@@ -1,3 +1,4 @@
+import { ComponentsModule } from 'app/components/components.module'
 import { NgModule } from '@angular/core'
 import { PromotionsComponent } from './promotions.component'
 import { PromotionsTableComponent } from './promotions-table/promotions-table.component'
@@ -17,7 +18,7 @@ const components = [
 ]
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule],
+	imports: [SharedModule, ComponentsModule],
 	exports: [...components],
 })
 export class PromotionsModule {}
