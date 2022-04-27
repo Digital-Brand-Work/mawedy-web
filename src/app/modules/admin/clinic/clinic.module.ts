@@ -7,6 +7,7 @@ import { ClinicDepartmentAddComponent } from './clinic-services/modals/clinic-de
 import { ClinicServicesAddComponent } from './clinic-services/modals/clinic-services-add/clinic-services-add.component'
 import { ClinicServicesEditComponent } from './clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
 import { ClinicInformationMapComponent } from './clinic-information-map/clinic-information-map.component'
+import { ComponentsModule } from 'app/components/components.module'
 
 const components = [
 	ClinicComponent,
@@ -20,7 +21,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule],
+	imports: [SharedModule, ComponentsModule],
 	exports: [...components],
 })
 export class ClinicModule {}

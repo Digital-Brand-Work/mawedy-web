@@ -8,6 +8,7 @@ import { AppointmentsWeekCalendarComponent } from './appointments/appointments-w
 import { AppointmentsDayCalendarComponent } from './appointments/appointments-day-calendar/appointments-day-calendar.component'
 import { AppointmentRegularBadgeComponent } from './appointments/appointments/badges/appointment-regular-badge/appointment-regular-badge.component'
 import { AppointmentDayBadgeComponent } from './appointments/appointments/badges/appointment-day-badge/appointment-day-badge.component'
+import { ComponentsModule } from 'app/components/components.module'
 
 const components = [
 	AppointmentsComponent,
@@ -22,7 +23,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule],
+	imports: [SharedModule, ComponentsModule],
 	exports: [...components],
 })
 export class AppointmentsModule {}

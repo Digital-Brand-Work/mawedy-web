@@ -10,6 +10,7 @@ import { PatientDetailsInformationComponent } from './patient-details/patient-de
 import { PatientDetailsBookingListComponent } from './patient-details/patient-details-booking-list/patient-details-booking-list.component'
 import { PatientDetailsBookingListUploadingResultComponent } from './patient-details/modal/patient-details-booking-list-uploading-result/patient-details-booking-list-uploading-result.component'
 import { SharedModule } from 'app/shared/shared.module'
+import { ComponentsModule } from 'app/components/components.module'
 
 const components = [
 	PatientsComponent,
@@ -26,7 +27,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule],
+	imports: [SharedModule, ComponentsModule],
 	exports: [...components],
 })
 export class PatientsModule {}

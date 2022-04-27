@@ -11,6 +11,7 @@ import { DoctorEditComponent } from './modals/doctor-edit/doctor-edit.component'
 import { DoctorAvailabilityComponent } from './modals/doctor-availability/doctor-availability.component'
 import { DoctorConfirmDeleteComponent } from './modals/doctor-confirm-delete/doctor-confirm-delete.component'
 import { SharedModule } from 'app/shared/shared.module'
+import { ComponentsModule } from 'app/components/components.module'
 
 const components = [
 	DoctorsComponent,
@@ -28,7 +29,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule],
+	imports: [SharedModule, ComponentsModule],
 	exports: [...components],
 })
 export class DoctorsModule {}

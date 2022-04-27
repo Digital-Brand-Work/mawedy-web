@@ -13,6 +13,7 @@ import { WaitingPatientsComponent } from './waiting-patients/waiting-patients.co
 import { WaitingPatientsTableComponent } from './waiting-patients/waiting-patients-table/waiting-patients-table.component'
 import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-patients-toolbar/waiting-patients-toolbar.component'
 import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patients-filter/waiting-patients-filter.component'
+import { ComponentsModule } from 'app/components/components.module'
 
 const components = [
 	DashboardAppointmentTableComponent,
@@ -32,7 +33,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [CommonModule],
+	imports: [CommonModule, ComponentsModule],
 	exports: [...components],
 })
 export class DashboardModule {}
