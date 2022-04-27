@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { DashboardAppointmentTableComponent } from './appointments/dashboard-appointment-table/dashboard-appointment-table.component'
@@ -14,6 +15,7 @@ import { WaitingPatientsTableComponent } from './waiting-patients/waiting-patien
 import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-patients-toolbar/waiting-patients-toolbar.component'
 import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patients-filter/waiting-patients-filter.component'
 import { ComponentsModule } from 'app/components/components.module'
+import { dashboardRoutes } from 'app/routes/admin/dashboard.routing'
 
 const components = [
 	DashboardAppointmentTableComponent,
@@ -33,7 +35,11 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [CommonModule, ComponentsModule],
+	imports: [
+		CommonModule,
+		ComponentsModule,
+		RouterModule.forChild(dashboardRoutes),
+	],
 	exports: [...components],
 })
 export class DashboardModule {}

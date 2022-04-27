@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router'
 
-const onTrialUser: Routes = []
+export const onTrialUser: Routes = []
 
-const standardUser: Routes = []
+export const standardUser: Routes = []
 
-const goldenUser: Routes = []
+export const goldenUser: Routes = []
 
-const platinumUser: Routes = []
+export const platinumUser: Routes = []

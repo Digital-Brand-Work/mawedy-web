@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router'
 import { SharedModule } from './../../../shared/shared.module'
 import { NgModule } from '@angular/core'
 import { ClinicComponent } from './clinic.component'
@@ -8,6 +9,7 @@ import { ClinicServicesAddComponent } from './clinic-services/modals/clinic-serv
 import { ClinicServicesEditComponent } from './clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
 import { ClinicInformationMapComponent } from './clinic-information-map/clinic-information-map.component'
 import { ComponentsModule } from 'app/components/components.module'
+import { clinicRoutes } from 'app/routes/admin/clinic.routing'
 
 const components = [
 	ClinicComponent,
@@ -21,7 +23,11 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, ComponentsModule],
+	imports: [
+		SharedModule,
+		ComponentsModule,
+		RouterModule.forChild(clinicRoutes),
+	],
 	exports: [...components],
 })
 export class ClinicModule {}

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router'
 import { ComponentsModule } from 'app/components/components.module'
 import { NgModule } from '@angular/core'
 import { PromotionsComponent } from './promotions.component'
@@ -7,6 +8,7 @@ import { PromotionsFilterComponent } from './promotions-filter/promotions-filter
 import { PromotionsAddComponent } from './promotions-add/promotions-add.component'
 import { PromotionsEditComponent } from './promotions-edit/promotions-edit.component'
 import { SharedModule } from 'app/shared/shared.module'
+import { promotionsRoutes } from 'app/routes/admin/promotions.routing'
 
 const components = [
 	PromotionsComponent,
@@ -18,7 +20,11 @@ const components = [
 ]
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, ComponentsModule],
+	imports: [
+		SharedModule,
+		ComponentsModule,
+		RouterModule.forChild(promotionsRoutes),
+	],
 	exports: [...components],
 })
 export class PromotionsModule {}

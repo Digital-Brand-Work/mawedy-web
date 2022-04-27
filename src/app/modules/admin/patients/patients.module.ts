@@ -11,6 +11,8 @@ import { PatientDetailsBookingListComponent } from './patient-details/patient-de
 import { PatientDetailsBookingListUploadingResultComponent } from './patient-details/modal/patient-details-booking-list-uploading-result/patient-details-booking-list-uploading-result.component'
 import { SharedModule } from 'app/shared/shared.module'
 import { ComponentsModule } from 'app/components/components.module'
+import { RouterModule } from '@angular/router'
+import { patientRoutes } from 'app/routes/admin/patients.routing'
 
 const components = [
 	PatientsComponent,
@@ -27,7 +29,11 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, ComponentsModule],
+	imports: [
+		SharedModule,
+		ComponentsModule,
+		RouterModule.forChild(patientRoutes),
+	],
 	exports: [...components],
 })
 export class PatientsModule {}

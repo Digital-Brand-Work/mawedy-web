@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router'
 import { SharedModule } from 'app/shared/shared.module'
 import { NgModule } from '@angular/core'
 import { AppointmentsComponent } from './appointments/appointments.component'
@@ -9,6 +10,7 @@ import { AppointmentsDayCalendarComponent } from './appointments/appointments-da
 import { AppointmentRegularBadgeComponent } from './appointments/appointments/badges/appointment-regular-badge/appointment-regular-badge.component'
 import { AppointmentDayBadgeComponent } from './appointments/appointments/badges/appointment-day-badge/appointment-day-badge.component'
 import { ComponentsModule } from 'app/components/components.module'
+import { appointmentRoutes } from 'app/routes/admin/appointment.routing'
 
 const components = [
 	AppointmentsComponent,
@@ -23,7 +25,11 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, ComponentsModule],
+	imports: [
+		SharedModule,
+		ComponentsModule,
+		RouterModule.forChild(appointmentRoutes),
+	],
 	exports: [...components],
 })
 export class AppointmentsModule {}
