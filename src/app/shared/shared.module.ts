@@ -10,6 +10,6 @@ const pipes = []
 @NgModule({
 	declarations: [...components, ...directives, ...pipes],
 	imports: [...modules],
-	exports: [...components, ...directives, ...pipes],
+	exports: [...components, ...directives, ...pipes, ...modules],
 })
 export class SharedModule {}
