@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SpinnerComponent } from 'app/components/spinner/spinner.component'
+import { MobileNumberFormComponent } from 'app/components/mobile-number-form/mobile-number-form.component'
+import { AnimateJsDirective } from '@digital_brand_work/directives/animate.js.directive'
 
-const components = [SpinnerComponent]
+const components = [SpinnerComponent, MobileNumberFormComponent]
 
 const modules = [CommonModule, FormsModule, ReactiveFormsModule]
 
-const directives = []
+const directives = [AnimateJsDirective]
 
 const pipes = []
 

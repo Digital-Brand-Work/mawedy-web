@@ -1,1 +1,51 @@
-<p>home-section2-first-step works!</p>
+<div>
+	<div class="text-4xl font-bold mb-3 text-emerald-500 md:w-3/4 text-center">
+		Partner with us!
+	</div>
+
+	<div class="mb-10 md:w-3/4 text-center text-2xl font-bold">
+		Benefits of being a Mawedy partner.
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-lg">Clinic Name</div>
+
+		<input
+			type="text"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full md:w-3/4"
+		/>
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-lg">Clinics Address</div>
+
+		<input
+			type="text"
+			class="py-3 px-4 rounded-lg border-gray-300/80 border w-full md:w-3/4"
+		/>
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-lg">Email</div>
+
+		<input
+			type="email"
+			class="py-3 px-4 rounded-lg border-gray-300/80 border w-full md:w-3/4"
+		/>
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-lg">Mobile No.</div>
+
+		<mobile-number-form></mobile-number-form>
+	</div>
+
+	<div class="mt-5 flex w-full md:w-3/4">
+		<button
+			(click)="onNext.emit()"
+			class="text-white px-10 py-3 rounded-lg ml-auto bg-sky-500 hover:bg-sky-600"
+		>
+			Next
+		</button>
+	</div>
+</div>

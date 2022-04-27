@@ -1,1 +1,40 @@
-<p>home-section2 works!</p>
+<div class="min-h-screen w-full flex items-center justify-center relative">
+	<div
+		class="max-w-screen-xl w-full flex items-center justify-center relative z-20 md:mt-32"
+	>
+		<div class="w-full flex flex-col items-center">
+			<home-section2-first-step
+				animateJs
+				class="w-full animate__fadeIn"
+				*ngIf="step === 'one'"
+				(onNext)="step = 'two'"
+			></home-section2-first-step>
+
+			<home-section2-second-step
+				class="w-full"
+				*ngIf="step === 'two'"
+				(onBack)="step = 'one'"
+			></home-section2-second-step>
+
+			<div class="flex items-center w-full md:w-1/4 mt-10 md:-ml-30">
+				<div
+					[ngClass]="{
+						'bg-emerald-600': step === 'one',
+						'bg-emerald-300': step === 'two'
+					}"
+					class="h-3 w-3 rounded-full shadow mx-2"
+				></div>
+
+				<div
+					[ngClass]="{
+						'bg-emerald-600': step === 'two',
+						'bg-emerald-300': step === 'one'
+					}"
+					class="h-3 w-3 rounded-full shadow-lg mx-2"
+				></div>
+			</div>
+		</div>
+
+		<div class="w-full"></div>
+	</div>
+</div>

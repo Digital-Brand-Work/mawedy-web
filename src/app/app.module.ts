@@ -18,19 +18,11 @@ import { AppRoutingModule } from './app.routing.module'
 		BrowserModule.withServerTransition({ appId: 'serverApp' }),
 		BrowserAnimationsModule,
 		AppRoutingModule,
-
-		// Fuse, FuseConfig & FuseMockAPI
 		FuseModule,
 		FuseConfigModule.forRoot(appConfig),
 		FuseMockApiModule.forRoot(mockApiServices),
-
-		// Core module of your application
 		CoreModule,
-
-		// Layout module of your application
 		LayoutModule,
-
-		// 3rd party modules that require global configuration via forRoot
 		MarkdownModule.forRoot({}),
 	],
 	bootstrap: [AppComponent],
