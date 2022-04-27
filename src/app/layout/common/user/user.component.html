@@ -14,6 +14,13 @@
 </button>
 
 <mat-menu [xPosition]="'before'" #userActions="matMenu">
+	<button class="block md:hidden" mat-menu-item>
+		<mat-icon [svgIcon]="'feather:plus'"></mat-icon>
+		<span>Appointment</span>
+	</button>
+
+	<mat-divider class="my-2 block md:hidden"></mat-divider>
+
 	<button mat-menu-item>
 		<mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
 		<span>Settings</span>

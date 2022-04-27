@@ -1,10 +1,10 @@
 <fuse-loading-bar></fuse-loading-bar>
 
 <div
-	class="relative flex items-center w-full px-4 md:px-6 z-49 shadow bg-card print:hidden py-.5"
+	class="relative flex items-center w-full px-4 md:px-6 z-49 shadow bg-card print:hidden py-2 md:py-.5"
 >
 	<img
-		class="h-20 max-w-50 mr-12"
+		class="h-20 max-w-50 mr-12 hidden md:block"
 		src=".../../../../../../../assets/app/logo.svg"
 		alt=""
 	/>
@@ -15,7 +15,7 @@
 
 	<div class="flex items-center pl-2 ml-auto">
 		<button
-			class="bg-emerald-500 text-lg text-white rounded-xl shadow-lg shadow-emerald-500/40 px-5 py-3 font-bold hover:bg-emerald-600/90 mx-8 flex items-center justify-center"
+			class="bg-emerald-500 text-lg text-white rounded-xl shadow-lg shadow-emerald-500/40 px-5 py-3 font-bold hover:bg-emerald-600/90 mx-8 items-center justify-center hidden md:flex"
 		>
 			<mat-icon class="text-white mr-2" svgIcon="feather:plus"></mat-icon>
 
@@ -41,7 +41,9 @@
 	[opened]="!isScreenSmall"
 >
 	<ng-container fuseVerticalNavigationContentFooter>
-		<div class="flex items-center justify-center flex-col px-5">
+		<div
+			class="flex items-center justify-center flex-col px-5 absolute bottom-50"
+		>
 			<img
 				class="w-full"
 				src="../../../../../assets/app/sidebar/clinic.png"

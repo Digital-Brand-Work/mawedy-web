@@ -1,39 +1,8 @@
 /* tslint:disable:max-line-length */
-import { FuseNavigationItem } from '@fuse/components/navigation';
+import { FuseNavigationItem } from '@fuse/components/navigation'
+import { platinumUser } from 'app/navigation/admin.navigations'
 
-export const defaultNavigation: FuseNavigationItem[] = [
-    {
-        id   : 'example',
-        title: 'Example',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/example'
-    }
-];
-export const compactNavigation: FuseNavigationItem[] = [
-    {
-        id   : 'example',
-        title: 'Example',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/example'
-    }
-];
-export const futuristicNavigation: FuseNavigationItem[] = [
-    {
-        id   : 'example',
-        title: 'Example',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/example'
-    }
-];
-export const horizontalNavigation: FuseNavigationItem[] = [
-    {
-        id   : 'example',
-        title: 'Example',
-        type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/example'
-    }
-];
+export const defaultNavigation: FuseNavigationItem[] = platinumUser
+export const compactNavigation: FuseNavigationItem[] = platinumUser
+export const futuristicNavigation: FuseNavigationItem[] = platinumUser
+export const horizontalNavigation: FuseNavigationItem[] = platinumUser
