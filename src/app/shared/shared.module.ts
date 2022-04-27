@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { SpinnerComponent } from 'app/components/spinner/spinner.component'
 
-const components = []
+const components = [SpinnerComponent]
+
 const modules = [CommonModule, FormsModule, ReactiveFormsModule]
+
 const directives = []
+
 const pipes = []
 
 @NgModule({

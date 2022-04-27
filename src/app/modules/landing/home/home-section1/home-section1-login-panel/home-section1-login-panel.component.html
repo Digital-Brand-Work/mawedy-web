@@ -1,1 +1,37 @@
-<p>home-section1-login-panel works!</p>
+<div
+	class="rounded-3xl drop-shadow-2xl pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-10"
+>
+	<img
+		class="h-36 max-w-50 mb-5"
+		src="/assets/app/logo.svg"
+		alt="Mawedy Logo"
+	/>
+
+	<input
+		type="text"
+		placeholder="Username"
+		class="bg-gray-100 py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20"
+	/>
+
+	<input
+		type="password"
+		placeholder="Password"
+		class="bg-gray-100 py-5 px-5 rounded-md shadow-md mt-10 w-full shadow-gray-500/20"
+	/>
+
+	<a class="text-right text-gray-400 mt-5 self-end">Forgot Password ?</a>
+
+	<div
+		class="border border-rose-500 text-rose-500 bg-red-50 p-5 rounded-lg my-5"
+	>
+		It seems that your account hasn't been approved yet. We ask for your
+		patience as we review your information. Thank you
+	</div>
+
+	<button
+		class="text-white py-3 px-10 bg-emerald-500 text-xl shadow-lg rounded-md flex items-center"
+	>
+		<spinner></spinner>
+		Sign in
+	</button>
+</div>
