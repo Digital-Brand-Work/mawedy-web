@@ -10,13 +10,15 @@
 	<input type="file" #tradeLicense class="hidden" />
 
 	<div class="mb-5">
-		<div class="mb-1 font-bold text-gray-500 text-lg">User Name</div>
+		<div class="mb-1 font-bold text-gray-500 text-lg">Username</div>
 
 		<input
 			#input
 			type="text"
-			class="py-3 px-4 rounded-lg border-gray-300/80 border w-full md:w-3/4"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full md:w-3/4 focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 		/>
+
+		<div class="text-sm text-rose-500">Username is required.</div>
 	</div>
 
 	<div class="mb-5">
@@ -36,40 +38,35 @@
 		<div class="mb-1 font-bold text-gray-500 text-lg">Subscription</div>
 
 		<select
-			class="py-3 px-4 rounded-lg border-gray-300/80 border w-full md:w-3/4"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full md:w-3/4 focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 		>
 			<option>Gold</option>
 		</select>
+
+		<div class="text-sm text-rose-500">Subscription is required.</div>
 	</div>
 
-	<div class="grid grid-cols-8 gap-10">
+	<div class="grid grid-cols-2 gap-5 md:w-3/4">
 		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">Users</div>
+			<div class="mb-1 font-bold text-gray-500 text-lg">1st account</div>
 
 			<input
-				value="2"
-				disabled
-				type="number"
-				class="py-3 px-4 rounded-lg border-gray-300/80 border w-full"
-			/>
-		</div>
-
-		<div class="mb-5 col-span-2">
-			<div class="mb-1 font-bold text-gray-500 text-lg">1st acct.</div>
-
-			<input
-				class="py-3 px-4 rounded-lg border-gray-300/80 border w-full"
+				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 				placeholder="Account name"
 			/>
+
+			<div class="text-sm text-rose-500">1st account is required.</div>
 		</div>
 
-		<div class="mb-5 col-span-2">
-			<div class="mb-1 font-bold text-gray-500 text-lg">2nd acct.</div>
+		<div class="mb-5">
+			<div class="mb-1 font-bold text-gray-500 text-lg">2nd account</div>
 
 			<input
-				class="py-3 px-4 rounded-lg border-gray-300/80 border w-full"
+				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 				placeholder="Account name"
 			/>
+
+			<div class="text-sm text-rose-500">2nd account is required.</div>
 		</div>
 	</div>
 
