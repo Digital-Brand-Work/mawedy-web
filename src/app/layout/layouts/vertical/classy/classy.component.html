@@ -15,18 +15,19 @@
 
 	<div class="flex items-center pl-2 ml-auto">
 		<button
-			class="bg-emerald-500 text-lg text-white rounded-xl shadow-lg shadow-emerald-500/40 px-5 py-3 font-bold hover:bg-emerald-600/90 mx-8 items-center justify-center hidden md:flex"
+			mat-button
+			class="bg-emerald-500 text-lg text-white rounded-xl shadow-lg shadow-emerald-500/40 px-5 py-4 font-bold hover:bg-emerald-600/90 mx-8 items-center justify-center hidden md:flex"
 		>
 			<mat-icon class="text-white mr-2" svgIcon="feather:plus"></mat-icon>
 
 			Appointment
 		</button>
 
-		<div>
+		<div matTooltip="Aster's Notification">
 			<notifications></notifications>
 		</div>
 
-		<div class="flex items-center mx-8">
+		<div mat-button matTooltip="See More" class="flex items-center mx-8">
 			<user [showAvatar]="true"></user>
 		</div>
 	</div>

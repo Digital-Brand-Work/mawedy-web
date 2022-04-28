@@ -1,16 +1,18 @@
 <div class="flex items-center w-full">
-	<div class="flex items-center">
-		<mat-icon
-			role="button"
-			class="text-gray-400 mr-2"
-			svgIcon="heroicons_solid:chevron-left"
-		></mat-icon>
+	<div class="flex items-center mr-5">
+		<button mat-icon-button matTooltip="View March Appointments">
+			<mat-icon
+				class="text-gray-400"
+				svgIcon="heroicons_solid:chevron-left"
+			></mat-icon>
+		</button>
 
-		<mat-icon
-			role="button"
-			class="text-gray-400 mr-2"
-			svgIcon="heroicons_solid:chevron-right"
-		></mat-icon>
+		<button mat-icon-button matTooltip="View May Appointment">
+			<mat-icon
+				class="text-gray-400"
+				svgIcon="heroicons_solid:chevron-right"
+			></mat-icon>
+		</button>
 	</div>
 
 	<div class="flex items-center mr-5">
@@ -40,40 +42,46 @@
 		class="mx-auto px-1 py-1 bg-neutral-100 rounded-lg -translate-x-20 flex items-center"
 	>
 		<div
+			mat-button
+			matTooltip="Month Layout"
 			[ngClass]="{
 				'text-emerald-500 bg-white pointer-events-none font-bold':
 					mode === 'month',
-				'text-gray-400': mode !== 'month'
+				'text-gray-400 font-semibold': mode !== 'month'
 			}"
 			routerLink="/aster_clinic/appointments/month"
 			role="button"
-			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 font-semibold mr-1"
+			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 mr-1"
 		>
 			Month
 		</div>
 
 		<div
+			mat-button
+			matTooltip="Week Layout"
 			[ngClass]="{
 				'text-emerald-500 bg-white pointer-events-none font-bold':
 					mode === 'week',
-				'text-gray-400': mode !== 'week'
+				'text-gray-400 font-semibold': mode !== 'week'
 			}"
 			routerLink="/aster_clinic/appointments/week"
 			role="button"
-			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 font-semibold mr-1"
+			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 mr-1"
 		>
 			Week
 		</div>
 
 		<div
+			mat-button
+			matTooltip="Day Layout"
 			[ngClass]="{
 				'text-emerald-500 bg-white pointer-events-none font-bold':
 					mode === 'day',
-				'text-gray-400': mode !== 'day'
+				'text-gray-400 font-semibold': mode !== 'day'
 			}"
 			routerLink="/aster_clinic/appointments/day"
 			role="button"
-			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 font-semibold"
+			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600"
 		>
 			Day
 		</div>

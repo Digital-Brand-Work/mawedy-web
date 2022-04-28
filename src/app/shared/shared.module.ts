@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatIconModule } from '@angular/material/icon'
 import { AppToolbarComponent } from './../components/app-toolbar/app-toolbar.component'
@@ -9,6 +10,7 @@ import { MobileNumberFormComponent } from 'app/components/mobile-number-form/mob
 import { AnimateJsDirective } from '@digital_brand_work/directives/animate.js.directive'
 import { MatMenuModule } from '@angular/material/menu'
 import { AlertComponent } from 'app/components/alert/alert.component'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 const components = [
 	SpinnerComponent,
@@ -24,6 +26,8 @@ const modules = [
 	MatIconModule,
 	MatMenuModule,
 	MatDividerModule,
+	MatButtonModule,
+	MatTooltipModule,
 ]
 
 const directives = [AnimateJsDirective]
