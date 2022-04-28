@@ -1,1 +1,11 @@
 <router-outlet></router-outlet>
+
+<div
+	[@listAnimation]="(alerts$ | async)!.length"
+	class="fixed bottom-5 right-10 z-50"
+>
+	<alert
+		[alert]="alert"
+		*ngFor="let alert of alerts$ | async; trackBy: identity"
+	></alert>
+</div>

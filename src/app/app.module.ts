@@ -1,3 +1,4 @@
+import { SharedModule } from 'app/shared/shared.module'
 import { NgModule } from '@angular/core'
 import { SubscriptionsModule } from './modules/admin/subscriptions/subscriptions.module'
 import { PromotionsModule } from './modules/admin/promotions/promotions.module'
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app.routing.module'
 
 @NgModule({
 	declarations: [AppComponent],
+
 	imports: [
 		BrowserModule.withServerTransition({ appId: 'serverApp' }),
 		BrowserAnimationsModule,
@@ -42,7 +44,9 @@ import { AppRoutingModule } from './app.routing.module'
 		ClinicModule,
 		PromotionsModule,
 		SubscriptionsModule,
+		SharedModule,
 	],
+
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

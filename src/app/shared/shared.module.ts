@@ -8,11 +8,13 @@ import { SpinnerComponent } from 'app/components/spinner/spinner.component'
 import { MobileNumberFormComponent } from 'app/components/mobile-number-form/mobile-number-form.component'
 import { AnimateJsDirective } from '@digital_brand_work/directives/animate.js.directive'
 import { MatMenuModule } from '@angular/material/menu'
+import { AlertComponent } from 'app/components/alert/alert.component'
 
 const components = [
 	SpinnerComponent,
 	MobileNumberFormComponent,
 	AppToolbarComponent,
+	AlertComponent,
 ]
 
 const modules = [
