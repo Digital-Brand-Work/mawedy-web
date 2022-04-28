@@ -1,1 +1,57 @@
-<p>dashboard-toolbar works!</p>
+<div class="flex items-center w-full">
+	<div
+		routerLink="/aster_clinic/dashboard/appointments"
+		class="font-bold text-xl text-emerald-500 mr-5 flex items-baseline"
+	>
+		<div>Appointments</div>
+
+		<div
+			class="bg-emerald-500 badge text-white rounded-full text-sm font-normal ml-5 -translate-y-1"
+		>
+			20
+		</div>
+	</div>
+
+	<div
+		role="button"
+		routerLink="/aster_clinic/dashboard/waiting-list"
+		class="bold text-xl text-gray-500 flex items-baseline"
+	>
+		<div class="hover:underline">Waiting Patient</div>
+
+		<div
+			class="bg-gray-100 badge text-gray-500 font-bold rounded-full text-sm ml-5 -translate-y-1"
+		>
+			04
+		</div>
+	</div>
+
+	<div class="ml-auto flex items-center">
+		<mat-icon
+			class="text-gray-400 mr-2"
+			svgIcon="heroicons_outline:calendar"
+		></mat-icon>
+
+		<div class="font-bold text-gray-700 mr-2 text-lg">
+			{{ today | date: 'dd MMMM' }}
+		</div>
+
+		<div class="font-bold text-gray-400 mr-2 text-lg">Today</div>
+	</div>
+
+	<div
+		style="width: 219px"
+		class="ml-5 flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
+	>
+		<input type="search" class="w-full" placeholder="Search" />
+
+		<mat-icon
+			class="text-gray-400 ml-auto"
+			svgIcon="feather:search"
+		></mat-icon>
+	</div>
+
+	<dashboard-appointment-filter
+		(onFilter)="onFilter.emit()"
+	></dashboard-appointment-filter>
+</div>

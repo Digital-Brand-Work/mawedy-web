@@ -1,15 +1,20 @@
 <app-toolbar
+	class="w-full"
 	[toolbar]="
-		(isInAppointments$ | async)
+		!(isInWaitingPatients$ | async)
 			? appointMentsToolbar
 			: waitingPatientsToolbar
 	"
 ></app-toolbar>
 
 <ng-template #appointMentsToolbar>
-	<dashboard-toolbar></dashboard-toolbar>
+	<dashboard-toolbar
+		(onFilter)="filter()"
+		(onSearch)="filter()"
+		class="w-full"
+	></dashboard-toolbar>
 </ng-template>
 
 <ng-template #waitingPatientsToolbar>
-	<waiting-patients-toolbar></waiting-patients-toolbar>
+	<waiting-patients-toolbar class="w-full"></waiting-patients-toolbar>
 </ng-template>

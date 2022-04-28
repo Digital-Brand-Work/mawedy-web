@@ -1,6 +1,7 @@
-import { map } from 'rxjs/operators'
+import { map, tap, takeUntil } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import { Component, OnInit } from '@angular/core'
+import { Observable, of, Subject } from 'rxjs'
 
 @Component({
 	selector: 'dashboard',
@@ -8,11 +9,22 @@ import { Component, OnInit } from '@angular/core'
 	styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-	constructor(private router: Router) {}
+	constructor(private router: Router) {
+		this.isInWaitingPatients$ = this.router.events.pipe(
+			map(() => this.router.url.includes('waiting-list')),
+			takeUntil(this._unsubscribeAll),
+		)
+	}
+	private _unsubscribeAll: Subject<any> = new Subject<any>()
 
-	isInAppointments$ = this.router.events.pipe(
-		map(() => this.router.url.includes('appointments')),
-	)
+	isInWaitingPatients$: Observable<boolean> = of(true)
 
 	ngOnInit(): void {}
+
+	ngOnDestroy(): void {
+		this._unsubscribeAll.next(null)
+		this._unsubscribeAll.complete()
+	}
+
+	filter() {}
 }

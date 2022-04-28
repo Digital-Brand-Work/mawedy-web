@@ -1,1 +1,63 @@
-<p>dashboard-appointment-filter works!</p>
+<div
+	role="button"
+	[matMenuTriggerFor]="dashboardAppointmentFilter"
+	style="width: 219px"
+	class="ml-5 flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 cursor-pointer hover:bg-gray-50"
+>
+	<input
+		role="button"
+		type="search"
+		class="w-full pointer-events-none"
+		placeholder="Filter"
+	/>
+
+	<mat-icon class="text-gray-400 ml-auto" svgIcon="feather:filter"></mat-icon>
+</div>
+
+<mat-menu
+	[xPosition]="'before'"
+	#dashboardAppointmentFilter="matMenu"
+	class="rounded-md"
+>
+	<button mat-menu-item>
+		<span>App Patient</span>
+	</button>
+
+	<button mat-menu-item>
+		<span>Walk-in Patient</span>
+	</button>
+
+	<mat-divider class="my-2"></mat-divider>
+
+	<button mat-menu-item class="flex items-center">
+		<span>Date</span>
+
+		<mat-icon
+			class="text-gray-400 ml-auto"
+			svgIcon="feather:arrow-up"
+		></mat-icon>
+	</button>
+
+	<button mat-menu-item class="flex items-center">
+		<span>Time</span>
+
+		<mat-icon
+			class="text-gray-400 ml-auto"
+			svgIcon="feather:arrow-down"
+		></mat-icon>
+	</button>
+
+	<mat-divider class="my-2"></mat-divider>
+
+	<button mat-menu-item>
+		<span>Attended</span>
+	</button>
+
+	<button mat-menu-item>
+		<span>Cancelled</span>
+	</button>
+
+	<button mat-menu-item>
+		<span>Done</span>
+	</button>
+</mat-menu>
