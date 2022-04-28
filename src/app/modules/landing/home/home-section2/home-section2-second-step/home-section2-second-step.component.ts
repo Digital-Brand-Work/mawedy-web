@@ -3,6 +3,7 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
+	Input,
 	OnInit,
 	Output,
 	ViewChild,
@@ -17,6 +18,8 @@ export class HomeSection2SecondStepComponent implements OnInit {
 	constructor(private cdr: ChangeDetectorRef) {}
 
 	@Output() onBack = new EventEmitter()
+
+	@Input() step: 'one' | 'two' = 'one'
 
 	@ViewChild('input') input!: ElementRef
 

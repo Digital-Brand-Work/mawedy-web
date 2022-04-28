@@ -1,5 +1,6 @@
 <div
 	*ngIf="alert.type === 'success'"
+	@slideInTop
 	style="width: 300px"
 	class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-emerald-200/20 via-white/20 to-white backdrop-blur-xl flex items-center border border-emerald-200"
 >
@@ -17,6 +18,7 @@
 
 <div
 	*ngIf="alert.type === 'info'"
+	@slideInTop
 	style="width: 300px"
 	class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-teal-200/20 via-white/20 to-whitebackdrop-blur-md flex items-center border border-teal-200"
 >
@@ -34,6 +36,7 @@
 
 <div
 	*ngIf="alert.type === 'error'"
+	@slideInTop
 	style="width: 300px"
 	class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-rose-200/20 via-white/20 to-whitebackdrop-blur-md flex items-center border border-rose-200"
 >

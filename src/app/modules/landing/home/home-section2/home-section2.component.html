@@ -6,14 +6,18 @@
 			class="w-full grid md:grid-cols-2 md:gap-x-5 grid-cols-1 items-center"
 		>
 			<home-section2-first-step
+				[ngClass]="{ 'opacity-50 pointer-events-none': step === 'two' }"
 				(onNext)="step = 'two'"
+				[step]="step"
 			></home-section2-first-step>
 
 			<home-section2-second-step
 				@fadeInRight
+				@fadeOutRight
 				class="w-full"
 				*ngIf="step === 'two'"
 				(onBack)="step = 'one'"
+				[step]="step"
 			></home-section2-second-step>
 			<!-- 
 			<div
