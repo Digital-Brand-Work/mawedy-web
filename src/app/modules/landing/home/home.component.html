@@ -1,8 +1,27 @@
 <div class="bg-white">
-	<home-navbar></home-navbar>
+	<home-navbar
+		*ngIf="
+			(breakpoint$ | async)! === 'laptop' ||
+			(breakpoint$ | async)! === 'desktop' ||
+			(breakpoint$ | async)! === 'max'
+		"
+	></home-navbar>
+
+	<home-navbar-responsive
+		*ngIf="
+			(breakpoint$ | async)! === 'phone' ||
+			(breakpoint$ | async)! === 'tablet'
+		"
+	>
+	</home-navbar-responsive>
+
 	<home-section1></home-section1>
+
 	<home-section2></home-section2>
+
 	<home-section3></home-section3>
+
 	<home-section4></home-section4>
+
 	<home-section5></home-section5>
 </div>

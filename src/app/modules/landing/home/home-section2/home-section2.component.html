@@ -2,21 +2,23 @@
 	<div
 		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
 	>
-		<div class="w-full flex flex-col items-center">
+		<div
+			class="w-full grid md:grid-cols-2 md:gap-x-5 grid-cols-1 items-center"
+		>
 			<home-section2-first-step
-				animateJs
-				class="w-full animate__fadeIn"
-				*ngIf="step === 'one'"
 				(onNext)="step = 'two'"
 			></home-section2-first-step>
 
 			<home-section2-second-step
+				@fadeInRight
 				class="w-full"
 				*ngIf="step === 'two'"
 				(onBack)="step = 'one'"
 			></home-section2-second-step>
-
-			<div class="flex items-center w-full md:w-1/4 mt-10 md:-ml-30">
+			<!-- 
+			<div
+				class="flex items-center w-full md:w-1/4 mt-10 md:-ml-30 justify-center md:justify-start"
+			>
 				<div
 					[ngClass]="{
 						'bg-emerald-600': step === 'one',
@@ -32,9 +34,7 @@
 					}"
 					class="h-3 w-3 rounded-full shadow-lg mx-2"
 				></div>
-			</div>
+			</div> -->
 		</div>
-
-		<div class="w-full"></div>
 	</div>
 </div>

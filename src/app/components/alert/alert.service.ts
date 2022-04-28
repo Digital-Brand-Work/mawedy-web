@@ -25,7 +25,7 @@ export class AlertState extends BaseState<Alert> {
 				alerts.pop()
 
 				this.initialize(newAlerts)
-			}, 2000)
+			}, 5000)
 		})
 	}
 }

@@ -7,9 +7,9 @@ export class SeoService {
 
 	default() {
 		return {
-			title: 'Kroki',
-			description: 'Connecting the world with creativity.',
-			image: '/assets/icon.svg',
+			title: 'Mawedy',
+			description: 'Helping people for better health.',
+			image: '/assets/app/logo.svg',
 			slug: '',
 		}
 	}
@@ -21,9 +21,9 @@ export class SeoService {
 		slug?: string
 	}) {
 		tags = {
-			title: 'Kroki',
-			description: 'Connecting the world with creativity.',
-			image: '/assets/icon.svg',
+			title: 'Mawedy',
+			description: 'Helping people for better health.',
+			image: '/assets/app/logo.svg',
 			slug: '',
 			...tags,
 		}
@@ -48,7 +48,7 @@ export class SeoService {
 
 		this.meta.updateTag({
 			name: 'og:site_name',
-			content: 'Kroki',
+			content: 'Mawedy',
 		})
 
 		this.meta.updateTag({
@@ -75,7 +75,7 @@ export class SeoService {
 
 		this.meta.updateTag({
 			name: 'twitter:site',
-			content: 'Kroki',
+			content: 'Mawedy',
 		})
 
 		this.meta.updateTag({
