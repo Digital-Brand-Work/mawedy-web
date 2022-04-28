@@ -1,1 +1,11 @@
-<p>promotions works!</p>
+<div *ngIf="true" @slideInTop class="w-full">
+	<app-toolbar class="w-full" [toolbar]="promotionsToolbar"></app-toolbar>
+</div>
+
+<ng-template #promotionsToolbar>
+	<promotions-toolbar
+		(onFilter)="filter()"
+		(onSearch)="filter()"
+		class="w-full"
+	></promotions-toolbar>
+</ng-template>

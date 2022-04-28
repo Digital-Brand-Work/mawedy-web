@@ -16,14 +16,19 @@
 	<doctors-filter (onFilter)="onFilter.emit()"></doctors-filter>
 
 	<button
-		class="mx-5 flex items-center bg-emerald-500 text-white py-2 px-10 rounded-md"
+		class="mx-5 flex items-center bg-emerald-500 text-white py-2 px-5 rounded-md g hover:bg-emerald-600/80"
 	>
+		<mat-icon
+			class="text-white mr-3 icon-size-6"
+			svgIcon="feather:plus"
+		></mat-icon>
+
 		Add Doctor
 	</button>
 
 	<button
 		style="background: #0a2440"
-		class="mr-5 flex items-center text-white py-2 px-10 rounded-md"
+		class="mr-5 flex items-center text-white py-2 px-10 rounded-md hover:shadow-md hover:shadow-zinc-600/20"
 	>
 		Export Lists
 	</button>
