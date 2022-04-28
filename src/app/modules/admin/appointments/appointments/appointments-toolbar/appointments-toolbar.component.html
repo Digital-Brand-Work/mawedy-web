@@ -15,7 +15,7 @@
 		</button>
 	</div>
 
-	<div class="flex items-center mr-5">
+	<div class="items-center mr-5 hidden md:flex">
 		<mat-icon
 			class="text-gray-400 mr-2 icon-size-5"
 			svgIcon="heroicons_outline:calendar"
@@ -26,7 +26,7 @@
 		</div>
 	</div>
 
-	<div class="flex items-center">
+	<div class="items-center hidden md:flex">
 		<mat-icon
 			class="text-gray-400 mr-2 icon-size-5"
 			svgIcon="feather:clock"
@@ -39,7 +39,7 @@
 
 	<div
 		style="font-size: 14px"
-		class="mx-auto px-1 py-1 bg-neutral-100 rounded-lg -translate-x-20 flex items-center"
+		class="ml-auto md:mx-auto px-1 py-1 bg-gray-100 rounded-md md:-translate-x-20 flex items-center"
 	>
 		<div
 			mat-button
@@ -51,7 +51,7 @@
 			}"
 			routerLink="/aster_clinic/appointments/month"
 			role="button"
-			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 mr-1"
+			class="px-5 py-1 hover:bg-gray-400/20 rounded-md hover:text-gray-600 mr-1"
 		>
 			Month
 		</div>
@@ -66,7 +66,7 @@
 			}"
 			routerLink="/aster_clinic/appointments/week"
 			role="button"
-			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 mr-1"
+			class="px-5 py-1 hover:bg-gray-400/20 rounded-md hover:text-gray-600 mr-1"
 		>
 			Week
 		</div>
@@ -81,7 +81,7 @@
 			}"
 			routerLink="/aster_clinic/appointments/day"
 			role="button"
-			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600"
+			class="px-5 py-1 hover:bg-gray-400/20 rounded-md hover:text-gray-600"
 		>
 			Day
 		</div>
@@ -89,7 +89,7 @@
 
 	<div
 		style="width: 250px"
-		class="ml-5 flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
+		class="ml-5 hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
 	>
 		<select class="w-full">
 			<option>All Doctors</option>

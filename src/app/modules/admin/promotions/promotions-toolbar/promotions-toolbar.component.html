@@ -1,7 +1,7 @@
 <div class="flex items-center w-full">
 	<div
 		style="width: 219px"
-		class="flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 ml-auto"
+		class="hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 ml-auto"
 	>
 		<input type="search" class="w-full" placeholder="Search Promotions" />
 
@@ -11,10 +11,13 @@
 		></mat-icon>
 	</div>
 
-	<promotions-filter (onFilter)="onFilter.emit()"></promotions-filter>
+	<promotions-filter
+		class="hidden md:flex"
+		(onFilter)="onFilter.emit()"
+	></promotions-filter>
 
 	<button
-		class="mx-5 flex items-center bg-emerald-500 text-white py-2 px-5 rounded-md g hover:bg-emerald-600/80"
+		class="ml-auto md:mx-5 flex items-center bg-emerald-500 text-white py-2 px-5 rounded-md g hover:bg-emerald-600/80"
 	>
 		Create new Offer
 

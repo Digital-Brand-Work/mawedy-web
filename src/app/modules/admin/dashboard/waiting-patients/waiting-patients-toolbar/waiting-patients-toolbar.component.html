@@ -2,12 +2,14 @@
 	<a
 		role="button"
 		routerLink="/aster_clinic/dashboard/appointments"
-		class="bold text-xl text-gray-500 flex items-baseline mr-5"
+		class="bold md:text-xl text-gray-500 flex items-baseline mr-5"
 	>
 		<div class="hover:underline">Appointments</div>
 
+		<span class="block md:hidden">(20)</span>
+
 		<div
-			class="bg-gray-100 badge text-gray-500 font-bold rounded-full text-sm ml-5 -translate-y-1"
+			class="bg-gray-100 badge text-gray-500 font-bold rounded-full text-sm ml-5 -translate-y-1 hidden md:block"
 		>
 			20
 		</div>
@@ -15,18 +17,20 @@
 
 	<a
 		routerLink="/aster_clinic/dashboard/waiting-list"
-		class="font-bold text-xl text-emerald-500 flex items-baseline pointer-events-none"
+		class="font-bold md:text-xl text-emerald-500 flex items-baseline pointer-events-none"
 	>
 		<div>Waiting Patient</div>
 
+		<span class="block md:hidden">(04)</span>
+
 		<div
-			class="bg-emerald-500 badge text-white rounded-full text-sm font-normal ml-5 -translate-y-1"
+			class="bg-emerald-500 badge text-white rounded-full text-sm font-normal ml-5 -translate-y-1 hidden md:block"
 		>
 			04
 		</div>
 	</a>
 
-	<div class="ml-auto flex items-center">
+	<div class="ml-auto hidden md:flex items-center">
 		<mat-icon
 			class="text-gray-400 mr-2 icon-size-5"
 			svgIcon="heroicons_outline:calendar"
@@ -41,7 +45,7 @@
 
 	<div
 		style="width: 219px"
-		class="ml-5 flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
+		class="ml-5 hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
 	>
 		<input type="search" class="w-full" placeholder="Search Appointments" />
 
@@ -52,6 +56,7 @@
 	</div>
 
 	<waiting-patients-filter
+		class="hidden md:flex"
 		(onFilter)="onFilter.emit()"
 	></waiting-patients-filter>
 </div>
