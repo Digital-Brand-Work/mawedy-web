@@ -1,5 +1,4 @@
 import { RouterModule } from '@angular/router'
-import { ComponentsModule } from 'app/components/components.module'
 import { NgModule } from '@angular/core'
 import { PromotionsComponent } from './promotions.component'
 import { PromotionsTableComponent } from './promotions-table/promotions-table.component'
@@ -20,11 +19,7 @@ const components = [
 ]
 @NgModule({
 	declarations: [...components],
-	imports: [
-		SharedModule,
-		ComponentsModule,
-		RouterModule.forChild(promotionsRoutes),
-	],
+	imports: [SharedModule, RouterModule.forChild(promotionsRoutes)],
 	exports: [...components],
 })
 export class PromotionsModule {}

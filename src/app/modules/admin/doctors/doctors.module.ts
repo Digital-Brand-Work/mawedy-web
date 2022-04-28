@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core'
 import { SharedModule } from 'app/shared/shared.module'
-import { ComponentsModule } from 'app/components/components.module'
 import { RouterModule } from '@angular/router'
 import { doctorRoutes } from 'app/routes/admin/doctors.routing'
 import { DoctorsComponent } from './doctors.component'
@@ -31,11 +30,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [
-		SharedModule,
-		ComponentsModule,
-		RouterModule.forChild(doctorRoutes),
-	],
+	imports: [SharedModule, RouterModule.forChild(doctorRoutes)],
 	exports: [...components],
 })
 export class DoctorsModule {}

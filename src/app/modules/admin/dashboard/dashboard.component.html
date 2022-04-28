@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<app-toolbar
+	[toolbar]="
+		(isInAppointments$ | async)
+			? appointMentsToolbar
+			: waitingPatientsToolbar
+	"
+></app-toolbar>
+
+<ng-template #appointMentsToolbar>
+	<dashboard-toolbar></dashboard-toolbar>
+</ng-template>
+
+<ng-template #waitingPatientsToolbar>
+	<waiting-patients-toolbar></waiting-patients-toolbar>
+</ng-template>

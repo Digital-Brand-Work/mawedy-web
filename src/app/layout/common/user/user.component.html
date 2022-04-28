@@ -21,7 +21,7 @@
 
 	<mat-divider class="my-2 block md:hidden"></mat-divider>
 
-	<button mat-menu-item>
+	<button (click)="toSettings()" mat-menu-item>
 		<mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
 		<span>Settings</span>
 	</button>

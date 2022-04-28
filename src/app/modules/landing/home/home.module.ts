@@ -1,4 +1,3 @@
-import { ComponentsModule } from 'app/components/components.module'
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from 'app/shared/shared.module'
@@ -12,7 +11,7 @@ import { HomeSection5Component } from './home-section5/home-section5.component'
 import { HomeSection1LoginPanelComponent } from './home-section1/home-section1-login-panel/home-section1-login-panel.component'
 import { HomeSection2FirstStepComponent } from './home-section2/home-section2-first-step/home-section2-first-step.component'
 import { HomeSection2SecondStepComponent } from './home-section2/home-section2-second-step/home-section2-second-step.component'
-import { HomeNavbarComponent } from './home-navbar/home-navbar.component';
+import { HomeNavbarComponent } from './home-navbar/home-navbar.component'
 import { HomeNavbarResponsiveComponent } from './home-navbar-responsive/home-navbar-responsive.component'
 
 const components = [
@@ -29,11 +28,7 @@ const components = [
 ]
 @NgModule({
 	declarations: [...components, HomeNavbarResponsiveComponent],
-	imports: [
-		RouterModule.forChild(landingHomeRoutes),
-		SharedModule,
-		ComponentsModule,
-	],
+	imports: [RouterModule.forChild(landingHomeRoutes), SharedModule],
 	exports: [...components],
 })
 export class LandingHomeModule {}

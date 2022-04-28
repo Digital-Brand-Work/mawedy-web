@@ -8,7 +8,6 @@ import { ClinicDepartmentAddComponent } from './clinic-services/modals/clinic-de
 import { ClinicServicesAddComponent } from './clinic-services/modals/clinic-services-add/clinic-services-add.component'
 import { ClinicServicesEditComponent } from './clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
 import { ClinicInformationMapComponent } from './clinic-information-map/clinic-information-map.component'
-import { ComponentsModule } from 'app/components/components.module'
 import { clinicRoutes } from 'app/routes/admin/clinic.routing'
 
 const components = [
@@ -23,11 +22,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [
-		SharedModule,
-		ComponentsModule,
-		RouterModule.forChild(clinicRoutes),
-	],
+	imports: [SharedModule, RouterModule.forChild(clinicRoutes)],
 	exports: [...components],
 })
 export class ClinicModule {}

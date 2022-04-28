@@ -1,6 +1,6 @@
+import { SharedModule } from '../../../shared/shared.module'
 import { RouterModule } from '@angular/router'
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { DashboardAppointmentTableComponent } from './appointments/dashboard-appointment-table/dashboard-appointment-table.component'
 import { DashboardAppointmentToolbarComponent } from './appointments/dashboard-appointment-toolbar/dashboard-appointment-toolbar.component'
 import { DashboardStatusComponent } from './dashboard-status/dashboard-status.component'
@@ -14,11 +14,13 @@ import { WaitingPatientsComponent } from './waiting-patients/waiting-patients.co
 import { WaitingPatientsTableComponent } from './waiting-patients/waiting-patients-table/waiting-patients-table.component'
 import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-patients-toolbar/waiting-patients-toolbar.component'
 import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patients-filter/waiting-patients-filter.component'
-import { ComponentsModule } from 'app/components/components.module'
 import { dashboardRoutes } from 'app/routes/admin/dashboard.routing'
 import { DashboardAppointmentsComponent } from './appointments/dashboard-appointments.component'
+import { AppToolbarComponent } from 'app/components/app-toolbar/app-toolbar.component'
+import { DashboardComponent } from './dashboard.component'
 
 const components = [
+	DashboardComponent,
 	DashboardAppointmentTableComponent,
 	DashboardAppointmentToolbarComponent,
 	DashboardStatusComponent,
@@ -37,11 +39,7 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [
-		CommonModule,
-		ComponentsModule,
-		RouterModule.forChild(dashboardRoutes),
-	],
+	imports: [SharedModule, RouterModule.forChild(dashboardRoutes)],
 	exports: [...components],
 })
 export class DashboardModule {}

@@ -1,14 +1,11 @@
+import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { AppToolbarComponent } from './app-toolbar/app-toolbar.component'
-import { SharedModule } from 'app/shared/shared.module'
-import { SpinnerComponent } from './spinner/spinner.component'
-import { MobileNumberFormComponent } from './mobile-number-form/mobile-number-form.component'
 
-const components = [AppToolbarComponent]
+const components = []
 
 @NgModule({
-	declarations: [...components],
-	imports: [SharedModule],
-	exports: [...components],
+	declarations: [],
+	imports: [CommonModule],
+	exports: [],
 })
 export class ComponentsModule {}

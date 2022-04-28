@@ -1,4 +1,11 @@
 import { NgModule } from '@angular/core'
+import { SubscriptionsModule } from './modules/admin/subscriptions/subscriptions.module'
+import { PromotionsModule } from './modules/admin/promotions/promotions.module'
+import { ClinicModule } from './modules/admin/clinic/clinic.module'
+import { PatientsModule } from './modules/admin/patients/patients.module'
+import { DoctorsModule } from './modules/admin/doctors/doctors.module'
+import { AppointmentsModule } from './modules/admin/appointments/appointments.module'
+import { DashboardModule } from './modules/admin/dashboard/dashboard.module'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MarkdownModule } from 'ngx-markdown'
@@ -24,6 +31,17 @@ import { AppRoutingModule } from './app.routing.module'
 		CoreModule,
 		LayoutModule,
 		MarkdownModule.forRoot({}),
+
+		/*
+		    Mawedy Modules
+		*/
+		DashboardModule,
+		AppointmentsModule,
+		DoctorsModule,
+		PatientsModule,
+		ClinicModule,
+		PromotionsModule,
+		SubscriptionsModule,
 	],
 	bootstrap: [AppComponent],
 })

@@ -66,4 +66,8 @@ export class UserComponent implements OnInit, OnDestroy {
 	signOut(): void {
 		this._router.navigate(['/'])
 	}
+
+	toSettings() {
+		this._router.navigate(['aster_clinic/account-setting'])
+	}
 }
