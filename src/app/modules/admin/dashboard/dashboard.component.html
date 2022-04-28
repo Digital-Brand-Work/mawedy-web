@@ -1,11 +1,13 @@
-<app-toolbar
-	class="w-full"
-	[toolbar]="
-		!(isInWaitingPatients$ | async)
-			? appointMentsToolbar
-			: waitingPatientsToolbar
-	"
-></app-toolbar>
+<div *ngIf="true" @slideInTop class="w-full">
+	<app-toolbar
+		class="w-full"
+		[toolbar]="
+			!(isInWaitingPatients$ | async)
+				? appointMentsToolbar
+				: waitingPatientsToolbar
+		"
+	></app-toolbar>
+</div>
 
 <ng-template #appointMentsToolbar>
 	<dashboard-toolbar
@@ -16,5 +18,11 @@
 </ng-template>
 
 <ng-template #waitingPatientsToolbar>
-	<waiting-patients-toolbar class="w-full"></waiting-patients-toolbar>
+	<waiting-patients-toolbar
+		(onFilter)="filter()"
+		(onSearch)="filter()"
+		class="w-full"
+	></waiting-patients-toolbar>
 </ng-template>
+
+<router-outlet></router-outlet>

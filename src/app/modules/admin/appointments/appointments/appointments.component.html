@@ -1,1 +1,9 @@
-<p>appointments works!</p>
+<div *ngIf="true" @slideInTop class="w-full">
+	<app-toolbar class="w-full" [toolbar]="toolbar"></app-toolbar>
+</div>
+
+<ng-template #toolbar>
+	<appointments-toolbar class="w-full"></appointments-toolbar>
+</ng-template>
+
+<router-outlet></router-outlet>

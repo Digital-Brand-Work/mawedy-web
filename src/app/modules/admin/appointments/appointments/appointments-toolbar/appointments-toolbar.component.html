@@ -1,1 +1,90 @@
-<p>appointments-toolbar works!</p>
+<div class="flex items-center w-full">
+	<div class="flex items-center">
+		<mat-icon
+			role="button"
+			class="text-gray-400 mr-2"
+			svgIcon="heroicons_solid:chevron-left"
+		></mat-icon>
+
+		<mat-icon
+			role="button"
+			class="text-gray-400 mr-2"
+			svgIcon="heroicons_solid:chevron-right"
+		></mat-icon>
+	</div>
+
+	<div class="flex items-center mr-5">
+		<mat-icon
+			class="text-gray-400 mr-2 icon-size-5"
+			svgIcon="heroicons_outline:calendar"
+		></mat-icon>
+
+		<div class="font-bold text-gray-700 mr-2 text-lg">
+			{{ today | date: 'MMMM yyyy' }}
+		</div>
+	</div>
+
+	<div class="flex items-center">
+		<mat-icon
+			class="text-gray-400 mr-2 icon-size-5"
+			svgIcon="feather:clock"
+		></mat-icon>
+
+		<div class="font-bold text-gray-700 mr-2 text-lg">
+			{{ today | date: 'hh:mm a' }}
+		</div>
+	</div>
+
+	<div
+		style="font-size: 14px"
+		class="mx-auto px-1 py-1 bg-neutral-100 rounded-lg -translate-x-20 flex items-center"
+	>
+		<div
+			[ngClass]="{
+				'text-emerald-500 bg-white pointer-events-none font-bold':
+					mode === 'month',
+				'text-gray-400': mode !== 'month'
+			}"
+			routerLink="/aster_clinic/appointments/month"
+			role="button"
+			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 font-semibold mr-1"
+		>
+			Month
+		</div>
+
+		<div
+			[ngClass]="{
+				'text-emerald-500 bg-white pointer-events-none font-bold':
+					mode === 'week',
+				'text-gray-400': mode !== 'week'
+			}"
+			routerLink="/aster_clinic/appointments/week"
+			role="button"
+			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 font-semibold mr-1"
+		>
+			Week
+		</div>
+
+		<div
+			[ngClass]="{
+				'text-emerald-500 bg-white pointer-events-none font-bold':
+					mode === 'day',
+				'text-gray-400': mode !== 'day'
+			}"
+			routerLink="/aster_clinic/appointments/day"
+			role="button"
+			class="px-5 py-1 hover:bg-gray-500/20 rounded-lg hover:text-gray-600 font-semibold"
+		>
+			Day
+		</div>
+	</div>
+
+	<div
+		style="width: 250px"
+		class="ml-5 flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
+	>
+		<select class="w-full">
+			<option>All Doctors</option>
+		</select>
+	</div>
+</div>
