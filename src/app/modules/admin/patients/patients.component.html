@@ -1,1 +1,11 @@
-<p>patients works!</p>
+<div *ngIf="true" @slideInTop class="w-full">
+	<app-toolbar class="w-full" [toolbar]="patientsToolbar"></app-toolbar>
+</div>
+
+<ng-template #patientsToolbar>
+	<patients-toolbar
+		(onFilter)="filter()"
+		(onSearch)="filter()"
+		class="w-full"
+	></patients-toolbar>
+</ng-template>

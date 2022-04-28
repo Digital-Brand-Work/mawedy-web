@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 
 @Component({
-  selector: 'patients-toolbar',
-  templateUrl: './patients-toolbar.component.html',
-  styleUrls: ['./patients-toolbar.component.scss']
+	selector: 'patients-toolbar',
+	templateUrl: './patients-toolbar.component.html',
+	styleUrls: ['./patients-toolbar.component.scss'],
 })
 export class PatientsToolbarComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
+	@Output() onSearch = new EventEmitter()
 
-  ngOnInit(): void {
-  }
+	@Output() onFilter = new EventEmitter()
 
+	keyword: string = ''
+
+	ngOnInit(): void {}
 }

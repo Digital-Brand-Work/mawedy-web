@@ -19,21 +19,32 @@
 	#dashboardAppointmentFilter="matMenu"
 	class="rounded-md"
 >
-	<button (click)="$event.stopPropagation()" mat-menu-item>
-		<select class="w-full">
-			<option selected disabled>Department</option>
+	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
+		<div class="mb-1 font-bold text-gray-500 text-md">Department</div>
+
+		<select
+			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+		>
 			<option>Cardiology</option>
 		</select>
-	</button>
+	</div>
 
-	<button (click)="$event.stopPropagation()" mat-menu-item>
-		<select class="w-full">
-			<option selected disabled>Availability</option>
+	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
+		<div class="mb-1 font-bold text-gray-500 text-md">Availability</div>
+
+		<select
+			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+		>
 			<option>Monday</option>
 		</select>
-	</button>
+	</div>
 
-	<button mat-menu-item class="text-center flex">
-		<span>Apply Filter</span>
-	</button>
+	<div class="flex-col px-5 mt-5 mb-5">
+		<button
+			mat-menu-item
+			class="flex bg-emerald-300 border-emerald-900 border text-emerald-900 rounded-md text-center items-center justify-center"
+		>
+			<span>Apply Filter</span>
+		</button>
+	</div>
 </mat-menu>
