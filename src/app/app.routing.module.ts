@@ -87,7 +87,7 @@ export const routes: Route[] = [
 	imports: [
 		RouterModule.forRoot(routes, {
 			initialNavigation: 'enabledBlocking',
-			scrollPositionRestoration: 'enabled',
+			scrollPositionRestoration: 'top',
 			anchorScrolling: 'enabled',
 			preloadingStrategy: PreloadAllModules,
 		}),

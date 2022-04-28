@@ -1,4 +1,6 @@
 <div
+	*ngIf="true"
+	@slideInLeft
 	class="md:rounded-3xl md:drop-shadow-2xl pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10"
 >
 	<img
@@ -10,7 +12,7 @@
 	<input
 		type="text"
 		placeholder="Username"
-		class="bg-gray-100 py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20"
+		class="bg-gray-100 py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 border border-rose-500"
 	/>
 
 	<input
@@ -26,15 +28,28 @@
 	>
 
 	<div
-		class="border border-rose-500 text-rose-500 bg-red-50 p-5 rounded-lg my-5"
+		*ngIf="true"
+		@slideInBottom
+		style="width: 300px"
+		class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-teal-200/20 via-white/20 to-white backdrop-blur-md flex items-center border border-teal-200 mt-10 mb-0"
 	>
-		It seems that your account hasn't been approved yet. We ask for your
-		patience as we review your information. Thank you
+		<mat-icon class="text-teal-500" svgIcon="info"></mat-icon>
+
+		<div class="ml-4">
+			<div class="text-teal-500 font-extrabold">
+				We are asking for your patience.
+			</div>
+			<div class="text-gray-500 font-medium">
+				It seems that your account hasn't been approved yet. We ask for
+				your patience as we review your information. Best Regards,
+				Mawedy Team
+			</div>
+		</div>
 	</div>
 
 	<button
 		(click)="login()"
-		class="text-white py-3 px-10 bg-emerald-500 hover:bg-emerald-600 text-xl shadow-lg rounded-md flex items-center"
+		class="text-white py-3 px-10 bg-emerald-500 hover:bg-emerald-600 text-xl shadow-lg rounded-md flex items-center mt-10"
 	>
 		<spinner></spinner>
 		Sign in

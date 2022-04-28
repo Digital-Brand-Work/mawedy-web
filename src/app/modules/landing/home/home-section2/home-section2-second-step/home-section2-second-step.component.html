@@ -27,46 +27,114 @@
 	</div>
 
 	<div class="mb-5">
-		<div class="mb-1 font-bold text-gray-500 text-lg">Subscription</div>
+		<div
+			class="mb-1 font-bold text-gray-500 text-lg flex items-center md:w-3/4"
+		>
+			Subscription
+
+			<div
+				role="button"
+				title="View Subscription Packages"
+				class="ml-auto"
+			>
+				<mat-icon
+					matTooltip="View Subscription Packages"
+					class="text-teal-500 hover:text-emerald-500"
+					svgIcon="info"
+				></mat-icon>
+			</div>
+		</div>
 
 		<select
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full md:w-3/4 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		>
-			<option>Gold</option>
+			<option>Free</option>
+			<option>Standard</option>
+			<option>Golden</option>
+			<option>Platinum</option>
 		</select>
 
 		<div class="text-sm text-rose-500">Subscription is required.</div>
 	</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:w-3/4">
-		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">1st account</div>
+	<div class="mb-5">
+		<div
+			class="mb-1 font-bold text-gray-500 text-lg flex items-center md:w-3/4"
+		>
+			<div>
+				You can add up to
+				<span class="font-bold text-emerald-500 mx-2">9</span> users
+			</div>
 
-			<input
-				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-				placeholder="Account name"
-			/>
+			<div class="ml-auto">
+				<button
+					title="Add user"
+					matTooltip="Add user"
+					class="text-white rounded-md px-3 py-1 ml-auto bg-teal-500 hover:bg-teal-600 flex items-center"
+				>
+					<mat-icon
+						class="text-white mr-2"
+						svgIcon="feather:plus"
+					></mat-icon>
 
-			<div class="text-sm text-rose-500">1st account is required.</div>
+					Add user
+				</button>
+			</div>
 		</div>
+	</div>
 
-		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">2nd account</div>
+	<mat-divider
+		class="my-2 mb-5 md:w-3/4 border-b border-zinc-100"
+	></mat-divider>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-10 gap-y-2 md:w-3/4">
+		<div
+			*ngFor="
+				let item of [1, 2, 3, 4, 5, 6];
+				let i = index;
+				trackBy: identity
+			"
+			class=""
+		>
+			<div class="mb-1 font-bold text-gray-500 text-lg flex items-center">
+				Account {{ i + 1 }}
+
+				<mat-icon
+					title="Remove"
+					matTooltip="Remove"
+					role="button"
+					class="ml-auto text-gray-200 hover:text-rose-400"
+					svgIcon="remove_circle"
+				></mat-icon>
+			</div>
 
 			<input
-				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-				placeholder="Account name"
+				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 placeholder-gray-400"
 			/>
 
-			<div class="text-sm text-rose-500">2nd account is required.</div>
+			<div class="text-sm text-rose-500">
+				Account {{ i + 1 }} is required.
+			</div>
 		</div>
 	</div>
 
 	<div
-		class="border border-teal-500 text-teal-500 bg-teal-50 p-5 rounded-lg my-5 md:w-3/4"
+		*ngIf="true"
+		@slideInBottom
+		style="width: 300px"
+		class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-emerald-200/20 via-white/20 to-white backdrop-blur-md flex items-center border border-teal-200 mt-10 mb-0 md:w-3/4"
 	>
-		Thank you for reaching out to us.We are reviewing your information and
-		we will contact you as soon as you get approved.
+		<mat-icon class="text-emerald-500" svgIcon="success"></mat-icon>
+
+		<div class="ml-4">
+			<div class="text-emerald-500 font-extrabold">
+				Thank you for reaching out to us.
+			</div>
+			<div class="text-gray-500 font-medium">
+				We are reviewing your information and we will contact you as
+				soon as you get approved.
+			</div>
+		</div>
 	</div>
 
 	<div class="mt-5 flex md:flex-row flex-col w-full md:w-3/4">

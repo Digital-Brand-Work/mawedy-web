@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core'
 import { AlertState } from 'app/components/alert/alert.service'
 import { Observable, take } from 'rxjs'
 import { Alert } from 'app/mawedy-core/models/utility.models'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
 	selector: 'home-section1-login-panel',
 	templateUrl: './home-section1-login-panel.component.html',
 	styleUrls: ['./home-section1-login-panel.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class HomeSection1LoginPanelComponent implements OnInit {
 	constructor(private router: Router, private alert: AlertState) {}

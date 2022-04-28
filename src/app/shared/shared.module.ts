@@ -1,3 +1,4 @@
+import { ParallaxDirective } from './../../@digital_brand_work/directives/parralax.directive'
 import { MatButtonModule } from '@angular/material/button'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatIconModule } from '@angular/material/icon'
@@ -30,7 +31,7 @@ const modules = [
 	MatTooltipModule,
 ]
 
-const directives = [AnimateJsDirective]
+const directives = [AnimateJsDirective, ParallaxDirective]
 
 const pipes = []
 

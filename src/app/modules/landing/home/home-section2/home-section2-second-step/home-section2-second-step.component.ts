@@ -8,11 +8,13 @@ import {
 	Output,
 	ViewChild,
 } from '@angular/core'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
 	selector: 'home-section2-second-step',
 	templateUrl: './home-section2-second-step.component.html',
 	styleUrls: ['./home-section2-second-step.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class HomeSection2SecondStepComponent implements OnInit {
 	constructor(private cdr: ChangeDetectorRef) {}
@@ -34,4 +36,6 @@ export class HomeSection2SecondStepComponent implements OnInit {
 	ngOnDestroy(): void {
 		this.cdr.detach()
 	}
+
+	identity = (item: any) => item
 }

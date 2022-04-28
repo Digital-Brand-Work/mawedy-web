@@ -1,7 +1,9 @@
 <div class="min-h-screen w-full flex items-center justify-center relative">
 	<img
+		parallax
+		[factor]="8.3"
 		src="../../../../../assets/app/home/home-section.jpg"
-		class="w-screen h-screen object-cover md:object-fill absolute top-0"
+		class="w-screen h-screen object-cover md:object-fill absolute top-0 z-0"
 		alt=""
 	/>
 
@@ -12,22 +14,29 @@
 			<div class="flex md:justify-center w-full min-h-screen px-5">
 				<div class="flex-col flex my-auto">
 					<div
-						class="text-4xl md:text-9xl text-white font-bold leading-none text-center md:text-left"
+						*ngIf="true"
+						@expandCollapse
+						class="text-6xl md:text-9xl text-white font-bold leading-none text-center md:text-left"
 					>
 						Clinic Appointments made easy.
 					</div>
 
-					<div class="text-emerald-100 text-xl md:text-2xl">
+					<div
+						class="text-emerald-100 text-xl md:text-2xl text-center md:text-left"
+					>
 						Helping people for better health.
 					</div>
 
-					<div class="flex flex-col md:flex-row mt-32 md:mt-10">
+					<div
+						[@listAnimation]="2"
+						class="flex flex-col md:flex-row mt-10"
+					>
 						<div
 							role="button"
 							class="rounded-lg px-3 pr-5 py-3 bg-emerald-900 hover:bg-black flex items-center whitespace-nowrap md:mr-2"
 						>
 							<img
-								class="h-12 mr-4"
+								class="h-12 mr-4 max-w-22"
 								src="../../../../../assets/app/home/google-play.svg"
 								alt="Google Play Logo"
 							/>
@@ -48,10 +57,10 @@
 
 						<div
 							role="button"
-							class="rounded-lg px-3 pr-5 py-3 bg-emerald-900 hover:bg-black flex items-center whitespace-nowrap"
+							class="rounded-lg px-3 pr-5 py-3 bg-emerald-900 hover:bg-black flex items-center whitespace-nowrap mt-2 md:mt-0"
 						>
 							<img
-								class="h-12 mr-4"
+								class="h-12 mr-4 max-w-22"
 								src="../../../../../assets/app/home/apple.svg"
 								style="filter: invert(100%)"
 								alt="Apple Logo"

@@ -1,4 +1,6 @@
-<div class="min-h-screen w-full flex items-center justify-center relative">
+<div
+	class="min-h-screen w-full flex items-center justify-center relative bg-white py-20"
+>
 	<div
 		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
 	>
@@ -9,6 +11,7 @@
 				[ngClass]="{ 'opacity-50 pointer-events-none': step === 'two' }"
 				(onNext)="step = 'two'"
 				[step]="step"
+				[focus$]="focus$"
 			></home-section2-first-step>
 
 			<home-section2-second-step
@@ -16,29 +19,9 @@
 				@fadeOutRight
 				class="w-full"
 				*ngIf="step === 'two'"
-				(onBack)="step = 'one'"
+				(onBack)="step = 'one'; focus$.next(true)"
 				[step]="step"
 			></home-section2-second-step>
-			<!-- 
-			<div
-				class="flex items-center w-full md:w-1/4 mt-10 md:-ml-30 justify-center md:justify-start"
-			>
-				<div
-					[ngClass]="{
-						'bg-emerald-600': step === 'one',
-						'bg-emerald-300': step === 'two'
-					}"
-					class="h-3 w-3 rounded-full shadow mx-2"
-				></div>
-
-				<div
-					[ngClass]="{
-						'bg-emerald-600': step === 'two',
-						'bg-emerald-300': step === 'one'
-					}"
-					class="h-3 w-3 rounded-full shadow-lg mx-2"
-				></div>
-			</div> -->
 		</div>
 	</div>
 </div>

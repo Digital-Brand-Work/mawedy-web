@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Component, OnInit } from '@angular/core'
 
@@ -11,6 +12,8 @@ export class HomeSection2Component implements OnInit {
 	constructor() {}
 
 	step: 'one' | 'two' = 'one'
+
+	focus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
 	ngOnInit(): void {}
 }

@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	Input,
+	OnInit,
+	Output,
+	ViewChild,
+} from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
@@ -8,11 +18,34 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class HomeSection2FirstStepComponent implements OnInit {
-	constructor() {}
+	constructor(private cdr: ChangeDetectorRef) {}
+
+	_unsubscribeAll: Subject<any> = new Subject<any>()
+
+	@ViewChild('input') input!: ElementRef
 
 	@Output() onNext = new EventEmitter()
 
 	@Input() step: 'one' | 'two' = 'one'
 
+	@Input() focus$!: BehaviorSubject<boolean>
+
 	ngOnInit(): void {}
+
+	ngAfterContentInit(): void {
+		this.focus$
+			.pipe(takeUntil(this._unsubscribeAll))
+			.subscribe((focused) => {
+				if (focused) {
+					this.input.nativeElement.focus()
+				}
+				console.log(focused)
+			})
+	}
+
+	ngOnDestroy(): void {
+		this._unsubscribeAll.next(null)
+
+		this._unsubscribeAll.complete()
+	}
 }
