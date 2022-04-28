@@ -19,6 +19,11 @@ export const routes: Route[] = [
 		},
 		children: [
 			{
+				path: '',
+				redirectTo: 'dashboard',
+				pathMatch: 'full',
+			},
+			{
 				path: 'dashboard',
 				loadChildren: () =>
 					import('./modules/admin/dashboard/dashboard.module').then(

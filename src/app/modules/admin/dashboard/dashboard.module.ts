@@ -16,6 +16,7 @@ import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-pati
 import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patients-filter/waiting-patients-filter.component'
 import { ComponentsModule } from 'app/components/components.module'
 import { dashboardRoutes } from 'app/routes/admin/dashboard.routing'
+import { DashboardAppointmentsComponent } from './appointments/dashboard-appointments.component'
 
 const components = [
 	DashboardAppointmentTableComponent,
@@ -31,6 +32,7 @@ const components = [
 	WaitingPatientsTableComponent,
 	WaitingPatientsToolbarComponent,
 	WaitingPatientsFilterComponent,
+	DashboardAppointmentsComponent,
 ]
 
 @NgModule({
