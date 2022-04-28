@@ -1,1 +1,39 @@
-<p>doctors-filter works!</p>
+<div
+	role="button"
+	[matMenuTriggerFor]="dashboardAppointmentFilter"
+	style="width: 219px"
+	class="ml-5 flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 cursor-pointer hover:bg-gray-50"
+>
+	<input
+		role="button"
+		type="search"
+		class="w-full pointer-events-none"
+		placeholder="Filter"
+	/>
+
+	<mat-icon class="text-gray-400 ml-auto" svgIcon="feather:filter"></mat-icon>
+</div>
+
+<mat-menu
+	[xPosition]="'before'"
+	#dashboardAppointmentFilter="matMenu"
+	class="rounded-md"
+>
+	<button (click)="$event.stopPropagation()" mat-menu-item>
+		<select class="w-full">
+			<option selected disabled>Department</option>
+			<option>Cardiology</option>
+		</select>
+	</button>
+
+	<button (click)="$event.stopPropagation()" mat-menu-item>
+		<select class="w-full">
+			<option selected disabled>Availability</option>
+			<option>Monday</option>
+		</select>
+	</button>
+
+	<button mat-menu-item class="text-center flex">
+		<span>Apply Filter</span>
+	</button>
+</mat-menu>

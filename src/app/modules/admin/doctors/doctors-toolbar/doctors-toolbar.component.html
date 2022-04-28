@@ -1,1 +1,30 @@
-<p>doctors-toolbar works!</p>
+<div class="flex items-center w-full">
+	<div class="font-bold text-xl">Doctors (32)</div>
+
+	<div
+		style="width: 219px"
+		class="flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 ml-auto"
+	>
+		<input type="search" class="w-full" placeholder="Search Doctors" />
+
+		<mat-icon
+			class="text-gray-400 ml-auto"
+			svgIcon="feather:search"
+		></mat-icon>
+	</div>
+
+	<doctors-filter (onFilter)="onFilter.emit()"></doctors-filter>
+
+	<button
+		class="mx-5 flex items-center bg-emerald-500 text-white py-2 px-10 rounded-md"
+	>
+		Add Doctor
+	</button>
+
+	<button
+		style="background: #0a2440"
+		class="mr-5 flex items-center text-white py-2 px-10 rounded-md"
+	>
+		Export Lists
+	</button>
+</div>
