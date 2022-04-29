@@ -1,0 +1,20 @@
+version: 1
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install
+        - if [ "${AWS_BRANCH}" = "main" ]; then export BUILD_ENV="production"; fi
+        - if [ "${AWS_BRANCH}" = "staging" ]; then export BUILD_ENV="staging"; fi
+        - if [ "${AWS_BRANCH}" = "dev" ]; then export BUILD_ENV="development"; fi
+    build:
+      commands:
+        - npm run build -- --configuration "${BUILD_ENV}"
+  artifacts:
+    baseDirectory: dist/mawedy/browser
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
