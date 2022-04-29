@@ -56,13 +56,6 @@ export class AppointmentAddComponent implements OnInit {
 			.subscribe((focused) => {
 				if (focused) {
 					this.input.nativeElement.focus()
-					;(
-						document.querySelector('html') as HTMLElement
-					).style.position = 'fixed'
-				} else {
-					;(
-						document.querySelector('html') as HTMLElement
-					).style.position = 'relative'
 				}
 			})
 

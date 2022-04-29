@@ -6,7 +6,9 @@
 			</div>
 
 			<button
+				(click)="banner.click()"
 				class="ml-auto text-teal-500 hover:underline flex items-center"
+				accept="image/*"
 			>
 				Upload Banner
 
@@ -15,6 +17,8 @@
 					class="ml-2 text-teal-500"
 				></mat-icon>
 			</button>
+
+			<input type="file" class="hidden" #banner />
 		</div>
 
 		<div
@@ -68,7 +72,7 @@
 					></textarea>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-5">
+				<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20">
 					<div>
 						<clinic-timings></clinic-timings>
 					</div>
@@ -107,6 +111,15 @@
 					<clinic-information-map></clinic-information-map>
 				</div>
 			</div>
+		</div>
+
+		<div class="mt-10">
+			<button
+				mat-button
+				class="hover:bg-emerald-600 rounded-lg px-5 py-5 font-bold text-white bg-emerald-500 border-2 border-emerald-500"
+			>
+				Update Changes
+			</button>
 		</div>
 	</div>
 </div>

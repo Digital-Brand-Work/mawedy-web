@@ -20,6 +20,7 @@ import { AutoSizeDirective } from '@digital_brand_work/directives/textarea-autos
 import { InputMaskModule } from '@ngneat/input-mask'
 import { NgxMaskModule } from 'ngx-mask'
 import { StopPropagation } from '@digital_brand_work/directives/stop.propagation.directive'
+import { ClinicTimingInputComponent } from 'app/components/clinic-timing-input/clinic-timing-input.component'
 
 const components = [
 	SpinnerComponent,
@@ -27,6 +28,7 @@ const components = [
 	AppToolbarComponent,
 	AlertComponent,
 	ModalHeaderComponent,
+	ClinicTimingInputComponent,
 
 	/** Modals */
 	AppointmentAddComponent,

@@ -58,11 +58,15 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 			.subscribe(({ matchingAliases }) => {
 				this.isScreenSmall = !matchingAliases.includes('md')
 			})
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'fixed'
 	}
 
 	ngOnDestroy(): void {
 		this._unsubscribeAll.next(null)
 		this._unsubscribeAll.complete()
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'relative'
 	}
 
 	toggleNavigation(name: string): void {

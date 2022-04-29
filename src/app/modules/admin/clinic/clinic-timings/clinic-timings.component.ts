@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {
+	WeekDay,
+	weekDays,
+} from './../../../../mawedy-core/constants/app.constant'
+import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'clinic-timings',
-  templateUrl: './clinic-timings.component.html',
-  styleUrls: ['./clinic-timings.component.scss']
+	selector: 'clinic-timings',
+	templateUrl: './clinic-timings.component.html',
+	styleUrls: ['./clinic-timings.component.scss'],
 })
 export class ClinicTimingsComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
+	weekDays: WeekDay[] = weekDays
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {}
 
+	identity = (item: any) => item
 }
