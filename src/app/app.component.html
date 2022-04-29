@@ -1,3 +1,13 @@
+<!-- Modals  -->
+<appointment-add
+	*ngIf="addAppointmentModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></appointment-add>
+
+<!-- Modals  -->
+
 <router-outlet></router-outlet>
 
 <div

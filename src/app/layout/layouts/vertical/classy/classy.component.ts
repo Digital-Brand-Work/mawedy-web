@@ -1,112 +1,78 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
-import { Navigation } from 'app/core/navigation/navigation.types';
-import { NavigationService } from 'app/core/navigation/navigation.service';
-import { User } from 'app/core/user/user.types';
-import { UserService } from 'app/core/user/user.service';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { FuseMediaWatcherService } from '@fuse/services/media-watcher'
+import {
+	FuseNavigationService,
+	FuseVerticalNavigationComponent,
+} from '@fuse/components/navigation'
+import { Navigation } from 'app/core/navigation/navigation.types'
+import { NavigationService } from 'app/core/navigation/navigation.service'
+import { User } from 'app/core/user/user.types'
+import { UserService } from 'app/core/user/user.service'
+import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-add/appointment-add.service'
 
 @Component({
-    selector     : 'classy-layout',
-    templateUrl  : './classy.component.html',
-    encapsulation: ViewEncapsulation.None
+	selector: 'classy-layout',
+	templateUrl: './classy.component.html',
+	encapsulation: ViewEncapsulation.None,
 })
-export class ClassyLayoutComponent implements OnInit, OnDestroy
-{
-    isScreenSmall: boolean;
-    navigation: Navigation;
-    user: User;
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
+export class ClassyLayoutComponent implements OnInit, OnDestroy {
+	constructor(
+		private _navigationService: NavigationService,
+		private _userService: UserService,
+		private _fuseMediaWatcherService: FuseMediaWatcherService,
+		private _fuseNavigationService: FuseNavigationService,
 
-    /**
-     * Constructor
-     */
-    constructor(
-        private _activatedRoute: ActivatedRoute,
-        private _router: Router,
-        private _navigationService: NavigationService,
-        private _userService: UserService,
-        private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fuseNavigationService: FuseNavigationService
-    )
-    {
-    }
+		private addAppointmentModal: AddAppointmentModal,
+	) {}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
+	private _unsubscribeAll: Subject<any> = new Subject<any>()
 
-    /**
-     * Getter for current year
-     */
-    get currentYear(): number
-    {
-        return new Date().getFullYear();
-    }
+	opened$: BehaviorSubject<boolean> = this.addAppointmentModal.opened$
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+	isScreenSmall: boolean
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Subscribe to navigation data
-        this._navigationService.navigation$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((navigation: Navigation) => {
-                this.navigation = navigation;
-            });
+	navigation: Navigation
 
-        // Subscribe to the user service
-        this._userService.user$
-            .pipe((takeUntil(this._unsubscribeAll)))
-            .subscribe((user: User) => {
-                this.user = user;
-            });
+	user: User
 
-        // Subscribe to media changes
-        this._fuseMediaWatcherService.onMediaChange$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(({matchingAliases}) => {
+	get currentYear(): number {
+		return new Date().getFullYear()
+	}
 
-                // Check if the screen is small
-                this.isScreenSmall = !matchingAliases.includes('md');
-            });
-    }
+	ngOnInit(): void {
+		this._navigationService.navigation$
+			.pipe(takeUntil(this._unsubscribeAll))
+			.subscribe((navigation: Navigation) => {
+				this.navigation = navigation
+			})
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next(null);
-        this._unsubscribeAll.complete();
-    }
+		this._userService.user$
+			.pipe(takeUntil(this._unsubscribeAll))
+			.subscribe((user: User) => {
+				this.user = user
+			})
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+		this._fuseMediaWatcherService.onMediaChange$
+			.pipe(takeUntil(this._unsubscribeAll))
+			.subscribe(({ matchingAliases }) => {
+				this.isScreenSmall = !matchingAliases.includes('md')
+			})
+	}
 
-    /**
-     * Toggle navigation
-     *
-     * @param name
-     */
-    toggleNavigation(name: string): void
-    {
-        // Get the navigation
-        const navigation = this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(name);
+	ngOnDestroy(): void {
+		this._unsubscribeAll.next(null)
+		this._unsubscribeAll.complete()
+	}
 
-        if ( navigation )
-        {
-            // Toggle the opened status
-            navigation.toggle();
-        }
-    }
+	toggleNavigation(name: string): void {
+		const navigation =
+			this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
+				name,
+			)
+
+		if (navigation) {
+			navigation.toggle()
+		}
+	}
 }

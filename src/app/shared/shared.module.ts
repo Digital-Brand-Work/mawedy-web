@@ -1,3 +1,5 @@
+import { AppointmentEditComponent } from './../modules/admin/appointments/appointment-edit/appointment-edit.component'
+import { AppointmentAddComponent } from './../modules/admin/appointments/appointment-add/appointment-add.component'
 import { ParallaxDirective } from './../../@digital_brand_work/directives/parralax.directive'
 import { MatButtonModule } from '@angular/material/button'
 import { MatDividerModule } from '@angular/material/divider'
@@ -12,12 +14,22 @@ import { AnimateJsDirective } from '@digital_brand_work/directives/animate.js.di
 import { MatMenuModule } from '@angular/material/menu'
 import { AlertComponent } from 'app/components/alert/alert.component'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { ModalHeaderComponent } from 'app/components/modal-header/modal-header.component'
+import { MatRadioModule } from '@angular/material/radio'
+import { AutoSizeDirective } from '@digital_brand_work/directives/textarea-autosize.directive'
+import { InputMaskModule } from '@ngneat/input-mask'
+import { NgxMaskModule } from 'ngx-mask'
 
 const components = [
 	SpinnerComponent,
 	MobileNumberFormComponent,
 	AppToolbarComponent,
 	AlertComponent,
+	ModalHeaderComponent,
+
+	/** Modals */
+	AppointmentAddComponent,
+	AppointmentEditComponent,
 ]
 
 const modules = [
@@ -29,9 +41,12 @@ const modules = [
 	MatDividerModule,
 	MatButtonModule,
 	MatTooltipModule,
+	MatRadioModule,
+	InputMaskModule,
+	NgxMaskModule.forRoot(),
 ]
 
-const directives = [AnimateJsDirective, ParallaxDirective]
+const directives = [AnimateJsDirective, ParallaxDirective, AutoSizeDirective]
 
 const pipes = []
 
