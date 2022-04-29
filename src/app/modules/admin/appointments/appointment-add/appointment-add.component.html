@@ -17,7 +17,7 @@
 		<div class="font-bold text-gray-500 mb-3">Patient Details</div>
 
 		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">Patient Name</div>
+			<div class="mb-1 font-bold accent-color text-md">Patient Name</div>
 
 			<input
 				#input
@@ -35,7 +35,7 @@
 		</div>
 
 		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">
+			<div class="mb-1 font-bold accent-color text-md">
 				Select Department
 			</div>
 
@@ -52,9 +52,7 @@
 		</div>
 
 		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">
-				Select Doctor
-			</div>
+			<div class="mb-1 font-bold accent-color text-md">Select Doctor</div>
 
 			<select
 				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
@@ -69,7 +67,7 @@
 		</div>
 
 		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">
+			<div class="mb-1 font-bold accent-color text-md">
 				Select Service
 			</div>
 
@@ -87,7 +85,7 @@
 
 		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-5 items-center">
 			<div class="mb-5">
-				<div class="mb-1 font-bold text-gray-500 text-lg">
+				<div class="mb-1 font-bold accent-color text-md">
 					Select date
 				</div>
 
@@ -100,7 +98,7 @@
 			</div>
 
 			<div class="mb-5">
-				<div class="mb-1 font-bold text-gray-500 text-lg">
+				<div class="mb-1 font-bold accent-color text-md">
 					Select Time
 				</div>
 
@@ -113,7 +111,7 @@
 			</div>
 
 			<div class="mb-5">
-				<div class="mb-1 font-bold text-gray-500 text-lg">Amount</div>
+				<div class="mb-1 font-bold accent-color text-md">Amount</div>
 
 				<input
 					[inputMask]="currencyInputMask"
@@ -131,7 +129,7 @@
 		</div>
 
 		<div class="mb-5">
-			<div class="mb-1 font-bold text-gray-500 text-lg">Comments</div>
+			<div class="mb-1 font-bold accent-color text-md">Comments</div>
 
 			<textarea
 				(keyup)="autoGrow()"

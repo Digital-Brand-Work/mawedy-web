@@ -1,1242 +1,250 @@
 [
-	{
-		"Afghanistan": "Åland Islands",
-		"AFG": "ALA",
-		"004": 248
-	},
-	{
-		"Afghanistan": "Albania",
-		"AFG": "ALB",
-		"004": 8
-	},
-	{
-		"Afghanistan": "Algeria",
-		"AFG": "DZA",
-		"004": 12
-	},
-	{
-		"Afghanistan": "American Samoa",
-		"AFG": "ASM",
-		"004": 16
-	},
-	{
-		"Afghanistan": "Andorra",
-		"AFG": "AND",
-		"004": 20
-	},
-	{
-		"Afghanistan": "Angola",
-		"AFG": "AGO",
-		"004": 24
-	},
-	{
-		"Afghanistan": "Anguilla",
-		"AFG": "AIA",
-		"004": 660
-	},
-	{
-		"Afghanistan": "Antarctica",
-		"AFG": "ATA",
-		"004": 10
-	},
-	{
-		"Afghanistan": "Antigua and Barbuda",
-		"AFG": "ATG",
-		"004": 28
-	},
-	{
-		"Afghanistan": "Argentina",
-		"AFG": "ARG",
-		"004": 32
-	},
-	{
-		"Afghanistan": "Armenia",
-		"AFG": "ARM",
-		"004": 51
-	},
-	{
-		"Afghanistan": "Aruba",
-		"AFG": "ABW",
-		"004": 533
-	},
-	{
-		"Afghanistan": "Australia",
-		"AFG": "AUS",
-		"004": 36
-	},
-	{
-		"Afghanistan": "Austria",
-		"AFG": "AUT",
-		"004": 40
-	},
-	{
-		"Afghanistan": "Azerbaijan",
-		"AFG": "AZE",
-		"004": 31
-	},
-	{
-		"Afghanistan": "Bahamas",
-		"AFG": "BHS",
-		"004": 44
-	},
-	{
-		"Afghanistan": "Bahrain",
-		"AFG": "BHR",
-		"004": 48
-	},
-	{
-		"Afghanistan": "Bangladesh",
-		"AFG": "BGD",
-		"004": 50
-	},
-	{
-		"Afghanistan": "Barbados",
-		"AFG": "BRB",
-		"004": 52
-	},
-	{
-		"Afghanistan": "Belarus",
-		"AFG": "BLR",
-		"004": 112
-	},
-	{
-		"Afghanistan": "Belgium",
-		"AFG": "BEL",
-		"004": 56
-	},
-	{
-		"Afghanistan": "Belize",
-		"AFG": "BLZ",
-		"004": 84
-	},
-	{
-		"Afghanistan": "Benin",
-		"AFG": "BEN",
-		"004": 204
-	},
-	{
-		"Afghanistan": "Bermuda",
-		"AFG": "BMU",
-		"004": 60
-	},
-	{
-		"Afghanistan": "Bhutan",
-		"AFG": "BTN",
-		"004": 64
-	},
-	{
-		"Afghanistan": "Bolivia (Plurinational State of)",
-		"AFG": "BOL",
-		"004": 68
-	},
-	{
-		"Afghanistan": "Bonaire, Sint Eustatius and Saba",
-		"AFG": "BES",
-		"004": 535
-	},
-	{
-		"Afghanistan": "Bosnia and Herzegovina",
-		"AFG": "BIH",
-		"004": 70
-	},
-	{
-		"Afghanistan": "Botswana",
-		"AFG": "BWA",
-		"004": 72
-	},
-	{
-		"Afghanistan": "Bouvet Island",
-		"AFG": "BVT",
-		"004": 74
-	},
-	{
-		"Afghanistan": "Brazil",
-		"AFG": "BRA",
-		"004": 76
-	},
-	{
-		"Afghanistan": "British Indian Ocean Territory",
-		"AFG": "IOT",
-		"004": 86
-	},
-	{
-		"Afghanistan": "Brunei Darussalam",
-		"AFG": "BRN",
-		"004": 96
-	},
-	{
-		"Afghanistan": "Bulgaria",
-		"AFG": "BGR",
-		"004": 100
-	},
-	{
-		"Afghanistan": "Burkina Faso",
-		"AFG": "BFA",
-		"004": 854
-	},
-	{
-		"Afghanistan": "Burundi",
-		"AFG": "BDI",
-		"004": 108
-	},
-	{
-		"Afghanistan": "Cabo Verde",
-		"AFG": "CPV",
-		"004": 132
-	},
-	{
-		"Afghanistan": "Cambodia",
-		"AFG": "KHM",
-		"004": 116
-	},
-	{
-		"Afghanistan": "Cameroon",
-		"AFG": "CMR",
-		"004": 120
-	},
-	{
-		"Afghanistan": "Canada",
-		"AFG": "CAN",
-		"004": 124
-	},
-	{
-		"Afghanistan": "Cayman Islands",
-		"AFG": "CYM",
-		"004": 136
-	},
-	{
-		"Afghanistan": "Central African Republic",
-		"AFG": "CAF",
-		"004": 140
-	},
-	{
-		"Afghanistan": "Chad",
-		"AFG": "TCD",
-		"004": 148
-	},
-	{
-		"Afghanistan": "Chile",
-		"AFG": "CHL",
-		"004": 152
-	},
-	{
-		"Afghanistan": "China",
-		"AFG": "CHN",
-		"004": 156
-	},
-	{
-		"Afghanistan": "Christmas Island",
-		"AFG": "CXR",
-		"004": 162
-	},
-	{
-		"Afghanistan": "Cocos (Keeling) Islands",
-		"AFG": "CCK",
-		"004": 166
-	},
-	{
-		"Afghanistan": "Colombia",
-		"AFG": "COL",
-		"004": 170
-	},
-	{
-		"Afghanistan": "Comoros",
-		"AFG": "COM",
-		"004": 174
-	},
-	{
-		"Afghanistan": "Congo",
-		"AFG": "COG",
-		"004": 178
-	},
-	{
-		"Afghanistan": "Congo, Democratic Republic of the",
-		"AFG": "COD",
-		"004": 180
-	},
-	{
-		"Afghanistan": "Cook Islands",
-		"AFG": "COK",
-		"004": 184
-	},
-	{
-		"Afghanistan": "Costa Rica",
-		"AFG": "CRI",
-		"004": 188
-	},
-	{
-		"Afghanistan": "Côte d'Ivoire",
-		"AFG": "CIV",
-		"004": 384
-	},
-	{
-		"Afghanistan": "Croatia",
-		"AFG": "HRV",
-		"004": 191
-	},
-	{
-		"Afghanistan": "Cuba",
-		"AFG": "CUB",
-		"004": 192
-	},
-	{
-		"Afghanistan": "Curaçao",
-		"AFG": "CUW",
-		"004": 531
-	},
-	{
-		"Afghanistan": "Cyprus",
-		"AFG": "CYP",
-		"004": 196
-	},
-	{
-		"Afghanistan": "Czechia",
-		"AFG": "CZE",
-		"004": 203
-	},
-	{
-		"Afghanistan": "Denmark",
-		"AFG": "DNK",
-		"004": 208
-	},
-	{
-		"Afghanistan": "Djibouti",
-		"AFG": "DJI",
-		"004": 262
-	},
-	{
-		"Afghanistan": "Dominica",
-		"AFG": "DMA",
-		"004": 212
-	},
-	{
-		"Afghanistan": "Dominican Republic",
-		"AFG": "DOM",
-		"004": 214
-	},
-	{
-		"Afghanistan": "Ecuador",
-		"AFG": "ECU",
-		"004": 218
-	},
-	{
-		"Afghanistan": "Egypt",
-		"AFG": "EGY",
-		"004": 818
-	},
-	{
-		"Afghanistan": "El Salvador",
-		"AFG": "SLV",
-		"004": 222
-	},
-	{
-		"Afghanistan": "Equatorial Guinea",
-		"AFG": "GNQ",
-		"004": 226
-	},
-	{
-		"Afghanistan": "Eritrea",
-		"AFG": "ERI",
-		"004": 232
-	},
-	{
-		"Afghanistan": "Estonia",
-		"AFG": "EST",
-		"004": 233
-	},
-	{
-		"Afghanistan": "Eswatini",
-		"AFG": "SWZ",
-		"004": 748
-	},
-	{
-		"Afghanistan": "Ethiopia",
-		"AFG": "ETH",
-		"004": 231
-	},
-	{
-		"Afghanistan": "Falkland Islands (Malvinas)",
-		"AFG": "FLK",
-		"004": 238
-	},
-	{
-		"Afghanistan": "Faroe Islands",
-		"AFG": "FRO",
-		"004": 234
-	},
-	{
-		"Afghanistan": "Fiji",
-		"AFG": "FJI",
-		"004": 242
-	},
-	{
-		"Afghanistan": "Finland",
-		"AFG": "FIN",
-		"004": 246
-	},
-	{
-		"Afghanistan": "France",
-		"AFG": "FRA",
-		"004": 250
-	},
-	{
-		"Afghanistan": "French Guiana",
-		"AFG": "GUF",
-		"004": 254
-	},
-	{
-		"Afghanistan": "French Polynesia",
-		"AFG": "PYF",
-		"004": 258
-	},
-	{
-		"Afghanistan": "French Southern Territories",
-		"AFG": "ATF",
-		"004": 260
-	},
-	{
-		"Afghanistan": "Gabon",
-		"AFG": "GAB",
-		"004": 266
-	},
-	{
-		"Afghanistan": "Gambia",
-		"AFG": "GMB",
-		"004": 270
-	},
-	{
-		"Afghanistan": "Georgia",
-		"AFG": "GEO",
-		"004": 268
-	},
-	{
-		"Afghanistan": "Germany",
-		"AFG": "DEU",
-		"004": 276
-	},
-	{
-		"Afghanistan": "Ghana",
-		"AFG": "GHA",
-		"004": 288
-	},
-	{
-		"Afghanistan": "Gibraltar",
-		"AFG": "GIB",
-		"004": 292
-	},
-	{
-		"Afghanistan": "Greece",
-		"AFG": "GRC",
-		"004": 300
-	},
-	{
-		"Afghanistan": "Greenland",
-		"AFG": "GRL",
-		"004": 304
-	},
-	{
-		"Afghanistan": "Grenada",
-		"AFG": "GRD",
-		"004": 308
-	},
-	{
-		"Afghanistan": "Guadeloupe",
-		"AFG": "GLP",
-		"004": 312
-	},
-	{
-		"Afghanistan": "Guam",
-		"AFG": "GUM",
-		"004": 316
-	},
-	{
-		"Afghanistan": "Guatemala",
-		"AFG": "GTM",
-		"004": 320
-	},
-	{
-		"Afghanistan": "Guernsey",
-		"AFG": "GGY",
-		"004": 831
-	},
-	{
-		"Afghanistan": "Guinea",
-		"AFG": "GIN",
-		"004": 324
-	},
-	{
-		"Afghanistan": "Guinea-Bissau",
-		"AFG": "GNB",
-		"004": 624
-	},
-	{
-		"Afghanistan": "Guyana",
-		"AFG": "GUY",
-		"004": 328
-	},
-	{
-		"Afghanistan": "Haiti",
-		"AFG": "HTI",
-		"004": 332
-	},
-	{
-		"Afghanistan": "Heard Island and McDonald Islands",
-		"AFG": "HMD",
-		"004": 334
-	},
-	{
-		"Afghanistan": "Holy See",
-		"AFG": "VAT",
-		"004": 336
-	},
-	{
-		"Afghanistan": "Honduras",
-		"AFG": "HND",
-		"004": 340
-	},
-	{
-		"Afghanistan": "Hong Kong",
-		"AFG": "HKG",
-		"004": 344
-	},
-	{
-		"Afghanistan": "Hungary",
-		"AFG": "HUN",
-		"004": 348
-	},
-	{
-		"Afghanistan": "Iceland",
-		"AFG": "ISL",
-		"004": 352
-	},
-	{
-		"Afghanistan": "India",
-		"AFG": "IND",
-		"004": 356
-	},
-	{
-		"Afghanistan": "Indonesia",
-		"AFG": "IDN",
-		"004": 360
-	},
-	{
-		"Afghanistan": "Iran (Islamic Republic of)",
-		"AFG": "IRN",
-		"004": 364
-	},
-	{
-		"Afghanistan": "Iraq",
-		"AFG": "IRQ",
-		"004": 368
-	},
-	{
-		"Afghanistan": "Ireland",
-		"AFG": "IRL",
-		"004": 372
-	},
-	{
-		"Afghanistan": "Isle of Man",
-		"AFG": "IMN",
-		"004": 833
-	},
-	{
-		"Afghanistan": "Israel",
-		"AFG": "ISR",
-		"004": 376
-	},
-	{
-		"Afghanistan": "Italy",
-		"AFG": "ITA",
-		"004": 380
-	},
-	{
-		"Afghanistan": "Jamaica",
-		"AFG": "JAM",
-		"004": 388
-	},
-	{
-		"Afghanistan": "Japan",
-		"AFG": "JPN",
-		"004": 392
-	},
-	{
-		"Afghanistan": "Jersey",
-		"AFG": "JEY",
-		"004": 832
-	},
-	{
-		"Afghanistan": "Jordan",
-		"AFG": "JOR",
-		"004": 400
-	},
-	{
-		"Afghanistan": "Kazakhstan",
-		"AFG": "KAZ",
-		"004": 398
-	},
-	{
-		"Afghanistan": "Kenya",
-		"AFG": "KEN",
-		"004": 404
-	},
-	{
-		"Afghanistan": "Kiribati",
-		"AFG": "KIR",
-		"004": 296
-	},
-	{
-		"Afghanistan": "Korea (Democratic People's Republic of)",
-		"AFG": "PRK",
-		"004": 408
-	},
-	{
-		"Afghanistan": "Korea, Republic of",
-		"AFG": "KOR",
-		"004": 410
-	},
-	{
-		"Afghanistan": "Kuwait",
-		"AFG": "KWT",
-		"004": 414
-	},
-	{
-		"Afghanistan": "Kyrgyzstan",
-		"AFG": "KGZ",
-		"004": 417
-	},
-	{
-		"Afghanistan": "Lao People's Democratic Republic",
-		"AFG": "LAO",
-		"004": 418
-	},
-	{
-		"Afghanistan": "Latvia",
-		"AFG": "LVA",
-		"004": 428
-	},
-	{
-		"Afghanistan": "Lebanon",
-		"AFG": "LBN",
-		"004": 422
-	},
-	{
-		"Afghanistan": "Lesotho",
-		"AFG": "LSO",
-		"004": 426
-	},
-	{
-		"Afghanistan": "Liberia",
-		"AFG": "LBR",
-		"004": 430
-	},
-	{
-		"Afghanistan": "Libya",
-		"AFG": "LBY",
-		"004": 434
-	},
-	{
-		"Afghanistan": "Liechtenstein",
-		"AFG": "LIE",
-		"004": 438
-	},
-	{
-		"Afghanistan": "Lithuania",
-		"AFG": "LTU",
-		"004": 440
-	},
-	{
-		"Afghanistan": "Luxembourg",
-		"AFG": "LUX",
-		"004": 442
-	},
-	{
-		"Afghanistan": "Macao",
-		"AFG": "MAC",
-		"004": 446
-	},
-	{
-		"Afghanistan": "Madagascar",
-		"AFG": "MDG",
-		"004": 450
-	},
-	{
-		"Afghanistan": "Malawi",
-		"AFG": "MWI",
-		"004": 454
-	},
-	{
-		"Afghanistan": "Malaysia",
-		"AFG": "MYS",
-		"004": 458
-	},
-	{
-		"Afghanistan": "Maldives",
-		"AFG": "MDV",
-		"004": 462
-	},
-	{
-		"Afghanistan": "Mali",
-		"AFG": "MLI",
-		"004": 466
-	},
-	{
-		"Afghanistan": "Malta",
-		"AFG": "MLT",
-		"004": 470
-	},
-	{
-		"Afghanistan": "Marshall Islands",
-		"AFG": "MHL",
-		"004": 584
-	},
-	{
-		"Afghanistan": "Martinique",
-		"AFG": "MTQ",
-		"004": 474
-	},
-	{
-		"Afghanistan": "Mauritania",
-		"AFG": "MRT",
-		"004": 478
-	},
-	{
-		"Afghanistan": "Mauritius",
-		"AFG": "MUS",
-		"004": 480
-	},
-	{
-		"Afghanistan": "Mayotte",
-		"AFG": "MYT",
-		"004": 175
-	},
-	{
-		"Afghanistan": "Mexico",
-		"AFG": "MEX",
-		"004": 484
-	},
-	{
-		"Afghanistan": "Micronesia (Federated States of)",
-		"AFG": "FSM",
-		"004": 583
-	},
-	{
-		"Afghanistan": "Moldova, Republic of",
-		"AFG": "MDA",
-		"004": 498
-	},
-	{
-		"Afghanistan": "Monaco",
-		"AFG": "MCO",
-		"004": 492
-	},
-	{
-		"Afghanistan": "Mongolia",
-		"AFG": "MNG",
-		"004": 496
-	},
-	{
-		"Afghanistan": "Montenegro",
-		"AFG": "MNE",
-		"004": 499
-	},
-	{
-		"Afghanistan": "Montserrat",
-		"AFG": "MSR",
-		"004": 500
-	},
-	{
-		"Afghanistan": "Morocco",
-		"AFG": "MAR",
-		"004": 504
-	},
-	{
-		"Afghanistan": "Mozambique",
-		"AFG": "MOZ",
-		"004": 508
-	},
-	{
-		"Afghanistan": "Myanmar",
-		"AFG": "MMR",
-		"004": 104
-	},
-	{
-		"Afghanistan": "Namibia",
-		"AFG": "NAM",
-		"004": 516
-	},
-	{
-		"Afghanistan": "Nauru",
-		"AFG": "NRU",
-		"004": 520
-	},
-	{
-		"Afghanistan": "Nepal",
-		"AFG": "NPL",
-		"004": 524
-	},
-	{
-		"Afghanistan": "Netherlands",
-		"AFG": "NLD",
-		"004": 528
-	},
-	{
-		"Afghanistan": "New Caledonia",
-		"AFG": "NCL",
-		"004": 540
-	},
-	{
-		"Afghanistan": "New Zealand",
-		"AFG": "NZL",
-		"004": 554
-	},
-	{
-		"Afghanistan": "Nicaragua",
-		"AFG": "NIC",
-		"004": 558
-	},
-	{
-		"Afghanistan": "Niger",
-		"AFG": "NER",
-		"004": 562
-	},
-	{
-		"Afghanistan": "Nigeria",
-		"AFG": "NGA",
-		"004": 566
-	},
-	{
-		"Afghanistan": "Niue",
-		"AFG": "NIU",
-		"004": 570
-	},
-	{
-		"Afghanistan": "Norfolk Island",
-		"AFG": "NFK",
-		"004": 574
-	},
-	{
-		"Afghanistan": "North Macedonia",
-		"AFG": "MKD",
-		"004": 807
-	},
-	{
-		"Afghanistan": "Northern Mariana Islands",
-		"AFG": "MNP",
-		"004": 580
-	},
-	{
-		"Afghanistan": "Norway",
-		"AFG": "NOR",
-		"004": 578
-	},
-	{
-		"Afghanistan": "Oman",
-		"AFG": "OMN",
-		"004": 512
-	},
-	{
-		"Afghanistan": "Pakistan",
-		"AFG": "PAK",
-		"004": 586
-	},
-	{
-		"Afghanistan": "Palau",
-		"AFG": "PLW",
-		"004": 585
-	},
-	{
-		"Afghanistan": "Palestine, State of",
-		"AFG": "PSE",
-		"004": 275
-	},
-	{
-		"Afghanistan": "Panama",
-		"AFG": "PAN",
-		"004": 591
-	},
-	{
-		"Afghanistan": "Papua New Guinea",
-		"AFG": "PNG",
-		"004": 598
-	},
-	{
-		"Afghanistan": "Paraguay",
-		"AFG": "PRY",
-		"004": 600
-	},
-	{
-		"Afghanistan": "Peru",
-		"AFG": "PER",
-		"004": 604
-	},
-	{
-		"Afghanistan": "Philippines",
-		"AFG": "PHL",
-		"004": 608
-	},
-	{
-		"Afghanistan": "Pitcairn",
-		"AFG": "PCN",
-		"004": 612
-	},
-	{
-		"Afghanistan": "Poland",
-		"AFG": "POL",
-		"004": 616
-	},
-	{
-		"Afghanistan": "Portugal",
-		"AFG": "PRT",
-		"004": 620
-	},
-	{
-		"Afghanistan": "Puerto Rico",
-		"AFG": "PRI",
-		"004": 630
-	},
-	{
-		"Afghanistan": "Qatar",
-		"AFG": "QAT",
-		"004": 634
-	},
-	{
-		"Afghanistan": "Réunion",
-		"AFG": "REU",
-		"004": 638
-	},
-	{
-		"Afghanistan": "Romania",
-		"AFG": "ROU",
-		"004": 642
-	},
-	{
-		"Afghanistan": "Russian Federation",
-		"AFG": "RUS",
-		"004": 643
-	},
-	{
-		"Afghanistan": "Rwanda",
-		"AFG": "RWA",
-		"004": 646
-	},
-	{
-		"Afghanistan": "Saint Barthélemy",
-		"AFG": "BLM",
-		"004": 652
-	},
-	{
-		"Afghanistan": "Saint Helena, Ascension and Tristan da Cunha",
-		"AFG": "SHN",
-		"004": 654
-	},
-	{
-		"Afghanistan": "Saint Kitts and Nevis",
-		"AFG": "KNA",
-		"004": 659
-	},
-	{
-		"Afghanistan": "Saint Lucia",
-		"AFG": "LCA",
-		"004": 662
-	},
-	{
-		"Afghanistan": "Saint Martin (French part)",
-		"AFG": "MAF",
-		"004": 663
-	},
-	{
-		"Afghanistan": "Saint Pierre and Miquelon",
-		"AFG": "SPM",
-		"004": 666
-	},
-	{
-		"Afghanistan": "Saint Vincent and the Grenadines",
-		"AFG": "VCT",
-		"004": 670
-	},
-	{
-		"Afghanistan": "Samoa",
-		"AFG": "WSM",
-		"004": 882
-	},
-	{
-		"Afghanistan": "San Marino",
-		"AFG": "SMR",
-		"004": 674
-	},
-	{
-		"Afghanistan": "Sao Tome and Principe",
-		"AFG": "STP",
-		"004": 678
-	},
-	{
-		"Afghanistan": "Saudi Arabia",
-		"AFG": "SAU",
-		"004": 682
-	},
-	{
-		"Afghanistan": "Senegal",
-		"AFG": "SEN",
-		"004": 686
-	},
-	{
-		"Afghanistan": "Serbia",
-		"AFG": "SRB",
-		"004": 688
-	},
-	{
-		"Afghanistan": "Seychelles",
-		"AFG": "SYC",
-		"004": 690
-	},
-	{
-		"Afghanistan": "Sierra Leone",
-		"AFG": "SLE",
-		"004": 694
-	},
-	{
-		"Afghanistan": "Singapore",
-		"AFG": "SGP",
-		"004": 702
-	},
-	{
-		"Afghanistan": "Sint Maarten (Dutch part)",
-		"AFG": "SXM",
-		"004": 534
-	},
-	{
-		"Afghanistan": "Slovakia",
-		"AFG": "SVK",
-		"004": 703
-	},
-	{
-		"Afghanistan": "Slovenia",
-		"AFG": "SVN",
-		"004": 705
-	},
-	{
-		"Afghanistan": "Solomon Islands",
-		"AFG": "SLB",
-		"004": 90
-	},
-	{
-		"Afghanistan": "Somalia",
-		"AFG": "SOM",
-		"004": 706
-	},
-	{
-		"Afghanistan": "South Africa",
-		"AFG": "ZAF",
-		"004": 710
-	},
-	{
-		"Afghanistan": "South Georgia and the South Sandwich Islands",
-		"AFG": "SGS",
-		"004": 239
-	},
-	{
-		"Afghanistan": "South Sudan",
-		"AFG": "SSD",
-		"004": 728
-	},
-	{
-		"Afghanistan": "Spain",
-		"AFG": "ESP",
-		"004": 724
-	},
-	{
-		"Afghanistan": "Sri Lanka",
-		"AFG": "LKA",
-		"004": 144
-	},
-	{
-		"Afghanistan": "Sudan",
-		"AFG": "SDN",
-		"004": 729
-	},
-	{
-		"Afghanistan": "Suriname",
-		"AFG": "SUR",
-		"004": 740
-	},
-	{
-		"Afghanistan": "Svalbard and Jan Mayen",
-		"AFG": "SJM",
-		"004": 744
-	},
-	{
-		"Afghanistan": "Sweden",
-		"AFG": "SWE",
-		"004": 752
-	},
-	{
-		"Afghanistan": "Switzerland",
-		"AFG": "CHE",
-		"004": 756
-	},
-	{
-		"Afghanistan": "Syrian Arab Republic",
-		"AFG": "SYR",
-		"004": 760
-	},
-	{
-		"Afghanistan": "Taiwan, Province of China",
-		"AFG": "TWN",
-		"004": 158
-	},
-	{
-		"Afghanistan": "Tajikistan",
-		"AFG": "TJK",
-		"004": 762
-	},
-	{
-		"Afghanistan": "Tanzania, United Republic of",
-		"AFG": "TZA",
-		"004": 834
-	},
-	{
-		"Afghanistan": "Thailand",
-		"AFG": "THA",
-		"004": 764
-	},
-	{
-		"Afghanistan": "Timor-Leste",
-		"AFG": "TLS",
-		"004": 626
-	},
-	{
-		"Afghanistan": "Togo",
-		"AFG": "TGO",
-		"004": 768
-	},
-	{
-		"Afghanistan": "Tokelau",
-		"AFG": "TKL",
-		"004": 772
-	},
-	{
-		"Afghanistan": "Tonga",
-		"AFG": "TON",
-		"004": 776
-	},
-	{
-		"Afghanistan": "Trinidad and Tobago",
-		"AFG": "TTO",
-		"004": 780
-	},
-	{
-		"Afghanistan": "Tunisia",
-		"AFG": "TUN",
-		"004": 788
-	},
-	{
-		"Afghanistan": "Turkey",
-		"AFG": "TUR",
-		"004": 792
-	},
-	{
-		"Afghanistan": "Turkmenistan",
-		"AFG": "TKM",
-		"004": 795
-	},
-	{
-		"Afghanistan": "Turks and Caicos Islands",
-		"AFG": "TCA",
-		"004": 796
-	},
-	{
-		"Afghanistan": "Tuvalu",
-		"AFG": "TUV",
-		"004": 798
-	},
-	{
-		"Afghanistan": "Uganda",
-		"AFG": "UGA",
-		"004": 800
-	},
-	{
-		"Afghanistan": "Ukraine",
-		"AFG": "UKR",
-		"004": 804
-	},
-	{
-		"Afghanistan": "United Arab Emirates",
-		"AFG": "ARE",
-		"004": 784
-	},
-	{
-		"Afghanistan": "United Kingdom of Great Britain and Northern Ireland",
-		"AFG": "GBR",
-		"004": 826
-	},
-	{
-		"Afghanistan": "United States of America",
-		"AFG": "USA",
-		"004": 840
-	},
-	{
-		"Afghanistan": "United States Minor Outlying Islands",
-		"AFG": "UMI",
-		"004": 581
-	},
-	{
-		"Afghanistan": "Uruguay",
-		"AFG": "URY",
-		"004": 858
-	},
-	{
-		"Afghanistan": "Uzbekistan",
-		"AFG": "UZB",
-		"004": 860
-	},
-	{
-		"Afghanistan": "Vanuatu",
-		"AFG": "VUT",
-		"004": 548
-	},
-	{
-		"Afghanistan": "Venezuela (Bolivarian Republic of)",
-		"AFG": "VEN",
-		"004": 862
-	},
-	{
-		"Afghanistan": "Viet Nam",
-		"AFG": "VNM",
-		"004": 704
-	},
-	{
-		"Afghanistan": "Virgin Islands (British)",
-		"AFG": "VGB",
-		"004": 92
-	},
-	{
-		"Afghanistan": "Virgin Islands (U.S.)",
-		"AFG": "VIR",
-		"004": 850
-	},
-	{
-		"Afghanistan": "Wallis and Futuna",
-		"AFG": "WLF",
-		"004": 876
-	},
-	{
-		"Afghanistan": "Western Sahara",
-		"AFG": "ESH",
-		"004": 732
-	},
-	{
-		"Afghanistan": "Yemen",
-		"AFG": "YEM",
-		"004": 887
-	},
-	{
-		"Afghanistan": "Zambia",
-		"AFG": "ZMB",
-		"004": 894
-	},
-	{
-		"Afghanistan": "Zimbabwe",
-		"AFG": "ZWE",
-		"004": 716
-	}
+	["Åland Islands", "ALA", 248],
+	["Albania", "ALB", 8],
+	["Algeria", "DZA", 12],
+	["American Samoa", "ASM", 16],
+	["Andorra", "AND", 20],
+	["Angola", "AGO", 24],
+	["Anguilla", "AIA", 660],
+	["Antarctica", "ATA", 10],
+	["Antigua and Barbuda", "ATG", 28],
+	["Argentina", "ARG", 32],
+	["Armenia", "ARM", 51],
+	["Aruba", "ABW", 533],
+	["Australia", "AUS", 36],
+	["Austria", "AUT", 40],
+	["Azerbaijan", "AZE", 31],
+	["Bahamas", "BHS", 44],
+	["Bahrain", "BHR", 48],
+	["Bangladesh", "BGD", 50],
+	["Barbados", "BRB", 52],
+	["Belarus", "BLR", 112],
+	["Belgium", "BEL", 56],
+	["Belize", "BLZ", 84],
+	["Benin", "BEN", 204],
+	["Bermuda", "BMU", 60],
+	["Bhutan", "BTN", 64],
+	["Bolivia (Plurinational State of)", "BOL", 68],
+	["Bonaire, Sint Eustatius and Saba", "BES", 535],
+	["Bosnia and Herzegovina", "BIH", 70],
+	["Botswana", "BWA", 72],
+	["Bouvet Island", "BVT", 74],
+	["Brazil", "BRA", 76],
+	["British Indian Ocean Territory", "IOT", 86],
+	["Brunei Darussalam", "BRN", 96],
+	["Bulgaria", "BGR", 100],
+	["Burkina Faso", "BFA", 854],
+	["Burundi", "BDI", 108],
+	["Cabo Verde", "CPV", 132],
+	["Cambodia", "KHM", 116],
+	["Cameroon", "CMR", 120],
+	["Canada", "CAN", 124],
+	["Cayman Islands", "CYM", 136],
+	["Central African Republic", "CAF", 140],
+	["Chad", "TCD", 148],
+	["Chile", "CHL", 152],
+	["China", "CHN", 156],
+	["Christmas Island", "CXR", 162],
+	["Cocos (Keeling) Islands", "CCK", 166],
+	["Colombia", "COL", 170],
+	["Comoros", "COM", 174],
+	["Congo", "COG", 178],
+	["Congo, Democratic Republic of the", "COD", 180],
+	["Cook Islands", "COK", 184],
+	["Costa Rica", "CRI", 188],
+	["Côte d'Ivoire", "CIV", 384],
+	["Croatia", "HRV", 191],
+	["Cuba", "CUB", 192],
+	["Curaçao", "CUW", 531],
+	["Cyprus", "CYP", 196],
+	["Czechia", "CZE", 203],
+	["Denmark", "DNK", 208],
+	["Djibouti", "DJI", 262],
+	["Dominica", "DMA", 212],
+	["Dominican Republic", "DOM", 214],
+	["Ecuador", "ECU", 218],
+	["Egypt", "EGY", 818],
+	["El Salvador", "SLV", 222],
+	["Equatorial Guinea", "GNQ", 226],
+	["Eritrea", "ERI", 232],
+	["Estonia", "EST", 233],
+	["Eswatini", "SWZ", 748],
+	["Ethiopia", "ETH", 231],
+	["Falkland Islands (Malvinas)", "FLK", 238],
+	["Faroe Islands", "FRO", 234],
+	["Fiji", "FJI", 242],
+	["Finland", "FIN", 246],
+	["France", "FRA", 250],
+	["French Guiana", "GUF", 254],
+	["French Polynesia", "PYF", 258],
+	["French Southern Territories", "ATF", 260],
+	["Gabon", "GAB", 266],
+	["Gambia", "GMB", 270],
+	["Georgia", "GEO", 268],
+	["Germany", "DEU", 276],
+	["Ghana", "GHA", 288],
+	["Gibraltar", "GIB", 292],
+	["Greece", "GRC", 300],
+	["Greenland", "GRL", 304],
+	["Grenada", "GRD", 308],
+	["Guadeloupe", "GLP", 312],
+	["Guam", "GUM", 316],
+	["Guatemala", "GTM", 320],
+	["Guernsey", "GGY", 831],
+	["Guinea", "GIN", 324],
+	["Guinea-Bissau", "GNB", 624],
+	["Guyana", "GUY", 328],
+	["Haiti", "HTI", 332],
+	["Heard Island and McDonald Islands", "HMD", 334],
+	["Holy See", "VAT", 336],
+	["Honduras", "HND", 340],
+	["Hong Kong", "HKG", 344],
+	["Hungary", "HUN", 348],
+	["Iceland", "ISL", 352],
+	["India", "IND", 356],
+	["Indonesia", "IDN", 360],
+	["Iran (Islamic Republic of)", "IRN", 364],
+	["Iraq", "IRQ", 368],
+	["Ireland", "IRL", 372],
+	["Isle of Man", "IMN", 833],
+	["Israel", "ISR", 376],
+	["Italy", "ITA", 380],
+	["Jamaica", "JAM", 388],
+	["Japan", "JPN", 392],
+	["Jersey", "JEY", 832],
+	["Jordan", "JOR", 400],
+	["Kazakhstan", "KAZ", 398],
+	["Kenya", "KEN", 404],
+	["Kiribati", "KIR", 296],
+	["Korea (Democratic People's Republic of)", "PRK", 408],
+	["Korea, Republic of", "KOR", 410],
+	["Kuwait", "KWT", 414],
+	["Kyrgyzstan", "KGZ", 417],
+	["Lao People's Democratic Republic", "LAO", 418],
+	["Latvia", "LVA", 428],
+	["Lebanon", "LBN", 422],
+	["Lesotho", "LSO", 426],
+	["Liberia", "LBR", 430],
+	["Libya", "LBY", 434],
+	["Liechtenstein", "LIE", 438],
+	["Lithuania", "LTU", 440],
+	["Luxembourg", "LUX", 442],
+	["Macao", "MAC", 446],
+	["Madagascar", "MDG", 450],
+	["Malawi", "MWI", 454],
+	["Malaysia", "MYS", 458],
+	["Maldives", "MDV", 462],
+	["Mali", "MLI", 466],
+	["Malta", "MLT", 470],
+	["Marshall Islands", "MHL", 584],
+	["Martinique", "MTQ", 474],
+	["Mauritania", "MRT", 478],
+	["Mauritius", "MUS", 480],
+	["Mayotte", "MYT", 175],
+	["Mexico", "MEX", 484],
+	["Micronesia (Federated States of)", "FSM", 583],
+	["Moldova, Republic of", "MDA", 498],
+	["Monaco", "MCO", 492],
+	["Mongolia", "MNG", 496],
+	["Montenegro", "MNE", 499],
+	["Montserrat", "MSR", 500],
+	["Morocco", "MAR", 504],
+	["Mozambique", "MOZ", 508],
+	["Myanmar", "MMR", 104],
+	["Namibia", "NAM", 516],
+	["Nauru", "NRU", 520],
+	["Nepal", "NPL", 524],
+	["Netherlands", "NLD", 528],
+	["New Caledonia", "NCL", 540],
+	["New Zealand", "NZL", 554],
+	["Nicaragua", "NIC", 558],
+	["Niger", "NER", 562],
+	["Nigeria", "NGA", 566],
+	["Niue", "NIU", 570],
+	["Norfolk Island", "NFK", 574],
+	["North Macedonia", "MKD", 807],
+	["Northern Mariana Islands", "MNP", 580],
+	["Norway", "NOR", 578],
+	["Oman", "OMN", 512],
+	["Pakistan", "PAK", 586],
+	["Palau", "PLW", 585],
+	["Palestine, State of", "PSE", 275],
+	["Panama", "PAN", 591],
+	["Papua New Guinea", "PNG", 598],
+	["Paraguay", "PRY", 600],
+	["Peru", "PER", 604],
+	["Philippines", "PHL", 608],
+	["Pitcairn", "PCN", 612],
+	["Poland", "POL", 616],
+	["Portugal", "PRT", 620],
+	["Puerto Rico", "PRI", 630],
+	["Qatar", "QAT", 634],
+	["Réunion", "REU", 638],
+	["Romania", "ROU", 642],
+	["Russian Federation", "RUS", 643],
+	["Rwanda", "RWA", 646],
+	["Saint Barthélemy", "BLM", 652],
+	["Saint Helena, Ascension and Tristan da Cunha", "SHN", 654],
+	["Saint Kitts and Nevis", "KNA", 659],
+	["Saint Lucia", "LCA", 662],
+	["Saint Martin (French part)", "MAF", 663],
+	["Saint Pierre and Miquelon", "SPM", 666],
+	["Saint Vincent and the Grenadines", "VCT", 670],
+	["Samoa", "WSM", 882],
+	["San Marino", "SMR", 674],
+	["Sao Tome and Principe", "STP", 678],
+	["Saudi Arabia", "SAU", 682],
+	["Senegal", "SEN", 686],
+	["Serbia", "SRB", 688],
+	["Seychelles", "SYC", 690],
+	["Sierra Leone", "SLE", 694],
+	["Singapore", "SGP", 702],
+	["Sint Maarten (Dutch part)", "SXM", 534],
+	["Slovakia", "SVK", 703],
+	["Slovenia", "SVN", 705],
+	["Solomon Islands", "SLB", 90],
+	["Somalia", "SOM", 706],
+	["South Africa", "ZAF", 710],
+	["South Georgia and the South Sandwich Islands", "SGS", 239],
+	["South Sudan", "SSD", 728],
+	["Spain", "ESP", 724],
+	["Sri Lanka", "LKA", 144],
+	["Sudan", "SDN", 729],
+	["Suriname", "SUR", 740],
+	["Svalbard and Jan Mayen", "SJM", 744],
+	["Sweden", "SWE", 752],
+	["Switzerland", "CHE", 756],
+	["Syrian Arab Republic", "SYR", 760],
+	["Taiwan, Province of China", "TWN", 158],
+	["Tajikistan", "TJK", 762],
+	["Tanzania, United Republic of", "TZA", 834],
+	["Thailand", "THA", 764],
+	["Timor-Leste", "TLS", 626],
+	["Togo", "TGO", 768],
+	["Tokelau", "TKL", 772],
+	["Tonga", "TON", 776],
+	["Trinidad and Tobago", "TTO", 780],
+	["Tunisia", "TUN", 788],
+	["Turkey", "TUR", 792],
+	["Turkmenistan", "TKM", 795],
+	["Turks and Caicos Islands", "TCA", 796],
+	["Tuvalu", "TUV", 798],
+	["Uganda", "UGA", 800],
+	["Ukraine", "UKR", 804],
+	["United Arab Emirates", "ARE", 784],
+	["United Kingdom of Great Britain and Northern Ireland", "GBR", 826],
+	["United States of America", "USA", 840],
+	["United States Minor Outlying Islands", "UMI", 581],
+	["Uruguay", "URY", 858],
+	["Uzbekistan", "UZB", 860],
+	["Vanuatu", "VUT", 548],
+	["Venezuela (Bolivarian Republic of)", "VEN", 862],
+	["Viet Nam", "VNM", 704],
+	["Virgin Islands (British)", "VGB", 92],
+	["Virgin Islands (U.S.)", "VIR", 850],
+	["Wallis and Futuna", "WLF", 876],
+	["Western Sahara", "ESH", 732],
+	["Yemen", "YEM", 887],
+	["Zambia", "ZMB", 894],
+	["Zimbabwe", "ZWE", 716]
 ]

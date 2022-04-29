@@ -2,15 +2,20 @@
 	class="py-3 px-4 rounded-lg border-gray-300/80 border w-full flex items-center"
 >
 	<img
-		src=".../../../../../assets/app/home/flag.png"
-		class="w-6 rounded-sm"
+		[src]="'https://flagcdn.com/16x12/' + country_code1 + '.png'"
+		class="w-4 rounded-sm scale-150"
 		alt="Flag"
 	/>
 
 	<div class="ml-2 border-r border-r-gray-300">
-		<select>
-			<option>+971</option>
-			<option>+639</option>
+		<select
+			(change)="change($event)"
+			[(ngModel)]="country_code"
+			class="pl-2"
+		>
+			<option [value]="country.code" *ngFor="let country of countries">
+				{{ country.code }}
+			</option>
 		</select>
 	</div>
 
