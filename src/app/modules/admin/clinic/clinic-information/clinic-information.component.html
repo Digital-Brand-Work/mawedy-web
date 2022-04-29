@@ -1,1 +1,112 @@
-<p>clinic-information works!</p>
+<div class="md:px-10 px-0 w-full">
+	<div class="md:rounded-xl bg-white py-5 px-10 w-full min-h-screen">
+		<div class="flex items-center mb-1">
+			<div class="text-gray-400 text-2xl font-semibold">
+				Clinic Information
+			</div>
+
+			<button
+				class="ml-auto text-teal-500 hover:underline flex items-center"
+			>
+				Upload Banner
+
+				<mat-icon
+					svgIcon="file_upload"
+					class="ml-2 text-teal-500"
+				></mat-icon>
+			</button>
+		</div>
+
+		<div
+			class="w-full bg-gray-100 flex items-center justify-center"
+			style="height: 569px"
+		>
+			<img
+				class="object-contain h-full grayscale opacity-30 mb-5"
+				src="./assets/app/logo.svg"
+				alt="Mawedy logo"
+			/>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mt-10">
+			<div class="mb-5">
+				<div class="mb-2 font-semibold text-gray-400 text-lg">
+					Clinic Name
+				</div>
+
+				<input
+					#input
+					type="text"
+					class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+				/>
+			</div>
+
+			<div class="mb-5">
+				<div class="mb-2 font-semibold text-gray-400 text-lg">
+					Address
+				</div>
+
+				<input
+					type="text"
+					class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+				/>
+			</div>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
+			<div>
+				<div class="mb-5">
+					<div class="mb-2 font-semibold text-gray-400 text-lg">
+						Clinic Description
+					</div>
+
+					<textarea
+						placeholder="Aa"
+						#clinicDescription
+						(keyup)="autoGrow()"
+						class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 w-full"
+					></textarea>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-5">
+					<div>
+						<clinic-timings></clinic-timings>
+					</div>
+
+					<div>
+						<div class="mb-2 font-semibold text-gray-400 text-lg">
+							Mobile Number
+						</div>
+
+						<mobile-number-form></mobile-number-form>
+
+						<div class="my-5"></div>
+
+						<mobile-number-form></mobile-number-form>
+
+						<div
+							class="mb-2 font-semibold text-gray-400 text-lg mt-10"
+						>
+							Email that will receive all data
+						</div>
+
+						<input
+							[inputMask]="emailInputMask"
+							class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div class="mb-5">
+					<div class="mb-2 font-semibold text-gray-400 text-lg">
+						Pin Location
+					</div>
+
+					<clinic-information-map></clinic-information-map>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

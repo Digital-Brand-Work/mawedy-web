@@ -56,7 +56,10 @@
 		</ng-container>
 	</fuse-vertical-navigation>
 
-	<div class="flex flex-col flex-auto" style="background: #f5f6fa">
+	<div
+		class="flex flex-col flex-auto overflow-y-auto"
+		style="background: #f5f6fa; max-height: 100vh"
+	>
 		<router-outlet *ngIf="true"></router-outlet>
 	</div>
 </div>

@@ -9,6 +9,7 @@ import { ClinicServicesAddComponent } from './clinic-services/modals/clinic-serv
 import { ClinicServicesEditComponent } from './clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
 import { ClinicInformationMapComponent } from './clinic-information-map/clinic-information-map.component'
 import { clinicRoutes } from 'app/routes/admin/clinic.routing'
+import { ClinicTimingsComponent } from './clinic-timings/clinic-timings.component'
 
 const components = [
 	ClinicComponent,
@@ -18,6 +19,7 @@ const components = [
 	ClinicServicesAddComponent,
 	ClinicServicesEditComponent,
 	ClinicInformationMapComponent,
+	ClinicTimingsComponent,
 ]
 
 @NgModule({

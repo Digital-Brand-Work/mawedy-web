@@ -77,7 +77,7 @@ export class AppointmentAddComponent implements OnInit {
 		this.cdr.detach()
 	}
 
-	public autoGrow() {
+	autoGrow() {
 		const textArea = this.textArea.nativeElement
 
 		textArea.style.overflow = 'hidden'

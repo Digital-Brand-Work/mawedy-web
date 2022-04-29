@@ -1,4 +1,11 @@
 <div *ngIf="true" @slideInTop class="w-full">
 	<app-toolbar class="w-full" [toolbar]="noToolbar"></app-toolbar>
-	<div #noToolbar></div>
+	<ng-template #noToolbar></ng-template>
+</div>
+
+<div *ngIf="true" @slideInBottom class="w-full">
+	<clinic-information></clinic-information>
+</div>
+<div class="w-full">
+	<clinic-services></clinic-services>
 </div>
