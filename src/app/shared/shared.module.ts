@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio'
 import { AutoSizeDirective } from '@digital_brand_work/directives/textarea-autosize.directive'
 import { InputMaskModule } from '@ngneat/input-mask'
 import { NgxMaskModule } from 'ngx-mask'
+import { StopPropagation } from '@digital_brand_work/directives/stop.propagation.directive'
 
 const components = [
 	SpinnerComponent,
@@ -46,7 +47,12 @@ const modules = [
 	NgxMaskModule.forRoot(),
 ]
 
-const directives = [AnimateJsDirective, ParallaxDirective, AutoSizeDirective]
+const directives = [
+	AnimateJsDirective,
+	ParallaxDirective,
+	AutoSizeDirective,
+	StopPropagation,
+]
 
 const pipes = []
 
