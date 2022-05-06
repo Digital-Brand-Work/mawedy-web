@@ -1,4 +1,4 @@
-<div class="md:px-10 px-0 w-full mt-10">
+<div class="md:px-10 px-0 w-full mt-10 min-h-screen">
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full">
 		<div class="text-3xl font-semibold mb-3 text-gray-700 flex w-full">
 			<div>Services</div>
@@ -23,24 +23,31 @@
 					let i = index
 				"
 				[ngClass]="{
-					'bg-emerald-50 font-extrabold text-black pointer-events-none rounded-tr-md rounded-tl-md':
+					'bg-emerald-50/70 font-extrabold text-gray-900/80 pointer-events-none rounded-tr-md rounded-tl-md':
 						i === 0,
-					'font-bold text-gray-600': i !== 0
+					'font-semibold text-gray-600': i !== 0
 				}"
 				class="py-3 px-10 hover:bg-gray-50 text-lg"
 				role="button"
 			>
-				Dentistry
+				Gynecology
 			</li>
 		</ul>
 
-		<div style="min-height: 50vh" class="bg-emerald-50 w-full p-10 mb-5">
-			<div class="flex">
+		<div style="min-height: 50vh" class="bg-emerald-50/70 w-full p-10 mb-5">
+			<div class="flex mb-10">
 				<button
 					class="ml-auto flex items-center bg-white border text-emerald-500 border-emerald-500 py-2 px-10 font-semibold tracking-wide rounded-md g hover:bg-red-50 hover:text-red-500 hover:border-red-500 text-md"
 				>
 					Delete
 				</button>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+				<clinic-service-item
+					*ngFor="let item of [1, 2, 3, 4, 5, 6]; trackBy: identity"
+				>
+				</clinic-service-item>
 			</div>
 
 			<div class="flex mt-10">
