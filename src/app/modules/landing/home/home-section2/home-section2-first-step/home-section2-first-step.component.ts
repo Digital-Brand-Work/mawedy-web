@@ -10,6 +10,7 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { createMask } from '@ngneat/input-mask'
 
 @Component({
 	selector: 'home-section2-first-step',
@@ -30,6 +31,8 @@ export class HomeSection2FirstStepComponent implements OnInit {
 
 	@Input() focus$!: BehaviorSubject<boolean>
 
+	emailInputMask = createMask({ alias: 'email' })
+
 	ngOnInit(): void {}
 
 	ngAfterContentInit(): void {
@@ -39,7 +42,6 @@ export class HomeSection2FirstStepComponent implements OnInit {
 				if (focused) {
 					this.input.nativeElement.focus()
 				}
-				console.log(focused)
 			})
 	}
 

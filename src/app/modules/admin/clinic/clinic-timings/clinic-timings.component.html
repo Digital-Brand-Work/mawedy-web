@@ -1,0 +1,16 @@
+<div class="grid md:grid-cols-2 grid-cols-1 items-center">
+	<div class="mb-2 font-semibold text-gray-400 text-lg">Timings</div>
+
+	<div class="mb-2 font-semibold text-gray-400 text-lg text-center">
+		Open - Close
+	</div>
+
+	<div
+		*ngFor="let day of weekDays"
+		class="col-span-2 mb-2 grid md:grid-cols-2"
+	>
+		<div class="mb-2 font-semibold">{{ day }}</div>
+
+		<clinic-timing-input></clinic-timing-input>
+	</div>
+</div>

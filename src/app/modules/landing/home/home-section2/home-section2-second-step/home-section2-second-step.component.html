@@ -2,18 +2,6 @@
 	<input type="file" #tradeLicense class="hidden" />
 
 	<div class="mb-5">
-		<div class="mb-1 font-bold text-gray-500 text-lg">Username</div>
-
-		<input
-			#input
-			type="text"
-			class="py-3 px-4 rounded-md border-gray-300/80 border w-full md:w-3/4 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-		/>
-
-		<div class="text-sm text-rose-500">Username is required.</div>
-	</div>
-
-	<div class="mb-5">
 		<div class="mb-1 font-bold text-gray-500 text-lg">Trade License</div>
 
 		<button
@@ -32,17 +20,14 @@
 		>
 			Subscription
 
-			<div
-				role="button"
+			<button
+				mat-icon-button
 				title="View Subscription Packages"
-				class="ml-auto"
+				class="text-teal-500 hover:text-emerald-500 ml-auto"
+				mat-icon-button
 			>
-				<mat-icon
-					matTooltip="View Subscription Packages"
-					class="text-teal-500 hover:text-emerald-500"
-					svgIcon="info"
-				></mat-icon>
-			</div>
+				<mat-icon svgIcon="info"></mat-icon>
+			</button>
 		</div>
 
 		<select
@@ -68,8 +53,7 @@
 
 			<div class="ml-auto">
 				<button
-					title="Add user"
-					matTooltip="Add user"
+					mat-flat-button
 					class="text-white rounded-md px-3 py-1 ml-auto bg-teal-500 hover:bg-teal-600 flex items-center"
 				>
 					<mat-icon
@@ -77,7 +61,7 @@
 						svgIcon="feather:plus"
 					></mat-icon>
 
-					Add user
+					Add account
 				</button>
 			</div>
 		</div>
@@ -99,13 +83,14 @@
 			<div class="mb-1 font-bold text-gray-500 text-lg flex items-center">
 				Account {{ i + 1 }}
 
-				<mat-icon
-					title="Remove"
-					matTooltip="Remove"
-					role="button"
-					class="ml-auto text-gray-200 hover:text-rose-400"
-					svgIcon="remove_circle"
-				></mat-icon>
+				<button
+					mat-icon-button
+					title="Remove Account"
+					class="ml-auto text-gray-200 hover:text-rose-400 translate-y-12 -translate-x-2"
+					mat-icon-button
+				>
+					<mat-icon svgIcon="person_remove"></mat-icon>
+				</button>
 			</div>
 
 			<input

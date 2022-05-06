@@ -4,6 +4,7 @@ import { AlertState } from 'app/components/alert/alert.service'
 import { Observable, take } from 'rxjs'
 import { Alert } from 'app/mawedy-core/models/utility.models'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { createMask } from '@ngneat/input-mask'
 
 @Component({
 	selector: 'home-section1-login-panel',
@@ -15,6 +16,8 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 	constructor(private router: Router, private alert: AlertState) {}
 
 	alerts$: Observable<Alert[]> = this.alert.get()
+
+	emailInputMask = createMask({ alias: 'email' })
 
 	ngOnInit(): void {}
 

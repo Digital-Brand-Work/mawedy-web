@@ -10,6 +10,8 @@ import { AppointmentsDayCalendarComponent } from './appointments/appointments-da
 import { AppointmentRegularBadgeComponent } from './appointments/appointments/badges/appointment-regular-badge/appointment-regular-badge.component'
 import { AppointmentDayBadgeComponent } from './appointments/appointments/badges/appointment-day-badge/appointment-day-badge.component'
 import { appointmentRoutes } from 'app/routes/admin/appointment.routing'
+import { AppointmentAddComponent } from './appointment-add/appointment-add.component'
+import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component'
 
 const components = [
 	AppointmentsComponent,

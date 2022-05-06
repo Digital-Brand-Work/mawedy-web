@@ -1,0 +1,8 @@
+select {
+	background: url('/assets/app/clock.svg') center/15px 15px no-repeat !important;
+	background-position: calc(100% - 0.75rem) center !important;
+	-moz-appearance: none !important;
+	-webkit-appearance: none !important;
+	appearance: none !important;
+	padding-right: 2rem !important;
+}

@@ -15,8 +15,9 @@
 
 	<div class="flex items-center pl-2 ml-auto">
 		<button
+			(click)="opened$.next(true)"
 			mat-button
-			class="bg-emerald-500 text-lg text-white rounded-xl shadow-md shadow-emerald-500/20 px-5 py-4 font-normal hover:bg-emerald-600/90 mx-8 items-center justify-center hidden md:flex"
+			class="bg-emerald-500 text-lg text-white rounded-xl shadow-md shadow-emerald-500/20 px-4 py-5 font-normal hover:bg-emerald-600/90 mx-8 items-center justify-center hidden md:flex"
 		>
 			<mat-icon class="text-white mr-2" svgIcon="feather:plus"></mat-icon>
 
@@ -55,7 +56,10 @@
 		</ng-container>
 	</fuse-vertical-navigation>
 
-	<div class="flex flex-col flex-auto" style="background: #f5f6fa">
+	<div
+		class="flex flex-col flex-auto overflow-y-auto"
+		style="background: #f5f6fa; max-height: 100vh"
+	>
 		<router-outlet *ngIf="true"></router-outlet>
 	</div>
 </div>

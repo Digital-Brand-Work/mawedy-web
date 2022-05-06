@@ -1,0 +1,28 @@
+<div
+	class="w-full border bg-gray-50 grid grid-cols-2"
+	style="border-radius: 5px"
+>
+	<select [(ngModel)]="time.start" class="text-center text-gray-500">
+		<option *ngFor="let item of timingsAM; trackBy: identity">
+			{{ item }}
+		</option>
+
+		<option disabled class="bg-gray-200"></option>
+
+		<option *ngFor="let item of timingsPM; trackBy: identity">
+			{{ item }}
+		</option>
+	</select>
+
+	<select [(ngModel)]="time.end" class="text-center text-gray-500">
+		<option *ngFor="let item of timingsAM; trackBy: identity">
+			{{ item }}
+		</option>
+
+		<option disabled class="bg-gray-200"></option>
+
+		<option *ngFor="let item of timingsPM; trackBy: identity">
+			{{ item }}
+		</option>
+	</select>
+</div>

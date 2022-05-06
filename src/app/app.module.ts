@@ -18,7 +18,8 @@ import { appConfig } from 'app/core/config/app.config'
 import { mockApiServices } from 'app/mock-api'
 import { LayoutModule } from 'app/layout/layout.module'
 import { AppComponent } from 'app/app.component'
-import { AppRoutingModule } from './app.routing.module'
+import { AppRoutingModule } from './app.routing.module';
+import { InputMaskModule } from '@ngneat/input-mask'
 
 @NgModule({
 	declarations: [AppComponent],
@@ -45,6 +46,7 @@ import { AppRoutingModule } from './app.routing.module'
 		PromotionsModule,
 		SubscriptionsModule,
 		SharedModule,
+  InputMaskModule,
 	],
 
 	bootstrap: [AppComponent],
