@@ -20,6 +20,7 @@ import { LayoutModule } from 'app/layout/layout.module'
 import { AppComponent } from 'app/app.component'
 import { AppRoutingModule } from './app.routing.module'
 import { InputMaskModule } from '@ngneat/input-mask'
+import { StoreModule } from '@ngrx/store'
 
 @NgModule({
 	declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { InputMaskModule } from '@ngneat/input-mask'
 		MarkdownModule.forRoot({}),
 		FuseMockApiModule.forRoot(mockApiServices),
 		FuseConfigModule.forRoot(appConfig),
+		StoreModule.forRoot({}, {}),
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		FuseModule,

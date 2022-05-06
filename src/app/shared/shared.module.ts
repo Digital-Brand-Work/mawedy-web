@@ -1,3 +1,4 @@
+import { MatCheckboxModule } from '@angular/material/checkbox'
 import { AppointmentEditComponent } from './../modules/admin/appointments/appointment-edit/appointment-edit.component'
 import { AppointmentAddComponent } from './../modules/admin/appointments/appointment-add/appointment-add.component'
 import { ParallaxDirective } from './../../@digital_brand_work/directives/parralax.directive'
@@ -39,14 +40,19 @@ const modules = [
 	CommonModule,
 	FormsModule,
 	ReactiveFormsModule,
+	InputMaskModule,
+	NgxMaskModule.forRoot(),
+
+	/**
+	    Mat Modules
+	*/
 	MatIconModule,
 	MatMenuModule,
 	MatDividerModule,
 	MatButtonModule,
 	MatTooltipModule,
+	MatCheckboxModule,
 	MatRadioModule,
-	InputMaskModule,
-	NgxMaskModule.forRoot(),
 ]
 
 const directives = [
