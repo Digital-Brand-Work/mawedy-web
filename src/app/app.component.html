@@ -8,6 +8,15 @@
 	class="fixed w-screen h-screen flex"
 ></appointment-add>
 
+<clinic-department-add
+	stop-propagation
+	(click)="addMedicalServiceModalOpened$.next(false)"
+	*ngIf="addMedicalServiceModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></clinic-department-add>
+
 <!-- Modals  -->
 
 <router-outlet></router-outlet>

@@ -4,6 +4,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { AlertState } from './components/alert/alert.service'
 import { Alert } from './mawedy-core/models/utility.models'
 import { AddAppointmentModal } from './modules/admin/appointments/appointment-add/appointment-add.service'
+import { AddMedicalServiceModal } from './modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.service'
 
 @Component({
 	selector: 'app-root',
@@ -17,12 +18,16 @@ export class AppComponent {
 
 		/* Modals **/
 		private addAppointmentModal: AddAppointmentModal,
+		private addMedicalService: AddMedicalServiceModal,
 	) {}
 
 	alerts$: Observable<Alert[]> = this.alert.get()
 
 	addAppointmentModalOpened$: BehaviorSubject<boolean> =
 		this.addAppointmentModal.opened$
+
+	addMedicalServiceModalOpened$: BehaviorSubject<boolean> =
+		this.addMedicalService.opened$
 
 	identity = (item: any) => item
 }

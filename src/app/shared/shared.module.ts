@@ -22,6 +22,9 @@ import { InputMaskModule } from '@ngneat/input-mask'
 import { NgxMaskModule } from 'ngx-mask'
 import { StopPropagation } from '@digital_brand_work/directives/stop.propagation.directive'
 import { ClinicTimingInputComponent } from 'app/components/clinic-timing-input/clinic-timing-input.component'
+import { ClinicServicesAddComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-add/clinic-services-add.component'
+import { ClinicServicesEditComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
+import { ClinicDepartmentAddComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.component'
 
 const components = [
 	SpinnerComponent,
@@ -34,6 +37,11 @@ const components = [
 	/** Modals */
 	AppointmentAddComponent,
 	AppointmentEditComponent,
+
+	ClinicDepartmentAddComponent,
+
+	ClinicServicesAddComponent,
+	ClinicServicesEditComponent,
 ]
 
 const modules = [
