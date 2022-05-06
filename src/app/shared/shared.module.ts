@@ -25,6 +25,7 @@ import { ClinicTimingInputComponent } from 'app/components/clinic-timing-input/c
 import { ClinicServicesAddComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-add/clinic-services-add.component'
 import { ClinicServicesEditComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
 import { ClinicDepartmentAddComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.component'
+import { MatSelectModule } from '@angular/material/select'
 
 const components = [
 	SpinnerComponent,
@@ -61,6 +62,7 @@ const modules = [
 	MatTooltipModule,
 	MatCheckboxModule,
 	MatRadioModule,
+	MatSelectModule,
 ]
 
 const directives = [

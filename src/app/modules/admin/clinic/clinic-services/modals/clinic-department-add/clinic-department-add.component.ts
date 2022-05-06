@@ -7,7 +7,7 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
-import { AddMedicalServiceModal } from './clinic-department-add.service'
+import { AddDepartmentModal } from './clinic-department-add.service'
 
 @Component({
 	selector: 'clinic-department-add',
@@ -16,7 +16,7 @@ import { AddMedicalServiceModal } from './clinic-department-add.service'
 })
 export class ClinicDepartmentAddComponent implements OnInit {
 	constructor(
-		private addMedicalService: AddMedicalServiceModal,
+		private addDepartment: AddDepartmentModal,
 		private cdr: ChangeDetectorRef,
 	) {}
 
@@ -27,7 +27,7 @@ export class ClinicDepartmentAddComponent implements OnInit {
 
 	@ViewChild('input') input!: ElementRef
 
-	opened$: BehaviorSubject<boolean> = this.addMedicalService.opened$
+	opened$: BehaviorSubject<boolean> = this.addDepartment.opened$
 
 	_unsubscribeAll: Subject<any> = new Subject<any>()
 

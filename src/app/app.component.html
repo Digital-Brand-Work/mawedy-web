@@ -10,12 +10,22 @@
 
 <clinic-department-add
 	stop-propagation
-	(click)="addMedicalServiceModalOpened$.next(false)"
-	*ngIf="addMedicalServiceModalOpened$ | async"
+	(click)="addDepartmentModalOpened$.next(false)"
+	*ngIf="addDepartmentModalOpened$ | async"
 	@fadeOut
 	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
 	class="fixed w-screen h-screen flex"
 ></clinic-department-add>
+
+<clinic-services-add
+	stop-propagation
+	(click)="addClinicServiceModalOpened$.next(false)"
+	*ngIf="addClinicServiceModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</clinic-services-add>
 
 <!-- Modals  -->
 

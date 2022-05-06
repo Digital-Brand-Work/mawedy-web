@@ -4,6 +4,6 @@ import { Injectable } from '@angular/core'
 @Injectable({
 	providedIn: 'root',
 })
-export class AddDepartmentModal {
+export class AddClinicServiceModal {
 	opened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 }
