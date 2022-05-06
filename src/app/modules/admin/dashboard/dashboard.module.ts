@@ -16,7 +16,6 @@ import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-pati
 import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patients-filter/waiting-patients-filter.component'
 import { dashboardRoutes } from 'app/routes/admin/dashboard.routing'
 import { DashboardAppointmentsComponent } from './appointments/dashboard-appointments.component'
-import { AppToolbarComponent } from 'app/components/app-toolbar/app-toolbar.component'
 import { DashboardComponent } from './dashboard.component'
 
 const components = [
