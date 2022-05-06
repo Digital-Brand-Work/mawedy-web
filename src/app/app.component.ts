@@ -6,6 +6,7 @@ import { Alert } from './mawedy-core/models/utility.models'
 import { AddAppointmentModal } from './modules/admin/appointments/appointment-add/appointment-add.service'
 import { AddDepartmentModal } from './modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from './modules/admin/clinic/clinic-services/modals/clinic-services-add/clinic-services-add.service'
+import { EditClinicServiceModal } from './modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.service'
 
 @Component({
 	selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent {
 		private addDepartmentModal: AddDepartmentModal,
 
 		private addClinicServiceModal: AddClinicServiceModal,
+		private editClinicServiceModal: EditClinicServiceModal,
 	) {}
 
 	alerts$: Observable<Alert[]> = this.alert.get()
@@ -35,6 +37,9 @@ export class AppComponent {
 
 	addClinicServiceModalOpened$: BehaviorSubject<boolean> =
 		this.addClinicServiceModal.opened$
+
+	editClinicServiceModalOpened$: BehaviorSubject<boolean> =
+		this.editClinicServiceModal.opened$
 
 	identity = (item: any) => item
 }

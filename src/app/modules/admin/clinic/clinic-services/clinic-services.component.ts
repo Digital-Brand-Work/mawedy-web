@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { AddDepartmentModal } from './modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from './modals/clinic-services-add/clinic-services-add.service'
+import { EditClinicServiceModal } from './modals/clinic-services-edit/clinic-services-edit.service'
 
 @Component({
 	selector: 'clinic-services',
@@ -12,6 +13,7 @@ export class ClinicServicesComponent implements OnInit {
 	constructor(
 		private addDepartmentModal: AddDepartmentModal,
 		private addClinicServiceModal: AddClinicServiceModal,
+		private editClinicServiceModal: EditClinicServiceModal,
 	) {}
 
 	_unsubscribeAll: Subject<any> = new Subject<any>()
@@ -21,6 +23,9 @@ export class ClinicServicesComponent implements OnInit {
 
 	addClinicServiceOpened$: BehaviorSubject<boolean> =
 		this.addClinicServiceModal.opened$
+
+	editClinicServiceModalOpened$: BehaviorSubject<boolean> =
+		this.editClinicServiceModal.opened$
 
 	ngOnInit(): void {}
 

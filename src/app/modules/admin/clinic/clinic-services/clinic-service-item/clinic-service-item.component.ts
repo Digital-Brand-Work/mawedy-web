@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 
 @Component({
-  selector: 'clinic-service-item',
-  templateUrl: './clinic-service-item.component.html',
-  styleUrls: ['./clinic-service-item.component.scss']
+	selector: 'clinic-service-item',
+	templateUrl: './clinic-service-item.component.html',
+	styleUrls: ['./clinic-service-item.component.scss'],
 })
 export class ClinicServiceItemComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
+	@Output() onSelectMedicalService = new EventEmitter<any>()
 
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {}
 }

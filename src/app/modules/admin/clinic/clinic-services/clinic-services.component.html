@@ -46,6 +46,9 @@
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 				<clinic-service-item
+					(onSelectMedicalService)="
+						editClinicServiceModalOpened$.next(true)
+					"
 					*ngFor="let item of [1, 2, 3, 4, 5, 6]; trackBy: identity"
 				>
 				</clinic-service-item>
