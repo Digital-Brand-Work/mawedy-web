@@ -100,3 +100,9 @@ input[type='time']::-webkit-calendar-picker-indicator {
 .datalist::-webkit-calendar-picker-indicator {
 	display: none !important;
 }
+
+th,
+td {
+	text-align: left;
+	padding-left: 1rem;
+}

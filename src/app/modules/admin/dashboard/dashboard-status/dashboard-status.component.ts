@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'dashboard-status',
-  templateUrl: './dashboard-status.component.html',
-  styleUrls: ['./dashboard-status.component.scss']
+	selector: 'dashboard-status',
+	templateUrl: './dashboard-status.component.html',
+	styleUrls: ['./dashboard-status.component.scss'],
 })
 export class DashboardStatusComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
+	@Input() color: 'red' | 'green' | 'blue' = 'blue'
 
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {}
 }

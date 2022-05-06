@@ -1,1 +1,32 @@
-<p>dashboard-status works!</p>
+<div
+	style="background: #fdf0ef 0% 0% no-repeat padding-box"
+	class="outer"
+	*ngIf="color === 'red'"
+>
+	<div
+		style="background: #fe4b39 0% 0% no-repeat padding-box"
+		class="inner"
+	></div>
+</div>
+
+<div
+	style="background: #d0ebff 0% 0% no-repeat padding-box"
+	class="outer"
+	*ngIf="color === 'blue'"
+>
+	<div
+		style="background: #0091ff 0% 0% no-repeat padding-box"
+		class="inner"
+	></div>
+</div>
+
+<div
+	style="background: #ddf5e7 0% 0% no-repeat padding-box"
+	class="outer"
+	*ngIf="color === 'green'"
+>
+	<div
+		style="background: #0db354 0% 0% no-repeat padding-box"
+		class="inner"
+	></div>
+</div>

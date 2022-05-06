@@ -10,6 +10,17 @@ export class DashboardAppointmentsComponent implements OnInit {
 	constructor(private seoService: SeoService) {}
 
 	ngOnInit(): void {
-		this.seoService.generateTags({ title: `Aster Clinic | Dashboard` })
+		this.seoService.generateTags({
+			title: `Aster Clinic | Profile`,
+		})
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'fixed'
 	}
+
+	ngOnDestroy(): void {
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'relative'
+	}
+
+	identity = (item: any) => item
 }
