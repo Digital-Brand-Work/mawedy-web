@@ -21,6 +21,11 @@ import { AppComponent } from 'app/app.component'
 import { AppRoutingModule } from './app.routing.module'
 import { InputMaskModule } from '@ngneat/input-mask'
 import { StoreModule } from '@ngrx/store'
+import { reducers, metaReducers } from './store/reducers'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { environment } from '../environments/environment'
+import { EffectsModule } from '@ngrx/effects'
+import { AppEffects } from './store/app.effects'
 
 @NgModule({
 	declarations: [AppComponent],
@@ -30,13 +35,16 @@ import { StoreModule } from '@ngrx/store'
 		MarkdownModule.forRoot({}),
 		FuseMockApiModule.forRoot(mockApiServices),
 		FuseConfigModule.forRoot(appConfig),
-		StoreModule.forRoot({}, {}),
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		FuseModule,
 		CoreModule,
 		LayoutModule,
 		InputMaskModule,
+		BrowserModule,
+
+		StoreModule.forRoot(reducers, { metaReducers }),
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
 
 		/*
 		    Mawedy Modules
@@ -49,6 +57,7 @@ import { StoreModule } from '@ngrx/store'
 		PromotionsModule,
 		SubscriptionsModule,
 		SharedModule,
+		EffectsModule.forRoot([AppEffects]),
 	],
 
 	bootstrap: [AppComponent],
