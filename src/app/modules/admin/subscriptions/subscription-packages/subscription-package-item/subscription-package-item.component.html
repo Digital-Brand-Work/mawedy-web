@@ -1,0 +1,22 @@
+<div class="relative pb-20 flex flex-col items-center h-full">
+	<div class="text-5xl font-semibold">{{ itemTitle }}</div>
+
+	<div class="mb-10 font-bold">{{ price | number }} AED</div>
+
+	<div
+		class="mb-5 font-semibold max-w-xs"
+		*ngFor="let feature of features; trackBy: identity"
+	>
+		{{ feature }}
+	</div>
+
+	<div class="absolute -bottom-10">
+		<button
+			routerLink="/aster_clinic/subscription/success/wew"
+			style="width: 189px"
+			class="text-teal-500 tracking-wide drop-shadow-md border border-teal-500 font-semibold bg-white hover:bg-gray-50 rounded-md py-3 mb-5"
+		>
+			Subscribe
+		</button>
+	</div>
+</div>

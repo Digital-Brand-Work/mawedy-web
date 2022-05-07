@@ -21,7 +21,8 @@ export type WeekDay =
 
 export const subscription: SubscriptionFeatures = {
 	standard: [
-		`Access to Mawedy App', 'Access to Solution Dashboard by receiving patient's Appointments & Out Reach Patients`,
+		`Access to Mawedy App`,
+		`Access to Solution Dashboard by receiving patient's Appointments & Out Reach Patients`,
 		`Limited options to only confirm or cancel patient's appointments`,
 		'Send booking confirmation notification to patients through App or SMS',
 		`Full access to doctor's profile by adding their availability schedule and Doctor's Information`,

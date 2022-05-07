@@ -1,5 +1,5 @@
-<div @slideInBottom class="md:px-10 px-0 w-full">
-	<div class="md:rounded-xl bg-white py-5 px-10 w-full">
+<div class="md:px-10 px-0 w-full">
+	<div class="md:rounded-xl bg-white py-5 px-10 w-full pb-40">
 		<div class="text-gray-700 text-2xl font-semibold mb-10">
 			Subscription
 		</div>
@@ -18,6 +18,53 @@
 		<div class="text-gray-600 max-w-sm font-semibold mb-1 text-lg my-10">
 			Your Trial will expire on the next 18 Days. Please Subscribe on us
 			to get the full access of Dashboard.
+		</div>
+
+		<div
+			[@listAnimation]="3"
+			class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10"
+		>
+			<subscription-package-item
+				style="
+					background: transparent
+						linear-gradient(149deg, #80ffd4 0%, #fffbbf 100%) 0% 0%
+						no-repeat padding-box;
+					border-radius: 15px;
+					max-width: 450px;
+				"
+				class="text-center p-10 w-full"
+				itemTitle="Standard"
+				[price]="150"
+				[features]="subscription.standard"
+			></subscription-package-item>
+
+			<subscription-package-item
+				style="
+					background: transparent
+						linear-gradient(149deg, #80ffd4 0%, #fffbbf 100%) 0% 0%
+						no-repeat padding-box;
+					border-radius: 15px;
+					max-width: 450px;
+				"
+				class="text-center p-10 w-full"
+				itemTitle="Golden"
+				[price]="180"
+				[features]="subscription.golden"
+			></subscription-package-item>
+
+			<subscription-package-item
+				style="
+					background: transparent
+						linear-gradient(149deg, #80ffd4 0%, #fffbbf 100%) 0% 0%
+						no-repeat padding-box;
+					border-radius: 15px;
+					max-width: 450px;
+				"
+				class="text-center p-10 w-full"
+				itemTitle="Platinum"
+				[price]="220"
+				[features]="subscription.platinum"
+			></subscription-package-item>
 		</div>
 	</div>
 </div>

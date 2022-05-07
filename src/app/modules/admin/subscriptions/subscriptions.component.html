@@ -1,6 +1,6 @@
 <div *ngIf="true" @slideInTop class="w-full">
 	<app-toolbar class="w-full" [toolbar]="noToolbar"></app-toolbar>
-	<div #noToolbar></div>
+	<ng-template #noToolbar></ng-template>
 </div>
 
 <subscription-packages *ngIf="isInPackages$ | async"></subscription-packages>
