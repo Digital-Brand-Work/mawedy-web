@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'promotions-edit',
+  selector: 'promotion-edit',
   templateUrl: './promotions-edit.component.html',
   styleUrls: ['./promotions-edit.component.scss']
 })

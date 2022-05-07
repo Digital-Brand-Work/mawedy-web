@@ -1,11 +1,25 @@
-<div *ngIf="true" @slideInTop class="w-full">
+<div @slideInTop class="w-full">
 	<app-toolbar class="w-full" [toolbar]="promotionsToolbar"></app-toolbar>
+
+	<ng-template #promotionsToolbar>
+		<promotions-toolbar
+			(onFilter)="filter()"
+			(onSearch)="filter()"
+			class="w-full"
+		></promotions-toolbar>
+	</ng-template>
 </div>
 
-<ng-template #promotionsToolbar>
-	<promotions-toolbar
-		(onFilter)="filter()"
-		(onSearch)="filter()"
-		class="w-full"
-	></promotions-toolbar>
-</ng-template>
+<promotion-add
+	@slideOutBottom
+	@slideInBottom
+	*ngIf="isInAdd$ | async"
+></promotion-add>
+
+<promotion-edit
+	@slideOutBottom
+	@slideInBottom
+	*ngIf="isInEdit$ | async"
+></promotion-edit>
+
+<promotions-table *ngIf="isInViewing$ | async"></promotions-table>

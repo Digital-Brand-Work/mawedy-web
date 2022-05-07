@@ -1,1 +1,81 @@
-<p>promotions-table works!</p>
+<div class="md:px-10 px-0 w-full">
+	<div
+		style="height: 80vh"
+		class="md:rounded-xl bg-white px-5 pr-0 w-full pt-5"
+	>
+		<div
+			style="max-width: 200px"
+			class="text-gray-700 text-2xl ml-5 font-semibold py-2 border-b-4 border-emerald-500 w-auto"
+		>
+			Clinic Promotions (5)
+		</div>
+
+		<div
+			class="flex flex-col flex-auto overflow-x-auto h-full bg-white px-5"
+		>
+			<table class="min-w-240 overflow-y-visible">
+				<thead
+					style="
+						height: 61px;
+						background: #f4f6f8 !important;
+						color: #6f7d8f;
+					"
+					class="sticky top-0 bg-white pt-4 text-lg z-10"
+				>
+					<tr class="border-b border-b-gray-100">
+						<th class="font-normal">Clinic Name</th>
+						<th class="font-normal">Promotion Name</th>
+						<th class="font-normal">Validity</th>
+						<th class="font-normal">Running Days</th>
+						<th class="font-normal">Edit</th>
+						<th class="font-normal">Delete</th>
+					</tr>
+				</thead>
+				<tbody [@listAnimation]="15">
+					<tr
+						style="height: 60px"
+						class="accent-color font-bold border-b border-b-gray-100"
+						*ngFor="
+							let item of [
+								1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6,
+								7
+							];
+							trackBy: identity
+						"
+					>
+						<td>Aster Clinic (Bur Dubai Branch)</td>
+						<td>Get %50 off on your check up</td>
+						<td>05/01/22 - 15/01/22</td>
+						<td>10 Days</td>
+						<td>
+							<button
+								mat-icon-button
+								matTooltip="Edit Promotion"
+								class="hover:bg-emerald-600 bg-emerald-500 relative z-0"
+								mat-icon-button
+							>
+								<mat-icon
+									class="text-white icon-size-5"
+									svgIcon="heroicons_outline:pencil-alt"
+								></mat-icon>
+							</button>
+						</td>
+						<td>
+							<button
+								mat-icon-button
+								matTooltip="Delete Promotion"
+								class="hover:bg-rose-600 bg-rose-500 relative z-0"
+								mat-icon-button
+							>
+								<mat-icon
+									class="text-white icon-size-5"
+									svgIcon="feather:trash"
+								></mat-icon>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

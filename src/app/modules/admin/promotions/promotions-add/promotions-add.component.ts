@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'promotions-add',
-  templateUrl: './promotions-add.component.html',
-  styleUrls: ['./promotions-add.component.scss']
+	selector: 'promotion-add',
+	templateUrl: './promotions-add.component.html',
+	styleUrls: ['./promotions-add.component.scss'],
 })
 export class PromotionsAddComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {}
 }

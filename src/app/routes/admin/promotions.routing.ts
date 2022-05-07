@@ -5,14 +5,19 @@ import { PromotionsAddComponent } from 'app/modules/admin/promotions/promotions-
 export const promotionsRoutes: Routes = [
 	{
 		path: '',
+		pathMatch: 'full',
+		redirectTo: 'view',
+	},
+	{
+		path: 'view',
 		component: PromotionsComponent,
 	},
 	{
 		path: 'add',
-		component: PromotionsAddComponent,
+		component: PromotionsComponent,
 	},
 	{
 		path: 'edit/:promotion_name',
-		component: PromotionsAddComponent,
+		component: PromotionsComponent,
 	},
 ]
