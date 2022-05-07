@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { SeoService } from '@digital_brand_work/services/seo.service'
 
 @Component({
 	selector: 'promotions-table',
@@ -8,9 +9,13 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class PromotionsTableComponent implements OnInit {
-	constructor() {}
+	constructor(private seoService: SeoService) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.seoService.generateTags({
+			title: `Aster Clinic |  Promotions`,
+		})
+	}
 
 	identity = (item: any) => item
 }

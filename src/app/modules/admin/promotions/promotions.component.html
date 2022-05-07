@@ -10,19 +10,8 @@
 	</ng-template>
 </div>
 
-<promotion-add
-	@slideOutBottom
-	@slideInBottom
-	*ngIf="isInAdd$ | async"
-></promotion-add>
+<promotion-add *ngIf="isInAdd$ | async"></promotion-add>
 
-<promotion-edit
-	@slideOutBottom
-	@slideInBottom
-	*ngIf="isInEdit$ | async"
-></promotion-edit>
+<promotion-edit *ngIf="isInEdit$ | async"></promotion-edit>
 
-<promotions-table
-	@slideOutBottom
-	*ngIf="isInViewing$ | async"
-></promotions-table>
+<promotions-table *ngIf="isInViewing$ | async"></promotions-table>

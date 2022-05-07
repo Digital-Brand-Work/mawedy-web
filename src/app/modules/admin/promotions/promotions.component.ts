@@ -11,7 +11,7 @@ import { Observable, of, Subject, takeUntil } from 'rxjs'
 	animations: [...dbwAnimations],
 })
 export class PromotionsComponent implements OnInit {
-	constructor(private seoService: SeoService, private router: Router) {
+	constructor(private router: Router) {
 		this.router.events
 			.pipe(takeUntil(this.unsubscribeAll))
 			.subscribe(() => {
@@ -32,9 +32,6 @@ export class PromotionsComponent implements OnInit {
 	isInViewing$: Observable<boolean> = of(false)
 
 	ngOnInit(): void {
-		this.seoService.generateTags({
-			title: `Aster Clinic | Promotions`,
-		})
 		;(document.querySelector('html') as HTMLElement).style.position =
 			'fixed'
 	}
