@@ -1,1 +1,84 @@
-<p>waiting-patients-table works!</p>
+<div class="md:px-10 px-0 w-full">
+	<div style="height: 80vh" class="md:rounded-xl bg-white px-5 pr-0 w-full">
+		<div class="flex flex-col flex-auto overflow-x-auto h-full bg-white">
+			<table class="min-w-240 overflow-y-visible mt-4">
+				<thead style="height: 42px" class="sticky top-0 bg-white pt-4">
+					<tr class="text-gray-400 border-b border-b-gray-100">
+						<th>Date</th>
+						<th>Time</th>
+						<th>Patient</th>
+						<th>Doctor</th>
+						<th>Type</th>
+						<th>Status</th>
+						<th>Via Promotion</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody [@listAnimation]="4">
+					<tr
+						style="height: 60px"
+						*ngFor="let item of [1, 2, 3, 4]; trackBy: identity"
+						class="accent-color font-semibold"
+					>
+						<td>10 December</td>
+						<td>10:30 AM - 11:00 AM</td>
+						<td
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
+							Riyad Abdallah
+						</td>
+						<td
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
+							Dr. Hanadi Yassin
+						</td>
+						<td>Returning Patient</td>
+						<td>
+							<div class="flex items-center">
+								<dashboard-status
+									[color]="'red'"
+								></dashboard-status>
+
+								<div class="ml-2">Cancelled</div>
+
+								<mat-icon
+									[matMenuTriggerFor]="userStatus"
+									role="button"
+									class="ml-2"
+									svgIcon="mat_solid:arrow_drop_down"
+								></mat-icon>
+
+								<mat-menu
+									[xPosition]="'after'"
+									#userStatus="matMenu"
+									class="rounded-md"
+								>
+									<button mat-menu-item>
+										<span>Confirmed</span>
+									</button>
+
+									<button mat-menu-item>
+										<span>Canceled</span>
+									</button>
+
+									<button mat-menu-item>
+										<span>Done</span>
+									</button>
+								</mat-menu>
+							</div>
+						</td>
+						<td>Yes</td>
+						<td
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
+							Outreach
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
