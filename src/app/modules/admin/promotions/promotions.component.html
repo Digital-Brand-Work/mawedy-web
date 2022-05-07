@@ -22,4 +22,7 @@
 	*ngIf="isInEdit$ | async"
 ></promotion-edit>
 
-<promotions-table *ngIf="isInViewing$ | async"></promotions-table>
+<promotions-table
+	@slideOutBottom
+	*ngIf="isInViewing$ | async"
+></promotions-table>
