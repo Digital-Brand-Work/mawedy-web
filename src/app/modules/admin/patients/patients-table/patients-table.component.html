@@ -1,1 +1,46 @@
-<p>patients-table works!</p>
+<div class="md:px-10 px-0 w-full">
+	<div style="height: 80vh" class="md:rounded-xl bg-white px-5 pr-0 w-full">
+		<div class="flex flex-col flex-auto overflow-x-auto h-full bg-white">
+			<table class="min-w-240 overflow-y-visible mt-4">
+				<thead style="height: 42px" class="sticky top-0 bg-white pt-4">
+					<tr class="text-gray-400 border-b border-b-gray-100">
+						<th class="text-center">Type</th>
+						<th>Name</th>
+						<th>Age</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Address</th>
+						<th>Profile</th>
+					</tr>
+				</thead>
+				<tbody [@listAnimation]="15">
+					<tr
+						style="height: 60px"
+						class="accent-color font-semibold border-b border-b-gray-100"
+						*ngFor="
+							let item of [
+								1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6,
+								7
+							];
+							trackBy: identity
+						"
+					>
+						<td class="text-center">Aa</td>
+						<td>Dr. Hanadi Yassin</td>
+						<td>28 Yrs.</td>
+						<td>Clarrise@Gmail.Com</td>
+						<td>+98-7862-43453</td>
+						<td>Flat 1167 Majid Building Business Bay Dubai Uae</td>
+						<td>
+							<button
+								class="py-1.5 px-4 text-white bg-emerald-500 rounded-md hover:bg-emerald-600"
+							>
+								View
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -15,7 +15,12 @@ export class PatientsComponent implements OnInit {
 		this.seoService.generateTags({
 			title: `Aster Clinic | Patients`,
 		})
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'fixed'
 	}
 
-	filter() {}
+	ngOnDestroy(): void {
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'relative'
+	}
 }
