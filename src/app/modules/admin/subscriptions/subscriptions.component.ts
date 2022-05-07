@@ -35,14 +35,9 @@ export class SubscriptionsComponent implements OnInit {
 		this.seoService.generateTags({
 			title: `Aster Clinic | Subscriptions`,
 		})
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'fixed'
 	}
 
 	ngOnDestroy(): void {
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'relative'
-
 		this.unsubscribeAll.next(null)
 
 		this.unsubscribeAll.complete()

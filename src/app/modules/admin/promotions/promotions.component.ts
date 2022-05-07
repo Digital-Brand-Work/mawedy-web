@@ -31,15 +31,9 @@ export class PromotionsComponent implements OnInit {
 
 	isInViewing$: Observable<boolean> = of(false)
 
-	ngOnInit(): void {
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'fixed'
-	}
+	ngOnInit(): void {}
 
 	ngOnDestroy(): void {
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'relative'
-
 		this.unsubscribeAll.next(null)
 
 		this.unsubscribeAll.complete()

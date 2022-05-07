@@ -15,14 +15,9 @@ export class PatientDetailsComponent implements OnInit {
 		this.seoService.generateTags({
 			title: `Aster Clinic | Jamel Eid Yassin`,
 		})
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'fixed'
 	}
 
-	ngOnDestroy(): void {
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'relative'
-	}
+	ngOnDestroy(): void {}
 
 	back() {
 		history.back()

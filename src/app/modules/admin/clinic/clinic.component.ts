@@ -15,12 +15,7 @@ export class ClinicComponent implements OnInit {
 		this.seoService.generateTags({
 			title: `Aster Clinic | Profile`,
 		})
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'fixed'
 	}
 
-	ngOnDestroy(): void {
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'relative'
-	}
+	ngOnDestroy(): void {}
 }
