@@ -2,3 +2,9 @@
 	<app-toolbar class="w-full" [toolbar]="noToolbar"></app-toolbar>
 	<div #noToolbar></div>
 </div>
+
+<subscription-packages *ngIf="isInPackages$ | async"></subscription-packages>
+
+<subscription-success *ngIf="isInSuccess$ | async"></subscription-success>
+
+<subscription-summary *ngIf="isInCurrent$ | async"></subscription-summary>
