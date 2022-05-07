@@ -1,0 +1,27 @@
+tbody tr:nth-child(even) {
+	background: #f7f8fa;
+	border-radius: 2px;
+}
+
+/* width */
+::-webkit-scrollbar {
+	display: block;
+	width: 6px;
+	height: 6px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	// background: #f1f1f1;
+	background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #bfc8d5;
+	border-radius: 999px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #bfc8d4;
+}

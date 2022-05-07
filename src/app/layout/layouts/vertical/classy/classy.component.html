@@ -58,7 +58,11 @@
 
 	<div
 		class="flex flex-col flex-auto overflow-y-auto"
-		style="background: #f5f6fa; max-height: 100vh"
+		style="
+			background: #f5f6fa;
+			max-height: 100vh;
+			width: calc(100vw - 280px) !important;
+		"
 	>
 		<router-outlet *ngIf="true"></router-outlet>
 	</div>

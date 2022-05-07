@@ -1,1 +1,46 @@
-<p>patient-details-booking-list works!</p>
+<div class="px-5">
+	<div class="flex items-center font-semibold text-2xl accent-color">
+		Booking List
+	</div>
+
+	<div
+		class="flex flex-col flex-auto overflow-x-auto h-full bg-white border-t border-gray-200/80 mt-3"
+	>
+		<table class="min-w-240 overflow-y-visible">
+			<thead style="height: 42px" class="sticky top-0 bg-white pt-4">
+				<tr class="text-gray-400 border-b border-b-gray-100">
+					<th>Booking No.:</th>
+					<th>Doctor</th>
+					<th>Department</th>
+					<th>Date</th>
+					<th>Upload Result</th>
+					<th class="text-center">Follow Up Check Up</th>
+				</tr>
+			</thead>
+			<tbody [@listAnimation]="3">
+				<tr
+					style="height: 48px"
+					class="text-gray-500 font-semibold border-b border-b-gray-100"
+					*ngFor="
+						let item of [
+							1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 3, 1, 2, 3, 1,
+							2, 3, 1, 2
+						];
+						trackBy: identity
+					"
+				>
+					<td>AAP954685432UI</td>
+					<td>Dr. Hanadi Yassin</td>
+					<td>Cardiologist</td>
+					<td>Sun, 19 Apr 2021 10:30 Am - 11:00 Am</td>
+					<td>Clarrise_Dermaresult.Pdf</td>
+					<td class="text-center">
+						<div class="flex items-center">
+							<mat-checkbox class="mx-auto"></mat-checkbox>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
