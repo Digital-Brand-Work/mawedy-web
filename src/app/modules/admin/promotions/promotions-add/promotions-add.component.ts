@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, HostListener, OnInit } from '@angular/core'
 
 @Component({
 	selector: 'promotion-add',
@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core'
 })
 export class PromotionsAddComponent implements OnInit {
 	constructor() {}
+
+	@HostListener('document:keydown.escape')
+	onKeydownHandler() {
+		history.back()
+	}
 
 	ngOnInit(): void {}
 }
