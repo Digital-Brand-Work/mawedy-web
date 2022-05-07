@@ -123,10 +123,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "fuse:build:production"
+							"browserTarget": "mawedy:build:production"
 						},
 						"development": {
-							"browserTarget": "fuse:build:development"
+							"browserTarget": "mawedy:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -134,7 +134,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "fuse:build"
+						"browserTarget": "mawedy:build"
 					}
 				},
 				"test": {
@@ -193,12 +193,12 @@
 					"builder": "@nguniversal/builders:ssr-dev-server",
 					"configurations": {
 						"development": {
-							"browserTarget": "fuse:build:development",
-							"serverTarget": "fuse:server:development"
+							"browserTarget": "mawedy:build:development",
+							"serverTarget": "mawedy:server:development"
 						},
 						"production": {
-							"browserTarget": "fuse:build:production",
-							"serverTarget": "fuse:server:production"
+							"browserTarget": "mawedy:build:production",
+							"serverTarget": "mawedy:server:production"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -210,12 +210,12 @@
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "fuse:build:production",
-							"serverTarget": "fuse:server:production"
+							"browserTarget": "mawedy:build:production",
+							"serverTarget": "mawedy:server:production"
 						},
 						"development": {
-							"browserTarget": "fuse:build:development",
-							"serverTarget": "fuse:server:development"
+							"browserTarget": "mawedy:build:development",
+							"serverTarget": "mawedy:server:development"
 						}
 					},
 					"defaultConfiguration": "production"
