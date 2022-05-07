@@ -21,9 +21,15 @@ export class DashboardComponent implements OnInit {
 
 	isInWaitingPatients$: Observable<boolean> = of(true)
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'fixed'
+	}
 
 	ngOnDestroy(): void {
+		;(document.querySelector('html') as HTMLElement).style.position =
+			'relative'
+
 		this._unsubscribeAll.next(null)
 		this._unsubscribeAll.complete()
 	}
