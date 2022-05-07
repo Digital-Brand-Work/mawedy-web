@@ -16,13 +16,5 @@ export class PatientDetailsInformationComponent implements OnInit {
 
 	emailInputMask = createMask({ alias: 'email' })
 
-	ngOnInit(): void {
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'fixed'
-	}
-
-	ngOnDestroy(): void {
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'relative'
-	}
+	ngOnInit(): void {}
 }
