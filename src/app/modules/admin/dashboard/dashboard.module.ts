@@ -17,6 +17,9 @@ import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patie
 import { dashboardRoutes } from 'app/routes/admin/dashboard.routing'
 import { DashboardAppointmentsComponent } from './appointments/dashboard-appointments.component'
 import { DashboardComponent } from './dashboard.component'
+import { StoreModule } from '@ngrx/store'
+import * as fromDashboardWaitingPatient from '../../../store/dashboard-waiting-patient/dashboard-waiting-patient.reducer'
+import * as fromDashboardAppointment from '../../../store/dashboard-appointment/dashboard-appointment.reducer'
 
 const components = [
 	DashboardComponent,
@@ -38,7 +41,18 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, RouterModule.forChild(dashboardRoutes)],
+	imports: [
+		SharedModule,
+		RouterModule.forChild(dashboardRoutes),
+		StoreModule.forFeature(
+			fromDashboardWaitingPatient.dashboardWaitingPatientsFeatureKey,
+			fromDashboardWaitingPatient.reducer,
+		),
+		StoreModule.forFeature(
+			fromDashboardAppointment.dashboardAppointmentsFeatureKey,
+			fromDashboardAppointment.reducer,
+		),
+	],
 	exports: [...components],
 })
 export class DashboardModule {}

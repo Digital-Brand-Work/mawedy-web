@@ -10,7 +10,8 @@
 			"projectType": "application",
 			"schematics": {
 				"@ngrx/schematics:component": {
-					"styleext": "scss"
+					"styleext": "scss",
+					"skipTests": true
 				},
 				"@schematics/angular:component": {
 					"style": "scss",

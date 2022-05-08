@@ -8,6 +8,8 @@ import { PromotionsAddComponent } from './promotions-add/promotions-add.componen
 import { PromotionsEditComponent } from './promotions-edit/promotions-edit.component'
 import { SharedModule } from 'app/shared/shared.module'
 import { promotionsRoutes } from 'app/routes/admin/promotions.routing'
+import { StoreModule } from '@ngrx/store'
+import * as fromPromotion from '../../../store/promotion/promotion.reducer'
 
 const components = [
 	PromotionsComponent,
@@ -19,7 +21,14 @@ const components = [
 ]
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, RouterModule.forChild(promotionsRoutes)],
+	imports: [
+		SharedModule,
+		RouterModule.forChild(promotionsRoutes),
+		StoreModule.forFeature(
+			fromPromotion.promotionsFeatureKey,
+			fromPromotion.reducer,
+		),
+	],
 	exports: [...components],
 })
 export class PromotionsModule {}

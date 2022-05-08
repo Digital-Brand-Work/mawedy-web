@@ -13,6 +13,8 @@ import { DoctorConfirmDeleteComponent } from './modals/doctor-confirm-delete/doc
 import { DoctorDetailsWorkingScheduleComponent } from './modals/doctor-details/doctor-details-working-schedule/doctor-details-working-schedule.component'
 import { DoctorDetailsComponent } from './modals/doctor-details/doctor-details.component'
 import { DoctorEditComponent } from './modals/doctor-edit/doctor-edit.component'
+import { StoreModule } from '@ngrx/store'
+import * as fromDoctor from '../../../store/doctor/doctor.reducer'
 
 const components = [
 	DoctorsComponent,
@@ -30,7 +32,14 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, RouterModule.forChild(doctorRoutes)],
+	imports: [
+		SharedModule,
+		RouterModule.forChild(doctorRoutes),
+		StoreModule.forFeature(
+			fromDoctor.doctorsFeatureKey,
+			fromDoctor.reducer,
+		),
+	],
 	exports: [...components],
 })
 export class DoctorsModule {}

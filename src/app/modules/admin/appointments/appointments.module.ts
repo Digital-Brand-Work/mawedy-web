@@ -10,6 +10,8 @@ import { AppointmentsDayCalendarComponent } from './appointments/appointments-da
 import { AppointmentRegularBadgeComponent } from './appointments/appointments/badges/appointment-regular-badge/appointment-regular-badge.component'
 import { AppointmentDayBadgeComponent } from './appointments/appointments/badges/appointment-day-badge/appointment-day-badge.component'
 import { appointmentRoutes } from 'app/routes/admin/appointment.routing'
+import { StoreModule } from '@ngrx/store'
+import * as fromAppointment from '../../../store/appointment/appointment.reducer'
 
 const components = [
 	AppointmentsComponent,
@@ -24,7 +26,14 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, RouterModule.forChild(appointmentRoutes)],
+	imports: [
+		SharedModule,
+		RouterModule.forChild(appointmentRoutes),
+		StoreModule.forFeature(
+			fromAppointment.appointmentsFeatureKey,
+			fromAppointment.reducer,
+		),
+	],
 	exports: [...components],
 })
 export class AppointmentsModule {}

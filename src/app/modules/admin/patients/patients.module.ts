@@ -12,6 +12,8 @@ import { PatientDetailsBookingListUploadingResultComponent } from './patient-det
 import { SharedModule } from 'app/shared/shared.module'
 import { RouterModule } from '@angular/router'
 import { patientRoutes } from 'app/routes/admin/patients.routing'
+import { StoreModule } from '@ngrx/store'
+import * as fromPatient from '../../../store/patient/patient.reducer'
 
 const components = [
 	PatientsComponent,
@@ -28,7 +30,14 @@ const components = [
 
 @NgModule({
 	declarations: [...components],
-	imports: [SharedModule, RouterModule.forChild(patientRoutes)],
+	imports: [
+		SharedModule,
+		RouterModule.forChild(patientRoutes),
+		StoreModule.forFeature(
+			fromPatient.patientsFeatureKey,
+			fromPatient.reducer,
+		),
+	],
 	exports: [...components],
 })
 export class PatientsModule {}
