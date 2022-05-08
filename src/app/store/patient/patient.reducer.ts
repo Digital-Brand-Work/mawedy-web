@@ -18,43 +18,21 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
 	initialState,
 
+	on(PatientActions.loadPatients, (state, action) =>
+		adapter.setAll(action.patients, state),
+	),
+
 	on(PatientActions.addPatient, (state, action) =>
 		adapter.addOne(action.patient, state),
-	),
-
-	on(PatientActions.upsertPatient, (state, action) =>
-		adapter.upsertOne(action.patient, state),
-	),
-
-	on(PatientActions.addPatients, (state, action) =>
-		adapter.addMany(action.patients, state),
-	),
-
-	on(PatientActions.upsertPatients, (state, action) =>
-		adapter.upsertMany(action.patients, state),
 	),
 
 	on(PatientActions.updatePatient, (state, action) =>
 		adapter.updateOne(action.patient, state),
 	),
 
-	on(PatientActions.updatePatients, (state, action) =>
-		adapter.updateMany(action.patients, state),
-	),
-
 	on(PatientActions.deletePatient, (state, action) =>
 		adapter.removeOne(action.id, state),
 	),
-
-	on(PatientActions.deletePatients, (state, action) =>
-		adapter.removeMany(action.ids, state),
-	),
-
-	on(PatientActions.loadPatients, (state, action) =>
-		adapter.setAll(action.patients, state),
-	),
-
-	on(PatientActions.clearPatients, (state) => adapter.removeAll(state)),
 )
 
 export const { selectIds, selectEntities, selectAll, selectTotal } =

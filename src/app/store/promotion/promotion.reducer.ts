@@ -19,43 +19,21 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
 	initialState,
 
+	on(PromotionActions.loadPromotions, (state, action) =>
+		adapter.setAll(action.promotions, state),
+	),
+
 	on(PromotionActions.addPromotion, (state, action) =>
 		adapter.addOne(action.promotion, state),
-	),
-
-	on(PromotionActions.upsertPromotion, (state, action) =>
-		adapter.upsertOne(action.promotion, state),
-	),
-
-	on(PromotionActions.addPromotions, (state, action) =>
-		adapter.addMany(action.promotions, state),
-	),
-
-	on(PromotionActions.upsertPromotions, (state, action) =>
-		adapter.upsertMany(action.promotions, state),
 	),
 
 	on(PromotionActions.updatePromotion, (state, action) =>
 		adapter.updateOne(action.promotion, state),
 	),
 
-	on(PromotionActions.updatePromotions, (state, action) =>
-		adapter.updateMany(action.promotions, state),
-	),
-
 	on(PromotionActions.deletePromotion, (state, action) =>
 		adapter.removeOne(action.id, state),
 	),
-
-	on(PromotionActions.deletePromotions, (state, action) =>
-		adapter.removeMany(action.ids, state),
-	),
-
-	on(PromotionActions.loadPromotions, (state, action) =>
-		adapter.setAll(action.promotions, state),
-	),
-
-	on(PromotionActions.clearPromotions, (state) => adapter.removeAll(state)),
 )
 
 export const { selectIds, selectEntities, selectAll, selectTotal } =

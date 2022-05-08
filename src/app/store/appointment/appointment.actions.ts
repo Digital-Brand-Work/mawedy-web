@@ -13,41 +13,12 @@ export const addAppointment = createAction(
 	props<{ appointment: Appointment }>(),
 )
 
-export const upsertAppointment = createAction(
-	'[Appointment/API] Upsert Appointment',
-	props<{ appointment: Appointment }>(),
-)
-
-export const addAppointments = createAction(
-	'[Appointment/API] Add Appointments',
-	props<{ appointments: Appointment[] }>(),
-)
-
-export const upsertAppointments = createAction(
-	'[Appointment/API] Upsert Appointments',
-	props<{ appointments: Appointment[] }>(),
-)
-
 export const updateAppointment = createAction(
 	'[Appointment/API] Update Appointment',
 	props<{ appointment: Update<Appointment> }>(),
 )
 
-export const updateAppointments = createAction(
-	'[Appointment/API] Update Appointments',
-	props<{ appointments: Update<Appointment>[] }>(),
-)
-
 export const deleteAppointment = createAction(
 	'[Appointment/API] Delete Appointment',
 	props<{ id: string }>(),
-)
-
-export const deleteAppointments = createAction(
-	'[Appointment/API] Delete Appointments',
-	props<{ ids: string[] }>(),
-)
-
-export const clearAppointments = createAction(
-	'[Appointment/API] Clear Appointments',
 )
