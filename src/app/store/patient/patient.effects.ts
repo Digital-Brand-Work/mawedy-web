@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core'
 import { PatientService } from './patient.service'
-import { EMPTY } from 'rxjs'
+import { BehaviorSubject, EMPTY } from 'rxjs'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, concatMap, map, mergeMap } from 'rxjs'
 import * as PatientActions from './patient.actions'
 import { Patient } from './patient.model'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PatientEffects {
 	constructor(private actions$: Actions, private service: PatientService) {}
+
+	current$: BehaviorSubject<Patient | null> = this.service.current$
 
 	get$ = createEffect(
 		() =>
@@ -16,9 +18,9 @@ export class PatientEffects {
 				ofType(PatientActions.loadPatients),
 				mergeMap(() =>
 					this.service.get().pipe(
-						map((doctors: Patient) => ({
+						map((patient: Patient[]) => ({
 							type: PatientActions.loadPatients,
-							payload: doctors,
+							payload: patient,
 						})),
 						catchError(() => EMPTY),
 					),

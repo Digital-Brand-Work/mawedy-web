@@ -16,7 +16,7 @@ export class DoctorEffects {
 				ofType(DoctorActions.loadDoctors),
 				mergeMap(() =>
 					this.service.get().pipe(
-						map((doctors: Doctor) => ({
+						map((doctors: Doctor[]) => ({
 							type: DoctorActions.loadDoctors,
 							payload: doctors,
 						})),

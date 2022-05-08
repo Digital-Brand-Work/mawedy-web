@@ -31,7 +31,7 @@ export class BaseService<T> {
 		return this.http.get<T>(url, this.headers())
 	}
 
-	get(): Observable<T> {
+	get(): Observable<T[]> {
 		const url = `${environment.api}${this.url}`
 		return this.http.get<any>(url, this.headers())
 	}
