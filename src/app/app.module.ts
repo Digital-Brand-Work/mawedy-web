@@ -25,6 +25,7 @@ import { reducers, metaReducers } from './app.state'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '../environments/environment'
 import { EffectsModule } from '@ngrx/effects'
+import { effects } from './app-effect.effects'
 
 @NgModule({
 	declarations: [AppComponent],
@@ -34,6 +35,10 @@ import { EffectsModule } from '@ngrx/effects'
 		MarkdownModule.forRoot({}),
 		FuseMockApiModule.forRoot(mockApiServices),
 		FuseConfigModule.forRoot(appConfig),
+		StoreModule.forRoot(reducers, { metaReducers }),
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
+		EffectsModule.forRoot(effects),
+
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		FuseModule,
@@ -41,9 +46,6 @@ import { EffectsModule } from '@ngrx/effects'
 		LayoutModule,
 		InputMaskModule,
 		BrowserModule,
-
-		StoreModule.forRoot(reducers, { metaReducers }),
-		!environment.production ? StoreDevtoolsModule.instrument() : [],
 
 		/*
 		    Mawedy Modules

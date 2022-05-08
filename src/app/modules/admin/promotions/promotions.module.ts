@@ -9,7 +9,7 @@ import { PromotionsEditComponent } from './promotions-edit/promotions-edit.compo
 import { SharedModule } from 'app/shared/shared.module'
 import { promotionsRoutes } from 'app/routes/admin/promotions.routing'
 import { StoreModule } from '@ngrx/store'
-import * as fromPromotion from '../../../store/promotion/promotion.reducer'
+import * as fromPromotion from '../../../store/entities/promotion/promotion.reducer'
 
 const components = [
 	PromotionsComponent,

@@ -18,8 +18,8 @@ import { dashboardRoutes } from 'app/routes/admin/dashboard.routing'
 import { DashboardAppointmentsComponent } from './appointments/dashboard-appointments.component'
 import { DashboardComponent } from './dashboard.component'
 import { StoreModule } from '@ngrx/store'
-import * as fromDashboardWaitingPatient from '../../../store/dashboard-waiting-patient/dashboard-waiting-patient.reducer'
-import * as fromDashboardAppointment from '../../../store/dashboard-appointment/dashboard-appointment.reducer'
+import * as fromDashboardWaitingPatient from '../../../store/entities/dashboard-waiting-patient/dashboard-waiting-patient.reducer'
+import * as fromDashboardAppointment from '../../../store/entities/dashboard-appointment/dashboard-appointment.reducer'
 
 const components = [
 	DashboardComponent,

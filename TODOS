@@ -21,3 +21,6 @@ Fix SEO
 
 Scaffold Entity
 ng generate entity DashboardWaitingPatient --reducers store/app.state.ts -m modules/admin/dashboard/dashboard.module.ts --flat false 
+
+Scaffold Effects 
+ng g effect DoctorEffect -c true --flat false  -g true -a true  -m modules/admin/doctors/doctors.module.ts
