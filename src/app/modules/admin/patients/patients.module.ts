@@ -13,7 +13,9 @@ import { SharedModule } from 'app/shared/shared.module'
 import { RouterModule } from '@angular/router'
 import { patientRoutes } from 'app/routes/admin/patients.routing'
 import { StoreModule } from '@ngrx/store'
-import * as fromPatient from '../../../store/entities/patient/patient.reducer'
+import * as fromPatient from '../../../store/patient/patient.reducer'
+import { EffectsModule } from '@ngrx/effects'
+import { PatientEffects } from 'app/store/patient/patient.effects'
 
 const components = [
 	PatientsComponent,
@@ -37,6 +39,7 @@ const components = [
 			fromPatient.patientsFeatureKey,
 			fromPatient.reducer,
 		),
+		EffectsModule.forFeature([PatientEffects]),
 	],
 	exports: [...components],
 })

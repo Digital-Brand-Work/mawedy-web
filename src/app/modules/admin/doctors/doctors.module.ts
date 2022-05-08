@@ -14,9 +14,9 @@ import { DoctorDetailsWorkingScheduleComponent } from './modals/doctor-details/d
 import { DoctorDetailsComponent } from './modals/doctor-details/doctor-details.component'
 import { DoctorEditComponent } from './modals/doctor-edit/doctor-edit.component'
 import { StoreModule } from '@ngrx/store'
-import * as fromDoctor from '../../../store/entities/doctor/doctor.reducer'
+import * as fromDoctor from '../../../store/doctor/doctor.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { DoctorEffectEffects } from '../../../store/effects/doctor-effect/doctor-effect.effects'
+import { DoctorEffects } from '../../../store/doctor/doctor.effects'
 
 const components = [
 	DoctorsComponent,
@@ -41,7 +41,7 @@ const components = [
 			fromDoctor.doctorsFeatureKey,
 			fromDoctor.reducer,
 		),
-		EffectsModule.forFeature([DoctorEffectEffects]),
+		EffectsModule.forFeature([DoctorEffects]),
 	],
 	exports: [...components],
 })

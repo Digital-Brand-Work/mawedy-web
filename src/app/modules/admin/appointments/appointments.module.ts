@@ -11,7 +11,9 @@ import { AppointmentRegularBadgeComponent } from './appointments/appointments/ba
 import { AppointmentDayBadgeComponent } from './appointments/appointments/badges/appointment-day-badge/appointment-day-badge.component'
 import { appointmentRoutes } from 'app/routes/admin/appointment.routing'
 import { StoreModule } from '@ngrx/store'
-import * as fromAppointment from '../../../store/entities/appointment/appointment.reducer'
+import * as fromAppointment from '../../../store/appointment/appointment.reducer'
+import { EffectsModule } from '@ngrx/effects'
+import { AppointmentEffects } from 'app/store/appointment/appointment.effects'
 
 const components = [
 	AppointmentsComponent,
@@ -33,6 +35,7 @@ const components = [
 			fromAppointment.appointmentsFeatureKey,
 			fromAppointment.reducer,
 		),
+		EffectsModule.forFeature([AppointmentEffects]),
 	],
 	exports: [...components],
 })
