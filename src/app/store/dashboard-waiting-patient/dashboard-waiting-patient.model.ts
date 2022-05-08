@@ -1,3 +1,3 @@
-export interface DashboardWaitingPatient {
-  id: string;
-}
+import { PHPBaseModel } from '@digital_brand_work/models/core.model'
+
+export interface DashboardWaitingPatient extends PHPBaseModel {}

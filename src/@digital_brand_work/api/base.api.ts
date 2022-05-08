@@ -7,7 +7,10 @@ import { Observable } from 'rxjs'
 	providedIn: 'root',
 })
 export class BaseService<T> {
-	constructor(public http: HttpClient, @Inject('url') public url: String = '') {}
+	constructor(
+		public http: HttpClient,
+		@Inject('url') public url: String = '',
+	) {}
 
 	headers() {
 		let token = localStorage.getItem('access_token')
@@ -54,12 +57,16 @@ export class BaseService<T> {
 	}
 
 	updateWithFile(id: string | number | false, data: Object): Observable<T> {
-		const url = `${environment.api}${this.url}${id !== false ? `/${id}` : ''}`
+		const url = `${environment.api}${this.url}${
+			id !== false ? `/${id}` : ''
+		}`
 		return this.http.post<T>(url, data, this.headers())
 	}
 
 	update(id: string | number | false, data: Object): Observable<T> {
-		const url = `${environment.api}${this.url}${id !== false ? `/${id}` : ''}`
+		const url = `${environment.api}${this.url}${
+			id !== false ? `/${id}` : ''
+		}`
 		return this.http.put<T>(url, data, this.headers())
 	}
 

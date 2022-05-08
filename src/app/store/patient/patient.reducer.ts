@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store'
+import { createReducer, on } from '@ngrx/store'
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity'
 import { Patient } from './patient.model'
 import * as PatientActions from './patient.actions'
