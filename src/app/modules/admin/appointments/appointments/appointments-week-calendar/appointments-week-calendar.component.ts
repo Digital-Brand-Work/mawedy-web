@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
 import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
 
@@ -6,6 +7,7 @@ import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
 	selector: 'appointments-week-calendar',
 	templateUrl: './appointments-week-calendar.component.html',
 	styleUrls: ['./appointments-week-calendar.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class AppointmentsWeekCalendarComponent implements OnInit {
 	constructor(private seoService: SeoService) {}

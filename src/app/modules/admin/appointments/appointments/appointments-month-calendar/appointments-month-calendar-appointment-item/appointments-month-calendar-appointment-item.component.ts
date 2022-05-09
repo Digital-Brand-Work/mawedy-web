@@ -1,3 +1,4 @@
+import { dbwAnimations } from './../../../../../../../@digital_brand_work/animations/animation.api'
 import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
@@ -7,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core'
 	styleUrls: [
 		'./appointments-month-calendar-appointment-item.component.scss',
 	],
+	animations: [...dbwAnimations],
 })
 export class AppointmentsMonthCalendarAppointmentItemComponent
 	implements OnInit
