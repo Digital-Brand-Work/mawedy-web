@@ -1,0 +1,26 @@
+.item {
+	text-align: left;
+	font: normal normal 900 12px/20px Avenir;
+	letter-spacing: 0px;
+	width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	overflow: hidden;
+	height: 28px;
+	border-radius: 4px;
+	padding: 5px 12px;
+	font-size: 12px;
+}
+
+.green {
+	background: #e9f0f1 0% 0% no-repeat padding-box;
+}
+
+.blue {
+	background: #e5eff7 0% 0% no-repeat padding-box;
+}
+
+.violet {
+	background: #edeaf7 0% 0% no-repeat padding-box;
+}

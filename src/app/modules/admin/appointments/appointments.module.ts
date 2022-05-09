@@ -13,7 +13,8 @@ import { appointmentRoutes } from 'app/routes/admin/appointment.routing'
 import { StoreModule } from '@ngrx/store'
 import * as fromAppointment from '../../../store/appointment/appointment.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { AppointmentEffects } from 'app/store/appointment/appointment.effects'
+import { AppointmentEffects } from 'app/store/appointment/appointment.effects';
+import { AppointmentsMonthCalendarAppointmentItemComponent } from './appointments/appointments-month-calendar/appointments-month-calendar-appointment-item/appointments-month-calendar-appointment-item.component'
 
 const components = [
 	AppointmentsComponent,
@@ -27,7 +28,7 @@ const components = [
 ]
 
 @NgModule({
-	declarations: [...components],
+	declarations: [...components, AppointmentsMonthCalendarAppointmentItemComponent],
 	imports: [
 		SharedModule,
 		RouterModule.forChild(appointmentRoutes),

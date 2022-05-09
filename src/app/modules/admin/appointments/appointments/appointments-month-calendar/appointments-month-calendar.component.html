@@ -1,1 +1,64 @@
-<p>appointments-month-calendar works!</p>
+<div class="md:px-10 px-0 w-full pb-20">
+	<div class="md:rounded-xl bg-white pr-0 w-full md:p-10 overflow-hidden">
+		<div
+			style="border: 1px solid #cfdae8c7; border-right: 0"
+			class="md:rounded-md"
+		>
+			<div
+				style="
+					background: #f7f8fa;
+					border-right: 1px solid #cfdae8c7;
+					height: 70px;
+				"
+				class="grid grid-cols-7 rounded-tr-md rounded-tl-md"
+			>
+				<div
+					class="text-center accent-color font-bold uppercase rounded-md flex items-center justify-center"
+					*ngFor="let day of weekDays; trackBy: identity"
+				>
+					{{ shorten(day) }}
+				</div>
+			</div>
+
+			<div class="grid grid-cols-7">
+				<div
+					role="button"
+					class="day hover:bg-gray-50"
+					*ngFor="let day of days; trackBy: identity; let i = index"
+				>
+					<div
+						[ngClass]="{
+							'text-gray-400': i === 0,
+							'accent-color': i !== 0
+						}"
+					>
+						<div class="flex items-center">
+							<div
+								*ngIf="i === 1"
+								class="uppercase py-1 px-3 rounded-sm bg-emerald-50 text-emerald-500 text-xs"
+							>
+								Today
+							</div>
+
+							<div class="mr-5 ml-auto text-xl">
+								{{ day }}
+							</div>
+						</div>
+
+						<appointments-month-calendar-appointment-item
+							*ngFor="
+								let item of [1, 2];
+								trackBy: identity;
+								let j = index
+							"
+							[color]="'green'"
+							[class.hidden]="i !== 3"
+						></appointments-month-calendar-appointment-item>
+
+						<div class="more" *ngIf="i === 3">3 more..</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
