@@ -18,7 +18,7 @@ export class AppointmentsMonthCalendarAppointmentItemComponent
     	violet = Phone Appointment = #EDEAF7
     	blue = Online = #E5EFF7
 	*/
-	@Input() color: 'green' | 'violet' | 'blue'
+	@Input() color: 'green' | 'violet' | 'blue' = 'blue'
 
 	ngOnInit(): void {}
 }

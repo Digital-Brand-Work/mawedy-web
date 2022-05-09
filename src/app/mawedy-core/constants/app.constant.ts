@@ -1,13 +1,13 @@
 import { SubscriptionFeatures } from '../models/utility.models'
 
 export const weekDays: WeekDay[] = [
+	'Sunday',
 	'Monday',
 	'Tuesday',
 	'Wednesday',
 	'Thursday',
 	'Friday',
 	'Saturday',
-	'Sunday',
 ]
 
 export type WeekDay =

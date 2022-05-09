@@ -1,1 +1,99 @@
-<p>appointments-week-calendar works!</p>
+<div class="md:px-10 px-0 w-full pb-20">
+	<div
+		class="md:rounded-xl bg-white pr-0 w-full md:p-10 md:pl-0 overflow-hidden"
+	>
+		<div class="md:rounded-md">
+			<div
+				style="border-right: 1px solid #cfdae8"
+				class="grid grid-cols-8 rounded-tr-md relative"
+			>
+				<div></div>
+
+				<div
+					style="
+						border: 1px solid #cfdae8c7;
+						background: #f7f8fa;
+						border-right: 0px;
+						height: 70px;
+					"
+					class="grid grid-cols-7 rounded-tr-md rounded-tl-md col-span-7"
+				>
+					<div
+						[ngClass]="{
+							'text-emerald-500': i === 3,
+							'accent-color': i !== 3
+						}"
+						class="text-center font-bold uppercase rounded-xl flex items-center justify-center flex-col"
+						*ngFor="
+							let day of weekDays;
+							trackBy: identity;
+							let weekDayIndex = index
+						"
+					>
+						<div class="text-sm">
+							{{ shorten(day) }}
+						</div>
+
+						<div class="font-extrabold text-lg">
+							{{ 21 + weekDayIndex }}
+						</div>
+					</div>
+				</div>
+
+				<div
+					*ngFor="
+						let timing of timings;
+						trackBy: identity;
+						let timingIndex = index
+					"
+					class="grid grid-cols-8 col-span-8"
+				>
+					<div
+						style="height: 70px"
+						class="text-gray-400 text-right mr-5"
+					>
+						{{ timing }}:00 AM
+					</div>
+
+					<div
+						stop-propagation
+						matTooltip="View appointments this day"
+						routerLink="/aster_clinic/appointments/day"
+						role="button"
+						*ngFor="
+							let day of weekDays;
+							trackBy: identity;
+							let dayIndex = index
+						"
+						style="height: 70px"
+						class="relative w-full day hover:bg-gray-50"
+					>
+						<!-- line  -->
+						<div
+							stop-propagation
+							*ngIf="timingIndex === 4 && dayIndex === 3"
+							class="absolute col-span-8 right-0 z-10 flex items-center w-full"
+						>
+							<div
+								matTooltip="Time today: 1 PM"
+								class="circle rounded-full translate-y-6"
+							></div>
+							<div
+								style="height: 1.5px"
+								class="circle w-full bg-emerald-500 translate-y-6"
+							></div>
+						</div>
+						<!-- line  -->
+
+						<appointments-month-calendar-appointment-item
+							stop-propagation
+							*ngFor="let item of [1, 2]; trackBy: identity"
+							[color]="'violet'"
+							[class.hidden]="timingIndex !== 3"
+						></appointments-month-calendar-appointment-item>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
