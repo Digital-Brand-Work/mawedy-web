@@ -20,8 +20,8 @@
 				>
 					<div
 						[ngClass]="{
-							'text-emerald-500': i === 3,
-							'accent-color': i !== 3
+							'text-emerald-500': weekDayIndex === 3,
+							'accent-color': weekDayIndex !== 3
 						}"
 						class="text-center font-bold uppercase rounded-xl flex items-center justify-center flex-col"
 						*ngFor="

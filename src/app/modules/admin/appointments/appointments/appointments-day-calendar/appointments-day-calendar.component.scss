@@ -1,0 +1,19 @@
+.day {
+	min-height: 70px;
+	border: 1px solid #cfdae8;
+	padding: 0 10px;
+	border-right: 0;
+	border-bottom: 0;
+	overflow: hidden;
+}
+
+.circle {
+	width: 13px;
+	height: 13px;
+	background: #00b074 0% 0% no-repeat padding-box;
+}
+
+.first {
+	border-top-right-radius: 8px;
+	border-top-left-radius: 8px;
+}

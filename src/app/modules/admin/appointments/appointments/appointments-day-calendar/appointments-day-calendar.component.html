@@ -1,4 +1,54 @@
-<!-- <div
+<div class="md:px-10 px-0 w-full pb-10">
+	<div
+		class="md:rounded-xl bg-white pr-0 w-full md:p-10 md:pl-0 overflow-hidden"
+	>
+		<div
+			style="border: 1px solid #cfdae8c7; border-top: 0; border-left: 0"
+			class="md:rounded-md first"
+		>
+			<div
+				[ngClass]="{ first: timingIndex === 0 }"
+				*ngFor="
+					let timing of timings;
+					trackBy: identity;
+					let timingIndex = index
+				"
+				class="grid grid-cols-8 col-span-8"
+			>
+				<div style="height: 70px" class="text-gray-400 text-right mr-5">
+					{{ timing }}:00 AM
+				</div>
+
+				<div class="relative w-full day col-span-7">
+					<!-- line  -->
+					<div
+						stop-propagation
+						*ngIf="timingIndex === 2"
+						class="absolute col-span-8 w-full right-0 translate-y-2 z-10 flex items-center"
+					>
+						<div
+							matTooltip="Time today: 1 PM"
+							class="circle rounded-full translate-y-6"
+						></div>
+						<div
+							style="height: 1.5px"
+							class="circle w-full bg-emerald-500 translate-y-6"
+						></div>
+					</div>
+					<!-- line  -->
+
+					<appointments-day-calendar-appointment-item
+						stop-propagation
+						[color]="'blue'"
+						*ngFor="let item of [1, 3, 4, 5, 6, 7]"
+						[class.hidden]="timingIndex !== 3"
+					></appointments-day-calendar-appointment-item>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div
 						style="width: 87.5%"
 						class="absolute col-span-8 right-1 z-10 flex items-center"
 					>
@@ -8,3 +58,4 @@
 							class="circle w-full bg-emerald-500 translate-y-6"
 						></div>
 					</div> -->
+</div>
