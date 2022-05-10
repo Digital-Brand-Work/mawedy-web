@@ -39,22 +39,16 @@ export class PatientAddComponent implements OnInit {
 
 	emailInputMask = createMask({ alias: 'email' })
 
-	countries: string[] = []
-
 	countryJson = countries
 
 	cities: string[] = []
 
-	ngOnInit(): void {
-		for (let key in countries) {
-			this.countries.push(key)
-		}
-	}
+	ngOnInit(): void {}
 
 	identity = (item: any) => item
 
-	onChangeCountry(event: any) {
-		this.cities = this.countryJson[event.target.value as string]
+	onChangeCountry(country: string) {
+		this.cities = this.countryJson[country]
 	}
 
 	ngAfterViewInit(): void {

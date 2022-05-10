@@ -26,6 +26,7 @@ import { ClinicServicesAddComponent } from 'app/modules/admin/clinic/clinic-serv
 import { ClinicServicesEditComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
 import { ClinicDepartmentAddComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.component'
 import { MatSelectModule } from '@angular/material/select'
+import { CountryFormComponent } from 'app/components/country-form/country-form.component'
 
 const components = [
 	SpinnerComponent,
@@ -34,6 +35,7 @@ const components = [
 	AlertComponent,
 	ModalHeaderComponent,
 	ClinicTimingInputComponent,
+	CountryFormComponent,
 
 	/** Modals */
 	AppointmentAddComponent,

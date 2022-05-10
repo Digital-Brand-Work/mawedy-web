@@ -79,17 +79,9 @@
 						Country
 					</div>
 
-					<select
-						(change)="onChangeCountry($event)"
-						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-					>
-						<option
-							[value]="country"
-							*ngFor="let country of countries; trackBy: identity"
-						>
-							{{ country }}
-						</option>
-					</select>
+					<country-form
+						(onChangeCountry)="onChangeCountry($event)"
+					></country-form>
 				</div>
 
 				<div class="mb-5">
@@ -212,6 +204,15 @@
 					/>
 
 					<div class="text-sm text-rose-500">Email is required.</div>
+				</div>
+
+				<div class="mt-20 mb-10 flex">
+					<button
+						mat-button
+						class="hover:bg-emerald-600 rounded-md shadow-lg shadow-emerald-500/20 px-10 py-5 font-bold text-white bg-emerald-500 border-2 border-emerald-500 ml-auto"
+					>
+						Add
+					</button>
 				</div>
 			</div>
 		</div>

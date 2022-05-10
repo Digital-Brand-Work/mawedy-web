@@ -1,0 +1,22 @@
+<div
+	class="py-3 px-4 pr-0 rounded-lg border-gray-300/80 border w-full flex items-center bg-white"
+>
+	<img
+		[src]="'https://flagcdn.com/64x48/' + country_code1 + '.png'"
+		class="rounded-sm object-fill w-4 scale-150"
+		alt="Flag"
+	/>
+
+	<select
+		[(ngModel)]="country"
+		(change)="onChange($event.target.value)"
+		class="h-full px-2 ml-3 pl-5 w-full border-l border-r-gray-300"
+	>
+		<option
+			[value]="country"
+			*ngFor="let country of countries; trackBy: identity"
+		>
+			{{ country }}
+		</option>
+	</select>
+</div>
