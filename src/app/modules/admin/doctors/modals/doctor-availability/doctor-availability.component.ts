@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { DoctorAvailabilityModal } from './doctor-availability.service'
 
 @Component({
@@ -16,11 +16,9 @@ export class DoctorAvailabilityComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
-	unsubscribeAll: Subject<any> = new Subject<any>()
-
 	opened$: BehaviorSubject<boolean> = this.doctorAvailabilityModal.opened$
 
-	weekdays: string[] = weekDays
+	weekdays: WeekDay[] = weekDays
 
 	ngOnInit(): void {}
 

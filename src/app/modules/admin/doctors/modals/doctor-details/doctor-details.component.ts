@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { Component, HostListener, OnInit } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
+import { DoctorDetailsModal } from './doctor-details.service'
 
 @Component({
-  selector: 'doctor-details',
-  templateUrl: './doctor-details.component.html',
-  styleUrls: ['./doctor-details.component.scss']
+	selector: 'doctor-details',
+	templateUrl: './doctor-details.component.html',
+	styleUrls: ['./doctor-details.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class DoctorDetailsComponent implements OnInit {
+	constructor(private doctorDetailsModal: DoctorDetailsModal) {}
 
-  constructor() { }
+	@HostListener('document:keydown.escape')
+	onKeydownHandler() {
+		this.opened$.next(false)
+	}
 
-  ngOnInit(): void {
-  }
+	opened$: BehaviorSubject<boolean> = this.doctorDetailsModal.opened$
 
+	ngOnInit(): void {}
 }

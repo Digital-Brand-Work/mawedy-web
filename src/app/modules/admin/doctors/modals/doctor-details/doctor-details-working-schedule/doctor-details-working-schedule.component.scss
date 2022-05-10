@@ -1,0 +1,18 @@
+.working-schedule-container {
+	min-height: 207px;
+	background: #f7f8fa 0% 0% no-repeat padding-box;
+	border: 1px solid #d9e1ec;
+	border-radius: 8px;
+}
+
+.available {
+	width: 10px;
+	height: 10px;
+	background: #00b074 0% 0% no-repeat padding-box;
+}
+
+.not-available {
+	width: 10px;
+	height: 10px;
+	background: #6f7d8f 0% 0% no-repeat padding-box;
+}

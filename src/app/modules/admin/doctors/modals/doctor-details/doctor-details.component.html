@@ -1,1 +1,89 @@
-<p>doctor-details works!</p>
+<div
+	*ngIf="opened$ | async"
+	@slideInRight
+	@slideOutRight
+	stop-propagation
+	class="ml-auto bg-white h-full w-full md:w-1/4"
+>
+	<modal-header
+		modalTitle="Dr. Hanadi Yassin"
+		(onClose)="opened$.next(false)"
+	></modal-header>
+	<div
+		class="px-10 py-5 bg-white"
+		style="max-height: calc(100vh - 5vh); overflow-y: scroll !important"
+	>
+		<div class="flex justify-center items-center">
+			<div class="rounded-full border-4 border-gray-200">
+				<img
+					src="../../../../../../assets/images/avatars/male-19.jpg"
+					class="photo rounded-full"
+					alt="Doctor Image"
+				/>
+			</div>
+		</div>
+
+		<div class="flex mt-6 items-center flex-col">
+			<div class="text-lg accent-color font-bold">Dr. Hanadi Yassin</div>
+
+			<div style="color: #6f7d8f" class="text-base font-medium">
+				MBBS, MD - General Medicine, DM - Cardiology
+			</div>
+
+			<div class="mt-4 accent-color text-base">
+				Interventional Cardiologist
+			</div>
+
+			<div>25 Years Experience</div>
+		</div>
+
+		<hr class="opacity-40" />
+
+		<div class="text-base text-gray-500">About</div>
+
+		<div
+			class="text-base accent-color font-semibold mt-5"
+			style="margin-bottom: 50px"
+		>
+			An expert in CHIP (Complex High-risk Indicated Procedures), Dr.
+			Hanadi Hassan has achieved a documented 91% success rate in Chronic
+			Total Occlusion (CTO) Angioplasty, which is unheralded in the region
+			and is on par with the best in the field.
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-x-3 mt-3">
+			<div>
+				<div class="text-base text-gray-500">Phone</div>
+				<div class="text-base accent-color font-bold">
+					+98-7862-43453
+				</div>
+			</div>
+
+			<div>
+				<div class="text-base text-gray-500">E-mail</div>
+				<div class="text-base accent-color font-bold">
+					hanadi@gmail.com
+				</div>
+			</div>
+		</div>
+
+		<doctor-details-working-schedule></doctor-details-working-schedule>
+
+		<div
+			class="w-full py-5 z border-t border-t-gray-100 flex items-center mb-5"
+		>
+			<button
+				class="hover:bg-emerald-600 mr-3 rounded-xl ml-auto px-7 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500 shadow-md shadow-emerald-500/50"
+			>
+				Edit
+			</button>
+
+			<button
+				(click)="opened$.next(false)"
+				class="hover:bg-gray-50 rounded-xl px-7 py-2 font-bold border-2 border-gray-300 text-gray-400"
+			>
+				Delete
+			</button>
+		</div>
+	</div>
+</div>

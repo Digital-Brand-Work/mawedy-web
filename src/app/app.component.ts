@@ -10,6 +10,7 @@ import { EditClinicServiceModal } from './modules/admin/clinic/clinic-services/m
 import { AddPatientModal } from './modules/admin/patients/modals/patient-add/patient-add.service'
 import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor-add.service'
 import { DoctorAvailabilityModal } from './modules/admin/doctors/modals/doctor-availability/doctor-availability.service'
+import { DoctorDetailsModal } from './modules/admin/doctors/modals/doctor-details/doctor-details.service'
 
 @Component({
 	selector: 'app-root',
@@ -32,7 +33,7 @@ export class AppComponent {
 		private addPatientModal: AddPatientModal,
 
 		private addDoctorModal: AddDoctorModal,
-
+		private doctorDetailsModal: DoctorDetailsModal,
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
 	) {}
 
@@ -58,6 +59,9 @@ export class AppComponent {
 
 	doctorAvailabilityModalOpened$: BehaviorSubject<boolean> =
 		this.doctorAvailabilityModal.opened$
+
+	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
+		this.doctorDetailsModal.opened$
 
 	identity = (item: any) => item
 }
