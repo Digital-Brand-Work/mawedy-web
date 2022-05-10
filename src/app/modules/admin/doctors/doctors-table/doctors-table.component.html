@@ -15,7 +15,7 @@
 				<tbody [@listAnimation]="15">
 					<tr
 						style="height: 60px"
-						class="accent-color font-semibold border-b border-b-gray-100"
+						class="accent-color font-semibold border-b border-b-gray-100 hover:bg-gray-50"
 						*ngFor="
 							let item of [
 								1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6,
@@ -29,6 +29,7 @@
 						<td class="text-center">25 Years</td>
 						<td class="text-center">+98-7862-43453</td>
 						<td
+							(click)="opened$.next(true)"
 							role="button"
 							class="underline hover:text-emerald-500 text-center"
 						>

@@ -55,6 +55,15 @@
 	class="fixed w-screen h-screen flex"
 ></doctor-add>
 
+<doctor-availability
+	stop-propagation
+	(click)="doctorAvailabilityModalOpened$.next(false)"
+	*ngIf="doctorAvailabilityModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></doctor-availability>
+
 <!-- Modals  -->
 
 <router-outlet></router-outlet>

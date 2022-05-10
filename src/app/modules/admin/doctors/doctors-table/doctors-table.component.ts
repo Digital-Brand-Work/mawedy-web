@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { BehaviorSubject } from 'rxjs'
+import { DoctorAvailabilityModal } from '../modals/doctor-availability/doctor-availability.service'
 
 @Component({
 	selector: 'doctors-table',
@@ -8,7 +10,9 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class DoctorsTableComponent implements OnInit {
-	constructor() {}
+	constructor(private doctorAvailabilityModal: DoctorAvailabilityModal) {}
+
+	opened$: BehaviorSubject<boolean> = this.doctorAvailabilityModal.opened$
 
 	ngOnInit(): void {}
 
