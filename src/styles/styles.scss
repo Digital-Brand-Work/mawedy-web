@@ -18,6 +18,13 @@ body {
 	overflow-y: hidden;
 }
 
+input,
+select {
+	font-size: 16px;
+	font-weight: 700;
+	color: #0a2440;
+}
+
 .accent-color {
 	color: #0a2440;
 }

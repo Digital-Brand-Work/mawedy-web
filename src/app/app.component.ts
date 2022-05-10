@@ -8,6 +8,7 @@ import { AddDepartmentModal } from './modules/admin/clinic/clinic-services/modal
 import { AddClinicServiceModal } from './modules/admin/clinic/clinic-services/modals/clinic-services-add/clinic-services-add.service'
 import { EditClinicServiceModal } from './modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.service'
 import { AddPatientModal } from './modules/admin/patients/modals/patient-add/patient-add.service'
+import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor-add.service'
 
 @Component({
 	selector: 'app-root',
@@ -28,6 +29,8 @@ export class AppComponent {
 		private editClinicServiceModal: EditClinicServiceModal,
 
 		private addPatientModal: AddPatientModal,
+
+		private addDoctorModal: AddDoctorModal,
 	) {}
 
 	alerts$: Observable<Alert[]> = this.alert.get()
@@ -46,6 +49,9 @@ export class AppComponent {
 
 	addPatientModalOpened$: BehaviorSubject<boolean> =
 		this.addPatientModal.opened$
+
+	addDoctorModalOpened$: BehaviorSubject<boolean> =
+		this.addDoctorModal.opened$
 
 	identity = (item: any) => item
 }

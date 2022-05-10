@@ -18,6 +18,7 @@ NO internet
 Unauthorized Page
 
 Fix SEO
+IndexedDb
 
 Scaffold Entity
 ng generate entity DashboardWaitingPatient --reducers store/app.state.ts -m modules/admin/dashboard/dashboard.module.ts --flat false 

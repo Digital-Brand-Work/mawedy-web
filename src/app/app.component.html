@@ -46,6 +46,15 @@
 	class="fixed w-screen h-screen flex"
 ></patient-add>
 
+<doctor-add
+	stop-propagation
+	(click)="addDoctorModalOpened$.next(false)"
+	*ngIf="addDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></doctor-add>
+
 <!-- Modals  -->
 
 <router-outlet></router-outlet>
