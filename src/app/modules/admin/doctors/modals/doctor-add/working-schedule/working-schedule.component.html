@@ -1,1 +1,54 @@
-<p>working-schedule works!</p>
+<div class="w-full">
+	<div class="flex mb-3.5">
+		<div class="text-gray-400 text-base">Working Schedule</div>
+		<div class="ml-auto text-gray-400 text-base">Working Schedule</div>
+	</div>
+
+	<div class="working-schedule-container">
+		<div class="grid grid-cols-1 md:grid-cols-7 md:gap-x-10">
+			<div *ngFor="let day of weekdays; trackBy: identity">
+				<div class="flex flex-col items-center justify-center">
+					<div class="flex items-center justify-center">
+						<mat-checkbox
+							style="transform: translateY(-3px)"
+							class="mr-1"
+						></mat-checkbox>
+
+						<div
+							class="text-center accent-color text-base font-bold uppercase rounded-md flex items-center justify-center"
+						>
+							{{ shorten(day) }}
+						</div>
+					</div>
+
+					<div class="mt-5">
+						<input
+							type="time"
+							class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
+						/>
+					</div>
+
+					<div class="mt-5">
+						<input
+							type="time"
+							class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="flex my-5 items-center md:ml-5">
+		<div class="flex items-center mr-5">
+			<div class="available rounded-full mr-2"></div>
+
+			<div>Available</div>
+		</div>
+		<div class="flex items-center">
+			<div class="not-available rounded-full mr-2"></div>
+
+			<div>Not Available</div>
+		</div>
+	</div>
+</div>
