@@ -80,6 +80,8 @@
 					</div>
 
 					<country-form
+						[bordered]="true"
+						[rounded]="true"
 						(onChangeCountry)="onChangeCountry($event)"
 					></country-form>
 				</div>
@@ -187,7 +189,11 @@
 						Phone
 					</div>
 
-					<mobile-number-form class="w-full"></mobile-number-form>
+					<mobile-number-form
+						[bordered]="true"
+						[rounded]="true"
+						class="w-full"
+					></mobile-number-form>
 
 					<div class="text-sm text-rose-500">Phone is required.</div>
 				</div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { countries } from 'app/mawedy-core/constants/countries.constant'
 import { iso } from 'app/mawedy-core/constants/countries.iso.constant'
 
@@ -11,6 +11,10 @@ export class CountryFormComponent implements OnInit {
 	constructor() {}
 
 	@Output() onChangeCountry = new EventEmitter<string>()
+
+	@Input() bordered: boolean = false
+
+	@Input() rounded: boolean = false
 
 	countries: string[] = []
 

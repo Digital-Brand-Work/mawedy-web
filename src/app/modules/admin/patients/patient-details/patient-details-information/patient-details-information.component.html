@@ -126,13 +126,7 @@
 					>Phone</label
 				>
 
-				<input
-					mask="(+000)-00-000-0000"
-					maxlength="14"
-					type="text"
-					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-					style="height: 45px"
-				/>
+				<mobile-number-form class="w-full"></mobile-number-form>
 			</div>
 
 			<div class="mb-5">
@@ -161,11 +155,11 @@
 					>Country</label
 				>
 
-				<input
-					type="text"
-					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-					style="height: 45px"
-				/>
+				<country-form
+					[bordered]="false"
+					[rounded]="false"
+					(onChangeCountry)="onChangeCountry($event)"
+				></country-form>
 			</div>
 
 			<div class="mb-5">
@@ -173,11 +167,14 @@
 					>City</label
 				>
 
-				<input
-					type="text"
+				<select
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
-				/>
+				>
+					<option *ngFor="let city of cities; trackBy: identity">
+						{{ city }}
+					</option>
+				</select>
 			</div>
 
 			<div class="mb-5">

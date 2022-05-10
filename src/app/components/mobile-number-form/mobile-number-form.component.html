@@ -1,5 +1,6 @@
 <div
-	class="py-3 px-4 rounded-lg border-gray-300/80 border w-full flex items-center bg-white"
+	[ngClass]="{ 'border-gray-300/80 border': bordered, 'rounded-lg': rounded }"
+	class="py-3 px-4 w-full flex items-center bg-white"
 >
 	<img
 		[src]="'https://flagcdn.com/64x48/' + country_code1 + '.png'"

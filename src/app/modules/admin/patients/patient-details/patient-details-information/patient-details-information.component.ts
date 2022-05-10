@@ -7,6 +7,7 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { createMask } from '@ngneat/input-mask'
+import { countries } from 'app/mawedy-core/constants/countries.constant'
 
 @Component({
 	selector: 'patient-details-information',
@@ -16,14 +17,13 @@ import { createMask } from '@ngneat/input-mask'
 export class PatientDetailsInformationComponent implements OnInit {
 	constructor(private cdr: ChangeDetectorRef) {}
 
-	// @HostListener('document:keydown.escape')
-	// back() {
-	// 	history.back()
-	// }
-
 	@ViewChild('input') input?: ElementRef
 
 	emailInputMask = createMask({ alias: 'email' })
+
+	cities: string[] = []
+
+	countryJson = countries
 
 	ngOnInit(): void {}
 
@@ -35,5 +35,11 @@ export class PatientDetailsInformationComponent implements OnInit {
 
 	ngOnDestroy(): void {
 		this.cdr.detach()
+	}
+
+	identity = (item: any) => item
+
+	onChangeCountry(country: string) {
+		this.cities = this.countryJson[country]
 	}
 }

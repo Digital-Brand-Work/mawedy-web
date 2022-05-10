@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { countries } from 'app/mawedy-core/constants/country-codes.list'
 @Component({
 	selector: 'mobile-number-form',
@@ -8,15 +8,19 @@ import { countries } from 'app/mawedy-core/constants/country-codes.list'
 export class MobileNumberFormComponent implements OnInit {
 	constructor() {}
 
+	@Input() bordered: boolean = false
+
+	@Input() rounded: boolean = false
+
 	countries = countries
 		.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
 		.reverse()
 
-	ngOnInit(): void {}
-
 	country_code = 'AE'
 
 	country_code1 = 'ae'
+
+	ngOnInit(): void {}
 
 	change(event) {
 		this.country_code1 = event.target.value.toLowerCase()
