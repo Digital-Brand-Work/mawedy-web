@@ -37,6 +37,15 @@
 >
 </clinic-services-edit>
 
+<patient-add
+	stop-propagation
+	(click)="addPatientModalOpened$.next(false)"
+	*ngIf="addPatientModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></patient-add>
+
 <!-- Modals  -->
 
 <router-outlet></router-outlet>

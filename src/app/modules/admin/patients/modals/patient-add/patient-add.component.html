@@ -1,1 +1,219 @@
-<p>patient-add works!</p>
+<div
+	*ngIf="opened$ | async"
+	animateJs
+	stop-propagation
+	class="m-auto bg-white w-full md:w-3/4 rounded-xl overflow-hidden animate__fadeInUp animate__faster"
+>
+	<modal-header
+		modalTitle="Patient Profile"
+		(onClose)="opened$.next(false)"
+	></modal-header>
+
+	<div class="px-10 py-5 bg-white">
+		<div class="grid grid-cols-1 md:grid-cols-3 md:gap-x-20">
+			<div class="flex flex-col items-center md:items-start mx-auto">
+				<button
+					(click)="avatar.click()"
+					class="photo flex flex-col items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full animate-pulse"
+				>
+					<mat-icon
+						class="text-gray-400 icon-size-20"
+						svgIcon="feather:user"
+					></mat-icon>
+				</button>
+
+				<input type="file" #avatar class="hidden" />
+
+				<div class="text-gray-400 text-center mt-3 mx-auto">
+					Upload a Photo
+				</div>
+			</div>
+
+			<div>
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Name
+					</div>
+
+					<input
+						#input
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					/>
+
+					<div class="text-sm text-rose-500">Name is required.</div>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Middle Name
+					</div>
+
+					<input
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					/>
+
+					<div class="text-sm text-rose-500">
+						Middle Name is required.
+					</div>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Last Name
+					</div>
+
+					<input
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					/>
+
+					<div class="text-sm text-rose-500">
+						Last Name is required.
+					</div>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Country
+					</div>
+
+					<select
+						(change)="onChangeCountry($event)"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					>
+						<option
+							[value]="country"
+							*ngFor="let country of countries; trackBy: identity"
+						>
+							{{ country }}
+						</option>
+					</select>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						City
+					</div>
+
+					<select
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					>
+						<option *ngFor="let city of cities; trackBy: identity">
+							{{ city }}
+						</option>
+					</select>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Address
+					</div>
+
+					<input
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					/>
+
+					<div class="text-sm text-rose-500">
+						Address is required.
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div class="grid grid-cols-1 md:grid-cols-3 mb-5 gap-x-5">
+					<div class="col-span-3 md:col-span-2">
+						<div class="mb-1 font-semibold text-gray-400 text-lg">
+							Birthday
+						</div>
+
+						<input
+							type="date"
+							class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+						/>
+
+						<div class="text-sm text-rose-500">
+							Birthday is required.
+						</div>
+					</div>
+
+					<div class="col-span-3 md:col-span-1">
+						<div class="mb-1 font-semibold text-gray-400 text-lg">
+							Age
+						</div>
+
+						<input
+							type="number"
+							class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+						/>
+
+						<div class="text-sm text-rose-500">
+							Age is required.
+						</div>
+					</div>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Religion
+					</div>
+
+					<input
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					/>
+
+					<div class="text-sm text-rose-500">
+						Religion is required.
+					</div>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Gender
+					</div>
+
+					<div class="flex">
+						<button
+							class="gender-btn rounded-md bg-emerald-500 text-white font-semibold drop-shadow-md"
+						>
+							F
+						</button>
+
+						<button
+							class="gender-btn rounded-md ml-3 bg-white text-gray-400 font-bold drop-shadow-md hover:border hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-500"
+						>
+							M
+						</button>
+					</div>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Phone
+					</div>
+
+					<mobile-number-form class="w-full"></mobile-number-form>
+
+					<div class="text-sm text-rose-500">Phone is required.</div>
+				</div>
+
+				<div class="mb-5">
+					<div class="mb-1 font-semibold text-gray-400 text-lg">
+						Email
+					</div>
+
+					<input
+						[inputMask]="emailInputMask"
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					/>
+
+					<div class="text-sm text-rose-500">Email is required.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

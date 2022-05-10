@@ -16,10 +16,10 @@ import { createMask } from '@ngneat/input-mask'
 export class PatientDetailsInformationComponent implements OnInit {
 	constructor(private cdr: ChangeDetectorRef) {}
 
-	@HostListener('document:keydown.escape')
-	back() {
-		history.back()
-	}
+	// @HostListener('document:keydown.escape')
+	// back() {
+	// 	history.back()
+	// }
 
 	@ViewChild('input') input?: ElementRef
 
