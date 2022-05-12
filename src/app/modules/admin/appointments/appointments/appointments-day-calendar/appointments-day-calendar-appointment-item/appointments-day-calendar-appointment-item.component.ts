@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { DashboardAppointmentDetailsModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
+import { BehaviorSubject } from 'rxjs'
 
 @Component({
 	selector: 'appointments-day-calendar-appointment-item',
@@ -6,7 +8,12 @@ import { Component, Input, OnInit } from '@angular/core'
 	styleUrls: ['./appointments-day-calendar-appointment-item.component.scss'],
 })
 export class AppointmentsDayCalendarAppointmentItemComponent implements OnInit {
-	constructor() {}
+	constructor(
+		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
+	) {}
+
+	dashboardAppointmentDetailsModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentDetailsModal.opened$
 
 	/**
     	green = Through Clinic = #E9F0F1

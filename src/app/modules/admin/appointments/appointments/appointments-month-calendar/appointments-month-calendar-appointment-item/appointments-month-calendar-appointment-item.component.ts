@@ -1,5 +1,7 @@
 import { dbwAnimations } from './../../../../../../../@digital_brand_work/animations/animation.api'
 import { Component, Input, OnInit } from '@angular/core'
+import { DashboardAppointmentDetailsModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
+import { BehaviorSubject } from 'rxjs'
 
 @Component({
 	selector: 'appointments-month-calendar-appointment-item',
@@ -13,7 +15,12 @@ import { Component, Input, OnInit } from '@angular/core'
 export class AppointmentsMonthCalendarAppointmentItemComponent
 	implements OnInit
 {
-	constructor() {}
+	constructor(
+		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
+	) {}
+
+	dashboardAppointmentDetailsModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentDetailsModal.opened$
 
 	/**
     	green = Through Clinic = #E9F0F1

@@ -1,3 +1,6 @@
+import { DashboardAppointmentSelectTimeSlotModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
+import { DashboardAppointmentSelectDoctorModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
+import { DashboardAppointmentDetailsModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
 import { DoctorAvailabilityModal } from './modules/admin/doctors/modals/doctor-availability/doctor-availability.service'
 import { DoctorDetailsModal } from './modules/admin/doctors/modals/doctor-details/doctor-details.service'
 import { Component } from '@angular/core'
@@ -11,9 +14,6 @@ import { AddClinicServiceModal } from './modules/admin/clinic/clinic-services/mo
 import { EditClinicServiceModal } from './modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.service'
 import { AddPatientModal } from './modules/admin/patients/modals/patient-add/patient-add.service'
 import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor-add.service'
-import { DashboardAppointmentDetailsModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
-import { DashboardAppointmentSelectDoctorModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
-import { DashboardAppointmentSelectTimeSlotModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
 
 @Component({
 	selector: 'app-root',
