@@ -1,1 +1,213 @@
-<p>dashboard-appointment-details works!</p>
+<div
+	*ngIf="opened$ | async"
+	@slideInRight
+	@slideOutRight
+	stop-propagation
+	class="ml-auto bg-white h-full w-full md:w-1/4"
+>
+	<modal-header
+		modalTitle="Appointment Details"
+		(onClose)="opened$.next(false)"
+	></modal-header>
+	<div
+		class="px-10 py-5 bg-white pb-20"
+		style="max-height: calc(100vh - 5vh); overflow-y: scroll !important"
+	>
+		<div class="grid grid-cols-2 mt-5 gap-y-7 gap-x-10">
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Date & Time
+					</div>
+					<div class="text-base accent-color font-bold">
+						10 Dec 2022
+					</div>
+					<div class="text-base accent-color font-bold">
+						11:30 AM - 12:00 PM
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Status
+					</div>
+					<div class="flex items-center">
+						<dashboard-status [color]="'green'"></dashboard-status>
+
+						<div class="ml-2">Confirmed</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Department
+					</div>
+					<div class="text-base accent-color font-bold">Dental</div>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Appointment Type
+					</div>
+					<div class="text-base accent-color font-bold">
+						Returning Patient
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Doctor
+					</div>
+					<div class="text-base accent-color font-bold">
+						Dr. Zaire Sultan
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Account Type
+					</div>
+					<div class="text-base accent-color font-bold">Walk In</div>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Services
+					</div>
+					<div class="text-base accent-color font-bold">
+						Dental Implant
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Consultation Fee
+					</div>
+					<div class="text-base accent-color font-bold">250 AED</div>
+					<div
+						class="paid text-emerald-500 flex items-center justify-center mt-3 font-bold text-base"
+					>
+						Paid
+					</div>
+				</div>
+			</div>
+
+			<div class="col-span-2">
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Comment
+					</div>
+					<div class="text-base accent-color font-bold">
+						Request Men Dr. For Urgent Dental Implant.
+					</div>
+				</div>
+			</div>
+
+			<div
+				class="relative w-full col-span-2 my-5 grid grid-cols-4 p-5"
+				style="height: 155px"
+			>
+				<img
+					src="../../../../../../../assets/app/dashboard/appointment-detail-card.svg"
+					class="absolute w-full object-contain col-span-3 z-0"
+					alt="Dashboard Details Card"
+				/>
+
+				<div class="col-span-2 relative z-10">
+					<div class="text-base font-light text-gray-500 mb-1">
+						Patient Name
+					</div>
+					<div class="text-base accent-color font-bold">
+						Rafiq Sadri
+					</div>
+				</div>
+
+				<div class="relative z-10">
+					<div class="text-base font-light text-gray-500 mb-1">
+						Sex
+					</div>
+					<div class="text-base accent-color font-bold">Male</div>
+				</div>
+
+				<div class="relative z-10">
+					<div class="text-base font-light text-gray-500 mb-1">
+						Age
+					</div>
+					<div class="text-base accent-color font-bold">25</div>
+				</div>
+
+				<div
+					class="underline accent-color font-bold text-base relative z-10 col-span-2"
+				>
+					Contact Details
+				</div>
+			</div>
+
+			<div class="col-span-2 grid-cols-1 grid md:grid-cols-2">
+				<div>
+					<div class="text-base font-light text-gray-500 mb-1">
+						Remind The Patient
+					</div>
+					<div class="text-xl accent-color font-bold">
+						+98 6000 58888
+					</div>
+				</div>
+
+				<div class="flex flex-col md:flex-row md:items-center">
+					<div>
+						<button
+							class="bg-white border-2 text-emerald-500 border-emerald-500 py-2 px-6 font-semibold tracking-wide rounded-xl hover:bg-emerald-100 hover:text-emerald-700 text-base mt-2 md:mt-0"
+						>
+							SMS
+						</button>
+					</div>
+
+					<div>
+						<button
+							class="bg-white border-2 text-emerald-500 border-emerald-500 py-2 px-6 font-semibold tracking-wide rounded-xl hover:bg-emerald-100 hover:text-emerald-700 text-base md:ml-2 mt-2 md:mt-0"
+						>
+							E-Mail
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-span-2">
+				<div class="text-base font-bold accent-color mb-1">
+					Make changes to this appointment
+				</div>
+
+				<div class="flex items-center mt-6">
+					<button
+						mat-flat-button
+						class="hover:bg-emerald-600 rounded-xl px-7 py-3 font-bold text-white bg-emerald-500 border-2 border-emerald-500 mr-2 shadow-md shadow-emerald-500/20"
+					>
+						Cancel
+					</button>
+
+					<div>
+						<button
+							class="bg-white border-2 text-emerald-500 border-emerald-500 py-2 px-6 font-semibold tracking-wide rounded-xl hover:bg-emerald-100 hover:text-emerald-700 text-base"
+						>
+							Reschedule
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

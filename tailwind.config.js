@@ -57,6 +57,7 @@ const config = {
 	content: ['./src/**/*.{html,scss,ts}'],
 	important: true,
 	theme: {
+		'accent-color': { color: '#0a2440' },
 		fontSize: {
 			xs: '0.625rem',
 			sm: '0.75rem',

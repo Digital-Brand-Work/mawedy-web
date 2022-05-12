@@ -1,3 +1,5 @@
+import { DoctorAvailabilityModal } from './modules/admin/doctors/modals/doctor-availability/doctor-availability.service'
+import { DoctorDetailsModal } from './modules/admin/doctors/modals/doctor-details/doctor-details.service'
 import { Component } from '@angular/core'
 import { BehaviorSubject, Observable, take } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -9,8 +11,7 @@ import { AddClinicServiceModal } from './modules/admin/clinic/clinic-services/mo
 import { EditClinicServiceModal } from './modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.service'
 import { AddPatientModal } from './modules/admin/patients/modals/patient-add/patient-add.service'
 import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor-add.service'
-import { DoctorAvailabilityModal } from './modules/admin/doctors/modals/doctor-availability/doctor-availability.service'
-import { DoctorDetailsModal } from './modules/admin/doctors/modals/doctor-details/doctor-details.service'
+import { DashboardAppointmentDetailsModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
 
 @Component({
 	selector: 'app-root',
@@ -35,6 +36,8 @@ export class AppComponent {
 		private addDoctorModal: AddDoctorModal,
 		private doctorDetailsModal: DoctorDetailsModal,
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
+
+		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
 	) {}
 
 	alerts$: Observable<Alert[]> = this.alert.get()
@@ -62,6 +65,9 @@ export class AppComponent {
 
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.doctorDetailsModal.opened$
+
+	dashboardAppointmentDetailsModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentDetailsModal.opened$
 
 	identity = (item: any) => item
 }

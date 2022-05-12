@@ -73,6 +73,15 @@
 	class="fixed w-screen h-screen flex"
 ></doctor-details>
 
+<dashboard-appointment-details
+	stop-propagation
+	(click)="dashboardAppointmentDetailsModalOpened$.next(false)"
+	*ngIf="dashboardAppointmentDetailsModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></dashboard-appointment-details>
+
 <!-- Modals  -->
 
 <router-outlet></router-outlet>
