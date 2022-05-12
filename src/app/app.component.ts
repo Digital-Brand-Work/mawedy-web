@@ -12,6 +12,7 @@ import { EditClinicServiceModal } from './modules/admin/clinic/clinic-services/m
 import { AddPatientModal } from './modules/admin/patients/modals/patient-add/patient-add.service'
 import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor-add.service'
 import { DashboardAppointmentDetailsModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
+import { DashboardAppointmentSelectDoctorModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
 
 @Component({
 	selector: 'app-root',
@@ -38,6 +39,7 @@ export class AppComponent {
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
 
 		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
+		private dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
 	) {}
 
 	alerts$: Observable<Alert[]> = this.alert.get()
@@ -68,6 +70,9 @@ export class AppComponent {
 
 	dashboardAppointmentDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.dashboardAppointmentDetailsModal.opened$
+
+	dashboardAppointmentSelectDoctorModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentSelectDoctorModal.opened$
 
 	identity = (item: any) => item
 }

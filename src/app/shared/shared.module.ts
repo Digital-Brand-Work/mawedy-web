@@ -27,6 +27,7 @@ import { ClinicServicesEditComponent } from 'app/modules/admin/clinic/clinic-ser
 import { ClinicDepartmentAddComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.component'
 import { MatSelectModule } from '@angular/material/select'
 import { CountryFormComponent } from 'app/components/country-form/country-form.component'
+import { DashboardAppointmentSelectDoctorComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.component'
 
 const components = [
 	SpinnerComponent,
@@ -45,6 +46,8 @@ const components = [
 
 	ClinicServicesAddComponent,
 	ClinicServicesEditComponent,
+
+	DashboardAppointmentSelectDoctorComponent,
 ]
 
 const modules = [

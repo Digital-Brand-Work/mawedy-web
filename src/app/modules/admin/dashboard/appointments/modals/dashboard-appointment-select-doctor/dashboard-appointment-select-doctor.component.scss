@@ -1,0 +1,71 @@
+.container-doctor {
+	background: #ffffff 0% 0% no-repeat padding-box;
+	box-shadow: 0px 2px 8px #6f7d8f2e;
+	border: 1px solid #fafafa;
+	border-radius: 16px;
+}
+
+.search-container {
+	height: 46px;
+	background: #f4f6f8 0% 0% no-repeat padding-box;
+	border-radius: 100px;
+	padding: 13px 22px;
+}
+
+.doctor {
+	height: 80px;
+	padding: 1rem;
+	.name {
+		font-size: 18px;
+		letter-spacing: 0.04px;
+		color: #0a2440;
+		text-transform: capitalize;
+	}
+	.profession {
+		font-size: 16px;
+		letter-spacing: 0.03px;
+		color: #6f7d8f;
+		text-transform: capitalize;
+	}
+	&:hover {
+		background: #e5f7f1;
+		.name {
+			color: #00b074;
+		}
+		.profession {
+			color: #6f7d8f;
+		}
+	}
+}
+
+.footer {
+	background: #ffffff 0% 0% no-repeat padding-box;
+	box-shadow: 0px -1px 0px #e3ebf5;
+	border-radius: 0px 0px 16px 16px;
+	height: 90px;
+	padding: 22px 30px;
+}
+
+/* width */
+::-webkit-scrollbar {
+	display: block;
+	width: 6px;
+	height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	// background: #f1f1f1;
+	background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #bfc8d5;
+	border-radius: 999px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #bfc8d4;
+}

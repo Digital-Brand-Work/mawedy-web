@@ -1,0 +1,65 @@
+<div
+	*ngIf="opened$ | async"
+	@fadeIn
+	stop-propagation
+	class="ml-auto h-full w-full md:w-1/4"
+>
+	<div
+		class="px-10 py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md"
+		style="height: calc(100vh); overflow-y: scroll !important"
+	>
+		<div class="container-doctor w-full overflow-x-hidden">
+			<div
+				stop-propagation
+				class="w-full flex px-5 py-5 items-center"
+				style="background: #f7f8fa"
+			>
+				<div class="font-extrabold text-xl accent-color">
+					Select Doctor
+				</div>
+			</div>
+
+			<div class="search-container flex items-center my-5 mx-5">
+				<mat-icon
+					class="text-gray-400 mr-4"
+					svgIcon="feather:search"
+				></mat-icon>
+
+				<input
+					type="search"
+					class="w-full font-thin"
+					placeholder="Search by doctor, departments"
+				/>
+			</div>
+
+			<div
+				style="height: 520px"
+				class="overflow-y-auto overflow-x-hidden"
+			>
+				<div
+					matTooltip="Select This Doctor"
+					(click)="opened$.next(false)"
+					role="button"
+					*ngFor="
+						let item of [1, 2, 3, 4, 5, 6, 7];
+						trackBy: identity
+					"
+				>
+					<div class="border-t border-gray-100 rounded-sm doctor">
+						<div class="name">Dr. Zaire Sultan</div>
+						<div class="profession">Neurologist . 25 Years</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="footer w-full items-center flex">
+				<button
+					(click)="opened$.next(false)"
+					class="ml-auto hover:bg-emerald-50 rounded-xl px-7 py-2.5 font-bold border-2 border-emerald-500 text-emerald-500 mr-3"
+				>
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
