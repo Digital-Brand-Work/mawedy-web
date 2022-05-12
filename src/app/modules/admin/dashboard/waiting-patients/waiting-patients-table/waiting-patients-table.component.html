@@ -23,12 +23,14 @@
 						<td>10 December</td>
 						<td>10:30 AM - 11:00 AM</td>
 						<td
+							routerLink="/aster_clinic/patients/jamel"
 							role="button"
 							class="underline hover:text-emerald-500"
 						>
 							Riyad Abdallah
 						</td>
 						<td
+							(click)="doctorDetailsModalOpened$.next(true)"
 							role="button"
 							class="underline hover:text-emerald-500"
 						>
