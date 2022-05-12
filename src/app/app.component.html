@@ -101,6 +101,16 @@
 >
 </dashboard-appointment-select-time-slot>
 
+<subscription-invoices
+	stop-propagation
+	(click)="subscriptionInvoicesModalOpened$.next(false)"
+	*ngIf="subscriptionInvoicesModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</subscription-invoices>
+
 <!-- Modals  -->
 
 <router-outlet></router-outlet>
