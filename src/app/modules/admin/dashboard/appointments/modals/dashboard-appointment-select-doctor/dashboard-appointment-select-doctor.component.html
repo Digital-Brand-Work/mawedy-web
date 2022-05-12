@@ -1,14 +1,13 @@
 <div
 	*ngIf="opened$ | async"
-	@fadeIn
 	stop-propagation
 	class="ml-auto h-full w-full md:w-1/4"
 >
 	<div
-		class="px-10 py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md"
-		style="height: calc(100vh); overflow-y: scroll !important"
+		class="px-10 py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md overflow-hidden"
+		style="height: calc(100vh)"
 	>
-		<div class="container-doctor w-full overflow-x-hidden">
+		<div @fadeInBottom class="container-doctor w-full overflow-x-hidden">
 			<div
 				stop-propagation
 				class="w-full flex px-5 py-5 items-center"

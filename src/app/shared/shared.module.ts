@@ -28,6 +28,7 @@ import { ClinicDepartmentAddComponent } from 'app/modules/admin/clinic/clinic-se
 import { MatSelectModule } from '@angular/material/select'
 import { CountryFormComponent } from 'app/components/country-form/country-form.component'
 import { DashboardAppointmentSelectDoctorComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.component'
+import { DashboardAppointmentSelectTimeSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.component'
 
 const components = [
 	SpinnerComponent,
@@ -48,6 +49,7 @@ const components = [
 	ClinicServicesEditComponent,
 
 	DashboardAppointmentSelectDoctorComponent,
+	DashboardAppointmentSelectTimeSlotComponent,
 ]
 
 const modules = [

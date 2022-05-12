@@ -13,6 +13,7 @@ import { AddPatientModal } from './modules/admin/patients/modals/patient-add/pat
 import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor-add.service'
 import { DashboardAppointmentDetailsModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
 import { DashboardAppointmentSelectDoctorModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
+import { DashboardAppointmentSelectTimeSlotModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
 
 @Component({
 	selector: 'app-root',
@@ -40,6 +41,7 @@ export class AppComponent {
 
 		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
 		private dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
+		private dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 	) {}
 
 	alerts$: Observable<Alert[]> = this.alert.get()
@@ -73,6 +75,9 @@ export class AppComponent {
 
 	dashboardAppointmentSelectDoctorModalOpened$: BehaviorSubject<boolean> =
 		this.dashboardAppointmentSelectDoctorModal.opened$
+
+	dashboardAppointmentSelectTimeSlotModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentSelectTimeSlotModal.opened$
 
 	identity = (item: any) => item
 }

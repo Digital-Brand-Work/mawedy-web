@@ -1,0 +1,86 @@
+<div
+	*ngIf="opened$ | async"
+	stop-propagation
+	class="ml-auto h-full w-full md:w-1/4"
+>
+	<div
+		class="px-10 py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md overflow-hidden"
+		style="height: calc(100vh)"
+	>
+		<div @fadeInBottom class="container-time-slot w-full overflow-x-hidden">
+			<div
+				stop-propagation
+				class="w-full flex px-5 py-5 items-center"
+				style="background: #f7f8fa"
+			>
+				<div class="font-extrabold text-xl accent-color">
+					Select time slot
+				</div>
+			</div>
+
+			<div
+				style="height: 520px"
+				class="overflow-y-auto overflow-x-hidden p-5"
+			>
+				<div class="font-bold text-gray-600 mb-10">
+					Selected Date - 12/10/2021
+				</div>
+
+				<div>
+					<div
+						*ngFor="
+							let item of [1, 2, 4, 45, 5, 6, 76, 788];
+							trackBy: identity;
+							let i = index
+						"
+						class="grid grid-cols-1 md:grid-cols-2 gap-5"
+					>
+						<div
+							[ngClass]="{
+								'bg-gray-300 pointer-events-none text-white':
+									i === 2,
+								'text-gray-500': i !== 2
+							}"
+							role="button"
+							class="w-full flex items-center justify-center rounded-xl text-base font-norm border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500"
+							style="height: 50px"
+						>
+							{{
+								'0' +
+									(i + 1) +
+									':00 AM - ' +
+									'0' +
+									(i + 1) +
+									':30 PM'
+							}}
+						</div>
+
+						<div
+							role="button"
+							class="w-full flex items-center justify-center rounded-xl text-base font-normal text-gray-500 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 mb-5"
+							style="height: 50px"
+						>
+							{{
+								'0' +
+									(i + 1) +
+									':30 AM - ' +
+									'0' +
+									(i + 2) +
+									':30 PM'
+							}}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="footer w-full items-center flex">
+				<button
+					(click)="opened$.next(false)"
+					class="ml-auto hover:bg-emerald-50 rounded-xl px-7 py-2.5 font-bold border-2 border-emerald-500 text-emerald-500 mr-3"
+				>
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

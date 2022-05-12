@@ -141,3 +141,9 @@ mat-checkbox {
 		background: white;
 	}
 }
+
+::placeholder {
+	font-size: 13px;
+	font-weight: 400;
+	color: #6d7c8d;
+}

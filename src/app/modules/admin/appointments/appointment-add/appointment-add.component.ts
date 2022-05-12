@@ -12,6 +12,7 @@ import { AddAppointmentModal } from './appointment-add.service'
 import { createMask } from '@ngneat/input-mask'
 import { FormControl } from '@angular/forms'
 import { DashboardAppointmentSelectDoctorModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
+import { DashboardAppointmentSelectTimeSlotModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
 
 @Component({
 	selector: 'appointment-add',
@@ -25,6 +26,7 @@ export class AppointmentAddComponent implements OnInit {
 		private cdr: ChangeDetectorRef,
 
 		private dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
+		private dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -42,6 +44,9 @@ export class AppointmentAddComponent implements OnInit {
 
 	dashboardAppointmentSelectDoctorModalOpened$: BehaviorSubject<boolean> =
 		this.dashboardAppointmentSelectDoctorModal.opened$
+
+	dashboardAppointmentSelectTimeSlotModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentSelectTimeSlotModal.opened$
 
 	currencyInputMask = createMask({
 		alias: 'numeric',

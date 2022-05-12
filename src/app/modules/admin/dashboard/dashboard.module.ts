@@ -24,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects'
 import { DashboardAppointmentEffects } from 'app/store/dashboard-appointment/dashboard-appointment.effects'
 import { DashboardWaitingPatientEffects } from 'app/store/dashboard-waiting-patient/dashboard-waiting-patient.effects'
 import { DashboardAppointmentSelectDoctorComponent } from './appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.component'
+import { DashboardAppointmentSelectTimeSlotComponent } from './appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.component'
 
 const components = [
 	DashboardComponent,
