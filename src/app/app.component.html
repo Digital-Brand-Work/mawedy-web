@@ -55,6 +55,16 @@
 	class="fixed w-screen h-screen flex"
 ></doctor-add>
 
+<doctor-edit
+	stop-propagation
+	(click)="editDoctorModalOpened$.next(false)"
+	*ngIf="editDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</doctor-edit>
+
 <doctor-availability
 	stop-propagation
 	(click)="doctorAvailabilityModalOpened$.next(false)"
@@ -110,6 +120,15 @@
 	class="fixed w-screen h-screen flex"
 >
 </subscription-invoices>
+
+<doctor-confirm-delete
+	stop-propagation
+	(click)="confirmDeleteDoctorModalOpened$.next(false)"
+	*ngIf="confirmDeleteDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+></doctor-confirm-delete>
 
 <!-- Modals  -->
 

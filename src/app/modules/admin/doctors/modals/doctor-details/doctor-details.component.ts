@@ -1,7 +1,15 @@
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { Component, HostListener, OnInit } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import {
+	Component,
+	ElementRef,
+	HostListener,
+	OnInit,
+	ViewChild,
+} from '@angular/core'
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 import { DoctorDetailsModal } from './doctor-details.service'
+import { ConfirmDeleteDoctorModal } from '../doctor-confirm-delete/doctor-confirm-delete.service'
+import { EditDoctorModal } from '../doctor-edit/doctor-edit.service'
 
 @Component({
 	selector: 'doctor-details',
@@ -10,14 +18,45 @@ import { DoctorDetailsModal } from './doctor-details.service'
 	animations: [...dbwAnimations],
 })
 export class DoctorDetailsComponent implements OnInit {
-	constructor(private doctorDetailsModal: DoctorDetailsModal) {}
+	constructor(
+		private doctorDetailsModal: DoctorDetailsModal,
+		private confirmDeleteDoctorModal: ConfirmDeleteDoctorModal,
+		private editDoctorModal: EditDoctorModal,
+	) {}
 
 	@HostListener('document:keydown.escape')
 	onKeydownHandler() {
 		this.opened$.next(false)
 	}
 
+	@ViewChild('scroll') scroll: ElementRef
+
 	opened$: BehaviorSubject<boolean> = this.doctorDetailsModal.opened$
 
-	ngOnInit(): void {}
+	confirmDeleteDoctorModalOpened$: BehaviorSubject<boolean> =
+		this.confirmDeleteDoctorModal.opened$
+
+	editDoctorModalOpened$: BehaviorSubject<boolean> =
+		this.editDoctorModal.opened$
+
+	unsubscribe: Subject<any> = new Subject()
+
+	ngOnInit(): void {
+		this.confirmDeleteDoctorModalOpened$
+			.pipe(takeUntil(this.unsubscribe))
+			.subscribe((opened: boolean) => {
+				if (opened) {
+					return (this.scroll.nativeElement.scrollTop = 0)
+				}
+
+				this.scroll.nativeElement.scrollTop =
+					this.scroll.nativeElement.scrollHeight
+			})
+	}
+
+	ngOnDestroy(): void {
+		this.unsubscribe.next(null)
+
+		this.unsubscribe.complete()
+	}
 }

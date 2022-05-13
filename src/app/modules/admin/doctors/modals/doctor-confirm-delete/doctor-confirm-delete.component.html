@@ -1,1 +1,33 @@
-<p>doctor-confirm-delete works!</p>
+<div
+	*ngIf="opened$ | async"
+	stop-propagation
+	class="ml-auto h-full w-full md:w-1/4"
+>
+	<div
+		style="height: calc(100vh)"
+		class="py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md overflow-hidden relative px-20"
+	>
+		<div class="confirm-container absolute bottom-20 w-3/4 p-6">
+			<div class="text-2xl font-bold accent-color">
+				Are you sure to delete <br />
+				Dr. Hanadi Yassin?
+			</div>
+
+			<div class="mt-10 flex items-center">
+				<button
+					(click)="opened$.next(false)"
+					class="hover:bg-emerald-50 rounded-xl px-7 py-2 font-bold border-2 border-emerald-500 text-emerald-500 mr-3 ml-auto"
+				>
+					No
+				</button>
+
+				<button
+					(click)="opened$.next(false)"
+					class="hover:bg-emerald-600 rounded-xl px-9 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500"
+				>
+					Yes
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

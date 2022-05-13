@@ -1,4 +1,19 @@
-Seperate Overrides to global
+Separate Overrides to global
+Separate Modals
+Responsive
+Responsive fixed html
+Add Pre loader
+Add page loader
+Add Modal Exit Transition
+Pages
+NO internet
+500 Page
+404 Page
+Unauthorized Page
+Virtual Scroll 
+
+Fix SEO
+IndexedDb
 
 OLD
 https://xd.adobe.com/view/380a5382-30a0-41cd-9df4-60f31249ba76-6d59/screen/71478ea3-fc01-4802-89ee-5e35ba9360fd/
@@ -11,17 +26,8 @@ https://develop.mawedy.ae
 Username: admin
 Password: QVSEKywyD69945A
 
-Pages
-NO internet
-500 Page
-404 Page
-Unauthorized Page
-
-Fix SEO
-IndexedDb
-
 Scaffold Entity
-ng generate entity DashboardWaitingPatient --reducers store/app.state.ts -m modules/admin/dashboard/dashboard.module.ts --flat false 
+ng generate entity DashboardWaitingPatient --reducers store/app.state.ts -m modules/admin/dashboard/dashboard.module.ts --flat false
 
-Scaffold Effects 
-ng g effect Patient -c true --flat false  -g true -a true  -m modules/admin/patients/patients.module.ts
+Scaffold Effects
+ng g effect Patient -c true --flat false -g true -a true -m modules/admin/patients/patients.module.ts
