@@ -39,6 +39,10 @@
 
 			<div class="relative z-10">
 				<button
+					(click)="
+						dashboardAppointmentAssignSlotModalOpened$.next(true);
+						opened$.next(false)
+					"
 					class="hover:bg-emerald-600 rounded-xl px-10 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500 mr-5 shadow-md shadow-emerald-500/20"
 				>
 					Yes

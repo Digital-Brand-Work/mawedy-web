@@ -1,1 +1,115 @@
-<p>dashboard-appointment-assign-slot works!</p>
+<div
+	stop-propagation
+	animateJs
+	class="m-auto bg-white w-full md:w-3/4 rounded-xl overflow-hidden animate__fadeInUp animate__faster"
+>
+	<modal-header
+		modalTitle="Assign Appointment To"
+		(onClose)="opened$.next(false)"
+	></modal-header>
+
+	<div
+		class="px-5 py-5 bg-white overflow-hidden z-10"
+		style="height: 640px; overflow-y: scroll !important"
+	>
+		<div
+			style="height: 78px; background: #f7f8fa"
+			class="flex relative w-full z-10 text-base items-center px-10 border border-gray-200 rounded-md mx-8 mb-10"
+		>
+			<div class="relative z-10 mr-5">Appointment Details</div>
+
+			<div class="relative z-10 mr-5">Date & Time</div>
+
+			<div class="relative z-10 mr-5">10 Dec, 10:30 AM - 11:00 AM</div>
+		</div>
+
+		<div class="px-0 w-full">
+			<div class="md:rounded-xl bg-white px-5 pr-0 w-full">
+				<div
+					class="flex flex-col flex-auto overflow-x-auto h-full bg-white"
+				>
+					<table class="min-w-240 overflow-y-visible mt-4">
+						<thead
+							style="height: 42px"
+							class="sticky top-0 bg-white pt-4"
+						>
+							<tr
+								class="text-gray-400 border-b border-b-gray-100"
+							>
+								<th>Date</th>
+								<th>Patient Name</th>
+								<th>Doctor Preference</th>
+								<th>Department</th>
+								<th>Appointment Type</th>
+								<th>Select</th>
+							</tr>
+						</thead>
+						<tbody [@listAnimation]="15">
+							<tr
+								style="height: 60px"
+								class="accent-color font-semibold"
+								*ngFor="
+									let item of [
+										1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4
+									];
+									trackBy: identity
+								"
+							>
+								<td>10 December</td>
+								<td
+									routerLink="/aster_clinic/patients/jamel"
+									role="button"
+									class="underline hover:text-emerald-500"
+								>
+									Riyad Abdallah
+								</td>
+								<td
+									(click)="
+										doctorDetailsModalOpened$.next(true)
+									"
+									role="button"
+									class="underline hover:text-emerald-500"
+								>
+									Dr. Hanadi Yassin
+								</td>
+
+								<td>Cardiology</td>
+
+								<td>Through Clinic</td>
+
+								<td>
+									<div class="flex">
+										<button
+											class="bg-white border border-gray-300 text-gray-400 rounded-xl py-1 px-5 hover:bg-emerald-100 hover:border-white hover:text-emerald-500"
+										>
+											Select
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="w-full py-5 z border-t border-t-gray-100 flex items-center mb-5 z-20 absolute -bottom-5 bg-white/30 backdrop-blur-md"
+		>
+			<button
+				(click)="opened$.next(false)"
+				class="hover:bg-emerald-50 rounded-xl px-5 py-2 font-bold border-2 border-emerald-500 text-emerald-500 ml-auto mr-3"
+			>
+				Cancel
+			</button>
+
+			<button
+				(click)="opened$.next(false)"
+				mat-flat-button
+				class="hover:bg-emerald-600 mr-20 rounded-xl px-10 py-3 font-bold text-white bg-emerald-500 border-2 border-emerald-500"
+			>
+				Assign
+			</button>
+		</div>
+	</div>
+</div>
