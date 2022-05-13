@@ -1,0 +1,28 @@
+<clinic-department-add
+	stop-propagation
+	(click)="addDepartmentModalOpened$.next(false)"
+	*ngIf="addDepartmentModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></clinic-department-add>
+
+<clinic-services-add
+	stop-propagation
+	(click)="addClinicServiceModalOpened$.next(false)"
+	*ngIf="addClinicServiceModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</clinic-services-add>
+
+<clinic-services-edit
+	stop-propagation
+	(click)="editClinicServiceModalOpened$.next(false)"
+	*ngIf="editClinicServiceModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</clinic-services-edit>

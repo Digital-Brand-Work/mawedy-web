@@ -1,0 +1,45 @@
+<doctor-add
+	stop-propagation
+	(click)="addDoctorModalOpened$.next(false)"
+	*ngIf="addDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></doctor-add>
+
+<doctor-edit
+	stop-propagation
+	(click)="editDoctorModalOpened$.next(false)"
+	*ngIf="editDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</doctor-edit>
+
+<doctor-availability
+	stop-propagation
+	(click)="doctorAvailabilityModalOpened$.next(false)"
+	*ngIf="doctorAvailabilityModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></doctor-availability>
+
+<doctor-details
+	stop-propagation
+	(click)="doctorDetailsModalOpened$.next(false)"
+	*ngIf="doctorDetailsModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></doctor-details>
+
+<doctor-confirm-delete
+	stop-propagation
+	(click)="confirmDeleteDoctorModalOpened$.next(false)"
+	*ngIf="confirmDeleteDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+></doctor-confirm-delete>

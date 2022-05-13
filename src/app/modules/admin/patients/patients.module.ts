@@ -3,7 +3,6 @@ import { PatientsComponent } from './patients.component'
 import { PatientsTableComponent } from './patients-table/patients-table.component'
 import { PatientsToolbarComponent } from './patients-toolbar/patients-toolbar.component'
 import { PatientsFilterComponent } from './patients-filter/patients-filter.component'
-import { PatientAddComponent } from './modals/patient-add/patient-add.component'
 import { PatientDetailsComponent } from './patient-details/patient-details.component'
 import { PatientDetailsToolbarComponent } from './patient-details/patient-details-toolbar/patient-details-toolbar.component'
 import { PatientDetailsInformationComponent } from './patient-details/patient-details-information/patient-details-information.component'
@@ -22,7 +21,6 @@ const components = [
 	PatientsTableComponent,
 	PatientsToolbarComponent,
 	PatientsFilterComponent,
-	PatientAddComponent,
 	PatientDetailsComponent,
 	PatientDetailsToolbarComponent,
 	PatientDetailsInformationComponent,

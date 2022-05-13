@@ -1,0 +1,37 @@
+<dashboard-appointment-details
+	stop-propagation
+	(click)="dashboardAppointmentDetailsModalOpened$.next(false)"
+	*ngIf="dashboardAppointmentDetailsModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></dashboard-appointment-details>
+
+<dashboard-appointment-select-doctor
+	stop-propagation
+	(click)="dashboardAppointmentSelectDoctorModalOpened$.next(false)"
+	*ngIf="dashboardAppointmentSelectDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+></dashboard-appointment-select-doctor>
+
+<dashboard-appointment-select-time-slot
+	stop-propagation
+	(click)="dashboardAppointmentSelectTimeSlotModalOpened$.next(false)"
+	*ngIf="dashboardAppointmentSelectTimeSlotModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+>
+</dashboard-appointment-select-time-slot>
+
+<dashboard-appointment-confirm-reassign-slot
+	stop-propagation
+	(click)="dashboardAppointmentConfirmReassignSlotModalOpened$.next(false)"
+	*ngIf="dashboardAppointmentConfirmReassignSlotModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+>
+</dashboard-appointment-confirm-reassign-slot>

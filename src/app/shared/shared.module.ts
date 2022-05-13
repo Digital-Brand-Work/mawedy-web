@@ -1,3 +1,4 @@
+import { DoctorDetailsComponent } from './../modules/admin/doctors/modals/doctor-details/doctor-details.component'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { AppointmentEditComponent } from './../modules/admin/appointments/appointment-edit/appointment-edit.component'
 import { AppointmentAddComponent } from './../modules/admin/appointments/appointment-add/appointment-add.component'
@@ -29,6 +30,19 @@ import { MatSelectModule } from '@angular/material/select'
 import { CountryFormComponent } from 'app/components/country-form/country-form.component'
 import { DashboardAppointmentSelectDoctorComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.component'
 import { DashboardAppointmentSelectTimeSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.component'
+import { DoctorAddComponent } from 'app/modules/admin/doctors/modals/doctor-add/doctor-add.component'
+import { DoctorAvailabilityComponent } from 'app/modules/admin/doctors/modals/doctor-availability/doctor-availability.component'
+import { DoctorConfirmDeleteComponent } from 'app/modules/admin/doctors/modals/doctor-confirm-delete/doctor-confirm-delete.component'
+import { DoctorDetailsWorkingScheduleComponent } from 'app/modules/admin/doctors/modals/doctor-details/doctor-details-working-schedule/doctor-details-working-schedule.component'
+import { DoctorEditComponent } from 'app/modules/admin/doctors/modals/doctor-edit/doctor-edit.component'
+import { WorkingScheduleComponent } from 'app/modules/admin/doctors/modals/doctor-add/working-schedule/working-schedule.component'
+import { PatientAddComponent } from 'app/modules/admin/patients/modals/patient-add/patient-add.component'
+import { DashboardAppointmentAddComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-add/dashboard-appointment-add.component'
+import { DashboardAppointmentDetailsComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.component'
+import { DashboardAppointmentConfirmCancelAppointmentComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-confirm-cancel-appointment/dashboard-appointment-confirm-cancel-appointment.component'
+import { DashboardAppointmentConfirmReassignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-confirm-reassign-slot/dashboard-appointment-confirm-reassign-slot.component'
+import { DashboardAppointmentAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-assign-slot/dashboard-appointment-assign-slot.component'
+import { SubscriptionInvoicesComponent } from 'app/modules/admin/subscriptions/modals/subscription-invoices/subscription-invoices.component'
 
 const components = [
 	SpinnerComponent,
@@ -38,18 +52,34 @@ const components = [
 	ModalHeaderComponent,
 	ClinicTimingInputComponent,
 	CountryFormComponent,
+	DoctorDetailsWorkingScheduleComponent,
+	WorkingScheduleComponent,
 
 	/** Modals */
 	AppointmentAddComponent,
 	AppointmentEditComponent,
 
-	ClinicDepartmentAddComponent,
-
-	ClinicServicesAddComponent,
-	ClinicServicesEditComponent,
-
+	DashboardAppointmentAddComponent,
+	DashboardAppointmentDetailsComponent,
+	DashboardAppointmentConfirmCancelAppointmentComponent,
+	DashboardAppointmentConfirmReassignSlotComponent,
+	DashboardAppointmentAssignSlotComponent,
 	DashboardAppointmentSelectDoctorComponent,
 	DashboardAppointmentSelectTimeSlotComponent,
+
+	DoctorAddComponent,
+	DoctorAvailabilityComponent,
+	DoctorConfirmDeleteComponent,
+	DoctorDetailsComponent,
+	DoctorEditComponent,
+
+	PatientAddComponent,
+
+	ClinicServicesAddComponent,
+	ClinicDepartmentAddComponent,
+	ClinicServicesEditComponent,
+
+	SubscriptionInvoicesComponent,
 ]
 
 const modules = [

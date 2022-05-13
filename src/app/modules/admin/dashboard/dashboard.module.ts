@@ -5,11 +5,7 @@ import { DashboardAppointmentTableComponent } from './appointments/dashboard-app
 import { DashboardAppointmentToolbarComponent } from './appointments/dashboard-appointment-toolbar/dashboard-appointment-toolbar.component'
 import { DashboardStatusComponent } from './dashboard-status/dashboard-status.component'
 import { DashboardAppointmentFilterComponent } from './appointments/dashboard-appointment-filter/dashboard-appointment-filter.component'
-import { DashboardAppointmentAddComponent } from './appointments/modals/dashboard-appointment-add/dashboard-appointment-add.component'
-import { DashboardAppointmentDetailsComponent } from './appointments/modals/dashboard-appointment-details/dashboard-appointment-details.component'
-import { DashboardAppointmentConfirmCancelAppointmentComponent } from './appointments/modals/dashboard-appointment-confirm-cancel-appointment/dashboard-appointment-confirm-cancel-appointment.component'
-import { DashboardAppointmentConfirmReassignSlotComponent } from './appointments/modals/dashboard-appointment-confirm-reassign-slot/dashboard-appointment-confirm-reassign-slot.component'
-import { DashboardAppointmentAssignSlotComponent } from './appointments/modals/dashboard-appointment-assign-slot/dashboard-appointment-assign-slot.component'
+
 import { WaitingPatientsComponent } from './waiting-patients/waiting-patients.component'
 import { WaitingPatientsTableComponent } from './waiting-patients/waiting-patients-table/waiting-patients-table.component'
 import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-patients-toolbar/waiting-patients-toolbar.component'
@@ -23,8 +19,6 @@ import * as fromDashboardAppointment from '../../../store/dashboard-appointment/
 import { EffectsModule } from '@ngrx/effects'
 import { DashboardAppointmentEffects } from 'app/store/dashboard-appointment/dashboard-appointment.effects'
 import { DashboardWaitingPatientEffects } from 'app/store/dashboard-waiting-patient/dashboard-waiting-patient.effects'
-import { DashboardAppointmentSelectDoctorComponent } from './appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.component'
-import { DashboardAppointmentSelectTimeSlotComponent } from './appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.component'
 
 const components = [
 	DashboardComponent,
@@ -32,11 +26,7 @@ const components = [
 	DashboardAppointmentToolbarComponent,
 	DashboardStatusComponent,
 	DashboardAppointmentFilterComponent,
-	DashboardAppointmentAddComponent,
-	DashboardAppointmentDetailsComponent,
-	DashboardAppointmentConfirmCancelAppointmentComponent,
-	DashboardAppointmentConfirmReassignSlotComponent,
-	DashboardAppointmentAssignSlotComponent,
+
 	WaitingPatientsComponent,
 	WaitingPatientsTableComponent,
 	WaitingPatientsToolbarComponent,

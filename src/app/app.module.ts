@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '../environments/environment'
 import { EffectsModule } from '@ngrx/effects'
 import { effects } from './app-effect.effects'
+import { ModalModule } from './modules/modals/modal.module'
 
 @NgModule({
 	declarations: [AppComponent],
@@ -57,6 +58,7 @@ import { effects } from './app-effect.effects'
 		ClinicModule,
 		PromotionsModule,
 		SubscriptionsModule,
+		ModalModule,
 		SharedModule,
 	],
 

@@ -1,146 +1,17 @@
-<!-- Modals  -->
-<appointment-add
-	stop-propagation
-	(click)="addAppointmentModalOpened$.next(false)"
-	*ngIf="addAppointmentModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
-></appointment-add>
+<modal-appointment></modal-appointment>
 
-<clinic-department-add
-	stop-propagation
-	(click)="addDepartmentModalOpened$.next(false)"
-	*ngIf="addDepartmentModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
-></clinic-department-add>
+<modal-doctor></modal-doctor>
 
-<clinic-services-add
-	stop-propagation
-	(click)="addClinicServiceModalOpened$.next(false)"
-	*ngIf="addClinicServiceModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
->
-</clinic-services-add>
+<modal-patient></modal-patient>
 
-<clinic-services-edit
-	stop-propagation
-	(click)="editClinicServiceModalOpened$.next(false)"
-	*ngIf="editClinicServiceModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
->
-</clinic-services-edit>
+<modal-clinic></modal-clinic>
 
-<patient-add
-	stop-propagation
-	(click)="addPatientModalOpened$.next(false)"
-	*ngIf="addPatientModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
-></patient-add>
+<modal-subscription></modal-subscription>
 
-<doctor-add
-	stop-propagation
-	(click)="addDoctorModalOpened$.next(false)"
-	*ngIf="addDoctorModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
-></doctor-add>
-
-<doctor-edit
-	stop-propagation
-	(click)="editDoctorModalOpened$.next(false)"
-	*ngIf="editDoctorModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
->
-</doctor-edit>
-
-<doctor-availability
-	stop-propagation
-	(click)="doctorAvailabilityModalOpened$.next(false)"
-	*ngIf="doctorAvailabilityModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
-></doctor-availability>
-
-<doctor-details
-	stop-propagation
-	(click)="doctorDetailsModalOpened$.next(false)"
-	*ngIf="doctorDetailsModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
-></doctor-details>
-
-<dashboard-appointment-details
-	stop-propagation
-	(click)="dashboardAppointmentDetailsModalOpened$.next(false)"
-	*ngIf="dashboardAppointmentDetailsModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
-></dashboard-appointment-details>
-
-<dashboard-appointment-select-doctor
-	stop-propagation
-	(click)="dashboardAppointmentSelectDoctorModalOpened$.next(false)"
-	*ngIf="dashboardAppointmentSelectDoctorModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999"
-	class="fixed w-screen h-screen flex"
-></dashboard-appointment-select-doctor>
-
-<dashboard-appointment-select-time-slot
-	stop-propagation
-	(click)="dashboardAppointmentSelectTimeSlotModalOpened$.next(false)"
-	*ngIf="dashboardAppointmentSelectTimeSlotModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999"
-	class="fixed w-screen h-screen flex"
->
-</dashboard-appointment-select-time-slot>
-
-<dashboard-appointment-confirm-reassign-slot
-	stop-propagation
-	(click)="dashboardAppointmentConfirmReassignSlotModalOpened$.next(false)"
-	*ngIf="dashboardAppointmentConfirmReassignSlotModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999"
-	class="fixed w-screen h-screen flex"
->
-</dashboard-appointment-confirm-reassign-slot>
-
-<subscription-invoices
-	stop-propagation
-	(click)="subscriptionInvoicesModalOpened$.next(false)"
-	*ngIf="subscriptionInvoicesModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
-	class="fixed w-screen h-screen flex"
->
-</subscription-invoices>
-
-<doctor-confirm-delete
-	stop-propagation
-	(click)="confirmDeleteDoctorModalOpened$.next(false)"
-	*ngIf="confirmDeleteDoctorModalOpened$ | async"
-	@fadeOut
-	style="z-index: 999"
-	class="fixed w-screen h-screen flex"
-></doctor-confirm-delete>
-
-<!-- Modals  -->
+<!-- 
+    This is should be at the bottom of all modals
+-->
+<modal-dashboard></modal-dashboard>
 
 <router-outlet></router-outlet>
 

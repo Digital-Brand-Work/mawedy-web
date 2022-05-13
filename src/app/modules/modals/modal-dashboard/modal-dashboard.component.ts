@@ -1,0 +1,36 @@
+import { Component, OnInit } from '@angular/core'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { DashboardAppointmentConfirmReassignSlotModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-confirm-reassign-slot/dashboard-appointment-confirm-reassign-slot.service'
+import { DashboardAppointmentDetailsModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
+import { DashboardAppointmentSelectDoctorModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
+import { DashboardAppointmentSelectTimeSlotModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
+import { BehaviorSubject } from 'rxjs'
+
+@Component({
+	selector: 'modal-dashboard',
+	templateUrl: './modal-dashboard.component.html',
+	styleUrls: ['./modal-dashboard.component.scss'],
+	animations: [...dbwAnimations],
+})
+export class ModalDashboardComponent implements OnInit {
+	constructor(
+		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
+		private dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
+		private dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
+		private dashboardAppointmentConfirmReassignSlotModal: DashboardAppointmentConfirmReassignSlotModal,
+	) {}
+
+	dashboardAppointmentDetailsModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentDetailsModal.opened$
+
+	dashboardAppointmentSelectDoctorModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentSelectDoctorModal.opened$
+
+	dashboardAppointmentSelectTimeSlotModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentSelectTimeSlotModal.opened$
+
+	dashboardAppointmentConfirmReassignSlotModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentConfirmReassignSlotModal.opened$
+
+	ngOnInit(): void {}
+}
