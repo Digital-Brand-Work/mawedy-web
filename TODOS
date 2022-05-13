@@ -1,4 +1,5 @@
-Separate Overrides to global
+Modal to choose Accounts
+Separate Overrides to global SCSS
 Separate Modals
 Responsive
 Responsive fixed html
@@ -10,7 +11,8 @@ NO internet
 500 Page
 404 Page
 Unauthorized Page
-Virtual Scroll 
+Virtual Scroll
+lint
 
 Fix SEO
 IndexedDb

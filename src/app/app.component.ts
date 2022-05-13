@@ -17,6 +17,7 @@ import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor
 import { SubscriptionInvoicesModal } from './modules/admin/subscriptions/modals/subscription-invoices/subscription-invoices.service'
 import { ConfirmDeleteDoctorModal } from './modules/admin/doctors/modals/doctor-confirm-delete/doctor-confirm-delete.service'
 import { EditDoctorModal } from './modules/admin/doctors/modals/doctor-edit/doctor-edit.service'
+import { DashboardAppointmentConfirmReassignSlotModal } from './modules/admin/dashboard/appointments/modals/dashboard-appointment-confirm-reassign-slot/dashboard-appointment-confirm-reassign-slot.service'
 
 @Component({
 	selector: 'app-root',
@@ -47,6 +48,7 @@ export class AppComponent {
 		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
 		private dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
 		private dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
+		private dashboardAppointmentConfirmReassignSlotModal: DashboardAppointmentConfirmReassignSlotModal,
 
 		private subscriptionInvoicesModal: SubscriptionInvoicesModal,
 	) {}
@@ -91,6 +93,9 @@ export class AppComponent {
 
 	dashboardAppointmentSelectTimeSlotModalOpened$: BehaviorSubject<boolean> =
 		this.dashboardAppointmentSelectTimeSlotModal.opened$
+
+	dashboardAppointmentConfirmReassignSlotModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentConfirmReassignSlotModal.opened$
 
 	subscriptionInvoicesModalOpened$: BehaviorSubject<boolean> =
 		this.subscriptionInvoicesModal.opened$
