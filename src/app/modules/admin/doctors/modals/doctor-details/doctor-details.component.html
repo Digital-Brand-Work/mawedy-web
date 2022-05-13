@@ -10,6 +10,7 @@
 		(onClose)="opened$.next(false)"
 	></modal-header>
 	<div
+		#scroll
 		class="px-10 py-5 bg-white"
 		style="max-height: calc(100vh - 5vh); overflow-y: scroll !important"
 	>
@@ -72,15 +73,17 @@
 		<div
 			class="w-full py-5 z border-t border-t-gray-100 flex items-center mb-5"
 		>
+			<div class="accent-color font-semibold">Take Action</div>
+
 			<button
-				class="hover:bg-emerald-600 mr-3 rounded-xl ml-auto px-7 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500 shadow-md shadow-emerald-500/50"
+				class="hover:bg-emerald-600 mr-3 rounded-xl ml-auto px-9 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500 shadow-md shadow-emerald-500/50"
 			>
 				Edit
 			</button>
 
 			<button
-				(click)="opened$.next(false)"
-				class="hover:bg-gray-50 rounded-xl px-7 py-2 font-bold border-2 border-gray-300 text-gray-400"
+				(click)="confirmDeleteDoctorModalOpened$.next(true)"
+				class="hover:bg-emerald-50 rounded-xl px-7 py-2 font-bold border-2 border-emerald-500 text-emerald-500"
 			>
 				Delete
 			</button>

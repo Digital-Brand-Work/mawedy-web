@@ -111,6 +111,15 @@
 >
 </subscription-invoices>
 
+<doctor-confirm-delete
+	stop-propagation
+	(click)="confirmDeleteDoctorModalOpened$.next(false)"
+	*ngIf="confirmDeleteDoctorModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+></doctor-confirm-delete>
+
 <!-- Modals  -->
 
 <router-outlet></router-outlet>
