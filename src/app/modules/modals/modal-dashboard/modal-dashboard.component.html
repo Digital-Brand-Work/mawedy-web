@@ -35,3 +35,15 @@
 	class="fixed w-screen h-screen flex"
 >
 </dashboard-appointment-confirm-reassign-slot>
+
+<dashboard-appointment-confirm-cancel-appointment
+	stop-propagation
+	(click)="
+		dashboardAppointmentConfirmCancelAppointmentModalOpened$.next(false)
+	"
+	*ngIf="dashboardAppointmentConfirmCancelAppointmentModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+>
+</dashboard-appointment-confirm-cancel-appointment>
