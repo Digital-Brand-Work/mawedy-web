@@ -19,6 +19,7 @@ import * as fromDashboardAppointment from '../../../store/dashboard-appointment/
 import { EffectsModule } from '@ngrx/effects'
 import { DashboardAppointmentEffects } from 'app/store/dashboard-appointment/dashboard-appointment.effects'
 import { DashboardWaitingPatientEffects } from 'app/store/dashboard-waiting-patient/dashboard-waiting-patient.effects'
+import { DashboardAppointmentCancelAndAssignSlotComponent } from './appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.component'
 
 const components = [
 	DashboardComponent,

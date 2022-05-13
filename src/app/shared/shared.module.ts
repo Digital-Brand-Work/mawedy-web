@@ -43,6 +43,7 @@ import { DashboardAppointmentConfirmCancelAppointmentComponent } from 'app/modul
 import { DashboardAppointmentConfirmReassignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-confirm-reassign-slot/dashboard-appointment-confirm-reassign-slot.component'
 import { DashboardAppointmentAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-assign-slot/dashboard-appointment-assign-slot.component'
 import { SubscriptionInvoicesComponent } from 'app/modules/admin/subscriptions/modals/subscription-invoices/subscription-invoices.component'
+import { DashboardAppointmentCancelAndAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.component'
 
 const components = [
 	SpinnerComponent,
@@ -66,6 +67,7 @@ const components = [
 	DashboardAppointmentAssignSlotComponent,
 	DashboardAppointmentSelectDoctorComponent,
 	DashboardAppointmentSelectTimeSlotComponent,
+	DashboardAppointmentCancelAndAssignSlotComponent,
 
 	DoctorAddComponent,
 	DoctorAvailabilityComponent,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { DashboardAppointmentCancelAndAssignSlotModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.service'
 import { DashboardAppointmentConfirmCancelAppointmentModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-confirm-cancel-appointment/dashboard-appointment-confirm-cancel-appointment.service'
 import { DashboardAppointmentConfirmReassignSlotModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-confirm-reassign-slot/dashboard-appointment-confirm-reassign-slot.service'
 import { DashboardAppointmentDetailsModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
@@ -20,6 +21,7 @@ export class ModalDashboardComponent implements OnInit {
 		private dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 		private dashboardAppointmentConfirmReassignSlotModal: DashboardAppointmentConfirmReassignSlotModal,
 		private dashboardAppointmentConfirmCancelAppointmentModal: DashboardAppointmentConfirmCancelAppointmentModal,
+		private dashboardAppointmentCancelAndAssignSlotModal: DashboardAppointmentCancelAndAssignSlotModal,
 	) {}
 
 	dashboardAppointmentDetailsModalOpened$: BehaviorSubject<boolean> =
@@ -36,6 +38,9 @@ export class ModalDashboardComponent implements OnInit {
 
 	dashboardAppointmentConfirmCancelAppointmentModalOpened$: BehaviorSubject<boolean> =
 		this.dashboardAppointmentConfirmCancelAppointmentModal.opened$
+
+	dashboardAppointmentCancelAndAssignSlotModalOpened$: BehaviorSubject<boolean> =
+		this.dashboardAppointmentCancelAndAssignSlotModal.opened$
 
 	ngOnInit(): void {}
 }

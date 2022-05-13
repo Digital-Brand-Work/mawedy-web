@@ -1,0 +1,49 @@
+<div
+	animateJs
+	stop-propagation
+	class="m-auto bg-white h-auto w-full md:w-1/4 rounded-xl overflow-hidden animate__flipInX animate__faster"
+>
+	<modal-header
+		modalTitle="Confirmation"
+		(onClose)="opened$.next(false)"
+	></modal-header>
+
+	<div class="px-10 py-5 h-auto bg-white">
+		<div class="flex items-center">
+			<img
+				src="/assets/app/dashboard/appointment-canceled.svg"
+				style="width: 70px; margin-right: 30px"
+				alt="Cancel Icon"
+			/>
+
+			<div class="text-2xl font-bold accent-color">
+				Appointment cancelled successfully.
+			</div>
+		</div>
+
+		<div
+			style="height: 110px"
+			class="flex items-center mt-10 relative w-full mb-5"
+		>
+			<img
+				src="/assets/app/dashboard/appointment-detail-card.svg"
+				class="absolute w-full object-contain col-span-3 z-0"
+				alt="Dashboard Details Card"
+			/>
+
+			<div
+				class="text-lg font-bold accent-color max-w-3/4 relative z-10 px-5"
+			>
+				Would you like to assign this slot to a new patient?
+			</div>
+
+			<div class="relative z-10">
+				<button
+					class="hover:bg-emerald-600 rounded-xl px-10 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500 mr-5 shadow-md shadow-emerald-500/20"
+				>
+					Yes
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
