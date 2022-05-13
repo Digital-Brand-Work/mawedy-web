@@ -63,8 +63,6 @@
 							"crypto-js/enc-base64"
 						],
 						"assets": [
-							"src/favicon-16x16.png",
-							"src/favicon-32x32.png",
 							"src/assets",
 							"src/robots.txt",
 							"src/sitemap.xml",
@@ -75,7 +73,11 @@
 							}
 						],
 						"stylePreprocessorOptions": {
-							"includePaths": ["src/@fuse/styles"]
+							"includePaths": [
+								"src/@fuse/styles",
+								"src/styles/overrides/fuse.override.scss",
+								"src/styles/overrides/material.override.scss"
+							]
 						},
 						"styles": [
 							"src/@fuse/styles/tailwind.scss",
@@ -83,7 +85,9 @@
 							"src/styles/vendors.scss",
 							"src/@fuse/styles/main.scss",
 							"src/styles/styles.scss",
-							"src/styles/tailwind.scss"
+							"src/styles/tailwind.scss",
+							"src/styles/overrides/fuse.override.scss",
+							"src/styles/overrides/material.override.scss"
 						],
 						"scripts": []
 					},
@@ -151,7 +155,11 @@
 							"src/favicon-32x32.png",
 							"src/assets"
 						],
-						"styles": ["src/styles/styles.scss"],
+						"styles": [
+							"src/styles/styles.scss",
+							"src/styles/overrides/fuse.override.scss",
+							"src/styles/overrides/material.override.scss"
+						],
 						"scripts": []
 					}
 				},
@@ -168,7 +176,11 @@
 						"main": "server.ts",
 						"tsConfig": "tsconfig.server.json",
 						"stylePreprocessorOptions": {
-							"includePaths": ["src/@fuse/styles"]
+							"includePaths": [
+								"src/@fuse/styles",
+								"src/styles/overrides/fuse.override.scss",
+								"src/styles/overrides/material.override.scss"
+							]
 						},
 						"inlineStyleLanguage": "scss"
 					},
