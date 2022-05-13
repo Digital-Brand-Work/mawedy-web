@@ -76,6 +76,7 @@
 			<div class="accent-color font-semibold">Take Action</div>
 
 			<button
+				(click)="editDoctorModalOpened$.next(true); opened$.next(false)"
 				class="hover:bg-emerald-600 mr-3 rounded-xl ml-auto px-9 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500 shadow-md shadow-emerald-500/50"
 			>
 				Edit

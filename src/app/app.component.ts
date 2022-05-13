@@ -16,6 +16,7 @@ import { AddPatientModal } from './modules/admin/patients/modals/patient-add/pat
 import { AddDoctorModal } from './modules/admin/doctors/modals/doctor-add/doctor-add.service'
 import { SubscriptionInvoicesModal } from './modules/admin/subscriptions/modals/subscription-invoices/subscription-invoices.service'
 import { ConfirmDeleteDoctorModal } from './modules/admin/doctors/modals/doctor-confirm-delete/doctor-confirm-delete.service'
+import { EditDoctorModal } from './modules/admin/doctors/modals/doctor-edit/doctor-edit.service'
 
 @Component({
 	selector: 'app-root',
@@ -38,6 +39,7 @@ export class AppComponent {
 		private addPatientModal: AddPatientModal,
 
 		private addDoctorModal: AddDoctorModal,
+		private editDoctorModal: EditDoctorModal,
 		private doctorDetailsModal: DoctorDetailsModal,
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
 		private confirmDeleteDoctorModal: ConfirmDeleteDoctorModal,
@@ -68,6 +70,9 @@ export class AppComponent {
 
 	addDoctorModalOpened$: BehaviorSubject<boolean> =
 		this.addDoctorModal.opened$
+
+	editDoctorModalOpened$: BehaviorSubject<boolean> =
+		this.editDoctorModal.opened$
 
 	confirmDeleteDoctorModalOpened$: BehaviorSubject<boolean> =
 		this.confirmDeleteDoctorModal.opened$

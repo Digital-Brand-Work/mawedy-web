@@ -9,6 +9,7 @@ import {
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 import { DoctorDetailsModal } from './doctor-details.service'
 import { ConfirmDeleteDoctorModal } from '../doctor-confirm-delete/doctor-confirm-delete.service'
+import { EditDoctorModal } from '../doctor-edit/doctor-edit.service'
 
 @Component({
 	selector: 'doctor-details',
@@ -20,6 +21,7 @@ export class DoctorDetailsComponent implements OnInit {
 	constructor(
 		private doctorDetailsModal: DoctorDetailsModal,
 		private confirmDeleteDoctorModal: ConfirmDeleteDoctorModal,
+		private editDoctorModal: EditDoctorModal,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -33,6 +35,9 @@ export class DoctorDetailsComponent implements OnInit {
 
 	confirmDeleteDoctorModalOpened$: BehaviorSubject<boolean> =
 		this.confirmDeleteDoctorModal.opened$
+
+	editDoctorModalOpened$: BehaviorSubject<boolean> =
+		this.editDoctorModal.opened$
 
 	unsubscribe: Subject<any> = new Subject()
 
