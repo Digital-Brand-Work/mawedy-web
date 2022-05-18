@@ -1,14 +1,38 @@
+import { ClinicSubscriptionTypeEnum } from './../enums/clinic-subscription-type.enum'
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
-import { clinicSubscriptionTypes } from '../enums/clinic-subscription-type.enum'
 
-export class StoreLoginRule {
+export interface RegisterRule {
+	name: (string | ((control: AbstractControl) => ValidationErrors))[]
+	address: (string | ((control: AbstractControl) => ValidationErrors))[]
+	email: (string | ((control: AbstractControl) => ValidationErrors))[]
+	phone_number_one_country_code: (
+		| string
+		| ((control: AbstractControl) => ValidationErrors)
+	)[]
+	phone_number_one: (
+		| string
+		| ((control: AbstractControl) => ValidationErrors)
+	)[]
+	subscription_type: (
+		| string
+		| ((control: AbstractControl) => ValidationErrors)
+	)[]
+	accounts?: (string | ((control: AbstractControl) => ValidationErrors))[][]
+	urls?: {
+		success: string
+		cancel: string
+	}
+	trade_license_photo?: File
+}
+
+export class StoreRegisterRule {
 	form: RegisterRule = {
 		name: ['', Validators.required, Validators.maxLength(255)],
 		address: ['', Validators.required, Validators.maxLength(255)],
 		email: ['', Validators.required, Validators.maxLength(255)],
 		phone_number_one_country_code: ['AE'],
 		phone_number_one: [''],
-		subscription_type: [clinicSubscriptionTypes[0]],
+		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
 	}
 
 	setAccounts(number: number): void {
@@ -34,7 +58,7 @@ export class StoreLoginRule {
 		this.form.trade_license_photo = photo
 	}
 
-	getFormData(): FormData {
+	toFromData(): FormData {
 		let form = new FormData()
 
 		const exclude = ['urls', 'accounts']
@@ -60,28 +84,4 @@ export class StoreLoginRule {
 
 		return form
 	}
-}
-
-export interface RegisterRule {
-	name: (string | ((control: AbstractControl) => ValidationErrors))[]
-	address: (string | ((control: AbstractControl) => ValidationErrors))[]
-	email: (string | ((control: AbstractControl) => ValidationErrors))[]
-	phone_number_one_country_code: (
-		| string
-		| ((control: AbstractControl) => ValidationErrors)
-	)[]
-	phone_number_one: (
-		| string
-		| ((control: AbstractControl) => ValidationErrors)
-	)[]
-	subscription_type: (
-		| string
-		| ((control: AbstractControl) => ValidationErrors)
-	)[]
-	accounts?: (string | ((control: AbstractControl) => ValidationErrors))[][]
-	urls?: {
-		success: string
-		cancel: string
-	}
-	trade_license_photo?: File
 }

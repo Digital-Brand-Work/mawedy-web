@@ -2,8 +2,24 @@ import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
 import { Department } from 'app/store/department/department.model'
 import { TimeSlot } from 'app/store/doctor/doctor.model'
 
-export class StoreLoginRule {
-	form: StoreDoctorRule = {
+export interface DoctorRule {
+	name: (string | ((control: AbstractControl) => ValidationErrors))[]
+	profession: (string | ((control: AbstractControl) => ValidationErrors))[]
+	experience: (string | ((control: AbstractControl) => ValidationErrors))[]
+	about: (string | ((control: AbstractControl) => ValidationErrors))[]
+	phone_number: (string | ((control: AbstractControl) => ValidationErrors))[]
+	phone_country_code: (
+		| string
+		| ((control: AbstractControl) => ValidationErrors)
+	)[]
+	email: (string | ((control: AbstractControl) => ValidationErrors))[]
+	timeslots?: TimeSlot[]
+	departments?: Department[]
+	picture?: File
+}
+
+export class StoreDoctorRule {
+	form: DoctorRule = {
 		name: ['', Validators.required, Validators.maxLength(20)],
 		profession: ['', Validators.required, Validators.maxLength(20)],
 		experience: ['', Validators.required, Validators.maxLength(3)],
@@ -33,7 +49,7 @@ export class StoreLoginRule {
 		this.form.picture = picture
 	}
 
-	getFormData(): FormData {
+	toFromData(): FormData {
 		let form = new FormData()
 
 		const exclude = ['timeslots', 'departments']
@@ -48,20 +64,4 @@ export class StoreLoginRule {
 
 		return form
 	}
-}
-
-export interface StoreDoctorRule {
-	name: (string | ((control: AbstractControl) => ValidationErrors))[]
-	profession: (string | ((control: AbstractControl) => ValidationErrors))[]
-	experience: (string | ((control: AbstractControl) => ValidationErrors))[]
-	about: (string | ((control: AbstractControl) => ValidationErrors))[]
-	phone_number: (string | ((control: AbstractControl) => ValidationErrors))[]
-	phone_country_code: (
-		| string
-		| ((control: AbstractControl) => ValidationErrors)
-	)[]
-	email: (string | ((control: AbstractControl) => ValidationErrors))[]
-	timeslots?: TimeSlot[]
-	departments?: Department[]
-	picture?: File
 }

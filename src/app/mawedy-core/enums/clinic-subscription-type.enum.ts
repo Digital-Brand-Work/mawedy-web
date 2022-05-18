@@ -1,8 +1,8 @@
 export enum ClinicSubscriptionTypeEnum {
-	PENDING = 'Pending',
-	CONFIRMED = 'Confirmed',
-	CANCELLED = 'Cancelled',
-	DONE = 'Done',
+	FREE = 'Free',
+	STANDARD = 'Standard',
+	GOLDEN = 'Golden',
+	PLATINUM = 'Platinum',
 }
 
 export const clinicSubscriptionTypes = Object.keys(ClinicSubscriptionTypeEnum)
