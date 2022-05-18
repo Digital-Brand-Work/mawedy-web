@@ -50,6 +50,8 @@ export class UserComponent implements OnInit, OnDestroy {
 		this._unsubscribeAll.complete()
 	}
 
+	identity = (item: any) => item
+
 	updateUserStatus(status: string): void {
 		if (!this.user) {
 			return

@@ -1,6 +1,19 @@
+import { slugify } from '@digital_brand_work/helpers/helpers'
 import { FuseNavigationItem } from '@fuse/components/navigation'
+import { map, of, zip } from 'rxjs'
 
-const clinic = 'aster_clinic'
+let clinic: string = ''
+
+let branch: string = ''
+
+const clinic$ = of('Aster Clinic')
+
+const branch$ = of('Jumeirah')
+
+zip(clinic$, branch$).subscribe((observable: string[]) => {
+	clinic = slugify(observable[0])
+	branch = slugify(observable[1])
+})
 
 export const onTrialUser: FuseNavigationItem[] = []
 
@@ -14,48 +27,48 @@ export const platinumUser: FuseNavigationItem[] = [
 		title: 'Dashboard',
 		type: 'basic',
 		icon: 'dashboard',
-		link: `/${clinic}/dashboard`,
+		link: `/${clinic}/${branch}/dashboard`,
 	},
 	{
 		id: '2',
 		title: 'Appointments',
 		type: 'basic',
 		icon: 'alarm',
-		link: `/${clinic}/appointments`,
+		link: `/${clinic}/${branch}/appointments`,
 	},
 	{
 		id: '3',
 		title: 'Doctor Profile',
 		type: 'basic',
 		icon: 'earbuds',
-		link: `/${clinic}/doctors`,
+		link: `/${clinic}/${branch}/doctors`,
 	},
 	{
 		id: '4',
 		title: 'Patients',
 		type: 'basic',
 		icon: 'group',
-		link: `/${clinic}/patients`,
+		link: `/${clinic}/${branch}/patients`,
 	},
 	{
 		id: '5',
 		title: 'Clinic Profile',
 		type: 'basic',
 		icon: 'room_preferences',
-		link: `/${clinic}/clinic`,
+		link: `/${clinic}/${branch}/clinic`,
 	},
 	{
 		id: '6',
 		title: 'Promotions',
 		type: 'basic',
 		icon: 'label',
-		link: `/${clinic}/promotions`,
+		link: `/${clinic}/${branch}/promotions`,
 	},
 	{
 		id: '7',
 		title: 'Subscription',
 		type: 'basic',
 		icon: 'notifications_active',
-		link: `/${clinic}/subscription`,
+		link: `/${clinic}/${branch}/subscription`,
 	},
 ]

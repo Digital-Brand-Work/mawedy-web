@@ -12,7 +12,7 @@ export const routes: Route[] = [
 			),
 	},
 	{
-		path: ':clinic_name',
+		path: ':clinic_name/:branch',
 		component: LayoutComponent,
 		resolve: {
 			initialData: InitialDataResolver,
