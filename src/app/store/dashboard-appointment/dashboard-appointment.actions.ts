@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store'
 import { Update } from '@ngrx/entity'
-
 import { DashboardAppointment } from './dashboard-appointment.model'
 
 export const loadDashboardAppointments = createAction(

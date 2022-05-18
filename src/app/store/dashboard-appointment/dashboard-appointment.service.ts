@@ -7,7 +7,7 @@ import { DashboardAppointment } from './dashboard-appointment.model'
 @Injectable({ providedIn: 'root' })
 export class DashboardAppointmentService extends BaseService<DashboardAppointment> {
 	constructor(http: HttpClient) {
-		super(http, 'patients')
+		super(http, 'appointments')
 	}
 
 	current$: BehaviorSubject<DashboardAppointment | null> =

@@ -2,14 +2,14 @@ import { BehaviorSubject } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { BaseService } from '../../../@digital_brand_work/api/base.api'
 import { Injectable } from '@angular/core'
-import { Promotion } from './promotion.model'
+import { Department } from './department.model'
 
 @Injectable({ providedIn: 'root' })
-export class PromotionServiceService extends BaseService<Promotion> {
+export class DepartmentService extends BaseService<Department> {
 	constructor(http: HttpClient) {
-		super(http, 'promotions')
+		super(http, 'departments')
 	}
 
-	current$: BehaviorSubject<Promotion | null> =
-		new BehaviorSubject<Promotion | null>(null)
+	current$: BehaviorSubject<Department | null> =
+		new BehaviorSubject<Department | null>(null)
 }

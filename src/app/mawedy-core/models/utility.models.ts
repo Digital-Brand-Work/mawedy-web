@@ -1,3 +1,4 @@
+import { PHPBaseModel } from './../../../@digital_brand_work/models/core.model'
 export interface Alert {
 	id: string
 	title: string
@@ -9,4 +10,13 @@ export interface SubscriptionFeatures {
 	standard: string[]
 	golden: string[]
 	platinum: string[]
+}
+
+export interface File extends PHPBaseModel {
+	type: string
+	name: string
+	url: string
+	size: string
+	path: string
+	driver: string
 }
