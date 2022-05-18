@@ -51,15 +51,8 @@ import { ModalModule } from './modules/modals/modal.module'
 		/*
 		    Mawedy Modules
 		*/
-		DashboardModule,
-		AppointmentsModule,
-		DoctorsModule,
-		PatientsModule,
-		ClinicModule,
-		PromotionsModule,
-		SubscriptionsModule,
-		ModalModule,
 		SharedModule,
+		ModalModule,
 	],
 
 	bootstrap: [AppComponent],

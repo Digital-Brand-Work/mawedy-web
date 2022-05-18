@@ -1,17 +1,17 @@
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
 import { clinicSubscriptionTypes } from '../enums/clinic-subscription-type.enum'
 
-export class Register {
-	form: RegisterRequest = {
+export class StoreLoginRule {
+	form: RegisterRule = {
 		name: ['', Validators.required, Validators.maxLength(255)],
 		address: ['', Validators.required, Validators.maxLength(255)],
 		email: ['', Validators.required, Validators.maxLength(255)],
-		phone_number_one_country_code: [''],
+		phone_number_one_country_code: ['AE'],
 		phone_number_one: [''],
 		subscription_type: [clinicSubscriptionTypes[0]],
 	}
 
-	setAccounts = (number: number): void => {
+	setAccounts(number: number): void {
 		let accounts = []
 
 		for (let i = 0; i <= number; i++) {
@@ -23,7 +23,7 @@ export class Register {
 		this.form.accounts = accounts
 	}
 
-	setUrl = (success: string, cancel: string): void => {
+	setUrl(success: string, cancel: string): void {
 		this.form.urls = {
 			success: success,
 			cancel: cancel,
@@ -52,7 +52,7 @@ export class Register {
 		this.form.accounts.forEach((account: any, index: number) => {
 			for (let key in account) {
 				form.append(
-					`accounts[${index}]s[${key}]`,
+					`accounts[${index}][${key}]`,
 					this.form.accounts[index][key],
 				)
 			}
@@ -62,7 +62,7 @@ export class Register {
 	}
 }
 
-export interface RegisterRequest {
+export interface RegisterRule {
 	name: (string | ((control: AbstractControl) => ValidationErrors))[]
 	address: (string | ((control: AbstractControl) => ValidationErrors))[]
 	email: (string | ((control: AbstractControl) => ValidationErrors))[]

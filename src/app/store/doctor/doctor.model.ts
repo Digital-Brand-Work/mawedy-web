@@ -12,7 +12,7 @@ export interface Doctor extends PHPBaseModel {
 	email: string
 }
 
-export interface Timeslot extends PHPBaseModel {
+export interface TimeSlot extends PHPBaseModel {
 	day: DayEnum
 	start: Date
 	end: Date
