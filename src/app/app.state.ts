@@ -6,6 +6,8 @@ import * as fromPromotion from './store/promotion/promotion.reducer'
 import * as fromAppointment from './store/appointment/appointment.reducer'
 import * as fromDashboardWaitingPatient from './store/dashboard-waiting-patient/dashboard-waiting-patient.reducer'
 import * as fromDashboardAppointment from './store/dashboard-appointment/dashboard-appointment.reducer'
+import * as fromDepartment from './store/department/department.reducer'
+import * as fromMedicalService from './store/medical-service/medical-service.reducer'
 
 export interface State {
 	[fromDoctor.doctorsFeatureKey]: fromDoctor.State
@@ -19,6 +21,10 @@ export interface State {
 	[fromDashboardWaitingPatient.dashboardWaitingPatientsFeatureKey]: fromDashboardWaitingPatient.State
 
 	[fromDashboardAppointment.dashboardAppointmentsFeatureKey]: fromDashboardAppointment.State
+
+	[fromDepartment.departmentsFeatureKey]: fromDepartment.State
+
+	[fromMedicalService.medicalServicesFeatureKey]: fromMedicalService.State
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -35,6 +41,10 @@ export const reducers: ActionReducerMap<State> = {
 
 	[fromDashboardAppointment.dashboardAppointmentsFeatureKey]:
 		fromDashboardAppointment.reducer,
+
+	[fromDepartment.departmentsFeatureKey]: fromDepartment.reducer,
+
+	[fromMedicalService.medicalServicesFeatureKey]: fromMedicalService.reducer,
 }
 
 export const metaReducers: MetaReducer<State>[] = !environment.production
