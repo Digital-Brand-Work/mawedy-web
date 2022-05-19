@@ -1,20 +1,49 @@
-<div class="min-h-screen w-full flex items-center justify-center relative">
+<div
+	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
+	class="w-full flex items-center justify-center relative"
+>
 	<img
+		[ngClass]="{
+			' h-screen ':
+				(breakpoint$ | async) !== 'tablet' &&
+				(breakpoint$ | async) !== 'phone'
+		}"
 		src="../../../../../assets/app/home/home-section.jpg"
-		class="w-screen h-screen object-cover md:object-fill absolute top-0 z-0"
+		class="w-screen h-full object-cover absolute top-0 z-0"
 		alt=""
 	/>
 
 	<div
 		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
 	>
-		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20">
-			<div class="flex md:justify-center w-full min-h-screen px-5">
-				<div class="flex-col flex my-auto">
+		<div
+			[ngClass]="{
+				'pb-20': (breakpoint$ | async) === 'tablet'
+			}"
+			class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20"
+		>
+			<div
+				[ngClass]="{
+					'min-h-screen': (breakpoint$ | async) !== 'tablet'
+				}"
+				class="flex md:justify-center w-full px-5"
+			>
+				<div
+					class="flex-col flex my-auto"
+					[ngClass]="{
+						'mt-40 ': (breakpoint$ | async) === 'tablet'
+					}"
+				>
 					<div
-						*ngIf="true"
+						[ngClass]="{
+							'text-5xl': (breakpoint$ | async) === 'phone',
+							'text-8xl ': (breakpoint$ | async) === 'tablet',
+							'text-9xl':
+								(breakpoint$ | async) !== 'phone' &&
+								(breakpoint$ | async) !== 'tablet'
+						}"
 						@expandCollapse
-						class="text-6xl md:text-9xl text-white font-bold leading-none text-center md:text-left"
+						class="text-white font-bold leading-none text-center md:text-left"
 					>
 						Clinic Appointments made easy.
 					</div>
@@ -27,16 +56,26 @@
 
 					<div
 						[@listAnimation]="2"
-						class="flex flex-col md:flex-row mt-10"
+						[ngClass]="{
+							'flex-col': (breakpoint$ | async) === 'phone',
+							'justify-center items-center':
+								(breakpoint$ | async) === 'tablet'
+						}"
+						class="flex mt-10"
 					>
 						<div
+							[ngClass]="{
+								'my-5': (breakpoint$ | async) === 'phone',
+								'mr-10': (breakpoint$ | async) === 'tablet'
+							}"
 							role="button"
-							class="rounded-lg px-3 pr-5 py-3 bg-emerald-900 hover:bg-black flex items-center whitespace-nowrap md:mr-2"
+							class="rounded-lg px-3 pr-5 py-3 bg-emerald-900 hover:bg-black flex items-center whitespace-nowrap md:mr-2 justify-center"
 						>
 							<img
-								class="h-12 mr-4 max-w-22"
-								src="../../../../../assets/app/home/google-play.svg"
-								alt="Google Play Logo"
+								class="h-12 mr-4 max-w-10"
+								src="../../../../../assets/app/home/apple.svg"
+								style="filter: invert(100%)"
+								alt="Apple Logo"
 							/>
 
 							<div class="text-white">
@@ -55,13 +94,12 @@
 
 						<div
 							role="button"
-							class="rounded-lg px-3 pr-5 py-3 bg-emerald-900 hover:bg-black flex items-center whitespace-nowrap mt-2 md:mt-0"
+							class="rounded-lg px-3 pr-5 py-3 bg-emerald-900 hover:bg-black flex items-center whitespace-nowrap md:mt-0 justify-center"
 						>
 							<img
-								class="h-12 mr-4 max-w-22"
-								src="../../../../../assets/app/home/apple.svg"
-								style="filter: invert(100%)"
-								alt="Apple Logo"
+								class="h-12 mr-4 max-w-10"
+								src="../../../../../assets/app/home/google-play.svg"
+								alt="Google Play Logo"
 							/>
 
 							<div class="text-white">
@@ -83,7 +121,7 @@
 
 			<div class="flex md:items-center md:justify-center w-full">
 				<home-section1-login-panel
-					class="md:w-3/4 w-full"
+					class="md:w-3/4 hidden md:block w-full"
 				></home-section1-login-panel>
 			</div>
 		</div>

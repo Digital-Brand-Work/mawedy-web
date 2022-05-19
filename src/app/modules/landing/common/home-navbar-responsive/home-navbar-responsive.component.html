@@ -1,14 +1,22 @@
 <div class="w-full text-black fixed z-49 bg-white">
 	<div
-		class="items-center flex justify-center w-full"
+		class="items-center flex justify-start w-full"
 		style="transition: 0.2s cubic-bezier(0.4, 0, 0.6, 1)"
 	>
 		<div
-			class="max-w-screen-2xl py-4 w-full font-medium px-5 flex items-center"
+			class="max-w-screen-2xl w-full font-medium px-5 pl-0 flex items-center justify-start"
 		>
-			<a (click)="showNav$.next(false)" routerLink="/">
-				<img src="/assets/app/logo.svg" class="h-14" alt="" />
-			</a>
+			<div
+				class="flex items-start justify-start mr-auto"
+				(click)="showNav$.next(false)"
+				routerLink="/"
+			>
+				<img
+					src="/assets/app/logo.svg"
+					class="h-20 mr-auto"
+					alt="Mawedy Logo"
+				/>
+			</div>
 
 			<div
 				(click)="showNav$.next(true)"
@@ -32,19 +40,27 @@
 
 	<div
 		*ngIf="showNav$ | async"
-		@fadeInBottom
-		@fadeOutBottom
+		@slideInBottom
+		@slideOutBottom
 		class="w-full z-100 block backdrop-blur-md min-h-screen"
 		style="animation-duration: 0.4s"
 	>
-		<ul class="px-5 text-xl font-light">
+		<ul class="px-8 text-xl font-light">
 			<li
+				[class.hidden]="nav.name === 'AR'"
 				[routerLink]="nav.link"
 				(click)="showNav$.next(false)"
-				class="py-3 border-b border-zinc-100 text-md tracking-wider"
+				class="py-3 border-b border-zinc-100 tracking-wider text-2xl font-medium accent-color flex items-center"
 				*ngFor="let nav of navigation; let i = index"
 			>
-				{{ nav.name }}
+				<div>{{ nav.name }}</div>
+
+				<div class="ml-auto">
+					<mat-icon
+						class="accent-color"
+						svgIcon="heroicons_solid:chevron-right"
+					></mat-icon>
+				</div>
 			</li>
 		</ul>
 	</div>
