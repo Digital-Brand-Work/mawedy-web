@@ -1,0 +1,22 @@
+<div
+	[ngClass]="{
+		'my-5': (breakpoint$ | async) === 'phone',
+		'mr-10': (breakpoint$ | async) === 'tablet'
+	}"
+	role="button"
+	class="rounded-lg px-3 pr-5 py-3 bg-neutral-900/80 backdrop-blur-xl hover:bg-black flex items-center whitespace-nowrap md:mr-2 justify-center"
+>
+	<img
+		class="h-12 mr-4 max-w-10"
+		src="../../../../../assets/app/home/apple.svg"
+		style="filter: invert(100%)"
+		alt="Apple Logo"
+	/>
+
+	<div class="text-white">
+		<div class="font-light tracking-wider uppercase text-xs">
+			Download on the
+		</div>
+		<div class="font-semibold tracking-wide text-3xl">App Store</div>
+	</div>
+</div>

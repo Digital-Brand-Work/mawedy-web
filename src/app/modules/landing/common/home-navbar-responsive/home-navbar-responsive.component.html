@@ -1,13 +1,13 @@
-<div class="w-full text-black fixed z-49 bg-white">
+<div class="w-full fixed text-black z-49 bg-white">
 	<div
 		class="items-center flex justify-start w-full"
 		style="transition: 0.2s cubic-bezier(0.4, 0, 0.6, 1)"
 	>
 		<div
-			class="max-w-screen-2xl w-full font-medium px-5 pl-0 flex items-center justify-start"
+			class="max-w-screen-2xl w-full font-medium px-5 flex items-center justify-start"
 		>
 			<div
-				class="flex items-start justify-start mr-auto"
+				class="flex items-start justify-start mr-auto w-20"
 				(click)="showNav$.next(false)"
 				routerLink="/"
 			>
@@ -20,12 +20,12 @@
 
 			<div
 				(click)="showNav$.next(true)"
-				class="ml-auto"
+				class="ml-auto px-4 py-2 rounded-full bg-emerald-400/40 flex items-center justify-center"
 				@fadeInRight
 				*ngIf="!(showNav$ | async)"
 			>
 				<mat-icon
-					class="icon-size-8 accent-color"
+					class="icon-size-5 text-emerald-700"
 					svgIcon="feather:menu"
 				></mat-icon>
 			</div>
@@ -69,5 +69,14 @@
 				</div>
 			</li>
 		</ul>
+
+		<div class="flex items-center justify-center mt-40">
+			<button
+				mat-button
+				class="bg-emerald-500 text-lg text-white rounded-full shadow-md shadow-emerald-500/20 px-10 py-6 font-normal hover:bg-emerald-600/90 mx-8 items-center justify-center"
+			>
+				Sign-in
+			</button>
+		</div>
 	</div>
 </div>
