@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity'
 import { Department } from './department.model'
-import * as DepartmentActions from './Department.actions'
+import * as DepartmentActions from './department.actions'
 
 export const departmentsFeatureKey = 'department'
 

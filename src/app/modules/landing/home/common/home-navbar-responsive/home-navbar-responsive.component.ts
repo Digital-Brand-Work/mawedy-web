@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BehaviorSubject, map, Subscription, tap } from 'rxjs'
-import { HomeNav, homeNavigation } from '../../../../navigation/home.navigation'
+import {
+	HomeNav,
+	homeNavigation,
+} from '../../../../../navigation/landing.navigation'
 
 @Component({
 	selector: 'home-navbar-responsive',

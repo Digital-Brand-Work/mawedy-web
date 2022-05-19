@@ -27,6 +27,7 @@ import { environment } from '../environments/environment'
 import { EffectsModule } from '@ngrx/effects'
 import { effects } from './app-effect.effects'
 import { ModalModule } from './modules/modals/modal.module'
+import { PagesModule } from './modules/pages/pages.module'
 
 @NgModule({
 	declarations: [AppComponent],
@@ -53,6 +54,7 @@ import { ModalModule } from './modules/modals/modal.module'
 		*/
 		SharedModule,
 		ModalModule,
+		PagesModule,
 	],
 
 	bootstrap: [AppComponent],

@@ -8,7 +8,7 @@ export const homeNavigation: HomeNav[] = [
 	{
 		id: 1,
 		name: 'About us',
-		link: '',
+		link: 'about-us',
 	},
 	{
 		id: 2,
@@ -18,12 +18,12 @@ export const homeNavigation: HomeNav[] = [
 	{
 		id: 3,
 		name: 'Join us',
-		link: '',
+		link: 'join-us',
 	},
 	{
 		id: 4,
 		name: 'Talk to us',
-		link: '',
+		link: 'talk-to-us',
 	},
 	{
 		id: 5,

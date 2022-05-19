@@ -8,7 +8,19 @@ export const landingHomeRoutes: Route[] = [
 		component: LandingHomeComponent,
 	},
 	{
+		path: 'about-us',
+		component: PartnerWithUsComponent,
+	},
+	{
 		path: 'partner-with-us',
+		component: PartnerWithUsComponent,
+	},
+	{
+		path: 'join-us',
+		component: PartnerWithUsComponent,
+	},
+	{
+		path: 'talk-to-us',
 		component: PartnerWithUsComponent,
 	},
 ]

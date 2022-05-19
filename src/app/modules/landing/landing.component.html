@@ -1,0 +1,17 @@
+<home-navbar
+	*ngIf="
+		(breakpoint$ | async)! === 'laptop' ||
+		(breakpoint$ | async)! === 'desktop' ||
+		(breakpoint$ | async)! === 'max'
+	"
+></home-navbar>
+
+<home-navbar-responsive
+	*ngIf="
+		(breakpoint$ | async)! === 'phone' ||
+		(breakpoint$ | async)! === 'tablet'
+	"
+>
+</home-navbar-responsive>
+
+<router-outlet></router-outlet>
