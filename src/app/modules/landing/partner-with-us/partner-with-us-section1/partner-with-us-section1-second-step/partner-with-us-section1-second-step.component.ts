@@ -9,6 +9,7 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { clinicSubscriptionTypes } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
 
 @Component({
 	selector: 'partner-with-us-section1-second-step',
@@ -23,14 +24,16 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 
 	@Input() step: 'one' | 'two' = 'one'
 
-	@ViewChild('input') input?: ElementRef
+	@ViewChild('input') input: ElementRef
+
+	subscriptionTypes: string[] = clinicSubscriptionTypes
 
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
-		this.cdr.detectChanges()
+		this.input.nativeElement.focus()
 
-		this.input?.nativeElement.focus()
+		this.cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {

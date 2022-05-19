@@ -5,12 +5,10 @@
 		</div>
 
 		<select
+			#input
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		>
-			<option>Free</option>
-			<option>Standard</option>
-			<option>Golden</option>
-			<option>Platinum</option>
+			<option *ngFor="let item of subscriptionTypes">{{ item }}</option>
 		</select>
 
 		<div class="text-sm text-rose-500">Subscription is required.</div>

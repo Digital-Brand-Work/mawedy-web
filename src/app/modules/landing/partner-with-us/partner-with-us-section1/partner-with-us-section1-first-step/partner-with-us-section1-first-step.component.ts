@@ -1,4 +1,3 @@
-import { takeUntil } from 'rxjs/operators'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -36,13 +35,17 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	ngAfterContentInit(): void {
-		this.input?.nativeElement.focus()
+	ngAfterViewInit(): void {
+		this.input.nativeElement.focus()
+
+		this.cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
 		this.unsubscribe.next(null)
 
 		this.unsubscribe.complete()
+
+		this.cdr.detach()
 	}
 }

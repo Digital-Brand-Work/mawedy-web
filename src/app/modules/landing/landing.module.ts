@@ -9,8 +9,6 @@ import { HomeSection3Component } from './home/home-section3/home-section3.compon
 import { HomeSection4Component } from './home/home-section4/home-section4.component'
 import { HomeSection5Component } from './home/home-section5/home-section5.component'
 import { HomeSection1LoginPanelComponent } from './home/home-section1/home-section1-login-panel/home-section1-login-panel.component'
-import { HomeSection2FirstStepComponent } from './home/home-section2/home-section2-first-step/home-section2-first-step.component'
-import { HomeSection2SecondStepComponent } from './home/home-section2/home-section2-second-step/home-section2-second-step.component'
 import { HomeNavbarComponent } from './common/home-navbar/home-navbar.component'
 import { HomeNavbarResponsiveComponent } from './common/home-navbar-responsive/home-navbar-responsive.component'
 import { PartnerWithUsComponent } from './partner-with-us/partner-with-us.component'
@@ -20,8 +18,8 @@ import { PartnerWithUsSection3Component } from './partner-with-us/partner-with-u
 import { AboutUsComponent } from './about-us/about-us.component'
 import { JoinUsComponent } from './join-us/join-us.component'
 import { TalkToUsComponent } from './talk-to-us/talk-to-us.component'
-import { LandingComponent } from './landing.component';
-import { PartnerWithUsSection1FirstStepComponent } from './partner-with-us/partner-with-us-section1/partner-with-us-section1-first-step/partner-with-us-section1-first-step.component';
+import { LandingComponent } from './landing.component'
+import { PartnerWithUsSection1FirstStepComponent } from './partner-with-us/partner-with-us-section1/partner-with-us-section1-first-step/partner-with-us-section1-first-step.component'
 import { PartnerWithUsSection1SecondStepComponent } from './partner-with-us/partner-with-us-section1/partner-with-us-section1-second-step/partner-with-us-section1-second-step.component'
 
 const components = [
@@ -37,8 +35,6 @@ const components = [
 	HomeSection4Component,
 	HomeSection5Component,
 	HomeSection1LoginPanelComponent,
-	HomeSection2FirstStepComponent,
-	HomeSection2SecondStepComponent,
 
 	PartnerWithUsComponent,
 	PartnerWithUsSection1Component,
@@ -50,7 +46,11 @@ const components = [
 	TalkToUsComponent,
 ]
 @NgModule({
-	declarations: [...components, PartnerWithUsSection1FirstStepComponent, PartnerWithUsSection1SecondStepComponent],
+	declarations: [
+		...components,
+		PartnerWithUsSection1FirstStepComponent,
+		PartnerWithUsSection1SecondStepComponent,
+	],
 	imports: [RouterModule.forChild(landingHomeRoutes), SharedModule],
 	exports: [...components],
 })

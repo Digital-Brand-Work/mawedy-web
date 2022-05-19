@@ -1,27 +1,40 @@
 <div
-	class="min-h-screen w-full flex items-center justify-center relative bg-white py-20"
+	class="min-h-screen w-full flex flex-col items-center justify-center relative py-20 md:py-0"
 >
-	<div
-		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
-	>
-		<div
-			class="w-full grid md:grid-cols-2 md:gap-x-5 grid-cols-1 items-center"
-		>
-			<home-section2-first-step
-				[ngClass]="{ 'opacity-50 pointer-events-none': step === 'two' }"
-				(onNext)="step = 'two'"
-				[step]="step"
-				[focus$]="focus$"
-			></home-section2-first-step>
+	<div class="text-gray-700 font-extrabold text-6xl">Features</div>
 
-			<home-section2-second-step
-				@fadeInRight
-				@fadeOutRight
-				class="w-full"
-				*ngIf="step === 'two'"
-				(onBack)="step = 'one'; focus$.next(true)"
-				[step]="step"
-			></home-section2-second-step>
+	<div
+		class="max-w-screen-xl w-full flex items-center justify-center relative z-20 md:mt-32"
+	>
+		<div class="grid md:grid-cols-3 md:gap-20 gap-y-20 text-center">
+			<div class="flex flex-col items-center px-10">
+				<div class="rounded-full bg-emerald-500 h-20 w-20"></div>
+
+				<div class="text-3xl font-bold my-5">
+					Additional revenue stream
+				</div>
+
+				<div class="text-sm text-gray-500 px-10">{{ description }}</div>
+			</div>
+
+			<div class="flex flex-col items-center px-10">
+				<div
+					class="rounded-full bg-emerald-500 h-20 w-20 md:scale-150"
+					style="transform-origin: bottom"
+				></div>
+
+				<div class="text-3xl font-bold my-5">New customers</div>
+
+				<div class="text-sm text-gray-500 px-10">{{ description }}</div>
+			</div>
+
+			<div class="flex flex-col items-center px-10">
+				<div class="rounded-full bg-emerald-500 h-20 w-20"></div>
+
+				<div class="text-3xl font-bold my-5">Easy Booking</div>
+
+				<div class="text-sm text-gray-500 px-10">{{ description }}</div>
+			</div>
 		</div>
 	</div>
 </div>

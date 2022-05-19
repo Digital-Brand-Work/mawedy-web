@@ -11,9 +11,8 @@ import { Component, OnInit } from '@angular/core'
 export class HomeSection2Component implements OnInit {
 	constructor() {}
 
-	step: 'one' | 'two' = 'one'
-
-	focus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+	description: string =
+		'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis .'
 
 	ngOnInit(): void {}
 }
