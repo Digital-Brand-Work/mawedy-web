@@ -28,6 +28,7 @@ import { EffectsModule } from '@ngrx/effects'
 import { effects } from './app-effect.effects'
 import { ModalModule } from './modules/modals/modal.module'
 import { PagesModule } from './modules/pages/pages.module'
+import { PlaceholderModule } from './modules/placeholder/placeholder.module'
 
 @NgModule({
 	declarations: [AppComponent],
@@ -55,6 +56,7 @@ import { PagesModule } from './modules/pages/pages.module'
 		SharedModule,
 		ModalModule,
 		PagesModule,
+		PlaceholderModule,
 	],
 
 	bootstrap: [AppComponent],
