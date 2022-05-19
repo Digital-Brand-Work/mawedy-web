@@ -46,6 +46,7 @@ import { SubscriptionInvoicesComponent } from 'app/modules/admin/subscriptions/m
 import { DashboardAppointmentCancelAndAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.component'
 import { UnderMaintenanceComponent } from 'app/modules/pages/under-maintenance/under-maintenance.component'
 import { UnderConstructionComponent } from 'app/modules/pages/under-construction/under-construction.component'
+import { FuseCardModule } from '@fuse/components/card'
 
 const components = [
 	SpinnerComponent,
@@ -95,6 +96,7 @@ const modules = [
 	ReactiveFormsModule,
 	InputMaskModule,
 	NgxMaskModule.forRoot(),
+	FuseCardModule,
 
 	/**
 	    Mat Modules

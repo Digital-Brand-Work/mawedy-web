@@ -8,5 +8,9 @@ import { Component, OnInit } from '@angular/core'
 export class HomeSection3Component implements OnInit {
 	constructor() {}
 
+	yearlyBilling: boolean = true
+
 	ngOnInit(): void {}
+
+	identity = (item: any) => item
 }

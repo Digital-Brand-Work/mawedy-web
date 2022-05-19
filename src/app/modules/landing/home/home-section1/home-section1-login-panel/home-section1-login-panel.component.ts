@@ -32,6 +32,6 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 			})
 		})
 
-		this.router.navigate(['/aster_clinic/jumeirah'])
+		this.router.navigate(['/aster-clinic/jumeirah/dashboard/appointments'])
 	}
 }
