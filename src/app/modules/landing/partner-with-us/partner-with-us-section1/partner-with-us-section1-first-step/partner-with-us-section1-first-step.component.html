@@ -1,0 +1,78 @@
+<div class="w-screen px-5 md:w-full">
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-base">Clinic Name</div>
+
+		<input
+			#input
+			type="text"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+		/>
+
+		<div class="text-sm text-rose-500">Clinic Name is required.</div>
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-base">
+			Clinics Address
+		</div>
+
+		<input
+			type="text"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+		/>
+
+		<div class="text-sm text-rose-500">Clinic Address is required.</div>
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-base">Email</div>
+
+		<input
+			[inputMask]="emailInputMask"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+		/>
+
+		<div class="text-sm text-rose-500">Email is required.</div>
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-base">Mobile Number</div>
+
+		<div class="">
+			<mobile-number-form
+				[bordered]="true"
+				[rounded]="true"
+				class="w-full"
+			></mobile-number-form>
+		</div>
+
+		<div class="text-sm text-rose-500">Mobile Number is required.</div>
+	</div>
+
+	<input type="file" #tradeLicense class="hidden" />
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-base">Trade License</div>
+
+		<button
+			(click)="tradeLicense.click()"
+			class="border border-teal-500 px-10 py-3 rounded-lg ml-auto text-teal-500 hover:bg-teal-50"
+		>
+			Upload
+		</button>
+
+		<div class="mt-2 text-sky-500">Trade License.pdf</div>
+	</div>
+
+	<div class="mt-5 flex w-full">
+		<button
+			@fadeOutBottom
+			@slideInRight
+			*ngIf="step !== 'two'"
+			(click)="onNext.emit()"
+			class="text-white px-10 py-4 uppercase rounded-lg ml-auto bg-teal-500 hover:bg-teal-600 w-full"
+		>
+			Next
+		</button>
+	</div>
+</div>

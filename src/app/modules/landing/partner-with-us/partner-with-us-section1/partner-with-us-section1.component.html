@@ -1,1 +1,42 @@
-<p>partner-with-us-section1 works!</p>
+<div
+	class="min-h-screen w-full flex items-center justify-center relative bg-white py-20"
+>
+	<div
+		class="max-w-screen-sm w-full flex items-center justify-center relative z-20"
+	>
+		<div class="w-full flex items-center justify-center flex-col">
+			<div class="w-screen px-5 md:w-full">
+				<div
+					class="text-4xl font-bold mb-3 text-teal-500 text-center md:text-left"
+				>
+					Become a partner
+				</div>
+
+				<div
+					class="mb-10 text-center md:text-left text-xl font-normal leading-snug text-gray-700"
+				>
+					Register your clinic, advertise your promotions & start
+					tracking appointments from patients that use Mawedy mobile
+					application.
+				</div>
+			</div>
+
+			<partner-with-us-section1-first-step
+				class="w-full"
+				*ngIf="step !== 'two'"
+				(onNext)="step = 'two'"
+				[step]="step"
+				[focus$]="focus$"
+			></partner-with-us-section1-first-step>
+
+			<partner-with-us-section1-second-step
+				class="w-full"
+				@slideInRight
+				class="w-full"
+				*ngIf="step === 'two'"
+				(onBack)="step = 'one'; focus$.next(true)"
+				[step]="step"
+			></partner-with-us-section1-second-step>
+		</div>
+	</div>
+</div>

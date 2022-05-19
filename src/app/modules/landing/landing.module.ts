@@ -20,7 +20,9 @@ import { PartnerWithUsSection3Component } from './partner-with-us/partner-with-u
 import { AboutUsComponent } from './about-us/about-us.component'
 import { JoinUsComponent } from './join-us/join-us.component'
 import { TalkToUsComponent } from './talk-to-us/talk-to-us.component'
-import { LandingComponent } from './landing.component'
+import { LandingComponent } from './landing.component';
+import { PartnerWithUsSection1FirstStepComponent } from './partner-with-us/partner-with-us-section1/partner-with-us-section1-first-step/partner-with-us-section1-first-step.component';
+import { PartnerWithUsSection1SecondStepComponent } from './partner-with-us/partner-with-us-section1/partner-with-us-section1-second-step/partner-with-us-section1-second-step.component'
 
 const components = [
 	HomeNavbarResponsiveComponent,
@@ -48,7 +50,7 @@ const components = [
 	TalkToUsComponent,
 ]
 @NgModule({
-	declarations: [...components],
+	declarations: [...components, PartnerWithUsSection1FirstStepComponent, PartnerWithUsSection1SecondStepComponent],
 	imports: [RouterModule.forChild(landingHomeRoutes), SharedModule],
 	exports: [...components],
 })
