@@ -6,7 +6,7 @@ import { MediaService } from '@digital_brand_work/utilities/media.service'
 	selector: 'landing-home',
 	templateUrl: './home.component.html',
 })
-export class LandingHomeComponent {
+export class HomeMainComponent {
 	constructor(private seoService: SeoService, private media: MediaService) {
 		this.seoService.generateTags(this.seoService.default())
 	}

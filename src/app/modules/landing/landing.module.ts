@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from 'app/shared/shared.module'
-import { LandingHomeComponent } from 'app/modules/landing/home/home.component'
-import { landingHomeRoutes } from 'app/modules/landing/landing.routing'
+import { HomeMainComponent } from 'app/modules/landing/home/home.component'
+import { landingHomeRoutes } from 'app/routes/landing/landing.routing'
 import { HomeSection1Component } from './home/home-section1/home-section1.component'
 import { HomeSection2Component } from './home/home-section2/home-section2.component'
 import { HomeSection3Component } from './home/home-section3/home-section3.component'
@@ -11,8 +11,8 @@ import { HomeSection5Component } from './home/home-section5/home-section5.compon
 import { HomeSection1LoginPanelComponent } from './home/home-section1/home-section1-login-panel/home-section1-login-panel.component'
 import { HomeSection2FirstStepComponent } from './home/home-section2/home-section2-first-step/home-section2-first-step.component'
 import { HomeSection2SecondStepComponent } from './home/home-section2/home-section2-second-step/home-section2-second-step.component'
-import { HomeNavbarComponent } from './home/common/home-navbar/home-navbar.component'
-import { HomeNavbarResponsiveComponent } from './home/common/home-navbar-responsive/home-navbar-responsive.component'
+import { HomeNavbarComponent } from './common/home-navbar/home-navbar.component'
+import { HomeNavbarResponsiveComponent } from './common/home-navbar-responsive/home-navbar-responsive.component'
 import { PartnerWithUsComponent } from './partner-with-us/partner-with-us.component'
 import { PartnerWithUsSection1Component } from './partner-with-us/partner-with-us-section1/partner-with-us-section1.component'
 import { PartnerWithUsSection2Component } from './partner-with-us/partner-with-us-section2/partner-with-us-section2.component'
@@ -27,7 +27,7 @@ const components = [
 	HomeNavbarComponent,
 
 	LandingComponent,
-	LandingHomeComponent,
+	HomeMainComponent,
 
 	HomeSection1Component,
 	HomeSection2Component,

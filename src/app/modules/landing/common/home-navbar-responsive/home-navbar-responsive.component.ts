@@ -5,7 +5,7 @@ import { BehaviorSubject, map, Subscription, tap } from 'rxjs'
 import {
 	HomeNav,
 	homeNavigation,
-} from '../../../../../navigation/landing.navigation'
+} from '../../../../navigation/landing.navigation'
 
 @Component({
 	selector: 'home-navbar-responsive',
