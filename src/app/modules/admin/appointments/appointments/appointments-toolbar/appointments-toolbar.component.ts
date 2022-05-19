@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { isPlatformBrowser } from '@angular/common'
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core'
 import { Router } from '@angular/router'
 import { Subject, takeUntil } from 'rxjs'
 
@@ -8,19 +9,22 @@ import { Subject, takeUntil } from 'rxjs'
 	styleUrls: ['./appointments-toolbar.component.scss'],
 })
 export class AppointmentsToolbarComponent implements OnInit {
-	constructor(private router: Router) {
-		this.router.events
+	constructor(
+		private _router: Router,
+		@Inject(PLATFORM_ID) private _platformID: Object,
+	) {
+		this._router.events
 			.pipe(takeUntil(this._unsubscribeAll))
 			.subscribe(() => {
-				if (this.router.url.includes('month')) {
+				if (this._router.url.includes('month')) {
 					this.mode = 'month'
 				}
 
-				if (this.router.url.includes('week')) {
+				if (this._router.url.includes('week')) {
 					this.mode = 'week'
 				}
 
-				if (this.router.url.includes('day')) {
+				if (this._router.url.includes('day')) {
 					this.mode = 'day'
 				}
 			})
@@ -35,9 +39,11 @@ export class AppointmentsToolbarComponent implements OnInit {
 	timer: any
 
 	ngOnInit(): void {
-		this.timer = setInterval(() => {
-			this.today = new Date(Date.now())
-		}, 1000)
+		if (isPlatformBrowser(this._platformID)) {
+			this.timer = setInterval(() => {
+				this.today = new Date(Date.now())
+			}, 1000)
+		}
 	}
 
 	ngOnDestroy(): void {

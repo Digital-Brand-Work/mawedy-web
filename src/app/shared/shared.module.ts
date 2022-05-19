@@ -45,10 +45,10 @@ import { DashboardAppointmentAssignSlotComponent } from 'app/modules/admin/dashb
 import { SubscriptionInvoicesComponent } from 'app/modules/admin/subscriptions/modals/subscription-invoices/subscription-invoices.component'
 import { DashboardAppointmentCancelAndAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.component'
 import { UnderMaintenanceComponent } from 'app/modules/pages/under-maintenance/under-maintenance.component'
-import { UnderConstructionComponent } from 'app/modules/pages/under-construction/under-construction.component'
 import { FuseCardModule } from '@fuse/components/card'
 import { AppStoreButtonComponent } from 'app/components/buttons/app-store-button/app-store-button.component'
 import { GooglePlayButtonComponent } from 'app/components/buttons/google-play-button/google-play-button.component'
+import { UnderConstructionComponent } from 'app/modules/pages/under-construction/under-construction.component'
 
 const components = [
 	SpinnerComponent,
@@ -129,5 +129,6 @@ const pipes = []
 	declarations: [...components, ...directives, ...pipes],
 	imports: [...modules],
 	exports: [...components, ...directives, ...pipes, ...modules],
+	providers: [{ provide: 'isBrowser', useValue: true }],
 })
 export class SharedModule {}

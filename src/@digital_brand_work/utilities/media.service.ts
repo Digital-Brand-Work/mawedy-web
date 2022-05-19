@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core'
+import { isPlatformBrowser } from '@angular/common'
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { BreakPoint } from '../models/core.model'
 
@@ -6,26 +7,29 @@ import { BreakPoint } from '../models/core.model'
 	providedIn: 'root',
 })
 export class MediaService {
-	constructor() {
+	constructor(@Inject(PLATFORM_ID) private _platformID: Object) {
 		this.onResize()
 		this.onScroll()
 		this.getMedia().subscribe((innerWidth) =>
 			this.resolveBreakPoint(innerWidth),
 		)
 	}
+
 	public breakpoints$ = new BehaviorSubject<BreakPoint>('phone')
 
 	private media$ = new BehaviorSubject<number>(
-		typeof window === 'undefined' ? 0 : window.innerWidth,
+		typeof window === 'undefined' ? 0 : 0,
 	)
 
 	private scrollTop$ = new BehaviorSubject<number>(
-		typeof window === 'undefined' ? 0 : window.pageYOffset,
+		typeof window === 'undefined' ? 0 : 0,
 	)
 
 	onResize() {
-		if (typeof window !== 'undefined') {
-			this.media$.next(window.innerWidth)
+		if (isPlatformBrowser(this._platformID)) {
+			if (typeof window !== 'undefined') {
+				this.media$.next(window.innerWidth)
+			}
 		}
 	}
 
@@ -34,8 +38,10 @@ export class MediaService {
 	}
 
 	onScroll() {
-		if (typeof window !== 'undefined') {
-			this.scrollTop$.next(window.pageYOffset)
+		if (isPlatformBrowser(this._platformID)) {
+			if (typeof window !== 'undefined') {
+				this.scrollTop$.next(window.pageYOffset)
+			}
 		}
 	}
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { isPlatformBrowser } from '@angular/common'
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
@@ -10,7 +11,10 @@ import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 	animations: [...dbwAnimations],
 })
 export class PartnerWithUsSection1Component implements OnInit {
-	constructor(private _scrollService: ScrollService) {}
+	constructor(
+		private _scrollService: ScrollService,
+		@Inject(PLATFORM_ID) private _platformID: Object,
+	) {}
 
 	step: 'one' | 'two' = 'one'
 
@@ -20,9 +24,11 @@ export class PartnerWithUsSection1Component implements OnInit {
 
 	ngOnInit(): void {
 		this.focus$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-			setTimeout(() => {
-				this._scrollService.scrollToTop()
-			}, 50)
+			if (isPlatformBrowser(this._platformID)) {
+				setTimeout(() => {
+					this._scrollService.scrollToTop()
+				}, 50)
+			}
 		})
 	}
 

@@ -1,11 +1,14 @@
+import { isPlatformBrowser } from '@angular/common'
 import {
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	EventEmitter,
+	Inject,
 	Input,
 	OnInit,
 	Output,
+	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -22,6 +25,7 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 	constructor(
 		private _cdr: ChangeDetectorRef,
 		private _scrollService: ScrollService,
+		@Inject(PLATFORM_ID) private _platformID: Object,
 	) {}
 
 	@Output() onBack = new EventEmitter()
@@ -37,9 +41,11 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 	ngAfterViewInit(): void {
 		this.input.nativeElement.focus()
 
-		setTimeout(() => {
-			this._scrollService.scrollToTop()
-		}, 50)
+		if (isPlatformBrowser(this._platformID)) {
+			setTimeout(() => {
+				this._scrollService.scrollToTop()
+			}, 50)
+		}
 
 		this._cdr.detectChanges()
 	}
