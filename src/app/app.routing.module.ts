@@ -7,8 +7,8 @@ export const routes: Route[] = [
 	{
 		path: '',
 		loadChildren: () =>
-			import('./modules/landing/home/home.module').then(
-				(m) => m.LandingHomeModule,
+			import('./modules/landing/landing.module').then(
+				(module) => module.LandingHomeModule,
 			),
 	},
 	{
@@ -27,7 +27,7 @@ export const routes: Route[] = [
 				path: 'dashboard',
 				loadChildren: () =>
 					import('./modules/admin/dashboard/dashboard.module').then(
-						(m) => m.DashboardModule,
+						(module) => module.DashboardModule,
 					),
 			},
 			{
@@ -35,34 +35,34 @@ export const routes: Route[] = [
 				loadChildren: () =>
 					import(
 						'./modules/admin/appointments/appointments.module'
-					).then((m) => m.AppointmentsModule),
+					).then((module) => module.AppointmentsModule),
 			},
 			{
 				path: 'doctors',
 				loadChildren: () =>
 					import('./modules/admin/doctors/doctors.module').then(
-						(m) => m.DoctorsModule,
+						(module) => module.DoctorsModule,
 					),
 			},
 			{
 				path: 'patients',
 				loadChildren: () =>
 					import('./modules/admin/patients/patients.module').then(
-						(m) => m.PatientsModule,
+						(module) => module.PatientsModule,
 					),
 			},
 			{
 				path: 'clinic',
 				loadChildren: () =>
 					import('./modules/admin/clinic/clinic.module').then(
-						(m) => m.ClinicModule,
+						(module) => module.ClinicModule,
 					),
 			},
 			{
 				path: 'promotions',
 				loadChildren: () =>
 					import('./modules/admin/promotions/promotions.module').then(
-						(m) => m.PromotionsModule,
+						(module) => module.PromotionsModule,
 					),
 			},
 			{
@@ -70,14 +70,14 @@ export const routes: Route[] = [
 				loadChildren: () =>
 					import(
 						'./modules/admin/subscriptions/subscriptions.module'
-					).then((m) => m.SubscriptionsModule),
+					).then((module) => module.SubscriptionsModule),
 			},
 			{
 				path: 'account-setting',
 				loadChildren: () =>
 					import(
 						'./modules/admin/account-setting/account-setting.module'
-					).then((m) => m.AccountSettingModule),
+					).then((module) => module.AccountSettingModule),
 			},
 		],
 	},

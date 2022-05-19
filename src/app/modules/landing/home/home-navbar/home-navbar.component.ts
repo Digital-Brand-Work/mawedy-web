@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { HomeNav, homeNavigation } from '../home.navigation'
+import { HomeNav, homeNavigation } from '../../../../navigation/home.navigation'
 
 @Component({
 	selector: 'home-navbar',
