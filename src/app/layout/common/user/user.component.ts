@@ -70,6 +70,12 @@ export class UserComponent implements OnInit, OnDestroy {
 	}
 
 	toSettings() {
-		this._router.navigate(['aster_clinic/account-setting'])
+		this._router.navigate(['/aster_clinic/jumeirah/account-setting'])
+	}
+
+	toUserAccounts() {
+		this._router.navigate([
+			'/aster_clinic/jumeirah/account-setting/user-account',
+		])
 	}
 }

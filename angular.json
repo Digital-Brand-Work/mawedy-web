@@ -73,11 +73,7 @@
 							}
 						],
 						"stylePreprocessorOptions": {
-							"includePaths": [
-								"src/@fuse/styles",
-								"src/styles/overrides/fuse.override.scss",
-								"src/styles/overrides/material.override.scss"
-							]
+							"includePaths": ["src/@fuse/styles"]
 						},
 						"styles": [
 							"src/@fuse/styles/tailwind.scss",
@@ -85,9 +81,7 @@
 							"src/styles/vendors.scss",
 							"src/@fuse/styles/main.scss",
 							"src/styles/styles.scss",
-							"src/styles/tailwind.scss",
-							"src/styles/overrides/fuse.override.scss",
-							"src/styles/overrides/material.override.scss"
+							"src/styles/tailwind.scss"
 						],
 						"scripts": []
 					},
@@ -155,11 +149,7 @@
 							"src/favicon-32x32.png",
 							"src/assets"
 						],
-						"styles": [
-							"src/styles/styles.scss",
-							"src/styles/overrides/fuse.override.scss",
-							"src/styles/overrides/material.override.scss"
-						],
+						"styles": ["src/styles/styles.scss"],
 						"scripts": []
 					}
 				},
@@ -176,11 +166,7 @@
 						"main": "server.ts",
 						"tsConfig": "tsconfig.server.json",
 						"stylePreprocessorOptions": {
-							"includePaths": [
-								"src/@fuse/styles",
-								"src/styles/overrides/fuse.override.scss",
-								"src/styles/overrides/material.override.scss"
-							]
+							"includePaths": ["src/@fuse/styles/themes.scss"]
 						},
 						"inlineStyleLanguage": "scss"
 					},

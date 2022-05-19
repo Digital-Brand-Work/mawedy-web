@@ -1,0 +1,58 @@
+<div *ngIf="true" @slideInTop class="w-full">
+	<app-toolbar class="w-full" [toolbar]="noToolbar"></app-toolbar>
+	<ng-template #noToolbar></ng-template>
+</div>
+
+<div class="md:px-10 px-0 w-full">
+	<div
+		style="min-height: 80vh"
+		class="md:rounded-xl bg-white px-5 pr-0 w-full pt-5"
+	>
+		<div class="accent-color text-3xl ml-5 font-semibold py-2">
+			User Account
+		</div>
+
+		<div class="text-xs text-gray-400 ml-5">Manage your account users.</div>
+
+		<div class="custom-border-green translate-y-5"></div>
+
+		<hr class="mt-4" />
+
+		<div class="grid grid-cols-3 gap-x-10 w-full pr-5">
+			<div
+				*ngFor="let item of [1, 2, 3]; trackBy: identity"
+				class="flex items-center col-span-1"
+			>
+				<button
+					(click)="avatar.click()"
+					class="photo flex flex-col items-center justify-center hover:bg-gray-50 rounded-sm mr-5"
+				>
+					<mat-icon
+						class="text-gray-400 icon-size-10"
+						svgIcon="feather:upload"
+					></mat-icon>
+				</button>
+
+				<div>
+					<div class="text-xl font-extrabold accent-color mb-5">
+						User 1
+					</div>
+
+					<input
+						#input
+						type="text"
+						class="py-3 mb-5 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20 shadow-sm shadow-gray-500/10"
+						placeholder="Name"
+					/>
+
+					<input
+						#input
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20 shadow-sm shadow-gray-500/10"
+						placeholder="Description"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
