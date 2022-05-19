@@ -9,6 +9,7 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import { clinicSubscriptionTypes } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
 
 @Component({
@@ -18,7 +19,10 @@ import { clinicSubscriptionTypes } from 'app/mawedy-core/enums/clinic-subscripti
 	animations: [...dbwAnimations],
 })
 export class PartnerWithUsSection1SecondStepComponent implements OnInit {
-	constructor(private cdr: ChangeDetectorRef) {}
+	constructor(
+		private _cdr: ChangeDetectorRef,
+		private _scrollService: ScrollService,
+	) {}
 
 	@Output() onBack = new EventEmitter()
 
@@ -33,11 +37,15 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 	ngAfterViewInit(): void {
 		this.input.nativeElement.focus()
 
-		this.cdr.detectChanges()
+		setTimeout(() => {
+			this._scrollService.scrollToTop()
+		}, 50)
+
+		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 
 	identity = (item: any) => item
