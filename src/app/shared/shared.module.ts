@@ -44,6 +44,8 @@ import { DashboardAppointmentConfirmReassignSlotComponent } from 'app/modules/ad
 import { DashboardAppointmentAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-assign-slot/dashboard-appointment-assign-slot.component'
 import { SubscriptionInvoicesComponent } from 'app/modules/admin/subscriptions/modals/subscription-invoices/subscription-invoices.component'
 import { DashboardAppointmentCancelAndAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.component'
+import { UnderMaintenanceComponent } from 'app/modules/pages/under-maintenance/under-maintenance.component'
+import { UnderConstructionComponent } from 'app/modules/pages/under-construction/under-construction.component'
 
 const components = [
 	SpinnerComponent,
@@ -82,6 +84,9 @@ const components = [
 	ClinicServicesEditComponent,
 
 	SubscriptionInvoicesComponent,
+
+	UnderMaintenanceComponent,
+	UnderConstructionComponent,
 ]
 
 const modules = [

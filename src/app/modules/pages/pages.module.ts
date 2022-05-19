@@ -18,8 +18,6 @@ const components = [
 	HomeCheckoutSuccessPageComponent,
 	PrivacyPolicyComponent,
 	TermsAndConditionsComponent,
-	UnderMaintenanceComponent,
-	UnderConstructionComponent,
 ]
 
 @NgModule({

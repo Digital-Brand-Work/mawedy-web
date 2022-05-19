@@ -11,15 +11,19 @@
 		<ul class="ml-auto flex">
 			<li
 				*ngFor="let nav of navigation"
+				[ngClass]="{
+					'hover:bg-emerald-500  hover:text-emerald-50 ':
+						nav.name !== 'AR'
+				}"
 				[routerLink]="nav.link"
 				role="button"
-				class="px-5 mr-10 hover:underline text-emerald-500"
+				class="px-7 py-3 text-emerald-500 rounded-lg text-lg"
 			>
 				{{ nav.name }}
 			</li>
 			<li>
 				<img
-					class="h-7 -translate-x-12 -translate-y-1"
+					class="h-7 translate-y-2"
 					src="../../../../../assets/app/uae.icon.png"
 					alt="UAE Icon"
 				/>
