@@ -6,13 +6,13 @@ import { APP_BASE_HREF } from '@angular/common'
 import { existsSync } from 'fs'
 import { createWindow } from 'domino'
 import { join } from 'path'
-const domino = require('domino')
 
-/* 
-    The Express app is exported so that it can be used by serverless Functions.
-*/
+const MockBrowser = require('mock-browser').mocks.MockBrowser
+
 export function app(): express.Express {
 	const server = express()
+
+	const MockBrowser = require('mock-browser').mocks.MockBrowser
 
 	const distFolder = join(process.cwd(), 'dist/mawedy/browser/')
 
@@ -20,19 +20,14 @@ export function app(): express.Express {
 		? 'index.original.html'
 		: 'index.html'
 
-	const win = domino.createWindow(indexHtml)
+	const mock = new MockBrowser()
 
-	win.Object = Object
-	win.Math = Math
+	const win = createWindow(indexHtml)
 
-	win.navigator.language = 'en'
+	global['window'] = mock.getWindow()
 
-	global['Event'] = null
-	global['window'] = win
-	global['document'] = win.document
-	global['branch'] = null
-	global['object'] = win.object
 	global['localStorage'] = localStorage
+
 	global['navigator'] = win.navigator
 
 	/* 
