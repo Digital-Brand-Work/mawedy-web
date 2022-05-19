@@ -24,7 +24,10 @@
 				@fadeInRight
 				*ngIf="!(showNav$ | async)"
 			>
-				<mat-icon class="text-4xl" svgIcon="feather:menu"></mat-icon>
+				<mat-icon
+					class="icon-size-8 accent-color"
+					svgIcon="feather:menu"
+				></mat-icon>
 			</div>
 
 			<div
@@ -33,7 +36,10 @@
 				@fadeInRight
 				*ngIf="showNav$ | async"
 			>
-				<mat-icon class="text-4xl" svgIcon="feather:x"></mat-icon>
+				<mat-icon
+					class="icon-size-8 accent-color"
+					svgIcon="feather:x"
+				></mat-icon>
 			</div>
 		</div>
 	</div>
