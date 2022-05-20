@@ -9,7 +9,7 @@ export class SeoService {
 		return {
 			title: 'Mawedy',
 			description: 'Helping people for better health.',
-			image: './assets/app/logo.svg',
+			image: './assets/app/logo.jpg',
 			slug: '',
 		}
 	}
@@ -23,7 +23,7 @@ export class SeoService {
 		tags = {
 			title: 'Mawedy',
 			description: 'Helping people for better health.',
-			image: './assets/app/logo.svg',
+			image: './assets/app/logo.jpg',
 			slug: '',
 			...tags,
 		}
