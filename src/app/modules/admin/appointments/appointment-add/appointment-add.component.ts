@@ -3,7 +3,9 @@ import {
 	Component,
 	ElementRef,
 	HostListener,
+	Inject,
 	OnInit,
+	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -13,6 +15,7 @@ import { createMask } from '@ngneat/input-mask'
 import { FormControl } from '@angular/forms'
 import { DashboardAppointmentSelectDoctorModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
 import { DashboardAppointmentSelectTimeSlotModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
+import { isPlatformBrowser } from '@angular/common'
 
 @Component({
 	selector: 'appointment-add',
@@ -22,11 +25,11 @@ import { DashboardAppointmentSelectTimeSlotModal } from '../../dashboard/appoint
 })
 export class AppointmentAddComponent implements OnInit {
 	constructor(
-		private addAppointmentModal: AddAppointmentModal,
-		private cdr: ChangeDetectorRef,
-
-		private dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
-		private dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
+		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _cdr: ChangeDetectorRef,
+		private _addAppointmentModal: AddAppointmentModal,
+		private _dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
+		private _dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -38,47 +41,48 @@ export class AppointmentAddComponent implements OnInit {
 
 	@ViewChild('comments', { read: ElementRef }) textArea: ElementRef
 
-	_unsubscribeAll: Subject<any> = new Subject<any>()
+	unsubscribe$: Subject<any> = new Subject<any>()
 
-	opened$: BehaviorSubject<boolean> = this.addAppointmentModal.opened$
+	opened$: BehaviorSubject<boolean> = this._addAppointmentModal.opened$
 
 	dashboardAppointmentSelectDoctorModalOpened$: BehaviorSubject<boolean> =
-		this.dashboardAppointmentSelectDoctorModal.opened$
+		this._dashboardAppointmentSelectDoctorModal.opened$
 
 	dashboardAppointmentSelectTimeSlotModalOpened$: BehaviorSubject<boolean> =
-		this.dashboardAppointmentSelectTimeSlotModal.opened$
+		this._dashboardAppointmentSelectTimeSlotModal.opened$
 
-	currencyInputMask = createMask({
-		alias: 'numeric',
-		groupSeparator: ',',
-		digits: 2,
+	currencyInputMask = !isPlatformBrowser(this._platformID)
+		? null
+		: createMask({
+				alias: 'numeric',
+				groupSeparator: ',',
+				digits: 2,
 
-		digitsOptional: false,
-		prefix: 'AED ',
-		placeholder: '0',
-	})
+				digitsOptional: false,
+				prefix: 'AED ',
+				placeholder: '0',
+		  })
+
 	currencyFC = new FormControl('')
 
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
-		this.opened$
-			.pipe(takeUntil(this._unsubscribeAll))
-			.subscribe((focused) => {
-				if (focused) {
-					this.input.nativeElement.focus()
-				}
-			})
+		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {
+			if (focused) {
+				this.input.nativeElement.focus()
+			}
+		})
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
-		this._unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this._unsubscribeAll.complete()
+		this.unsubscribe$.complete()
 
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 
 	autoGrow() {

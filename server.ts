@@ -6,8 +6,7 @@ import { APP_BASE_HREF } from '@angular/common'
 import { existsSync } from 'fs'
 import { createWindow } from 'domino'
 import { join } from 'path'
-
-const MockBrowser = require('mock-browser').mocks.MockBrowser
+import { applyDomino } from '@ntegral/ngx-universal-window'
 
 export function app(): express.Express {
 	const server = express()
@@ -15,6 +14,8 @@ export function app(): express.Express {
 	const MockBrowser = require('mock-browser').mocks.MockBrowser
 
 	const distFolder = join(process.cwd(), 'dist/mawedy/browser/')
+
+	applyDomino(global, join(distFolder, 'index.html'))
 
 	const indexHtml = existsSync(join(distFolder, 'index.html'))
 		? 'index.original.html'
@@ -30,9 +31,6 @@ export function app(): express.Express {
 
 	global['navigator'] = win.navigator
 
-	/* 
-        Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-    */
 	server.engine(
 		'html',
 		ngExpressEngine({
@@ -44,9 +42,6 @@ export function app(): express.Express {
 
 	server.set('views', distFolder)
 
-	/* 
-        Add this line for SEO
-    */
 	server.get('/robots.txt', (req, res) => {
 		const robotsPath = `${distFolder}/robots.txt`
 
@@ -55,11 +50,6 @@ export function app(): express.Express {
 		res.sendFile(robotsPath)
 	})
 
-	/* 
-       Example Express Rest API endpoints
-       server.get('/api/**', (req, res) => { });
-       Serve static files from /browser
-    */
 	server.get(
 		'*.*',
 		express.static(distFolder, {
@@ -67,9 +57,6 @@ export function app(): express.Express {
 		}),
 	)
 
-	/* 
-	    All regular routes use the Universal engine
-    */
 	server.get('*', (req, res) => {
 		res.render(indexHtml, {
 			req,
@@ -83,9 +70,6 @@ export function app(): express.Express {
 function run(): void {
 	const port = process.env['PORT'] || 4000
 
-	/* 
-	    Start up the Node server
-    */
 	const server = app()
 
 	server.listen(port, () => {
@@ -93,11 +77,6 @@ function run(): void {
 	})
 }
 
-/* 
-	Webpack will replace 'require' with '__webpack_require__'
-	'__non_webpack_require__' is a proxy to Node 'require'
-	The below code is to ensure that the server is run only when not requiring the bundle.
-*/
 declare const __non_webpack_require__: NodeRequire
 
 const mainModule = __non_webpack_require__.main

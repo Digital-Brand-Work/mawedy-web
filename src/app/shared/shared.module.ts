@@ -49,6 +49,7 @@ import { FuseCardModule } from '@fuse/components/card'
 import { AppStoreButtonComponent } from 'app/components/buttons/app-store-button/app-store-button.component'
 import { GooglePlayButtonComponent } from 'app/components/buttons/google-play-button/google-play-button.component'
 import { UnderConstructionComponent } from 'app/modules/pages/under-construction/under-construction.component'
+import { SSRExcludeModule } from 'ngx-ssr-exclude'
 
 const components = [
 	SpinnerComponent,
@@ -102,6 +103,7 @@ const modules = [
 	InputMaskModule,
 	NgxMaskModule.forRoot(),
 	FuseCardModule,
+	SSRExcludeModule,
 
 	/**
 	    Mat Modules

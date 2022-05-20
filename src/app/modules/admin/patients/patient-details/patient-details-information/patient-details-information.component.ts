@@ -1,9 +1,12 @@
+import { isPlatformBrowser } from '@angular/common'
 import {
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
+	Inject,
 	OnInit,
+	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { createMask } from '@ngneat/input-mask'
@@ -15,11 +18,16 @@ import { countries } from 'app/mawedy-core/constants/countries.constant'
 	styleUrls: ['./patient-details-information.component.scss'],
 })
 export class PatientDetailsInformationComponent implements OnInit {
-	constructor(private cdr: ChangeDetectorRef) {}
+	constructor(
+		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _cdr: ChangeDetectorRef,
+	) {}
 
 	@ViewChild('input') input?: ElementRef
 
-	emailInputMask = createMask({ alias: 'email' })
+	emailInputMask = !isPlatformBrowser(this._platformID)
+		? null
+		: createMask({ alias: 'email' })
 
 	cities: string[] = []
 
@@ -30,11 +38,11 @@ export class PatientDetailsInformationComponent implements OnInit {
 	ngAfterViewInit(): void {
 		this.input.nativeElement.focus()
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 
 	identity = (item: any) => item

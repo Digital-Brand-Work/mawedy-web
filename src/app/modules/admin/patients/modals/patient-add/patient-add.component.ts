@@ -1,9 +1,12 @@
+import { isPlatformBrowser } from '@angular/common'
 import {
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
+	Inject,
 	OnInit,
+	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -20,8 +23,9 @@ import { AddPatientModal } from './patient-add.service'
 })
 export class PatientAddComponent implements OnInit {
 	constructor(
-		private addPatientModal: AddPatientModal,
-		private cdr: ChangeDetectorRef,
+		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _addPatientModal: AddPatientModal,
+		private _cdr: ChangeDetectorRef,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -35,9 +39,11 @@ export class PatientAddComponent implements OnInit {
 
 	unsubscribeAll: Subject<any> = new Subject<any>()
 
-	opened$: BehaviorSubject<boolean> = this.addPatientModal.opened$
+	opened$: BehaviorSubject<boolean> = this._addPatientModal.opened$
 
-	emailInputMask = createMask({ alias: 'email' })
+	emailInputMask = !isPlatformBrowser(this._platformID)
+		? null
+		: createMask({ alias: 'email' })
 
 	countryJson = countries
 
@@ -60,7 +66,7 @@ export class PatientAddComponent implements OnInit {
 				}
 			})
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
@@ -68,6 +74,6 @@ export class PatientAddComponent implements OnInit {
 
 		this.unsubscribeAll.complete()
 
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 }

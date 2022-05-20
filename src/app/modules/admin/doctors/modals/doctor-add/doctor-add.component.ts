@@ -1,9 +1,12 @@
+import { isPlatformBrowser } from '@angular/common'
 import {
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
+	Inject,
 	OnInit,
+	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { createMask } from '@ngneat/input-mask'
@@ -17,8 +20,9 @@ import { AddDoctorModal } from './doctor-add.service'
 })
 export class DoctorAddComponent implements OnInit {
 	constructor(
-		private addDoctorModal: AddDoctorModal,
-		private cdr: ChangeDetectorRef,
+		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _addDoctorModal: AddDoctorModal,
+		private _cdr: ChangeDetectorRef,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -28,33 +32,33 @@ export class DoctorAddComponent implements OnInit {
 
 	@ViewChild('input') input!: ElementRef
 
-	unsubscribeAll: Subject<any> = new Subject<any>()
+	unsubscribe$: Subject<any> = new Subject<any>()
 
-	opened$: BehaviorSubject<boolean> = this.addDoctorModal.opened$
+	opened$: BehaviorSubject<boolean> = this._addDoctorModal.opened$
 
-	emailInputMask = createMask({ alias: 'email' })
+	emailInputMask = !isPlatformBrowser(this._platformID)
+		? null
+		: createMask({ alias: 'email' })
 
 	ngOnInit(): void {}
 
 	ngOnDestroy(): void {
 		this.opened$.subscribe((value) => console.log(value))
 
-		this.unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this.unsubscribeAll.complete()
+		this.unsubscribe$.complete()
 
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 
 	ngAfterViewInit(): void {
-		this.opened$
-			.pipe(takeUntil(this.unsubscribeAll))
-			.subscribe((focused) => {
-				if (focused) {
-					this.input.nativeElement.focus()
-				}
-			})
+		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {
+			if (focused) {
+				this.input.nativeElement.focus()
+			}
+		})
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 }

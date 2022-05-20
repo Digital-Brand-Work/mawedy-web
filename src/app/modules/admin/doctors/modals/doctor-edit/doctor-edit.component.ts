@@ -1,9 +1,12 @@
+import { isPlatformBrowser } from '@angular/common'
 import {
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
+	Inject,
 	OnInit,
+	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { createMask } from '@ngneat/input-mask'
@@ -18,9 +21,10 @@ import { EditDoctorModal } from './doctor-edit.service'
 })
 export class DoctorEditComponent implements OnInit {
 	constructor(
-		private editDoctorModal: EditDoctorModal,
-		private doctorDetailsModal: DoctorDetailsModal,
-		private cdr: ChangeDetectorRef,
+		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _editDoctorModal: EditDoctorModal,
+		private _doctorDetailsModal: DoctorDetailsModal,
+		private _cdr: ChangeDetectorRef,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -32,14 +36,16 @@ export class DoctorEditComponent implements OnInit {
 
 	@ViewChild('input') input!: ElementRef
 
+	opened$: BehaviorSubject<boolean> = this._editDoctorModal.opened$
+
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
-		this.doctorDetailsModal.opened$
+		this._doctorDetailsModal.opened$
 
 	unsubscribeAll: Subject<any> = new Subject<any>()
 
-	opened$: BehaviorSubject<boolean> = this.editDoctorModal.opened$
-
-	emailInputMask = createMask({ alias: 'email' })
+	emailInputMask = !isPlatformBrowser(this._platformID)
+		? null
+		: createMask({ alias: 'email' })
 
 	ngOnInit(): void {}
 
@@ -48,7 +54,7 @@ export class DoctorEditComponent implements OnInit {
 
 		this.unsubscribeAll.complete()
 
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 
 	ngAfterViewInit(): void {
@@ -60,6 +66,6 @@ export class DoctorEditComponent implements OnInit {
 				}
 			})
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 }

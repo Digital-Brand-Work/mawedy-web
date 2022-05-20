@@ -3,14 +3,17 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
+	Inject,
 	Input,
 	OnInit,
 	Output,
+	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { createMask } from '@ngneat/input-mask'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { isPlatformBrowser } from '@angular/common'
 
 @Component({
 	selector: 'partner-with-us-section1-first-step',
@@ -19,7 +22,10 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class PartnerWithUsSection1FirstStepComponent implements OnInit {
-	constructor(private cdr: ChangeDetectorRef) {}
+	constructor(
+		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _cdr: ChangeDetectorRef,
+	) {}
 
 	unsubscribe: Subject<any> = new Subject<any>()
 
@@ -31,14 +37,16 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 
 	@Input() focus$!: BehaviorSubject<boolean>
 
-	emailInputMask = createMask({ alias: 'email' })
+	emailInputMask = !isPlatformBrowser(this._platformID)
+		? null
+		: createMask({ alias: 'email' })
 
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
 		this.input.nativeElement.focus()
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
@@ -46,6 +54,6 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 
 		this.unsubscribe.complete()
 
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 }

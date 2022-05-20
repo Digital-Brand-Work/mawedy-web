@@ -130,12 +130,14 @@ export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy {
 	 */
 	ngOnInit(): void {
 		// Subscribe to window resize event
-		fromEvent(window, 'resize')
-			.pipe(takeUntil(this._unsubscribeAll), debounceTime(150))
-			.subscribe(() => {
-				// Update the PerfectScrollbar
-				this.update()
-			})
+		if (isPlatformBrowser(this._platformID)) {
+			fromEvent(window, 'resize')
+				.pipe(takeUntil(this._unsubscribeAll), debounceTime(150))
+				.subscribe(() => {
+					// Update the PerfectScrollbar
+					this.update()
+				})
+		}
 	}
 
 	/**
