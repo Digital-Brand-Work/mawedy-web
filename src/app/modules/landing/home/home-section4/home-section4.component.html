@@ -1,4 +1,6 @@
-<div class="md:min-h-screen w-full flex relative py-20 md:py-0 bg-gray-50">
+<div
+	class="md:min-h-screen w-full flex relative py-20 md:py-0 bg-gray-50 justify-center"
+>
 	<!-- <img
 		parallax
 		[factor]="1.3"
@@ -18,7 +20,7 @@
 				<div
 					*ngIf="true"
 					@expandCollapse
-					class="text-6xl md:text-4xl text-emerald-500 font-bold leading-none text-center"
+					class="text-6xl md:text-4xl text-emerald-500 font-bold leading-none text-center md:text-left"
 				>
 					Join our Community!
 				</div>
@@ -36,7 +38,7 @@
 						'justify-center items-center':
 							(breakpoint$ | async) === 'tablet'
 					}"
-					class="flex mt-10"
+					class="flex mt-10 w-full items-center justify-center"
 				>
 					<app-store-button></app-store-button>
 
