@@ -9,7 +9,7 @@ import { AppointmentsWeekCalendarComponent } from './appointments/appointments-w
 import { AppointmentsDayCalendarComponent } from './appointments/appointments-day-calendar/appointments-day-calendar.component'
 import { AppointmentRegularBadgeComponent } from './appointments/appointments/badges/appointment-regular-badge/appointment-regular-badge.component'
 import { AppointmentDayBadgeComponent } from './appointments/appointments/badges/appointment-day-badge/appointment-day-badge.component'
-import { appointmentRoutes } from 'app/routes/admin/appointment.routing'
+import { appointmentRoutes } from 'app/mawedy-core/routes/admin/appointment.routing'
 import { StoreModule } from '@ngrx/store'
 import * as fromAppointment from './appointment.reducer'
 import { EffectsModule } from '@ngrx/effects'

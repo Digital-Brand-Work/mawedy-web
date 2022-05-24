@@ -5,7 +5,7 @@ import { SubscriptionSummaryComponent } from './subscription-summary/subscriptio
 import { SubscriptionPackagesComponent } from './subscription-packages/subscription-packages.component'
 import { SubscriptionSuccessComponent } from './subscription-success/subscription-success.component'
 import { SharedModule } from 'app/shared/shared.module'
-import { subscriptionRoutes } from 'app/routes/admin/subscription.routing'
+import { subscriptionRoutes } from 'app/mawedy-core/routes/admin/subscription.routing'
 import { SubscriptionPackageItemComponent } from './subscription-packages/subscription-package-item/subscription-package-item.component'
 
 const components = [

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import {
 	HomeNav,
 	homeNavigation,
-} from '../../../../navigation/landing.navigation'
+} from '../../../../mawedy-core/navigation/landing.navigation'
 
 @Component({
 	selector: 'home-navbar',

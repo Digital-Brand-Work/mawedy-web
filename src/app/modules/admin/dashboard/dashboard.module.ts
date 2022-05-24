@@ -10,7 +10,7 @@ import { WaitingPatientsComponent } from './waiting-patients/waiting-patients.co
 import { WaitingPatientsTableComponent } from './waiting-patients/waiting-patients-table/waiting-patients-table.component'
 import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-patients-toolbar/waiting-patients-toolbar.component'
 import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patients-filter/waiting-patients-filter.component'
-import { dashboardRoutes } from 'app/routes/admin/dashboard.routing'
+import { dashboardRoutes } from 'app/mawedy-core/routes/admin/dashboard.routing'
 import { DashboardAppointmentsComponent } from './appointments/dashboard-appointments.component'
 import { DashboardComponent } from './dashboard.component'
 import { StoreModule } from '@ngrx/store'
