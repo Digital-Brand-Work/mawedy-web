@@ -1,4 +1,4 @@
-import { Department } from 'app/store/department/department.model'
+import { Department } from 'app/modules/admin/clinic/department/department.model'
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
 
 export interface MedicalServiceRule {

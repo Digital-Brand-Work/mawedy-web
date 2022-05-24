@@ -9,9 +9,9 @@ import { PromotionsEditComponent } from './promotions-edit/promotions-edit.compo
 import { SharedModule } from 'app/shared/shared.module'
 import { promotionsRoutes } from 'app/routes/admin/promotions.routing'
 import { StoreModule } from '@ngrx/store'
-import * as fromPromotion from '../../../store/promotion/promotion.reducer'
+import * as fromPromotion from './promotion.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { PromotionEffects } from 'app/store/promotion/promotion.effects'
+import { PromotionEffects } from 'app/modules/admin/promotions/promotion.effects'
 
 const components = [
 	PromotionsComponent,

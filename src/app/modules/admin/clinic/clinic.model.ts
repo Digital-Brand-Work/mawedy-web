@@ -1,6 +1,6 @@
 import { PHPBaseModel } from '@digital_brand_work/models/core.model'
-import { ClinicRegistrationStatusEnum } from '../enums/clinic-registration.enum'
-import { StripeStatusEnum } from '../enums/strape-status.enum'
+import { ClinicRegistrationStatusEnum } from '../../../mawedy-core/enums/clinic-registration.enum'
+import { StripeStatusEnum } from '../../../mawedy-core/enums/strape-status.enum'
 
 export interface Clinic extends PHPBaseModel {
 	name: string

@@ -1,13 +1,13 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store'
 import { environment } from '../environments/environment'
-import * as fromDoctor from './store/doctor/doctor.reducer'
-import * as fromPatient from './store/patient/patient.reducer'
-import * as fromPromotion from './store/promotion/promotion.reducer'
-import * as fromAppointment from './store/appointment/appointment.reducer'
-import * as fromDashboardWaitingPatient from './store/dashboard-waiting-patient/dashboard-waiting-patient.reducer'
-import * as fromDashboardAppointment from './store/dashboard-appointment/dashboard-appointment.reducer'
-import * as fromDepartment from './store/department/department.reducer'
-import * as fromMedicalService from './store/medical-service/medical-service.reducer'
+import * as fromDoctor from './modules/admin/doctors/doctor.reducer'
+import * as fromPatient from './modules/admin/patients/patient.reducer'
+import * as fromPromotion from './modules/admin/promotions/promotion.reducer'
+import * as fromAppointment from './modules/admin/appointments/appointment.reducer'
+import * as fromDashboardWaitingPatient from './modules/admin/dashboard/waiting-patients/dashboard-waiting-patient.reducer'
+import * as fromDashboardAppointment from './modules/admin/dashboard/appointments/dashboard-appointment.reducer'
+import * as fromDepartment from './modules/admin/clinic/department/department.reducer'
+import * as fromMedicalService from './modules/admin/clinic/clinic-services/medical-service.reducer'
 
 export interface State {
 	[fromDoctor.doctorsFeatureKey]: fromDoctor.State

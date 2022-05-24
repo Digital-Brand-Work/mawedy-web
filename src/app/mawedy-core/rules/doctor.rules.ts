@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
-import { Department } from 'app/store/department/department.model'
-import { TimeSlot } from 'app/store/doctor/doctor.model'
+import { Department } from 'app/modules/admin/clinic/department/department.model'
+import { TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 
 export interface DoctorRule {
 	name: (string | ((control: AbstractControl) => ValidationErrors))[]

@@ -12,9 +12,9 @@ import { SharedModule } from 'app/shared/shared.module'
 import { RouterModule } from '@angular/router'
 import { patientRoutes } from 'app/routes/admin/patients.routing'
 import { StoreModule } from '@ngrx/store'
-import * as fromPatient from '../../../store/patient/patient.reducer'
+import * as fromPatient from './patient.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { PatientEffects } from 'app/store/patient/patient.effects'
+import { PatientEffects } from 'app/modules/admin/patients/patient.effects'
 
 const components = [
 	PatientsComponent,

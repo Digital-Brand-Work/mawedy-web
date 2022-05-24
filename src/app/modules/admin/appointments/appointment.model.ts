@@ -1,6 +1,6 @@
 import { AppointmentStatusEnum } from 'app/mawedy-core/enums/appointment-status.enum'
 import { AppointmentTypeEnum } from 'app/mawedy-core/enums/appointment-type.enum'
-import { PHPBaseModel } from '../../../@digital_brand_work/models/core.model'
+import { PHPBaseModel } from '../../../../@digital_brand_work/models/core.model'
 
 export interface Appointment extends PHPBaseModel {
 	clinic_id: string

@@ -7,9 +7,9 @@ import { DoctorsFilterComponent } from './doctors-filter/doctors-filter.componen
 import { DoctorsTableComponent } from './doctors-table/doctors-table.component'
 import { DoctorsToolbarComponent } from './doctors-toolbar/doctors-toolbar.component'
 import { StoreModule } from '@ngrx/store'
-import * as fromDoctor from '../../../store/doctor/doctor.reducer'
+import * as fromDoctor from './doctor.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { DoctorEffects } from '../../../store/doctor/doctor.effects'
+import { DoctorEffects } from './doctor.effects'
 
 const components = [
 	DoctorsComponent,
