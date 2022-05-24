@@ -1,3 +1,5 @@
+export type ClinicSubscriptionType = 'Free' | 'Standard' | 'Golden' | 'Platinum'
+
 export enum ClinicSubscriptionTypeEnum {
 	FREE = 'Free',
 	STANDARD = 'Standard',

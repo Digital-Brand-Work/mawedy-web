@@ -1,27 +1,24 @@
+import { Navigation } from './../../core/navigation/navigation.types'
 import { slugify } from '@digital_brand_work/helpers/helpers'
 import { FuseNavigationItem } from '@fuse/components/navigation'
-import { map, of, zip } from 'rxjs'
+import { BehaviorSubject, of, zip } from 'rxjs'
 
 let clinic: string = ''
 
 let branch: string = ''
 
-const clinic$ = of('Aster Clinic')
+export const clinic$: BehaviorSubject<string> = new BehaviorSubject(
+	'Aster Clinic',
+)
 
-const branch$ = of('Jumeirah')
+export const branch$: BehaviorSubject<string> = new BehaviorSubject('Jumeirah')
 
 zip(clinic$, branch$).subscribe((observable: string[]) => {
 	clinic = slugify(observable[0])
 	branch = slugify(observable[1])
 })
 
-export const onTrialUser: FuseNavigationItem[] = []
-
-export const standardUser: FuseNavigationItem[] = []
-
-export const goldenUser: FuseNavigationItem[] = []
-
-export const platinumUser: FuseNavigationItem[] = [
+const navigation: FuseNavigationItem[] = [
 	{
 		id: '1',
 		title: 'Dashboard',
@@ -72,3 +69,11 @@ export const platinumUser: FuseNavigationItem[] = [
 		link: `/${clinic}/${branch}/subscription`,
 	},
 ]
+
+export const standardUser: FuseNavigationItem[] = []
+
+export const goldenUser: FuseNavigationItem[] = []
+
+export const platinumUser: FuseNavigationItem[] = [...navigation]
+
+export const onTrialUser: FuseNavigationItem[] = [...platinumUser]

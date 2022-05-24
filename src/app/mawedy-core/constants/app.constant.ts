@@ -1,4 +1,7 @@
-import { SubscriptionFeatures } from '../models/utility.models'
+import {
+	MawedySubscription,
+	SubscriptionFeatures,
+} from '../models/utility.models'
 
 export const weekDays: WeekDay[] = [
 	'Sunday',
@@ -18,6 +21,130 @@ export type WeekDay =
 	| 'Friday'
 	| 'Saturday'
 	| 'Sunday'
+
+export const CUSTOMER_PRICE = 60
+
+export const mawedySubscription: MawedySubscription[] = [
+	{
+		yearly: {
+			name: 'Standard',
+			price: 1500,
+			features: [
+				'Subscription includes 1 user',
+				'View solution dashboard',
+				'Listed in Mawedy Application',
+				'Receive patient ‘appointments, outreach patients',
+				'Confirm or cancel patient appointments',
+				'Appointment confirmation through App and SMS',
+				`Manage doctor's profile, availability, schedule, and pertinent information`,
+				'1 to 1 technical support, phone, and email support',
+			],
+		},
+	},
+	{
+		yearly: {
+			name: 'Golden (Web Solution)',
+			price: 2300,
+			features: [
+				'Subscription includes 3 users',
+				'1 Master Admin Panel. ',
+				'Advanced booking solution',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Custom Fieldes and filter',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Data Import',
+				'Data export',
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Manage promotions.',
+				'Receive emails',
+				' 1 to 1 technical support and email support.',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Automatic Updates',
+				'Patient SMS Notification',
+			],
+		},
+		monthly: {
+			name: 'Golden (Web Solution)',
+			price: 220,
+			features: [
+				'Subscription includes 3 users',
+				'1 Master Admin Panel. ',
+				'Advanced booking solution',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Custom Fieldes and filter',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Data Import',
+				'Data export',
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Receive emails',
+				'1 to 1 technical support and email support.',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Automatic Updates',
+				'Patient SMS Notification',
+			],
+		},
+	},
+	{
+		yearly: {
+			name: 'Platinum ( Application & Web Solution)',
+			price: 3000,
+			features: [
+				'Subscription includes 6 users',
+				'1 Master Admin Panel. ',
+				'Listed in Mawedy Application',
+				'View solution dashboard',
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Receive patients appointments, outreach patients',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Manage promotions.',
+				'Listed in Mawedy booking application.',
+				'Powerful Report for management users',
+				'Subscription includes 6 Users',
+				'1 to 1 technical support , phone and email support',
+				'Flexible Scheduling',
+				'Data Import',
+				'Data Export',
+				'Automatic Updates',
+				'Patient SMS Notifications',
+			],
+		},
+		monthly: {
+			name: 'Golden (Web Solution)',
+			price: 220,
+			features: [
+				'Subscription includes 6 users',
+				'1 Master Admin Panel. ',
+				'Listed in Mawedy Application',
+				'View solution dashboard',
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Receive patients appointments, outreach patients',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Manage promotions.',
+				'Listed in Mawedy booking application.',
+				'Powerful Report for management users',
+				'Subscription includes 6 Users',
+				'1 to 1 technical support , phone and email support',
+				'Flexible Scheduling',
+				'Data Import',
+				'Data Export',
+				'Automatic Updates',
+				'Patient SMS Notifications',
+			],
+		},
+	},
+]
 
 export const subscription: SubscriptionFeatures = {
 	standard: [

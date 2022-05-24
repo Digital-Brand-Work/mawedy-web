@@ -1,3 +1,4 @@
+import { ClinicSubscriptionType } from './../../../mawedy-core/enums/clinic-subscription-type.enum'
 import { PHPBaseModel } from '@digital_brand_work/models/core.model'
 import { ClinicRegistrationStatusEnum } from '../../../mawedy-core/enums/clinic-registration.enum'
 import { StripeStatusEnum } from '../../../mawedy-core/enums/strape-status.enum'
@@ -12,7 +13,7 @@ export interface Clinic extends PHPBaseModel {
 	phone_number_two: string | null
 	phone_number_two_country_code: string | null
 	status: ClinicRegistrationStatusEnum
-	subscription_type: string
+	subscription_type: ClinicSubscriptionType
 	subscription_date: Date
 	payment_received: 0
 	stripe_session_id: string | null

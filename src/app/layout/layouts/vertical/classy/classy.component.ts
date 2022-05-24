@@ -1,3 +1,4 @@
+import { FuseNavigationItem } from './../../../../../@fuse/components/navigation/navigation.types'
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher'
@@ -10,6 +11,8 @@ import { NavigationService } from 'app/core/navigation/navigation.service'
 import { User } from 'app/core/user/user.types'
 import { UserService } from 'app/core/user/user.service'
 import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-add/appointment-add.service'
+import { AdminNavigationService } from 'app/mawedy-core/navigation/admin.navigation.service'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 
 @Component({
 	selector: 'classy-layout',
@@ -18,17 +21,18 @@ import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-
 })
 export class ClassyLayoutComponent implements OnInit, OnDestroy {
 	constructor(
-		private _navigationService: NavigationService,
 		private _userService: UserService,
 		private _fuseMediaWatcherService: FuseMediaWatcherService,
 		private _fuseNavigationService: FuseNavigationService,
 
-		private addAppointmentModal: AddAppointmentModal,
+		private _adminNavigationService: AdminNavigationService,
+		private _clinicUserService: ClinicUserService,
+		private _addAppointmentModal: AddAppointmentModal,
 	) {}
 
 	private _unsubscribeAll: Subject<any> = new Subject<any>()
 
-	opened$: BehaviorSubject<boolean> = this.addAppointmentModal.opened$
+	opened$: BehaviorSubject<boolean> = this._addAppointmentModal.opened$
 
 	isScreenSmall: boolean
 
@@ -41,10 +45,22 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this._navigationService.navigation$
+		this._clinicUserService.clinic$
 			.pipe(takeUntil(this._unsubscribeAll))
-			.subscribe((navigation: Navigation) => {
-				this.navigation = navigation
+			.subscribe({
+				next: (clinic) => {
+					this._adminNavigationService
+						.get(clinic.subscription_type)
+						.pipe(takeUntil(this._unsubscribeAll))
+						.subscribe((navigation: FuseNavigationItem[]) => {
+							this.navigation = {
+								compact: navigation,
+								default: navigation,
+								futuristic: navigation,
+								horizontal: navigation,
+							}
+						})
+				},
 			})
 
 		this._userService.user$

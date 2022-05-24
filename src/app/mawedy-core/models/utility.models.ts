@@ -12,6 +12,17 @@ export interface SubscriptionFeatures {
 	platinum: string[]
 }
 
+export interface MawedySubscription {
+	monthly?: Subscription
+	yearly: Subscription
+}
+
+export interface Subscription {
+	name: string
+	features: string[]
+	price: number
+}
+
 export interface File extends PHPBaseModel {
 	type: string
 	name: string
