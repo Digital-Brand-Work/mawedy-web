@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	api: 'api.mawedy.ae/',
+	api: 'https://api.mawedy.ae/',
 }

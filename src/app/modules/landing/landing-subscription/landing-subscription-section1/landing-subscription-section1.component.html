@@ -122,6 +122,11 @@
 			</div>
 		</div>
 
-		<div></div>
+		<div class="px-5 md:p-10 items-start md:-translate-y-20">
+			<partner-with-us-section1-first-step
+				[isProcessing]="isProcessing"
+				(onNext)="register($event)"
+			></partner-with-us-section1-first-step>
+		</div>
 	</div>
 </div>

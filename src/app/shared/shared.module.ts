@@ -1,3 +1,4 @@
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { DoctorDetailsComponent } from './../modules/admin/doctors/modals/doctor-details/doctor-details.component'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { AppointmentEditComponent } from './../modules/admin/appointments/appointment-edit/appointment-edit.component'
@@ -116,6 +117,7 @@ const modules = [
 	MatCheckboxModule,
 	MatRadioModule,
 	MatSelectModule,
+	MatProgressSpinnerModule,
 ]
 
 const directives = [

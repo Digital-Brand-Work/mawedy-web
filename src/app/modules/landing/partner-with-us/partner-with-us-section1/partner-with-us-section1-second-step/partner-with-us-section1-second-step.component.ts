@@ -59,8 +59,6 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 
 	form = this._formBuilder.group(this._storeRegisterRule.secondForm)
 
-	// accounts = this._formBuilder.group(this._storeRegisterRule.form.accounts)
-
 	previousData: any = undefined
 
 	ngOnInit(): void {}
@@ -89,12 +87,6 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 		for (let i = 1; i <= users; i++) {
 			accounts.push({ username: '' })
 		}
-
-		this._storeRegisterRule.setAccounts(users)
-
-		// this.accounts = this._formBuilder.group(
-		// 	this._storeRegisterRule.form.accounts,
-		// )
 
 		this._cdr.detectChanges()
 

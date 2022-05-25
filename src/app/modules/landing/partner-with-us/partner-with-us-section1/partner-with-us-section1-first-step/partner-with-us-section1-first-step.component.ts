@@ -1,4 +1,4 @@
-import { FormBuilder, NgForm } from '@angular/forms'
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -37,9 +37,14 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 
 	@ViewChild('input') input!: ElementRef
 
-	@Output() onNext = new EventEmitter()
+	@Output() onNext = new EventEmitter<{
+		form: FormGroup
+		trade_license_photo: any
+	}>()
 
 	@Input() step: 'one' | 'two' = 'one'
+
+	@Input() isProcessing: boolean = false
 
 	@Input() focus$!: BehaviorSubject<boolean>
 
@@ -47,9 +52,11 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 		? null
 		: createMask({ alias: 'email' })
 
-	form = this._formBuilder.group(this._storeRegisterRule.firstForm)
+	form: FormGroup = this._formBuilder.group(this._storeRegisterRule.firstForm)
 
 	filename: string = ''
+
+	file?: File
 
 	ngOnInit(): void {}
 
@@ -68,7 +75,7 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 	}
 
 	setTradeLicense(event: any): void {
-		this._storeRegisterRule.setTradeLicense(event.target.files[0])
+		this.file = event.target.files[0]
 
 		this.filename = event.target.files[0].name
 	}

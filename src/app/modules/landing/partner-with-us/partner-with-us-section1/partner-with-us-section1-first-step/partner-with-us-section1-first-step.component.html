@@ -91,6 +91,7 @@
 	</div>
 
 	<input
+		accept="image/*"
 		(change)="setTradeLicense($event)"
 		type="file"
 		#tradeLicense
@@ -116,20 +117,22 @@
 
 	<div class="mt-5 flex w-full">
 		<button
-			(click)="this.onNext.emit(form)"
 			@fadeOutBottom
 			@slideInRight
-			[disabled]="!form.valid || filename === ''"
+			[disabled]="!form.valid || filename === '' || isProcessing"
 			[ngClass]="{
-				'bg-teal-500 hover:bg-teal-600': form.valid && filename !== '',
+				'bg-teal-500 hover:bg-teal-600':
+					form.valid && filename !== '' && !isProcessing,
 				'bg-gray-400 pointer-events-none':
-					!form.valid || filename === ''
+					!form.valid || filename === '' || isProcessing
 			}"
 			*ngIf="step !== 'two'"
-			(click)="onNext.emit()"
-			class="text-white px-10 py-4 uppercase rounded-lg ml-auto w-full"
+			(click)="onNext.emit({ form: form, trade_license_photo: file })"
+			class="text-white px-10 py-4 rounded-lg ml-auto w-full uppercase flex items-center justify-center"
 		>
-			Next
+			<spinner *ngIf="isProcessing"></spinner>
+
+			<div *ngIf="!isProcessing">Next</div>
 		</button>
 	</div>
 </div>
