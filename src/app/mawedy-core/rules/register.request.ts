@@ -24,6 +24,7 @@ export interface RegisterRule {
 		cancel: string
 	}
 	trade_license_photo?: File
+	interval: (string | ((control: AbstractControl) => ValidationErrors))[]
 }
 
 @Injectable({ providedIn: 'root' })
@@ -35,6 +36,7 @@ export class StoreRegisterRule {
 		phone_number_one_country_code: ['AE'],
 		phone_number_one: [''],
 		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
+		interval: [''],
 	}
 
 	secondForm = {
@@ -49,5 +51,6 @@ export class StoreRegisterRule {
 		phone_number_one_country_code: ['AE'],
 		phone_number_one: [''],
 		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
+		interval: [''],
 	}
 }

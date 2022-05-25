@@ -1,4 +1,4 @@
-import { File } from './../../../../mawedy-core/models/utility.models'
+import { Router } from '@angular/router'
 import { FormGroup } from '@angular/forms'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import { Subscription } from 'app/mawedy-core/models/utility.models'
@@ -7,14 +7,13 @@ import {
 	PRICE_PER_USER,
 } from 'app/mawedy-core/constants/app.constant'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { BehaviorSubject, Observable, take } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { HomeSubscriptionState } from 'app/misc/home.state'
 import { RegisterService } from '../../home/register.service'
 import { AlertState } from 'app/components/alert/alert.service'
-import { DOCUMENT } from '@angular/common'
 
 @Component({
 	selector: 'landing-subscription-section1',
@@ -24,10 +23,9 @@ import { DOCUMENT } from '@angular/common'
 })
 export class LandingSubscriptionSection1Component implements OnInit {
 	constructor(
-		@Inject(DOCUMENT) private document: Document,
 		private _mediaService: MediaService,
 		private _scrollService: ScrollService,
-
+		private _router: Router,
 		private _alert: AlertState,
 		private _homeSubscriptionState: HomeSubscriptionState,
 		private _registerService: RegisterService,
@@ -57,7 +55,7 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			if (subscription === null) {
 				this.subscription$.next(this.defaultSubscription)
 
-				this.interval$.next('yearly')
+				return this.interval$.next('yearly')
 			}
 		})
 
@@ -69,25 +67,41 @@ export class LandingSubscriptionSection1Component implements OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		this._scrollService.scrollToTop()
+		setTimeout(() => {
+			this._scrollService.scrollToTop()
+		}, 50)
 	}
 
 	register(data: { form: FormGroup; trade_license_photo: any }) {
-		console.log(event)
-
-		this.isProcessing = true
-
 		let form = new FormData()
 
 		this.subscription$.pipe(take(1)).subscribe((subscription) => {
 			data.form.value.subscription_type = subscription.type
 		})
 
+		this.interval$.pipe(take(1)).subscribe((interval) => {
+			data.form.value.interval = interval
+		})
+
+		this.isProcessing = true
+
+		return (window.location.href =
+			window.location.origin +
+			`/success?subscription=${data.form.value.subscription_type}&interval=${data.form.value.interval}`)
+
 		form.append('trade_license_photo', data.trade_license_photo)
 
-		form.append('success', this.document.location.origin + '')
+		form.append(
+			'success',
+			window.location.origin +
+				`/success?subscription=${data.form.value.subscription_type}&interval=${data.form.value.interval}`,
+		)
 
-		form.append('cancel', this.document.location.origin + '')
+		form.append(
+			'cancel',
+			window.location.origin +
+				`/subscription?subscription=${data.form.value.subscription_type}&interval=${data.form.value.interval}`,
+		)
 
 		if (data.form.value !== undefined) {
 			for (let key in data?.form?.value) {
