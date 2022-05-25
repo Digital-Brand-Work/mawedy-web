@@ -27,6 +27,8 @@ export class HomeSection3PricingComponent implements OnInit {
 	subscribe() {
 		this._homeSubscriptionState.subscription$.next(this.subscription)
 
+		this._homeSubscriptionState.interval$.next(this.interval)
+
 		this._router.navigate(['/subscription'])
 	}
 }

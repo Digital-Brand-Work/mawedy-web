@@ -36,7 +36,7 @@ export const FEATURES: string[] = [
 	'Membership plan with lots of benefits',
 ]
 
-export const CUSTOMER_PRICE: number = 60
+export const PRICE_PER_USER: number = 60
 
 export const BILL_INTERVALS: BillInterval[] = ['monthly', 'yearly']
 

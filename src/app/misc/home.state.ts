@@ -6,4 +6,8 @@ import { BehaviorSubject } from 'rxjs'
 export class HomeSubscriptionState {
 	subscription$: BehaviorSubject<Subscription | null> =
 		new BehaviorSubject<Subscription | null>(null)
+
+	interval$: BehaviorSubject<string | null> = new BehaviorSubject<
+		string | null
+	>(null)
 }
