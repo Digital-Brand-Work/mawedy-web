@@ -1,1 +1,46 @@
-<p>about-us-section1 works!</p>
+<div
+	@slideInBottom
+	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
+	class="w-full flex items-center justify-center relative"
+>
+	<div
+		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
+	>
+		<div
+			[ngClass]="{
+				'pb-20': (breakpoint$ | async) === 'tablet'
+			}"
+			class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20"
+		>
+			<div>
+				<div class="text-5xl text-emerald-500 font-bold my-3">
+					Who we are
+				</div>
+
+				<div
+					class="text-xl text-gray-700 md:pr-10"
+					style="line-height: 40px"
+				>
+					Mawedy is the premier solution to offer a comprehensive
+					communication channel that makes it easier for patients to
+					book their appointment quick and easy. We know how difficult
+					it can be to manage patient bookings appropriately and
+					that’s why Mawedy is here to assist. Not only that, but you
+					will also never miss out on any clinical offers and register
+					for membership to get free or discounted services! With
+					Mawedy it becomes a lot easier for any patient to book the
+					necessary service at their preferred clinic. You can easily
+					pick the clinic you want, the doctor you want to visit and
+					select the desired time and date as you see fit.
+				</div>
+			</div>
+
+			<div>
+				<img
+					src="/assets/app/about-us/section-1-icon.svg"
+					alt="About Us"
+				/>
+			</div>
+		</div>
+	</div>
+</div>

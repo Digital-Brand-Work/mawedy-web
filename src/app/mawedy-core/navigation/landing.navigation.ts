@@ -16,11 +16,6 @@ export const homeNavigation: HomeNav[] = [
 		link: 'partner-with-us',
 	},
 	{
-		id: 3,
-		name: 'Join us',
-		link: 'join-us',
-	},
-	{
 		id: 4,
 		name: 'Talk to us',
 		link: 'talk-to-us',
