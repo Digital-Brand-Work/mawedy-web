@@ -47,6 +47,7 @@
 
 				<div class="mt-3 w-full">
 					<input
+						#input
 						[ngClass]="{
 							'border-red-500 shadow-sm  placeholder-red-400 ':
 								form.get('name')?.invalid &&
@@ -54,7 +55,7 @@
 						}"
 						formControlName="name"
 						type="text"
-						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border"
+						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
 						[placeholder]="
 							form.get('name')?.invalid &&
 							form.get('name')?.touched
@@ -73,7 +74,7 @@
 						}"
 						formControlName="email"
 						type="text"
-						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border"
+						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
 						[placeholder]="
 							form.get('email')?.invalid &&
 							form.get('email')?.touched
@@ -87,7 +88,7 @@
 					<input
 						formControlName="phone"
 						type="text"
-						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border"
+						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
 						placeholder="Your phone (Optional)"
 					/>
 				</div>
@@ -101,7 +102,7 @@
 						}"
 						formControlName="message"
 						style="height: 265px"
-						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border"
+						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
 						[placeholder]="
 							form.get('message')?.invalid &&
 							form.get('message')?.touched

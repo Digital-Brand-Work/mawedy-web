@@ -3,6 +3,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Component, OnInit } from '@angular/core'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
+import { FEATURES } from 'app/mawedy-core/constants/app.constant'
 
 @Component({
 	selector: 'home-section2',
@@ -15,8 +16,9 @@ export class HomeSection2Component implements OnInit {
 
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
-	description: string =
-		'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis .'
+	features: string[] = FEATURES
 
 	ngOnInit(): void {}
+
+	identity = (item: any) => item
 }

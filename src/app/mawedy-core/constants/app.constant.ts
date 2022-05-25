@@ -25,6 +25,15 @@ export type WeekDay =
 	| 'Saturday'
 	| 'Sunday'
 
+export const FEATURES: string[] = [
+	'Reliable, detailed booking solution',
+	'Professional way to connect clinics and patients',
+	'Saves Time and Effort',
+	'Never miss out on offers',
+	'Patient onboarding a lot easier',
+	'Membership plan with lots of benefits',
+]
+
 export const CUSTOMER_PRICE: number = 60
 
 export const BILL_INTERVALS: BillInterval[] = ['monthly', 'yearly']
