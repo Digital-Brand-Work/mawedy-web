@@ -6,6 +6,8 @@ import {
 
 export const PHONE = '+971501112222'
 
+export const EMAIL = 'info@mawedy.ae'
+
 export const weekDays: WeekDay[] = [
 	'Sunday',
 	'Monday',

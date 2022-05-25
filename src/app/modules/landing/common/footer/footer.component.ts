@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { EMAIL, PHONE } from 'app/mawedy-core/constants/app.constant'
 
 @Component({
-  selector: 'footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+	selector: 'footer',
+	templateUrl: './footer.component.html',
+	styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
+	phone: string = PHONE
 
-  ngOnInit(): void {
-  }
+	email: string = EMAIL
 
+	ngOnInit(): void {}
 }
