@@ -1,0 +1,46 @@
+<div
+	class="min-h-screen w-full flex flex-col items-center justify-center relative py-20 md:py-0 bg-gray-50"
+>
+	<div class="text-gray-700 font-extrabold text-6xl mt-40">
+		Plans and Pricing
+	</div>
+
+	<div class="text-gray-700 font-medium text-xl">
+		Start small and free upgrade as you go. Take control of everything.
+	</div>
+
+	<div
+		style="width: 300px"
+		class="border border-emerald-500 rounded-xl grid grid-cols-2 my-10 overflow-hidden"
+	>
+		<button
+			(click)="billing$.next(item)"
+			style="height: 50px"
+			[ngClass]="{
+				'bg-emerald-500 text-white pointer-events-none  ':
+					(billing$ | async) === item,
+				'text-gray-400 bg-white': (billing$ | async) !== item
+			}"
+			class="hover:bg-emerald-50 hover:text-emerald-800 font-medium"
+			*ngFor="let item of billings; trackBy: identity"
+		>
+			{{ item | titlecase }} Plan
+		</button>
+	</div>
+
+	<div
+		[@listAnimation]="3"
+		class="grid grid-cols-1 md:grid-cols-3 gap-20 max-w-screen-xl mt-20"
+	>
+		<div
+			[class.hidden]="!subscription[billing$ | async]"
+			*ngFor="let subscription of mawedySubscriptions; trackBy: identity"
+		>
+			<home-section3-pricing
+				*ngIf="subscription[billing$ | async]"
+				[interval]="billing$ | async"
+				[subscription]="subscription[billing$ | async]"
+			></home-section3-pricing>
+		</div>
+	</div>
+</div>
