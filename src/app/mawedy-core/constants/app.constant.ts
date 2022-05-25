@@ -1,4 +1,5 @@
 import {
+	BillInterval,
 	MawedySubscription,
 	SubscriptionFeatures,
 } from '../models/utility.models'
@@ -22,12 +23,16 @@ export type WeekDay =
 	| 'Saturday'
 	| 'Sunday'
 
-export const CUSTOMER_PRICE = 60
+export const CUSTOMER_PRICE: number = 60
 
-export const mawedySubscription: MawedySubscription[] = [
+export const BILL_INTERVALS: BillInterval[] = ['monthly', 'yearly']
+
+export const mawedySubscriptions: MawedySubscription[] = [
 	{
 		yearly: {
+			type: 'Standard',
 			name: 'Standard',
+			users: 1,
 			price: 1500,
 			features: [
 				'Subscription includes 1 user',
@@ -43,8 +48,10 @@ export const mawedySubscription: MawedySubscription[] = [
 	},
 	{
 		yearly: {
+			type: 'Golden',
 			name: 'Golden (Web Solution)',
 			price: 2300,
+			users: 3,
 			features: [
 				'Subscription includes 3 users',
 				'1 Master Admin Panel. ',
@@ -68,8 +75,10 @@ export const mawedySubscription: MawedySubscription[] = [
 			],
 		},
 		monthly: {
+			type: 'Golden',
 			name: 'Golden (Web Solution)',
 			price: 220,
+			users: 3,
 			features: [
 				'Subscription includes 3 users',
 				'1 Master Admin Panel. ',
@@ -94,8 +103,10 @@ export const mawedySubscription: MawedySubscription[] = [
 	},
 	{
 		yearly: {
+			type: 'Platinum',
 			name: 'Platinum ( Application & Web Solution)',
 			price: 3000,
+			users: 6,
 			features: [
 				'Subscription includes 6 users',
 				'1 Master Admin Panel. ',
@@ -119,8 +130,10 @@ export const mawedySubscription: MawedySubscription[] = [
 			],
 		},
 		monthly: {
-			name: 'Golden (Web Solution)',
-			price: 220,
+			type: 'Platinum',
+			name: 'Platinum ( Application & Web Solution)',
+			price: 300,
+			users: 6,
 			features: [
 				'Subscription includes 6 users',
 				'1 Master Admin Panel. ',

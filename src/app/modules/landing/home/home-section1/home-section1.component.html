@@ -8,7 +8,7 @@
 				(breakpoint$ | async) !== 'tablet' &&
 				(breakpoint$ | async) !== 'phone'
 		}"
-		src="../../../../../assets/app/home/home-section.jpg"
+		src="../../../../../assets/app/home/home-section-v2.png"
 		class="w-screen h-full object-cover absolute top-0 z-0"
 		alt=""
 	/>
@@ -35,25 +35,31 @@
 					}"
 				>
 					<div
+						class="accent-color text-2xl md:text-4xl text-center md:text-left"
+					>
+						Forget long calls
+					</div>
+
+					<div
 						[ngClass]="{
-							'text-5xl -mt-50':
+							'text-4xl -mt-50':
 								(breakpoint$ | async) === 'phone',
-							'text-8xl px-30 ':
+							'text-7xl px-30 ':
 								(breakpoint$ | async) === 'tablet',
-							'text-9xl':
+							'text-8xl':
 								(breakpoint$ | async) !== 'phone' &&
 								(breakpoint$ | async) !== 'tablet'
 						}"
 						@expandCollapse
-						class="text-white font-bold leading-none text-center md:text-left"
+						class="accent-color my-2 font-bold leading-none text-center md:text-left"
 					>
-						Clinic Appointments made easy.
+						Book your appointments.
 					</div>
 
 					<div
-						class="text-emerald-100 text-xl md:text-2xl text-center md:text-left"
+						class="accent-color text-xl md:text-2xl text-center md:text-left"
 					>
-						Helping people for better health.
+						A reliable, detailed booking solution made to serve you.
 					</div>
 
 					<div

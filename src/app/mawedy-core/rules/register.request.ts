@@ -1,5 +1,6 @@
 import { ClinicSubscriptionTypeEnum } from './../enums/clinic-subscription-type.enum'
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
+import { Injectable } from '@angular/core'
 
 export interface RegisterRule {
 	name: (string | ((control: AbstractControl) => ValidationErrors))[]
@@ -25,11 +26,26 @@ export interface RegisterRule {
 	trade_license_photo?: File
 }
 
+@Injectable({ providedIn: 'root' })
 export class StoreRegisterRule {
+	firstForm = {
+		name: ['', Validators.required],
+		address: ['', Validators.required],
+		email: ['', Validators.required],
+		phone_number_one_country_code: ['AE'],
+		phone_number_one: [''],
+		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
+	}
+
+	secondForm = {
+		subscription_interval: [ClinicSubscriptionTypeEnum.FREE],
+		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
+	}
+
 	form: RegisterRule = {
-		name: ['', Validators.required, Validators.maxLength(255)],
-		address: ['', Validators.required, Validators.maxLength(255)],
-		email: ['', Validators.required, Validators.maxLength(255)],
+		name: ['', Validators.required],
+		address: ['', Validators.required],
+		email: ['', Validators.required],
 		phone_number_one_country_code: ['AE'],
 		phone_number_one: [''],
 		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
@@ -40,7 +56,7 @@ export class StoreRegisterRule {
 
 		for (let i = 0; i <= number; i++) {
 			accounts.push({
-				username: ['', Validators.required, Validators.maxLength(255)],
+				username: ['', Validators.required],
 			})
 		}
 

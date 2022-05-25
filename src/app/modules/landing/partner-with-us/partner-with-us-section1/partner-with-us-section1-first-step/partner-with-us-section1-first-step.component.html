@@ -1,56 +1,101 @@
-<div class="px-5 md:w-full">
+<div [formGroup]="form" #ngForm="ngForm" class="px-5 md:w-full">
 	<div class="mb-5">
-		<div class="mb-1 font-bold text-gray-500 text-base">Clinic Name</div>
+		<label for="name" class="mb-1 font-bold text-gray-500 text-base"
+			>Clinic Name</label
+		>
 
 		<input
 			#input
+			id="name"
 			type="text"
+			formControlName="name"
+			[ngClass]="{
+				' border-red-500':
+					!form.get('name')?.valid && form.get('name')?.touched
+			}"
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		/>
 
-		<div class="text-sm text-rose-500">Clinic Name is required.</div>
+		<div
+			*ngIf="!form.get('name')?.valid && form.get('name')?.touched"
+			class="text-sm text-rose-500"
+		>
+			Clinic Name is required.
+		</div>
 	</div>
 
 	<div class="mb-5">
-		<div class="mb-1 font-bold text-gray-500 text-base">
+		<label for="address" class="mb-1 font-bold text-gray-500 text-base">
 			Clinics Address
-		</div>
+		</label>
 
 		<input
+			id="address"
 			type="text"
+			formControlName="address"
+			[ngClass]="{
+				' border-red-500':
+					!form.get('address')?.valid && form.get('address')?.touched
+			}"
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		/>
 
-		<div class="text-sm text-rose-500">Clinic Address is required.</div>
+		<div
+			*ngIf="!form.get('address')?.valid && form.get('address')?.touched"
+			class="text-sm text-rose-500"
+		>
+			Clinic Address is required.
+		</div>
 	</div>
 
 	<div class="mb-5">
-		<div class="mb-1 font-bold text-gray-500 text-base">Email</div>
+		<label for="email" class="mb-1 font-bold text-gray-500 text-base"
+			>Email</label
+		>
 
 		<input
 			*ssrExclude
+			id="email"
+			formControlName="email"
+			[ngClass]="{
+				' border-red-500':
+					!form.get('email')?.valid && form.get('email')?.touched
+			}"
 			[inputMask]="emailInputMask"
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		/>
 
-		<div class="text-sm text-rose-500">Email is required.</div>
+		<div
+			*ngIf="!form.get('email')?.valid && form.get('email')?.touched"
+			class="text-sm text-rose-500"
+		>
+			Email is required.
+		</div>
 	</div>
 
 	<div class="mb-5">
-		<div class="mb-1 font-bold text-gray-500 text-base">Mobile Number</div>
+		<div class="mb-1 font-bold text-gray-500 text-base">Mobile Number*</div>
 
 		<div class="">
 			<mobile-number-form
+				(onMobileNumberChange)="
+					form.value.phone_number_one_country_code =
+						$event.countryCode;
+					form.value.phone_number_one = $event.phoneNumber
+				"
 				[bordered]="true"
 				[rounded]="true"
 				class="w-full"
 			></mobile-number-form>
 		</div>
-
-		<div class="text-sm text-rose-500">Mobile Number is required.</div>
 	</div>
 
-	<input type="file" #tradeLicense class="hidden" />
+	<input
+		(change)="setTradeLicense($event)"
+		type="file"
+		#tradeLicense
+		class="hidden"
+	/>
 
 	<div class="mb-5">
 		<div class="mb-1 font-bold text-gray-500 text-base">Trade License</div>
@@ -59,19 +104,30 @@
 			(click)="tradeLicense.click()"
 			class="border border-teal-500 px-10 py-3 rounded-lg ml-auto text-teal-500 hover:bg-teal-50"
 		>
-			Upload
+			{{
+				filename === ''
+					? 'Upload Trade License'
+					: 'Change Trade License'
+			}}
 		</button>
 
-		<div class="mt-2 text-sky-500">Trade License.pdf</div>
+		<div class="mt-2 text-sky-500">{{ filename }}</div>
 	</div>
 
 	<div class="mt-5 flex w-full">
 		<button
+			(click)="this.onNext.emit(form)"
 			@fadeOutBottom
 			@slideInRight
+			[disabled]="!form.valid || filename === ''"
+			[ngClass]="{
+				'bg-teal-500 hover:bg-teal-600': form.valid && filename !== '',
+				'bg-gray-400 pointer-events-none':
+					!form.valid || filename === ''
+			}"
 			*ngIf="step !== 'two'"
 			(click)="onNext.emit()"
-			class="text-white px-10 py-4 uppercase rounded-lg ml-auto bg-teal-500 hover:bg-teal-600 w-full"
+			class="text-white px-10 py-4 uppercase rounded-lg ml-auto w-full"
 		>
 			Next
 		</button>

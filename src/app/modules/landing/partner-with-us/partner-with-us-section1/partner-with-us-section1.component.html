@@ -21,20 +21,21 @@
 				</div>
 			</div>
 
-			<partner-with-us-section1-first-step
+			<!-- <partner-with-us-section1-first-step
 				@slideInBottom
 				class="w-full"
 				*ngIf="step !== 'two'"
 				(onNext)="step = 'two'"
 				[step]="step"
 				[focus$]="focus$"
-			></partner-with-us-section1-first-step>
+			></partner-with-us-section1-first-step> -->
+
+			<!-- *ngIf="step === 'two'" -->
 
 			<partner-with-us-section1-second-step
 				class="w-full"
 				@slideInRight
 				class="w-full"
-				*ngIf="step === 'two'"
 				(onBack)="step = 'one'; focus$.next(true)"
 				[step]="step"
 			></partner-with-us-section1-second-step>

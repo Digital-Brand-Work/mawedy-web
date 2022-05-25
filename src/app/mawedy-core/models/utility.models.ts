@@ -1,3 +1,4 @@
+import { ClinicSubscriptionType } from './../enums/clinic-subscription-type.enum'
 import { PHPBaseModel } from './../../../@digital_brand_work/models/core.model'
 export interface Alert {
 	id: string
@@ -21,7 +22,11 @@ export interface Subscription {
 	name: string
 	features: string[]
 	price: number
+	type: ClinicSubscriptionType
+	users: number
 }
+
+export type BillInterval = 'monthly' | 'yearly'
 
 export interface File extends PHPBaseModel {
 	type: string

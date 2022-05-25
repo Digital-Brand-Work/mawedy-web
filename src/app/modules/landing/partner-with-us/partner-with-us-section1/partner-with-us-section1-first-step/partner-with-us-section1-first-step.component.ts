@@ -1,3 +1,4 @@
+import { FormBuilder, NgForm } from '@angular/forms'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -14,6 +15,7 @@ import { createMask } from '@ngneat/input-mask'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { isPlatformBrowser } from '@angular/common'
+import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
 
 @Component({
 	selector: 'partner-with-us-section1-first-step',
@@ -25,9 +27,13 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 	constructor(
 		@Inject(PLATFORM_ID) private _platformID: Object,
 		private _cdr: ChangeDetectorRef,
+		private _formBuilder: FormBuilder,
+		private _storeRegisterRule: StoreRegisterRule,
 	) {}
 
 	unsubscribe: Subject<any> = new Subject<any>()
+
+	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 
@@ -40,6 +46,10 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 	emailInputMask = !isPlatformBrowser(this._platformID)
 		? null
 		: createMask({ alias: 'email' })
+
+	form = this._formBuilder.group(this._storeRegisterRule.firstForm)
+
+	filename: string = ''
 
 	ngOnInit(): void {}
 
@@ -55,5 +65,11 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 		this.unsubscribe.complete()
 
 		this._cdr.detach()
+	}
+
+	setTradeLicense(event: any): void {
+		this._storeRegisterRule.setTradeLicense(event.target.files[0])
+
+		this.filename = event.target.files[0].name
 	}
 }
