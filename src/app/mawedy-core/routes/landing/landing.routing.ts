@@ -5,6 +5,7 @@ import { Route } from '@angular/router'
 import { HomeMainComponent } from 'app/modules/landing/home/home.component'
 import { LandingComponent } from 'app/modules/landing/landing.component'
 import { JoinUsComponent } from 'app/modules/landing/join-us/join-us.component'
+import { LandingSubscriptionComponent } from 'app/modules/landing/landing-subscription/landing-subscription.component'
 
 export const landingHomeRoutes: Route[] = [
 	{
@@ -35,6 +36,10 @@ export const landingHomeRoutes: Route[] = [
 			{
 				path: 'talk-to-us',
 				component: TalkToUsComponent,
+			},
+			{
+				path: 'subscription',
+				component: LandingSubscriptionComponent,
 			},
 		],
 	},
