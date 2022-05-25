@@ -27,7 +27,9 @@ import { AboutUsSection3Component } from './about-us/about-us-section3/about-us-
 import { FooterComponent } from './common/footer/footer.component';
 import { LandingSubscriptionComponent } from './landing-subscription/landing-subscription.component';
 import { LandingSubscriptionSection1Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1.component';
-import { LandingSubscriptionSection2Component } from './landing-subscription/landing-subscription-section2/landing-subscription-section2.component'
+import { LandingSubscriptionSection2Component } from './landing-subscription/landing-subscription-section2/landing-subscription-section2.component';
+import { TalkToUsSection1Component } from './talk-to-us/talk-to-us-section1/talk-to-us-section1.component';
+import { TalkToUsSection2Component } from './talk-to-us/talk-to-us-section2/talk-to-us-section2.component'
 
 const components = [
 	HomeNavbarResponsiveComponent,
@@ -64,6 +66,8 @@ const components = [
   LandingSubscriptionComponent,
   LandingSubscriptionSection1Component,
   LandingSubscriptionSection2Component,
+  TalkToUsSection1Component,
+  TalkToUsSection2Component,
 	],
 	imports: [RouterModule.forChild(landingHomeRoutes), SharedModule],
 	exports: [...components],

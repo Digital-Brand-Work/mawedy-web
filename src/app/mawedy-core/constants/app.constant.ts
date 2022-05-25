@@ -4,6 +4,8 @@ import {
 	SubscriptionFeatures,
 } from '../models/utility.models'
 
+export const PHONE = '+971501112222'
+
 export const weekDays: WeekDay[] = [
 	'Sunday',
 	'Monday',
