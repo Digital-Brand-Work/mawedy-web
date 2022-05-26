@@ -1,0 +1,18 @@
+<div>
+	<input
+		(input)="onCardNumberChange.emit(form.value)"
+		type="text"
+		autocomplete="card_number"
+		formControlName="card_number"
+		placeholder="1234 1234 1234 1234"
+		mask="0000 0000 0000 0000"
+		maxlength="20"
+		class="py-2 px-5 w-full"
+		[ngClass]="{
+			'text-red-600':
+				!form.get('card_number')?.valid &&
+				form.get('card_number')?.touched &&
+				!isValid(form.value.card_number)
+		}"
+	/>
+</div>

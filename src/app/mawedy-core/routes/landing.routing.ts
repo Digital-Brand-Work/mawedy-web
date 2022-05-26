@@ -47,10 +47,6 @@ export const landingHomeRoutes: Route[] = [
 				path: 'success',
 				component: SuccessComponent,
 			},
-			{
-				path: '**',
-				component: PageNotFoundComponent,
-			},
 		],
 	},
 ]

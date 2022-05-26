@@ -90,11 +90,6 @@ export const routes: Route[] = [
 			},
 		],
 	},
-
-	{
-		path: '**',
-		component: PageNotFoundComponent,
-	},
 ]
 
 @NgModule({

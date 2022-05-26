@@ -5,8 +5,4 @@ import { PageNotFoundComponent } from 'app/modules/pages/page-not-found/page-not
 export const checkOutRoutes: Route[] = [
 	{ path: '', redirectTo: 'subscribe', pathMatch: 'full' },
 	{ path: 'subscribe', component: CheckoutComponent },
-	{
-		path: '**',
-		component: PageNotFoundComponent,
-	},
 ]

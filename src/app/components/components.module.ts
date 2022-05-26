@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { CountryFormComponent } from './country-form/country-form.component'
-import { GooglePlayButtonComponent } from './buttons/google-play-button/google-play-button.component'
-import { AppStoreButtonComponent } from './buttons/app-store-button/app-store-button.component'
+import { CardNumberFormComponent } from './forms/card-number-form/card-number-form.component'
 
 const components = []
 

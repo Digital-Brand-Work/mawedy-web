@@ -13,7 +13,6 @@ import {
 import { Subscription } from 'app/mawedy-core/models/utility.models'
 import { HomeSubscriptionState } from 'app/misc/home.state'
 import { BehaviorSubject, Observable, take } from 'rxjs'
-declare var window: any
 @Component({
 	selector: 'checkout',
 	templateUrl: './checkout.component.html',
@@ -23,14 +22,8 @@ declare var window: any
 export class CheckoutComponent implements OnInit {
 	constructor(
 		private _mediaService: MediaService,
-		private _scrollService: ScrollService,
-		private _router: Router,
-		private _alert: AlertState,
 		private _homeSubscriptionState: HomeSubscriptionState,
-		private _registerService: RegisterService,
 	) {}
-
-	isProcessing: boolean = false
 
 	PRICE_PER_USER = PRICE_PER_USER
 
@@ -49,11 +42,7 @@ export class CheckoutComponent implements OnInit {
 
 	billMultiplier: number = 1
 
-	showApplePay = false
-
 	ngOnInit(): void {
-		this.showApplePay = false
-
 		this.subscription$.pipe(take(1)).subscribe((subscription) => {
 			if (subscription === null) {
 				this.subscription$.next(this.defaultSubscription)
@@ -67,25 +56,5 @@ export class CheckoutComponent implements OnInit {
 				this.billMultiplier = 12
 			}
 		})
-
-		if (window.ApplePaySession) {
-			const merchantIdentifier = 'example.com.store'
-
-			window.ApplePaySession.canMakePaymentsWithActiveCard(
-				merchantIdentifier,
-			).then((canMakePayments: boolean) => {
-				if (canMakePayments) {
-					this.showApplePay = true
-				}
-			})
-		}
 	}
-
-	ngAfterViewInit(): void {
-		setTimeout(() => {
-			this._scrollService.scrollToTop()
-		}, 50)
-	}
-
-	onLoadPaymentData($event) {}
 }
