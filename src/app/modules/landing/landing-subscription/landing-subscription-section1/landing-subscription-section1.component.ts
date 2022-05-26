@@ -1,3 +1,4 @@
+import { setPrefix, slugToSentence } from './../../../../mawedy-core/helpers'
 import { Router } from '@angular/router'
 import { FormGroup } from '@angular/forms'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
@@ -73,6 +74,8 @@ export class LandingSubscriptionSection1Component implements OnInit {
 	}
 
 	register(data: { form: FormGroup; trade_license_photo: any }) {
+		this.isProcessing = true
+
 		let form = new FormData()
 
 		this.subscription$.pipe(take(1)).subscribe((subscription) => {
@@ -83,29 +86,33 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			data.form.value.interval = interval
 		})
 
-		this.isProcessing = true
-
-		return (window.location.href =
-			window.location.origin +
-			`/success?subscription=${data.form.value.subscription_type}&interval=${data.form.value.interval}`)
-
 		form.append('trade_license_photo', data.trade_license_photo)
 
 		form.append(
-			'success',
+			'urls[success]',
 			window.location.origin +
 				`/success?subscription=${data.form.value.subscription_type}&interval=${data.form.value.interval}`,
 		)
 
 		form.append(
-			'cancel',
+			'urls[cancel]',
 			window.location.origin +
 				`/subscription?subscription=${data.form.value.subscription_type}&interval=${data.form.value.interval}`,
 		)
 
-		if (data.form.value !== undefined) {
-			for (let key in data?.form?.value) {
-				if (data.form.value[key] !== undefined) {
+		form.append(
+			'phone_number_one',
+			`${setPrefix(data.form.value.phone_number_one_country_code)}${
+				data.form.value.phone_number_one
+			}`,
+		)
+
+		for (let key in data?.form?.value) {
+			if (
+				data.form.value[key] !== undefined ||
+				data.form.value[key] !== ''
+			) {
+				if (key !== 'phone_number_one') {
 					form.append(key, data.form.value[key])
 				}
 			}
@@ -115,20 +122,19 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			.post(form)
 			.subscribe({
 				next: () => {},
-				error: (error) => {
-					this._alert.add({
-						title: error.name,
-						message: error.message,
-						type: 'error',
-						id: Math.floor(Math.random() * 100000000000).toString(),
-					})
-
-					this._alert.add({
-						title: 'Try Again Later',
-						message: 'Something went wrong. Unexpected Error occur',
-						type: 'error',
-						id: Math.floor(Math.random() * 100000000000).toString(),
-					})
+				error: (http) => {
+					for (let key in http.error.errors) {
+						for (let error of http.error.errors[key]) {
+							this._alert.add({
+								title: `Error in ${slugToSentence(key)}`,
+								message: error,
+								type: 'error',
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+							})
+						}
+					}
 				},
 			})
 			.add(() => (this.isProcessing = false))

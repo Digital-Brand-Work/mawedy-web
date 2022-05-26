@@ -15,7 +15,7 @@
 			class="pl-2"
 		>
 			<option [value]="country.code" *ngFor="let country of countries">
-				{{ country.code }}
+				{{ country.code }} ({{ country.dial_code }})
 			</option>
 		</select>
 	</div>

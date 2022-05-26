@@ -1,4 +1,10 @@
-export const countries = [
+export interface DialCode {
+	name: string
+	dial_code: string
+	code: string
+}
+
+export const countries: DialCode[] = [
 	{
 		name: 'Afghanistan',
 		dial_code: '+93',
