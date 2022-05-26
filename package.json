@@ -30,6 +30,7 @@
     "@angular/platform-browser-dynamic": "13.3.9",
     "@angular/platform-server": "13.3.9",
     "@angular/router": "13.3.9",
+    "@google-pay/button-angular": "^3.0.0",
     "@ngneat/input-mask": "^5.2.0",
     "@ngneat/transloco": "3.1.4",
     "@ngrx/effects": "^13.2.0",
