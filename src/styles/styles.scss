@@ -27,7 +27,7 @@ body {
 input,
 select {
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: 500;
 	color: #0a2440;
 }
 
@@ -85,4 +85,21 @@ td {
 	font-size: 13px;
 	font-weight: 400;
 	color: #6d7c8d;
+}
+
+::-webkit-input-placeholder {
+	font-weight: lighter;
+	color: #afb2b3;
+}
+
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 5000s ease-in-out 0s;
+	-webkit-text-fill-color: #0a2440 !important;
 }

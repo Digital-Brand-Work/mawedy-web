@@ -1,0 +1,95 @@
+<div
+	*ngIf="subscription$ | async as subscription"
+	class="max-w-screen-sm w-full mb-10 px-5 md:px-0"
+>
+	<div
+		class="fixed md:relative top-0 bg-emerald-500 w-full px-5 md:px-0 -translate-x-5"
+	>
+		<button
+			routerLink="/subscription"
+			class="flex my-2 text-xl items-center hover:text-white text-emerald-300 w-full"
+		>
+			<mat-icon
+				svgIcon="heroicons_solid:arrow-narrow-left"
+				class="mr-3"
+			></mat-icon>
+			Back to Subscription
+		</button>
+	</div>
+
+	<div
+		class="text-2xl opacity-70 md:mt-10 text-center md:text-left mt-20 px-5 md:px-0"
+	>
+		{{ subscription.name }}
+	</div>
+
+	<div class="mb-5 text-5xl font-bold text-center md:text-left px-5 md:px-0">
+		{{
+			subscription.price +
+				additionalUsers * PRICE_PER_USER * billMultiplier
+				| currency: 'AED '
+		}}
+		<span class="text-sm">/ {{ interval$ | async | titlecase }}</span>
+	</div>
+
+	<div class="text-left my-2 self-start text-lg font-bold hidden md:block">
+		Inclusive:
+	</div>
+
+	<ul
+		@slideInBottom
+		class="w-full md:min-w-140 px-10 font-normal hidden md:block"
+	>
+		<li
+			class="text-gray flex items-end py-4 border-b border-b-emerald-400 w-full"
+		>
+			<div class="text-2xl flex flex-col">
+				{{ subscription.type }}
+				<div class="opacity-70 text-base">
+					{{ subscription.name }}
+				</div>
+			</div>
+
+			<div class="text-2xl ml-auto">
+				{{ subscription.price | currency: 'AED ' }}
+			</div>
+		</li>
+
+		<li
+			class="text-gray flex items-center py-4 border-b border-b-emerald-400 w-full"
+		>
+			<div class="text-2xl">Subtotal</div>
+
+			<div class="text-2xl ml-auto">
+				{{ subscription.price | currency: 'AED ' }}
+			</div>
+		</li>
+
+		<li
+			class="text-gray flex items-center py-4 border-b border-b-emerald-400 w-full opacity-70"
+		>
+			<div class="text-base">
+				Additional Users x {{ additionalUsers }}
+			</div>
+
+			<div class="text-base ml-auto">
+				{{
+					additionalUsers * PRICE_PER_USER * billMultiplier
+						| currency: 'AED '
+				}}
+			</div>
+		</li>
+
+		<li class="text-gray flex items-center py-4 w-full">
+			<div class="text-2xl">Total Due</div>
+
+			<div class="text-2xl ml-auto">
+				{{
+					subscription.price +
+						additionalUsers * PRICE_PER_USER * billMultiplier
+						| currency: 'AED '
+				}}
+			</div>
+		</li>
+	</ul>
+</div>

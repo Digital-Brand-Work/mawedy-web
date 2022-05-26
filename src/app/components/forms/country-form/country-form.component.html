@@ -9,9 +9,10 @@
 	/>
 
 	<select
+		autocomplete="country"
 		[(ngModel)]="country"
 		(change)="onChange($event.target.value)"
-		class="h-full px-2 ml-3 pl-5 w-full border-l border-r-gray-300"
+		class="h-full px-2 ml-3 pl-5 w-full border-l border-l-gray-200"
 	>
 		<option
 			[value]="country"

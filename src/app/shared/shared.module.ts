@@ -12,7 +12,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SpinnerComponent } from 'app/components/spinner/spinner.component'
-import { MobileNumberFormComponent } from 'app/components/mobile-number-form/mobile-number-form.component'
+import { MobileNumberFormComponent } from 'app/components/forms/mobile-number-form/mobile-number-form.component'
 import { AnimateJsDirective } from '@digital_brand_work/directives/animate.js.directive'
 import { MatMenuModule } from '@angular/material/menu'
 import { AlertComponent } from 'app/components/alert/alert.component'
@@ -28,7 +28,7 @@ import { ClinicServicesAddComponent } from 'app/modules/admin/clinic/clinic-serv
 import { ClinicServicesEditComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.component'
 import { ClinicDepartmentAddComponent } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.component'
 import { MatSelectModule } from '@angular/material/select'
-import { CountryFormComponent } from 'app/components/country-form/country-form.component'
+import { CountryFormComponent } from 'app/components/forms/country-form/country-form.component'
 import { DashboardAppointmentSelectDoctorComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.component'
 import { DashboardAppointmentSelectTimeSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.component'
 import { DoctorAddComponent } from 'app/modules/admin/doctors/modals/doctor-add/doctor-add.component'
@@ -51,6 +51,9 @@ import { AppStoreButtonComponent } from 'app/components/buttons/app-store-button
 import { GooglePlayButtonComponent } from 'app/components/buttons/google-play-button/google-play-button.component'
 import { UnderConstructionComponent } from 'app/modules/pages/under-construction/under-construction.component'
 import { SSRExcludeModule } from 'ngx-ssr-exclude'
+import { GooglePayButtonComponent } from 'app/components/buttons/google-pay-button/google-pay-button.component'
+import { ApplePayButtonComponent } from 'app/components/buttons/apple-pay-button/apple-pay-button.component'
+import { CardNumberFormComponent } from 'app/components/forms/card-number-form/card-number-form.component'
 
 const components = [
 	SpinnerComponent,
@@ -95,6 +98,10 @@ const components = [
 
 	GooglePlayButtonComponent,
 	AppStoreButtonComponent,
+	GooglePayButtonComponent,
+	ApplePayButtonComponent,
+
+	CardNumberFormComponent,
 ]
 
 const modules = [
