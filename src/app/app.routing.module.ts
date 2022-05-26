@@ -2,8 +2,17 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Route, PreloadAllModules } from '@angular/router'
 import { InitialDataResolver } from './app.resolvers'
 import { LayoutComponent } from './layout/layout.component'
+import { PageNotFoundComponent } from './modules/pages/page-not-found/page-not-found.component'
 
 export const routes: Route[] = [
+	{
+		path: 'checkout',
+		loadChildren: () =>
+			import('./modules/checkout/checkout.module').then(
+				(module) => module.CheckoutModule,
+			),
+	},
+
 	{
 		path: '',
 		loadChildren: () =>
@@ -80,6 +89,11 @@ export const routes: Route[] = [
 					).then((module) => module.AccountSettingModule),
 			},
 		],
+	},
+
+	{
+		path: '**',
+		component: PageNotFoundComponent,
 	},
 ]
 

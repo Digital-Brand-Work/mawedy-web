@@ -1,1 +1,26 @@
-<p>page-not-found works!</p>
+<div
+	class="min-h-screen grid grid-cols-1 md:grid-cols-2 items-center justify-center flex-col"
+>
+	<img src="/assets/app/pages/not-found.svg" style="height: 50vh" alt="" />
+
+	<div>
+		<div
+			class="text-3xl md:text-9xl accent-color font-extrabold mb-2 text-yellow-800/9 mt-5"
+		>
+			Oops!
+		</div>
+		<div class="text-3xl text-gray-500">
+			We can't seem find the page you are looking for
+		</div>
+
+		<div class="flex mt-20 w-full items-start justify-baseline">
+			<a
+				role="button"
+				routerLink="/partner-with-us"
+				class="text-white px-20 bg-emerald-500 hover:bg-emerald-600 py-4 font-semibold text-lg rounded-lg w-full md:w-auto drop-shadow-xl"
+			>
+				Back to Home
+			</a>
+		</div>
+	</div>
+</div>
