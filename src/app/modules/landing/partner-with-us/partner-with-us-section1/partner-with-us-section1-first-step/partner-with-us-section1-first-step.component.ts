@@ -4,17 +4,13 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
-	Inject,
 	Input,
 	OnInit,
 	Output,
-	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
-import { createMask } from '@ngneat/input-mask'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { isPlatformBrowser } from '@angular/common'
 import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
 
 @Component({
@@ -25,7 +21,6 @@ import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
 })
 export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 	constructor(
-		@Inject(PLATFORM_ID) private _platformID: Object,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
 		private _storeRegisterRule: StoreRegisterRule,
@@ -47,10 +42,6 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 	@Input() isProcessing: boolean = false
 
 	@Input() focus$!: BehaviorSubject<boolean>
-
-	emailInputMask = !isPlatformBrowser(this._platformID)
-		? null
-		: createMask({ alias: 'email' })
 
 	form: FormGroup = this._formBuilder.group(this._storeRegisterRule.firstForm)
 
