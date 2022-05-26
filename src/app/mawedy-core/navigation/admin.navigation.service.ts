@@ -9,10 +9,12 @@ import { ClinicSubscriptionType } from '../enums/clinic-subscription-type.enum'
 @Injectable({ providedIn: 'root' })
 export class AdminNavigationService {
 	constructor(private _clinicUserService: ClinicUserService) {
-		zip(this.clinic$, this.branch$).subscribe((clinic: Clinic[]) => {
-			this.clinic = slugify(clinic[0].name)
+		this.clinic$.subscribe((clinic) => {
+			this.clinic = slugify(clinic.name)
 
-			this.branch = slugify(clinic[1].name)
+			this.branch = slugify(
+				clinic.accounts.length === 0 ? clinic.address : clinic[0].name,
+			)
 		})
 	}
 
@@ -87,8 +89,6 @@ export class AdminNavigationService {
 	get(
 		subscription: ClinicSubscriptionType,
 	): Observable<FuseNavigationItem[]> {
-		console.log(subscription)
-
 		if (subscription === 'Free') {
 			of(this.onTrialUser)
 		}

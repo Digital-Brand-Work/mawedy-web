@@ -32,7 +32,7 @@ export class StoreRegisterRule {
 	firstForm = {
 		name: ['', Validators.required],
 		address: ['', Validators.required],
-		email: ['', Validators.required],
+		email: ['', Validators.email],
 		phone_number_one_country_code: ['AE'],
 		phone_number_one: [''],
 		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
@@ -47,7 +47,7 @@ export class StoreRegisterRule {
 	form: RegisterRule = {
 		name: ['', Validators.required],
 		address: ['', Validators.required],
-		email: ['', Validators.required],
+		email: ['', Validators.email],
 		phone_number_one_country_code: ['AE'],
 		phone_number_one: [''],
 		subscription_type: [ClinicSubscriptionTypeEnum.FREE],

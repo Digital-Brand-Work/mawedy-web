@@ -1,5 +1,6 @@
 <form
-	*ngIf="true"
+	[formGroup]="form"
+	#ngForm="ngForm"
 	@slideInLeft
 	class="md:rounded-xl md:shadow-md shadow-blue-500/50 pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10"
 >
@@ -10,18 +11,50 @@
 	/>
 
 	<input
-		*ssrExclude
-		[inputMask]="emailInputMask"
+		#input
+		type="email"
+		autocomplete="email"
 		placeholder="Email"
-		class="bg-gray-100 py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 border border-rose-500"
+		formControlName="email"
+		[ngClass]="{
+			'border border-red-500 bg-red-50':
+				!form.get('email')?.valid && form.get('email')?.touched,
+			'bg-gray-100 ':
+				(form.get('email')?.valid && form.get('email')?.touched) ||
+				!form.get('email')?.touched
+		}"
+		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5"
 	/>
+
+	<div
+		*ngIf="!form.get('email')?.valid && form.get('email')?.touched"
+		class="text-sm text-rose-500 text-left self-baseline"
+	>
+		Invalid email format.
+	</div>
 
 	<input
 		type="password"
 		placeholder="Password"
-		class="bg-gray-100 py-5 px-5 rounded-md shadow-md mt-10 w-full shadow-gray-500/20"
 		autocomplete="password"
+		formControlName="password"
+		[ngClass]="{
+			'border border-red-500 bg-red-50':
+				!form.get('password')?.valid && form.get('password')?.touched,
+			'bg-gray-100 ':
+				(form.get('password')?.valid &&
+					form.get('password')?.touched) ||
+				!form.get('password')?.touched
+		}"
+		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5"
 	/>
+
+	<div
+		*ngIf="!form.get('password')?.valid && form.get('password')?.touched"
+		class="text-sm text-rose-500 text-left self-baseline"
+	>
+		Password is required.
+	</div>
 
 	<a
 		role="button"
@@ -51,9 +84,15 @@
 
 	<button
 		(click)="login()"
-		class="text-white py-3 px-10 bg-emerald-500 hover:bg-emerald-600 text-xl shadow-lg rounded-md flex items-center mt-10"
+		[disabled]="!form.valid || form.disabled"
+		[ngClass]="{
+			'bg-emerald-500 hover:bg-emerald-600': form.valid && !form.disabled,
+			'bg-gray-400 pointer-events-none': !form.valid || form.disabled
+		}"
+		class="text-white py-3 px-10 text-xl shadow-lg rounded-md flex items-center mt-10"
 	>
-		<!-- <spinner></spinner> -->
-		Sign In
+		<spinner *ngIf="form.disabled"></spinner>
+
+		<div *ngIf="!form.disabled">Sign In</div>
 	</button>
 </form>
