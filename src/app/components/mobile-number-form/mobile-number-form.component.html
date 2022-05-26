@@ -12,15 +12,17 @@
 		<select
 			(change)="change($event)"
 			[(ngModel)]="country_code"
-			class="pl-2"
+			class="pl-2 pr-5"
 		>
 			<option [value]="country.code" *ngFor="let country of countries">
-				{{ country.code }}
+				{{ country.code }} ({{ country.dial_code }})
 			</option>
 		</select>
 	</div>
 
 	<input
+		(input)="this.emit()"
+		[(ngModel)]="phoneNumber"
 		mask="00-000-0000"
 		type="tel"
 		class="h-full px-2 w-3/4"

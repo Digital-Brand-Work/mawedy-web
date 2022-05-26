@@ -1,6 +1,21 @@
 <div class="px-5 md:w-full">
 	<div class="mb-5">
 		<div class="mb-1 font-bold text-gray-500 text-base flex items-center">
+			Interval
+		</div>
+
+		<select
+			#input
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+		>
+			<option *ngFor="let item of billIntervals; trackBy: identity">
+				{{ item | titlecase }}
+			</option>
+		</select>
+	</div>
+
+	<div class="mb-5">
+		<div class="mb-1 font-bold text-gray-500 text-base flex items-center">
 			Subscription
 		</div>
 
@@ -8,22 +23,31 @@
 			#input
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		>
-			<option *ngFor="let item of subscriptionTypes">{{ item }}</option>
+			<option *ngFor="let item of subscriptionTypes; trackBy: identity">
+				{{ item | titlecase }}
+			</option>
 		</select>
 	</div>
 
-	<div class="mt-5">
+	<div @slideInBottom *ngIf="currentSubscription" class="mt-5">
 		<div class="flex items-baseline mt-8 whitespace-nowrap">
 			<div class="text-6xl font-semibold leading-tight tracking-tight">
-				<ng-container>AED 49</ng-container>
+				<ng-container
+					>AED {{ currentSubscription.price | number }}</ng-container
+				>
 			</div>
 
-			<div class="ml-2 text-2xl text-emerald-500">/ month</div>
+			<div class="ml-2 text-2xl text-emerald-500">
+				/ {{ currentSubscription.type === 'yearly' ? 'year' : 'month' }}
+			</div>
 		</div>
 
 		<div class="flex flex-col mt-2 text-gray-500">
 			<ng-container>
-				<div class="text-gray-800"><b>AED 69.00</b> billed monthly</div>
+				<div class="text-gray-800">
+					<b>AED {{ currentSubscription.price | number: '1.2-2' }}</b>
+					billed {{ currentSubscription.type }}
+				</div>
 			</ng-container>
 		</div>
 	</div>
@@ -33,7 +57,7 @@
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-10 gap-y-2">
 		<div
 			*ngFor="
-				let item of [1, 2, 3, 4, 5, 6];
+				let item of handleUsers(currentSubscription.users);
 				let i = index;
 				trackBy: identity
 			"

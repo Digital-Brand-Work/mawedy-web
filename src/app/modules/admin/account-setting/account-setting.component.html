@@ -3,7 +3,7 @@
 	<ng-template #noToolbar></ng-template>
 </div>
 
-<div class="md:px-10 px-0 w-full">
+<form class="md:px-10 px-0 w-full">
 	<div
 		style="min-height: 80vh"
 		class="md:rounded-xl bg-white px-5 pr-0 w-full pt-5"
@@ -44,54 +44,17 @@
 			</div>
 
 			<div>
-				<div
-					class="font-extrabold tracking-wider accent-color text-xl mb-10"
-				>
-					Personal Information
-				</div>
-
 				<div class="mb-5">
 					<div class="mb-1 font-bold accent-color text-lg ml-3">
-						Username
+						Email
 					</div>
 
 					<input
 						#input
-						type="text"
+						type="email"
+						autocomplete="email"
 						class="datalist py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 shadow-md shadow-gray-500/10"
 					/>
-				</div>
-
-				<div class="mb-5">
-					<div class="mb-1 font-bold accent-color text-lg ml-3">
-						First Name
-					</div>
-
-					<input
-						#input
-						type="text"
-						class="datalist py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 shadow-md shadow-gray-500/10"
-					/>
-				</div>
-
-				<div class="mb-5">
-					<div class="mb-1 font-bold accent-color text-lg ml-3">
-						Last Name
-					</div>
-
-					<input
-						#input
-						type="text"
-						class="datalist py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 shadow-md shadow-gray-500/10"
-					/>
-				</div>
-			</div>
-
-			<div>
-				<div
-					class="font-extrabold tracking-wider accent-color text-xl mb-10"
-				>
-					Security
 				</div>
 
 				<div class="mb-5">
@@ -100,19 +63,20 @@
 					</div>
 
 					<input
-						#input
+						autocomplete="password"
 						type="password"
 						class="datalist py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 shadow-md shadow-gray-500/10"
 					/>
 				</div>
+			</div>
 
+			<div>
 				<div class="mb-5">
 					<div class="mb-1 font-bold accent-color text-lg ml-3">
 						New Password
 					</div>
 
 					<input
-						#input
 						type="password"
 						class="datalist py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 shadow-md shadow-gray-500/10"
 					/>
@@ -124,7 +88,6 @@
 					</div>
 
 					<input
-						#input
 						type="password"
 						class="datalist py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 shadow-md shadow-gray-500/10"
 					/>
@@ -134,4 +97,4 @@
 			<div></div>
 		</div>
 	</div>
-</div>
+</form>

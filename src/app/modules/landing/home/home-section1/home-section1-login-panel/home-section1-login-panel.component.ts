@@ -1,11 +1,12 @@
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Router } from '@angular/router'
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { AlertState } from 'app/components/alert/alert.service'
-import { Observable, take } from 'rxjs'
-import { Alert } from 'app/mawedy-core/models/utility.models'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { createMask } from '@ngneat/input-mask'
-import { isPlatformBrowser } from '@angular/common'
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { LoginService } from '../../login.service'
+import { slugToSentence } from 'app/mawedy-core/helpers'
+import { slugify } from '@digital_brand_work/helpers/helpers'
 
 @Component({
 	selector: 'home-section1-login-panel',
@@ -15,30 +16,76 @@ import { isPlatformBrowser } from '@angular/common'
 })
 export class HomeSection1LoginPanelComponent implements OnInit {
 	constructor(
-		@Inject(PLATFORM_ID) private _platformID: Object,
 		private _router: Router,
 		private _alert: AlertState,
+		private _formBuilder: FormBuilder,
+
+		private _loginService: LoginService,
+		private _clinicUserService: ClinicUserService,
 	) {}
 
-	alerts$: Observable<Alert[]> = this._alert.get()
+	@ViewChild('ngForm') ngForm!: NgForm
 
-	emailInputMask = isPlatformBrowser(this._platformID)
-		? null
-		: createMask({ alias: 'email' })
+	@ViewChild('input') input!: ElementRef
+
+	form: FormGroup = this._formBuilder.group({
+		email: ['', Validators.email],
+		password: ['', Validators.required],
+	})
 
 	ngOnInit(): void {}
 
 	login() {
-		this.alerts$.pipe(take(1)).subscribe((alerts) => {
-			this._alert.add({
-				id: alerts.length + 1 + '',
-				title: 'Welcome Back Aster Clinic Jumeirah Branch!',
-				message:
-					'We hope that you use our services to its full extent. Have a great day ahead.',
-				type: 'info',
-			})
-		})
+		this.form.disable()
 
-		this._router.navigate(['/aster-clinic/jumeirah/dashboard/appointments'])
+		this._loginService
+			.post(this.form.value)
+			.subscribe({
+				next: (userAccount) => {
+					this._clinicUserService.saveDataLocally(userAccount)
+
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						title: `Welcome Back ${userAccount.data.name}!`,
+						message:
+							'We hope that you use our services to its full extent. Have a great day ahead.',
+						type: 'info',
+					})
+
+					this._router.navigate([
+						`/${slugify(userAccount.data.name)}/${slugify(
+							userAccount.data.accounts.length === 0
+								? userAccount.data.address
+								: userAccount.data[0].name,
+						)}/dashboard/appointments`,
+					])
+				},
+				error: (http) => {
+					for (let key in http.error.errors) {
+						for (let error of http.error.errors[key]) {
+							this._alert.add({
+								title: `Error in ${slugToSentence(key)}`,
+								message: error,
+								type: 'error',
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+							})
+						}
+					}
+
+					if (http.error.key !== undefined) {
+						this._alert.add({
+							title: `Error in ${slugToSentence(http.error.key)}`,
+							message: http.error.message,
+							type: 'error',
+							id: Math.floor(
+								Math.random() * 100000000000,
+							).toString(),
+						})
+					}
+				},
+			})
+			.add(() => this.form.enable())
 	}
 }

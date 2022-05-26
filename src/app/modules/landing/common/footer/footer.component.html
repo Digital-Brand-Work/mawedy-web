@@ -1,0 +1,94 @@
+<div
+	class="grid bg-emerald-500 text-white grid-cols-2 md:grid-cols-6 p-20 px-30 relative z-50 font-normal"
+>
+	<div>
+		<a routerLink="/">
+			<img
+				class="h-52 max-w-50 -mt-5"
+				src=".../../../../../../../assets/app/logo.svg"
+				alt=""
+			/>
+		</a>
+	</div>
+
+	<div>
+		<div role="button" class="text-lg mb-3 hover:underline">Company</div>
+		<div role="button" class="text-lg mb-3 hover:underline">Features</div>
+		<div role="button" class="text-lg mb-3 hover:underline">Pricing</div>
+		<div role="button" class="text-lg mb-3 hover:underline">Career</div>
+	</div>
+
+	<div>
+		<div role="button" class="text-lg mb-3 hover:underline">
+			Terms & Condition
+		</div>
+		<div role="button" class="text-lg mb-3 hover:underline">
+			Privacy Policy
+		</div>
+	</div>
+
+	<div>
+		<div class="text-lg mb-3">Contact Us</div>
+
+		<div role="button" class="text-lg mb-3 hover:underline">
+			<a class="text-lg mb-3 hover:underline" target="_blank">
+				{{ phone }}</a
+			>
+		</div>
+
+		<div class="text-lg mb-3">Email Us</div>
+
+		<div role="button" class="text-lg mb-3 hover:underline">
+			<a [href]="'mailto:' + email">{{ email }}</a>
+		</div>
+	</div>
+
+	<div class="col-span-2">
+		<div class="text-lg mb-3">Be updated on Mawedy</div>
+
+		<div class="overflow-hidden w-full flex items-center">
+			<input
+				type="email"
+				placeholder="Email"
+				class="px-5 py-3 bg-white border rounded-md border-gray-200"
+			/>
+			<button
+				style="width: 189px; background-color: #0a2440"
+				class="tracking-wide text-white py-3 text-xl text-semibold hover:bg-black rounded-md -ml-2 rounded-tl-none rounded-bl-none"
+			>
+				Subscribe
+			</button>
+		</div>
+
+		<div class="text-lg mb-3 mt-10">Find us on</div>
+
+		<div class="grid grid-cols-4 gap-x-10 text-emerald-200 w-1/3">
+			<i
+				role="button"
+				class="bi bi-instagram text-3xl hover:text-white"
+			></i>
+
+			<i
+				role="button"
+				class="bi bi-facebook text-3xl hover:text-white"
+			></i>
+
+			<i
+				role="button"
+				class="bi bi-whatsapp text-3xl hover:text-white"
+			></i>
+
+			<i
+				role="button"
+				class="bi bi-youtube text-3xl hover:text-white"
+			></i>
+		</div>
+	</div>
+</div>
+
+<div
+	class="flex items-center justify-center py-2 accent-color relative z-50"
+	style="background: #cff3e8"
+>
+	All Rights Reserved @ Digital Brand Work LLC 2022
+</div>

@@ -1,4 +1,12 @@
-import { SubscriptionFeatures } from '../models/utility.models'
+import {
+	BillInterval,
+	MawedySubscription,
+	SubscriptionFeatures,
+} from '../models/utility.models'
+
+export const PHONE = '+971501112222'
+
+export const EMAIL = 'info@mawedy.ae'
 
 export const weekDays: WeekDay[] = [
 	'Sunday',
@@ -18,6 +26,151 @@ export type WeekDay =
 	| 'Friday'
 	| 'Saturday'
 	| 'Sunday'
+
+export const FEATURES: string[] = [
+	'Reliable, detailed booking solution',
+	'Professional way to connect clinics and patients',
+	'Saves Time and Effort',
+	'Never miss out on offers',
+	'Patient onboarding a lot easier',
+	'Membership plan with lots of benefits',
+]
+
+export const PRICE_PER_USER: number = 60
+
+export const BILL_INTERVALS: BillInterval[] = ['monthly', 'yearly']
+
+export const mawedySubscriptions: MawedySubscription[] = [
+	{
+		yearly: {
+			type: 'Standard',
+			name: 'Standard',
+			users: 1,
+			price: 1500,
+			features: [
+				'Subscription includes 1 user',
+				'View solution dashboard',
+				'Listed in Mawedy Application',
+				'Receive patient ‘appointments, outreach patients',
+				'Confirm or cancel patient appointments',
+				'Appointment confirmation through App and SMS',
+				`Manage doctor's profile, availability, schedule, and pertinent information`,
+				'1 to 1 technical support, phone, and email support',
+			],
+		},
+	},
+	{
+		yearly: {
+			type: 'Golden',
+			name: 'Golden (Web Solution)',
+			price: 2300,
+			users: 3,
+			features: [
+				'Subscription includes 3 users',
+				'1 Master Admin Panel. ',
+				'Advanced booking solution',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Custom Fieldes and filter',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Data Import',
+				'Data export',
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Manage promotions.',
+				'Receive emails',
+				' 1 to 1 technical support and email support.',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Automatic Updates',
+				'Patient SMS Notification',
+			],
+		},
+		monthly: {
+			type: 'Golden',
+			name: 'Golden (Web Solution)',
+			price: 220,
+			users: 3,
+			features: [
+				'Subscription includes 3 users',
+				'1 Master Admin Panel. ',
+				'Advanced booking solution',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Custom Fieldes and filter',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Data Import',
+				'Data export',
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Receive emails',
+				'1 to 1 technical support and email support.',
+				'Flexible Scheduling',
+				'Powerful Report for management users',
+				'Automatic Updates',
+				'Patient SMS Notification',
+			],
+		},
+	},
+	{
+		yearly: {
+			type: 'Platinum',
+			name: 'Platinum ( Application & Web Solution)',
+			price: 3000,
+			users: 6,
+			features: [
+				'Subscription includes 6 users',
+				'1 Master Admin Panel. ',
+				'Listed in Mawedy Application',
+				'View solution dashboard',
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Receive patients appointments, outreach patients',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Manage promotions.',
+				'Listed in Mawedy booking application.',
+				'Powerful Report for management users',
+				'Subscription includes 6 Users',
+				'1 to 1 technical support , phone and email support',
+				'Flexible Scheduling',
+				'Data Import',
+				'Data Export',
+				'Automatic Updates',
+				'Patient SMS Notifications',
+			],
+		},
+		monthly: {
+			type: 'Platinum',
+			name: 'Platinum ( Application & Web Solution)',
+			price: 300,
+			users: 6,
+			features: [
+				'Subscription includes 6 users',
+				'1 Master Admin Panel. ',
+				'Listed in Mawedy Application',
+				'View solution dashboard',
+				'Book, view, reschedule, re-assign, cancel or confirm appointments.',
+				'Receive patients appointments, outreach patients',
+				`Manage doctor's profile, availability, schedule, and pertinent information.`,
+				'Manage patient profile.',
+				'Manage clinic profile.',
+				'Manage promotions.',
+				'Listed in Mawedy booking application.',
+				'Powerful Report for management users',
+				'Subscription includes 6 Users',
+				'1 to 1 technical support , phone and email support',
+				'Flexible Scheduling',
+				'Data Import',
+				'Data Export',
+				'Automatic Updates',
+				'Patient SMS Notifications',
+			],
+		},
+	},
+]
 
 export const subscription: SubscriptionFeatures = {
 	standard: [

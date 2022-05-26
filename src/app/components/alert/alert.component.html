@@ -1,8 +1,9 @@
 <div
 	*ngIf="alert.type === 'success'"
-	@slideInTop
+	@slideInBottom
+	@slideOutRight
 	style="width: 300px"
-	class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-emerald-200/20 via-white/20 to-white backdrop-blur-xl flex items-center border border-emerald-200"
+	class="w-full my-2 p-5 rounded-sm from-emerald-200/20 bg-white drop-shadow-xl flex items-center border border-emerald-200"
 >
 	<mat-icon class="text-emerald-500" svgIcon="check_circle"></mat-icon>
 
@@ -18,9 +19,10 @@
 
 <div
 	*ngIf="alert.type === 'info'"
-	@slideInTop
+	@slideInBottom
+	@slideOutRight
 	style="width: 300px"
-	class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-teal-200/20 via-white/20 to-white backdrop-blur-md flex items-center border border-teal-200"
+	class="w-full my-2 p-5 rounded-sm from-emerald-200/20 bg-white drop-shadow-xl flex items-center border border-teal-200"
 >
 	<mat-icon class="text-teal-500" svgIcon="info"></mat-icon>
 
@@ -36,9 +38,10 @@
 
 <div
 	*ngIf="alert.type === 'error'"
-	@slideInTop
+	@slideInBottom
+	@slideOutRight
 	style="width: 300px"
-	class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-rose-200/20 via-white/20 to-white backdrop-blur-md flex items-center border border-rose-200"
+	class="w-full my-2 p-5 rounded-sm from-emerald-200/20 bg-white drop-shadow-xl flex items-center border border-rose-200"
 >
 	<mat-icon class="text-rose-500" svgIcon="error"></mat-icon>
 

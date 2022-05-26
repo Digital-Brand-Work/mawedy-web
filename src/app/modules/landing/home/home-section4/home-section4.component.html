@@ -1,13 +1,11 @@
 <div
-	class="md:min-h-screen w-full flex relative py-20 md:py-0 bg-gray-50 justify-center"
+	class="md:min-h-screen w-full flex relative pt-20 md:py-0 bg-gray-50 justify-center"
 >
-	<!-- <img
-		parallax
-		[factor]="1.3"
+	<img
 		src="/assets/app/home/wave.svg"
-		class="w-screen h-screen object-fill md:object-fill absolute z-0 bottom-0 self-end mt-auto"
+		class="w-screen h-screen object-fill md:object-cover absolute z-0 -bottom-80 self-end mt-auto scale-y-60"
 		alt=""
-	/> -->
+	/>
 
 	<div class="max-w-screen-xl w-full flex justify-center relative z-20">
 		<div class="grid grid-cols-1 md:grid-cols-2 px-5">
@@ -40,7 +38,7 @@
 					}"
 					class="flex mt-10 w-full items-center justify-center"
 				>
-					<app-store-button></app-store-button>
+					<app-store-button class="md:mr-5"></app-store-button>
 
 					<google-play-button></google-play-button>
 				</div>

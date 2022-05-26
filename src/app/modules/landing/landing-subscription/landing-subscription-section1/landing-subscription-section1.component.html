@@ -1,0 +1,132 @@
+<div
+	*ngIf="subscription$ | async as subscription"
+	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
+	class="w-full flex items-center justify-center relative py-20"
+>
+	<div
+		class="max-w-screen-xl w-full items-center justify-center relative z-20 grid grid-cols-1 md:grid-cols-2 mt-20"
+	>
+		<div>
+			<div
+				*ngIf="interval$ | async as interval"
+				@slideInLeft
+				class="border border-gray-200 bg-gray-100 p-10 rounded-3xl w-full"
+			>
+				<div class="text-5xl font-extrabold text-emerald-500">
+					{{ subscription.type }}
+				</div>
+
+				<div class="mb-5 accent-color text-2xl font-bold">
+					{{ subscription.price | number }} AED /
+					{{ interval | titlecase }}
+				</div>
+
+				<div
+					class="text-left my-2 accent-color self-start text-lg font-bold"
+				>
+					Features
+				</div>
+
+				<ul class="grid grid-cols-2 gap-x-10">
+					<li
+						class="text-gray flex items-center py-2 w-full"
+						*ngFor="
+							let item of subscription.features;
+							trackBy: identity
+						"
+					>
+						<mat-icon
+							class="mr-3 text-emerald-500"
+							svgIcon="check"
+						></mat-icon>
+
+						{{ item }}
+					</li>
+				</ul>
+			</div>
+
+			<div class="flex items-center mt-10 text-2xl font-normal">
+				<div>{{ subscription.name }}</div>
+
+				<div class="ml-auto">{{ subscription.price | number }} AED</div>
+			</div>
+
+			<div class="flex items-center mt-2 text-2xl font-normal">
+				<div>
+					<span class="text-emerald-500"
+						>{{ subscription.users }} Free users
+					</span>
+					<div class="flex items-center">
+						{{ additionalUsers }} Additional users
+
+						<div class="flex items-center ml-10">
+							<button
+								(click)="
+									additionalUsers =
+										additionalUsers === 0
+											? 0
+											: additionalUsers - 1
+								"
+								mat-icon-button
+								matTooltip="Remove User"
+							>
+								<mat-icon
+									maticc
+									svgIcon="heroicons_outline:minus"
+								></mat-icon>
+							</button>
+
+							<div
+								style="height: 36px; width: 36px"
+								class="p-3 items-center justify-center flex border border-emerald-500 rounded-md mx-1 text-lg font-bold accent-color"
+							>
+								{{ additionalUsers }}
+							</div>
+
+							<button
+								(click)="additionalUsers = additionalUsers + 1"
+								mat-icon-button
+								matTooltip="Add user"
+							>
+								<mat-icon
+									svgIcon="heroicons_outline:plus"
+								></mat-icon>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="ml-auto">
+					<br />
+					{{
+						additionalUsers * PRICE_PER_USER * billMultiplier
+							| number
+					}}
+					AED
+				</div>
+			</div>
+
+			<mat-divider class="my-5 border-gray-300"></mat-divider>
+
+			<div class="flex items-center mt-2 text-2xl font-normal">
+				<div class="ml-auto">Total Amount</div>
+
+				<div class="ml-10 font-bold accent-color">
+					{{
+						subscription.price +
+							additionalUsers * PRICE_PER_USER * billMultiplier
+							| number
+					}}
+					AED
+				</div>
+			</div>
+		</div>
+
+		<div class="px-5 md:p-10 items-start md:-translate-y-20">
+			<partner-with-us-section1-first-step
+				(onNext)="register($event)"
+				[isProcessing]="isProcessing"
+			></partner-with-us-section1-first-step>
+		</div>
+	</div>
+</div>

@@ -1,8 +1,13 @@
 import { isPlatformBrowser } from '@angular/common'
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core'
+import { FormGroup } from '@angular/forms'
+import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
+import { AlertState } from 'app/components/alert/alert.service'
+import { setPrefix, slugToSentence } from 'app/mawedy-core/helpers'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { RegisterService } from '../../home/register.service'
 
 @Component({
 	selector: 'partner-with-us-section1',
@@ -12,15 +17,18 @@ import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 })
 export class PartnerWithUsSection1Component implements OnInit {
 	constructor(
-		private _scrollService: ScrollService,
 		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _scrollService: ScrollService,
+		private _router: Router,
+		private _alert: AlertState,
+		private _registerService: RegisterService,
 	) {}
-
-	step: 'one' | 'two' = 'one'
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	focus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+
+	isProcessing: boolean = false
 
 	ngOnInit(): void {
 		this.focus$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
@@ -36,5 +44,72 @@ export class PartnerWithUsSection1Component implements OnInit {
 		this.unsubscribe$.next(null)
 
 		this.unsubscribe$.complete()
+	}
+
+	register(data: { form: FormGroup; trade_license_photo: any }) {
+		this.isProcessing = true
+
+		let form = new FormData()
+
+		form.append('trade_license_photo', data.trade_license_photo)
+
+		form.append(
+			'phone_number_one',
+			`${setPrefix(data.form.value.phone_number_one_country_code)}${
+				data.form.value.phone_number_one
+			}`,
+		)
+
+		for (let key in data?.form?.value) {
+			if (
+				data.form.value[key] !== undefined ||
+				data.form.value[key] !== '' ||
+				key !== 'interval'
+			) {
+				if (key !== 'phone_number_one') {
+					form.append(key, data.form.value[key])
+				}
+			}
+		}
+
+		this._registerService
+			.post(form)
+			.subscribe({
+				next: () => {
+					this._alert.add({
+						title: `Account has been successfully created.`,
+						message:
+							'We are reviewing your account and will notify you once your account has been successfully approved. Best Regards, Mawedy Team',
+						type: 'success',
+						id: Math.floor(Math.random() * 100000000000).toString(),
+					})
+
+					this._alert.add({
+						title: `Redirecting...`,
+						message: 'You will be redirected in Sign In Page.',
+						type: 'info',
+						id: Math.floor(Math.random() * 100000000000).toString(),
+					})
+
+					setTimeout(() => {
+						this._router.navigate(['/'])
+					}, 5000)
+				},
+				error: (http) => {
+					for (let key in http.error.errors) {
+						for (let error of http.error.errors[key]) {
+							this._alert.add({
+								title: `Error in ${slugToSentence(key)}`,
+								message: error,
+								type: 'error',
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+							})
+						}
+					}
+				},
+			})
+			.add(() => (this.isProcessing = false))
 	}
 }

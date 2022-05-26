@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from 'app/shared/shared.module'
 import { HomeMainComponent } from 'app/modules/landing/home/home.component'
-import { landingHomeRoutes } from 'app/routes/landing/landing.routing'
+import { landingHomeRoutes } from 'app/mawedy-core/routes/landing/landing.routing'
 import { HomeSection1Component } from './home/home-section1/home-section1.component'
 import { HomeSection2Component } from './home/home-section2/home-section2.component'
 import { HomeSection3Component } from './home/home-section3/home-section3.component'
@@ -21,6 +21,19 @@ import { TalkToUsComponent } from './talk-to-us/talk-to-us.component'
 import { LandingComponent } from './landing.component'
 import { PartnerWithUsSection1FirstStepComponent } from './partner-with-us/partner-with-us-section1/partner-with-us-section1-first-step/partner-with-us-section1-first-step.component'
 import { PartnerWithUsSection1SecondStepComponent } from './partner-with-us/partner-with-us-section1/partner-with-us-section1-second-step/partner-with-us-section1-second-step.component'
+import { AboutUsSection1Component } from './about-us/about-us-section1/about-us-section1.component'
+import { AboutUsSection2Component } from './about-us/about-us-section2/about-us-section2.component'
+import { AboutUsSection3Component } from './about-us/about-us-section3/about-us-section3.component'
+import { FooterComponent } from './common/footer/footer.component'
+import { LandingSubscriptionComponent } from './landing-subscription/landing-subscription.component'
+import { LandingSubscriptionSection1Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1.component'
+import { LandingSubscriptionSection2Component } from './landing-subscription/landing-subscription-section2/landing-subscription-section2.component'
+import { TalkToUsSection1Component } from './talk-to-us/talk-to-us-section1/talk-to-us-section1.component'
+import { TalkToUsSection2Component } from './talk-to-us/talk-to-us-section2/talk-to-us-section2.component'
+import { HomeSection3PricingComponent } from './home/home-section3/home-section3-pricing/home-section3-pricing.component';
+import { LandingSubscriptionSection1Form1Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1-form1/landing-subscription-section1-form1.component';
+import { LandingSubscriptionSection1Form2Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1-form2/landing-subscription-section1-form2.component';
+import { SuccessComponent } from './success/success.component'
 
 const components = [
 	HomeNavbarResponsiveComponent,
@@ -44,13 +57,21 @@ const components = [
 	AboutUsComponent,
 	JoinUsComponent,
 	TalkToUsComponent,
+	PartnerWithUsSection1FirstStepComponent,
+	PartnerWithUsSection1SecondStepComponent,
+	AboutUsSection1Component,
+	AboutUsSection2Component,
+	AboutUsSection3Component,
+	FooterComponent,
+	LandingSubscriptionComponent,
+	LandingSubscriptionSection1Component,
+	LandingSubscriptionSection2Component,
+	TalkToUsSection1Component,
+	TalkToUsSection2Component,
+	HomeSection3PricingComponent,
 ]
 @NgModule({
-	declarations: [
-		...components,
-		PartnerWithUsSection1FirstStepComponent,
-		PartnerWithUsSection1SecondStepComponent,
-	],
+	declarations: [...components, LandingSubscriptionSection1Form1Component, LandingSubscriptionSection1Form2Component, SuccessComponent],
 	imports: [RouterModule.forChild(landingHomeRoutes), SharedModule],
 	exports: [...components],
 })

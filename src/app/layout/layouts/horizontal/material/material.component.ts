@@ -1,101 +1,80 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
-import { Navigation } from 'app/core/navigation/navigation.types';
-import { NavigationService } from 'app/core/navigation/navigation.service';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Subject, takeUntil } from 'rxjs'
+import { FuseMediaWatcherService } from '@fuse/services/media-watcher'
+import {
+	FuseNavigationItem,
+	FuseNavigationService,
+	FuseVerticalNavigationComponent,
+} from '@fuse/components/navigation'
+import { Navigation } from 'app/core/navigation/navigation.types'
+import { NavigationService } from 'app/core/navigation/navigation.service'
+import { AdminNavigationService } from 'app/mawedy-core/navigation/admin.navigation.service'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 
 @Component({
-    selector     : 'material-layout',
-    templateUrl  : './material.component.html',
-    encapsulation: ViewEncapsulation.None
+	selector: 'material-layout',
+	templateUrl: './material.component.html',
+	encapsulation: ViewEncapsulation.None,
 })
-export class MaterialLayoutComponent implements OnInit, OnDestroy
-{
-    isScreenSmall: boolean;
-    navigation: Navigation;
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
+export class MaterialLayoutComponent implements OnInit, OnDestroy {
+	constructor(
+		private _fuseMediaWatcherService: FuseMediaWatcherService,
+		private _fuseNavigationService: FuseNavigationService,
 
-    /**
-     * Constructor
-     */
-    constructor(
-        private _activatedRoute: ActivatedRoute,
-        private _router: Router,
-        private _navigationService: NavigationService,
-        private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fuseNavigationService: FuseNavigationService
-    )
-    {
-    }
+		private _adminNavigationService: AdminNavigationService,
+		private _clinicUserService: ClinicUserService,
+	) {}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
+	isScreenSmall: boolean
 
-    /**
-     * Getter for current year
-     */
-    get currentYear(): number
-    {
-        return new Date().getFullYear();
-    }
+	navigation: Navigation
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+	_unsubscribeAll: Subject<any> = new Subject<any>()
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Subscribe to navigation data
-        this._navigationService.navigation$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((navigation: Navigation) => {
-                this.navigation = navigation;
-            });
+	get currentYear(): number {
+		return new Date().getFullYear()
+	}
 
-        // Subscribe to media changes
-        this._fuseMediaWatcherService.onMediaChange$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(({matchingAliases}) => {
+	ngOnInit(): void {
+		this._clinicUserService.clinic$
+			.pipe(takeUntil(this._unsubscribeAll))
+			.subscribe({
+				next: (clinic) => {
+					this._adminNavigationService
+						.get(clinic.subscription_type)
+						.pipe(takeUntil(this._unsubscribeAll))
+						.subscribe((navigation: FuseNavigationItem[]) => {
+							this.navigation = {
+								compact: navigation,
+								default: navigation,
+								futuristic: navigation,
+								horizontal: navigation,
+							}
+						})
+				},
+			})
 
-                // Check if the screen is small
-                this.isScreenSmall = !matchingAliases.includes('md');
-            });
-    }
+		this._fuseMediaWatcherService.onMediaChange$
+			.pipe(takeUntil(this._unsubscribeAll))
+			.subscribe(({ matchingAliases }) => {
+				this.isScreenSmall = !matchingAliases.includes('md')
+			})
+	}
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next(null);
-        this._unsubscribeAll.complete();
-    }
+	ngOnDestroy(): void {
+		this._unsubscribeAll.next(null)
+		this._unsubscribeAll.complete()
+	}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+	toggleNavigation(name: string): void {
+		const navigation =
+			this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
+				name,
+			)
 
-    /**
-     * Toggle navigation
-     *
-     * @param name
-     */
-    toggleNavigation(name: string): void
-    {
-        // Get the navigation
-        const navigation = this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(name);
-
-        if ( navigation )
-        {
-            // Toggle the opened status
-            navigation.toggle();
-        }
-    }
+		if (navigation) {
+			navigation.toggle()
+		}
+	}
 }

@@ -9,12 +9,12 @@ import { AppointmentsWeekCalendarComponent } from './appointments/appointments-w
 import { AppointmentsDayCalendarComponent } from './appointments/appointments-day-calendar/appointments-day-calendar.component'
 import { AppointmentRegularBadgeComponent } from './appointments/appointments/badges/appointment-regular-badge/appointment-regular-badge.component'
 import { AppointmentDayBadgeComponent } from './appointments/appointments/badges/appointment-day-badge/appointment-day-badge.component'
-import { appointmentRoutes } from 'app/routes/admin/appointment.routing'
+import { appointmentRoutes } from 'app/mawedy-core/routes/admin/appointment.routing'
 import { StoreModule } from '@ngrx/store'
-import * as fromAppointment from '../../../store/appointment/appointment.reducer'
+import * as fromAppointment from './appointment.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { AppointmentEffects } from 'app/store/appointment/appointment.effects';
-import { AppointmentsMonthCalendarAppointmentItemComponent } from './appointments/appointments-month-calendar/appointments-month-calendar-appointment-item/appointments-month-calendar-appointment-item.component';
+import { AppointmentEffects } from 'app/modules/admin/appointments/appointment.effects'
+import { AppointmentsMonthCalendarAppointmentItemComponent } from './appointments/appointments-month-calendar/appointments-month-calendar-appointment-item/appointments-month-calendar-appointment-item.component'
 import { AppointmentsDayCalendarAppointmentItemComponent } from './appointments/appointments-day-calendar/appointments-day-calendar-appointment-item/appointments-day-calendar-appointment-item.component'
 
 const components = [
@@ -29,7 +29,11 @@ const components = [
 ]
 
 @NgModule({
-	declarations: [...components, AppointmentsMonthCalendarAppointmentItemComponent, AppointmentsDayCalendarAppointmentItemComponent],
+	declarations: [
+		...components,
+		AppointmentsMonthCalendarAppointmentItemComponent,
+		AppointmentsDayCalendarAppointmentItemComponent,
+	],
 	imports: [
 		SharedModule,
 		RouterModule.forChild(appointmentRoutes),
