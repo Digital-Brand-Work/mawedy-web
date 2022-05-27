@@ -66,6 +66,10 @@ export class LandingSubscriptionSection1Component implements OnInit {
 					next: (results) => {
 						const subscription_request: any = results[0]
 
+						if (!subscription_request) {
+							return this._router.navigate(['/'])
+						}
+
 						this.subscription$.next(
 							subscription_request.subscription,
 						)
@@ -74,9 +78,6 @@ export class LandingSubscriptionSection1Component implements OnInit {
 						if (subscription_request.interval === 'yearly') {
 							this.billMultiplier = 12
 						}
-					},
-					error: () => {
-						this._router.navigate(['/'])
 					},
 				})
 		}, 100)

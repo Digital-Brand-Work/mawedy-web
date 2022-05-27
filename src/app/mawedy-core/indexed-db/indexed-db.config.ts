@@ -1,4 +1,5 @@
 import { DBConfig } from 'ngx-indexed-db'
+import { DB } from '../enums/index.db.enum'
 
 export function migrationFactory() {
 	return {}
@@ -6,10 +7,10 @@ export function migrationFactory() {
 
 export const indexedDbConfig: DBConfig = {
 	name: 'mawedy',
-	version: 2,
+	version: 3,
 	objectStoresMeta: [
 		{
-			store: 'subscription_request',
+			store: DB.SUBSCRIPTION_REQUEST,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
 			storeSchema: [
 				{
@@ -25,7 +26,7 @@ export const indexedDbConfig: DBConfig = {
 			],
 		},
 		{
-			store: 'account_users_request',
+			store: DB.ACCOUNT_USERS_REQUEST,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
 			storeSchema: [
 				{
@@ -34,6 +35,41 @@ export const indexedDbConfig: DBConfig = {
 					options: { unique: false },
 				},
 				{ name: 'users', keypath: 'users', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.CLINIC,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.APPOINTMENTS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.DOCTORS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.PROMOTIONS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.SUBSCRIPTIONS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
 			],
 		},
 	],

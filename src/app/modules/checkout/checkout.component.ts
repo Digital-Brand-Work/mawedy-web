@@ -54,14 +54,15 @@ export class CheckoutComponent implements OnInit {
 
 					const account_users_request: any = results[0]
 
+					if (!account_users_request || !subscription_request) {
+						return this._router.navigate(['/'])
+					}
+
 					this.interval$.next(subscription_request.interval)
 
 					this.subscription$.next(subscription_request.subscription)
 
 					this.additionalUsers = account_users_request.users
-				},
-				error: () => {
-					this._router.navigate(['/'])
 				},
 			})
 	}

@@ -45,6 +45,7 @@ export class SuccessComponent implements OnInit {
 								subscription_request.interval
 							])
 					}
+
 					this._router.navigate(['/'])
 				},
 				error: () => {
