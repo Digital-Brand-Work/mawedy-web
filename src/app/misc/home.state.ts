@@ -10,4 +10,6 @@ export class HomeSubscriptionState {
 	interval$: BehaviorSubject<string | null> = new BehaviorSubject<
 		string | null
 	>(null)
+
+	users$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 }

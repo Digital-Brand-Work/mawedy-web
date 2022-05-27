@@ -15,6 +15,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { HomeSubscriptionState } from 'app/misc/home.state'
 import { RegisterService } from '../../home/register.service'
 import { AlertState } from 'app/components/alert/alert.service'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 
 @Component({
 	selector: 'landing-subscription-section1',
@@ -30,6 +31,7 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		private _alert: AlertState,
 		private _homeSubscriptionState: HomeSubscriptionState,
 		private _registerService: RegisterService,
+		private _clinicUserService: ClinicUserService,
 	) {}
 
 	isProcessing: boolean = false
@@ -121,7 +123,15 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		this._registerService
 			.post(form)
 			.subscribe({
-				next: () => {},
+				next: (userAccount) => {
+					this._homeSubscriptionState.users$.next(
+						this.additionalUsers,
+					)
+
+					this._clinicUserService.saveDataLocally(userAccount)
+
+					this._router.navigate(['checkout'])
+				},
 				error: (http) => {
 					for (let key in http.error.errors) {
 						for (let error of http.error.errors[key]) {
