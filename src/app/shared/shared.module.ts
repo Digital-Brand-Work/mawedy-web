@@ -54,6 +54,8 @@ import { SSRExcludeModule } from 'ngx-ssr-exclude'
 import { GooglePayButtonComponent } from 'app/components/buttons/google-pay-button/google-pay-button.component'
 import { ApplePayButtonComponent } from 'app/components/buttons/apple-pay-button/apple-pay-button.component'
 import { CardNumberFormComponent } from 'app/components/forms/card-number-form/card-number-form.component'
+import { NgxIndexedDBModule } from 'ngx-indexed-db'
+import { indexedDbConfig } from 'app/mawedy-core/indexed-db/indexed-db.config'
 
 const components = [
 	SpinnerComponent,
@@ -105,6 +107,7 @@ const components = [
 ]
 
 const modules = [
+	NgxIndexedDBModule.forRoot(indexedDbConfig),
 	CommonModule,
 	FormsModule,
 	ReactiveFormsModule,

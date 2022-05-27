@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
 import { LoginService } from '../../login.service'
 import { slugToSentence } from 'app/mawedy-core/helpers'
 import { slugify } from '@digital_brand_work/helpers/helpers'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
 
 @Component({
 	selector: 'home-section1-login-panel',
@@ -16,12 +17,11 @@ import { slugify } from '@digital_brand_work/helpers/helpers'
 })
 export class HomeSection1LoginPanelComponent implements OnInit {
 	constructor(
-		private _router: Router,
 		private _alert: AlertState,
 		private _formBuilder: FormBuilder,
-
 		private _loginService: LoginService,
 		private _clinicUserService: ClinicUserService,
+		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
 	@ViewChild('ngForm') ngForm!: NgForm
@@ -65,17 +65,6 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 				},
 				error: (http) => {
 					for (let key in http.error.errors) {
-						for (let error of http.error.errors[key]) {
-							this._alert.add({
-								title: `Error in ${slugToSentence(key)}`,
-								message: error,
-								type: 'error',
-								id: Math.floor(
-									Math.random() * 100000000000,
-								).toString(),
-							})
-						}
-
 						for (let errorKey in this.errors) {
 							if (key.includes(errorKey)) {
 								this.errors[errorKey] = true
@@ -83,16 +72,7 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 						}
 					}
 
-					if (http.error.key !== undefined) {
-						this._alert.add({
-							title: `Error in ${slugToSentence(http.error.key)}`,
-							message: http.error.message,
-							type: 'error',
-							id: Math.floor(
-								Math.random() * 100000000000,
-							).toString(),
-						})
-					}
+					this._errorHandlerService.handleError(http)
 				},
 			})
 			.add(() => this.form.enable())
