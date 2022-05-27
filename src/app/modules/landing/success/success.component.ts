@@ -7,8 +7,11 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { mawedySubscriptions } from 'app/mawedy-core/constants/app.constant'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
-import { Observable } from 'rxjs'
+import { Observable, take } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
+import { Clinic } from 'app/modules/admin/clinic/clinic.model'
+import { slugify } from '@digital_brand_work/helpers/helpers'
 
 @Component({
 	selector: 'success',
@@ -21,6 +24,7 @@ export class SuccessComponent implements OnInit {
 		private _route: ActivatedRoute,
 		private _mediaService: MediaService,
 		private _router: Router,
+		private _clinicUserService: ClinicUserService,
 	) {}
 
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
@@ -47,4 +51,16 @@ export class SuccessComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	explore() {
+		this._clinicUserService.hasLoggedIn$
+			.pipe(take(1))
+			.subscribe((hasLoggedIn) => {
+				if (hasLoggedIn) {
+					this._clinicUserService.toDashboard()
+				} else {
+					return this._router.navigate(['/'])
+				}
+			})
+	}
 }

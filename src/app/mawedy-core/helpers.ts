@@ -1,3 +1,4 @@
+import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { countries } from './constants/country-codes.list'
 
 export const setPrefix = (country_code: string): string => {
@@ -12,4 +13,8 @@ export function toCardExpiry(digits: string) {
 	const expiry = digits.split('/')
 
 	return { month: expiry[0], year: '20' + expiry[1] }
+}
+
+export function toAddress(clinic: Clinic) {
+	return
 }

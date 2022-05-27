@@ -13,7 +13,7 @@ export class AdminNavigationService {
 			this.clinic = slugify(clinic.name)
 
 			this.branch = slugify(
-				clinic.accounts.length === 0 ? clinic.address : clinic[0].name,
+				clinic.accounts.length === 0 ? clinic.line_one : clinic[0].name,
 			)
 		})
 	}

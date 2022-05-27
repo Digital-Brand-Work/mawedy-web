@@ -29,13 +29,22 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 	@ViewChild('input') input!: ElementRef
 
 	form: FormGroup = this._formBuilder.group({
-		email: ['', Validators.email],
+		email: ['', [Validators.email, Validators.required]],
 		password: ['', Validators.required],
 	})
+
+	errors = {
+		email: false,
+		password: false,
+	}
 
 	ngOnInit(): void {}
 
 	login() {
+		for (let key in this.errors) {
+			this.errors[key] = false
+		}
+
 		this.form.disable()
 
 		this._loginService
@@ -52,13 +61,7 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 						type: 'info',
 					})
 
-					this._router.navigate([
-						`/${slugify(userAccount.data.name)}/${slugify(
-							userAccount.data.accounts.length === 0
-								? userAccount.data.address
-								: userAccount.data[0].name,
-						)}/dashboard/appointments`,
-					])
+					this._clinicUserService.toDashboard()
 				},
 				error: (http) => {
 					for (let key in http.error.errors) {
@@ -71,6 +74,12 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 									Math.random() * 100000000000,
 								).toString(),
 							})
+						}
+
+						for (let errorKey in this.errors) {
+							if (key.includes(errorKey)) {
+								this.errors[errorKey] = true
+							}
 						}
 					}
 

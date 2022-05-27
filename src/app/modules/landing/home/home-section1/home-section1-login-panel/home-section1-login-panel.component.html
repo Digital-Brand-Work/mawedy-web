@@ -17,8 +17,11 @@
 		placeholder="Email"
 		formControlName="email"
 		[ngClass]="{
+			'text-red-500': errors.email && !form.disabled,
 			'border border-red-500 bg-red-50':
-				!form.get('email')?.valid && form.get('email')?.touched,
+				!form.get('email')?.valid &&
+				form.get('email')?.touched &&
+				!form.disabled,
 			'bg-gray-100 ':
 				(form.get('email')?.valid && form.get('email')?.touched) ||
 				!form.get('email')?.touched
@@ -27,7 +30,11 @@
 	/>
 
 	<div
-		*ngIf="!form.get('email')?.valid && form.get('email')?.touched"
+		*ngIf="
+			!form.get('email')?.valid &&
+			form.get('email')?.touched &&
+			!form.disabled
+		"
 		class="text-sm text-rose-500 text-left self-baseline"
 	>
 		Invalid email format.
@@ -39,8 +46,11 @@
 		autocomplete="password"
 		formControlName="password"
 		[ngClass]="{
+			'text-red-500': errors.password && !form.disabled,
 			'border border-red-500 bg-red-50':
-				!form.get('password')?.valid && form.get('password')?.touched,
+				!form.get('password')?.valid &&
+				form.get('password')?.touched &&
+				!form.disabled,
 			'bg-gray-100 ':
 				(form.get('password')?.valid &&
 					form.get('password')?.touched) ||
@@ -50,7 +60,11 @@
 	/>
 
 	<div
-		*ngIf="!form.get('password')?.valid && form.get('password')?.touched"
+		*ngIf="
+			!form.get('password')?.valid &&
+			form.get('password')?.touched &&
+			!form.disabled
+		"
 		class="text-sm text-rose-500 text-left self-baseline"
 	>
 		Password is required.
