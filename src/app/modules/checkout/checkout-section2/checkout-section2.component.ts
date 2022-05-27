@@ -12,6 +12,7 @@ import { Router } from '@angular/router'
 import { AlertState } from 'app/components/alert/alert.service'
 import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { countries } from 'app/mawedy-core/constants/countries.constant'
 declare var window: any
 
 @Component({
@@ -40,6 +41,10 @@ export class CheckoutSection2Component implements OnInit {
 
 	showApplePay = false
 
+	cities: string[] = []
+
+	countryJson = countries
+
 	ngOnInit(): void {
 		this.showApplePay = false
 
@@ -54,6 +59,8 @@ export class CheckoutSection2Component implements OnInit {
 				}
 			})
 		}
+
+		this.cities = this.countryJson['United Arab Emirates']
 	}
 
 	ngAfterViewInit(): void {
@@ -68,6 +75,12 @@ export class CheckoutSection2Component implements OnInit {
 
 	ngOnDestroy(): void {
 		this._cdr.detach()
+	}
+
+	identity = (item: any) => item
+
+	onChangeCountry(country: string) {
+		this.cities = this.countryJson[country]
 	}
 
 	pay() {

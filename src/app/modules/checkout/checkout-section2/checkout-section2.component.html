@@ -17,7 +17,6 @@
 				type="email"
 				autocomplete="email"
 				placeholder="johndoe@example.com"
-				formControlName="email"
 				class="py-2 px-3 w-full"
 			/>
 		</div>
@@ -52,7 +51,6 @@
 				type="text"
 				autocomplete="card_expiry"
 				placeholder="MM/YY"
-				formControlName="email"
 				mask="00/00"
 				maxlength="5"
 				class="py-2 px-3 w-full"
@@ -64,7 +62,6 @@
 				autocomplete="cvc"
 				placeholder="CVC"
 				maxlength="3"
-				formControlName="email"
 				class="py-2 px-3 w-full border-l border-gray-200"
 			/>
 		</div>
@@ -81,7 +78,6 @@
 				type="text"
 				autocomplete="name"
 				placeholder="John Doe"
-				formControlName="name"
 				class="py-2 px-3 w-full"
 			/>
 		</div>
@@ -94,7 +90,42 @@
 		class="rounded-2xl border border-gray-200 w-full overflow-hidden shadow-md shadow-emerald-200/20 bg-white mb-10"
 	>
 		<div class="px-3">
-			<country-form></country-form>
+			<div class="border-b border-b-gray-200 px-3">
+				<country-form>
+					(onChangeCountry)="onChangeCountry($event)"
+				</country-form>
+			</div>
+
+			<div class="border-b border-b-gray-200 px-3">
+				<select
+					class="w-full bg-white rounded-sm px-5"
+					style="height: 45px"
+				>
+					<option *ngFor="let city of cities; trackBy: identity">
+						{{ city }}
+					</option>
+				</select>
+			</div>
+
+			<div class="border-b border-b-gray-200 px-3">
+				<input
+					type="text"
+					autocomplete="address-level1"
+					placeholder="Address line 1"
+					maxlength="5"
+					class="py-2 px-3 w-full"
+				/>
+			</div>
+
+			<div class="border-b border-b-gray-200 px-3">
+				<input
+					type="text"
+					autocomplete="postal-code"
+					placeholder="Postal Code"
+					maxlength="5"
+					class="py-2 px-3 w-full"
+				/>
+			</div>
 		</div>
 	</div>
 
