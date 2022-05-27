@@ -18,7 +18,7 @@ export class HomeSection3PricingComponent implements OnInit {
 
 	@Input() subscription?: Subscription
 
-	@Input() interval?: string
+	@Input() interval?: 'yearly' | 'monthly' | null
 
 	ngOnInit(): void {}
 

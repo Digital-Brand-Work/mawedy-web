@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http'
-import { BaseService } from './../../../../@digital_brand_work/api/base.api'
+import { BaseService } from '../../../@digital_brand_work/api/base.api'
 import { Injectable } from '@angular/core'
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutService extends BaseService<any> {
-	constructor(_http: HttpClient) {
-		super(_http, 'v1/subscriptions/checkout')
+	constructor(http: HttpClient) {
+		super(http, 'v1/subscriptions/checkout')
 	}
 
 	// * POST *
@@ -13,8 +13,8 @@ export class CheckoutService extends BaseService<any> {
 
 @Injectable({ providedIn: 'root' })
 export class BillingService extends BaseService<any> {
-	constructor(_http: HttpClient) {
-		super(_http, 'v1/subscriptions/billing')
+	constructor(http: HttpClient) {
+		super(http, 'v1/subscriptions/billing')
 	}
 
 	// * POST *

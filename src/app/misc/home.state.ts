@@ -7,9 +7,8 @@ export class HomeSubscriptionState {
 	subscription$: BehaviorSubject<Subscription | null> =
 		new BehaviorSubject<Subscription | null>(null)
 
-	interval$: BehaviorSubject<string | null> = new BehaviorSubject<
-		string | null
-	>(null)
+	interval$: BehaviorSubject<'yearly' | 'monthly' | null> =
+		new BehaviorSubject<'yearly' | 'monthly' | null>(null)
 
 	users$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 }

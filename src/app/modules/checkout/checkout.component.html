@@ -21,8 +21,12 @@
 	</div>
 
 	<div
-		class="w-full md:h-screen bg-emerald-50/20 drop-shadow shadow-2xl shadow-black/50 relative md:z-60"
+		class="w-full md:h-screen md:overflow-y-auto bg-emerald-50/20 drop-shadow shadow-2xl shadow-black/50 relative md:z-60"
 	>
-		<checkout-section2></checkout-section2>
+		<checkout-section2
+			[subscription$]="subscription$"
+			[interval$]="interval$"
+			[additionalUsers]="additionalUsers"
+		></checkout-section2>
 	</div>
 </div>

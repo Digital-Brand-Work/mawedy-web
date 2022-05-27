@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core'
 
 export interface User {
 	access: {
-		access_token: string
+		token: string
 		token_type: string
 		expiry: any
 	}
@@ -24,7 +24,7 @@ export class ClinicUserService {
 	clinic?: Clinic
 
 	saveDataLocally(data: User): void {
-		localStorage.setItem('access_token', JSON.stringify(data.access))
+		localStorage.setItem('access_token', data.access.token)
 
 		localStorage.setItem('user', JSON.stringify(data.data))
 

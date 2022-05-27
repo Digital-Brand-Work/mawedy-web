@@ -58,6 +58,15 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			if (subscription === null) {
 				this.subscription$.next(this.defaultSubscription)
 
+				this._alert.add({
+					title: `Session has expired.`,
+					message: 'Please resubscribe to continue.',
+					type: 'info',
+					id: Math.floor(Math.random() * 100000000000).toString(),
+				})
+
+				this._router.navigate(['/'])
+
 				return this.interval$.next('yearly')
 			}
 		})

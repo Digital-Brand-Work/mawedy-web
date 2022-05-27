@@ -7,6 +7,6 @@ import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 })
 export class LoginService extends BaseService<any> {
 	constructor(http: HttpClient) {
-		super(http, 'v1/auth/login')
+		super(http, '/v1/auth/login')
 	}
 }
