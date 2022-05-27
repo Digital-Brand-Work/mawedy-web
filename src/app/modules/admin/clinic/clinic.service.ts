@@ -1,3 +1,4 @@
+import { IndexedDbController } from '../../../mawedy-core/indexed-db/indexed-db.controller'
 import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, take } from 'rxjs'
@@ -17,7 +18,11 @@ export interface User {
 
 @Injectable({ providedIn: 'root' })
 export class ClinicUserService {
-	constructor(private _router: Router, private _http: HttpClient) {
+	constructor(
+		private _router: Router,
+		private _http: HttpClient,
+		private _indexedDBController: IndexedDbController,
+	) {
 		const clinic = localStorage.getItem('user')
 
 		if (clinic !== null) {
@@ -52,7 +57,7 @@ export class ClinicUserService {
 
 	update(): void {
 		this.clinic$.pipe(take(1)).subscribe((clinic) => {
-			if (Object.keys(clinic).length === 0) {
+			if (Object.keys(clinic).length === 0 || !clinic.accounts) {
 				new BaseService(this._http, 'v1/auth/check')
 					.get()
 					.pipe(take(1))
@@ -75,9 +80,7 @@ export class ClinicUserService {
 
 		this.clinic$.pipe(take(1)).subscribe((userAccount) => {
 			return `/${slugify(userAccount.name)}/${slugify(
-				userAccount.accounts.length === 0
-					? userAccount.line_one
-					: userAccount[0].name,
+				userAccount.account_type,
 			)}/`
 		})
 	}
@@ -86,12 +89,12 @@ export class ClinicUserService {
 		this.update()
 
 		this.clinic$.pipe(take(1)).subscribe((userAccount) => {
+			if (!userAccount.accounts === undefined) {
+				this.update()
+			}
+
 			this._router.navigate([
-				`/${slugify(userAccount.name)}/${slugify(
-					userAccount.accounts.length === 0
-						? userAccount.line_one
-						: userAccount[0].name,
-				)}/dashboard/appointments`,
+				this.resolveClinicPath() + `dashboard/appointments`,
 			])
 		})
 	}

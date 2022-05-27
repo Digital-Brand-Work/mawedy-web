@@ -15,7 +15,8 @@ import { countries } from 'app/mawedy-core/constants/countries.constant'
 import { CheckoutService } from '../stripe.service'
 import { BehaviorSubject, take } from 'rxjs'
 import { Subscription } from 'app/mawedy-core/models/utility.models'
-import { slugToSentence, toCardExpiry } from 'app/mawedy-core/helpers'
+import { toCardExpiry } from 'app/mawedy-core/helpers'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
 declare var window: any
 
 @Component({
@@ -28,11 +29,11 @@ export class CheckoutSection2Component implements OnInit {
 	constructor(
 		private _cdr: ChangeDetectorRef,
 		private _scrollService: ScrollService,
-		private _router: Router,
 		private _alert: AlertState,
 		private _formBuilder: FormBuilder,
-
 		private _checkoutService: CheckoutService,
+		private _errorHandlerService: ErrorHandlerService,
+		private _router: Router,
 	) {}
 
 	@ViewChild('ngForm') ngForm?: NgForm
@@ -49,6 +50,14 @@ export class CheckoutSection2Component implements OnInit {
 
 	isProcessing: boolean = false
 
+	showApplePay = false
+
+	cities: string[] = []
+
+	countryJson = countries
+
+	expiryError: boolean = false
+
 	form: FormGroup = this._formBuilder.group({
 		name: ['', Validators.required],
 		email: ['', Validators.email],
@@ -62,12 +71,6 @@ export class CheckoutSection2Component implements OnInit {
 		expiry: ['', [Validators.required]],
 		cvc: ['', [Validators.required]],
 	})
-
-	showApplePay = false
-
-	cities: string[] = []
-
-	countryJson = countries
 
 	ngOnInit(): void {
 		this.showApplePay = false
@@ -115,18 +118,6 @@ export class CheckoutSection2Component implements OnInit {
 		this.form.value.city = this.cities[0]
 	}
 
-	expiryError: boolean = false
-
-	isValid(form: any): boolean {
-		for (let key in form) {
-			if (this.form.value.key === '') {
-				return false
-			}
-		}
-
-		return true
-	}
-
 	pay() {
 		for (let key in this.form.value) {
 			if (this.form.value[key] === '') {
@@ -171,24 +162,16 @@ export class CheckoutSection2Component implements OnInit {
 			.post(data)
 			.subscribe({
 				next: () => {
-					window.location.href =
-						window.location.origin +
-						`/success?subscription=${data.type}&interval=${data.interval}ly`
+					this._router.navigate([
+						`/success?subscription=${data.type}&interval=${data.interval}ly`,
+					])
 				},
 				error: (http) => {
 					if (http.error.message.includes('exp')) {
 						this.expiryError = true
 					}
-					if (http.error.key !== undefined) {
-						this._alert.add({
-							title: `${slugToSentence(http.error.key)}`,
-							message: http.error.message,
-							type: 'error',
-							id: Math.floor(
-								Math.random() * 100000000000,
-							).toString(),
-						})
-					}
+
+					this._errorHandlerService.handleError(http)
 				},
 			})
 			.add(() => (this.isProcessing = false))

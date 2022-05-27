@@ -12,7 +12,8 @@ import {
 } from 'app/mawedy-core/constants/app.constant'
 import { Subscription } from 'app/mawedy-core/models/utility.models'
 import { HomeSubscriptionState } from 'app/misc/home.state'
-import { BehaviorSubject, Observable, take } from 'rxjs'
+import { BehaviorSubject, forkJoin, Observable, take } from 'rxjs'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Component({
 	selector: 'checkout',
 	templateUrl: './checkout.component.html',
@@ -21,14 +22,13 @@ import { BehaviorSubject, Observable, take } from 'rxjs'
 })
 export class CheckoutComponent implements OnInit {
 	constructor(
+		private _router: Router,
 		private _mediaService: MediaService,
 		private _homeSubscriptionState: HomeSubscriptionState,
+		private _indexedDbService: NgxIndexedDBService,
 	) {}
 
-	PRICE_PER_USER = PRICE_PER_USER
-
-	defaultSubscription: Subscription =
-		mawedySubscriptions[mawedySubscriptions.length - 1].yearly
+	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
 	subscription$: BehaviorSubject<Subscription | null> =
 		this._homeSubscriptionState.subscription$
@@ -36,29 +36,33 @@ export class CheckoutComponent implements OnInit {
 	interval$: BehaviorSubject<string | null> =
 		this._homeSubscriptionState.interval$
 
-	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
+	PRICE_PER_USER = PRICE_PER_USER
 
-	additionalUsers: number = 5
+	additionalUsers?: number
 
 	billMultiplier: number = 1
 
 	ngOnInit(): void {
-		this.subscription$.pipe(take(1)).subscribe((subscription) => {
-			if (subscription === null) {
-				this.subscription$.next(this.defaultSubscription)
+		forkJoin([
+			this._indexedDbService.getByKey('account_users_request', 1),
+			this._indexedDbService.getByKey('subscription_request', 1),
+		])
+			.pipe(take(1))
+			.subscribe({
+				next: (results) => {
+					const subscription_request: any = results[1]
 
-				return this.interval$.next('yearly')
-			}
-		})
+					const account_users_request: any = results[0]
 
-		this.interval$.pipe(take(1)).subscribe((interval) => {
-			if (interval === 'yearly') {
-				this.billMultiplier = 12
-			}
-		})
+					this.interval$.next(subscription_request.interval)
 
-		this._homeSubscriptionState.users$.pipe(take(1)).subscribe((users) => {
-			this.additionalUsers = users
-		})
+					this.subscription$.next(subscription_request.subscription)
+
+					this.additionalUsers = account_users_request.users
+				},
+				error: () => {
+					this._router.navigate(['/'])
+				},
+			})
 	}
 }

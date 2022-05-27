@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './../../../../misc/error-handler.service'
 import { isPlatformBrowser } from '@angular/common'
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core'
 import { FormGroup } from '@angular/forms'
@@ -22,6 +23,7 @@ export class PartnerWithUsSection1Component implements OnInit {
 		private _router: Router,
 		private _alert: AlertState,
 		private _registerService: RegisterService,
+		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
 	unsubscribe$: Subject<any> = new Subject<any>()
@@ -103,28 +105,7 @@ export class PartnerWithUsSection1Component implements OnInit {
 						this._router.navigate(['/'])
 					}, 5000)
 				},
-				error: (http) => {
-					for (let key in http.error.errors) {
-						for (let error of http.error.errors[key]) {
-							if (key.includes('phone')) {
-								this.phoneErrors = true
-							}
-
-							if (key.includes('email')) {
-								this.emailErrors = true
-							}
-
-							this._alert.add({
-								title: `Error in ${slugToSentence(key)}`,
-								message: error,
-								type: 'error',
-								id: Math.floor(
-									Math.random() * 100000000000,
-								).toString(),
-							})
-						}
-					}
-				},
+				error: (http) => this._errorHandlerService.handleError(http),
 			})
 			.add(() => (this.isProcessing = false))
 	}

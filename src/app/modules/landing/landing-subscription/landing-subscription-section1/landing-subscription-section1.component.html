@@ -78,12 +78,16 @@
 								></mat-icon>
 							</button>
 
-							<div
-								style="height: 36px; width: 36px"
-								class="p-3 items-center justify-center flex border border-emerald-500 rounded-md mx-1 text-lg font-bold accent-color"
-							>
-								{{ additionalUsers }}
-							</div>
+							<input
+								type="number"
+								[(ngModel)]="additionalUsers"
+								style="
+									min-height: 36px;
+									min-width: 36px;
+									max-width: 50px;
+								"
+								class="p-3 items-center justify-center flex border border-emerald-500 rounded-md mx-1 text-lg font-bold accent-color text-center"
+							/>
 
 							<button
 								(click)="additionalUsers = additionalUsers + 1"
@@ -98,13 +102,22 @@
 					</div>
 				</div>
 
-				<div class="ml-auto">
-					<br />
-					{{
-						additionalUsers * PRICE_PER_USER * billMultiplier
-							| number
-					}}
-					AED
+				<div class="ml-auto flex flex-col mt-10">
+					<div class="text-right">
+						{{
+							additionalUsers * PRICE_PER_USER * billMultiplier
+								| number
+						}}
+						AED
+					</div>
+					<div
+						*ngIf="billMultiplier === 12"
+						class="text-sm ml-3 text-right"
+					>
+						( Additional Users x
+
+						{{ PRICE_PER_USER | number }} AED ) x 12 Months
+					</div>
 				</div>
 			</div>
 
