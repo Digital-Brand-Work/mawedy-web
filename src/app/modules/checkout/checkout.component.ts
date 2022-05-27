@@ -56,5 +56,9 @@ export class CheckoutComponent implements OnInit {
 				this.billMultiplier = 12
 			}
 		})
+
+		this._homeSubscriptionState.users$.pipe(take(1)).subscribe((users) => {
+			this.additionalUsers = users
+		})
 	}
 }

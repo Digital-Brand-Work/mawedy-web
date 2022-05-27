@@ -39,6 +39,10 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 
 	@Input() step: 'one' | 'two' = 'one'
 
+	@Input() emailErrors: boolean = false
+
+	@Input() phoneErrors: boolean = false
+
 	@Input() isProcessing: boolean = false
 
 	@Input() focus$!: BehaviorSubject<boolean>

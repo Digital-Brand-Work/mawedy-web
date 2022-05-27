@@ -12,6 +12,7 @@ import { BooleanInput } from '@angular/cdk/coercion'
 import { Subject, takeUntil } from 'rxjs'
 import { User } from 'app/core/user/user.types'
 import { UserService } from 'app/core/user/user.service'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 
 @Component({
 	selector: 'user',
@@ -33,6 +34,8 @@ export class UserComponent implements OnInit, OnDestroy {
 		private _changeDetectorRef: ChangeDetectorRef,
 		private _router: Router,
 		private _userService: UserService,
+
+		private _clinicUserService: ClinicUserService,
 	) {}
 
 	ngOnInit(): void {
@@ -66,16 +69,19 @@ export class UserComponent implements OnInit, OnDestroy {
 	}
 
 	signOut(): void {
-		this._router.navigate(['/'])
+		this._clinicUserService.logout()
 	}
 
 	toSettings() {
-		this._router.navigate(['/aster_clinic/jumeirah/account-setting'])
+		this._router.navigate([
+			this._clinicUserService.resolveClinicPath() + 'account-setting',
+		])
 	}
 
 	toUserAccounts() {
 		this._router.navigate([
-			'/aster_clinic/jumeirah/account-setting/user-account',
+			this._clinicUserService.resolveClinicPath() +
+				'account-setting/user-account',
 		])
 	}
 }

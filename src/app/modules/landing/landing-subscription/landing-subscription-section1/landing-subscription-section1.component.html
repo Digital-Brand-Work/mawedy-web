@@ -9,7 +9,6 @@
 		<div>
 			<div
 				*ngIf="interval$ | async as interval"
-				@slideInLeft
 				class="border border-gray-200 bg-gray-100 p-10 rounded-3xl w-full"
 			>
 				<div class="text-5xl font-extrabold text-emerald-500">
@@ -27,7 +26,10 @@
 					Features
 				</div>
 
-				<ul class="grid grid-cols-2 gap-x-10">
+				<ul
+					[@listAnimation]="subscription.features.length"
+					class="grid grid-cols-2 gap-x-10"
+				>
 					<li
 						class="text-gray flex items-center py-2 w-full"
 						*ngFor="

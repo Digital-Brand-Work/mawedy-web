@@ -33,7 +33,8 @@ import { TalkToUsSection1Component } from './talk-to-us/talk-to-us-section1/talk
 import { TalkToUsSection2Component } from './talk-to-us/talk-to-us-section2/talk-to-us-section2.component'
 import { HomeSection3PricingComponent } from './home/home-section3/home-section3-pricing/home-section3-pricing.component'
 import { LandingSubscriptionSection1Form1Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1-form1/landing-subscription-section1-form1.component'
-import { LandingSubscriptionSection1Form2Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1-form2/landing-subscription-section1-form2.component'
+import { LandingSubscriptionSection1Form2Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1-form2/landing-subscription-section1-form2.component';
+import { PreviewSectionComponent } from './home/home-section4/preview-section/preview-section.component'
 
 const components = [
 	HomeNavbarResponsiveComponent,
@@ -75,7 +76,7 @@ const components = [
 	SuccessComponent,
 ]
 @NgModule({
-	declarations: [...components],
+	declarations: [...components, PreviewSectionComponent],
 	imports: [RouterModule.forChild(landingHomeRoutes), SharedModule],
 	exports: [...components],
 })

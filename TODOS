@@ -57,3 +57,5 @@ Scaffold Effects
 ng g effect Patient -c true --flat false -g true -a true -m modules/admin/patients/patients.module.ts
 
 https://documenter.getpostman.com/view/20654750/UyxqD45a?fbclid=IwAR2RreWciaxjYBphx0XvwZWGqviKDKGjKwD3DZllCW5FdB5Lo53kX8GK8r0
+
+city,postal code, line-1 country

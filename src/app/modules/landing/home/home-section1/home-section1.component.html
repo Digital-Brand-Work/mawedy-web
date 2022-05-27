@@ -18,9 +18,17 @@
 	>
 		<div
 			[ngClass]="{
-				'pb-20': (breakpoint$ | async) === 'tablet'
+				'pb-20  grid-cols-1':
+					(breakpoint$ | async) === 'phone' ||
+					(breakpoint$ | async) === 'tablet' ||
+					!showSignInPanel,
+				'pb-20 md:grid-cols-2':
+					((breakpoint$ | async) === 'laptop' ||
+						(breakpoint$ | async) === 'desktop' ||
+						(breakpoint$ | async) === 'max') &&
+					showSignInPanel
 			}"
-			class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20"
+			class="grid md:gap-x-20"
 		>
 			<div
 				[ngClass]="{
@@ -31,7 +39,9 @@
 				<div
 					class="flex-col flex my-auto"
 					[ngClass]="{
-						'mt-40 ': (breakpoint$ | async) === 'tablet'
+						'mt-40 ': (breakpoint$ | async) === 'tablet',
+						'text-center justify-center items-center':
+							!showSignInPanel
 					}"
 				>
 					<div
@@ -79,7 +89,10 @@
 				</div>
 			</div>
 
-			<div class="flex md:items-center md:justify-center w-full md:px-10">
+			<div
+				*ngIf="showSignInPanel"
+				class="flex md:items-center md:justify-center w-full md:px-10"
+			>
 				<home-section1-login-panel
 					class="md:w-3/4 hidden md:block w-full"
 				></home-section1-login-panel>

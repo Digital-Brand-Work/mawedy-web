@@ -1,6 +1,7 @@
 <form
-	[formGroup]="form"
+	*ngIf="form"
 	#ngForm="ngForm"
+	[formGroup]="form"
 	class="p-5 md:px-20 md:pr-30 md:py-40 font-normal max-w-screen-sm"
 >
 	<div class="text-2xl accent-color mb-5">Pay with card</div>
@@ -16,8 +17,8 @@
 				#input
 				type="email"
 				autocomplete="email"
+				(input)="form.value.email = $event.target.value"
 				placeholder="johndoe@example.com"
-				formControlName="email"
 				class="py-2 px-3 w-full"
 			/>
 		</div>
@@ -43,28 +44,29 @@
 		class="rounded-2xl border border-gray-200 w-full overflow-hidden shadow-md shadow-emerald-200/20 bg-white mb-10"
 	>
 		<div class="border-b border-b-gray-200 px-3">
-			<card-number-form (onCardNumberChange)="(null)"></card-number-form>
+			<card-number-form
+				(onCardNumberChange)="onCardNumberChange($event)"
+			></card-number-form>
 		</div>
 
 		<div class="px-5 grid grid-cols-2">
 			<input
-				#input
 				type="text"
 				autocomplete="card_expiry"
+				(input)="form.value.expiry = $event.target.value"
 				placeholder="MM/YY"
-				formControlName="email"
 				mask="00/00"
 				maxlength="5"
 				class="py-2 px-3 w-full"
+				[ngClass]="{ 'text-red-500': expiryError }"
 			/>
 
 			<input
-				#input
 				type="text"
 				autocomplete="cvc"
+				(input)="form.value.cvc = $event.target.value"
 				placeholder="CVC"
 				maxlength="3"
-				formControlName="email"
 				class="py-2 px-3 w-full border-l border-gray-200"
 			/>
 		</div>
@@ -80,8 +82,8 @@
 			<input
 				type="text"
 				autocomplete="name"
+				(input)="form.value.name = $event.target.value"
 				placeholder="John Doe"
-				formControlName="name"
 				class="py-2 px-3 w-full"
 			/>
 		</div>
@@ -94,15 +96,59 @@
 		class="rounded-2xl border border-gray-200 w-full overflow-hidden shadow-md shadow-emerald-200/20 bg-white mb-10"
 	>
 		<div class="px-3">
-			<country-form></country-form>
+			<div class="border-b border-b-gray-200 px-3">
+				<country-form>
+					(onChangeCountry)="onChangeCountry($event); "
+				</country-form>
+			</div>
+
+			<div class="border-b border-b-gray-200 px-2">
+				<select
+					(change)="form.value.city = $event.target.value"
+					class="w-full bg-white rounded-sm px-5"
+					style="height: 45px"
+				>
+					<option *ngFor="let city of cities; trackBy: identity">
+						{{ city }}
+					</option>
+				</select>
+			</div>
+
+			<div class="border-b border-b-gray-200 px-3">
+				<input
+					type="text"
+					autocomplete="address-level1"
+					(input)="form.value.line_one = $event.target.value"
+					placeholder="Address line 1"
+					class="py-2 px-3 w-full"
+				/>
+			</div>
+
+			<div class="border-b border-b-gray-200 px-3">
+				<input
+					type="text"
+					autocomplete="postal-code"
+					(input)="form.value.postal_code = $event.target.value"
+					placeholder="Postal Code"
+					maxlength="5"
+					class="py-2 px-3 w-full"
+				/>
+			</div>
 		</div>
 	</div>
 
 	<button
 		(click)="pay()"
+		[ngClass]="{
+			'bg-emerald-500 shadow-md shadow-emerald-500/20 px-4 py-6 hover:bg-emerald-600/90 ':
+				!isProcessing,
+			'bg-gray-400 pointer-events-none ': isProcessing
+		}"
 		mat-button
-		class="bg-emerald-500 text-xl text-white/90 font-medium rounded-ful shadow-md shadow-emerald-500/20 px-4 py-6 hover:bg-emerald-600/90 items-center justify-center w-full"
+		class="text-xl font-medium rounded-ful items-center justify-center text-white w-full"
 	>
-		Pay
+		<spinner *ngIf="isProcessing"></spinner>
+
+		<div *ngIf="!isProcessing">Pay</div>
 	</button>
 </form>

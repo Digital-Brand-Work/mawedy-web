@@ -1,4 +1,7 @@
-<nav class="flex items-center justify-center fixed z-50 bg-white w-full">
+<nav
+	@fadeInTop
+	class="flex items-center justify-center fixed z-50 bg-white w-full"
+>
 	<div class="w-full max-w-screen-xl flex items-center justify-center">
 		<a routerLink="/">
 			<img
@@ -11,16 +14,32 @@
 		<ul class="ml-auto flex">
 			<li
 				*ngFor="let nav of navigation"
+				[class.hidden]="nav.id === 2 && (hasLoggedIn$ | async)"
 				[ngClass]="{
-					'hover:bg-emerald-500  hover:text-emerald-50 ':
-						nav.name !== 'AR'
+					'bg-emerald-500 text-white hover:bg-emerald-600 hover:text-white shadow-md shadow-emerald-400/50 mx-2':
+						nav.id === 4,
+					'hover:bg-emerald-100  hover:text-emerald-500 ':
+						nav.name !== 'AR' && nav.id !== 4,
+					'text-emerald-500': nav.id !== 4
 				}"
+				(click)="nav.id === 4 ? toDashboard() : null"
 				[routerLink]="nav.link"
 				role="button"
-				class="px-7 py-3 text-emerald-500 rounded-lg text-lg"
+				class="px-7 py-3 rounded-lg text-lg flex items-center"
 			>
-				{{ nav.name }}
+				{{
+					(hasLoggedIn$ | async) && nav.id === 4
+						? 'Dashboard'
+						: nav.name
+				}}
+
+				<mat-icon
+					*ngIf="hasLoggedIn$ | async"
+					class="ml-auto icon-size-4 text-white"
+					[svgIcon]="'feather:chevron-right'"
+				></mat-icon>
 			</li>
+
 			<li>
 				<img
 					class="h-7 translate-y-2"

@@ -22,6 +22,8 @@
 			</div>
 
 			<partner-with-us-section1-first-step
+				[emailErrors]="emailErrors"
+				[phoneErrors]="phoneErrors"
 				@slideInBottom
 				class="w-full"
 				(onNext)="register($event)"

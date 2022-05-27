@@ -15,7 +15,6 @@ export interface Clinic extends PHPBaseModel {
 	stripe_status: StripeStatusEnum
 	subscription_date: Date
 	accounts: Branch[]
-	address: string
 	email: string
 	password: string
 	phone_number_one: string
@@ -29,6 +28,10 @@ export interface Clinic extends PHPBaseModel {
 	description: string | null
 	is_twenty_four_hours: boolean
 	name: string
+	country: string
+	city: string
+	line_one: string
+	postal_code: string
 }
 
 export interface Branch extends PHPBaseModel {

@@ -13,6 +13,8 @@ export class MobileNumberFormComponent implements OnInit {
 		phoneNumber: string
 	}>()
 
+	@Input() phoneErrors: boolean = false
+
 	@Input() bordered: boolean = false
 
 	@Input() rounded: boolean = false

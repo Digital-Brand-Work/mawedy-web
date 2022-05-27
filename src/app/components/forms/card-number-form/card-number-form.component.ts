@@ -5,7 +5,7 @@ import {
 	Output,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { NgForm } from '@angular/forms'
 
 @Component({
 	selector: 'card-number-form',
@@ -13,15 +13,13 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
 	styleUrls: ['./card-number-form.component.scss'],
 })
 export class CardNumberFormComponent implements OnInit {
-	constructor(private _formBuilder: FormBuilder) {}
+	constructor() {}
 
 	@Output() onCardNumberChange = new EventEmitter<string>()
 
 	@ViewChild('ngForm') ngForm?: NgForm
 
-	form: FormGroup = this._formBuilder.group({
-		card_number: ['', Validators.required],
-	})
+	cardNumber: string = ''
 
 	ngOnInit(): void {}
 
