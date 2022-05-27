@@ -12,15 +12,19 @@
 			<li
 				*ngFor="let nav of navigation"
 				[ngClass]="{
-					'hover:bg-emerald-500  hover:text-emerald-50 ':
-						nav.name !== 'AR'
+					'bg-emerald-500 text-white hover:bg-emerald-600 hover:text-white shadow-md shadow-emerald-400/50 mx-2':
+						nav.id === 4,
+					'hover:bg-emerald-100  hover:text-emerald-500 ':
+						nav.name !== 'AR' && nav.id !== 4,
+					'text-emerald-500': nav.id !== 4
 				}"
 				[routerLink]="nav.link"
 				role="button"
-				class="px-7 py-3 text-emerald-500 rounded-lg text-lg"
+				class="px-7 py-3 rounded-lg text-lg"
 			>
 				{{ nav.name }}
 			</li>
+
 			<li>
 				<img
 					class="h-7 translate-y-2"

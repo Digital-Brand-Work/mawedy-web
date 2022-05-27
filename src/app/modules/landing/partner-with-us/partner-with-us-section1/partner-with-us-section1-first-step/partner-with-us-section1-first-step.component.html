@@ -59,16 +59,17 @@
 			formControlName="email"
 			[ngClass]="{
 				' border-red-500':
-					!form.get('email')?.valid && form.get('email')?.touched
+					!form.get('email')?.valid && form.get('email')?.touched,
+				'text-red-500': emailErrors
 			}"
-			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 text-red-500"
 		/>
 
 		<div
 			*ngIf="!form.get('email')?.valid && form.get('email')?.touched"
 			class="text-sm text-rose-500"
 		>
-			Email is required.
+			Email is badly formatted.
 		</div>
 	</div>
 
@@ -82,6 +83,7 @@
 						$event.countryCode;
 					form.value.phone_number_one = $event.phoneNumber
 				"
+				[phoneErrors]="phoneErrors"
 				[bordered]="true"
 				[rounded]="true"
 				class="w-full"

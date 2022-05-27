@@ -30,6 +30,10 @@ export class PartnerWithUsSection1Component implements OnInit {
 
 	isProcessing: boolean = false
 
+	emailErrors: boolean = false
+
+	phoneErrors: boolean = false
+
 	ngOnInit(): void {
 		this.focus$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
 			if (isPlatformBrowser(this._platformID)) {
@@ -48,6 +52,10 @@ export class PartnerWithUsSection1Component implements OnInit {
 
 	register(data: { form: FormGroup; trade_license_photo: any }) {
 		this.isProcessing = true
+
+		this.emailErrors = false
+
+		this.phoneErrors = false
 
 		let form = new FormData()
 
@@ -98,6 +106,14 @@ export class PartnerWithUsSection1Component implements OnInit {
 				error: (http) => {
 					for (let key in http.error.errors) {
 						for (let error of http.error.errors[key]) {
+							if (key.includes('phone')) {
+								this.phoneErrors = true
+							}
+
+							if (key.includes('email')) {
+								this.emailErrors = true
+							}
+
 							this._alert.add({
 								title: `Error in ${slugToSentence(key)}`,
 								message: error,
