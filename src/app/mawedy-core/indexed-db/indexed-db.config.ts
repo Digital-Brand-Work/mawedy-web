@@ -7,7 +7,7 @@ export function migrationFactory() {
 
 export const indexedDbConfig: DBConfig = {
 	name: 'mawedy',
-	version: 3,
+	version: 5,
 	objectStoresMeta: [
 		{
 			store: DB.SUBSCRIPTION_REQUEST,
@@ -73,7 +73,6 @@ export const indexedDbConfig: DBConfig = {
 			],
 		},
 	],
-	migrationFactory,
 }
 
 // delete kag v3

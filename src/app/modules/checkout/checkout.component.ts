@@ -14,6 +14,7 @@ import { Subscription } from 'app/mawedy-core/models/utility.models'
 import { HomeSubscriptionState } from 'app/misc/home.state'
 import { BehaviorSubject, forkJoin, Observable, take } from 'rxjs'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 @Component({
 	selector: 'checkout',
 	templateUrl: './checkout.component.html',
@@ -44,19 +45,14 @@ export class CheckoutComponent implements OnInit {
 
 	ngOnInit(): void {
 		forkJoin([
-			this._indexedDbService.getByKey('account_users_request', 1),
-			this._indexedDbService.getByKey('subscription_request', 1),
+			this._indexedDbService.getByKey(DB.SUBSCRIPTION_REQUEST, 1),
+			this._indexedDbService.getByKey(DB.ACCOUNT_USERS_REQUEST, 1),
 		])
 			.pipe(take(1))
 			.subscribe({
 				next: (results) => {
-					const subscription_request: any = results[1]
-
-					const account_users_request: any = results[0]
-
-					if (!account_users_request || !subscription_request) {
-						return this._router.navigate(['/'])
-					}
+					const [subscription_request, account_users_request]: any =
+						results
 
 					this.interval$.next(subscription_request.interval)
 

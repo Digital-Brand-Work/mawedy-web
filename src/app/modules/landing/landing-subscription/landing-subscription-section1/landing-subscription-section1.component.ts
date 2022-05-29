@@ -7,7 +7,14 @@ import { PRICE_PER_USER } from 'app/mawedy-core/constants/app.constant'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { Component, OnInit } from '@angular/core'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
-import { BehaviorSubject, forkJoin, Observable, take } from 'rxjs'
+import {
+	BehaviorSubject,
+	forkJoin,
+	Observable,
+	Subject,
+	take,
+	takeUntil,
+} from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { HomeSubscriptionState } from 'app/misc/home.state'
 import { RegisterService } from '../../home/register.service'
@@ -15,6 +22,7 @@ import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 @Component({
 	selector: 'landing-subscription-section1',
@@ -36,9 +44,9 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		private _clinicUserService: ClinicUserService,
 	) {}
 
-	isProcessing: boolean = false
+	unsubscribe$: Subject<any> = new Subject<any>()
 
-	PRICE_PER_USER = PRICE_PER_USER
+	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
 	subscription$: BehaviorSubject<Subscription | null> =
 		this._homeSubscriptionState.subscription$
@@ -46,41 +54,48 @@ export class LandingSubscriptionSection1Component implements OnInit {
 	interval$: BehaviorSubject<string | null> =
 		this._homeSubscriptionState.interval$
 
-	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
+	isProcessing: boolean = false
+
+	PRICE_PER_USER = PRICE_PER_USER
 
 	additionalUsers: number = 0
 
 	billMultiplier: number = 1
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this._indexedDbService
+			.getByKey(DB.SUBSCRIPTION_REQUEST, 1)
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe({
+				next: (subscription_request: any) => {
+					if (subscription_request === undefined) {
+						return
+					}
+
+					this.subscription$.next(subscription_request.subscription)
+
+					this.interval$.next(subscription_request.interval)
+
+					if (subscription_request.interval === 'yearly') {
+						this.billMultiplier = 12
+					}
+				},
+				error: () => {
+					this._router.navigate(['/'])
+				},
+			})
+	}
 
 	ngAfterViewInit(): void {
 		setTimeout(() => {
 			this._scrollService.scrollToTop()
-
-			forkJoin([
-				this._indexedDbService.getByKey('subscription_request', 1),
-			])
-				.pipe(take(1))
-				.subscribe({
-					next: (results) => {
-						const subscription_request: any = results[0]
-
-						if (!subscription_request) {
-							return this._router.navigate(['/'])
-						}
-
-						this.subscription$.next(
-							subscription_request.subscription,
-						)
-						this.interval$.next(subscription_request.interval)
-
-						if (subscription_request.interval === 'yearly') {
-							this.billMultiplier = 12
-						}
-					},
-				})
 		}, 100)
+	}
+
+	ngOnDestroy(): void {
+		this.subscription$.next(null)
+
+		this.subscription$.complete()
 	}
 
 	register(data: { form: FormGroup; trade_license_photo: any }) {
@@ -118,7 +133,7 @@ export class LandingSubscriptionSection1Component implements OnInit {
 
 					this._clinicUserService.saveDataLocally(userAccount)
 
-					this._indexedDbController.upsert('account_users_request', {
+					this._indexedDbController.upsert(DB.ACCOUNT_USERS_REQUEST, {
 						id: 1,
 						subscription_request_id: 1,
 						users: this.additionalUsers,

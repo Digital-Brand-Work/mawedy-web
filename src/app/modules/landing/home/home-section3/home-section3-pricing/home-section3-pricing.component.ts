@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Subscription } from 'app/mawedy-core/models/utility.models'
 import { HomeSubscriptionState } from 'app/misc/home.state'
 import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 @Component({
 	selector: 'home-section3-pricing',
@@ -31,11 +32,15 @@ export class HomeSection3PricingComponent implements OnInit {
 
 		this._homeSubscriptionState.interval$.next(this.interval)
 
-		this._indexedDbController.upsert('subscription_request', {
+		this._indexedDbController.upsert(DB.SUBSCRIPTION_REQUEST, {
 			id: 1,
 			interval: this.interval,
 			subscription: this.subscription,
 		})
+
+		this._homeSubscriptionState.subscription$.next(this.subscription)
+
+		this._homeSubscriptionState.interval$.next(this.interval)
 
 		this._router.navigate(['/subscription'])
 	}

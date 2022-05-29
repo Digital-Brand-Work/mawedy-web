@@ -9,7 +9,7 @@ export class IndexedDbController {
 		this._indexedDbService.getByKey(db, 1).subscribe({
 			next: () => {
 				this._indexedDbService
-					.update('account_users_request', {
+					.update(db, {
 						id: 1,
 						...data,
 					})
