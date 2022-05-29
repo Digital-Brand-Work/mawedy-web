@@ -1,22 +1,8 @@
-<form
-	[formGroup]="form"
-	#ngForm="ngForm"
-	@slideInLeft
-	class="md:rounded-xl md:shadow-md shadow-blue-500/50 pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10"
->
-	<img
-		class="h-36 max-w-50 mb-5"
-		src="/assets/app/logo.svg"
-		alt="Mawedy Logo"
-	/>
+<form [formGroup]="form" #ngForm="ngForm" @slideInLeft
+	class="md:rounded-xl md:shadow-md shadow-blue-500/50 pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10">
+	<img class="h-36 max-w-50 mb-5" src="/assets/app/logo.svg" alt="Mawedy Logo" />
 
-	<input
-		#input
-		type="email"
-		autocomplete="email"
-		placeholder="Email"
-		formControlName="email"
-		[ngClass]="{
+	<input #input type="email" autocomplete="email" placeholder="Email" formControlName="email" [ngClass]="{
 			'text-red-500': errors.email && !form.disabled,
 			'border border-red-500 bg-red-50':
 				!form.get('email')?.valid &&
@@ -26,26 +12,17 @@
 				(form.get('email')?.valid && form.get('email')?.touched) ||
 				!form.get('email')?.touched
 		}"
-		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5"
-	/>
+		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5" />
 
-	<div
-		*ngIf="
+	<div *ngIf="
 			!form.get('email')?.valid &&
 			form.get('email')?.touched &&
 			!form.disabled
-		"
-		class="text-sm text-rose-500 text-left self-baseline"
-	>
+		" class="text-sm text-rose-500 text-left self-baseline">
 		Invalid email format.
 	</div>
 
-	<input
-		type="password"
-		placeholder="Password"
-		autocomplete="password"
-		formControlName="password"
-		[ngClass]="{
+	<input type="password" placeholder="Password" autocomplete="password" formControlName="password" [ngClass]="{
 			'text-red-500': errors.password && !form.disabled,
 			'border border-red-500 bg-red-50':
 				!form.get('password')?.valid &&
@@ -56,25 +33,18 @@
 					form.get('password')?.touched) ||
 				!form.get('password')?.touched
 		}"
-		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5"
-	/>
+		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5" />
 
-	<div
-		*ngIf="
+	<div *ngIf="
 			!form.get('password')?.valid &&
 			form.get('password')?.touched &&
 			!form.disabled
-		"
-		class="text-sm text-rose-500 text-left self-baseline"
-	>
+		" class="text-sm text-rose-500 text-left self-baseline">
 		Password is required.
 	</div>
 
-	<a
-		role="button"
-		class="text-right text-gray-400 mt-5 self-end hover:underline"
-		>Forgot Password ?</a
-	>
+	<a routerLink="/auth" role="button" class="text-right text-gray-400 mt-5 self-end hover:underline">Forgot Password
+		?</a>
 
 	<!-- <div
 		*ngIf="true"
@@ -96,15 +66,11 @@
 		</div>
 	</div> -->
 
-	<button
-		(click)="login()"
-		[disabled]="!form.valid || form.disabled"
-		[ngClass]="{
+	<button (click)="login()" [disabled]="!form.valid || form.disabled" [ngClass]="{
 			'bg-emerald-500 hover:bg-emerald-600': form.valid && !form.disabled,
 			'bg-gray-400 pointer-events-none': !form.valid || form.disabled
-		}"
-		class="text-white py-3 px-10 text-xl shadow-lg rounded-md flex items-center mt-10"
-	>
+		}" class="text-white py-3 px-10 text-xl shadow-lg rounded-md flex items-center mt-10">
+
 		<spinner *ngIf="form.disabled"></spinner>
 
 		<div *ngIf="!form.disabled">Sign In</div>

@@ -1,105 +1,101 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/core/auth/auth.service';
+import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	OnInit,
+	ViewChild,
+	ViewEncapsulation,
+} from '@angular/core'
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	NgForm,
+	Validators,
+} from '@angular/forms'
+import { BehaviorSubject, finalize, take } from 'rxjs'
+import { fuseAnimations } from '@fuse/animations'
+import { FuseAlertType } from '@fuse/components/alert'
+import { AuthService } from 'app/core/auth/auth.service'
+import { ScrollService } from '@digital_brand_work/services/scroll.service'
 
 @Component({
-    selector     : 'auth-forgot-password',
-    templateUrl  : './forgot-password.component.html',
-    encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+	selector: 'auth-forgot-password',
+	templateUrl: './forgot-password.component.html',
+	encapsulation: ViewEncapsulation.None,
+	animations: fuseAnimations,
 })
-export class AuthForgotPasswordComponent implements OnInit
-{
-    @ViewChild('forgotPasswordNgForm') forgotPasswordNgForm: NgForm;
+export class AuthForgotPasswordComponent implements OnInit {
+	constructor(
+		// private _passwordResetSendService: ResetSendService,-
+		private _cdr: ChangeDetectorRef,
+		private _scrollService: ScrollService,
+	) {}
 
-    alert: { type: FuseAlertType; message: string } = {
-        type   : 'success',
-        message: ''
-    };
-    forgotPasswordForm: FormGroup;
-    showAlert: boolean = false;
+	@ViewChild('email') email?: ElementRef
 
-    /**
-     * Constructor
-     */
-    constructor(
-        private _authService: AuthService,
-        private _formBuilder: FormBuilder
-    )
-    {
-    }
+	throttle$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+	form = new FormGroup({
+		email: new FormControl('', [
+			Validators.email,
+			Validators.required,
+			Validators.minLength(3),
+		]),
+	})
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Create the form
-        this.forgotPasswordForm = this._formBuilder.group({
-            email: ['', [Validators.required, Validators.email]]
-        });
-    }
+	hasErrorEmail: boolean = false
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+	validated: boolean = false
 
-    /**
-     * Send the reset link
-     */
-    sendResetLink(): void
-    {
-        // Return if the form is invalid
-        if ( this.forgotPasswordForm.invalid )
-        {
-            return;
-        }
+	throttled: boolean = false
 
-        // Disable the form
-        this.forgotPasswordForm.disable();
+	ngOnInit(): void {}
 
-        // Hide the alert
-        this.showAlert = false;
+	ngAfterViewInit(): void {
+		this.email?.nativeElement.focus()
 
-        // Forgot password
-        this._authService.forgotPassword(this.forgotPasswordForm.get('email').value)
-            .pipe(
-                finalize(() => {
+		this._scrollService.scrollToTop()
 
-                    // Re-enable the form
-                    this.forgotPasswordForm.enable();
+		this._cdr.detectChanges()
+	}
 
-                    // Reset the form
-                    this.forgotPasswordNgForm.resetForm();
+	ngOnDestroy(): void {
+		this._cdr.detach()
+	}
 
-                    // Show the alert
-                    this.showAlert = true;
-                })
-            )
-            .subscribe(
-                (response) => {
+	send() {
+		this.form.disable()
 
-                    // Set the alert
-                    this.alert = {
-                        type   : 'success',
-                        message: 'Password reset sent! You\'ll receive an email if you are registered on our system.'
-                    };
-                },
-                (response) => {
+		// this._passwordResetSendService.post(this.form.value).subscribe({
+		// 	next: () => {
+		// 		this.throttled = false
 
-                    // Set the alert
-                    this.alert = {
-                        type   : 'error',
-                        message: 'Email does not found! Are you sure you are already a member?'
-                    };
-                }
-            );
-    }
+		// 		this.validated = true
+
+		// 		this.throttle$.next(60)
+
+		// 		this.setTimer()
+		// 	},
+		// 	error: () => {
+		// 		this.form.enable()
+
+		// 		this.throttled = true
+		// 	},
+		// })
+	}
+
+	setTimer() {
+		setInterval(() => {
+			this.throttle$.pipe(take(1)).subscribe((value) => {
+				if (value > 0) {
+					this.throttle$.next(value - 1)
+				}
+
+				if (value === 0) {
+					this.throttled = false
+				}
+			})
+		}, 1000)
+	}
 }
