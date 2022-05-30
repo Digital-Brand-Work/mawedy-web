@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
-import { Observable, of, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, Observable, of, Subject, takeUntil } from 'rxjs'
+import { Clinic } from '../clinic/clinic.model'
+import { ClinicUserService } from '../clinic/clinic.service'
 
 @Component({
 	selector: 'subscriptions',
@@ -11,19 +13,23 @@ import { Observable, of, Subject, takeUntil } from 'rxjs'
 	animations: [...dbwAnimations],
 })
 export class SubscriptionsComponent implements OnInit {
-	constructor(private seoService: SeoService, private router: Router) {
-		this.router.events
-			.pipe(takeUntil(this.unsubscribeAll))
-			.subscribe(() => {
-				this.isInCurrent$ = of(this.router.url.includes('current'))
+	constructor(
+		private seoService: SeoService,
+		private router: Router,
+		private _clinicUserService: ClinicUserService,
+	) {
+		this.router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+			this.isInCurrent$ = of(this.router.url.includes('current'))
 
-				this.isInPackages$ = of(this.router.url.includes('packages'))
+			this.isInPackages$ = of(this.router.url.includes('packages'))
 
-				this.isInSuccess$ = of(this.router.url.includes('success'))
-			})
+			this.isInSuccess$ = of(this.router.url.includes('success'))
+		})
 	}
 
-	unsubscribeAll: Subject<any> = new Subject<any>()
+	unsubscribe$: Subject<any> = new Subject<any>()
+
+	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
 	isInCurrent$: Observable<boolean> = of(false)
 
@@ -32,14 +38,20 @@ export class SubscriptionsComponent implements OnInit {
 	isInSuccess$: Observable<boolean> = of(false)
 
 	ngOnInit(): void {
-		this.seoService.generateTags({
-			title: `Aster Clinic | Subscriptions`,
+		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
+			if (!clinic) {
+				return
+			}
+
+			this.seoService.generateTags({
+				title: `${clinic.name} | ${clinic?.line_one} | Subscriptions`,
+			})
 		})
 	}
 
 	ngOnDestroy(): void {
-		this.unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this.unsubscribeAll.complete()
+		this.unsubscribe$.complete()
 	}
 }

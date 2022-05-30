@@ -63,6 +63,7 @@
 
 <div class="flex flex-wrap flex-auto w-full min-w-0">
 	<fuse-vertical-navigation
+		@slideInRight
 		*ngIf="navigation && navigation.default"
 		class="bg-white print:hidden pt-20"
 		[mode]="isScreenSmall ? 'over' : 'side'"

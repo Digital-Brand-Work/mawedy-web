@@ -1,7 +1,5 @@
 Forgot Password
-Check if Account is Approved
-Edit clinic info when subscription is pressed and logged in.
-Update when clicking the next (Update and Proceed to Checkout)
+Contact Us
 
 Fork join
 Appointments
@@ -11,16 +9,12 @@ Subscriptions
 
 Bulk Save to IndexDB
 
-Banner and Logo Placeholder
-
 Disable Subscription if already subscribed
 
 Text-color on error
 
 Responsive
 Responsive fixed html
-
-post man add user
 
 Add Pre loader
 
@@ -33,10 +27,10 @@ Virtual Scroll
 Pagination
 
 lint
+
 link to app store
 
 Interceptors
-Hide dashboard when free trial
 
 Guards
 

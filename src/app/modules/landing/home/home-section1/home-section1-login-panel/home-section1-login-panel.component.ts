@@ -37,6 +37,8 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 		password: false,
 	}
 
+	isProcessing: boolean = false
+
 	ngOnInit(): void {}
 
 	login() {
@@ -44,7 +46,7 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 			this.errors[key] = false
 		}
 
-		this.form.disable()
+		this.isProcessing = true
 
 		this._loginService
 			.post(this.form.value)
@@ -97,7 +99,7 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 					this._errorHandlerService.handleError(http)
 				},
 			})
-			.add(() => this.form.enable())
+			.add(() => (this.isProcessing = false))
 	}
 
 	proceedToDashboard(userAccount) {

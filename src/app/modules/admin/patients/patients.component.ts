@@ -1,13 +1,12 @@
-import { take } from 'rxjs/operators'
 import { Patient } from './patient.model'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
 import { select, Store } from '@ngrx/store'
-import * as PatientActions from './patient.actions'
 import { PatientEffects } from 'app/modules/admin/patients/patient.effects'
-import { PatientService } from 'app/modules/admin/patients/patient.service'
+import { ClinicUserService } from '../clinic/clinic.service'
+import { Clinic } from '../clinic/clinic.model'
 
 @Component({
 	selector: 'patients',
@@ -20,13 +19,24 @@ export class PatientsComponent implements OnInit {
 		private seoService: SeoService,
 		private store: Store<{ patients: Patient[] }>,
 		private patientEffects: PatientEffects,
+		private _clinicUserService: ClinicUserService,
 	) {}
+
+	unsubscribe$: Subject<any> = new Subject<any>()
+
+	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
 	patients$?: Observable<Patient[]>
 
 	ngOnInit(): void {
-		this.seoService.generateTags({
-			title: `Aster Clinic | Patients`,
+		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
+			if (!clinic) {
+				return
+			}
+
+			this.seoService.generateTags({
+				title: `${clinic.name} | ${clinic?.line_one}`,
+			})
 		})
 
 		this.patients$ = this.store.pipe(select('patients'), take(1))
@@ -42,5 +52,9 @@ export class PatientsComponent implements OnInit {
 		this.patientEffects.current$.next(patient)
 	}
 
-	ngOnDestroy(): void {}
+	ngOnDestroy(): void {
+		this.unsubscribe$.next(null)
+
+		this.unsubscribe$.complete()
+	}
 }

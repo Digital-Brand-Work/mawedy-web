@@ -1,4 +1,5 @@
 <form
+	[ngClass]="{ 'pointer-events-none opacity-87': isProcessing }"
 	[formGroup]="form"
 	#ngForm="ngForm"
 	class="md:rounded-lg pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10 drop--custom"
@@ -16,11 +17,11 @@
 		placeholder="Email"
 		formControlName="email"
 		[ngClass]="{
-			'text-red-500': errors.email && !form.disabled,
+			'text-red-500': errors.email && !isProcessing,
 			'border border-red-500 bg-red-50':
 				!form.get('email')?.valid &&
 				form.get('email')?.touched &&
-				!form.disabled,
+				!isProcessing,
 			'bg-white border border-gray-300/80':
 				(form.get('email')?.valid && form.get('email')?.touched) ||
 				!form.get('email')?.touched
@@ -32,7 +33,7 @@
 		*ngIf="
 			!form.get('email')?.valid &&
 			form.get('email')?.touched &&
-			!form.disabled
+			!isProcessing
 		"
 		class="text-sm text-rose-500 text-left self-baseline"
 	>
@@ -45,11 +46,11 @@
 		autocomplete="password"
 		formControlName="password"
 		[ngClass]="{
-			'text-red-500': errors.password && !form.disabled,
+			'text-red-500': errors.password && !isProcessing,
 			'border border-red-500 bg-red-50':
 				!form.get('password')?.valid &&
 				form.get('password')?.touched &&
-				!form.disabled,
+				!isProcessing,
 			'bg-white border border-gray-300/80':
 				(form.get('password')?.valid &&
 					form.get('password')?.touched) ||
@@ -62,7 +63,7 @@
 		*ngIf="
 			!form.get('password')?.valid &&
 			form.get('password')?.touched &&
-			!form.disabled
+			!isProcessing
 		"
 		class="text-sm text-rose-500 text-left self-baseline"
 	>
@@ -78,15 +79,15 @@
 
 	<button
 		(click)="login()"
-		[disabled]="!form.valid || form.disabled"
+		[disabled]="!form.valid || isProcessing"
 		[ngClass]="{
-			'bg-emerald-500 hover:bg-emerald-600': form.valid && !form.disabled,
-			'bg-gray-400 pointer-events-none': !form.valid || form.disabled
+			'bg-emerald-500 hover:bg-emerald-600': form.valid && !isProcessing,
+			'bg-gray-400 pointer-events-none': !form.valid || isProcessing
 		}"
-		class="text-white py-3 px-10 text-xl -lg rounded-md flex items-center mt-10"
+		class="text-white py-3 px-10 text-xl -lg rounded-md flex items-center mt-10 w-full justify-center"
 	>
-		<spinner *ngIf="form.disabled"></spinner>
+		<spinner *ngIf="isProcessing"></spinner>
 
-		<div *ngIf="!form.disabled">Sign In</div>
+		<div *ngIf="!isProcessing">Sign In</div>
 	</button>
 </form>

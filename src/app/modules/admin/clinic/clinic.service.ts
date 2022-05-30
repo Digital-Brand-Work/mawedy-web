@@ -38,7 +38,7 @@ export class ClinicUserService {
 		this._indexedDBService
 			.getByKey(DB.CLINIC, 1)
 			.subscribe((clinic: any) => {
-				if (clinic.data) {
+				if (clinic && clinic.data) {
 					this.hasLoggedIn$.next(true)
 
 					this.clinic$.next(clinic.data)
@@ -106,7 +106,7 @@ export class ClinicUserService {
 			map(
 				(userAccount: any) =>
 					`/${slugify(userAccount.name)}/${slugify(
-						userAccount.account_type,
+						userAccount.line_one || userAccount.account_type,
 					)}/`,
 			),
 		)

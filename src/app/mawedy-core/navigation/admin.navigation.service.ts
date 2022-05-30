@@ -76,7 +76,7 @@ export class AdminNavigationService {
 			map((clinic) =>
 				this.getNavigation(
 					slugify(clinic.name),
-					slugify(clinic.account_type),
+					slugify(clinic.line_one || clinic.account_type),
 				),
 			),
 		)

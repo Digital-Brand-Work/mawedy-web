@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BehaviorSubject } from 'rxjs'
 import { DashboardAppointmentCancelAndAssignSlotModal } from '../dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.service'
 import { DashboardAppointmentDetailsModal } from '../dashboard-appointment-details/dashboard-appointment-details.service'
@@ -11,6 +12,7 @@ import { DashboardAppointmentConfirmCancelAppointmentModal } from './dashboard-a
 	styleUrls: [
 		'./dashboard-appointment-confirm-cancel-appointment.component.scss',
 	],
+	animations: [...dbwAnimations],
 })
 export class DashboardAppointmentConfirmCancelAppointmentComponent
 	implements OnInit

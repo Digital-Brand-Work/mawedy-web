@@ -12,6 +12,10 @@
 	background-color: #10b981 !important;
 }
 
+.mat-progress-bar-fill::after {
+	background-color: red !important;
+}
+
 mat-checkbox {
 	.mat-checkbox-background {
 		border: 1px solid #10b981;
