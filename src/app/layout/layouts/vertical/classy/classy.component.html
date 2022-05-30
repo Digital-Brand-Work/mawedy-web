@@ -26,7 +26,14 @@
 			<notifications></notifications>
 		</div>
 
-		<div class="accent-color ml-5 font-semibold -mr-5">Jumeirah</div>
+		<div class="accent-color ml-5 font-semibold mr-2">
+			{{ (clinic$ | async)?.name }}
+			<span
+				class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md ml-1"
+			>
+				{{ (clinic$ | async)?.account_type }} Branch</span
+			>
+		</div>
 
 		<div mat-button matTooltip="Options" class="flex items-center mx-8">
 			<user [showAvatar]="true"></user>
@@ -36,6 +43,7 @@
 
 <div class="flex flex-wrap flex-auto w-full min-w-0">
 	<fuse-vertical-navigation
+		*ngIf="navigation && navigation.default"
 		class="bg-white print:hidden pt-20"
 		[mode]="isScreenSmall ? 'over' : 'side'"
 		[name]="'mainNavigation'"

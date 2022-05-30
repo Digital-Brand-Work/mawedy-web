@@ -1,7 +1,6 @@
 import { setPrefix } from './../../../../mawedy-core/helpers'
 import { Router } from '@angular/router'
 import { FormGroup } from '@angular/forms'
-import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import { Subscription } from 'app/mawedy-core/models/utility.models'
 import { PRICE_PER_USER } from 'app/mawedy-core/constants/app.constant'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
@@ -9,10 +8,9 @@ import { Component, OnInit } from '@angular/core'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import {
 	BehaviorSubject,
-	forkJoin,
+	combineLatest,
 	Observable,
 	Subject,
-	take,
 	takeUntil,
 } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -80,7 +78,7 @@ export class LandingSubscriptionSection1Component implements OnInit {
 	}
 
 	fetchFromIndexDB() {
-		forkJoin([
+		combineLatest([
 			this._indexedDbService.getByKey(DB.SUBSCRIPTION_REQUEST, 1),
 			this._indexedDbService.getByKey(DB.ACCOUNT_USERS_REQUEST, 1),
 		])

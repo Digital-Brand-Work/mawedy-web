@@ -1,18 +1,18 @@
 import { FuseNavigationItem } from './../../../../../@fuse/components/navigation/navigation.types'
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs'
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher'
 import {
 	FuseNavigationService,
 	FuseVerticalNavigationComponent,
 } from '@fuse/components/navigation'
 import { Navigation } from 'app/core/navigation/navigation.types'
-import { NavigationService } from 'app/core/navigation/navigation.service'
 import { User } from 'app/core/user/user.types'
 import { UserService } from 'app/core/user/user.service'
 import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-add/appointment-add.service'
 import { AdminNavigationService } from 'app/mawedy-core/navigation/admin.navigation.service'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
+import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 
 @Component({
 	selector: 'classy-layout',
@@ -30,7 +30,9 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 		private _addAppointmentModal: AddAppointmentModal,
 	) {}
 
-	private _unsubscribeAll: Subject<any> = new Subject<any>()
+	_unsubscribeAll: Subject<any> = new Subject<any>()
+
+	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
 	opened$: BehaviorSubject<boolean> = this._addAppointmentModal.opened$
 
@@ -45,37 +47,45 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this._clinicUserService.clinic$
+		this._clinicUserService.initialize()
+
+		combineLatest([
+			this._clinicUserService.clinic$,
+			this._userService.user$,
+			this._fuseMediaWatcherService.onMediaChange$,
+		])
 			.pipe(takeUntil(this._unsubscribeAll))
 			.subscribe({
-				next: (clinic) => {
-					this._adminNavigationService
-						.get(clinic.subscription_type)
-						.pipe(takeUntil(this._unsubscribeAll))
-						.subscribe((navigation: FuseNavigationItem[]) => {
-							this.navigation = {
-								compact: navigation,
-								default: navigation,
-								futuristic: navigation,
-								horizontal: navigation,
-							}
-						})
+				next: (results: any) => {
+					const [clinic, user, { matchingAliases }] = results
+
+					if (clinic) {
+						this._adminNavigationService
+							.get(clinic.subscription_type)
+							.pipe(takeUntil(this._unsubscribeAll))
+							.subscribe((navigation: FuseNavigationItem[]) => {
+								this.navigation = {
+									default: navigation,
+									compact: navigation,
+									futuristic: navigation,
+									horizontal: navigation,
+								}
+							})
+					}
+
+					if (user) {
+						this.user = user
+					}
+
+					if ({ matchingAliases }) {
+						this.isScreenSmall = !matchingAliases.includes('md')
+					}
+
+					;(
+						document.querySelector('html') as HTMLElement
+					).style.position = 'fixed'
 				},
 			})
-
-		this._userService.user$
-			.pipe(takeUntil(this._unsubscribeAll))
-			.subscribe((user: User) => {
-				this.user = user
-			})
-
-		this._fuseMediaWatcherService.onMediaChange$
-			.pipe(takeUntil(this._unsubscribeAll))
-			.subscribe(({ matchingAliases }) => {
-				this.isScreenSmall = !matchingAliases.includes('md')
-			})
-		;(document.querySelector('html') as HTMLElement).style.position =
-			'fixed'
 	}
 
 	ngOnDestroy(): void {

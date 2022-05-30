@@ -1,14 +1,11 @@
 import { ClinicRegistrationStatusEnum } from './../../../../../mawedy-core/enums/clinic-registration.enum'
 import { ClinicSubscriptionTypeEnum } from './../../../../../mawedy-core/enums/clinic-subscription-type.enum'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import { Router } from '@angular/router'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { AlertState } from 'app/components/alert/alert.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
 import { LoginService } from '../../login.service'
-import { slugToSentence } from 'app/mawedy-core/helpers'
-import { slugify } from '@digital_brand_work/helpers/helpers'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 
 @Component({
@@ -106,6 +103,8 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 	proceedToDashboard(userAccount) {
 		this._clinicUserService.saveDataLocally(userAccount)
 
+		this._clinicUserService.toDashboard()
+
 		this._alert.add({
 			id: Math.floor(Math.random() * 100000000000).toString(),
 			title: `Welcome Back ${userAccount.data.name}!`,
@@ -113,7 +112,5 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 				'We hope that you use our services to its full extent. Have a great day ahead.',
 			type: 'info',
 		})
-
-		this._clinicUserService.toDashboard()
 	}
 }

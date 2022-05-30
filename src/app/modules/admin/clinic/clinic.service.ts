@@ -2,7 +2,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { IndexedDbController } from '../../../mawedy-core/indexed-db/indexed-db.controller'
 import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject, take } from 'rxjs'
+import { BehaviorSubject, combineLatest, forkJoin, map, of, take } from 'rxjs'
 import { Clinic } from './clinic.model'
 import { Router } from '@angular/router'
 import { Injectable } from '@angular/core'
@@ -25,10 +25,18 @@ export class ClinicUserService {
 		private _http: HttpClient,
 		private _indexedDBController: IndexedDbController,
 		private _indexedDBService: NgxIndexedDBService,
-	) {
+	) {}
+
+	clinic$: BehaviorSubject<Clinic | null> =
+		new BehaviorSubject<Clinic | null>(null)
+
+	clinic?: Clinic | null
+
+	hasLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+
+	initialize() {
 		this._indexedDBService
 			.getByKey(DB.CLINIC, 1)
-			.pipe(take(1))
 			.subscribe((clinic: any) => {
 				if (clinic.data) {
 					this.hasLoggedIn$.next(true)
@@ -40,15 +48,20 @@ export class ClinicUserService {
 			})
 	}
 
-	clinic$: BehaviorSubject<Clinic | null> =
-		new BehaviorSubject<Clinic | null>(null)
-
-	clinic?: Clinic | null
-
-	hasLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-
 	saveDataLocally(data: User): void {
+		localStorage.clear()
+
+		this._indexedDBController.removeAll([DB.CLINIC, DB.ACCESS_TOKEN])
+
+		this.clinic$.next(null)
+
+		this.clinic = null
+
+		this.hasLoggedIn$.next(false)
+
 		this.hasLoggedIn$.next(true)
+
+		localStorage.setItem('access_token', data.access.token)
 
 		this._indexedDBController.upsert(DB.ACCESS_TOKEN, {
 			data: data.access.token,
@@ -61,12 +74,14 @@ export class ClinicUserService {
 		this.clinic = data.data
 
 		this.clinic$.next(data.data)
-
-		this._router.navigate(['/dashboard'])
 	}
 
 	update(): void {
 		this.clinic$.pipe(take(1)).subscribe((clinic) => {
+			if (!clinic) {
+				return
+			}
+
 			if (Object.keys(clinic).length === 0 || !clinic.accounts) {
 				new BaseService(
 					this._http,
@@ -87,30 +102,41 @@ export class ClinicUserService {
 	}
 
 	resolveClinicPath() {
-		this.update()
-
-		this.clinic$.pipe(take(1)).subscribe((userAccount) => {
-			return `/${slugify(userAccount.name)}/${slugify(
-				userAccount.account_type,
-			)}/`
-		})
+		return this.clinic$.pipe(
+			map(
+				(userAccount: any) =>
+					`/${slugify(userAccount.name)}/${slugify(
+						userAccount.account_type,
+					)}/`,
+			),
+		)
 	}
 
 	toDashboard(): void {
 		this.update()
 
-		this.clinic$.pipe(take(1)).subscribe((userAccount) => {
-			if (!userAccount.accounts === undefined) {
-				this.update()
-			}
+		combineLatest([this.clinic$, this.resolveClinicPath()])
+			.pipe(take(1))
+			.subscribe({
+				next: (results: any) => {
+					const [userAccount, path] = results
 
-			this._router.navigate([
-				this.resolveClinicPath() + `dashboard/appointments`,
-			])
-		})
+					if (!userAccount || !path) {
+						return
+					}
+
+					if (!userAccount.accounts === undefined) {
+						this.update()
+					}
+
+					this._router.navigate([path + `dashboard/appointments`])
+				},
+			})
 	}
 
 	logout(): void {
+		localStorage.clear()
+
 		this._indexedDBController.removeAll([DB.CLINIC, DB.ACCESS_TOKEN])
 
 		this.clinic$.next(null)

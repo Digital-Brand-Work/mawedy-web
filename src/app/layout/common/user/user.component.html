@@ -4,7 +4,7 @@
 		<img
 			class="w-10 h-10 rounded-full"
 			*ngIf="showAvatar && user.avatar"
-			src="/assets/app/sidebar/user.png"
+			src="../../../../assets/app/navbar/ruth.jpg"
 		/>
 
 		<span class="absolute -right-7 bottom-0 text-gray-500">
@@ -14,7 +14,10 @@
 </button>
 
 <mat-menu [xPosition]="'before'" #userActions="matMenu" class="p-5">
-	<div class="accent-color font-bold flex items-center">
+	<div
+		*ngIf="(clinic$ | async)?.accounts.length !== 0"
+		class="accent-color font-bold flex items-center"
+	>
 		<div>Branches</div>
 
 		<mat-icon
@@ -23,7 +26,10 @@
 		></mat-icon>
 	</div>
 
-	<div class="ml-3 mt-2 mb-4 w-full text-gray-500">
+	<div
+		*ngIf="(clinic$ | async)?.accounts.length !== 0"
+		class="ml-3 mt-2 mb-4 w-full text-gray-500"
+	>
 		<button mat-menu-item class="flex items-center">
 			<span>Main </span>
 
@@ -33,30 +39,15 @@
 			></mat-icon>
 		</button>
 
-		<button mat-menu-item class="flex items-center bg-teal-500 text-white">
-			<span>Jumeira </span>
-
-			<mat-icon
-				class="ml-auto icon-size-4 translate-x-3 text-white"
-				[svgIcon]="'feather:chevron-right'"
-			></mat-icon>
-		</button>
-
-		<button mat-menu-item class="flex items-center">
-			<span>Bur Dubai </span>
-
-			<mat-icon
-				class="ml-auto icon-size-4 translate-x-3"
-				[svgIcon]="'feather:chevron-right'"
-			></mat-icon>
-		</button>
-
 		<button
-			*ngFor="let item of [1, 2, 3, 4, 5, 5]; trackBy: identity"
+			*ngFor="
+				let account of (clinic$ | async)?.accounts;
+				trackBy: identity
+			"
 			mat-menu-item
 			class="flex items-center"
 		>
-			<span>Al Nahda </span>
+			<span>{{ account.name || account.username }}</span>
 
 			<mat-icon
 				class="ml-auto icon-size-4 translate-x-3"
@@ -65,7 +56,10 @@
 		</button>
 	</div>
 
-	<mat-divider class="my-2"></mat-divider>
+	<mat-divider
+		*ngIf="(clinic$ | async)?.accounts.length !== 0"
+		class="my-2"
+	></mat-divider>
 
 	<button class="block md:hidden" mat-menu-item>
 		<span>Add Appointment</span>

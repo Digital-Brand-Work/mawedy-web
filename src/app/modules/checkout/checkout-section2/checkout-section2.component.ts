@@ -121,7 +121,6 @@ export class CheckoutSection2Component implements OnInit {
 	pay() {
 		for (let key in this.form.value) {
 			if (this.form.value[key] === '') {
-				console.log(key)
 				return this._alert.add({
 					title: `Cannot perform operation`,
 					message: 'One or more fields are empty.',

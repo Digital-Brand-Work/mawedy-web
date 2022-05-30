@@ -6,14 +6,7 @@ import { ClinicRegistrationStatusEnum } from 'app/mawedy-core/enums/clinic-regis
 import { ClinicSubscriptionTypeEnum } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import {
-	BehaviorSubject,
-	forkJoin,
-	Observable,
-	Subject,
-	take,
-	takeUntil,
-} from 'rxjs'
+import { BehaviorSubject, Observable, Subject } from 'rxjs'
 
 @Component({
 	selector: 'home-section1',
@@ -46,6 +39,10 @@ export class HomeSection1Component implements OnInit {
 
 	getClinicData() {
 		this.clinic$.subscribe((clinic) => {
+			if (!clinic) {
+				return
+			}
+
 			const isConfirmedOrDone =
 				clinic.account_status ===
 					ClinicRegistrationStatusEnum.CONFIRMED ||

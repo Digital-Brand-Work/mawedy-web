@@ -5,7 +5,7 @@ import {
 	HomeNav,
 	homeNavigation,
 } from '../../../../mawedy-core/navigation/landing.navigation'
-import { BehaviorSubject, forkJoin, take } from 'rxjs'
+import { BehaviorSubject, forkJoin, Subject, take, takeUntil } from 'rxjs'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicSubscriptionTypeEnum } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
 import { ClinicRegistrationStatusEnum } from 'app/mawedy-core/enums/clinic-registration.enum'
@@ -18,6 +18,8 @@ import { ClinicRegistrationStatusEnum } from 'app/mawedy-core/enums/clinic-regis
 })
 export class HomeNavbarComponent implements OnInit {
 	constructor(private _clinicUserService: ClinicUserService) {}
+
+	unsubscribe$: Subject<any> = new Subject<any>()
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
@@ -32,8 +34,18 @@ export class HomeNavbarComponent implements OnInit {
 		this.getClinicData()
 	}
 
+	ngOnDestroy(): void {
+		this.unsubscribe$.next(null)
+
+		this.unsubscribe$.complete()
+	}
+
 	getClinicData() {
-		this.clinic$.subscribe((clinic) => {
+		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
+			if (!clinic) {
+				return
+			}
+
 			const isConfirmedOrDone =
 				clinic.account_status ===
 					ClinicRegistrationStatusEnum.CONFIRMED ||
@@ -50,7 +62,11 @@ export class HomeNavbarComponent implements OnInit {
 	}
 
 	toDashboard() {
-		this.clinic$.subscribe((clinic) => {
+		this.clinic$.pipe(take(1)).subscribe((clinic) => {
+			if (!clinic) {
+				return
+			}
+
 			const isConfirmedOrDone =
 				clinic.account_status ===
 					ClinicRegistrationStatusEnum.CONFIRMED ||

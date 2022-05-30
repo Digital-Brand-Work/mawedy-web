@@ -43,7 +43,7 @@ export class DoctorAddComponent implements OnInit {
 	ngOnInit(): void {}
 
 	ngOnDestroy(): void {
-		this.opened$.subscribe((value) => console.log(value))
+		this.opened$.subscribe()
 
 		this.unsubscribe$.next(null)
 

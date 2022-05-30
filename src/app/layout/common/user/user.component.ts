@@ -9,10 +9,11 @@ import {
 } from '@angular/core'
 import { Router } from '@angular/router'
 import { BooleanInput } from '@angular/cdk/coercion'
-import { Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 import { User } from 'app/core/user/user.types'
 import { UserService } from 'app/core/user/user.service'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
+import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 
 @Component({
 	selector: 'user',
@@ -22,14 +23,6 @@ import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 	exportAs: 'user',
 })
 export class UserComponent implements OnInit, OnDestroy {
-	static ngAcceptInputType_showAvatar: BooleanInput
-
-	@Input() showAvatar: boolean = true
-
-	user: User
-
-	private _unsubscribeAll: Subject<any> = new Subject<any>()
-
 	constructor(
 		private _changeDetectorRef: ChangeDetectorRef,
 		private _router: Router,
@@ -37,6 +30,16 @@ export class UserComponent implements OnInit, OnDestroy {
 
 		private _clinicUserService: ClinicUserService,
 	) {}
+
+	ngAcceptInputType_showAvatar: BooleanInput
+
+	_unsubscribeAll: Subject<any> = new Subject<any>()
+
+	@Input() showAvatar: boolean = true
+
+	user: User
+
+	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
 	ngOnInit(): void {
 		this._userService.user$
@@ -73,15 +76,14 @@ export class UserComponent implements OnInit, OnDestroy {
 	}
 
 	toSettings() {
-		this._router.navigate([
-			this._clinicUserService.resolveClinicPath() + 'account-setting',
-		])
+		this._clinicUserService.resolveClinicPath().subscribe((path) => {
+			this._router.navigate([path + 'account-setting'])
+		})
 	}
 
 	toUserAccounts() {
-		this._router.navigate([
-			this._clinicUserService.resolveClinicPath() +
-				'account-setting/user-account',
-		])
+		this._clinicUserService.resolveClinicPath().subscribe((path) => {
+			this._router.navigate([path + 'account-setting/user-account'])
+		})
 	}
 }

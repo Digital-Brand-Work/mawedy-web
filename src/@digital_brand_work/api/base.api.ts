@@ -12,34 +12,20 @@ export class BaseService<T> {
 		@Optional() public http: HttpClient,
 		@Optional() public indexDbService: NgxIndexedDBService,
 		@Inject('url') public url: String = '',
-	) {
-		this.indexDbService
-			.getByKey('access_token', 1)
-			.subscribe((access_token: any) => {
-				if (access_token) {
-					this.token = access_token.data
-				}
-			})
-	}
+	) {}
 
 	token: string | undefined | unknown = undefined
 
 	headers() {
-		this.indexDbService
-			.getByKey('access_token', 1)
-			.subscribe((access_token) => {
-				if (access_token) {
-					this.token = access_token
-				}
-			})
+		let token = localStorage.getItem('access_token')
 
 		let headers: any = {
 			Accept: 'application/json',
 			'Access-Control-Allow-Origin': '*',
-			Authorization: 'Bearer ' + this.token,
+			Authorization: 'Bearer ' + token,
 		}
 
-		if (!this.token) {
+		if (token === undefined) {
 			delete headers['Authorization']
 		}
 
@@ -54,16 +40,19 @@ export class BaseService<T> {
 
 	get(): Observable<T[]> {
 		const url = `${environment.api}${this.url}`
+
 		return this.http.get<any>(url, this.headers())
 	}
 
 	query(param: string): Observable<T> {
 		const url = `${environment.api}${this.url}` + param
+
 		return this.http.get<any>(url, this.headers())
 	}
 
 	findOne(id: string | number): Observable<T> {
 		const url = `${environment.api}${this.url}/${id}`
+
 		return this.http.get<T>(url, this.headers())
 	}
 
@@ -74,6 +63,7 @@ export class BaseService<T> {
 
 	put(data: Object): Observable<T> {
 		const url = `${environment.api}${this.url}`
+
 		return this.http.put<T>(url, data, this.headers())
 	}
 
@@ -81,6 +71,7 @@ export class BaseService<T> {
 		const url = `${environment.api}${this.url}${
 			id !== false ? `/${id}` : ''
 		}`
+
 		return this.http.post<T>(url, data, this.headers())
 	}
 
@@ -88,11 +79,13 @@ export class BaseService<T> {
 		const url = `${environment.api}${this.url}${
 			id !== false ? `/${id}` : ''
 		}`
+
 		return this.http.put<T>(url, data, this.headers())
 	}
 
 	remove(id: string | number): Observable<T> {
 		const url = `${environment.api}${this.url}/${id}`
+
 		return this.http.delete<T>(url, this.headers())
 	}
 }
