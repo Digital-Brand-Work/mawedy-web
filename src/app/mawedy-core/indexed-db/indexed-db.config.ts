@@ -7,7 +7,7 @@ export function migrationFactory() {
 
 export const indexedDbConfig: DBConfig = {
 	name: 'mawedy',
-	version: 5,
+	version: 7,
 	objectStoresMeta: [
 		{
 			store: DB.SUBSCRIPTION_REQUEST,
@@ -67,6 +67,13 @@ export const indexedDbConfig: DBConfig = {
 		},
 		{
 			store: DB.SUBSCRIPTIONS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.ACCESS_TOKEN,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
 			storeSchema: [
 				{ name: 'data', keypath: 'data', options: { unique: false } },

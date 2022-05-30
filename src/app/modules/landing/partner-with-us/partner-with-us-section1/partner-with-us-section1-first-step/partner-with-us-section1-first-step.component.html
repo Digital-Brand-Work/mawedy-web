@@ -137,7 +137,13 @@
 		>
 			<spinner *ngIf="isProcessing"></spinner>
 
-			<div *ngIf="!isProcessing">Register</div>
+			<div *ngIf="($isInSubscription | async) && !isProcessing">
+				Purchase Now
+			</div>
+
+			<div *ngIf="!isProcessing && !($isInSubscription | async)">
+				Register
+			</div>
 		</button>
 	</div>
 </form>

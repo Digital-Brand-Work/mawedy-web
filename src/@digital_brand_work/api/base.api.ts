@@ -1,27 +1,48 @@
 import { environment } from './../../environments/environment'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
+import { Inject, Injectable, Optional } from '@angular/core'
 import { Observable } from 'rxjs'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 
 @Injectable({
 	providedIn: 'root',
 })
 export class BaseService<T> {
 	constructor(
-		public http: HttpClient,
+		@Optional() public http: HttpClient,
+		@Optional() public indexDbService: NgxIndexedDBService,
 		@Inject('url') public url: String = '',
-	) {}
+	) {
+		this.indexDbService
+			.getByKey('access_token', 1)
+			.subscribe((access_token: any) => {
+				if (access_token) {
+					this.token = access_token.data
+				}
+			})
+	}
+
+	token: string | undefined | unknown = undefined
 
 	headers() {
-		let token = localStorage.getItem('access_token')
+		this.indexDbService
+			.getByKey('access_token', 1)
+			.subscribe((access_token) => {
+				if (access_token) {
+					this.token = access_token
+				}
+			})
+
 		let headers: any = {
 			Accept: 'application/json',
 			'Access-Control-Allow-Origin': '*',
-			Authorization: 'Bearer ' + token,
+			Authorization: 'Bearer ' + this.token,
 		}
-		if (token === null) {
+
+		if (!this.token) {
 			delete headers['Authorization']
 		}
+
 		return {
 			headers: new HttpHeaders(headers),
 		}

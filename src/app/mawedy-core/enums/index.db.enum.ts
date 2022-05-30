@@ -6,4 +6,5 @@ export enum DB {
 	DOCTORS = 'doctors',
 	PROMOTIONS = 'promotions',
 	SUBSCRIPTIONS = 'subscriptions',
+	ACCESS_TOKEN = 'access_token',
 }

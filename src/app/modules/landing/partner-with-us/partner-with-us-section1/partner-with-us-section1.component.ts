@@ -7,7 +7,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { setPrefix, slugToSentence } from 'app/mawedy-core/helpers'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, map, Observable, Subject, takeUntil } from 'rxjs'
 import { RegisterService } from '../../home/register.service'
 
 @Component({

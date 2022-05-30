@@ -1,3 +1,4 @@
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { IndexedDbController } from '../../../mawedy-core/indexed-db/indexed-db.controller'
 import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 import { HttpClient } from '@angular/common/http'
@@ -6,6 +7,7 @@ import { Clinic } from './clinic.model'
 import { Router } from '@angular/router'
 import { Injectable } from '@angular/core'
 import { slugify } from '@digital_brand_work/helpers/helpers'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 export interface User {
 	access: {
@@ -22,16 +24,20 @@ export class ClinicUserService {
 		private _router: Router,
 		private _http: HttpClient,
 		private _indexedDBController: IndexedDbController,
+		private _indexedDBService: NgxIndexedDBService,
 	) {
-		const clinic = localStorage.getItem('user')
+		this._indexedDBService
+			.getByKey(DB.CLINIC, 1)
+			.pipe(take(1))
+			.subscribe((clinic: any) => {
+				if (clinic.data) {
+					this.hasLoggedIn$.next(true)
 
-		if (clinic !== null) {
-			this.hasLoggedIn$.next(true)
+					this.clinic$.next(clinic.data)
 
-			this.clinic$.next(JSON.parse(clinic))
-
-			this.clinic = JSON.parse(clinic)
-		}
+					this.clinic = clinic.data
+				}
+			})
 	}
 
 	clinic$: BehaviorSubject<Clinic | null> =
@@ -44,9 +50,13 @@ export class ClinicUserService {
 	saveDataLocally(data: User): void {
 		this.hasLoggedIn$.next(true)
 
-		localStorage.setItem('access_token', data.access.token)
+		this._indexedDBController.upsert(DB.ACCESS_TOKEN, {
+			data: data.access.token,
+		})
 
-		localStorage.setItem('user', JSON.stringify(data.data))
+		this._indexedDBController.upsert(DB.CLINIC, {
+			data: data.data,
+		})
 
 		this.clinic = data.data
 
@@ -58,7 +68,11 @@ export class ClinicUserService {
 	update(): void {
 		this.clinic$.pipe(take(1)).subscribe((clinic) => {
 			if (Object.keys(clinic).length === 0 || !clinic.accounts) {
-				new BaseService(this._http, 'v1/auth/check')
+				new BaseService(
+					this._http,
+					this._indexedDBService,
+					'v1/auth/check',
+				)
 					.get()
 					.pipe(take(1))
 					.subscribe((clinic: any) => {
@@ -66,10 +80,7 @@ export class ClinicUserService {
 
 						this.clinic = clinic.data
 
-						localStorage.setItem(
-							'user',
-							JSON.stringify(clinic.data),
-						)
+						this._indexedDBController.upsert(DB.CLINIC, clinic.data)
 					})
 			}
 		})
@@ -100,9 +111,7 @@ export class ClinicUserService {
 	}
 
 	logout(): void {
-		localStorage.clear()
-
-		this._router.navigate([''])
+		this._indexedDBController.removeAll([DB.CLINIC, DB.ACCESS_TOKEN])
 
 		this.clinic$.next(null)
 
@@ -110,7 +119,7 @@ export class ClinicUserService {
 
 		this.hasLoggedIn$.next(false)
 
-		new BaseService(this._http, '/v1/auth/logout')
+		new BaseService(this._http, this._indexedDBService, '/v1/auth/logout')
 
 		this._router.navigate(['/'])
 	}

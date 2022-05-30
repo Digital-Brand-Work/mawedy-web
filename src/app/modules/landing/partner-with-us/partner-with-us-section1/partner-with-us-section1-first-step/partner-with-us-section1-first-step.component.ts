@@ -9,9 +9,10 @@ import {
 	Output,
 	ViewChild,
 } from '@angular/core'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { BehaviorSubject, map, Observable, Subject, takeUntil } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'partner-with-us-section1-first-step',
@@ -24,9 +25,22 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
 		private _storeRegisterRule: StoreRegisterRule,
-	) {}
+		private _router: Router,
+	) {
+		this._router.events
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe(() =>
+				this.$isInSubscription.next(
+					this._router.url.includes('subscription'),
+				),
+			)
+	}
 
-	unsubscribe: Subject<any> = new Subject<any>()
+	unsubscribe$: Subject<any> = new Subject<any>()
+
+	$isInSubscription: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+		true,
+	)
 
 	@ViewChild('ngForm') ngForm!: NgForm
 
@@ -62,9 +76,9 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 	}
 
 	ngOnDestroy(): void {
-		this.unsubscribe.next(null)
+		this.unsubscribe$.next(null)
 
-		this.unsubscribe.complete()
+		this.unsubscribe$.complete()
 
 		this._cdr.detach()
 	}

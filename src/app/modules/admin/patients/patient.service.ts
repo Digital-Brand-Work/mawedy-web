@@ -3,11 +3,12 @@ import { BehaviorSubject } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { BaseService } from '../../../../@digital_brand_work/api/base.api'
 import { Injectable } from '@angular/core'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 
 @Injectable({ providedIn: 'root' })
 export class PatientService extends BaseService<Patient> {
-	constructor(http: HttpClient) {
-		super(http, 'patients')
+	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
+		super(http, indexDbService, 'patients')
 	}
 
 	current$: BehaviorSubject<Patient | null> =
