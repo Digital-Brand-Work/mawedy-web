@@ -3,11 +3,15 @@
 <div
 	class="relative flex items-center w-full px-4 md:px-6 z-49 bg-card print:hidden py-2 md:py-0 border-b border-gray-200"
 >
-	<a class="h-20 w-50 mr-12 hidden md:block" routerLink="/">
+	<a @zoomIn class="h-20 w-50 mr-12 hidden md:block" routerLink="/">
 		<img class="h-20 max-w-50" src="/assets/app/logo.svg" alt="" />
 	</a>
 
-	<button mat-icon-button (click)="toggleNavigation('mainNavigation')">
+	<button
+		@slideInBottom
+		mat-icon-button
+		(click)="toggleNavigation('mainNavigation')"
+	>
 		<mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
 	</button>
 
@@ -26,18 +30,34 @@
 			<notifications></notifications>
 		</div>
 
-		<div class="accent-color ml-5 font-semibold mr-2">
+		<button
+			*ngIf="
+				(clinic$ | async) &&
+				((breakpoint$ | async) === 'laptop' ||
+					(breakpoint$ | async) === 'desktop' ||
+					(breakpoint$ | async) === 'max')
+			"
+			(click)="resolvePath('/clinic')"
+			mat-button
+			@fadeInBottom
+			class="accent-color ml-5 font-semibold mr-0"
+		>
 			{{ (clinic$ | async)?.name }}
 			<span
 				class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md ml-1"
 			>
 				{{ (clinic$ | async)?.account_type }} Branch</span
 			>
-		</div>
+		</button>
 
-		<div mat-button matTooltip="Options" class="flex items-center mx-8">
+		<button
+			@slideInRight
+			mat-button
+			matTooltip="Options"
+			class="flex items-center mx-0"
+		>
 			<user [showAvatar]="true"></user>
-		</div>
+		</button>
 	</div>
 </div>
 

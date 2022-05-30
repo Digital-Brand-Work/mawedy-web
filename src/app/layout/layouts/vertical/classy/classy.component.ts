@@ -1,6 +1,13 @@
 import { FuseNavigationItem } from './../../../../../@fuse/components/navigation/navigation.types'
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
-import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs'
+import {
+	BehaviorSubject,
+	combineLatest,
+	Observable,
+	Subject,
+	take,
+	takeUntil,
+} from 'rxjs'
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher'
 import {
 	FuseNavigationService,
@@ -13,24 +20,32 @@ import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-
 import { AdminNavigationService } from 'app/mawedy-core/navigation/admin.navigation.service'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { Router } from '@angular/router'
+import { BreakPoint } from '@digital_brand_work/models/core.model'
+import { MediaService } from '@digital_brand_work/utilities/media.service'
 
 @Component({
 	selector: 'classy-layout',
 	templateUrl: './classy.component.html',
 	encapsulation: ViewEncapsulation.None,
+	animations: [...dbwAnimations],
 })
 export class ClassyLayoutComponent implements OnInit, OnDestroy {
 	constructor(
+		private _router: Router,
 		private _userService: UserService,
-		private _fuseMediaWatcherService: FuseMediaWatcherService,
-		private _fuseNavigationService: FuseNavigationService,
-
-		private _adminNavigationService: AdminNavigationService,
+		private _mediaService: MediaService,
 		private _clinicUserService: ClinicUserService,
 		private _addAppointmentModal: AddAppointmentModal,
+		private _fuseNavigationService: FuseNavigationService,
+		private _adminNavigationService: AdminNavigationService,
+		private _fuseMediaWatcherService: FuseMediaWatcherService,
 	) {}
 
-	_unsubscribeAll: Subject<any> = new Subject<any>()
+	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
+
+	unsubscribe$: Subject<any> = new Subject<any>()
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
@@ -54,7 +69,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 			this._userService.user$,
 			this._fuseMediaWatcherService.onMediaChange$,
 		])
-			.pipe(takeUntil(this._unsubscribeAll))
+			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe({
 				next: (results: any) => {
 					const [clinic, user, { matchingAliases }] = results
@@ -62,7 +77,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 					if (clinic) {
 						this._adminNavigationService
 							.get(clinic.subscription_type)
-							.pipe(takeUntil(this._unsubscribeAll))
+							.pipe(takeUntil(this.unsubscribe$))
 							.subscribe((navigation: FuseNavigationItem[]) => {
 								this.navigation = {
 									default: navigation,
@@ -89,11 +104,20 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this._unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this._unsubscribeAll.complete()
+		this.unsubscribe$.complete()
 		;(document.querySelector('html') as HTMLElement).style.position =
 			'relative'
+	}
+
+	resolvePath(path: string) {
+		this._clinicUserService
+			.resolveClinicPath()
+			.pipe(take(1))
+			.subscribe((resolvedPath) => {
+				this._router.navigate([resolvedPath + path])
+			})
 	}
 
 	toggleNavigation(name: string): void {

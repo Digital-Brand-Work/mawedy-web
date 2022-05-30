@@ -15,8 +15,26 @@
 
 <mat-menu [xPosition]="'before'" #userActions="matMenu" class="p-5">
 	<div
+		(click)="resolvePath('/clinic')"
+		@slideInTop
+		*ngIf="
+			(clinic$ | async) &&
+			((breakpoint$ | async) === 'phone' ||
+				(breakpoint$ | async) === 'tablet')
+		"
+		class="accent-color font-semibold mx-0 w-full mb-3"
+	>
+		{{ (clinic$ | async)?.name }}
+		<span
+			class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md mx-1"
+		>
+			{{ (clinic$ | async)?.account_type }} Branch</span
+		>
+	</div>
+
+	<div
 		*ngIf="(clinic$ | async)?.accounts.length !== 0"
-		class="accent-color font-bold flex items-center"
+		class="accent-color font-bold flex items-center my-5"
 	>
 		<div>Branches</div>
 
@@ -28,12 +46,23 @@
 
 	<div
 		*ngIf="(clinic$ | async)?.accounts.length !== 0"
-		class="ml-3 mt-2 mb-4 w-full text-gray-500"
+		class="ml-1 mt-2 mb-4 w-full text-gray-500"
 	>
-		<button mat-menu-item class="flex items-center">
+		<button
+			[ngClass]="{
+				'bg-teal-500 text-white rounded-tr-lg':
+					(clinic$ | async)?.account_type === 'Main'
+			}"
+			mat-menu-item
+			class="flex items-center"
+		>
 			<span>Main </span>
 
 			<mat-icon
+				[ngClass]="{
+					'bg-teal-500 text-white':
+						(clinic$ | async)?.account_type === 'Main'
+				}"
 				class="ml-auto icon-size-4 translate-x-3"
 				[svgIcon]="'feather:chevron-right'"
 			></mat-icon>
@@ -47,7 +76,7 @@
 			mat-menu-item
 			class="flex items-center"
 		>
-			<span>{{ account.name || account.username }}</span>
+			<span>{{ account.name || '@' + account.username }}</span>
 
 			<mat-icon
 				class="ml-auto icon-size-4 translate-x-3"
@@ -61,17 +90,20 @@
 		class="my-2"
 	></mat-divider>
 
-	<button class="block md:hidden" mat-menu-item>
+	<button (click)="opened$.next(true)" class="block md:hidden" mat-menu-item>
 		<span>Add Appointment</span>
 	</button>
 
 	<mat-divider class="my-2 block md:hidden"></mat-divider>
 
-	<button (click)="toUserAccounts()" mat-menu-item>
+	<button
+		(click)="resolvePath('/account-setting/user-account')"
+		mat-menu-item
+	>
 		<span>User Accounts</span>
 	</button>
 
-	<button (click)="toSettings()" mat-menu-item>
+	<button (click)="resolvePath('/account-setting')" mat-menu-item>
 		<span>Settings</span>
 	</button>
 

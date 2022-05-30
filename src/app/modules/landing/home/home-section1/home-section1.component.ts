@@ -1,3 +1,4 @@
+import { takeUntil } from 'rxjs/operators'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
@@ -38,7 +39,7 @@ export class HomeSection1Component implements OnInit {
 	}
 
 	getClinicData() {
-		this.clinic$.subscribe((clinic) => {
+		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
 			if (!clinic) {
 				return
 			}
