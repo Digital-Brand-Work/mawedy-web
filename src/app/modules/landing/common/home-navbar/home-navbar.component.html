@@ -27,21 +27,10 @@
 				role="button"
 				class="px-7 py-3 rounded-lg text-lg flex items-center"
 			>
-				{{
-					(hasLoggedIn$ | async) &&
-					nav.id === 4 &&
-					((clinic$ | async).account_status === 'Confirmed' ||
-						(clinic$ | async).account_status === 'Done')
-						? 'Dashboard'
-						: nav.name
-				}}
+				{{ !showSignInPanel && nav.id === 4 ? 'Dashboard' : nav.name }}
 
 				<mat-icon
-					*ngIf="
-						(hasLoggedIn$ | async) &&
-						((clinic$ | async).account_status === 'Confirmed' ||
-							(clinic$ | async).account_status === 'Done')
-					"
+					*ngIf="!showSignInPanel && nav.id === 4"
 					class="ml-auto icon-size-4 text-white"
 					[svgIcon]="'feather:chevron-right'"
 				></mat-icon>

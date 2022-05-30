@@ -29,9 +29,7 @@ export class IndexedDbController {
 
 	removeAll(databases: any[]) {
 		databases.forEach((database) =>
-			this._indexedDbService
-				.clear(database)
-				.subscribe((data) => console.log(data)),
+			this._indexedDbService.clear(database).subscribe(),
 		)
 	}
 }

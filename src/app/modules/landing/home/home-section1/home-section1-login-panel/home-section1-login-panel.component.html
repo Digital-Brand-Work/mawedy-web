@@ -1,8 +1,7 @@
 <form
 	[formGroup]="form"
 	#ngForm="ngForm"
-	@slideInLeft
-	class="md:rounded-lg pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10 drop-shadow-custom"
+	class="md:rounded-lg pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10 drop--custom"
 >
 	<img
 		class="h-36 max-w-50 mb-5"
@@ -22,11 +21,11 @@
 				!form.get('email')?.valid &&
 				form.get('email')?.touched &&
 				!form.disabled,
-			'bg-gray-100 ':
+			'bg-white border border-gray-300/80':
 				(form.get('email')?.valid && form.get('email')?.touched) ||
 				!form.get('email')?.touched
 		}"
-		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5"
+		class="py-4 px-5 rounded-md -md w-full focus:border-teal-500 focus:border-2 focus:-md focus:-teal-500/20 mt-5"
 	/>
 
 	<div
@@ -51,12 +50,12 @@
 				!form.get('password')?.valid &&
 				form.get('password')?.touched &&
 				!form.disabled,
-			'bg-gray-100 ':
+			'bg-white border border-gray-300/80':
 				(form.get('password')?.valid &&
 					form.get('password')?.touched) ||
 				!form.get('password')?.touched
 		}"
-		class="py-5 px-5 rounded-md shadow-md w-full shadow-gray-500/20 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 mt-5"
+		class="py-4 px-5 rounded-md -md w-full focus:border-teal-500 focus:border-2 focus:-md focus:-teal-500/20 mt-5"
 	/>
 
 	<div
@@ -81,7 +80,7 @@
 		*ngIf="true"
 		@slideInBottom
 		style="width: 300px"
-		class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-teal-200/20 via-white/20 to-white backdrop-blur-md flex items-center border border-teal-200 mt-10 mb-0"
+		class="w-full my-2 p-5 rounded-sm bg-gradient-to-br from-teal-300/80/20 via-white/20 to-white backdrop-blur-md flex items-center border border-teal-300/80 mt-10 mb-0"
 	>
 		<mat-icon class="text-teal-500" svgIcon="info"></mat-icon>
 
@@ -104,7 +103,7 @@
 			'bg-emerald-500 hover:bg-emerald-600': form.valid && !form.disabled,
 			'bg-gray-400 pointer-events-none': !form.valid || form.disabled
 		}"
-		class="text-white py-3 px-10 text-xl shadow-lg rounded-md flex items-center mt-10"
+		class="text-white py-3 px-10 text-xl -lg rounded-md flex items-center mt-10"
 	>
 		<spinner *ngIf="form.disabled"></spinner>
 

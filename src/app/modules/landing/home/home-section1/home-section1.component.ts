@@ -27,6 +27,8 @@ export class HomeSection1Component implements OnInit {
 		private _clinicUserService: ClinicUserService,
 	) {}
 
+	isLoading: boolean = true
+
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
@@ -41,29 +43,26 @@ export class HomeSection1Component implements OnInit {
 		this._clinicUserService.hasLoggedIn$
 
 	ngOnInit(): void {
-		forkJoin([this._clinicUserService.hasLoggedIn$, this.clinic$])
-			.pipe(takeUntil(this.unsubscribe$))
-			.subscribe((results: any) => {
-				const [hasLoggedIn, clinic] = results
+		this.getClinicData()
+	}
 
-				const isConfirmedOrDone =
-					clinic.data.account_status ===
-						ClinicRegistrationStatusEnum.CONFIRMED ||
-					clinic.data.account_status ===
-						ClinicRegistrationStatusEnum.DONE
+	getClinicData() {
+		this.clinic$.subscribe((clinic) => {
+			const isConfirmedOrDone =
+				clinic.account_status ===
+					ClinicRegistrationStatusEnum.CONFIRMED ||
+				clinic.account_status === ClinicRegistrationStatusEnum.DONE
 
-				if (
-					(hasLoggedIn &&
-						clinic.data.subscription_type ===
-							ClinicSubscriptionTypeEnum.FREE &&
-						isConfirmedOrDone) ||
-					(hasLoggedIn &&
-						clinic.data.subscription_type !==
-							ClinicSubscriptionTypeEnum.FREE)
-				) {
-					this._clinicUserService.toDashboard()
-				}
-			})
+			if (
+				(clinic.subscription_type === ClinicSubscriptionTypeEnum.FREE &&
+					isConfirmedOrDone) ||
+				clinic.subscription_type !== ClinicSubscriptionTypeEnum.FREE
+			) {
+				this.showSignInPanel = false
+			}
+
+			this.isLoading = false
+		})
 	}
 
 	ngOnDestroy(): void {

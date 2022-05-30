@@ -1,4 +1,5 @@
 <div
+	*ngIf="!isLoading"
 	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
 	class="w-full flex items-center justify-center relative"
 >
