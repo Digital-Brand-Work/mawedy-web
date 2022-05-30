@@ -43,7 +43,15 @@ export class CheckoutComponent implements OnInit {
 
 	billMultiplier: number = 1
 
-	ngOnInit(): void {
+	ngOnInit(): void {}
+
+	ngAfterViewInit(): void {
+		setTimeout(() => {
+			this.fetchFromIndexDB()
+		}, 500)
+	}
+
+	fetchFromIndexDB() {
 		forkJoin([
 			this._indexedDbService.getByKey(DB.SUBSCRIPTION_REQUEST, 1),
 			this._indexedDbService.getByKey(DB.ACCOUNT_USERS_REQUEST, 1),

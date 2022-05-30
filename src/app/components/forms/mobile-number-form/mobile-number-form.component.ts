@@ -23,7 +23,7 @@ export class MobileNumberFormComponent implements OnInit {
 		.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
 		.reverse()
 
-	phoneNumber: string = ''
+	@Input() phoneNumber: string = ''
 
 	country_code = 'AE'
 
@@ -38,9 +38,11 @@ export class MobileNumberFormComponent implements OnInit {
 	}
 
 	emit() {
-		this.onMobileNumberChange.emit({
-			countryCode: this.country_code,
-			phoneNumber: this.phoneNumber,
-		})
+		if (this.country_code !== '' && this.phoneNumber !== '') {
+			this.onMobileNumberChange.emit({
+				countryCode: this.country_code,
+				phoneNumber: this.phoneNumber,
+			})
+		}
 	}
 }

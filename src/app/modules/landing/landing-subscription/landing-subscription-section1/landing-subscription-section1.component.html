@@ -138,7 +138,18 @@
 		</div>
 
 		<div class="px-5 md:p-10 items-start md:-translate-y-20">
+			<button
+				@fadeOutBottom
+				@slideInRight
+				*ngIf="hasLoggedIn$ | async"
+				(click)="toCheckOut()"
+				class="text-white animate-pulse hover:bg-emerald-600 font-bold text-lg bg-emerald-500 px-10 py-4 rounded-lg ml-auto w-full uppercase flex items-center justify-center"
+			>
+				<div>Proceed to CheckOut</div>
+			</button>
+
 			<partner-with-us-section1-first-step
+				*ngIf="!(hasLoggedIn$ | async)"
 				(onNext)="register($event)"
 				[isProcessing]="isProcessing"
 			></partner-with-us-section1-first-step>

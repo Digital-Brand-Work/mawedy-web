@@ -23,7 +23,9 @@
 		Payment for {{ subscription.name }}
 	</div>
 
-	<div class="mb-5 text-5xl font-bold text-center md:text-left px-5 md:px-0">
+	<div
+		class="mb-5 text-5xl font-extrabold text-center md:text-left px-5 md:px-0"
+	>
 		{{
 			subscription.price +
 				additionalUsers * PRICE_PER_USER * billMultiplier

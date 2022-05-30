@@ -69,6 +69,17 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 		this._cdr.detach()
 	}
 
+	handleMobileNumberChange(event: {
+		countryCode: string
+		phoneNumber: string
+	}) {
+		if (event.phoneNumber !== '') {
+			this.form.value.phone_number_one = event.phoneNumber
+		}
+
+		this.form.value.phone_number_one_country_code = event.countryCode
+	}
+
 	setTradeLicense(event: any): void {
 		this.file = event.target.files[0]
 

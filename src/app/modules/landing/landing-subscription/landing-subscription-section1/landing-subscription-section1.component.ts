@@ -36,7 +36,6 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		private _indexedDbController: IndexedDbController,
 		private _errorHandlerService: ErrorHandlerService,
 		private _mediaService: MediaService,
-		private _scrollService: ScrollService,
 		private _router: Router,
 		private _homeSubscriptionState: HomeSubscriptionState,
 		private _registerService: RegisterService,
@@ -44,12 +43,16 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		private _clinicUserService: ClinicUserService,
 	) {}
 
+	hasLoggedIn$: BehaviorSubject<boolean> =
+		this._clinicUserService.hasLoggedIn$
+
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
-	subscription$: BehaviorSubject<Subscription | null> =
-		this._homeSubscriptionState.subscription$
+	subscription$: BehaviorSubject<Subscription | null> = new BehaviorSubject(
+		null,
+	)
 
 	interval$: BehaviorSubject<string | null> =
 		this._homeSubscriptionState.interval$
@@ -62,22 +65,44 @@ export class LandingSubscriptionSection1Component implements OnInit {
 
 	billMultiplier: number = 1
 
-	ngOnInit(): void {
-		this._indexedDbService
-			.getByKey(DB.SUBSCRIPTION_REQUEST, 1)
+	ngOnInit(): void {}
+
+	ngAfterViewInit(): void {
+		setTimeout(() => {
+			this.fetchFromIndexDB()
+		}, 500)
+	}
+
+	ngOnDestroy(): void {
+		this.subscription$.next(null)
+
+		this.subscription$.complete()
+	}
+
+	fetchFromIndexDB() {
+		forkJoin([
+			this._indexedDbService.getByKey(DB.SUBSCRIPTION_REQUEST, 1),
+			this._indexedDbService.getByKey(DB.ACCOUNT_USERS_REQUEST, 1),
+		])
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe({
-				next: (subscription_request: any) => {
-					if (subscription_request === undefined) {
-						return
+				next: (request: any) => {
+					const [subscription_request, account_user_request] = request
+
+					if (subscription_request) {
+						this.subscription$.next(
+							subscription_request.subscription,
+						)
+
+						this.interval$.next(subscription_request.interval)
+
+						if (subscription_request.interval === 'yearly') {
+							this.billMultiplier = 12
+						}
 					}
 
-					this.subscription$.next(subscription_request.subscription)
-
-					this.interval$.next(subscription_request.interval)
-
-					if (subscription_request.interval === 'yearly') {
-						this.billMultiplier = 12
+					if (account_user_request) {
+						this.additionalUsers = account_user_request.users
 					}
 				},
 				error: () => {
@@ -86,16 +111,14 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			})
 	}
 
-	ngAfterViewInit(): void {
-		setTimeout(() => {
-			this._scrollService.scrollToTop()
-		}, 100)
-	}
+	toCheckOut() {
+		this._indexedDbController.upsert(DB.ACCOUNT_USERS_REQUEST, {
+			id: 1,
+			subscription_request_id: 1,
+			users: this.additionalUsers,
+		})
 
-	ngOnDestroy(): void {
-		this.subscription$.next(null)
-
-		this.subscription$.complete()
+		this._router.navigate(['checkout'])
 	}
 
 	register(data: { form: FormGroup; trade_license_photo: any }) {

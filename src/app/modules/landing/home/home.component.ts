@@ -9,17 +9,8 @@ import { forkJoin } from 'rxjs'
 	templateUrl: './home.component.html',
 })
 export class HomeMainComponent {
-	constructor(
-		private seoService: SeoService,
-		private media: MediaService,
-		private _indexedDbService: NgxIndexedDBService,
-	) {
+	constructor(private seoService: SeoService, private media: MediaService) {
 		this.seoService.generateTags(this.seoService.default())
-
-		forkJoin([
-			this._indexedDbService.deleteByKey('account_users_request', 1),
-			this._indexedDbService.deleteByKey('subscription_request', 1),
-		]).subscribe()
 	}
 
 	breakpoint$ = this.media.breakpoints$

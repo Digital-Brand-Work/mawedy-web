@@ -162,9 +162,7 @@ export class CheckoutSection2Component implements OnInit {
 			.post(data)
 			.subscribe({
 				next: () => {
-					this._router.navigate([
-						`/success?subscription=${data.type}&interval=${data.interval}ly`,
-					])
+					this._router.navigate([`/success`])
 				},
 				error: (http) => {
 					if (http.error.message.includes('exp')) {

@@ -10,7 +10,6 @@
 
 	<div class="ml-2 border-r border-r-gray-200">
 		<select
-			autocomplete="mobile"
 			(change)="change($event)"
 			[(ngModel)]="country_code"
 			class="pl-2 pr-5 text-base"
@@ -28,7 +27,6 @@
 		mask="00-000-0000"
 		type="tel"
 		class="h-full px-2 w-3/4"
-		maxlength="15"
 		placeholder="50-123-45678"
 	/>
 </div>

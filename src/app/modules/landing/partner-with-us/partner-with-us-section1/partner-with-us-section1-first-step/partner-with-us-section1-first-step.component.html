@@ -77,12 +77,16 @@
 		<div class="mb-1 font-bold text-gray-500 text-base">Mobile Number*</div>
 
 		<div class="">
+			<input type="hidden" formControlName="phone_number_one" />
+
+			<input
+				type="hidden"
+				formControlName="phone_number_one_country_code"
+			/>
+
 			<mobile-number-form
-				(onMobileNumberChange)="
-					form.value.phone_number_one_country_code =
-						$event.countryCode;
-					form.value.phone_number_one = $event.phoneNumber
-				"
+				(onMobileNumberChange)="handleMobileNumberChange($event)"
+				[phoneNumber]="form.value.phone_number_one"
 				[phoneErrors]="phoneErrors"
 				[bordered]="true"
 				[rounded]="true"
@@ -133,7 +137,7 @@
 		>
 			<spinner *ngIf="isProcessing"></spinner>
 
-			<div *ngIf="!isProcessing">Next</div>
+			<div *ngIf="!isProcessing">Register</div>
 		</button>
 	</div>
 </form>

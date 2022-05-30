@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { forkJoin } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
 export class IndexedDbController {
@@ -24,5 +25,13 @@ export class IndexedDbController {
 					.subscribe()
 			},
 		})
+	}
+
+	removeAll(databases: any[]) {
+		databases.forEach((database) =>
+			this._indexedDbService
+				.clear(database)
+				.subscribe((data) => console.log(data)),
+		)
 	}
 }
