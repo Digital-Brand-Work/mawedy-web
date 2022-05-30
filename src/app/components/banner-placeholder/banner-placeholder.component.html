@@ -1,1 +1,6 @@
-<p>banner-placeholder works!</p>
+<div
+	class="w-full font-extrabold bg-gray-50 text-4xl flex items-center justify-center px-5 rounded-md shadow text-teal-500 text-center"
+	style="height: 120px"
+>
+	{{ (clinic$ | async)?.name }}
+</div>

@@ -3,9 +3,13 @@
 	<span class="relative">
 		<img
 			class="w-10 h-10 rounded-full"
-			*ngIf="showAvatar && user.avatar"
+			*ngIf="(clinic$ | async)?.banner"
 			src="../../../../assets/app/navbar/ruth.jpg"
 		/>
+
+		<avatar-placeholder
+			*ngIf="!(clinic$ | async)?.banner"
+		></avatar-placeholder>
 
 		<span class="absolute -right-7 bottom-0 text-gray-500">
 			<mat-icon svgIcon="heroicons_solid:chevron-down"></mat-icon
