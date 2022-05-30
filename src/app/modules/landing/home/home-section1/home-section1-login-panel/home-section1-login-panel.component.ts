@@ -1,3 +1,5 @@
+import { ClinicRegistrationStatusEnum } from './../../../../../mawedy-core/enums/clinic-registration.enum'
+import { ClinicSubscriptionTypeEnum } from './../../../../../mawedy-core/enums/clinic-subscription-type.enum'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Router } from '@angular/router'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
@@ -51,17 +53,40 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 			.post(this.form.value)
 			.subscribe({
 				next: (userAccount) => {
-					this._clinicUserService.saveDataLocally(userAccount)
+					if (
+						userAccount.data.subscription_type ===
+							ClinicSubscriptionTypeEnum.FREE &&
+						ClinicRegistrationStatusEnum.PENDING
+					) {
+						return this._alert.add({
+							id: Math.floor(
+								Math.random() * 100000000000,
+							).toString(),
+							title: `We are asking for your patience.`,
+							message: `It seems that your account hasn't been approved yet. We ask for
+                        				your patience as we review your information. Best Regards,
+                        				Mawedy Team`,
+							type: 'info',
+						})
+					}
 
-					this._alert.add({
-						id: Math.floor(Math.random() * 100000000000).toString(),
-						title: `Welcome Back ${userAccount.data.name}!`,
-						message:
-							'We hope that you use our services to its full extent. Have a great day ahead.',
-						type: 'info',
-					})
+					if (
+						userAccount.data.subscription_type !==
+						ClinicSubscriptionTypeEnum.FREE
+					) {
+						this.proceedToDashboard(userAccount)
+					}
 
-					this._clinicUserService.toDashboard()
+					if (
+						userAccount.data.subscription_type ===
+							ClinicSubscriptionTypeEnum.FREE &&
+						(userAccount.data.account_status ===
+							ClinicRegistrationStatusEnum.DONE ||
+							userAccount.data.account_status ===
+								ClinicRegistrationStatusEnum.CONFIRMED)
+					) {
+						this.proceedToDashboard(userAccount)
+					}
 				},
 				error: (http) => {
 					for (let key in http.error.errors) {
@@ -76,5 +101,19 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 				},
 			})
 			.add(() => this.form.enable())
+	}
+
+	proceedToDashboard(userAccount) {
+		this._clinicUserService.saveDataLocally(userAccount)
+
+		this._alert.add({
+			id: Math.floor(Math.random() * 100000000000).toString(),
+			title: `Welcome Back ${userAccount.data.name}!`,
+			message:
+				'We hope that you use our services to its full extent. Have a great day ahead.',
+			type: 'info',
+		})
+
+		this._clinicUserService.toDashboard()
 	}
 }

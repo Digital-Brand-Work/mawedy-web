@@ -27,8 +27,6 @@ export class HomeSection1Component implements OnInit {
 		private _clinicUserService: ClinicUserService,
 	) {}
 
-	isLoading: boolean = true
-
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
@@ -60,8 +58,6 @@ export class HomeSection1Component implements OnInit {
 			) {
 				this.showSignInPanel = false
 			}
-
-			this.isLoading = false
 		})
 	}
 
