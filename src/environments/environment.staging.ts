@@ -1,4 +1,5 @@
 export const environment = {
 	production: false,
-	api: '',
+	// api: '',
+	api: 'https://develop.api.mawedy.ae/',
 }
