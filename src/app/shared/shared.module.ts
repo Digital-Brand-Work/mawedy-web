@@ -16,12 +16,16 @@ import { indexedDbConfig } from 'app/mawedy-core/indexed-db/indexed-db.config'
 import { matModules } from './mat.modules'
 import { appComponents } from './app.components'
 import { modalComponents } from './modal.components'
-// import { GoogleMapsModule } from '@angular/google-maps'
+import { AgmCoreModule } from '@agm/core'
+import { environment } from 'environments/environment'
 
 const components = [...appComponents, ...modalComponents, UnderMaintenanceComponent, UnderConstructionComponent]
 
 const modules = [
 	NgxIndexedDBModule.forRoot(indexedDbConfig),
+	AgmCoreModule.forRoot({
+		apiKey: environment.GOOGLE_MAP_API_KEY,
+	}),
 	CommonModule,
 	FormsModule,
 	ReactiveFormsModule,
@@ -29,7 +33,6 @@ const modules = [
 	NgxMaskModule.forRoot(),
 	FuseCardModule,
 	SSRExcludeModule,
-	// GoogleMapsModule,
 
 	...matModules,
 ]

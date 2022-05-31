@@ -1,3 +1,4 @@
+import { Coordinates } from './../clinic-information-map/clinic-information-map.component'
 import { HttpErrorResponse } from '@angular/common/http'
 import { AccountTypeEnum } from './../../../../mawedy-core/enums/account.type.enum'
 import { isPlatformBrowser } from '@angular/common'
@@ -58,8 +59,8 @@ export class ClinicInformationComponent implements OnInit {
 		name: [''],
 		email: [''],
 		address: [''],
-		latitude: [''],
-		longitude: [''],
+		latitude: [0],
+		longitude: [0],
 		description: [''],
 		phone_number_one: [''],
 		phone_number_two: [''],
@@ -67,7 +68,7 @@ export class ClinicInformationComponent implements OnInit {
 		phone_number_two_country_code: ['AE'],
 	})
 
-	banner_picture: File | undefined = undefined
+	banner_picture: File | undefined | true = undefined
 
 	bannerPreview: string | ArrayBuffer = '/assets/app/logo.svg'
 
@@ -93,18 +94,20 @@ export class ClinicInformationComponent implements OnInit {
 				return
 			}
 
-			if (clinic.banner.picture !== null) {
+			if (clinic.banner && clinic.banner.picture !== null) {
 				this.bannerPreview = clinic.banner.picture.url
 			}
 
 			this.bannerPreview
 
+			this.banner_picture = true
+
 			this.form.setValue({
 				name: clinic.name || '',
 				email: clinic.email || '',
 				address: clinic.address || '',
-				latitude: clinic.latitude || '',
-				longitude: clinic.longitude || '',
+				latitude: parseFloat(clinic.latitude) || 0,
+				longitude: parseFloat(clinic.longitude) || 0,
 				description: clinic.description || '',
 				phone_number_one: clinic.phone_number_one || '',
 				phone_number_two: clinic.phone_number_two || '',
@@ -124,6 +127,12 @@ export class ClinicInformationComponent implements OnInit {
 		reader.onload = (_event) => {
 			this.bannerPreview = reader.result
 		}
+	}
+
+	handleMarkerDrag(event: Coordinates) {
+		this.form.value.latitude = event.latitude
+
+		this.form.value.longitude = event.longitude
 	}
 
 	handleMobileNumberChange(
@@ -161,8 +170,8 @@ export class ClinicInformationComponent implements OnInit {
 	saveAsMain(): void {
 		let form = new FormData()
 
-		if (this.banner_picture) {
-			form.append('banner_picture', this.banner_picture)
+		if (this.banner_picture !== undefined && this.banner_picture !== true) {
+			form.append('banner_picture', this.banner_picture as any)
 		}
 
 		for (let key in this.form.value) {

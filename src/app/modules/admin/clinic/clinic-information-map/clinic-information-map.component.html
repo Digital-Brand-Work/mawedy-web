@@ -1,1 +1,45 @@
-<!-- <google-map></google-map> -->
+<agm-map
+	[zoom]="20.33"
+	mapTypeId="roadmap"
+	style="height: 500px"
+	[latitude]="coordinates.latitude"
+	[longitude]="coordinates.longitude"
+	[disableDefaultUI]="false"
+	[styles]="styles"
+	[backgroundColor]="'#E8ECF2'"
+	[usePanning]="true"
+>
+	<agm-marker
+		iconUrl="/assets/app/clinic/marker.svg"
+		[animation]="'bounce'"
+		(dragEnd)="onMarkerDragged($event)"
+		[draggable]="true"
+		[markerDraggable]="true"
+		[latitude]="coordinates.latitude"
+		[longitude]="coordinates.longitude"
+	>
+		<agm-info-window>
+			<div class="rounded-md drop-shadow-sm text-gray-500 flex items-center p-3">
+				<div class="mr-3">
+					<img
+						class="w-10 h-10 rounded-full"
+						*ngIf="(clinic$ | async)?.banner"
+						src="/assets/app/navbar/ruth.jpg"
+					/>
+
+					<avatar-placeholder *ngIf="!(clinic$ | async)?.banner"></avatar-placeholder>
+				</div>
+
+				<div>
+					<div class="text-xl text-emerald-500 font-extrabold">
+						{{ (clinic$ | async)?.name }} {{ (clinic$ | async)?.line_one }}
+					</div>
+					<div class="text-md mt-1 text-gray-500">
+						Click & drag to change your location <br />
+						that will be shown on the mobile app
+					</div>
+				</div>
+			</div>
+		</agm-info-window>
+	</agm-marker>
+</agm-map>

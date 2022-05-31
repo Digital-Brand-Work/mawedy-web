@@ -1,10 +1,7 @@
 const path = require('path')
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
-const generatePalette = require(path.resolve(
-	__dirname,
-	'src/@fuse/tailwind/utils/generate-palette',
-))
+const generatePalette = require(path.resolve(__dirname, 'src/@fuse/tailwind/utils/generate-palette'))
 
 const customPalettes = {
 	brand: generatePalette('#2196F3'),
@@ -93,9 +90,7 @@ const config = {
 			},
 			fontFamily: {
 				sans: `"Inter var", ${defaultTheme.fontFamily.sans.join(',')}`,
-				mono: `"IBM Plex Mono", ${defaultTheme.fontFamily.mono.join(
-					',',
-				)}`,
+				mono: `"IBM Plex Mono", ${defaultTheme.fontFamily.mono.join(',')}`,
 			},
 			opacity: {
 				12: '0.12',
@@ -270,14 +265,10 @@ const config = {
 		verticalAlign: false,
 	},
 	plugins: [
-		require(path.resolve(
-			__dirname,
-			'src/@fuse/tailwind/plugins/utilities',
-		)),
-		require(path.resolve(
-			__dirname,
-			'src/@fuse/tailwind/plugins/icon-size',
-		)),
+		require(path.resolve(__dirname, 'src/@fuse/tailwind/plugins/utilities')),
+
+		require(path.resolve(__dirname, 'src/@fuse/tailwind/plugins/icon-size')),
+
 		require(path.resolve(__dirname, 'src/@fuse/tailwind/plugins/theming'))({
 			themes,
 		}),

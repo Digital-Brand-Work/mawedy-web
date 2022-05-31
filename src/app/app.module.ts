@@ -22,6 +22,7 @@ import { effects } from './app-effect.effects'
 import { ModalModule } from './modules/modals/modal.module'
 import { PagesModule } from './modules/pages/pages.module'
 import { PlaceholderModule } from './modules/placeholder/placeholder.module'
+import { AgmCoreModule } from '@agm/core'
 
 @NgModule({
 	declarations: [AppComponent],
