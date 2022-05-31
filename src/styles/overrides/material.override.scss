@@ -31,3 +31,7 @@ mat-checkbox {
 .mat-menu-panel {
 	box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 19px 0px !important;
 }
+
+.mat-menu-panel {
+	max-width: 500px !important;
+}
