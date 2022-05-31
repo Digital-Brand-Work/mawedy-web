@@ -8,30 +8,40 @@ import { StripeStatusEnum } from '../../../mawedy-core/enums/strape-status.enum'
 import { AccountType } from 'app/mawedy-core/enums/account.type.enum'
 
 export interface Clinic extends PHPBaseModel {
+	accounts: Branch[]
 	account_status: ClinicRegistrationStatus
 	account_type: AccountType
-	status: ClinicRegistrationStatusEnum
-	subscription_type: ClinicSubscriptionType
-	stripe_status: StripeStatusEnum
-	subscription_date: Date
-	accounts: Branch[]
+
 	email: string
 	password: string
-	phone_number_one: string
-	phone_number_one_country_code: string
-	phone_number_two: string | null
-	phone_number_two_country_code: string | null
-	payment_received: 0
-	stripe_session_id: string | null
-	latitude: string | null
-	longitude: string | null
-	description: string | null
-	is_twenty_four_hours: boolean
+
 	name: string
+	description: string
 	country: string
 	city: string
 	line_one: string
 	postal_code: string
+	address: string
+	latitude: string
+	longitude: string
+
+	banner: { picture: { url: string } }
+
+	phone_number_one: string
+	phone_number_two: string
+	phone_number_one_country_code: string
+	phone_number_two_country_code: string
+
+	payment_received: 0
+
+	is_twenty_four_hours: boolean
+
+	stripe_session_id: string
+
+	subscription_date: Date
+	stripe_status: StripeStatusEnum
+	status: ClinicRegistrationStatusEnum
+	subscription_type: ClinicSubscriptionType
 }
 
 export interface Branch extends PHPBaseModel {

@@ -63,6 +63,8 @@ export class ClinicUserService {
 
 		localStorage.setItem('access_token', data.access.token)
 
+		localStorage.setItem('current_account', data.data.id)
+
 		this._indexedDBController.upsert(DB.ACCESS_TOKEN, {
 			data: data.access.token,
 		})

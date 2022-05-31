@@ -15,13 +15,13 @@ export class MobileNumberFormComponent implements OnInit {
 
 	@Input() phoneErrors: boolean = false
 
+	@Input() bold: boolean = false
+
 	@Input() bordered: boolean = false
 
 	@Input() rounded: boolean = false
 
-	countries = countries
-		.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
-		.reverse()
+	countries = countries.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)).reverse()
 
 	@Input() phoneNumber: string = ''
 
