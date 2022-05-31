@@ -16,14 +16,9 @@ import { indexedDbConfig } from 'app/mawedy-core/indexed-db/indexed-db.config'
 import { matModules } from './mat.modules'
 import { appComponents } from './app.components'
 import { modalComponents } from './modal.components'
+// import { GoogleMapsModule } from '@angular/google-maps'
 
-const components = [
-	...appComponents,
-	...modalComponents,
-
-	UnderMaintenanceComponent,
-	UnderConstructionComponent,
-]
+const components = [...appComponents, ...modalComponents, UnderMaintenanceComponent, UnderConstructionComponent]
 
 const modules = [
 	NgxIndexedDBModule.forRoot(indexedDbConfig),
@@ -34,16 +29,12 @@ const modules = [
 	NgxMaskModule.forRoot(),
 	FuseCardModule,
 	SSRExcludeModule,
+	// GoogleMapsModule,
 
 	...matModules,
 ]
 
-const directives = [
-	AnimateJsDirective,
-	ParallaxDirective,
-	AutoSizeDirective,
-	StopPropagation,
-]
+const directives = [AnimateJsDirective, ParallaxDirective, AutoSizeDirective, StopPropagation]
 
 const pipes = []
 

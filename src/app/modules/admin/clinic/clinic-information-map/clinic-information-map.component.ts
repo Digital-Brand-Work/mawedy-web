@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'clinic-information-map',
-  templateUrl: './clinic-information-map.component.html',
-  styleUrls: ['./clinic-information-map.component.scss']
+	selector: 'clinic-information-map',
+	templateUrl: './clinic-information-map.component.html',
+	styleUrls: ['./clinic-information-map.component.scss'],
 })
 export class ClinicInformationMapComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {}
 }

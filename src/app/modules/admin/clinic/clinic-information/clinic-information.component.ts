@@ -147,7 +147,7 @@ export class ClinicInformationComponent implements OnInit {
 			this.isProcessing = true
 
 			for (let errorKey in this.errors) {
-				this.errors[errorKey] = true
+				this.errors[errorKey] = false
 			}
 
 			if (clinic.account_type === AccountTypeEnum.BRANCH) {

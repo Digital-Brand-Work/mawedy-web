@@ -77,3 +77,11 @@ Scaffold Effects
 ng g effect Patient -c true --flat false -g true -a true -m modules/admin/patients/patients.module.ts
 
 https://documenter.getpostman.com/view/20654750/UyxqD45a?fbclid=IwAR2RreWciaxjYBphx0XvwZWGqviKDKGjKwD3DZllCW5FdB5Lo53kX8GK8r0
+
+GOOGLE OAUTH
+
+https://www.mawedy.ae/privacy-policy
+
+https://www.mawedy.ae/terms-of-service
+
+https://timdeschryver.dev/blog/google-maps-as-an-angular-component#loading-the-maps-javascript-api
