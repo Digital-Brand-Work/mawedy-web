@@ -36,6 +36,7 @@
 
 	<div *ngIf="(clinic$ | async)?.accounts.length !== 0" class="mt-2 mb-4 w-full text-gray-500">
 		<button
+			(click)="switchAccount()"
 			[ngClass]="{
 				'bg-teal-500 text-white rounded-tr-lg': (clinic$ | async)?.account_type === 'Main'
 			}"
@@ -54,7 +55,15 @@
 		</button>
 
 		<div class="border-b border-b-gray-100" *ngFor="let account of (clinic$ | async)?.accounts; trackBy: identity">
-			<button mat-menu-item class="flex items-center mx-0 rounded-md">
+			<button
+				(click)="switchAccount(account.id)"
+				mat-menu-item
+				class="flex items-center mx-0 rounded-md"
+				[ngClass]="{
+					'bg-teal-500 text-white rounded-tr-lg':
+						account.id === (clinic$ | async)?.id && (clinic$ | async)?.account_type === 'Branch'
+				}"
+			>
 				{{ account.name || '@' + account.username }}
 				<mat-icon class="ml-auto icon-size-4 translate-x-3" [svgIcon]="'feather:chevron-right'"></mat-icon>
 			</button>
