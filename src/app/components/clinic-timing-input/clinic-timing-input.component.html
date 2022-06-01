@@ -1,11 +1,22 @@
 <button
 	(click)="openTimeSheet()"
 	matRipple
+	[ngClass]="{
+		'bg-gray-400 text-white hover:bg-gray-500': !timeslot.active,
+		'border-emerald-400 bg-emerald-50 text-emerald-50 hover:bg-gray-50 hover:text-gray-500 hover:border-gray-400':
+			timeslot.active
+	}"
 	matRippleColor="rgba(11, 169, 118,.1)"
 	matTooltip="Change Timings"
 	matTooltipPosition="right"
 	style="width: 200px"
-	class="border border-emerald-400 font-bold py-1 self-center text-sm rounded-md bg-emerald-50 text-emerald-500 hover:bg-gray-50 hover:text-gray-500 hover:border-gray-400"
+	class="border font-bold py-1 self-center text-sm rounded-md 0"
 >
-	09:30AM - 08:30PM
+	{{
+		!timeslot.active
+			? 'Closed'
+			: timeslot?.start !== '00:00' && timeslot?.end !== '24:00'
+			? 'Available 24 hrs'
+			: resolveTiming(timeslot?.start) + ' - ' + resolveTiming(timeslot?.end)
+	}}
 </button>

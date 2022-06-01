@@ -21,11 +21,19 @@ export class ClinicTimingInputComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	openTimeSheet() {
+	openTimeSheet(): void {
 		this.opened$.next(true)
 
 		this.timing$.next(this.timeslot)
 	}
 
-	apply() {}
+	resolveTiming(timing: string): string {
+		const time = parseInt(timing.split(':')[0])
+
+		if (time <= 12) {
+			return timing + 'AM'
+		}
+
+		return time - 12 + 'PM'
+	}
 }

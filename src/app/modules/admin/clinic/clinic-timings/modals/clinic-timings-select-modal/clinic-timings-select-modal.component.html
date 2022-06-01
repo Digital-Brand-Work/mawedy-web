@@ -10,41 +10,60 @@
 			</div>
 
 			<div style="height: 520px" class="overflow-y-auto overflow-x-hidden p-5">
-				<div>
-					<button
-						(click)="handleOpenAndClose('open')"
-						matRipple
-						matRippleColor="rgba(11, 169, 118,.1)"
-						[ngClass]="{
-							'bg-emerald-500 text-white pointer-events-none':
-								timeSlot?.start === '00:00' && timeSlot?.start === '24:00'
-						}"
-						role="button"
-						class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
-						style="height: 50px"
-					>
-						Available 24hrs
-					</button>
+				<button
+					(click)="handleOpenAndClose('custom')"
+					matRipple
+					matRippleColor="rgba(11, 169, 118,.1)"
+					[ngClass]="{
+						'bg-emerald-500 text-white pointer-events-none':
+							timeSlot?.start !== '00:00' && end?.start !== '24:00' && timeSlot.active
+					}"
+					role="button"
+					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
+					style="height: 50px"
+				>
+					Custom
+				</button>
 
-					<button
-						(click)="handleOpenAndClose('close')"
-						matRipple
-						matRippleColor="rgba(11, 169, 118,.1)"
-						[ngClass]="{
-							'bg-emerald-500 text-white pointer-events-none': !timeSlot?.active
-						}"
-						role="button"
-						class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
-						style="height: 50px"
-					>
-						Closed
-					</button>
+				<button
+					(click)="handleOpenAndClose('open')"
+					matRipple
+					matRippleColor="rgba(11, 169, 118,.1)"
+					[ngClass]="{
+						'bg-emerald-500 text-white pointer-events-none':
+							timeSlot?.start === '00:00' && timeSlot?.end === '24:00'
+					}"
+					role="button"
+					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
+					style="height: 50px"
+				>
+					Available 24hrs
+				</button>
 
+				<button
+					(click)="handleOpenAndClose('close')"
+					matRipple
+					matRippleColor="rgba(11, 169, 118,.1)"
+					[ngClass]="{
+						'bg-emerald-500 text-white pointer-events-none': !timeSlot?.active
+					}"
+					role="button"
+					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
+					style="height: 50px"
+				>
+					Closed
+				</button>
+
+				<div
+					[@listAnimation]="48"
+					*ngIf="timeSlot.active && timeSlot?.start !== '00:00' && timeSlot?.end !== '24:00'"
+				>
 					<div
 						*ngFor="let item of [1, 2, 4, 45, 5, 6, 76, 7, 8, 8, 10, 11]; trackBy: identity; let i = index"
 						class="grid grid-cols-1 md:grid-cols-2 gap-5"
 					>
 						<button
+							(click)="selectedTime = toFixedTwo(i + 1) + ':00 AM'"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -56,6 +75,7 @@
 						</button>
 
 						<button
+							(click)="selectedTime = toFixedTwo(i + 1) + ':30 AM'"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -76,6 +96,7 @@
 						class="grid grid-cols-1 md:grid-cols-2 gap-5"
 					>
 						<button
+							(click)="selectedTime = toFixedTwo(i + 1) + ':00 PM'"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -87,6 +108,7 @@
 						</button>
 
 						<button
+							(click)="selectedTime = toFixedTwo(i + 1) + ':30 PM'"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -111,7 +133,7 @@
 
 				<div
 					@slideInBottom
-					*ngIf="timeSlot?.start === '00:00' && timeSlot?.start === '24:00'"
+					*ngIf="timeSlot?.start === '00:00' && timeSlot?.end === '24:00'"
 					class="text-emerald-500 flex items-center"
 				>
 					<mat-icon class="mr-2 text-emerald-500" svgIcon="check_circle"></mat-icon>

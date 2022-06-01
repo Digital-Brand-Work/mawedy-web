@@ -1,6 +1,6 @@
 import { ClinicTimingSelectModal } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
 import { Component, HostListener, OnInit } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, take } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ClinicTimeSlot } from '../../../clinic.model'
 
@@ -22,6 +22,8 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 
 	timing$: BehaviorSubject<ClinicTimeSlot> = this._clinicTimingSelectModal.timing$
 
+	selectedTime: string = ''
+
 	ngOnInit(): void {}
 
 	identity = (item: any): any => item
@@ -32,7 +34,17 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 
 	ngOnDestroy(): void {}
 
-	handleTimeChange(timing: 'start' | 'end') {}
+	handleTimeValue(): string {
+		return ''
+	}
 
-	handleOpenAndClose(mode: 'open' | 'close') {}
+	handleTimeChange(timing: 'start' | 'end') {
+		this.timing$.pipe(take(1)).subscribe((timeSlot) => {
+			if (timing === 'start') {
+				this.timing$.next({ ...timeSlot, start: this.handleTimeValue() })
+			}
+		})
+	}
+
+	handleOpenAndClose(mode: 'open' | 'close' | 'custom') {}
 }
