@@ -1,7 +1,7 @@
-import { ClinicTimingSelectModal } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
+import { dbwAnimations } from './../../../../../../../@digital_brand_work/animations/animation.api'
+import { ClinicTimingSelectModal } from './clinic-timings.select-moda.service'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { BehaviorSubject, take } from 'rxjs'
-import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ClinicTimeSlot } from '../../../clinic.model'
 
 @Component({
@@ -35,6 +35,8 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 	ngOnDestroy(): void {}
 
 	handleTimeValue(): string {
+		// const meridian = this.selectedTime.split()
+
 		return ''
 	}
 

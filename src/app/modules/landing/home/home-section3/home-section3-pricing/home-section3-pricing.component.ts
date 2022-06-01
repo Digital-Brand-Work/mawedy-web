@@ -28,6 +28,10 @@ export class HomeSection3PricingComponent implements OnInit {
 	identity = (item: any) => item
 
 	subscribe() {
+		if (this.subscription.type === 'Standard') {
+			return this._router.navigate(['/partner-with-us'])
+		}
+
 		this._homeSubscriptionState.subscription$.next(this.subscription)
 
 		this._homeSubscriptionState.interval$.next(this.interval)
