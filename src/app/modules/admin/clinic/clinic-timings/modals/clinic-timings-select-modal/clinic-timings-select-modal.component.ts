@@ -75,7 +75,7 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 	handleOpenAndClose(mode: 'open' | 'close' | 'custom'): void {
 		this.timing$.pipe(take(1)).subscribe((timeSlot) => {
 			if (mode === 'open') {
-				this.timing$.next({ ...timeSlot, start: '00:00', end: '24:00', active: true })
+				this.timing$.next({ ...timeSlot, start: '00:00', end: '23:59', active: true })
 			}
 
 			if (mode === 'close') {

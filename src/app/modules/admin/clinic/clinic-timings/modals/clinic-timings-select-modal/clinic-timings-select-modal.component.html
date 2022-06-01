@@ -16,13 +16,13 @@
 					matRippleColor="rgba(11, 169, 118,.1)"
 					[ngClass]="{
 						'bg-emerald-500 text-white pointer-events-none':
-							timeSlot?.start !== '00:00' && end?.start !== '24:00' && timeSlot.active
+							timeSlot?.start !== '00:00' && end?.start !== '23:59' && timeSlot.active
 					}"
 					role="button"
 					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
 					style="height: 50px"
 				>
-					<div [class.text-white]="timeSlot?.start !== '00:00' && end?.start !== '24:00' && timeSlot.active">
+					<div [class.text-white]="timeSlot?.start !== '00:00' && end?.start !== '23:59' && timeSlot.active">
 						Custom
 					</div>
 				</button>
@@ -33,13 +33,13 @@
 					matRippleColor="rgba(11, 169, 118,.1)"
 					[ngClass]="{
 						'bg-emerald-500 text-white pointer-events-none':
-							timeSlot?.start === '00:00' && timeSlot?.end === '24:00'
+							timeSlot?.start === '00:00' && timeSlot?.end === '23:59'
 					}"
 					role="button"
 					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
 					style="height: 50px"
 				>
-					<div [class.text-white]="timeSlot?.start === '00:00' && timeSlot?.end === '24:00'">
+					<div [class.text-white]="timeSlot?.start === '00:00' && timeSlot?.end === '23:59'">
 						Available 24hrs
 					</div>
 				</button>
@@ -60,7 +60,7 @@
 
 				<div
 					[@listAnimation]="48"
-					*ngIf="timeSlot.active && timeSlot?.start !== '00:00' && timeSlot?.end !== '24:00'"
+					*ngIf="timeSlot.active && timeSlot?.start !== '00:00' && timeSlot?.end !== '23:59'"
 				>
 					<div
 						*ngFor="let item of [1, 2, 4, 45, 5, 6, 76, 7, 8, 8, 10, 11]; let i = index"
@@ -192,7 +192,12 @@
 
 			<div class="my-3 px-5">
 				<div
-					*ngIf="timeSlot?.start !== null && timeSlot?.start !== '00:00' && timeSlot?.end !== '24:00'"
+					*ngIf="
+						timeSlot.start &&
+						timeSlot?.start !== null &&
+						timeSlot?.start !== '00:00' &&
+						timeSlot?.end !== '23:59'
+					"
 					class="text-gray-600 mb-1"
 				>
 					Opened at:
@@ -200,7 +205,10 @@
 				</div>
 
 				<div
-					*ngIf="timeSlot?.end !== null && timeSlot?.start !== '00:00' && timeSlot?.end !== '24:00'"
+					*ngIf="
+						timeSlot.end &&
+						timeSlot?.end !== null && timeSlot?.start !== '00:00' && timeSlot?.end !== '23:59'
+					"
 					class="text-gray-600"
 				>
 					Closed at: <span class="font-bold text-teal-500">{{ timeWithMeridian(timeSlot.end) }}</span>
@@ -208,7 +216,7 @@
 
 				<div
 					@slideInBottom
-					*ngIf="timeSlot?.start === '00:00' && timeSlot?.end === '24:00'"
+					*ngIf="timeSlot?.start === '00:00' && timeSlot?.end === '23:59'"
 					class="text-emerald-500 flex items-center"
 				>
 					<mat-icon class="mr-2 text-emerald-500" svgIcon="check_circle"></mat-icon>
@@ -230,15 +238,7 @@
 						(click)="opened$.next(false)"
 						class="ml-auto hover:bg-emerald-50 rounded-xl px-7 py-2.5 font-bold border-2 border-emerald-500 text-emerald-500"
 					>
-						Back
-					</button>
-
-					<button
-						matRipple
-						matRippleColor="rgba(11, 169, 118,.1)"
-						class="ml-3 hover:bg-emerald-600 rounded-xl px-7 py-2.5 font-bold border-2 border-emerald-500 text-white bg-emerald-500"
-					>
-						Apply
+						Close
 					</button>
 				</div>
 			</div>

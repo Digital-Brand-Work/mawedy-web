@@ -30,10 +30,10 @@ export class ClinicTimingInputComponent implements OnInit {
 	resolveTiming(timing: string): string {
 		const time = parseInt(timing.split(':')[0])
 
-		if (time <= 12) {
-			return timing + 'AM'
+		if (time < 13) {
+			return `${timing} AM`
 		}
 
-		return time - 12 + 'PM'
+		return `${time - 12}:${timing.split(':')[1]} PM`
 	}
 }

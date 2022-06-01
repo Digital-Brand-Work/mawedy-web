@@ -14,6 +14,8 @@ import { AlertState } from 'app/components/alert/alert.service'
 import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { days } from 'app/mawedy-core/enums/day.enum'
+import { ClinicTimingSelectModal } from '../clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
+import { times } from 'lodash'
 
 @Component({
 	selector: 'clinic-information',
@@ -31,6 +33,7 @@ export class ClinicInformationComponent implements OnInit {
 		private _clinicUserService: ClinicUserService,
 		@Inject(PLATFORM_ID) private _platformID: Object,
 		private _errorHandlerService: ErrorHandlerService,
+		private _clinicTimingSelectModal: ClinicTimingSelectModal,
 	) {}
 
 	@ViewChild('ngForm') ngForm: NgForm
@@ -40,6 +43,8 @@ export class ClinicInformationComponent implements OnInit {
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
+
+	timing$: BehaviorSubject<ClinicTimeSlot> = this._clinicTimingSelectModal.timing$
 
 	emailInputMask = !isPlatformBrowser(this._platformID) ? null : createMask({ alias: 'email' })
 
@@ -75,7 +80,9 @@ export class ClinicInformationComponent implements OnInit {
 
 	bannerPreview: string | ArrayBuffer = '/assets/app/logo.svg'
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.listenToTimeSlotChanges()
+	}
 
 	ngAfterViewInit(): void {
 		this.initializeForm()
@@ -89,6 +96,16 @@ export class ClinicInformationComponent implements OnInit {
 		this.unsubscribe$.complete()
 
 		this._cdr.detach()
+	}
+
+	listenToTimeSlotChanges(): void {
+		this.timing$.pipe(takeUntil(this.unsubscribe$)).subscribe((timeslot) => {
+			const index = this.timeslots.findIndex((slot) => slot.day === timeslot.day)
+
+			if (index >= 0) {
+				this.timeslots[index] = timeslot
+			}
+		})
 	}
 
 	initializeForm(): void {
@@ -125,10 +142,11 @@ export class ClinicInformationComponent implements OnInit {
 	}
 
 	handLeEmptyTimeSlots(): void {
-		this.timeslots = []
-
-		if (this.timeslots.length === 0) {
-			for (let day of days) {
+		for (let day of days) {
+			if (
+				this.timeslots.findIndex((_timeSlot) => _timeSlot.day.toLocaleLowerCase() === day.toLocaleLowerCase()) <
+				0
+			) {
 				this.timeslots.push({ start: null, end: null, day: day, active: false })
 			}
 		}
@@ -196,6 +214,18 @@ export class ClinicInformationComponent implements OnInit {
 				form.append(key, this.form.value[key])
 			}
 		}
+
+		this.timeslots.forEach((slot) => {
+			form.append(`timeslots[${slot.day.toLowerCase()}][active]`, slot.active + '')
+
+			if (slot.start && slot.start !== null) {
+				form.append(`timeslots[${slot.day.toLowerCase()}][start]`, slot.start + '')
+			}
+
+			if (slot.end && slot.end !== null) {
+				form.append(`timeslots[${slot.day.toLowerCase()}][end]`, slot.end + '')
+			}
+		})
 
 		this._clinicApi
 			.post(form)
