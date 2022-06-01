@@ -35,18 +35,50 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 	ngOnDestroy(): void {}
 
 	handleTimeValue(): string {
-		// const meridian = this.selectedTime.split()
+		const meridian = this.selectedTime.split(' ')
 
-		return ''
+		if (meridian[1] !== 'AM') {
+			return parseInt(meridian[0] + 12).toString()
+		}
+
+		return meridian[0]
 	}
 
-	handleTimeChange(timing: 'start' | 'end') {
+	timeWithMeridian(value: string): string {
+		let time = value.split(':')
+
+		if (parseInt(time[0]) <= 12) {
+			return time.join(':') + ' AM'
+		}
+
+		time[0] = (parseInt(time[0]) - 12).toString()
+
+		return time.join(':') + ' PM'
+	}
+
+	handleTimeChange(timing: 'start' | 'end'): void {
 		this.timing$.pipe(take(1)).subscribe((timeSlot) => {
 			if (timing === 'start') {
-				this.timing$.next({ ...timeSlot, start: this.handleTimeValue() })
+				return this.timing$.next({ ...timeSlot, start: this.handleTimeValue() })
 			}
+
+			return this.timing$.next({ ...timeSlot, end: this.handleTimeValue() })
 		})
 	}
 
-	handleOpenAndClose(mode: 'open' | 'close' | 'custom') {}
+	handleOpenAndClose(mode: 'open' | 'close' | 'custom'): void {
+		this.timing$.pipe(take(1)).subscribe((timeSlot) => {
+			if (mode === 'open') {
+				this.timing$.next({ ...timeSlot, start: '00:00', end: '24:00', active: true })
+			}
+
+			if (mode === 'close') {
+				this.timing$.next({ ...timeSlot, start: null, end: null, active: false })
+			}
+
+			if (mode === 'custom') {
+				this.timing$.next({ ...timeSlot, start: '01:00', end: '24:30', active: true })
+			}
+		})
+	}
 }
