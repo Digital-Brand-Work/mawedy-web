@@ -205,9 +205,12 @@
 				</div>
 
 				<div
+					@slideInBottom
 					*ngIf="
 						timeSlot.end &&
-						timeSlot?.end !== null && timeSlot?.start !== '00:00' && timeSlot?.end !== '23:59'
+						timeSlot?.end !== null &&
+						timeSlot?.start !== '00:00' &&
+						timeSlot?.end !== '23:59'
 					"
 					class="text-gray-600"
 				>
