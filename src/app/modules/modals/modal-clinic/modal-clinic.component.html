@@ -26,3 +26,13 @@
 	class="fixed w-screen h-screen flex"
 >
 </clinic-services-edit>
+
+<clinic-timings-select-modal
+	stop-propagation
+	(click)="clinicTimingSelectModalOpened$.next(false)"
+	*ngIf="clinicTimingSelectModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</clinic-timings-select-modal>

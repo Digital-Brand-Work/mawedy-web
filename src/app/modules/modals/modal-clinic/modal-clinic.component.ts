@@ -3,6 +3,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { AddDepartmentModal } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-add/clinic-services-add.service'
 import { EditClinicServiceModal } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.service'
+import { ClinicTimingSelectModal } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
 import { BehaviorSubject } from 'rxjs'
 
 @Component({
@@ -13,19 +14,19 @@ import { BehaviorSubject } from 'rxjs'
 })
 export class ModalClinicComponent implements OnInit {
 	constructor(
-		private addDepartmentModal: AddDepartmentModal,
-		private addClinicServiceModal: AddClinicServiceModal,
-		private editClinicServiceModal: EditClinicServiceModal,
+		private _addDepartmentModal: AddDepartmentModal,
+		private _addClinicServiceModal: AddClinicServiceModal,
+		private _editClinicServiceModal: EditClinicServiceModal,
+		private _clinicTimingSelectModal: ClinicTimingSelectModal,
 	) {}
 
-	addDepartmentModalOpened$: BehaviorSubject<boolean> =
-		this.addDepartmentModal.opened$
+	addDepartmentModalOpened$: BehaviorSubject<boolean> = this._addDepartmentModal.opened$
 
-	addClinicServiceModalOpened$: BehaviorSubject<boolean> =
-		this.addClinicServiceModal.opened$
+	addClinicServiceModalOpened$: BehaviorSubject<boolean> = this._addClinicServiceModal.opened$
 
-	editClinicServiceModalOpened$: BehaviorSubject<boolean> =
-		this.editClinicServiceModal.opened$
+	editClinicServiceModalOpened$: BehaviorSubject<boolean> = this._editClinicServiceModal.opened$
+
+	clinicTimingSelectModalOpened$: BehaviorSubject<boolean> = this._clinicTimingSelectModal.opened$
 
 	ngOnInit(): void {}
 }

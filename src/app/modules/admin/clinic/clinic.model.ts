@@ -42,6 +42,15 @@ export interface Clinic extends PHPBaseModel {
 	stripe_status: StripeStatusEnum
 	status: ClinicRegistrationStatusEnum
 	subscription_type: ClinicSubscriptionType
+
+	timeslots: ClinicTimeSlot[]
+}
+
+export interface ClinicTimeSlot extends PHPBaseModel {
+	start?: string | null
+	end?: string | null
+	active: boolean
+	day: string | null
 }
 
 export interface Branch extends PHPBaseModel {

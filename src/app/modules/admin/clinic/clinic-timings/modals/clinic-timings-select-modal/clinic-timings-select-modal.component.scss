@@ -1,0 +1,38 @@
+.container-time-slot {
+	background: #ffffff 0% 0% no-repeat padding-box;
+	box-shadow: 0px 2px 8px #6f7d8f2e;
+	border: 1px solid #fafafa;
+	border-radius: 16px;
+}
+
+.footer {
+	background: #ffffff 0% 0% no-repeat padding-box;
+	box-shadow: 0px -1px 0px #e3ebf5;
+	border-radius: 0px 0px 16px 16px;
+	height: 90px;
+	padding: 22px 30px;
+}
+
+/* width */
+::-webkit-scrollbar {
+	display: block;
+	width: 6px;
+	height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	// background: #f1f1f1;
+	background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #bfc8d5;
+	border-radius: 999px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #bfc8d4;
+}

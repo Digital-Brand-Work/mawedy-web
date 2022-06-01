@@ -9,6 +9,51 @@ export const MapStyles = [
 		],
 	},
 	{
+		featureType: 'administrative.country',
+		elementType: 'labels.text',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
+		featureType: 'administrative.province',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
+		featureType: 'administrative.locality',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
+		featureType: 'administrative.neighborhood',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
+		featureType: 'administrative.land_parcel',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
 		featureType: 'landscape',
 		elementType: 'all',
 		stylers: [
@@ -27,6 +72,15 @@ export const MapStyles = [
 		],
 	},
 	{
+		featureType: 'landscape.man_made',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
 		featureType: 'landscape.natural.landcover',
 		elementType: 'all',
 		stylers: [
@@ -41,6 +95,15 @@ export const MapStyles = [
 		stylers: [
 			{
 				hue: '#ff0000',
+			},
+		],
+	},
+	{
+		featureType: 'landscape.natural.terrain',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
 			},
 		],
 	},
@@ -198,6 +261,24 @@ export const MapStyles = [
 		],
 	},
 	{
+		featureType: 'road.highway.controlled_access',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
+		featureType: 'road.arterial',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
 		featureType: 'road.arterial',
 		elementType: 'labels.icon',
 		stylers: [
@@ -216,11 +297,38 @@ export const MapStyles = [
 		],
 	},
 	{
+		featureType: 'road.local',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
 		featureType: 'transit',
 		elementType: 'all',
 		stylers: [
 			{
 				visibility: 'off',
+			},
+		],
+	},
+	{
+		featureType: 'transit.line',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
+			},
+		],
+	},
+	{
+		featureType: 'transit.station',
+		elementType: 'labels.text.fill',
+		stylers: [
+			{
+				color: '#1e2a5e',
 			},
 		],
 	},

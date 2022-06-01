@@ -1,0 +1,38 @@
+import { ClinicTimingSelectModal } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
+import { Component, HostListener, OnInit } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { ClinicTimeSlot } from '../../../clinic.model'
+
+@Component({
+	selector: 'clinic-timings-select-modal',
+	templateUrl: './clinic-timings-select-modal.component.html',
+	styleUrls: ['./clinic-timings-select-modal.component.scss'],
+	animations: [...dbwAnimations],
+})
+export class ClinicTimingsSelectModalComponent implements OnInit {
+	constructor(private _clinicTimingSelectModal: ClinicTimingSelectModal) {}
+
+	@HostListener('document:keydown.escape')
+	onKeydownHandler(): void {
+		this.opened$.next(false)
+	}
+
+	opened$: BehaviorSubject<boolean> = this._clinicTimingSelectModal.opened$
+
+	timing$: BehaviorSubject<ClinicTimeSlot> = this._clinicTimingSelectModal.timing$
+
+	ngOnInit(): void {}
+
+	identity = (item: any): any => item
+
+	toFixedTwo(value: number): string {
+		return (value < 10 ? '0' : '') + value
+	}
+
+	ngOnDestroy(): void {}
+
+	handleTimeChange(timing: 'start' | 'end') {}
+
+	handleOpenAndClose(mode: 'open' | 'close') {}
+}

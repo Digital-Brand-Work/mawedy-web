@@ -1,4 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core'
+import { ClinicTimeSlot } from './../../modules/admin/clinic/clinic.model'
+import { ClinicTimingSelectModal } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
 
 @Component({
 	selector: 'clinic-timing-input',
@@ -6,28 +9,23 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 	styleUrls: ['./clinic-timing-input.component.scss'],
 })
 export class ClinicTimingInputComponent implements OnInit {
-	constructor() {}
+	constructor(private _clinicTimingSelectModal: ClinicTimingSelectModal) {}
 
 	@Output() onChangeTime = new EventEmitter<{ start: any; end: any }>()
 
-	time = {
-		start: '6 AM',
-		end: '5 PM',
+	@Input() timeslot?: ClinicTimeSlot
+
+	opened$: BehaviorSubject<boolean> = this._clinicTimingSelectModal.opened$
+
+	timing$: BehaviorSubject<ClinicTimeSlot> = this._clinicTimingSelectModal.timing$
+
+	ngOnInit(): void {}
+
+	openTimeSheet() {
+		this.opened$.next(true)
+
+		this.timing$.next(this.timeslot)
 	}
 
-	timingsAM: string[] = []
-
-	timingsPM: string[] = []
-
-	ngOnInit(): void {
-		for (let i = 1; i <= 12; i++) {
-			this.timingsAM.push(i + ' AM')
-		}
-
-		for (let i = 1; i <= 12; i++) {
-			this.timingsPM.push(i + ' PM')
-		}
-	}
-
-	identity = (item: any) => item
+	apply() {}
 }

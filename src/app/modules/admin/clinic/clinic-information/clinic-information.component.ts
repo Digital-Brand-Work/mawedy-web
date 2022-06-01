@@ -7,12 +7,13 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms'
 import { createMask } from '@ngneat/input-mask'
 import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs'
 import { BranchApi, ClinicApi } from '../clinic.api.service'
-import { Clinic } from '../clinic.model'
+import { Clinic, ClinicTimeSlot } from '../clinic.model'
 import { ClinicUserService } from '../clinic.service'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { days } from 'app/mawedy-core/enums/day.enum'
 
 @Component({
 	selector: 'clinic-information',
@@ -68,6 +69,8 @@ export class ClinicInformationComponent implements OnInit {
 		phone_number_two_country_code: ['AE'],
 	})
 
+	timeslots: ClinicTimeSlot[] = []
+
 	banner_picture: File | undefined | true = undefined
 
 	bannerPreview: string | ArrayBuffer = '/assets/app/logo.svg'
@@ -114,7 +117,21 @@ export class ClinicInformationComponent implements OnInit {
 				phone_number_one_country_code: clinic.phone_number_one_country_code || '',
 				phone_number_two_country_code: clinic.phone_number_two_country_code || '',
 			})
+
+			this.timeslots = clinic.timeslots
+
+			this.handLeEmptyTimeSlots()
 		})
+	}
+
+	handLeEmptyTimeSlots(): void {
+		this.timeslots = []
+
+		if (this.timeslots.length === 0) {
+			for (let day of days) {
+				this.timeslots.push({ start: null, end: null, day: day, active: false })
+			}
+		}
 	}
 
 	readFile(event: any): void {
@@ -129,7 +146,7 @@ export class ClinicInformationComponent implements OnInit {
 		}
 	}
 
-	handleMarkerDrag(event: Coordinates) {
+	handleMarkerDrag(event: Coordinates): void {
 		this.form.value.latitude = event.latitude
 
 		this.form.value.longitude = event.longitude
@@ -141,7 +158,7 @@ export class ClinicInformationComponent implements OnInit {
 			phoneNumber: string
 		},
 		form: 'phone_number_one' | 'phone_number_two',
-	) {
+	): void {
 		this.form.value[form] = event.phoneNumber
 
 		this.form.value[`${form}_country_code`] = event.countryCode

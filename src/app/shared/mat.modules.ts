@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatSelectModule } from '@angular/material/select'
+import { MatRippleModule } from '@angular/material/core'
 
 export const matModules = [
 	MatIconModule,
@@ -18,4 +19,5 @@ export const matModules = [
 	MatRadioModule,
 	MatSelectModule,
 	MatProgressSpinnerModule,
+	MatRippleModule,
 ]

@@ -1,18 +1,17 @@
-import {
-	WeekDay,
-	weekDays,
-} from './../../../../mawedy-core/constants/app.constant'
-import { Component, OnInit } from '@angular/core'
+import { ClinicTimeSlot } from './../clinic.model'
+import { Component, Input, OnInit } from '@angular/core'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
 	selector: 'clinic-timings',
 	templateUrl: './clinic-timings.component.html',
 	styleUrls: ['./clinic-timings.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class ClinicTimingsComponent implements OnInit {
 	constructor() {}
 
-	weekDays: WeekDay[] = weekDays
+	@Input() timeslots?: ClinicTimeSlot[] = []
 
 	ngOnInit(): void {}
 
