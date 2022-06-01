@@ -28,17 +28,21 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 
 	identity = (item: any): any => item
 
+	ngOnDestroy(): void {}
+
 	toFixedTwo(value: number): string {
 		return (value < 10 ? '0' : '') + value
 	}
-
-	ngOnDestroy(): void {}
 
 	handleTimeValue(): string {
 		const meridian = this.selectedTime.split(' ')
 
 		if (meridian[1] !== 'AM') {
-			return parseInt(meridian[0] + 12).toString()
+			let time = meridian[0].split(':')
+
+			time[0] = (parseInt(time[0]) + 12).toString()
+
+			return time.join(':')
 		}
 
 		return meridian[0]
@@ -47,11 +51,13 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 	timeWithMeridian(value: string): string {
 		let time = value.split(':')
 
-		if (parseInt(time[0]) <= 12) {
+		if (parseInt(time[0]) < 13) {
 			return time.join(':') + ' AM'
 		}
 
 		time[0] = (parseInt(time[0]) - 12).toString()
+
+		time[0] = this.toFixedTwo(parseInt(time[0]))
 
 		return time.join(':') + ' PM'
 	}
