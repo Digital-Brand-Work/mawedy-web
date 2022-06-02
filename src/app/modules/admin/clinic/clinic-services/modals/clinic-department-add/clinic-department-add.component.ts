@@ -15,6 +15,7 @@ import { AddDepartmentModal } from './clinic-department-add.service'
 import * as DepartmentActions from '../../../department/department.actions'
 import { DepartmentService } from '../../../department/department.service'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { AlertState } from 'app/components/alert/alert.service'
 @Component({
 	selector: 'clinic-department-add',
 	templateUrl: './clinic-department-add.component.html',
@@ -22,11 +23,12 @@ import { ErrorHandlerService } from 'app/misc/error-handler.service'
 })
 export class ClinicDepartmentAddComponent implements OnInit {
 	constructor(
+		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
 		private _addDepartment: AddDepartmentModal,
 		private store: Store<{ department: Department[] }>,
-		private departmentService: DepartmentService,
+		private _departmentService: DepartmentService,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
@@ -70,7 +72,7 @@ export class ClinicDepartmentAddComponent implements OnInit {
 	save() {
 		this.form.disable()
 
-		this.departmentService
+		this._departmentService
 			.post(this.form.value)
 			.subscribe({
 				next: (department: any) => {
@@ -81,6 +83,13 @@ export class ClinicDepartmentAddComponent implements OnInit {
 					)
 
 					this.form.reset()
+
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						title: `${department.data.name} Successfully Added`,
+						message: `A new department has been successfully added to this branch`,
+						type: 'info',
+					})
 
 					this.input.nativeElement.focus()
 				},

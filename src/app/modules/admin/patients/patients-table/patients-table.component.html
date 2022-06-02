@@ -13,25 +13,35 @@
 						<th>Profile</th>
 					</tr>
 				</thead>
-				<tbody [@listAnimation]="3">
+				<tbody [@listAnimation]="patients.length">
 					<tr
 						style="height: 60px"
 						class="accent-color font-semibold border-b border-b-gray-100 hover:bg-gray-50"
-						*ngFor="let item of [1, 2, 3]; trackBy: identity"
+						*ngFor="let patient of patients; trackBy: identity"
 					>
-						<td class="text-center">Aa</td>
-						<td>Dr. Hanadi Yassin</td>
-						<td>28 Yrs.</td>
-						<td>Clarrise@Gmail.Com</td>
-						<td>+98-7862-43453</td>
-						<td>Flat 1167 Majid Building Business Bay Dubai Uae</td>
+						<td class="text-center">{{ patient.type }}</td>
 						<td>
-							<a
-								routerLink="/aster_clinic/jumeirah/patients/jamel"
+							{{ patient.first_name }} {{ patient.middle_name }}
+							{{ patient.last_name }}
+						</td>
+						<td>{{ patient.birth_day | age }}</td>
+						<td>{{ patient.email }}</td>
+						<td>{{ patient.phone_number }}</td>
+						<td>{{ patient.address }}</td>
+						<td>
+							<button
+								(click)="viewPatient(patient)"
 								class="py-1.5 px-5 text-white bg-emerald-500 rounded-md hover:bg-emerald-600"
 							>
 								View
-							</a>
+							</button>
+
+							<button
+								(click)="remove(patient)"
+								class="py-1.5 px-5 text-white bg-rose-500 rounded-md hover:bg-rose-600 ml-3"
+							>
+								Delete
+							</button>
 						</td>
 					</tr>
 				</tbody>

@@ -7,6 +7,8 @@ import { select, Store } from '@ngrx/store'
 import { PatientEffects } from 'app/modules/admin/patients/patient.effects'
 import { ClinicUserService } from '../clinic/clinic.service'
 import { Clinic } from '../clinic/clinic.model'
+import { PatientService } from './patient.service'
+import * as PatientActions from './patient.actions'
 
 @Component({
 	selector: 'patients',
@@ -20,6 +22,7 @@ export class PatientsComponent implements OnInit {
 		private store: Store<{ patients: Patient[] }>,
 		private patientEffects: PatientEffects,
 		private _clinicUserService: ClinicUserService,
+		private _patientService: PatientService,
 	) {}
 
 	unsubscribe$: Subject<any> = new Subject<any>()
@@ -39,12 +42,12 @@ export class PatientsComponent implements OnInit {
 			})
 		})
 
-		this.patients$ = this.store.pipe(select('patients'), take(1))
+		this.patients$ = this.store.select('patients')
 
-		// this.store.dispatch(PatientActions.loadPatients({ patients: [] }))
-
-		this.patients$.pipe(take(1)).subscribe((patients: Patient[]) => {
-			console.log(patients)
+		this._patientService.get().subscribe((data: any) => {
+			this.store.dispatch(
+				PatientActions.loadPatients({ patients: data.data }),
+			)
 		})
 	}
 

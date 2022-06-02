@@ -10,4 +10,6 @@
 	></patients-toolbar>
 </ng-template>
 
-<patients-table></patients-table>
+<patients-table
+	[patients]="(patients$ | async).entities | entities"
+></patients-table>
