@@ -7,7 +7,7 @@ export function migrationFactory() {
 
 export const indexedDbConfig: DBConfig = {
 	name: 'mawedy',
-	version: 7,
+	version: 9,
 	objectStoresMeta: [
 		{
 			store: DB.SUBSCRIPTION_REQUEST,
@@ -53,6 +53,27 @@ export const indexedDbConfig: DBConfig = {
 		},
 		{
 			store: DB.DOCTORS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.PATIENTS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.DEPARTMENTS,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{ name: 'data', keypath: 'data', options: { unique: false } },
+			],
+		},
+		{
+			store: DB.MEDICAL_SERVICES,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
 			storeSchema: [
 				{ name: 'data', keypath: 'data', options: { unique: false } },

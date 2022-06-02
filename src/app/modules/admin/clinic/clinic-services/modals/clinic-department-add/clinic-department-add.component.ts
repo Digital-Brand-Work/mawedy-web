@@ -16,6 +16,8 @@ import * as DepartmentActions from '../../../department/department.actions'
 import { DepartmentService } from '../../../department/department.service'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 @Component({
 	selector: 'clinic-department-add',
 	templateUrl: './clinic-department-add.component.html',
@@ -30,6 +32,7 @@ export class ClinicDepartmentAddComponent implements OnInit {
 		private store: Store<{ department: Department[] }>,
 		private _departmentService: DepartmentService,
 		private _errorHandlerService: ErrorHandlerService,
+		private _indexDBService: NgxIndexedDBService,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -76,22 +79,28 @@ export class ClinicDepartmentAddComponent implements OnInit {
 			.post(this.form.value)
 			.subscribe({
 				next: (department: any) => {
-					this.store.dispatch(
-						DepartmentActions.addDepartment({
-							department: department.data,
-						}),
-					)
+					this._indexDBService
+						.add(DB.DEPARTMENTS, department.data)
+						.subscribe(() => {
+							this.store.dispatch(
+								DepartmentActions.addDepartment({
+									department: department.data,
+								}),
+							)
 
-					this.form.reset()
+							this._alert.add({
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+								title: `${department.data.name} Successfully Added`,
+								message: `A new department has been successfully added to this branch`,
+								type: 'info',
+							})
 
-					this._alert.add({
-						id: Math.floor(Math.random() * 100000000000).toString(),
-						title: `${department.data.name} Successfully Added`,
-						message: `A new department has been successfully added to this branch`,
-						type: 'info',
-					})
+							this.form.reset()
 
-					this.input.nativeElement.focus()
+							this.input.nativeElement.focus()
+						})
 				},
 				error: (http: HttpErrorResponse) => {
 					this._errorHandlerService.handleError(http)

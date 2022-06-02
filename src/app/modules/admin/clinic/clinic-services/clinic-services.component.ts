@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import {
 	BehaviorSubject,
+	combineLatest,
 	map,
 	Observable,
 	of,
@@ -17,6 +18,8 @@ import { EditClinicServiceModal } from './modals/clinic-services-edit/clinic-ser
 import * as DepartmentActions from '../../clinic/department//department.actions'
 import { DepartmentService } from '../department/department.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 @Component({
 	selector: 'clinic-services',
@@ -31,6 +34,7 @@ export class ClinicServicesComponent implements OnInit {
 		private editClinicServiceModal: EditClinicServiceModal,
 		private store: Store<{ department: Department[] }>,
 		private _departmentService: DepartmentService,
+		private _indexDBService: NgxIndexedDBService,
 	) {}
 
 	unsubscribe$: Subject<any> = new Subject<any>()
@@ -52,15 +56,19 @@ export class ClinicServicesComponent implements OnInit {
 	ngOnInit(): void {
 		this.departments$ = this.store.select('department')
 
-		this._departmentService.get().subscribe((data: any) => {
-			this.store.dispatch(
-				DepartmentActions.loadDepartments({ departments: data.data }),
-			)
+		this._indexDBService
+			.getAll(DB.DEPARTMENTS)
+			.subscribe((departments: Department[]) => {
+				this.store.dispatch(
+					DepartmentActions.loadDepartments({
+						departments: departments,
+					}),
+				)
 
-			if (data.data.length !== 0) {
-				this.department$.next(data.data[0])
-			}
-		})
+				if (departments.length !== 0) {
+					this.department$.next(departments[0])
+				}
+			})
 	}
 
 	identity = (item: any) => item
@@ -72,9 +80,15 @@ export class ClinicServicesComponent implements OnInit {
 			}
 
 			this._departmentService.remove(department.id).subscribe(() => {
-				this.store.dispatch(
-					DepartmentActions.deleteDepartment({ id: department.id }),
-				)
+				this._indexDBService
+					.deleteByKey(DB.DEPARTMENTS, department.id)
+					.subscribe(() => {
+						this.store.dispatch(
+							DepartmentActions.deleteDepartment({
+								id: department.id,
+							}),
+						)
+					})
 			})
 		})
 	}
