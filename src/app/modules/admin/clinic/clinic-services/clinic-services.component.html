@@ -7,30 +7,46 @@
 				(click)="addMedicalServiceOpened$.next(true)"
 				class="ml-auto flex items-center bg-emerald-500 text-white py-2 px-5 rounded-md g hover:bg-emerald-600/80 text-lg"
 			>
-				<mat-icon class="text-white mr-3 icon-size-5" svgIcon="feather:plus"></mat-icon>
+				<mat-icon
+					class="text-white mr-3 icon-size-5"
+					svgIcon="feather:plus"
+				></mat-icon>
 
 				<div class="translate-y-.5">Add Department</div>
 			</button>
 		</div>
 
-		<ul class="flex flex-wrap">
+		<ul
+			[@listAnimation]="
+				((departments$ | async).entities | entities).length
+			"
+			class="flex flex-wrap"
+		>
 			<li
-				*ngFor="let department of (departments$ | async).entities | entities; trackBy: identity; let i = index"
+				(click)="department$.next(department)"
+				*ngFor="
+					let department of (departments$ | async).entities
+						| entities;
+					trackBy: identity;
+					let i = index
+				"
 				[ngClass]="{
 					'bg-emerald-50/70 font-extrabold text-gray-900/80 pointer-events-none rounded-tr-md rounded-tl-md':
-						i === 0,
-					'font-semibold text-gray-600': i !== 0
+						(department$ | async)?.id === department.id,
+					'font-semibold text-gray-600':
+						(department$ | async)?.id !== department.id
 				}"
 				class="py-3 px-10 hover:bg-gray-50 text-lg"
 				role="button"
 			>
-				{{ department.name }}
+				{{ department.name | titlecase }}
 			</li>
 		</ul>
 
 		<div style="min-height: 50vh" class="bg-emerald-50/70 w-full p-10 mb-5">
 			<div class="flex items-center mb-10">
 				<button
+					(click)="remove()"
 					class="ml-auto bg-white border text-emerald-500 border-emerald-500 py-2 px-10 font-semibold tracking-wide rounded-md hover:bg-red-50 hover:text-red-500 hover:border-red-500 text-md"
 				>
 					Delete
@@ -39,7 +55,9 @@
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 				<clinic-service-item
-					(onSelectMedicalService)="editClinicServiceModalOpened$.next(true)"
+					(onSelectMedicalService)="
+						editClinicServiceModalOpened$.next(true)
+					"
 					*ngFor="let item of [1, 2, 3, 4, 5, 6]; trackBy: identity"
 				>
 				</clinic-service-item>
@@ -50,7 +68,10 @@
 					(click)="addClinicServiceOpened$.next(true)"
 					class="ml-auto flex items-center bg-emerald-500 text-white py-2 px-5 rounded-md g hover:bg-emerald-600/80 text-lg"
 				>
-					<mat-icon class="text-white mr-3 icon-size-5" svgIcon="feather:plus"></mat-icon>
+					<mat-icon
+						class="text-white mr-3 icon-size-5"
+						svgIcon="feather:plus"
+					></mat-icon>
 
 					<div class="translate-y-.5">Add Services</div>
 				</button>

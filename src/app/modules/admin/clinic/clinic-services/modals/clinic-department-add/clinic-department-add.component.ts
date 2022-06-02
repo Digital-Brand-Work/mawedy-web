@@ -1,6 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http'
 import { Department } from './../../../department/department.model'
-import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core'
+import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	HostListener,
+	OnInit,
+	ViewChild,
+} from '@angular/core'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
@@ -36,7 +43,9 @@ export class ClinicDepartmentAddComponent implements OnInit {
 
 	opened$: BehaviorSubject<boolean> = this._addDepartment.opened$
 
-	form: FormGroup = this._formBuilder.group({ name: ['', Validators.required] })
+	form: FormGroup = this._formBuilder.group({
+		name: ['', Validators.required],
+	})
 
 	ngOnInit(): void {}
 
@@ -59,13 +68,26 @@ export class ClinicDepartmentAddComponent implements OnInit {
 	}
 
 	save() {
-		this.departmentService.post(this.form.value).subscribe({
-			next: (department: any) => {
-				this.store.dispatch(DepartmentActions.addDepartment({ department: department.data }))
-			},
-			error: (http: HttpErrorResponse) => {
-				this._errorHandlerService.handleError(http)
-			},
-		})
+		this.form.disable()
+
+		this.departmentService
+			.post(this.form.value)
+			.subscribe({
+				next: (department: any) => {
+					this.store.dispatch(
+						DepartmentActions.addDepartment({
+							department: department.data,
+						}),
+					)
+
+					this.form.reset()
+
+					this.input.nativeElement.focus()
+				},
+				error: (http: HttpErrorResponse) => {
+					this._errorHandlerService.handleError(http)
+				},
+			})
+			.add(this.form.enable())
 	}
 }
