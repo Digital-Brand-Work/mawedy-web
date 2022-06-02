@@ -10,7 +10,7 @@ import { AddPatientModal } from '../../modals/patient-add/patient-add.service'
 export class PatientDetailsToolbarComponent implements OnInit {
 	constructor(private addPatientModal: AddPatientModal) {}
 
-	ngOnInit(): void {}
-
 	opened$: BehaviorSubject<boolean> = this.addPatientModal.opened$
+
+	ngOnInit(): void {}
 }

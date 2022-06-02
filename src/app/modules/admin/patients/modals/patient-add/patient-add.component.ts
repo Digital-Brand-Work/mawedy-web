@@ -3,14 +3,11 @@ import {
 	Component,
 	ElementRef,
 	HostListener,
-	Inject,
 	OnInit,
-	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { createMask } from '@ngneat/input-mask'
 import { Store } from '@ngrx/store'
 import { countries } from 'app/mawedy-core/constants/countries.constant'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
@@ -21,6 +18,8 @@ import { AddPatientModal } from './patient-add.service'
 import * as PatientActions from '../../patient.actions'
 import { HttpErrorResponse } from '@angular/common/http'
 import { AlertState } from 'app/components/alert/alert.service'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 @Component({
 	selector: 'patient-add',
@@ -31,13 +30,13 @@ import { AlertState } from 'app/components/alert/alert.service'
 export class PatientAddComponent implements OnInit {
 	constructor(
 		private _alert: AlertState,
-		@Inject(PLATFORM_ID) private _platformID: Object,
 		private _addPatientModal: AddPatientModal,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
 		private _errorHandlerService: ErrorHandlerService,
 		private _patientService: PatientService,
 		private _store: Store<{ department: Patient[] }>,
+		private _indexDBService: NgxIndexedDBService,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -122,30 +121,46 @@ export class PatientAddComponent implements OnInit {
 	save() {
 		this.form.disable()
 
+		const form = new FormData()
+
+		if (this.picture !== undefined && this.picture !== true) {
+			form.append('picture', this.picture)
+		}
+
+		for (let key in this.form.value) {
+			form.append(key, this.form.value[key])
+		}
+
 		this._patientService
-			.post(this.form.value)
+			.post(form)
 			.subscribe({
 				next: (patient: any) => {
-					this._store.dispatch(
-						PatientActions.addPatient({
-							patient: patient.data,
-						}),
-					)
+					this._indexDBService
+						.add(DB.PATIENTS, patient.data)
+						.subscribe(() => {
+							this._store.dispatch(
+								PatientActions.addPatient({
+									patient: patient.data,
+								}),
+							)
 
-					this.form.reset()
+							this.form.reset()
 
-					this.picture = undefined
+							this.picture = undefined
 
-					this.picturePreview = undefined
+							this.picturePreview = undefined
 
-					this.input.nativeElement.focus()
+							this.input.nativeElement.focus()
 
-					this._alert.add({
-						id: Math.floor(Math.random() * 100000000000).toString(),
-						title: `${patient.data.first_name} Successfully Added`,
-						message: `A new patient has been successfully added to this branch`,
-						type: 'info',
-					})
+							this._alert.add({
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+								title: `${patient.data.first_name} Successfully Added`,
+								message: `A new patient has been successfully added to this branch`,
+								type: 'info',
+							})
+						})
 				},
 				error: (http: HttpErrorResponse) => {
 					this._errorHandlerService.handleError(http)

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 import { AddPatientModal } from '../modals/patient-add/patient-add.service'
+import { Patient } from '../patient.model'
 
 @Component({
 	selector: 'patients-toolbar',
@@ -13,6 +14,8 @@ export class PatientsToolbarComponent implements OnInit {
 	@Output() onSearch = new EventEmitter()
 
 	@Output() onFilter = new EventEmitter()
+
+	@Input() patients: Patient[] = []
 
 	opened$: BehaviorSubject<boolean> = this.addPatientModal.opened$
 

@@ -4,6 +4,7 @@
 
 <ng-template #patientsToolbar>
 	<patients-toolbar
+		[patients]="(patients$ | async).entities | entities"
 		(onFilter)="filter()"
 		(onSearch)="filter()"
 		class="w-full"

@@ -1,4 +1,4 @@
-import { PHPBaseModel } from '@digital_brand_work/models/core.model'
+import { PHPBaseModel, PHPFile } from '@digital_brand_work/models/core.model'
 
 export interface Patient extends PHPBaseModel {
 	clinic_id: string
@@ -13,4 +13,5 @@ export interface Patient extends PHPBaseModel {
 	address: string
 	city: string
 	country: string
+	picture: PHPFile
 }

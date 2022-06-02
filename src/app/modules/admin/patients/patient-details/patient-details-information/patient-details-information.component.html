@@ -1,4 +1,4 @@
-<div class="mb-10">
+<div @expandCollapse *ngIf="ready" class="mb-10">
 	<form
 		[formGroup]="form"
 		#ngForm="ngForm"
@@ -7,6 +7,7 @@
 	>
 		<div class="flex items-center flex-col">
 			<button
+				*ngIf="!picturePreview"
 				(click)="patientAvatar.click()"
 				class="avatar bg-white rounded-full hover:border hover:border-gray-300"
 			>
@@ -16,7 +17,21 @@
 				></mat-icon>
 			</button>
 
-			<input type="file" class="hidden" #patientAvatar />
+			<img
+				*ngIf="picturePreview"
+				(click)="patientAvatar.click()"
+				class="avatar bg-white rounded-full hover:border hover:border-gray-300"
+				[src]="picturePreview"
+				alt="Profile"
+			/>
+
+			<input
+				accept="images/*"
+				(change)="readFile($event)"
+				type="file"
+				class="hidden"
+				#patientAvatar
+			/>
 
 			<div class="text-gray-400 text-center mt-3">Upload a Photo</div>
 		</div>

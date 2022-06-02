@@ -7,7 +7,7 @@ export function migrationFactory() {
 
 export const indexedDbConfig: DBConfig = {
 	name: 'mawedy',
-	version: 9,
+	version: 10,
 	objectStoresMeta: [
 		{
 			store: DB.SUBSCRIPTION_REQUEST,
@@ -44,48 +44,73 @@ export const indexedDbConfig: DBConfig = {
 				{ name: 'data', keypath: 'data', options: { unique: false } },
 			],
 		},
+
 		{
 			store: DB.APPOINTMENTS,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
-			storeSchema: [
-				{ name: 'data', keypath: 'data', options: { unique: false } },
-			],
+			storeSchema: [],
 		},
+		{
+			store: DB.APPOINTMENT,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [],
+		},
+
 		{
 			store: DB.DOCTORS,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
-			storeSchema: [
-				{ name: 'data', keypath: 'data', options: { unique: false } },
-			],
+			storeSchema: [],
 		},
+		{
+			store: DB.DOCTOR,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [],
+		},
+
 		{
 			store: DB.PATIENTS,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
-			storeSchema: [
-				{ name: 'data', keypath: 'data', options: { unique: false } },
-			],
+			storeSchema: [],
 		},
+		{
+			store: DB.PATIENT,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [],
+		},
+
 		{
 			store: DB.DEPARTMENTS,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
-			storeSchema: [
-				{ name: 'data', keypath: 'data', options: { unique: false } },
-			],
+			storeSchema: [],
 		},
+		{
+			store: DB.DEPARTMENT,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [],
+		},
+
 		{
 			store: DB.MEDICAL_SERVICES,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
-			storeSchema: [
-				{ name: 'data', keypath: 'data', options: { unique: false } },
-			],
+			storeSchema: [],
 		},
+		{
+			store: DB.MEDICAL_SERVICE,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [],
+		},
+
 		{
 			store: DB.PROMOTIONS,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
-			storeSchema: [
-				{ name: 'data', keypath: 'data', options: { unique: false } },
-			],
+			storeSchema: [],
 		},
+		{
+			store: DB.PROMOTION,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [],
+		},
+
 		{
 			store: DB.SUBSCRIPTIONS,
 			storeConfig: { keyPath: 'id', autoIncrement: true },
