@@ -1,16 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { select, Store } from '@ngrx/store'
-import {
-	BehaviorSubject,
-	combineLatest,
-	map,
-	Observable,
-	of,
-	pipe,
-	Subject,
-	take,
-	tap,
-} from 'rxjs'
+import { Store } from '@ngrx/store'
+import { BehaviorSubject, Observable, Subject, take } from 'rxjs'
 import { Department } from '../department/department.model'
 import { AddDepartmentModal } from './modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from './modals/clinic-services-add/clinic-services-add.service'
