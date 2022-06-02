@@ -37,7 +37,7 @@ export class PatientAddComponent implements OnInit {
 
 	@ViewChild('comments', { read: ElementRef }) textArea: ElementRef
 
-	unsubscribeAll: Subject<any> = new Subject<any>()
+	unsubscribe$: Subject<any> = new Subject<any>()
 
 	opened$: BehaviorSubject<boolean> = this._addPatientModal.opened$
 
@@ -58,21 +58,19 @@ export class PatientAddComponent implements OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		this.opened$
-			.pipe(takeUntil(this.unsubscribeAll))
-			.subscribe((focused) => {
-				if (focused) {
-					this.input.nativeElement.focus()
-				}
-			})
+		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {
+			if (focused) {
+				this.input.nativeElement.focus()
+			}
+		})
 
 		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
-		this.unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this.unsubscribeAll.complete()
+		this.unsubscribe$.complete()
 
 		this._cdr.detach()
 	}
