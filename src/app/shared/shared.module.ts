@@ -17,6 +17,7 @@ import { matModules } from './mat.modules'
 import { appComponents } from './app.components'
 import { modalComponents } from './modal.components'
 import { AgmCoreModule } from '@agm/core'
+import { EntitiesPipe } from '@digital_brand_work/pipes/entity.pipe'
 
 const components = [...appComponents, ...modalComponents, UnderMaintenanceComponent, UnderConstructionComponent]
 
@@ -36,7 +37,7 @@ const modules = [
 	...matModules,
 ]
 
-const directives = [AnimateJsDirective, ParallaxDirective, AutoSizeDirective, StopPropagation]
+const directives = [AnimateJsDirective, ParallaxDirective, AutoSizeDirective, StopPropagation, EntitiesPipe]
 
 const pipes = []
 
