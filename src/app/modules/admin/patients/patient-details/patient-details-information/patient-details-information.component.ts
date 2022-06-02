@@ -16,6 +16,9 @@ import { Patient } from '../../patient.model'
 import { PatientService } from '../../patient.service'
 import * as dayjs from 'dayjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { AlertState } from 'app/components/alert/alert.service'
+import { HttpErrorResponse } from '@angular/common/http'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
 
 @Component({
 	selector: 'patient-details-information',
@@ -25,11 +28,13 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 })
 export class PatientDetailsInformationComponent implements OnInit {
 	constructor(
+		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
 		private _clinicUserService: ClinicUserService,
 		private _patientService: PatientService,
 		private _indexDBService: NgxIndexedDBService,
+		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
 	@ViewChild('ngForm') ngForm?: NgForm
@@ -47,6 +52,7 @@ export class PatientDetailsInformationComponent implements OnInit {
 	countryJson = countries
 
 	form: FormGroup = this._formBuilder.group({
+		id: [''],
 		first_name: [''],
 		middle_name: [''],
 		last_name: [''],
@@ -77,21 +83,7 @@ export class PatientDetailsInformationComponent implements OnInit {
 						return
 					}
 
-					this.form.setValue({
-						first_name: patient.data.first_name,
-						middle_name: patient.data.middle_name,
-						last_name: patient.data.last_name,
-						birthday: dayjs(patient.data.birthday).format(
-							'YYYY-MM-DD',
-						),
-						gender: patient.data.gender,
-						religion: patient.data.religion,
-						phone_number: patient.data.phone_number,
-						email: patient.data.email,
-						city: patient.data.city,
-						address: patient.data.address,
-						country: patient.data.country,
-					})
+					this.setForm(patient)
 
 					if (patient.data.picture && patient.data.picture !== null) {
 						this.picturePreview = patient.data.picture.url
@@ -106,6 +98,23 @@ export class PatientDetailsInformationComponent implements OnInit {
 					}
 				})
 		}, 300)
+	}
+
+	setForm(patient: { data: Patient }) {
+		this.form.setValue({
+			id: patient.data.id,
+			first_name: patient.data.first_name,
+			middle_name: patient.data.middle_name,
+			last_name: patient.data.last_name,
+			birthday: dayjs(patient.data.birthday).format('YYYY-MM-DD'),
+			gender: patient.data.gender,
+			religion: patient.data.religion,
+			phone_number: patient.data.phone_number,
+			email: patient.data.email,
+			city: patient.data.city,
+			address: patient.data.address,
+			country: patient.data.country,
+		})
 	}
 
 	ngAfterViewInit(): void {
@@ -140,5 +149,48 @@ export class PatientDetailsInformationComponent implements OnInit {
 		reader.onload = (_event) => {
 			this.picturePreview = reader.result
 		}
+	}
+
+	update() {
+		this.form.disable()
+
+		const form = new FormData()
+
+		if (this.picture !== undefined && this.picture !== true) {
+			form.append('picture', this.picture)
+		}
+
+		for (let key in this.form.value) {
+			form.append(key, this.form.value[key])
+		}
+
+		form.delete('id')
+
+		this._patientService
+			.updateWithFile(this.form.value.id, form)
+			.subscribe({
+				next: (data: any) => {
+					this._indexDBService
+						.update(DB.PATIENTS, data.data)
+						.subscribe(() => {
+							this.patient$.next(data.data)
+
+							this.setForm(data)
+
+							this._alert.add({
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+								title: `Profile Successfully Updated`,
+								message: `You have update the profile of ${data.data.first_name}`,
+								type: 'info',
+							})
+						})
+				},
+				error: (http: HttpErrorResponse) => {
+					this._errorHandlerService.handleError(http)
+				},
+			})
+			.add(this.form.enable())
 	}
 }
