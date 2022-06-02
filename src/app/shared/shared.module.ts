@@ -17,14 +17,13 @@ import { matModules } from './mat.modules'
 import { appComponents } from './app.components'
 import { modalComponents } from './modal.components'
 import { AgmCoreModule } from '@agm/core'
-import { environment } from 'environments/environment'
 
 const components = [...appComponents, ...modalComponents, UnderMaintenanceComponent, UnderConstructionComponent]
 
 const modules = [
 	NgxIndexedDBModule.forRoot(indexedDbConfig),
 	AgmCoreModule.forRoot({
-		apiKey: environment.GOOGLE_MAP_API_KEY,
+		apiKey: 'AIzaSyAVSgFcc_sKMdkAgXTc3vJQWUUy2XJK6ck',
 	}),
 	CommonModule,
 	FormsModule,
