@@ -27,6 +27,15 @@ export type WeekDay =
 	| 'Saturday'
 	| 'Sunday'
 
+export const BENEFITS: HomeSection2Feature[] = [
+	{ img: 1, feature: 'Advertise your clinic' },
+	{ img: 2, feature: 'Additional revenue stream' },
+	{ img: 3, feature: 'New customers' },
+	{ img: 4, feature: 'Time efficientc' },
+	{ img: 5, feature: '24/7 booking service' },
+	{ img: 6, feature: 'Free trial' },
+]
+
 export const FEATURES: HomeSection2Feature[] = [
 	{ img: 1, feature: 'Reliable, detailed booking solution' },
 	{ img: 2, feature: 'Professional way to connect clinics and patients' },
