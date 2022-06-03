@@ -1,27 +1,47 @@
 <div
-	class="min-h-screen w-full flex items-center justify-center relative bg-white py-20"
+	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
+	class="w-screen flex items-center justify-center relative"
 >
-	<div
-		class="max-w-screen-sm w-full flex items-center justify-center relative z-20"
-	>
-		<div class="w-full flex items-center justify-center flex-col">
-			<div class="px-5 md:w-full">
-				<div
-					class="text-4xl font-bold mb-3 text-teal-500 text-center md:text-left"
-				>
-					Become a partner
-				</div>
+	<img
+		[ngClass]="{
+			' h-screen ':
+				(breakpoint$ | async) !== 'tablet' &&
+				(breakpoint$ | async) !== 'phone'
+		}"
+		src="/assets/app/partner-with-us/partner.png"
+		class="w-screen h-full object-cover absolute top-0 z-0"
+		alt="partner-with-us"
+	/>
 
-				<div
-					class="mb-10 text-center md:text-left text-xl font-normal leading-snug text-gray-700"
-				>
-					Register your clinic, advertise your promotions & start
-					tracking appointments from patients that use Mawedy mobile
-					application.
-				</div>
+	<div class="w-full flex items-center justify-center relative z-20">
+		<div
+			[ngClass]="{
+				'pb-20  grid-cols-1':
+					(breakpoint$ | async) === 'phone' ||
+					(breakpoint$ | async) === 'tablet',
+				'pb-20 md:grid-cols-2':
+					(breakpoint$ | async) === 'laptop' ||
+					(breakpoint$ | async) === 'desktop' ||
+					(breakpoint$ | async) === 'max'
+			}"
+			class="grid md:gap-x-20 w-full"
+		>
+			<div class="w-full"></div>
+
+			<div class="w-full">
+				<partner-with-us-form
+					@slideInBottom
+					[isProcessing]="isProcessing"
+					[focus$]="focus$"
+					(onNext)="register($event)"
+					[emailErrors]="emailErrors"
+					[phoneErrors]="phoneErrors"
+				></partner-with-us-form>
 			</div>
+		</div>
+	</div>
 
-			<partner-with-us-section1-first-step
+	<!-- <partner-with-us-section1-first-step
 				[emailErrors]="emailErrors"
 				[phoneErrors]="phoneErrors"
 				@slideInBottom
@@ -29,7 +49,5 @@
 				(onNext)="register($event)"
 				[isProcessing]="isProcessing"
 				[focus$]="focus$"
-			></partner-with-us-section1-first-step>
-		</div>
-	</div>
+			></partner-with-us-section1-first-step> -->
 </div>

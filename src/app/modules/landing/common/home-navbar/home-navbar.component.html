@@ -1,6 +1,10 @@
 <nav
 	@fadeInTop
-	class="flex items-center justify-center fixed z-50 bg-white w-full"
+	[ngClass]="{
+		'bg-transparent': isInPartnerWithUs,
+		'bg-white': !isInPartnerWithUs
+	}"
+	class="flex items-center justify-center fixed z-50 w-full"
 >
 	<div class="w-full max-w-screen-xl flex items-center justify-center">
 		<a routerLink="/">

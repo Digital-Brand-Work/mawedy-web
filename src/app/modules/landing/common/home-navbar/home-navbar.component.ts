@@ -1,3 +1,4 @@
+import { Router } from '@angular/router'
 import { Component, Input, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
@@ -17,7 +18,16 @@ import { ClinicRegistrationStatusEnum } from 'app/mawedy-core/enums/clinic-regis
 	animations: [...dbwAnimations],
 })
 export class HomeNavbarComponent implements OnInit {
-	constructor(private _clinicUserService: ClinicUserService) {}
+	constructor(
+		private _clinicUserService: ClinicUserService,
+		private _router: Router,
+	) {
+		this._router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+			this.isInPartnerWithUs = this._router.url.includes('partner')
+		})
+	}
+
+	isInPartnerWithUs: boolean = false
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -31,6 +41,8 @@ export class HomeNavbarComponent implements OnInit {
 	navigation: HomeNav[] = homeNavigation
 
 	ngOnInit(): void {
+		this.isInPartnerWithUs = this._router.url.includes('partner')
+
 		this.getClinicData()
 	}
 
