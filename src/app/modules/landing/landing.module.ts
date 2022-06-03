@@ -36,6 +36,9 @@ import { LandingSubscriptionSection1Form1Component } from './landing-subscriptio
 import { LandingSubscriptionSection1Form2Component } from './landing-subscription/landing-subscription-section1/landing-subscription-section1-form2/landing-subscription-section1-form2.component'
 import { PreviewSectionComponent } from './home/home-section4/preview-section/preview-section.component'
 import { PartnerWithUsFormComponent } from './partner-with-us/partner-with-us-form/partner-with-us-form.component'
+import { SitBackRelexComponent } from './sit-back-relex/sit-back-relex.component'
+import { SitBackRelexSection1Component } from './sit-back-relex/sit-back-relex-section1/sit-back-relex-section1.component'
+import { SitBackRelexSection2Component } from './sit-back-relex/sit-back-relex-section2/sit-back-relex-section2.component'
 
 const components = [
 	HomeNavbarResponsiveComponent,
@@ -77,6 +80,10 @@ const components = [
 	SuccessComponent,
 	PreviewSectionComponent,
 	PartnerWithUsFormComponent,
+
+	SitBackRelexComponent,
+	SitBackRelexSection1Component,
+	SitBackRelexSection2Component,
 ]
 @NgModule({
 	declarations: [...components],

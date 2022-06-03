@@ -28,9 +28,8 @@
 		>
 			<div class="w-full"></div>
 
-			<div class="w-full">
+			<div @slideInRight class="w-full">
 				<partner-with-us-form
-					@slideInBottom
 					[isProcessing]="isProcessing"
 					[focus$]="focus$"
 					(onNext)="register($event)"

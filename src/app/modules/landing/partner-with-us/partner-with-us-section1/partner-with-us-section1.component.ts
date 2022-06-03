@@ -91,24 +91,7 @@ export class PartnerWithUsSection1Component implements OnInit {
 			.post(form)
 			.subscribe({
 				next: () => {
-					this._alert.add({
-						title: `Account has been successfully created.`,
-						message:
-							'We are reviewing your account and will notify you once your account has been successfully approved. Best Regards, Mawedy Team',
-						type: 'success',
-						id: Math.floor(Math.random() * 100000000000).toString(),
-					})
-
-					this._alert.add({
-						title: `Redirecting...`,
-						message: 'You will be redirected in Sign In Page.',
-						type: 'info',
-						id: Math.floor(Math.random() * 100000000000).toString(),
-					})
-
-					setTimeout(() => {
-						this._router.navigate(['/'])
-					}, 5000)
+					this._router.navigate(['/sit-back-relax'])
 				},
 				error: (http) => this._errorHandlerService.handleError(http),
 			})

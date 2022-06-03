@@ -8,6 +8,7 @@ import { JoinUsComponent } from 'app/modules/landing/join-us/join-us.component'
 import { LandingSubscriptionComponent } from 'app/modules/landing/landing-subscription/landing-subscription.component'
 import { SuccessComponent } from 'app/modules/landing/success/success.component'
 import { PageNotFoundComponent } from 'app/modules/pages/page-not-found/page-not-found.component'
+import { SitBackRelexSection1Component } from 'app/modules/landing/sit-back-relex/sit-back-relex-section1/sit-back-relex-section1.component'
 
 export const landingHomeRoutes: Route[] = [
 	{
@@ -46,6 +47,10 @@ export const landingHomeRoutes: Route[] = [
 			{
 				path: 'success',
 				component: SuccessComponent,
+			},
+			{
+				path: 'sit-back-relax',
+				component: SitBackRelexSection1Component,
 			},
 		],
 	},
