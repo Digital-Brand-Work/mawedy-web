@@ -104,6 +104,9 @@ input:-webkit-autofill:active {
 	-webkit-text-fill-color: #0a2440;
 }
 
+textarea {
+	resize: none; /*remove the resize handle on the bottom right*/
+}
 select {
 	cursor: pointer;
 }

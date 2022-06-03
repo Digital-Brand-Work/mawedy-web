@@ -8,127 +8,142 @@
 		<div
 			class="grid grid-cols-1 md:grid-cols-2 md:gap-40 items-center w-full justify-center mt-10 md:mt-0"
 		>
-			<div
-				@slideInTop
-				class="text-center flex flex-col md:-mt-40 text-gray-400"
-			>
-				<div class="font-extrabold text-5xl mb-5 text-emerald-500">
-					Talk to us!
+			<div @slideInTop class="text-center flex flex-col text-gray-400">
+				<div class="flex flex-col self-end -mb-30">
+					<div class="font-extrabold text-5xl mb-5 text-emerald-500">
+						Talk to us!
+					</div>
+
+					<a
+						target="_blank"
+						[href]="'https://wa.me/' + phone"
+						role="button"
+						class="hover:underline mb-3 accent-color text-lg px-10 md:px-0 accent-color font-bold flex items-center justify-center"
+					>
+						<span>
+							<img
+								src="../../../../../assets/app/talk-to-us/whats-app-icon.svg"
+								class="mr-10 h-7"
+								alt="whats-app-icon"
+							/>
+						</span>
+
+						<span mask="00-000-0000"> {{ phone }}</span>
+					</a>
 				</div>
 
-				<a
-					target="_blank"
-					[href]="'https://wa.me/' + phone"
-					role="button"
-					class="hover:underline mb-3 accent-color text-lg px-10 md:px-0 accent-color font-bold flex items-center justify-center"
-				>
-					<span>
-						<img
-							src="../../../../../assets/app/talk-to-us/whats-app-icon.svg"
-							class="mr-10 h-7"
-							alt="whats-app-icon"
-						/>
-					</span>
-
-					<span mask="00-000-0000"> {{ phone }}</span>
-				</a>
+				<img
+					src="../../../../../assets/app/talk-to-us/talk-to-us.svg"
+					alt=""
+				/>
 			</div>
 
 			<div
-				@slideInBottom
-				*ngIf="form"
-				[formGroup]="form"
-				#ngForm="ngForm"
-				class="w-full flex flex-col md:items-start items-center px-5 md:px-0 mt-20 md:mt-0"
+				class="p-10 rounded-lg mr-30"
+				style="box-shadow: 0px 3px 6px #00000029"
 			>
-				<div class="font-semibold text-lg mb-5 text-emerald-500">
-					How can we Help?
-				</div>
+				<div
+					@slideInBottom
+					*ngIf="form"
+					[formGroup]="form"
+					#ngForm="ngForm"
+					class="w-full flex flex-col md:items-start items-center px-5 md:px-0 mt-20 md:mt-0"
+				>
+					<div class="font-semibold text-xl mb-5 text-emerald-500">
+						How can we Help?
+					</div>
 
-				<div class="mt-3 w-full">
-					<input
-						#input
-						[ngClass]="{
-							'border-red-500 shadow-sm  placeholder-red-400 ':
+					<div class="mt-3 w-full">
+						<input
+							#input
+							[ngClass]="{
+								'border-red-500 shadow-sm  placeholder-red-400 ':
+									form.get('name')?.invalid &&
+									form.get('name')?.touched
+							}"
+							formControlName="name"
+							type="text"
+							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
+							[placeholder]="
 								form.get('name')?.invalid &&
 								form.get('name')?.touched
-						}"
-						formControlName="name"
-						type="text"
-						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
-						[placeholder]="
-							form.get('name')?.invalid &&
-							form.get('name')?.touched
-								? 'Your name is required.'
-								: 'Your name'
-						"
-					/>
-				</div>
+									? 'Your name is required.'
+									: 'Your name'
+							"
+						/>
+					</div>
 
-				<div class="mt-3 w-full">
-					<input
-						[ngClass]="{
-							'border-red-500 shadow-sm  placeholder-red-400':
+					<div class="mt-3 w-full">
+						<input
+							[ngClass]="{
+								'border-red-500 shadow-sm  placeholder-red-400':
+									form.get('email')?.invalid &&
+									form.get('email')?.touched
+							}"
+							formControlName="email"
+							type="text"
+							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
+							[placeholder]="
 								form.get('email')?.invalid &&
 								form.get('email')?.touched
-						}"
-						formControlName="email"
-						type="text"
-						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
-						[placeholder]="
-							form.get('email')?.invalid &&
-							form.get('email')?.touched
-								? 'Your email is required.'
-								: 'Your email'
-						"
-					/>
-				</div>
+									? 'Your email is required.'
+									: 'Your email'
+							"
+						/>
+					</div>
 
-				<div class="mt-3 w-3/4">
-					<mobile-number-form
-						(onMobileNumberChange)="
-							form.value.phone_number_one_country_code =
-								$event.countryCode;
-							form.value.phone_number_one = $event.phoneNumber
-						"
-						[bordered]="true"
-						[rounded]="true"
-						class="w-full"
-					></mobile-number-form>
-				</div>
+					<div class="mt-3 w-full">
+						<input
+							[ngClass]="{
+								'border-red-500 shadow-sm  placeholder-red-400':
+									form.get('phone')?.invalid &&
+									form.get('email')?.touched
+							}"
+							formControlName="phone"
+							type="text"
+							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
+							[placeholder]="
+								form.get('phone')?.invalid &&
+								form.get('phone')?.touched
+									? 'Your phone is required.'
+									: 'Your phone'
+							"
+						/>
+					</div>
 
-				<div class="mt-3 w-full">
-					<textarea
-						[ngClass]="{
-							'border-red-500 shadow-sm  placeholder-red-400':
+					<div class="mt-3 w-full">
+						<textarea
+							[ngClass]="{
+								'border-red-500 shadow-sm  placeholder-red-400':
+									form.get('message')?.invalid &&
+									form.get('message')?.touched
+							}"
+							formControlName="message"
+							style="height: 265px"
+							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
+							[placeholder]="
 								form.get('message')?.invalid &&
 								form.get('message')?.touched
-						}"
-						formControlName="message"
-						style="height: 265px"
-						class="rounded-md w-full md:w-3/4 border-gray-200 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
-						[placeholder]="
-							form.get('message')?.invalid &&
-							form.get('message')?.touched
-								? 'Your message is required.'
-								: 'Your message'
-						"
-					></textarea>
-				</div>
+									? 'Your message is required.'
+									: 'Your message'
+							"
+						></textarea>
+					</div>
 
-				<div class="flex w-full md:w-3/4 mb-20">
-					<button
-						[disabled]="!form.valid || form.disabled"
-						[ngClass]="{
-							'pointer-events-none opacity-40':
-								!form.valid || form.disabled
-						}"
-						class="rounded-lg text-white bg-black py-3 px-10 ml-auto mt-5 tracking-widest uppercase w-full md:w-auto"
-					>
-						<span *ngIf="!form.disabled"> SEND </span>
+					<div class="flex w-full">
+						<button
+							[disabled]="!form.valid || form.disabled"
+							[ngClass]="{
+								'pointer-events-none opacity-40':
+									!form.valid || form.disabled
+							}"
+							class="rounded-lg text-white bg-black py-3 px-10 ml-auto mt-5 tracking-widest uppercase w-full md:w-auto"
+						>
+							<span *ngIf="!form.disabled"> SEND </span>
 
-						<span *ngIf="form.disabled"> sending... </span>
-					</button>
+							<span *ngIf="form.disabled"> sending... </span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
