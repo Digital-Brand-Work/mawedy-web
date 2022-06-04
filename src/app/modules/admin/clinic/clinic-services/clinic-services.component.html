@@ -1,7 +1,7 @@
 <div class="md:px-10 px-0 w-full mt-10 min-h-screen">
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full">
 		<div class="text-3xl font-semibold mb-3 text-gray-700 flex w-full">
-			<div>Departments</div>
+			<div>Services</div>
 
 			<button
 				(click)="addMedicalServiceOpened$.next(true)"
@@ -23,15 +23,16 @@
 			class="inline-flex overflow-x-hidden whitespace-nowrap relative w-full"
 		>
 			<button
+				matTooltip="More Departments"
 				[matMenuTriggerFor]="departmentMenu"
-				class="absolute right-0 z-50 bg-white py-3 px-10 hover:bg-gray-50 text-lg flex items-center drop-shadow-xl"
+				class="absolute right-0 z-50 bg-white/90 py-1 px-10 text-lg flex items-center drop-shadow-xl overflow-hidden"
 			>
-				More
-
-				<mat-icon
-					svgIcon="more_horiz"
-					class="ml-2 text-gray"
-				></mat-icon>
+				<button mat-icon-button>
+					<mat-icon
+						svgIcon="chevron_right"
+						class="text-emerald-500"
+					></mat-icon>
+				</button>
 			</button>
 
 			<mat-menu #departmentMenu="matMenu">
@@ -47,7 +48,9 @@
 					(click)="department$.next(department)"
 					[ngClass]="{
 						'bg-emerald-500 text-white pointer-events-none':
-							(department$ | async).id === department.id
+							(department$ | async).id === department.id,
+						'text-gray-500':
+							(department$ | async).id !== department.id
 					}"
 				>
 					<span class="mr-5"> {{ department.name | titlecase }}</span>
@@ -58,7 +61,7 @@
 								(department$ | async).id === department.id
 						}"
 						svgIcon="keyboard_arrow_right"
-						class="ml-auto text-gray-500"
+						class="ml-auto"
 					></mat-icon>
 				</button>
 			</mat-menu>
@@ -86,17 +89,6 @@
 
 		<div style="min-height: 50vh" class="bg-emerald-50/70 w-full p-10 mb-5">
 			<div class="flex items-center mb-10">
-				<div
-					@slideInTop
-					*ngIf="department$ | async"
-					class="text-3xl font-semibold mb-3 text-gray-700"
-				>
-					Medical Services
-					<span class="text-gray-500 font-normal text-lg">
-						({{ (department$ | async)?.name | titlecase }})</span
-					>
-				</div>
-
 				<button
 					(click)="remove()"
 					class="ml-auto bg-white border text-emerald-500 border-emerald-500 py-2 px-10 font-semibold tracking-wide rounded-md hover:bg-red-50 hover:text-red-500 hover:border-red-500 text-md"

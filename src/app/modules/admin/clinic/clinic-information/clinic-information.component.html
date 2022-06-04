@@ -7,7 +7,9 @@
 >
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full min-h-screen">
 		<div class="flex items-center mb-1">
-			<div class="text-gray-400 text-2xl font-semibold">Clinic Information</div>
+			<div class="text-gray-400 text-2xl font-semibold">
+				Clinic Information
+			</div>
 
 			<button
 				(click)="banner.click()"
@@ -16,10 +18,18 @@
 			>
 				Upload Banner
 
-				<mat-icon svgIcon="file_upload" class="ml-2 text-teal-500"></mat-icon>
+				<mat-icon
+					svgIcon="file_upload"
+					class="ml-2 text-teal-500"
+				></mat-icon>
 			</button>
 
-			<input (change)="readFile($event)" type="file" class="hidden" #banner />
+			<input
+				(change)="readFile($event)"
+				type="file"
+				class="hidden"
+				#banner
+			/>
 		</div>
 
 		<button
@@ -29,7 +39,8 @@
 		>
 			<img
 				[ngClass]="{
-					'object-contain  grayscale  opacity-30  mb-5': !banner_picture
+					'object-contain  grayscale  opacity-30  mb-5':
+						!banner_picture
 				}"
 				class="h-full w-full"
 				[src]="bannerPreview"
@@ -39,7 +50,12 @@
 
 		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mt-10">
 			<div class="mb-5">
-				<label for="name" class="mb-2 font-semibold text-gray-400 text-lg"> Clinic Name </label>
+				<label
+					for="name"
+					class="mb-2 font-semibold text-gray-400 text-lg"
+				>
+					Clinic Name
+				</label>
 
 				<input
 					id="name"
@@ -54,7 +70,12 @@
 			</div>
 
 			<div class="mb-5">
-				<label for="address" class="mb-2 font-semibold text-gray-400 text-lg"> Address </label>
+				<label
+					for="address"
+					class="mb-2 font-semibold text-gray-400 text-lg"
+				>
+					Address
+				</label>
 
 				<input
 					id="address"
@@ -72,7 +93,10 @@
 		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
 			<div>
 				<div class="mb-5">
-					<label for="description" class="mb-2 font-semibold text-gray-400 text-lg">
+					<label
+						for="description"
+						class="mb-2 font-semibold text-gray-400 text-lg"
+					>
 						Clinic Description
 					</label>
 
@@ -93,17 +117,33 @@
 
 				<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20">
 					<div>
-						<clinic-timings [timeslots]="timeslots"></clinic-timings>
+						<clinic-timings
+							[timeslots]="timeslots"
+						></clinic-timings>
 					</div>
 
 					<div>
-						<div class="mb-2 font-semibold text-gray-400 text-lg">Mobile Number</div>
+						<div class="mb-2 font-semibold text-gray-400 text-lg">
+							Mobile Number
+						</div>
 
-						<input formControlName="phone_number_one" type="hidden" />
-						<input formControlName="phone_number_one_country_code" type="hidden" />
+						<input
+							formControlName="phone_number_one"
+							type="hidden"
+						/>
+						<input
+							formControlName="phone_number_one_country_code"
+							type="hidden"
+						/>
 
-						<input formControlName="phone_number_two" type="hidden" />
-						<input formControlName="phone_number_two_country_code" type="hidden" />
+						<input
+							formControlName="phone_number_two"
+							type="hidden"
+						/>
+						<input
+							formControlName="phone_number_two_country_code"
+							type="hidden"
+						/>
 
 						<mobile-number-form
 							[bold]="true"
@@ -111,7 +151,12 @@
 							[bordered]="true"
 							[phoneErrors]="errors.phone_number_one"
 							[phoneNumber]="form.value.phone_number_one"
-							(onMobileNumberChange)="handleMobileNumberChange($event, 'phone_number_one')"
+							(onMobileNumberChange)="
+								handleMobileNumberChange(
+									$event,
+									'phone_number_one'
+								)
+							"
 						></mobile-number-form>
 
 						<div class="my-5"></div>
@@ -122,13 +167,21 @@
 							[bordered]="true"
 							[phoneErrors]="errors.phone_number_two"
 							[phoneNumber]="form.value.phone_number_two"
-							(onMobileNumberChange)="handleMobileNumberChange($event, 'phone_number_two')"
+							(onMobileNumberChange)="
+								handleMobileNumberChange(
+									$event,
+									'phone_number_two'
+								)
+							"
 						></mobile-number-form>
 
 						<br />
 						<br />
 
-						<label for="email" class="mb-2 font-semibold text-gray-400 text-lg">
+						<label
+							for="email"
+							class="mb-2 font-semibold text-gray-400 text-lg"
+						>
 							Email that will receive all data
 						</label>
 
@@ -148,22 +201,28 @@
 
 			<div>
 				<div class="mb-5">
-					<div class="mb-2 font-semibold text-gray-400 text-lg">Pin Location</div>
+					<div class="mb-2 font-semibold text-gray-400 text-lg">
+						Pin Location
+					</div>
 
 					<clinic-information-map
-						[coordinates]="{ latitude: form.value.latitude, longitude: form.value.longitude }"
+						[coordinates]="{
+							latitude: form.value.latitude,
+							longitude: form.value.longitude
+						}"
 						(onMarkerDraggedEvent)="handleMarkerDrag($event)"
 					></clinic-information-map>
 				</div>
 			</div>
 		</div>
 
-		<div class="mt-1 flex items-center">
+		<div class="flex items-center mt-10">
 			<button
 				(click)="save()"
 				[disabled]="!form.valid || isProcessing"
 				[ngClass]="{
-					'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 ': !isProcessing,
+					'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 ':
+						!isProcessing,
 					'bg-gray-400 pointer-events-none ': isProcessing
 				}"
 				class="rounded-lg px-5 py-3 font-bold text-white border-2 flex items-center justify-center"

@@ -28,7 +28,7 @@ export class PromotionsTableComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one} | Promotions`,
+				title: `${clinic.name} | ${clinic?.address} | Promotions`,
 			})
 		})
 	}

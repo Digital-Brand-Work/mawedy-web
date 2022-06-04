@@ -1,5 +1,7 @@
 import {
+	ChangeDetectorRef,
 	Component,
+	ElementRef,
 	EventEmitter,
 	OnInit,
 	Output,
@@ -13,15 +15,27 @@ import { NgForm } from '@angular/forms'
 	styleUrls: ['./card-number-form.component.scss'],
 })
 export class CardNumberFormComponent implements OnInit {
-	constructor() {}
+	constructor(private _cdr: ChangeDetectorRef) {}
 
 	@Output() onCardNumberChange = new EventEmitter<string>()
 
 	@ViewChild('ngForm') ngForm?: NgForm
 
+	@ViewChild('input') input?: ElementRef
+
 	cardNumber: string = ''
 
 	ngOnInit(): void {}
+
+	ngAfterContentInit(): void {
+		this.input?.nativeElement.focus()
+
+		this._cdr.detectChanges()
+	}
+
+	ngOnDestroy(): void {
+		this._cdr.detach()
+	}
 
 	isValid(digits: any) {
 		let sum = 0

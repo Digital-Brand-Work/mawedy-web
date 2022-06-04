@@ -29,7 +29,7 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one} | Monthly Appointments`,
+				title: `${clinic.name} | ${clinic?.address} | Monthly Appointments`,
 			})
 		})
 

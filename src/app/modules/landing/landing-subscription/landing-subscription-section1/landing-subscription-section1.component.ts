@@ -37,7 +37,6 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		private _router: Router,
 		private _homeSubscriptionState: HomeSubscriptionState,
 		private _registerService: RegisterService,
-
 		private _clinicUserService: ClinicUserService,
 	) {}
 
@@ -55,13 +54,13 @@ export class LandingSubscriptionSection1Component implements OnInit {
 	interval$: BehaviorSubject<string | null> =
 		this._homeSubscriptionState.interval$
 
-	isProcessing: boolean = false
-
 	PRICE_PER_USER = PRICE_PER_USER
 
 	additionalUsers: number = 0
 
 	billMultiplier: number = 1
+
+	isProcessing: boolean = false
 
 	ngOnInit(): void {}
 
@@ -81,11 +80,17 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		combineLatest([
 			this._indexedDbService.getByKey(DB.SUBSCRIPTION_REQUEST, 1),
 			this._indexedDbService.getByKey(DB.ACCOUNT_USERS_REQUEST, 1),
+			this._indexedDbService.getByKey(DB.CLINIC, 1),
 		])
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe({
 				next: (request: any) => {
-					const [subscription_request, account_user_request] = request
+					const [subscription_request, account_user_request, clinic] =
+						request
+
+					if (clinic) {
+						this.hasLoggedIn$.next(true)
+					}
 
 					if (subscription_request) {
 						this.subscription$.next(
@@ -151,8 +156,6 @@ export class LandingSubscriptionSection1Component implements OnInit {
 					this._homeSubscriptionState.users$.next(
 						this.additionalUsers,
 					)
-
-					console.log(data?.form?.value.password)
 
 					localStorage.setItem('password', data?.form?.value.password)
 

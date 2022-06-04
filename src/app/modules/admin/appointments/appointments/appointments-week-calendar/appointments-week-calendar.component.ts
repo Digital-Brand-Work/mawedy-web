@@ -33,7 +33,7 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one}  | Weekly Appointments`,
+				title: `${clinic.name} | ${clinic?.address}  | Weekly Appointments`,
 			})
 		})
 

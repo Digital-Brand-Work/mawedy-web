@@ -28,7 +28,7 @@ export class AppointmentsDayCalendarComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one}  | Daily Appointments`,
+				title: `${clinic.name} | ${clinic?.address}  | Daily Appointments`,
 			})
 		})
 

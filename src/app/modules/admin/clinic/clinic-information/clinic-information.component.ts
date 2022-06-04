@@ -2,7 +2,15 @@ import { Coordinates } from './../clinic-information-map/clinic-information-map.
 import { HttpErrorResponse } from '@angular/common/http'
 import { AccountTypeEnum } from './../../../../mawedy-core/enums/account.type.enum'
 import { isPlatformBrowser } from '@angular/common'
-import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core'
+import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	Inject,
+	OnInit,
+	PLATFORM_ID,
+	ViewChild,
+} from '@angular/core'
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms'
 import { createMask } from '@ngneat/input-mask'
 import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs'
@@ -38,15 +46,19 @@ export class ClinicInformationComponent implements OnInit {
 
 	@ViewChild('ngForm') ngForm: NgForm
 
-	@ViewChild('clinicDescription', { read: ElementRef }) clinicDescription!: ElementRef
+	@ViewChild('clinicDescription', { read: ElementRef })
+	clinicDescription!: ElementRef
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
-	timing$: BehaviorSubject<ClinicTimeSlot> = this._clinicTimingSelectModal.timing$
+	timing$: BehaviorSubject<ClinicTimeSlot> =
+		this._clinicTimingSelectModal.timing$
 
-	emailInputMask = !isPlatformBrowser(this._platformID) ? null : createMask({ alias: 'email' })
+	emailInputMask = !isPlatformBrowser(this._platformID)
+		? null
+		: createMask({ alias: 'email' })
 
 	isProcessing: boolean = false
 
@@ -99,13 +111,17 @@ export class ClinicInformationComponent implements OnInit {
 	}
 
 	listenToTimeSlotChanges(): void {
-		this.timing$.pipe(takeUntil(this.unsubscribe$)).subscribe((timeslot) => {
-			const index = this.timeslots.findIndex((slot) => slot.day === timeslot.day)
+		this.timing$
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((timeslot) => {
+				const index = this.timeslots.findIndex(
+					(slot) => slot.day === timeslot.day,
+				)
 
-			if (index >= 0) {
-				this.timeslots[index] = timeslot
-			}
-		})
+				if (index >= 0) {
+					this.timeslots[index] = timeslot
+				}
+			})
 	}
 
 	initializeForm(): void {
@@ -131,8 +147,10 @@ export class ClinicInformationComponent implements OnInit {
 				description: clinic.description || '',
 				phone_number_one: clinic.phone_number_one || '',
 				phone_number_two: clinic.phone_number_two || '',
-				phone_number_one_country_code: clinic.phone_number_one_country_code || '',
-				phone_number_two_country_code: clinic.phone_number_two_country_code || '',
+				phone_number_one_country_code:
+					clinic.phone_number_one_country_code || '',
+				phone_number_two_country_code:
+					clinic.phone_number_two_country_code || '',
 			})
 
 			this.timeslots = clinic.timeslots
@@ -144,10 +162,18 @@ export class ClinicInformationComponent implements OnInit {
 	handLeEmptyTimeSlots(): void {
 		for (let day of days) {
 			if (
-				this.timeslots.findIndex((_timeSlot) => _timeSlot.day.toLocaleLowerCase() === day.toLocaleLowerCase()) <
-				0
+				this.timeslots.findIndex(
+					(_timeSlot) =>
+						_timeSlot.day.toLocaleLowerCase() ===
+						day.toLocaleLowerCase(),
+				) < 0
 			) {
-				this.timeslots.push({ start: null, end: null, day: day, active: false })
+				this.timeslots.push({
+					start: null,
+					end: null,
+					day: day,
+					active: false,
+				})
 			}
 		}
 	}
@@ -216,14 +242,23 @@ export class ClinicInformationComponent implements OnInit {
 		}
 
 		this.timeslots.forEach((slot) => {
-			form.append(`timeslots[${slot.day.toLowerCase()}][active]`, slot.active + '')
+			form.append(
+				`timeslots[${slot.day.toLowerCase()}][active]`,
+				slot.active + '',
+			)
 
 			if (slot.start && slot.start !== null) {
-				form.append(`timeslots[${slot.day.toLowerCase()}][start]`, slot.start + '')
+				form.append(
+					`timeslots[${slot.day.toLowerCase()}][start]`,
+					slot.start + '',
+				)
 			}
 
 			if (slot.end && slot.end !== null) {
-				form.append(`timeslots[${slot.day.toLowerCase()}][end]`, slot.end + '')
+				form.append(
+					`timeslots[${slot.day.toLowerCase()}][end]`,
+					slot.end + '',
+				)
 			}
 		})
 
@@ -233,13 +268,18 @@ export class ClinicInformationComponent implements OnInit {
 				next: (clinic) => {
 					this.clinic$.next(clinic.data)
 
-					this._indexDbController.upsert(DB.CLINIC, { id: 1, data: clinic.data })
+					this._indexDbController.upsert(DB.CLINIC, {
+						id: 1,
+						data: clinic.data,
+					})
 
 					this._alert.add({
 						id: Math.floor(Math.random() * 100000000000).toString(),
 						title: `Success`,
-						message: `You have updated the clinic profile of ${clinic.data.name} ${
-							clinic.data.line_one
+						message: `You have updated the clinic profile of ${
+							clinic.data.name
+						} ${
+							clinic.data.address
 						} ${clinic.data.account_type.toLowerCase()}.`,
 						type: 'success',
 					})

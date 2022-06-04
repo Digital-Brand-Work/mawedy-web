@@ -19,7 +19,9 @@
 		[longitude]="coordinates.longitude"
 	>
 		<agm-info-window>
-			<div class="rounded-md drop-shadow-sm text-gray-500 flex items-center p-3">
+			<div
+				class="rounded-md drop-shadow-sm text-gray-500 flex items-center p-3"
+			>
 				<div class="mr-3">
 					<img
 						class="w-10 h-10 rounded-full"
@@ -27,12 +29,15 @@
 						src="/assets/app/navbar/ruth.jpg"
 					/>
 
-					<avatar-placeholder *ngIf="!(clinic$ | async)?.banner"></avatar-placeholder>
+					<avatar-placeholder
+						*ngIf="!(clinic$ | async)?.banner"
+					></avatar-placeholder>
 				</div>
 
 				<div>
 					<div class="text-xl text-emerald-500 font-extrabold">
-						{{ (clinic$ | async)?.name }} {{ (clinic$ | async)?.line_one }}
+						{{ (clinic$ | async)?.name }}
+						{{ (clinic$ | async)?.address }}
 					</div>
 					<div class="text-md mt-1 text-gray-500">
 						Click & drag to change your location <br />

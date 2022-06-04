@@ -8,11 +8,7 @@
 >
 	<div class="w-full max-w-screen-xl flex items-center justify-center">
 		<a routerLink="/">
-			<img
-				class="h-28 max-w-50"
-				src=".../../../../../../../assets/app/logo.svg"
-				alt=""
-			/>
+			<img class="h-28 max-w-50" src="/assets/app/logo.svg" alt="" />
 		</a>
 
 		<ul class="ml-auto flex">
@@ -31,10 +27,18 @@
 				role="button"
 				class="px-7 py-3 rounded-lg text-lg flex items-center"
 			>
-				{{ !showSignInPanel && nav.id === 4 ? 'Dashboard' : nav.name }}
+				{{
+					(!showSignInPanel && nav.id === 4) ||
+					isInSubscriptionSuccess
+						? 'Dashboard'
+						: nav.name
+				}}
 
 				<mat-icon
-					*ngIf="!showSignInPanel && nav.id === 4"
+					*ngIf="
+						(!showSignInPanel && nav.id === 4) ||
+						isInSubscriptionSuccess
+					"
 					class="ml-auto icon-size-4 text-white"
 					[svgIcon]="'feather:chevron-right'"
 				></mat-icon>

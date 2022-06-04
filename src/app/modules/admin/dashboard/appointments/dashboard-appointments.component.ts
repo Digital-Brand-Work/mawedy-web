@@ -28,7 +28,7 @@ export class DashboardAppointmentsComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one} | Profile`,
+				title: `${clinic.name} | ${clinic?.address} | Profile`,
 			})
 		})
 	}

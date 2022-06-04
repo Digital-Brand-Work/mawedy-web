@@ -63,6 +63,8 @@ export class SuccessComponent implements OnInit {
 						// 	DB.ACCOUNT_USERS_REQUEST,
 						// ])
 
+						// localStorage.removeItem('password')
+
 						return (this.subscription =
 							mawedySubscriptions[index][
 								subscription_request.interval

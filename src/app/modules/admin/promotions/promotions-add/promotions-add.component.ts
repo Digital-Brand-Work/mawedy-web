@@ -33,7 +33,7 @@ export class PromotionsAddComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one} | Add Promotion`,
+				title: `${clinic.name} | ${clinic?.address} | Add Promotion`,
 			})
 		})
 	}

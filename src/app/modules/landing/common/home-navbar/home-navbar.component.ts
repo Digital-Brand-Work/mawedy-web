@@ -24,10 +24,14 @@ export class HomeNavbarComponent implements OnInit {
 	) {
 		this._router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
 			this.isInPartnerWithUs = this._router.url.includes('partner')
+
+			this.isInSubscriptionSuccess = this._router.url.includes('success')
 		})
 	}
 
 	isInPartnerWithUs: boolean = false
+
+	isInSubscriptionSuccess: boolean = false
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -42,6 +46,8 @@ export class HomeNavbarComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.isInPartnerWithUs = this._router.url.includes('partner')
+
+		this.isInSubscriptionSuccess = this._router.url.includes('success')
 
 		this.getClinicData()
 	}

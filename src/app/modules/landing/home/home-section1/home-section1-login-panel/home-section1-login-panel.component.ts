@@ -52,40 +52,42 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 			.post(this.form.value)
 			.subscribe({
 				next: (userAccount) => {
-					if (
-						userAccount.data.subscription_type ===
-							ClinicSubscriptionTypeEnum.FREE &&
-						ClinicRegistrationStatusEnum.PENDING
-					) {
-						return this._alert.add({
-							id: Math.floor(
-								Math.random() * 100000000000,
-							).toString(),
-							title: `We are asking for your patience.`,
-							message: `It seems that your account hasn't been approved yet. We ask for
-                        				your patience as we review your information. Best Regards,
-                        				Mawedy Team`,
-							type: 'info',
-						})
-					}
+					// if (
+					// 	userAccount.data.subscription_type ===
+					// 		ClinicSubscriptionTypeEnum.FREE &&
+					// 	ClinicRegistrationStatusEnum.PENDING
+					// ) {
+					// 	return this._alert.add({
+					// 		id: Math.floor(
+					// 			Math.random() * 100000000000,
+					// 		).toString(),
+					// 		title: `We are asking for your patience.`,
+					// 		message: `It seems that your account hasn't been approved yet. We ask for
+					//     				your patience as we review your information. Best Regards,
+					//     				Mawedy Team`,
+					// 		type: 'info',
+					// 	})
+					// }
 
-					if (
-						userAccount.data.subscription_type !==
-						ClinicSubscriptionTypeEnum.FREE
-					) {
-						this.proceedToDashboard(userAccount)
-					}
+					// if (
+					// 	userAccount.data.subscription_type !==
+					// 	ClinicSubscriptionTypeEnum.FREE
+					// ) {
+					// 	this.proceedToDashboard(userAccount)
+					// }
 
-					if (
-						userAccount.data.subscription_type ===
-							ClinicSubscriptionTypeEnum.FREE &&
-						(userAccount.data.account_status ===
-							ClinicRegistrationStatusEnum.DONE ||
-							userAccount.data.account_status ===
-								ClinicRegistrationStatusEnum.CONFIRMED)
-					) {
-						this.proceedToDashboard(userAccount)
-					}
+					// if (
+					// 	userAccount.data.subscription_type ===
+					// 		ClinicSubscriptionTypeEnum.FREE &&
+					// 	(userAccount.data.account_status ===
+					// 		ClinicRegistrationStatusEnum.DONE ||
+					// 		userAccount.data.account_status ===
+					// 			ClinicRegistrationStatusEnum.CONFIRMED)
+					// ) {
+					// 	this.proceedToDashboard(userAccount)
+					// }
+
+					this.proceedToDashboard(userAccount)
 				},
 				error: (http) => {
 					for (let key in http.error.errors) {

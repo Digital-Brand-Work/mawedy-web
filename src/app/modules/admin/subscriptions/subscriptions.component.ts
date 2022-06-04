@@ -44,7 +44,7 @@ export class SubscriptionsComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one} | Subscriptions`,
+				title: `${clinic.name} | ${clinic?.address} | Subscriptions`,
 			})
 		})
 	}

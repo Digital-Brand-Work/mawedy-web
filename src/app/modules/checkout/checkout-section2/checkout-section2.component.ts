@@ -35,7 +35,6 @@ export class CheckoutSection2Component implements OnInit {
 		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
-		private _scrollService: ScrollService,
 		private _checkoutService: CheckoutService,
 		private _clinicUserService: ClinicUserService,
 		private _errorHandlerService: ErrorHandlerService,
@@ -43,8 +42,6 @@ export class CheckoutSection2Component implements OnInit {
 	) {}
 
 	@ViewChild('ngForm') ngForm?: NgForm
-
-	@ViewChild('input') input?: ElementRef
 
 	@Input() subscription$?: BehaviorSubject<Subscription | null>
 
@@ -67,10 +64,6 @@ export class CheckoutSection2Component implements OnInit {
 	expiryError: boolean = false
 
 	form: FormGroup = this._formBuilder.group({
-		name: ['', Validators.required],
-		email: ['', Validators.email],
-		phone_number_one: ['', Validators.required],
-		phone_number_one_country_code: ['', Validators.required],
 		number: ['', [Validators.required]],
 		expiry: ['', [Validators.required]],
 		cvc: ['', [Validators.required]],
@@ -93,8 +86,6 @@ export class CheckoutSection2Component implements OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		this.input?.nativeElement.focus()
-
 		setTimeout(() => {
 			this._indexDbService
 				.getByKey(DB.CLINIC, 1)
@@ -107,18 +98,11 @@ export class CheckoutSection2Component implements OnInit {
 					}
 
 					this.form.setValue({
-						name: clinic.name,
-						email: clinic.email,
-						phone_number_one: clinic.name,
-						phone_number_one_country_code:
-							clinic.phone_number_one_country_code,
 						number: '',
 						expiry: '',
 						cvc: '',
 					})
 				})
-
-			this._scrollService.scrollToTop()
 		}, 500)
 
 		this.onChangeCountry('United Arab Emirates')
@@ -161,8 +145,6 @@ export class CheckoutSection2Component implements OnInit {
 		this.isProcessing = true
 
 		let data: any = {}
-
-		data.user = { ...this.form.value }
 
 		data.accounts = { count: this.additionalUsers }
 

@@ -106,7 +106,7 @@ export class ClinicUserService {
 			map(
 				(userAccount: any) =>
 					`/${slugify(userAccount.name)}/${slugify(
-						userAccount.line_one || userAccount.account_type,
+						userAccount.address || userAccount.account_type,
 					)}/`,
 			),
 		)

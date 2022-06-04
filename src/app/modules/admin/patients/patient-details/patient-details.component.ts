@@ -44,7 +44,7 @@ export class PatientDetailsComponent implements OnInit {
 					}
 
 					this.seoService.generateTags({
-						title: `${clinic.name} | ${clinic?.line_one} | ${patient.data.first_name} ${patient.data.middle_name} ${patient.data.last_name}`,
+						title: `${clinic.name} | ${clinic?.address} | ${patient.data.first_name} ${patient.data.middle_name} ${patient.data.last_name}`,
 					})
 				},
 			)

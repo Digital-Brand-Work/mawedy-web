@@ -33,7 +33,7 @@ export class PromotionsEditComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one}  | Promotion ID : ASTER-FDGF-DGGFD-GDFSD`,
+				title: `${clinic.name} | ${clinic?.address}  | Promotion ID : ASTER-FDGF-DGGFD-GDFSD`,
 			})
 		})
 	}

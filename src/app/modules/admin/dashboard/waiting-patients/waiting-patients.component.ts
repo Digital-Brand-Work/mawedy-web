@@ -26,7 +26,7 @@ export class WaitingPatientsComponent implements OnInit {
 			}
 
 			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.line_one} | Waiting Patients`,
+				title: `${clinic.name} | ${clinic?.address} | Waiting Patients`,
 			})
 		})
 	}
