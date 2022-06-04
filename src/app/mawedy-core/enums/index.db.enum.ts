@@ -1,10 +1,26 @@
 export enum DB {
+	CLINIC = 'clinic',
 	SUBSCRIPTION_REQUEST = 'subscription_request',
 	ACCOUNT_USERS_REQUEST = 'account_users_request',
-	CLINIC = 'clinic',
-	APPOINTMENTS = 'appointments',
-	DOCTORS = 'doctors',
-	PROMOTIONS = 'promotions',
-	SUBSCRIPTIONS = 'subscriptions',
 	ACCESS_TOKEN = 'access_token',
+
+	APPOINTMENTS = 'appointments',
+	APPOINTMENT = 'appointment',
+
+	DOCTORS = 'doctors',
+	DOCTOR = 'doctor',
+
+	DEPARTMENTS = 'departments',
+	DEPARTMENT = 'department',
+
+	PATIENTS = 'patients',
+	PATIENT = 'patient',
+
+	MEDICAL_SERVICES = 'medical_services',
+	MEDICAL_SERVICE = 'medical_service',
+
+	PROMOTIONS = 'promotions',
+	PROMOTION = 'promotion',
+
+	SUBSCRIPTIONS = 'subscriptions',
 }

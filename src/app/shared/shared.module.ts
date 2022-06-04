@@ -17,14 +17,20 @@ import { matModules } from './mat.modules'
 import { appComponents } from './app.components'
 import { modalComponents } from './modal.components'
 import { AgmCoreModule } from '@agm/core'
-import { environment } from 'environments/environment'
+import { EntitiesPipe } from '@digital_brand_work/pipes/entity.pipe'
+import { AgePipe } from '@digital_brand_work/pipes/age.pipe'
 
-const components = [...appComponents, ...modalComponents, UnderMaintenanceComponent, UnderConstructionComponent]
+const components = [
+	...appComponents,
+	...modalComponents,
+	UnderMaintenanceComponent,
+	UnderConstructionComponent,
+]
 
 const modules = [
 	NgxIndexedDBModule.forRoot(indexedDbConfig),
 	AgmCoreModule.forRoot({
-		apiKey: environment.GOOGLE_MAP_API_KEY,
+		apiKey: 'AIzaSyAVSgFcc_sKMdkAgXTc3vJQWUUy2XJK6ck',
 	}),
 	CommonModule,
 	FormsModule,
@@ -37,7 +43,14 @@ const modules = [
 	...matModules,
 ]
 
-const directives = [AnimateJsDirective, ParallaxDirective, AutoSizeDirective, StopPropagation]
+const directives = [
+	AnimateJsDirective,
+	ParallaxDirective,
+	AutoSizeDirective,
+	StopPropagation,
+	EntitiesPipe,
+	AgePipe,
+]
 
 const pipes = []
 

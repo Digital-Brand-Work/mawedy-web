@@ -1,10 +1,13 @@
-<div class="mb-10">
-	<div
+<div @expandCollapse *ngIf="ready" class="mb-10">
+	<form
+		[formGroup]="form"
+		#ngForm="ngForm"
 		style="background: #f7f8fa"
 		class="grid grid-cols-3 md:grid-cols-5 m-3 p-10 gap-x-10 items-center"
 	>
 		<div class="flex items-center flex-col">
 			<button
+				*ngIf="!picturePreview"
 				(click)="patientAvatar.click()"
 				class="avatar bg-white rounded-full hover:border hover:border-gray-300"
 			>
@@ -14,7 +17,21 @@
 				></mat-icon>
 			</button>
 
-			<input type="file" class="hidden" #patientAvatar />
+			<img
+				*ngIf="picturePreview"
+				(click)="patientAvatar.click()"
+				class="avatar bg-white rounded-full hover:border hover:border-gray-300"
+				[src]="picturePreview"
+				alt="Profile"
+			/>
+
+			<input
+				accept="images/*"
+				(change)="readFile($event)"
+				type="file"
+				class="hidden"
+				#patientAvatar
+			/>
 
 			<div class="text-gray-400 text-center mt-3">Upload a Photo</div>
 		</div>
@@ -25,12 +42,16 @@
 			</div>
 
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label
+					for="first_name"
+					class="ml-1 font-normal text-gray-500 mb-1"
 					>Name</label
 				>
 
 				<input
 					#input
+					id="first_name"
+					formControlName="first_name"
 					type="text"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
@@ -38,11 +59,15 @@
 			</div>
 
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label
+					for="middle_name"
+					class="ml-1 font-normal text-gray-500 mb-1"
 					>Middle Name</label
 				>
 
 				<input
+					id="middle_name"
+					formControlName="middle_name"
 					type="text"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
@@ -50,11 +75,15 @@
 			</div>
 
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label
+					for="last_name"
+					class="ml-1 font-normal text-gray-500 mb-1"
 					>Last Name</label
 				>
 
 				<input
+					id="last_name"
+					formControlName="last_name"
 					type="text"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
@@ -64,11 +93,15 @@
 
 		<div class="flex flex-col md:pt-10">
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label
+					for="birthday"
+					class="ml-1 font-normal text-gray-500 mb-1"
 					>Birthday</label
 				>
 
 				<input
+					id="birthday"
+					formControlName="birthday"
 					type="date"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
@@ -76,13 +109,12 @@
 			</div>
 
 			<div class="mb-5 flex-col flex">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
-					>Age</label
-				>
+				<label class="ml-1 font-normal text-gray-500 mb-1">Age</label>
 
 				<input
 					disabled
-					type="number"
+					[value]="form.value.birthday | age"
+					type="text"
 					class="w-1/2 bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
 				/>
@@ -95,13 +127,23 @@
 
 				<div class="flex">
 					<button
-						class="gender-btn rounded-md bg-emerald-500 text-white font-semibold drop-shadow-md"
+						(click)="form.value.gender = 'Female'"
+						[ngClass]="{
+							'bg-emerald-500 text-white pointer-events-none':
+								form.value.gender === 'Female'
+						}"
+						class="gender-btn rounded-md font-semibold drop-shadow-md shadow-md hover:bg-gray-50"
 					>
 						F
 					</button>
 
 					<button
-						class="gender-btn rounded-md ml-3 bg-white text-gray-400 font-bold drop-shadow-md hover:border hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-500"
+						(click)="form.value.gender = 'Male'"
+						[ngClass]="{
+							'bg-emerald-500 text-white pointer-events-none':
+								form.value.gender === 'Male'
+						}"
+						class="gender-btn rounded-md font-semibold drop-shadow-md shadow-md ml-2 hover:bg-gray-50"
 					>
 						M
 					</button>
@@ -111,11 +153,15 @@
 
 		<div class="flex flex-col md:pt-10">
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label
+					for="religion"
+					class="ml-1 font-normal text-gray-500 mb-1"
 					>Religion</label
 				>
 
 				<input
+					id="religion"
+					formControlName="religion"
 					type="text"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
@@ -123,21 +169,29 @@
 			</div>
 
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label
+					for="phone_number"
+					class="ml-1 font-normal text-gray-500 mb-1"
 					>Phone</label
 				>
 
-				<mobile-number-form class="w-full"></mobile-number-form>
+				<input
+					id="phone_number"
+					formControlName="phone_number"
+					type="text"
+					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					style="height: 45px"
+				/>
 			</div>
 
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label for="email" class="ml-1 font-normal text-gray-500 mb-1"
 					>Email</label
 				>
 
 				<input
-					*ssrExclude
-					[inputMask]="emailInputMask"
+					id="email"
+					formControlName="email"
 					type="text"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
@@ -147,13 +201,18 @@
 
 		<div class="flex flex-col">
 			<button
-				class="text-lg font-extrabold text-emerald-500 mb-4 ml-auto hover:underline"
+				[ngClass]="{
+					' text-emerald-500': !form.disabled,
+					'text-gray-500 pointer-events-none': form.disabled
+				}"
+				(click)="update()"
+				class="text-lg font-extrabold mb-4 ml-auto hover:underline"
 			>
 				Update
 			</button>
 
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label class="ml-1 font-normal text-gray-500 mb-1"
 					>Country</label
 				>
 
@@ -165,11 +224,13 @@
 			</div>
 
 			<div class="mb-5">
-				<label for="" class="ml-1 font-normal text-gray-500 mb-1"
+				<label for="city" class="ml-1 font-normal text-gray-500 mb-1"
 					>City</label
 				>
 
 				<select
+					id="city"
+					formControlName="city"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
 				>
@@ -185,12 +246,13 @@
 				>
 
 				<input
+					id="address"
+					formControlName="address"
 					type="text"
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
 				/>
 			</div>
 		</div>
-	</div>
+	</form>
 </div>
-`

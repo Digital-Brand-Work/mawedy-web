@@ -1,3 +1,4 @@
+import { BENEFITS } from './../../../../mawedy-core/constants/app.constant'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
@@ -15,8 +16,9 @@ export class AboutUsSection2Component implements OnInit {
 
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
-	description: string =
-		'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis .'
+	benefits = BENEFITS
 
 	ngOnInit(): void {}
+
+	identity = (item: any) => item
 }

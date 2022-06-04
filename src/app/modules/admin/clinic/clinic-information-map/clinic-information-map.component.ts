@@ -23,14 +23,17 @@ export class ClinicInformationMapComponent implements OnInit {
 	styles = MapStyles
 
 	ngOnInit(): void {
-		// setTimeout(() => {
-		// 	navigator.geolocation.getCurrentPosition((event) => {
-		// 		// if (this.coordinates.latitude === 0 || this.coordinates.longitude === 0) {
-		// 		// 	this.coordinates.latitude = event.coords.latitude
-		// 		// 	this.coordinates.longitude = event.coords.longitude
-		// 		// }
-		// 	})
-		// }, 1500)
+		setTimeout(() => {
+			navigator.geolocation.getCurrentPosition((event) => {
+				if (
+					this.coordinates.latitude === 0 ||
+					this.coordinates.longitude === 0
+				) {
+					this.coordinates.latitude = event.coords.latitude
+					this.coordinates.longitude = event.coords.longitude
+				}
+			})
+		}, 1500)
 	}
 
 	onMarkerDragged(coordinates: any) {

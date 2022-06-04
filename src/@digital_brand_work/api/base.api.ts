@@ -67,10 +67,15 @@ export class BaseService<T> {
 		return this.http.put<T>(url, data, this.headers())
 	}
 
-	updateWithFile(id: string | number | false, data: Object): Observable<T> {
+	updateWithFile(
+		id: string | number | false,
+		data: FormData | any,
+	): Observable<T> {
 		const url = `${environment.api}${this.url}${
 			id !== false ? `/${id}` : ''
 		}`
+
+		data.append('_method', 'PUT')
 
 		return this.http.post<T>(url, data, this.headers())
 	}

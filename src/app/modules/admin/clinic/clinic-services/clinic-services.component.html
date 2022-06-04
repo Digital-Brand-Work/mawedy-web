@@ -1,7 +1,7 @@
 <div class="md:px-10 px-0 w-full mt-10 min-h-screen">
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full">
 		<div class="text-3xl font-semibold mb-3 text-gray-700 flex w-full">
-			<div>Services</div>
+			<div>Departments</div>
 
 			<button
 				(click)="addMedicalServiceOpened$.next(true)"
@@ -16,28 +16,89 @@
 			</button>
 		</div>
 
-		<ul class="flex flex-wrap">
+		<ul
+			[@listAnimation]="
+				((departments$ | async).entities | entities).length
+			"
+			class="inline-flex overflow-x-hidden whitespace-nowrap relative w-full"
+		>
+			<button
+				[matMenuTriggerFor]="departmentMenu"
+				class="absolute right-0 z-50 bg-white py-3 px-10 hover:bg-gray-50 text-lg flex items-center drop-shadow-xl"
+			>
+				More
+
+				<mat-icon
+					svgIcon="more_horiz"
+					class="ml-2 text-gray"
+				></mat-icon>
+			</button>
+
+			<mat-menu #departmentMenu="matMenu">
+				<button
+					*ngFor="
+						let department of (departments$ | async).entities
+							| entities;
+						trackBy: identity;
+						let i = index
+					"
+					mat-menu-item
+					class="hover:bg-gray-200 text-gray-500 font-medium flex items-center"
+					(click)="department$.next(department)"
+					[ngClass]="{
+						'bg-emerald-500 text-white pointer-events-none':
+							(department$ | async).id === department.id
+					}"
+				>
+					<span class="mr-5"> {{ department.name | titlecase }}</span>
+
+					<mat-icon
+						[ngClass]="{
+							'text-white ':
+								(department$ | async).id === department.id
+						}"
+						svgIcon="keyboard_arrow_right"
+						class="ml-auto text-gray-500"
+					></mat-icon>
+				</button>
+			</mat-menu>
+
 			<li
+				(click)="department$.next(department)"
 				*ngFor="
-					let item of [1, 2, 3, 4, 5, 6];
+					let department of (departments$ | async).entities
+						| entities;
 					trackBy: identity;
 					let i = index
 				"
 				[ngClass]="{
 					'bg-emerald-50/70 font-extrabold text-gray-900/80 pointer-events-none rounded-tr-md rounded-tl-md':
-						i === 0,
-					'font-semibold text-gray-600': i !== 0
+						(department$ | async)?.id === department.id,
+					'font-semibold text-gray-600':
+						(department$ | async)?.id !== department.id
 				}"
 				class="py-3 px-10 hover:bg-gray-50 text-lg"
 				role="button"
 			>
-				Gynecology
+				{{ department.name | titlecase }}
 			</li>
 		</ul>
 
 		<div style="min-height: 50vh" class="bg-emerald-50/70 w-full p-10 mb-5">
 			<div class="flex items-center mb-10">
+				<div
+					@slideInTop
+					*ngIf="department$ | async"
+					class="text-3xl font-semibold mb-3 text-gray-700"
+				>
+					Medical Services
+					<span class="text-gray-500 font-normal text-lg">
+						({{ (department$ | async)?.name | titlecase }})</span
+					>
+				</div>
+
 				<button
+					(click)="remove()"
 					class="ml-auto bg-white border text-emerald-500 border-emerald-500 py-2 px-10 font-semibold tracking-wide rounded-md hover:bg-red-50 hover:text-red-500 hover:border-red-500 text-md"
 				>
 					Delete

@@ -4,10 +4,13 @@
 
 <ng-template #patientsToolbar>
 	<patients-toolbar
+		[patients]="(patients$ | async).entities | entities"
 		(onFilter)="filter()"
 		(onSearch)="filter()"
 		class="w-full"
 	></patients-toolbar>
 </ng-template>
 
-<patients-table></patients-table>
+<patients-table
+	[patients]="(patients$ | async).entities | entities"
+></patients-table>

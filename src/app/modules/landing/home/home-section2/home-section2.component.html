@@ -1,6 +1,4 @@
-<div
-	class="min-h-screen w-full flex flex-col items-center justify-center relative py-20 md:py-0"
->
+<div class="w-full flex flex-col items-center justify-center relative py-40">
 	<div class="text-gray-700 font-extrabold text-6xl">Features</div>
 
 	<div
@@ -11,15 +9,19 @@
 			[ngClass]="{
 				'pb-20': (breakpoint$ | async) === 'tablet'
 			}"
-			class="grid grid-cols-1 md:grid-cols-2 md:gap-20 mt-20"
+			class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 mt-20 gap-y-10"
 		>
 			<div
 				class="flex items-center"
 				*ngFor="let item of features; trackBy: identity"
 			>
-				<div class="rounded-full bg-emerald-500 h-20 w-20 mr-10"></div>
+				<img
+					class="rounded-full bg-emerald-500 h-20 w-20 mr-10"
+					[src]="'/assets/app/home/feature/' + item.img + '.svg'"
+					alt=""
+				/>
 
-				<div class="text-3xl">{{ item }}</div>
+				<div class="text-3xl">{{ item.feature }}</div>
 			</div>
 		</div>
 	</div>

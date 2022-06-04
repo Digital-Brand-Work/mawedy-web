@@ -47,23 +47,23 @@
 					<div
 						class="accent-color text-2xl md:text-4xl text-center md:text-left"
 					>
-						Forget long calls
+						Forget the long calls
 					</div>
 
 					<div
 						[ngClass]="{
 							'text-5xl -mt-50':
 								(breakpoint$ | async) === 'phone',
-							'text-7xl px-30 ':
+							'text-6xl px-30 ':
 								(breakpoint$ | async) === 'tablet',
-							'text-9xl':
+							'text-8xl':
 								(breakpoint$ | async) !== 'phone' &&
 								(breakpoint$ | async) !== 'tablet'
 						}"
 						@expandCollapse
-						class="accent-color my-2 font-bold leading-none text-center md:text-left"
+						class="accent-color my-2 font-bold leading-none text-center md:text-left whitespace-nowrap"
 					>
-						Book your appointments.
+						Book your appointments!
 					</div>
 
 					<div

@@ -27,14 +27,25 @@ export type WeekDay =
 	| 'Saturday'
 	| 'Sunday'
 
-export const FEATURES: string[] = [
-	'Reliable, detailed booking solution',
-	'Professional way to connect clinics and patients',
-	'Saves Time and Effort',
-	'Never miss out on offers',
-	'Patient onboarding a lot easier',
-	'Membership plan with lots of benefits',
+export const BENEFITS: HomeSection2Feature[] = [
+	{ img: 1, feature: 'Advertise your clinic' },
+	{ img: 2, feature: 'Additional revenue stream' },
+	{ img: 3, feature: 'New customers' },
+	{ img: 4, feature: 'Time efficientc' },
+	{ img: 5, feature: '24/7 booking service' },
+	{ img: 6, feature: 'Free trial' },
 ]
+
+export const FEATURES: HomeSection2Feature[] = [
+	{ img: 1, feature: 'Reliable, detailed booking solution' },
+	{ img: 2, feature: 'Professional way to connect clinics and patients' },
+	{ img: 3, feature: 'Saves Time and Effort' },
+	{ img: 4, feature: 'Never miss out on offers' },
+	{ img: 5, feature: 'Patient onboarding a lot easier' },
+	{ img: 6, feature: 'Membership plan with lots of benefits' },
+]
+
+export type HomeSection2Feature = { feature: string; img: number }
 
 export const PRICE_PER_USER: number = 60
 

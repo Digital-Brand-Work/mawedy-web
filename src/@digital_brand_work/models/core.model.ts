@@ -10,4 +10,11 @@ export interface NodeBaseModel {
 	updatedAt?: string
 }
 
+export interface PHPFile extends PHPBaseModel {
+	url: string
+	type: string
+	name: string
+	size: string
+}
+
 export type BreakPoint = 'phone' | 'tablet' | 'laptop' | 'desktop' | 'max'

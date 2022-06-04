@@ -8,3 +8,7 @@ export const slugify = (text: string) => {
 		.replace(/[^\w\-]+/g, '') // Remove all non-word chars
 		.replace(/\-\-+/g, '_') // Replace multiple - with single -
 }
+
+export const slugToSentence = (slug: string) => {
+	return slug.split('_').join(' ')
+}
