@@ -148,11 +148,11 @@
 				<div>Proceed to CheckOut</div>
 			</button>
 
-			<partner-with-us-section1-first-step
+			<landing-subscription-section1-form
 				*ngIf="!(hasLoggedIn$ | async)"
 				(onNext)="register($event)"
 				[isProcessing]="isProcessing"
-			></partner-with-us-section1-first-step>
+			></landing-subscription-section1-form>
 		</div>
 	</div>
 </div>

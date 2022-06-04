@@ -1,0 +1,200 @@
+<div
+	class="flex flex-col items-center justify-center min-h-screen w-full px-13 -mt-10"
+>
+	<div
+		class="bg-white rounded-xl w-full"
+		style="box-shadow: 0px 2px 12px #08315d33; padding: 34px 42px"
+	>
+		<form [formGroup]="form" #ngForm="ngForm" class="md:w-full">
+			<div class="mb-5">
+				<label for="name" class="mb-1 font-bold text-gray-500 text-base"
+					>Clinic Name</label
+				>
+
+				<input
+					#input
+					id="name"
+					type="text"
+					formControlName="name"
+					[ngClass]="{
+						' border-red-500':
+							!form.get('name')?.valid &&
+							form.get('name')?.touched
+					}"
+					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+				/>
+
+				<div
+					*ngIf="
+						!form.get('name')?.valid && form.get('name')?.touched
+					"
+					class="text-sm text-rose-500"
+				>
+					Clinic Name is required.
+				</div>
+			</div>
+
+			<div class="mb-5">
+				<label
+					for="address"
+					class="mb-1 font-bold text-gray-500 text-base"
+				>
+					Clinics Address
+				</label>
+
+				<input
+					id="address"
+					type="text"
+					formControlName="address"
+					[ngClass]="{
+						' border-red-500':
+							!form.get('address')?.valid &&
+							form.get('address')?.touched
+					}"
+					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+				/>
+
+				<div
+					*ngIf="
+						!form.get('address')?.valid &&
+						form.get('address')?.touched
+					"
+					class="text-sm text-rose-500"
+				>
+					Clinic Address is required.
+				</div>
+			</div>
+
+			<div class="mb-5">
+				<label
+					for="email"
+					class="mb-1 font-bold text-gray-500 text-base"
+					>Email</label
+				>
+
+				<input
+					id="email"
+					formControlName="email"
+					[ngClass]="{
+						' border-red-500':
+							!form.get('email')?.valid &&
+							form.get('email')?.touched,
+						'text-red-500': emailErrors
+					}"
+					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 text-red-500"
+				/>
+
+				<div
+					*ngIf="
+						!form.get('email')?.valid && form.get('email')?.touched
+					"
+					class="text-sm text-rose-500"
+				>
+					Email is badly formatted.
+				</div>
+			</div>
+
+			<div class="mb-5">
+				<label
+					for="password"
+					class="mb-1 font-bold text-gray-500 text-base"
+					>Password</label
+				>
+
+				<input
+					id="password"
+					formControlName="password"
+					[ngClass]="{
+						' border-red-500':
+							!form.get('password')?.valid &&
+							form.get('email')?.touched,
+						'text-red-500': emailErrors
+					}"
+					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 text-red-500"
+				/>
+
+				<div
+					*ngIf="
+						!form.get('password')?.valid &&
+						form.get('password')?.touched
+					"
+					class="text-sm text-rose-500"
+				>
+					Password is badly formatted.
+				</div>
+			</div>
+
+			<div class="mb-5">
+				<div class="mb-1 font-bold text-gray-500 text-base">
+					Mobile Number*
+				</div>
+
+				<div class="">
+					<input type="hidden" formControlName="phone_number_one" />
+
+					<input
+						type="hidden"
+						formControlName="phone_number_one_country_code"
+					/>
+
+					<mobile-number-form
+						(onMobileNumberChange)="
+							handleMobileNumberChange($event)
+						"
+						[phoneNumber]="form.value.phone_number_one"
+						[phoneErrors]="phoneErrors"
+						[bordered]="true"
+						[rounded]="true"
+						class="w-full"
+					></mobile-number-form>
+				</div>
+			</div>
+
+			<input
+				accept="image/*"
+				(change)="setTradeLicense($event)"
+				type="file"
+				#tradeLicense
+				class="hidden"
+			/>
+
+			<div class="mb-5 flex items-center">
+				<div class="mb-1 font-bold text-gray-500 text-base">
+					Trade License No.
+				</div>
+
+				<button
+					(click)="tradeLicense.click()"
+					class="border text-white bg-gray-400 hover:bg-gray-500 px-10 py-3 rounded-lg ml-auto"
+				>
+					{{ filename === '' ? 'Upload Docs' : 'Change Docs' }}
+				</button>
+			</div>
+
+			<div class="mt-2 text-sky-500">{{ filename }}</div>
+
+			<div class="mt-5 flex w-full">
+				<button
+					@fadeOutBottom
+					@slideInRight
+					[disabled]="!form.valid || filename === '' || isProcessing"
+					[ngClass]="{
+						'bg-sky-500 hover:bg-sky-600':
+							form.valid && filename !== '' && !isProcessing,
+						'bg-gray-400 pointer-events-none':
+							!form.valid || filename === '' || isProcessing
+					}"
+					*ngIf="step !== 'two'"
+					(click)="
+						onNext.emit({ form: form, trade_license_photo: file })
+					"
+					class="text-white px-10 py-4 rounded-lg ml-auto w-full flex items-center justify-center mt-10"
+				>
+					<spinner *ngIf="isProcessing"></spinner>
+
+					<div *ngIf="!isProcessing">Purchase Now</div>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
