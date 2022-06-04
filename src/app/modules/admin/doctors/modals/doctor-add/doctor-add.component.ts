@@ -99,4 +99,6 @@ export class DoctorAddComponent implements OnInit {
 
 		this._cdr.detectChanges()
 	}
+
+	save() {}
 }

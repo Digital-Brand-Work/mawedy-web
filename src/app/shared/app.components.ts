@@ -14,6 +14,8 @@ import { ApplePayButtonComponent } from 'app/components/buttons/apple-pay-button
 import { CardNumberFormComponent } from 'app/components/forms/card-number-form/card-number-form.component'
 import { AvatarPlaceholderComponent } from 'app/components/avatar-placeholder/avatar-placeholder.component'
 import { BannerPlaceholderComponent } from 'app/components/banner-placeholder/banner-placeholder.component'
+import { DoctorScheduleSelectComponent } from 'app/components/forms/doctor-schedule-select/doctor-schedule-select.component'
+import { ClinicScheduleSelectComponent } from 'app/components/forms/clinic-schedule-select/clinic-schedule-select.component'
 
 export const appComponents = [
 	GooglePlayButtonComponent,
@@ -32,4 +34,6 @@ export const appComponents = [
 	WorkingScheduleComponent,
 	AvatarPlaceholderComponent,
 	BannerPlaceholderComponent,
+	DoctorScheduleSelectComponent,
+	ClinicScheduleSelectComponent,
 ]

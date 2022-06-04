@@ -11,17 +11,17 @@
 
 	<div
 		class="px-10 py-5 bg-white"
-		style="height: calc(90vh - 5vh); overflow-y: scroll !important"
+		style="height: 80vh; overflow-y: scroll !important"
 	>
 		<div class="grid grid-cols-1 md:grid-cols-3 md:gap-x-20">
 			<div class="flex flex-col items-center md:items-start mx-auto">
 				<button
 					(click)="avatar.click()"
-					class="photo flex flex-col items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full animate-pulse"
+					class="photo flex flex-col items-center justify-center bg-gray-100 border hover:border-gray-300 rounded-full"
 				>
 					<mat-icon
-						class="text-gray-400 icon-size-20"
-						svgIcon="earbuds"
+						class="icon-size-22 text-gray-300"
+						svgIcon="feather:user"
 					></mat-icon>
 				</button>
 
@@ -30,9 +30,9 @@
 
 			<div>
 				<div class="mb-10">
-					<div class="mb-1 font-semibold text-gray-400 text-base">
+					<label class="mb-1 font-semibold text-gray-400 text-base">
 						Name
-					</div>
+					</label>
 
 					<input
 						#input
@@ -44,9 +44,9 @@
 				</div>
 
 				<div class="mb-5">
-					<div class="mb-1 font-semibold text-gray-400 text-base">
+					<label class="mb-1 font-semibold text-gray-400 text-base">
 						Profession
-					</div>
+					</label>
 
 					<input
 						type="text"
@@ -61,9 +61,9 @@
 
 			<div @slideInBottom *ngIf="departments$ | async">
 				<div class="mb-10">
-					<div class="mb-1 font-semibold text-gray-400 text-base">
+					<label class="mb-1 font-semibold text-gray-400 text-base">
 						Department
-					</div>
+					</label>
 
 					<mat-select
 						multiple
@@ -89,9 +89,9 @@
 				</div>
 
 				<div class="mb-5">
-					<div class="mb-1 font-semibold text-gray-400 text-base">
+					<label class="mb-1 font-semibold text-gray-400 text-base">
 						Years of Experience
-					</div>
+					</label>
 
 					<input
 						type="number"
@@ -109,7 +109,10 @@
 
 		<div class="grid grid-cols-1 md:grid-cols-3 md:gap-x-20">
 			<div class="mb-5 col-span-3 md:col-span-2">
-				<div class="mb-1 font-bold accent-color text-md">About</div>
+				<label
+					class="mb-1 font-bold accent-color text-gray-400 text-base"
+					>About</label
+				>
 
 				<textarea
 					style="min-height: 187px"
@@ -122,9 +125,9 @@
 
 			<div class="col-span-3 md:col-span-1">
 				<div class="mb-5">
-					<div class="mb-2 font-semibold text-gray-400 text-base">
-						Mobile Number
-					</div>
+					<label class="mb-2 font-semibold text-gray-400 text-base">
+						Phone
+					</label>
 
 					<mobile-number-form
 						[bordered]="true"
@@ -137,9 +140,9 @@
 				</div>
 
 				<div class="mb-5">
-					<div class="mb-2 font-semibold text-gray-400 text-base">
+					<label class="mb-2 font-semibold text-gray-400 text-base">
 						Email
-					</div>
+					</label>
 
 					<input
 						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
@@ -151,5 +154,25 @@
 		</div>
 
 		<working-schedule></working-schedule>
+
+		<div class="flex">
+			<button
+				(click)="save()"
+				matRipple
+				matRippleColor="rgba(11, 169, 118,.1)"
+				[disabled]="!form.valid || form.disabled"
+				[ngClass]="{
+					'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 shadow-emerald-500/50 shadow ':
+						form.valid && !form.disabled,
+					'bg-gray-400 pointer-events-none ':
+						!form.valid || form.disabled
+				}"
+				class="ml-auto rounded-lg px-10 py-3 font-bold border-2"
+			>
+				<spinner *ngIf="form.disabled"></spinner>
+
+				<div class="text-white" *ngIf="!form.disabled">Add</div>
+			</button>
+		</div>
 	</div>
 </div>

@@ -19,6 +19,7 @@ import { modalComponents } from './modal.components'
 import { AgmCoreModule } from '@agm/core'
 import { EntitiesPipe } from '@digital_brand_work/pipes/entity.pipe'
 import { AgePipe } from '@digital_brand_work/pipes/age.pipe'
+import { TimePipe } from '@digital_brand_work/pipes/time.pipe'
 
 const components = [
 	...appComponents,
@@ -50,6 +51,7 @@ const directives = [
 	StopPropagation,
 	EntitiesPipe,
 	AgePipe,
+	TimePipe,
 ]
 
 const pipes = []

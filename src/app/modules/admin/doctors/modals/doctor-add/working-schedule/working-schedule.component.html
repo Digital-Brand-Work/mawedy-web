@@ -1,7 +1,7 @@
 <div class="w-full">
 	<div class="flex mb-3.5">
 		<div class="text-gray-400 text-base">Working Schedule</div>
-		<div class="ml-auto text-gray-400 text-base">Working Schedule</div>
+		<div class="ml-auto text-gray-400 text-base">Select Availability</div>
 	</div>
 
 	<div class="working-schedule-container">
@@ -10,6 +10,7 @@
 				<div class="flex flex-col items-center justify-center">
 					<div class="flex items-center justify-center">
 						<mat-checkbox
+							matTooltip="Within the clinic schedule"
 							style="transform: translateY(-3px)"
 							class="mr-1"
 						></mat-checkbox>
@@ -22,17 +23,11 @@
 					</div>
 
 					<div class="mt-5">
-						<input
-							type="time"
-							class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
-						/>
+						<doctor-schedule-select></doctor-schedule-select>
 					</div>
 
 					<div class="mt-5">
-						<input
-							type="time"
-							class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
-						/>
+						<doctor-schedule-select></doctor-schedule-select>
 					</div>
 				</div>
 			</div>
