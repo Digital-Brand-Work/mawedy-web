@@ -14,8 +14,6 @@ import { StoreModule } from '@ngrx/store'
 import * as fromAppointment from './appointment.reducer'
 import { EffectsModule } from '@ngrx/effects'
 import { AppointmentEffects } from 'app/modules/admin/appointments/appointment.effects'
-import { AppointmentsMonthCalendarAppointmentItemComponent } from './appointments/appointments-month-calendar/appointments-month-calendar-appointment-item/appointments-month-calendar-appointment-item.component'
-import { AppointmentsDayCalendarAppointmentItemComponent } from './appointments/appointments-day-calendar/appointments-day-calendar-appointment-item/appointments-day-calendar-appointment-item.component'
 
 const components = [
 	AppointmentsComponent,
@@ -31,8 +29,8 @@ const components = [
 @NgModule({
 	declarations: [
 		...components,
-		AppointmentsMonthCalendarAppointmentItemComponent,
-		AppointmentsDayCalendarAppointmentItemComponent,
+		// AppointmentsMonthCalendarAppointmentItemComponent,
+		// AppointmentsDayCalendarAppointmentItemComponent,
 	],
 	imports: [
 		SharedModule,
