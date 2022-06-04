@@ -17,6 +17,10 @@ import { BehaviorSubject, take } from 'rxjs'
 import { Subscription } from 'app/mawedy-core/models/utility.models'
 import { toCardExpiry } from 'app/mawedy-core/helpers'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
+import { Clinic } from 'app/modules/admin/clinic/clinic.model'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 declare var window: any
 
 @Component({
@@ -27,13 +31,15 @@ declare var window: any
 })
 export class CheckoutSection2Component implements OnInit {
 	constructor(
-		private _cdr: ChangeDetectorRef,
-		private _scrollService: ScrollService,
-		private _alert: AlertState,
-		private _formBuilder: FormBuilder,
-		private _checkoutService: CheckoutService,
-		private _errorHandlerService: ErrorHandlerService,
 		private _router: Router,
+		private _alert: AlertState,
+		private _cdr: ChangeDetectorRef,
+		private _formBuilder: FormBuilder,
+		private _scrollService: ScrollService,
+		private _checkoutService: CheckoutService,
+		private _clinicUserService: ClinicUserService,
+		private _errorHandlerService: ErrorHandlerService,
+		private _indexDbService: NgxIndexedDBService,
 	) {}
 
 	@ViewChild('ngForm') ngForm?: NgForm
@@ -48,6 +54,8 @@ export class CheckoutSection2Component implements OnInit {
 
 	@Input() additionalUsers: number = 5
 
+	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
+
 	isProcessing: boolean = false
 
 	showApplePay = false
@@ -61,10 +69,6 @@ export class CheckoutSection2Component implements OnInit {
 	form: FormGroup = this._formBuilder.group({
 		name: ['', Validators.required],
 		email: ['', Validators.email],
-		country: ['', Validators.required],
-		city: ['', Validators.required],
-		line_one: ['', Validators.required],
-		postal_code: ['', Validators.required],
 		phone_number_one: ['', Validators.required],
 		phone_number_one_country_code: ['', Validators.required],
 		number: ['', [Validators.required]],
@@ -92,6 +96,28 @@ export class CheckoutSection2Component implements OnInit {
 		this.input?.nativeElement.focus()
 
 		setTimeout(() => {
+			this._indexDbService
+				.getByKey(DB.CLINIC, 1)
+				.pipe(take(1))
+				.subscribe((data: any) => {
+					const clinic = data.data
+
+					if (!clinic) {
+						return
+					}
+
+					this.form.setValue({
+						name: clinic.name,
+						email: clinic.email,
+						phone_number_one: clinic.name,
+						phone_number_one_country_code:
+							clinic.phone_number_one_country_code,
+						number: '',
+						expiry: '',
+						cvc: '',
+					})
+				})
+
 			this._scrollService.scrollToTop()
 		}, 500)
 
@@ -145,6 +171,8 @@ export class CheckoutSection2Component implements OnInit {
 			expiry: toCardExpiry(this.form.value.expiry),
 			cvc: this.form.value.cvc,
 		}
+
+		data.password = localStorage.getItem('password')
 
 		this.subscription$.pipe(take(1)).subscribe((subscription) => {
 			data.type = subscription.type

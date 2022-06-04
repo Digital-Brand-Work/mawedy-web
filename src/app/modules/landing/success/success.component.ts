@@ -58,10 +58,10 @@ export class SuccessComponent implements OnInit {
 					)
 
 					if (index >= 0) {
-						this._indexedDBController.removeAll([
-							DB.SUBSCRIPTION_REQUEST,
-							DB.ACCOUNT_USERS_REQUEST,
-						])
+						// this._indexedDBController.removeAll([
+						// 	DB.SUBSCRIPTION_REQUEST,
+						// 	DB.ACCOUNT_USERS_REQUEST,
+						// ])
 
 						return (this.subscription =
 							mawedySubscriptions[index][

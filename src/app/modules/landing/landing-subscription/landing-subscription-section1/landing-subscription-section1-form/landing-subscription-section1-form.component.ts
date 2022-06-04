@@ -63,7 +63,7 @@ export class LandingSubscriptionSection1FormComponent implements OnInit {
 
 	form: FormGroup = this._formBuilder.group({
 		...this._storeRegisterRule.firstForm,
-		password: ['', [Validators.required]],
+		password: ['', [Validators.required, Validators.min(8)]],
 	})
 
 	filename: string = ''

@@ -49,8 +49,6 @@ export class ClinicUserService {
 	}
 
 	saveDataLocally(data: User): void {
-		localStorage.clear()
-
 		this._indexedDBController.removeAll([DB.CLINIC, DB.ACCESS_TOKEN])
 
 		this.clinic$.next(null)

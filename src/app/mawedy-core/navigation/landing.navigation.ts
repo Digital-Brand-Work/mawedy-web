@@ -22,7 +22,7 @@ export const homeNavigation: HomeNav[] = [
 	},
 	{
 		id: 4,
-		name: 'Try Mawedy',
+		name: 'Join Mawedy',
 		link: 'partner-with-us',
 	},
 	{

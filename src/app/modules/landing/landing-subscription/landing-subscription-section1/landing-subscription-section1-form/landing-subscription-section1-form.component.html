@@ -104,6 +104,7 @@
 				<input
 					id="password"
 					formControlName="password"
+					type="password"
 					[ngClass]="{
 						' border-red-500':
 							!form.get('password')?.valid &&
@@ -120,7 +121,7 @@
 					"
 					class="text-sm text-rose-500"
 				>
-					Password is badly formatted.
+					Password should be minimum of 8 characters.
 				</div>
 			</div>
 

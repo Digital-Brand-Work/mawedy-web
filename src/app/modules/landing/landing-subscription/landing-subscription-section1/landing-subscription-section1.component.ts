@@ -152,6 +152,10 @@ export class LandingSubscriptionSection1Component implements OnInit {
 						this.additionalUsers,
 					)
 
+					console.log(data?.form?.value.password)
+
+					localStorage.setItem('password', data?.form?.value.password)
+
 					this._clinicUserService.saveDataLocally(userAccount)
 
 					this._indexedDbController.upsert(DB.ACCOUNT_USERS_REQUEST, {
