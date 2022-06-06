@@ -79,6 +79,39 @@
 					</div>
 				</div>
 
+				<div class="mb-10">
+					<label
+						for="title"
+						class="mb-1 font-semibold text-gray-400 text-base"
+					>
+						Doctor Title
+					</label>
+
+					<input
+						#input
+						id="title"
+						formControlName="title"
+						[ngClass]="{
+							'border-red-500':
+								form.get('title')?.touched &&
+								!form.get('title')?.valid,
+							'text-red-500': errors.name
+						}"
+						type="text"
+						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					/>
+
+					<div
+						*ngIf="
+							form.get('title')?.touched &&
+							!form.get('title')?.valid
+						"
+						class="text-sm text-rose-500"
+					>
+						Doctor Title is required.
+					</div>
+				</div>
+
 				<div class="mb-5">
 					<label
 						for="profession"

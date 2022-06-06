@@ -4,20 +4,30 @@
 	@slideOutRight
 	stop-propagation
 	class="ml-auto bg-white h-full w-full md:w-1/4"
+	style="min-width: 500px"
 >
 	<modal-header
 		modalTitle="Dr. Hanadi Yassin"
 		(onClose)="opened$.next(false)"
 	></modal-header>
 	<div
+		*ngIf="doctor$ | async as doctor"
 		#scroll
 		class="px-10 py-5 bg-white"
 		style="max-height: calc(100vh - 5vh); overflow-y: scroll !important"
 	>
 		<div class="flex justify-center items-center">
-			<div class="rounded-full border-4 border-gray-200">
+			<doctor-image-placeholder
+				[doctor]="doctor"
+				*ngIf="doctor.picture === null"
+			></doctor-image-placeholder>
+
+			<div
+				*ngIf="doctor.picture !== null"
+				class="rounded-full border-4 border-gray-200"
+			>
 				<img
-					src="../../../../../../assets/images/avatars/male-19.jpg"
+					[src]="doctor.picture.url"
 					class="photo rounded-full"
 					alt="Doctor Image"
 				/>
@@ -25,17 +35,20 @@
 		</div>
 
 		<div class="flex mt-6 items-center flex-col">
-			<div class="text-lg accent-color font-bold">Dr. Hanadi Yassin</div>
+			<div class="text-lg accent-color font-bold">
+				Dr. {{ doctor.name }}
+			</div>
 
 			<div style="color: #6f7d8f" class="text-base font-medium">
-				MBBS, MD - General Medicine, DM - Cardiology
+				{{ doctor.title }} -
+				{{ doctor.departments[0].name }}
 			</div>
 
 			<div class="mt-4 accent-color text-base">
-				Interventional Cardiologist
+				{{ doctor.profession }}
 			</div>
 
-			<div>25 Years Experience</div>
+			<div>{{ doctor.experience }} Years Experience</div>
 		</div>
 
 		<hr class="opacity-40" />
@@ -46,29 +59,45 @@
 			class="text-base accent-color font-semibold mt-5"
 			style="margin-bottom: 50px"
 		>
-			An expert in CHIP (Complex High-risk Indicated Procedures), Dr.
-			Hanadi Hassan has achieved a documented 91% success rate in Chronic
-			Total Occlusion (CTO) Angioplasty, which is unheralded in the region
-			and is on par with the best in the field.
+			{{ doctor.about }}
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-x-3 mt-3 mb-10">
 			<div>
 				<div class="text-base text-gray-500">Phone</div>
 				<div class="text-base accent-color font-bold">
-					+98-7862-43453
+					<a
+						role="button"
+						target="_blank"
+						class="underline hover:text-emerald-500 text-center"
+						[href]="'https://wa.me/0' + doctor.phone_number"
+					>
+						{{
+							doctor.phone_number
+								| appendCountryCode: doctor.phone_country_code
+						}}</a
+					>
 				</div>
 			</div>
 
 			<div>
 				<div class="text-base text-gray-500">E-mail</div>
 				<div class="text-base accent-color font-bold">
-					hanadi@gmail.com
+					<a
+						role="button"
+						target="_blank"
+						class="underline hover:text-emerald-500 text-center"
+						[href]="'mailto:' + doctor.email"
+					>
+						{{ doctor.email }}</a
+					>
 				</div>
 			</div>
 		</div>
 
-		<doctor-details-working-schedule></doctor-details-working-schedule>
+		<doctor-details-working-schedule
+			[timeslots]="doctor.timeslots"
+		></doctor-details-working-schedule>
 
 		<div
 			class="w-full py-5 z border-t border-t-gray-100 flex items-center mb-5"

@@ -1,5 +1,5 @@
 <div
 	class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center font-extrabold text-white uppercase"
 >
-	{{ initial }}
+	{{ (clinic$ | async).name | initials }}
 </div>

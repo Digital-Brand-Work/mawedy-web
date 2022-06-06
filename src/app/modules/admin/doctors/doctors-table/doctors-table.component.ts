@@ -8,6 +8,7 @@ import { Doctor } from '../doctor.model'
 import { DoctorAvailabilityModal } from '../modals/doctor-availability/doctor-availability.service'
 import { DoctorDetailsModal } from '../modals/doctor-details/doctor-details.service'
 import * as DoctorActions from '../doctor.actions'
+import { DoctorService } from '../doctor.service'
 @Component({
 	selector: 'doctors-table',
 	templateUrl: './doctors-table.component.html',
@@ -17,6 +18,7 @@ import * as DoctorActions from '../doctor.actions'
 export class DoctorsTableComponent implements OnInit {
 	constructor(
 		private store: Store<{ doctors: Doctor[] }>,
+		private _doctorService: DoctorService,
 		private _indexDBService: NgxIndexedDBService,
 		private doctorDetailsModal: DoctorDetailsModal,
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
@@ -37,6 +39,16 @@ export class DoctorsTableComponent implements OnInit {
 	ngOnInit(): void {
 		this.doctors$ = this.store.select('doctors')
 
+		this.doctors$
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((doctors: any) => {
+				if (doctors) {
+					this.onDoctorChanges.emit(
+						Object.values(doctors.entities) as Doctor[],
+					)
+				}
+			})
+
 		this._indexDBService
 			.getAll(DB.DOCTORS)
 			.pipe(takeUntil(this.unsubscribe$))
@@ -47,8 +59,6 @@ export class DoctorsTableComponent implements OnInit {
 							doctors: doctors as Doctor[],
 						}),
 					)
-
-					this.onDoctorChanges.emit(doctors as Doctor[])
 				}
 			})
 	}
@@ -60,4 +70,16 @@ export class DoctorsTableComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	manage(doctor: Doctor) {
+		this.doctorDetailsModalOpened$.next(true)
+
+		this._doctorService.current$.next(doctor)
+	}
+
+	remove(doctor: Doctor) {
+		this._doctorService.remove(doctor.id).subscribe(() => {
+			this.store.dispatch(DoctorActions.deleteDoctor({ id: doctor.id }))
+		})
+	}
 }

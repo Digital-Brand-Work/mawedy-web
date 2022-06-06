@@ -16,6 +16,7 @@ import { AvatarPlaceholderComponent } from 'app/components/avatar-placeholder/av
 import { BannerPlaceholderComponent } from 'app/components/banner-placeholder/banner-placeholder.component'
 import { DoctorScheduleSelectComponent } from 'app/components/forms/doctor-schedule-select/doctor-schedule-select.component'
 import { ClinicScheduleSelectComponent } from 'app/components/forms/clinic-schedule-select/clinic-schedule-select.component'
+import { DoctorImagePlaceholderComponent } from 'app/components/placeholders/doctor-image-placeholder/doctor-image-placeholder.component'
 
 export const appComponents = [
 	GooglePlayButtonComponent,
@@ -36,4 +37,5 @@ export const appComponents = [
 	BannerPlaceholderComponent,
 	DoctorScheduleSelectComponent,
 	ClinicScheduleSelectComponent,
+	DoctorImagePlaceholderComponent,
 ]

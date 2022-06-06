@@ -12,7 +12,11 @@
 						<th class="text-center"></th>
 					</tr>
 				</thead>
-				<tbody [@listAnimation]="15">
+				<tbody
+					[@listAnimation]="
+						((doctors$ | async).entities | entities).length
+					"
+				>
 					<tr
 						style="height: 60px"
 						class="accent-color font-semibold border-b border-b-gray-100 hover:bg-gray-50"
@@ -50,10 +54,17 @@
 						</td>
 						<td class="text-center">
 							<button
-								(click)="doctorDetailsModalOpened$.next(true)"
+								(click)="manage(doctor)"
 								class="py-2 px-3 font-semibold rounded-md border-2 border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-500"
 							>
 								Manage
+							</button>
+
+							<button
+								(click)="remove(doctor)"
+								class="py-1.5 px-5 text-white bg-rose-500 rounded-md hover:bg-rose-600 ml-3"
+							>
+								Delete
 							</button>
 						</td>
 					</tr>

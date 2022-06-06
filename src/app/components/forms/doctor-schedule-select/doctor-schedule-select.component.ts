@@ -43,7 +43,7 @@ export class DoctorScheduleSelectComponent implements OnInit {
 			}`
 		}
 
-		this.onTimeSelected.emit(this.timing)
+		this.onTimeSelected.emit(this.toFixedTwo(parseInt(this.timing)))
 	}
 
 	ngOnInit(): void {}
@@ -67,4 +67,8 @@ export class DoctorScheduleSelectComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	toFixedTwo(value: number): string {
+		return (value < 10 ? '0' : '') + value
+	}
 }

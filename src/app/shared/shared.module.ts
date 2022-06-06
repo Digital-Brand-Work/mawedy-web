@@ -21,6 +21,7 @@ import { EntitiesPipe } from '@digital_brand_work/pipes/entity.pipe'
 import { AgePipe } from '@digital_brand_work/pipes/age.pipe'
 import { TimePipe } from '@digital_brand_work/pipes/time.pipe'
 import { AppendCountryCodePipe } from '@digital_brand_work/pipes/append-country-code.pipe'
+import { InitialsPipe } from '@digital_brand_work/pipes/initials.pipe'
 
 const components = [
 	...appComponents,
@@ -54,6 +55,7 @@ const directives = [
 	AgePipe,
 	TimePipe,
 	AppendCountryCodePipe,
+	InitialsPipe,
 ]
 
 const pipes = []
