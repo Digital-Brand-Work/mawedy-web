@@ -1,7 +1,8 @@
 <div
-	animateJs
+	*ngIf="doctor$ | async as doctor"
+	@zoomIn
 	stop-propagation
-	class="m-auto bg-white h-auto w-full md:w-1/4 rounded-xl overflow-hidden animate__zoomIn animate__faster"
+	class="m-auto bg-white h-auto w-full md:w-1/4 rounded-xl overflow-hidden"
 >
 	<modal-header
 		modalTitle="Availability"
@@ -13,50 +14,22 @@
 			<div>
 				<div class="text-base text-gray-500">Name</div>
 				<div class="text-base accent-color font-bold">
-					Dr. Hanadi Yassin
+					Dr.{{ doctor.name }}
 				</div>
 			</div>
 
 			<div>
 				<div class="text-base text-gray-500">Department</div>
-				<div class="text-base accent-color font-bold">Cardiology</div>
+				<div class="text-base accent-color font-bold">
+					{{ doctor.departments[0].name }}
+				</div>
 			</div>
 		</div>
 
 		<hr class="bg-opacity-20" />
 
-		<div class="text-base text-gray-500 mb-3.5">Working Schedule</div>
-
-		<div
-			class="working-schedule-container grid grid-cols-1 md:grid-cols-2 p-5"
-		>
-			<div
-				*ngFor="let day of weekdays; trackBy: identity"
-				class="flex flex-col mb-5"
-			>
-				<div>
-					<div class="text-md accent-color flex items-center">
-						<div class="available rounded-full mr-2"></div>
-
-						{{ shorten(day) | uppercase }} (Available)
-					</div>
-
-					<div class="text-sm text-black">07:30 AM | 07:30 PM</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="flex my-5 items-center">
-			<div class="flex items-center mr-5">
-				<div class="available rounded-full mr-2"></div>
-
-				<div class="text-gray-600">Available</div>
-			</div>
-			<div class="flex items-center">
-				<div class="not-available rounded-full mr-2"></div>
-
-				<div class="text-gray-600">Not Available</div>
-			</div>
-		</div>
+		<doctor-details-working-schedule
+			[timeslots]="doctor.timeslots"
+		></doctor-details-working-schedule>
 	</div>
 </div>

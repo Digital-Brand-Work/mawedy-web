@@ -76,4 +76,10 @@ export class DoctorsTableComponent implements OnInit {
 
 		this._doctorService.current$.next(doctor)
 	}
+
+	view(doctor: Doctor) {
+		this.doctorAvailabilityModalOpened$.next(true)
+
+		this._doctorService.current$.next(doctor)
+	}
 }
