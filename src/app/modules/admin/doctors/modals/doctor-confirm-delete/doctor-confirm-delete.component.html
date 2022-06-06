@@ -2,15 +2,17 @@
 	*ngIf="opened$ | async"
 	stop-propagation
 	class="ml-auto h-full w-full md:w-1/4"
+	style="min-width: 500px"
 >
 	<div
+		*ngIf="doctor$ | async as doctor"
 		style="height: calc(100vh)"
 		class="py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md overflow-hidden relative px-20"
 	>
 		<div class="confirm-container absolute bottom-20 w-3/4 p-6">
 			<div class="text-2xl font-bold accent-color">
 				Are you sure to delete <br />
-				Dr. Hanadi Yassin?
+				Dr. {{ doctor.name }}?
 			</div>
 
 			<div class="mt-10 flex items-center">
@@ -22,7 +24,7 @@
 				</button>
 
 				<button
-					(click)="opened$.next(false)"
+					(click)="remove(doctor)"
 					class="hover:bg-emerald-600 rounded-xl px-9 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500"
 				>
 					Yes

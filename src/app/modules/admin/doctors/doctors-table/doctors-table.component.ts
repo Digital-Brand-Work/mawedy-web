@@ -76,10 +76,4 @@ export class DoctorsTableComponent implements OnInit {
 
 		this._doctorService.current$.next(doctor)
 	}
-
-	remove(doctor: Doctor) {
-		this._doctorService.remove(doctor.id).subscribe(() => {
-			this.store.dispatch(DoctorActions.deleteDoctor({ id: doctor.id }))
-		})
-	}
 }

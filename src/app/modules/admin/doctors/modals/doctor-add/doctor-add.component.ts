@@ -211,7 +211,7 @@ export class DoctorAddComponent implements OnInit {
 								id: Math.floor(
 									Math.random() * 100000000000,
 								).toString(),
-								title: `${doctor.data.name} Successfully Added`,
+								title: `Dr. ${doctor.data.name} Successfully Added`,
 								message: `A new doctor has been successfully added to this branch`,
 								type: 'info',
 							})

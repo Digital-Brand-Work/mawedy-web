@@ -7,7 +7,11 @@
 		<img class="h-20 max-w-50" src="/assets/app/logo.svg" alt="" />
 	</a>
 
-	<button @slideInBottom mat-icon-button (click)="toggleNavigation('mainNavigation')">
+	<button
+		@slideInBottom
+		mat-icon-button
+		(click)="toggleNavigation('mainNavigation')"
+	>
 		<mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
 	</button>
 
@@ -39,12 +43,18 @@
 			class="accent-color ml-5 font-semibold mr-0"
 		>
 			{{ (clinic$ | async)?.name }}
-			<span class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md ml-1">
+			<span
+				class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md ml-1"
+			>
 				{{ (clinic$ | async)?.account_type }} Branch</span
 			>
 		</button>
 
-		<button @slideInRight matTooltip="Options" class="flex items-center mx-0 mr-10">
+		<button
+			@slideInRight
+			matTooltip="Options"
+			class="flex items-center mx-0 mr-10"
+		>
 			<user [showAvatar]="true"></user>
 		</button>
 	</div>
@@ -52,7 +62,6 @@
 
 <div class="flex flex-wrap flex-auto w-full min-w-0">
 	<fuse-vertical-navigation
-		@slideInRight
 		*ngIf="navigation && navigation.default"
 		class="bg-white print:hidden pt-20"
 		[mode]="isScreenSmall ? 'over' : 'side'"
@@ -61,17 +70,25 @@
 		[opened]="!isScreenSmall"
 	>
 		<ng-container fuseVerticalNavigationContentFooter>
-			<div class="flex items-center justify-center flex-col px-5 absolute bottom-50 w-full -translate-x-3">
+			<div
+				class="flex items-center justify-center flex-col px-5 absolute bottom-50 w-full -translate-x-3"
+			>
 				<img
 					@slideInBottom
-					*ngIf="(clinic$ | async)?.banner && (clinic$ | async)?.banner?.picture"
+					*ngIf="
+						(clinic$ | async)?.banner &&
+						(clinic$ | async)?.banner?.picture
+					"
 					class="w-full rounded-md shadow-md"
 					[src]="(clinic$ | async)?.banner?.picture?.url"
 				/>
 
 				<banner-placeholder
 					@slideInBottom
-					*ngIf="(clinic$ | async)?.banner === null || (clinic$ | async)?.banner.picture === null"
+					*ngIf="
+						(clinic$ | async)?.banner === null ||
+						(clinic$ | async)?.banner.picture === null
+					"
 				></banner-placeholder>
 
 				<div class="italic text-gray-400 mt-2">Powered by mawedy</div>
@@ -81,7 +98,11 @@
 
 	<div
 		class="flex flex-col flex-auto overflow-y-auto"
-		style="background: #f5f6fa; max-height: 100vh; width: calc(100vw - 380px) !important"
+		style="
+			background: #f5f6fa;
+			max-height: 100vh;
+			width: calc(100vw - 380px) !important;
+		"
 	>
 		<router-outlet *ngIf="true"></router-outlet>
 	</div>
