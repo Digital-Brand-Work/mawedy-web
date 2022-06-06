@@ -48,7 +48,27 @@ export class DoctorScheduleSelectComponent implements OnInit {
 		this.onTimeSelected.emit(this.timing)
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		if (this.timing !== undefined) {
+			let hour: any = this.timing.split(':')[0]
+
+			let min = this.timing.split(':')[1]
+
+			let part = hour > 12 ? 'PM' : 'AM'
+
+			if (parseInt(hour) === 0) hour = 12
+
+			min = (min + '').length === 1 ? `0${min}` : min
+
+			hour = hour > 12 ? hour - 12 : hour
+
+			this.selectedTime = {
+				hour: hour,
+				minutes: min,
+				meridian: part,
+			}
+		}
+	}
 
 	ngAfterViewInit(): void {
 		for (let i = 0; i <= 12; i++) {

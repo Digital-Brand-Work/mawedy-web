@@ -6,6 +6,8 @@ import { DoctorService } from '../../doctor.service'
 import { ConfirmDeleteDoctorModal } from './doctor-confirm-delete.service'
 import * as DoctorActions from '../../doctor.actions'
 import { DoctorDetailsModal } from '../doctor-details/doctor-details.service'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 @Component({
 	selector: 'doctor-confirm-delete',
 	templateUrl: './doctor-confirm-delete.component.html',
@@ -17,6 +19,7 @@ export class DoctorConfirmDeleteComponent implements OnInit {
 		private _confirmDeleteDoctorModal: ConfirmDeleteDoctorModal,
 		private _store: Store<{ doctors: Doctor[] }>,
 		private _doctorDetailsModal: DoctorDetailsModal,
+		private _indexDBService: NgxIndexedDBService,
 	) {}
 
 	opened$: BehaviorSubject<boolean> = this._confirmDeleteDoctorModal.opened$
@@ -27,11 +30,15 @@ export class DoctorConfirmDeleteComponent implements OnInit {
 
 	remove(doctor: Doctor) {
 		this._doctorService.remove(doctor.id).subscribe(() => {
-			this._store.dispatch(DoctorActions.deleteDoctor({ id: doctor.id }))
+			this._indexDBService.delete(DB.DOCTORS, doctor.id).subscribe(() => {
+				this._store.dispatch(
+					DoctorActions.deleteDoctor({ id: doctor.id }),
+				)
 
-			this.opened$.next(false)
+				this.opened$.next(false)
 
-			this._doctorDetailsModal.opened$.next(false)
+				this._doctorDetailsModal.opened$.next(false)
+			})
 		})
 	}
 }

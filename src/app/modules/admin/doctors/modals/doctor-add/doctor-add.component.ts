@@ -106,6 +106,8 @@ export class DoctorAddComponent implements OnInit {
 						departments: departments,
 					}),
 				)
+
+				this.form.value.departments = departments[0].id
 			})
 	}
 
