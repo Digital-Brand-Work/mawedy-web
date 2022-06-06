@@ -17,17 +17,30 @@
 						style="height: 60px"
 						class="accent-color font-semibold border-b border-b-gray-100 hover:bg-gray-50"
 						*ngFor="
-							let item of [
-								1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6,
-								7
-							];
+							let doctor of (doctors$ | async).entities
+								| entities;
 							trackBy: identity
 						"
 					>
-						<td>Dr. Hanadi Yassin</td>
+						<td>Dr. {{ doctor.name }}</td>
 						<td>Cardiology</td>
-						<td class="text-center">25 Years</td>
-						<td class="text-center">+98-7862-43453</td>
+						<td class="text-center">
+							{{ doctor.experience }} Years
+						</td>
+						<td class="text-center">
+							<a
+								role="button"
+								target="_blank"
+								class="underline hover:text-emerald-500 text-center"
+								[href]="'https://wa.me/0' + doctor.phone_number"
+							>
+								{{
+									doctor.phone_number
+										| appendCountryCode
+											: doctor.phone_country_code
+								}}</a
+							>
+						</td>
 						<td
 							(click)="doctorAvailabilityModalOpened$.next(true)"
 							role="button"

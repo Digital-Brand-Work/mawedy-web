@@ -20,6 +20,7 @@ import { AgmCoreModule } from '@agm/core'
 import { EntitiesPipe } from '@digital_brand_work/pipes/entity.pipe'
 import { AgePipe } from '@digital_brand_work/pipes/age.pipe'
 import { TimePipe } from '@digital_brand_work/pipes/time.pipe'
+import { AppendCountryCodePipe } from '@digital_brand_work/pipes/append-country-code.pipe'
 
 const components = [
 	...appComponents,
@@ -52,6 +53,7 @@ const directives = [
 	EntitiesPipe,
 	AgePipe,
 	TimePipe,
+	AppendCountryCodePipe,
 ]
 
 const pipes = []

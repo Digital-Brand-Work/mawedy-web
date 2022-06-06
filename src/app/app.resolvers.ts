@@ -14,6 +14,7 @@ import { DepartmentService } from './modules/admin/clinic/department/department.
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from './mawedy-core/enums/index.db.enum'
 import { UserService } from './core/user/user.service'
+import { DoctorService } from './modules/admin/doctors/doctor.service'
 
 @Injectable({
 	providedIn: 'root',
@@ -24,6 +25,7 @@ export class InitialDataResolver implements Resolve<any> {
 		private _userService: UserService,
 		private _patientService: PatientService,
 		private _departmentService: DepartmentService,
+		private _doctorService: DoctorService,
 		private _indexDBService: NgxIndexedDBService,
 		private _indexDBController: IndexedDbController,
 	) {}
@@ -35,8 +37,9 @@ export class InitialDataResolver implements Resolve<any> {
 		forkJoin([
 			this._patientService.get(),
 			this._departmentService.get(),
+			this._doctorService.get(),
 		]).subscribe((results: any) => {
-			const [patient, department] = results
+			const [patients, departments, doctors] = results
 
 			this._indexDBController.removeAll([
 				DB.DEPARTMENTS,
@@ -47,11 +50,19 @@ export class InitialDataResolver implements Resolve<any> {
 				DB.PROMOTIONS,
 			])
 
-			this._indexDBService.bulkAdd(DB.PATIENTS, patient.data as Patient[])
+			this._indexDBService.bulkAdd(
+				DB.PATIENTS,
+				patients.data as Patient[],
+			)
 
 			this._indexDBService.bulkAdd(
 				DB.DEPARTMENTS,
-				department.data as Department[],
+				departments.data as Department[],
+			)
+
+			this._indexDBService.bulkAdd(
+				DB.DOCTORS,
+				doctors.data as Department[],
 			)
 		})
 

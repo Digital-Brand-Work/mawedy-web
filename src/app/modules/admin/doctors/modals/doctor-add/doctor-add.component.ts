@@ -190,7 +190,7 @@ export class DoctorAddComponent implements OnInit {
 			.subscribe({
 				next: (doctor: any) => {
 					this._indexDBService
-						.add(DB.DOCTOR, doctor.data)
+						.add(DB.DOCTORS, doctor.data)
 						.subscribe(() => {
 							this._store.dispatch(
 								DoctorActions.addDoctor({

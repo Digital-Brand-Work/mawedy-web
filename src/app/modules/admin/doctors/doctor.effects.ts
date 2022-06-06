@@ -10,67 +10,67 @@ import { EMPTY } from 'rxjs'
 export class DoctorEffects {
 	constructor(private actions$: Actions, private service: DoctorService) {}
 
-	get$ = createEffect(
-		() =>
-			this.actions$.pipe(
-				ofType(DoctorActions.loadDoctors),
-				mergeMap(() =>
-					this.service.get().pipe(
-						map((doctors: Doctor[]) => ({
-							type: DoctorActions.loadDoctors,
-							payload: doctors,
-						})),
-						catchError(() => EMPTY),
-					),
-				),
-			) as any,
-	)
+	// get$ = createEffect(
+	// 	() =>
+	// 		this.actions$.pipe(
+	// 			ofType(DoctorActions.loadDoctors),
+	// 			mergeMap(() =>
+	// 				this.service.get().pipe(
+	// 					map((doctors: Doctor[]) => ({
+	// 						type: DoctorActions.loadDoctors,
+	// 						payload: doctors,
+	// 					})),
+	// 					catchError(() => EMPTY),
+	// 				),
+	// 			),
+	// 		) as any,
+	// )
 
-	add$ = createEffect(
-		() =>
-			this.actions$.pipe(
-				ofType(DoctorActions.addDoctor),
-				concatMap(({ doctor }) =>
-					this.service.post(doctor).pipe(
-						map((doctor: Doctor) => ({
-							type: DoctorActions.addDoctor,
-							payload: doctor,
-						})),
-						catchError(() => EMPTY),
-					),
-				),
-			) as any,
-	)
+	// add$ = createEffect(
+	// 	() =>
+	// 		this.actions$.pipe(
+	// 			ofType(DoctorActions.addDoctor),
+	// 			concatMap(({ doctor }) =>
+	// 				this.service.post(doctor).pipe(
+	// 					map((doctor: Doctor) => ({
+	// 						type: DoctorActions.addDoctor,
+	// 						payload: doctor,
+	// 					})),
+	// 					catchError(() => EMPTY),
+	// 				),
+	// 			),
+	// 		) as any,
+	// )
 
-	update$ = createEffect(
-		() =>
-			this.actions$.pipe(
-				ofType(DoctorActions.updateDoctor),
-				concatMap(({ doctor }) =>
-					this.service.updateWithFile(doctor.id, doctor).pipe(
-						map((doctor: Doctor) => ({
-							type: DoctorActions.updateDoctor,
-							payload: doctor,
-						})),
-						catchError(() => EMPTY),
-					),
-				),
-			) as any,
-	)
+	// update$ = createEffect(
+	// 	() =>
+	// 		this.actions$.pipe(
+	// 			ofType(DoctorActions.updateDoctor),
+	// 			concatMap(({ doctor }) =>
+	// 				this.service.updateWithFile(doctor.id, doctor).pipe(
+	// 					map((doctor: Doctor) => ({
+	// 						type: DoctorActions.updateDoctor,
+	// 						payload: doctor,
+	// 					})),
+	// 					catchError(() => EMPTY),
+	// 				),
+	// 			),
+	// 		) as any,
+	// )
 
-	remove$ = createEffect(
-		() =>
-			this.actions$.pipe(
-				ofType(DoctorActions.deleteDoctor),
-				concatMap(({ id }) =>
-					this.service.remove(id).pipe(
-						map(() => ({
-							type: DoctorActions.deleteDoctor,
-							payload: id,
-						})),
-						catchError(() => EMPTY),
-					),
-				),
-			) as any,
-	)
+	// remove$ = createEffect(
+	// 	() =>
+	// 		this.actions$.pipe(
+	// 			ofType(DoctorActions.deleteDoctor),
+	// 			concatMap(({ id }) =>
+	// 				this.service.remove(id).pipe(
+	// 					map(() => ({
+	// 						type: DoctorActions.deleteDoctor,
+	// 						payload: id,
+	// 					})),
+	// 					catchError(() => EMPTY),
+	// 				),
+	// 			),
+	// 		) as any,
+	// )
 }

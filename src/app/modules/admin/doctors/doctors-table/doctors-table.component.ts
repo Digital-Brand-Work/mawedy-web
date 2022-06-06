@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { BehaviorSubject } from 'rxjs'
+import { Store } from '@ngrx/store'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
+import { Doctor } from '../doctor.model'
 import { DoctorAvailabilityModal } from '../modals/doctor-availability/doctor-availability.service'
 import { DoctorDetailsModal } from '../modals/doctor-details/doctor-details.service'
-
+import * as DoctorActions from '../doctor.actions'
 @Component({
 	selector: 'doctors-table',
 	templateUrl: './doctors-table.component.html',
@@ -12,9 +16,13 @@ import { DoctorDetailsModal } from '../modals/doctor-details/doctor-details.serv
 })
 export class DoctorsTableComponent implements OnInit {
 	constructor(
-		private doctorAvailabilityModal: DoctorAvailabilityModal,
+		private store: Store<{ doctors: Doctor[] }>,
+		private _indexDBService: NgxIndexedDBService,
 		private doctorDetailsModal: DoctorDetailsModal,
+		private doctorAvailabilityModal: DoctorAvailabilityModal,
 	) {}
+
+	unsubscribe$: Subject<any> = new Subject<any>()
 
 	doctorAvailabilityModalOpened$: BehaviorSubject<boolean> =
 		this.doctorAvailabilityModal.opened$
@@ -22,7 +30,30 @@ export class DoctorsTableComponent implements OnInit {
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.doctorDetailsModal.opened$
 
-	ngOnInit(): void {}
+	doctors$?: Observable<Doctor[]>
+
+	ngOnInit(): void {
+		this.doctors$ = this.store.select('doctors')
+
+		this._indexDBService
+			.getAll(DB.DOCTORS)
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((doctors) => {
+				if (doctors) {
+					this.store.dispatch(
+						DoctorActions.loadDoctors({
+							doctors: doctors as Doctor[],
+						}),
+					)
+				}
+			})
+	}
+
+	ngOnDestroy(): void {
+		this.unsubscribe$.next(null)
+
+		this.unsubscribe$.complete()
+	}
 
 	identity = (item: any) => item
 }
