@@ -1,8 +1,8 @@
 <div
 	*ngIf="opened$ | async"
 	stop-propagation
-	animateJs
-	class="m-auto bg-white w-full md:w-3/5 rounded-xl overflow-hidden animate__fadeInUp animate__faster"
+	class="m-auto bg-white w-full md:w-3/5 rounded-xl overflow-hidden"
+	@zoomIn
 >
 	<modal-header
 		modalTitle="Doctor's Profile"

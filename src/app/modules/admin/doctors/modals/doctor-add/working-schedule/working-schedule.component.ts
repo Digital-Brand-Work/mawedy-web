@@ -6,6 +6,7 @@ import {
 	Input,
 	ChangeDetectorRef,
 } from '@angular/core'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
 import { TimeSlot } from '../../../doctor.model'
 
@@ -13,6 +14,7 @@ import { TimeSlot } from '../../../doctor.model'
 	selector: 'working-schedule',
 	templateUrl: './working-schedule.component.html',
 	styleUrls: ['./working-schedule.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class WorkingScheduleComponent implements OnInit {
 	constructor(private _cdr: ChangeDetectorRef) {}
@@ -60,7 +62,7 @@ export class WorkingScheduleComponent implements OnInit {
 					}
 				}
 			}
-		}, 500)
+		}, 200)
 
 		this._cdr.detectChanges()
 
@@ -83,11 +85,5 @@ export class WorkingScheduleComponent implements OnInit {
 		this._cdr.detectChanges()
 
 		this.onChangeSchedule.emit(this.currentTimeSlots)
-	}
-
-	shorten(day: WeekDay) {
-		const char = day.split('')
-
-		return `${char[0]}${char[1]}${char[2]}`
 	}
 }

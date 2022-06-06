@@ -202,10 +202,15 @@ export class DoctorEditComponent implements OnInit {
 
 		for (let day in this.currentTimeSlots) {
 			for (let key in this.currentTimeSlots[day]) {
-				form.append(
-					`timeslots[${day}][${key}]`,
-					this.currentTimeSlots[day][key],
-				)
+				if (
+					this.currentTimeSlots[day].start !== undefined &&
+					this.currentTimeSlots[day].end !== undefined
+				) {
+					form.append(
+						`timeslots[${day}][${key}]`,
+						this.currentTimeSlots[day][key],
+					)
+				}
 			}
 		}
 

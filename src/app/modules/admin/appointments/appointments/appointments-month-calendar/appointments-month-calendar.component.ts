@@ -55,9 +55,4 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 	days: number[] = [31]
 
 	identity = (item: any) => item
-
-	shorten(day: WeekDay) {
-		const char = day.split('')
-		return `${char[0]}${char[1]}${char[2]}`
-	}
 }

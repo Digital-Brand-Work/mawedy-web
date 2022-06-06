@@ -16,7 +16,7 @@
 					class="text-center accent-color font-bold uppercase rounded-md flex items-center justify-center"
 					*ngFor="let day of weekDays; trackBy: identity"
 				>
-					{{ shorten(day) }}
+					{{ day | shortened }}
 				</div>
 			</div>
 

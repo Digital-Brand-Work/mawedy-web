@@ -9,13 +9,13 @@ export const PHONE = '+971501112222'
 export const EMAIL = 'info@mawedy.ae'
 
 export const weekDays: WeekDay[] = [
-	'sunday',
 	'monday',
 	'tuesday',
 	'wednesday',
 	'thursday',
 	'friday',
 	'saturday',
+	'sunday',
 ]
 
 export type WeekDay =

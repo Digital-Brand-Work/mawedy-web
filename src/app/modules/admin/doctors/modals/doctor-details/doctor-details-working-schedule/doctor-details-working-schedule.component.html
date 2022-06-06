@@ -6,22 +6,34 @@
 		class="flex flex-col mb-5"
 	>
 		<div>
-			<div class="text-md accent-color flex items-center">
+			<div class="text-base accent-color flex items-center">
 				<div
 					[ngClass]="{
-						available: getTimeSlot(day)?.active,
-						'not-available': !getTimeSlot(day)?.active
+						'available ': (day | toTimeSlot: timeslots)?.active,
+						'not-available': !(day | toTimeSlot: timeslots)?.active
 					}"
 					class="rounded-full mr-2"
 				></div>
 
-				{{ shorten(day) | uppercase }} ({{
-					getTimeSlot(day)?.active ? 'Available' : 'Unavailable'
-				}})
+				<div
+					[ngClass]="{
+						'text-emerald-500': (day | toTimeSlot: timeslots)
+							?.active
+					}"
+				>
+					{{ day | shortened | uppercase }}
+				</div>
 			</div>
 
-			<div *ngIf="getTimeSlot(day)?.active" class="text-sm text-black">
-				{{ getTimeSlot(day)?.start }} | {{ getTimeSlot(day)?.end }}
+			<div
+				*ngIf="(day | toTimeSlot: timeslots)?.active"
+				class="text-md accent-color ml-4"
+			>
+				{{
+					(day | toTimeSlot: timeslots)?.start | toTwelve | uppercase
+				}}
+				-
+				{{ (day | toTimeSlot: timeslots)?.end | toTwelve | uppercase }}
 			</div>
 		</div>
 	</div>

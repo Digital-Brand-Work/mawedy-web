@@ -1,8 +1,8 @@
 <div
 	*ngIf="opened$ | async"
 	stop-propagation
-	animateJs
-	class="m-auto bg-white w-full md:w-3/4 rounded-xl overflow-hidden animate__fadeInUp animate__faster"
+	class="m-auto bg-white w-full md:w-3/4 rounded-xl overflow-hidden"
+	@zoomIn
 >
 	<modal-header
 		modalTitle="Doctors Profile"
@@ -174,7 +174,7 @@
 
 		<working-schedule
 			(onChangeSchedule)="changeSchedule($event)"
-			[timeslots]="timeslots"
+			[timeslots]="(doctor$ | async)?.timeslots"
 		></working-schedule>
 
 		<div class="flex">

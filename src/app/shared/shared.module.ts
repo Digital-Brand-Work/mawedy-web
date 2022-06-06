@@ -22,6 +22,9 @@ import { AgePipe } from '@digital_brand_work/pipes/age.pipe'
 import { TimePipe } from '@digital_brand_work/pipes/time.pipe'
 import { AppendCountryCodePipe } from '@digital_brand_work/pipes/append-country-code.pipe'
 import { InitialsPipe } from '@digital_brand_work/pipes/initials.pipe'
+import { ToTimeSlotPipe } from '@digital_brand_work/pipes/time-slot.pipe'
+import { ShortenDayPipe } from '@digital_brand_work/pipes/shorten.day.pipe'
+import { TwentyFourToTwelveHoursPipe } from '@digital_brand_work/pipes/twenty-four-to-twelve.hours.pipe'
 
 const components = [
 	...appComponents,
@@ -56,6 +59,9 @@ const directives = [
 	TimePipe,
 	AppendCountryCodePipe,
 	InitialsPipe,
+	ToTimeSlotPipe,
+	ShortenDayPipe,
+	TwentyFourToTwelveHoursPipe,
 ]
 
 const pipes = []

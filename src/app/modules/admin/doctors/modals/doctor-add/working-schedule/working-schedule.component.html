@@ -11,6 +11,7 @@
 		<div class="grid grid-cols-1 md:grid-cols-7 md:gap-x-10">
 			<div *ngFor="let day of weekdays; trackBy: identity">
 				<div
+					@expandCollapse
 					*ngIf="currentTimeSlots[day]"
 					class="flex flex-col items-center justify-center"
 				>
@@ -28,7 +29,7 @@
 						<div
 							class="text-center accent-color text-base font-bold uppercase rounded-md flex items-center justify-center"
 						>
-							{{ shorten(day) }}
+							{{ day | shortened }}
 						</div>
 					</div>
 

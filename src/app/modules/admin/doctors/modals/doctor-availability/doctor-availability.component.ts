@@ -32,10 +32,4 @@ export class DoctorAvailabilityComponent implements OnInit {
 	ngOnInit(): void {}
 
 	identity = (item: any): any => item
-
-	shorten(day: WeekDay): string {
-		const char = day.split('')
-
-		return `${char[0]}${char[1]}${char[2]}`
-	}
 }

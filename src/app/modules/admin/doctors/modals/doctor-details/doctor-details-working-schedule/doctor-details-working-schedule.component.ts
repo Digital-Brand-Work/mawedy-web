@@ -1,5 +1,5 @@
 import { TimeSlot } from './../../../doctor.model'
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
 
 @Component({
@@ -10,16 +10,11 @@ import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
 export class DoctorDetailsWorkingScheduleComponent implements OnInit {
 	constructor() {}
 
-	timeslots: TimeSlot[] = []
+	@Input() timeslots: TimeSlot[] = []
 
 	weekdays: WeekDay[] = weekDays
 
 	ngOnInit(): void {}
-
-	getTimeSlot = (day: any): TimeSlot =>
-		this.timeslots.find(
-			(slot) => day.toLowerCase() === slot.day.toLowerCase(),
-		)
 
 	identity = (item: any): any => item
 
@@ -33,11 +28,5 @@ export class DoctorDetailsWorkingScheduleComponent implements OnInit {
 		}
 
 		return available
-	}
-
-	shorten(day: WeekDay): string {
-		const char = day.split('')
-
-		return `${char[0]}${char[1]}${char[2]}`
 	}
 }

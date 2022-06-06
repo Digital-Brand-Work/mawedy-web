@@ -49,9 +49,4 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
-
-	shorten(day: WeekDay) {
-		const char = day.split('')
-		return `${char[0]}${char[1]}${char[2]}`
-	}
 }
