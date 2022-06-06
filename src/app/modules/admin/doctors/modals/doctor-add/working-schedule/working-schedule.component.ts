@@ -40,13 +40,27 @@ export class WorkingScheduleComponent implements OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		for (let day of this.weekdays) {
-			this.currentTimeSlots[day] = {
-				active: true,
-				start: '00:00',
-				end: '00:01',
+		setTimeout(() => {
+			for (let day of this.weekdays) {
+				this.currentTimeSlots[day] = {
+					active: true,
+					start: '00:00',
+					end: '00:01',
+				}
+
+				const timeslot = this.timeslots.find(
+					(slot) => slot.day.toLowerCase() === day.toLowerCase(),
+				)
+
+				if (timeslot) {
+					this.currentTimeSlots[day] = {
+						active: timeslot.active,
+						start: timeslot.start,
+						end: timeslot.end,
+					}
+				}
 			}
-		}
+		}, 500)
 
 		this._cdr.detectChanges()
 

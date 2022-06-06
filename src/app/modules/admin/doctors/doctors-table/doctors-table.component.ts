@@ -46,9 +46,15 @@ export class DoctorsTableComponent implements OnInit {
 					this.onDoctorChanges.emit(
 						Object.values(doctors.entities) as Doctor[],
 					)
+
+					this.fetchAndLoadDoctors()
 				}
 			})
 
+		this.fetchAndLoadDoctors()
+	}
+
+	fetchAndLoadDoctors() {
 		this._indexDBService
 			.getAll(DB.DOCTORS)
 			.pipe(takeUntil(this.unsubscribe$))
@@ -73,7 +79,6 @@ export class DoctorsTableComponent implements OnInit {
 
 	manage(doctor: Doctor) {
 		this.doctorDetailsModalOpened$.next(true)
-
 		this._doctorService.current$.next(doctor)
 	}
 

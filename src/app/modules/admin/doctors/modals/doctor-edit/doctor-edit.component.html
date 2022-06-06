@@ -176,5 +176,24 @@
 			(onChangeSchedule)="changeSchedule($event)"
 			[timeslots]="timeslots"
 		></working-schedule>
+
+		<div class="flex">
+			<button
+				(click)="save()"
+				matRipple
+				matRippleColor="rgba(11, 169, 118,.1)"
+				[disabled]="isProcessing"
+				[ngClass]="{
+					'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 shadow-emerald-500/50 shadow ':
+						!isProcessing,
+					'bg-gray-400 pointer-events-none ': isProcessing
+				}"
+				class="ml-auto rounded-lg px-10 py-3 font-bold border-2"
+			>
+				<spinner *ngIf="isProcessing"></spinner>
+
+				<div class="text-white" *ngIf="!isProcessing">Update</div>
+			</button>
+		</div>
 	</form>
 </div>

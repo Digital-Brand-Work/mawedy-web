@@ -24,7 +24,10 @@ import { DoctorDetailsModal } from '../doctor-details/doctor-details.service'
 import { EditDoctorModal } from './doctor-edit.service'
 import * as DepartmentActions from '../../../clinic/department/department.actions'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { result } from 'lodash'
+import * as DoctorActions from '../../doctor.actions'
+import { HttpErrorResponse } from '@angular/common/http'
+import { AlertState } from 'app/components/alert/alert.service'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
 @Component({
 	selector: 'doctor-edit',
 	templateUrl: './doctor-edit.component.html',
@@ -33,12 +36,14 @@ import { result } from 'lodash'
 })
 export class DoctorEditComponent implements OnInit {
 	constructor(
+		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
+		private _formBuilder: FormBuilder,
 		private _doctorService: DoctorService,
 		private _editDoctorModal: EditDoctorModal,
-		private _doctorDetailsModal: DoctorDetailsModal,
-		private _formBuilder: FormBuilder,
 		private _indexDBService: NgxIndexedDBService,
+		private _doctorDetailsModal: DoctorDetailsModal,
+		private _errorHandlerService: ErrorHandlerService,
 		private _store: Store<{ department: Department[]; doctors: Doctor }>,
 	) {}
 
@@ -64,6 +69,7 @@ export class DoctorEditComponent implements OnInit {
 	departments$?: Observable<Department[]>
 
 	form: FormGroup = this._formBuilder.group({
+		id: ['', [Validators.required]],
 		name: ['', [Validators.required]],
 		title: ['', [Validators.required]],
 		profession: ['', [Validators.required]],
@@ -110,24 +116,29 @@ export class DoctorEditComponent implements OnInit {
 				}),
 			)
 
-			this.form.setValue({
-				name: doctor.name,
-				title: doctor.title,
-				profession: doctor.profession,
-				experience: doctor.experience,
-				about: doctor.about,
-				phone_number: doctor.phone_number,
-				phone_country_code: doctor.phone_country_code,
-				email: doctor.email,
-				departments: doctor.departments[0].id,
-			})
-
-			this.timeslots = doctor.timeslots
-
-			if (doctor.picture !== null) {
-				this.picturePreview = doctor.picture.url
-			}
+			this.setForm(doctor)
 		})
+	}
+
+	setForm(doctor: Doctor) {
+		this.form.setValue({
+			id: doctor.id,
+			name: doctor.name,
+			title: doctor.title,
+			profession: doctor.profession,
+			experience: doctor.experience,
+			about: doctor.about,
+			phone_number: doctor.phone_number,
+			phone_country_code: doctor.phone_country_code,
+			email: doctor.email,
+			departments: doctor.departments[0].id,
+		})
+
+		this.timeslots = doctor.timeslots
+
+		if (doctor.picture !== null) {
+			this.picturePreview = doctor.picture.url
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -170,5 +181,58 @@ export class DoctorEditComponent implements OnInit {
 		this.currentTimeSlots = event
 	}
 
-	save() {}
+	save() {
+		this.isProcessing = true
+
+		const form = new FormData()
+
+		if (this.picture !== undefined && this.picture !== true) {
+			form.append('picture', this.picture)
+		}
+
+		for (let key in this.form.value) {
+			if (key !== 'departments') {
+				form.append(key, this.form.value[key])
+			}
+		}
+
+		form.append('departments[0]', this.form.value.departments)
+
+		this._doctorService
+			.updateWithFile(this.form.value.id, form)
+			.subscribe({
+				next: (doctor: any) => {
+					this._indexDBService
+						.update(DB.DOCTORS, doctor.data)
+						.subscribe(() => {
+							this._store.dispatch(
+								DoctorActions.updateDoctor({
+									doctor: doctor.data,
+								}),
+							)
+
+							this.form.reset()
+
+							this.input.nativeElement.focus()
+
+							this.setForm(doctor.data)
+
+							this.doctor$.next(doctor.data)
+
+							this._alert.add({
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+								title: `Doctor has been updated!`,
+								message: `Dr. ${doctor.data.name}'s data has been successfully updated`,
+								type: 'info',
+							})
+						})
+				},
+				error: (http: HttpErrorResponse) => {
+					this._errorHandlerService.handleError(http)
+				},
+			})
+			.add(() => (this.isProcessing = false))
+	}
 }
