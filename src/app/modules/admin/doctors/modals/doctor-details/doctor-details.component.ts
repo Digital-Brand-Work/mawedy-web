@@ -22,9 +22,9 @@ import { Doctor } from '../../doctor.model'
 export class DoctorDetailsComponent implements OnInit {
 	constructor(
 		private _doctorService: DoctorService,
-		private editDoctorModal: EditDoctorModal,
-		private confirmDeleteDoctorModal: ConfirmDeleteDoctorModal,
-		private doctorDetailsModal: DoctorDetailsModal,
+		private _editDoctorModal: EditDoctorModal,
+		private _confirmDeleteDoctorModal: ConfirmDeleteDoctorModal,
+		private _doctorDetailsModal: DoctorDetailsModal,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -36,13 +36,13 @@ export class DoctorDetailsComponent implements OnInit {
 
 	unsubscribe$: Subject<any> = new Subject()
 
-	opened$: BehaviorSubject<boolean> = this.doctorDetailsModal.opened$
+	opened$: BehaviorSubject<boolean> = this._doctorDetailsModal.opened$
 
 	confirmDeleteDoctorModalOpened$: BehaviorSubject<boolean> =
-		this.confirmDeleteDoctorModal.opened$
+		this._confirmDeleteDoctorModal.opened$
 
 	editDoctorModalOpened$: BehaviorSubject<boolean> =
-		this.editDoctorModal.opened$
+		this._editDoctorModal.opened$
 
 	doctor$?: BehaviorSubject<Doctor | null> = this._doctorService.current$
 
