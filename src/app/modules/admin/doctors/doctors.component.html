@@ -4,10 +4,11 @@
 
 <ng-template #doctorsToolbar>
 	<doctors-toolbar
+		[doctors]="doctors"
 		(onFilter)="filter()"
 		(onSearch)="filter()"
 		class="w-full"
 	></doctors-toolbar>
 </ng-template>
 
-<doctors-table></doctors-table>
+<doctors-table (onDoctorChanges)="doctors = $event"></doctors-table>

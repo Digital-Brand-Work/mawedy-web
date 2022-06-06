@@ -4,6 +4,7 @@ import { SeoService } from '@digital_brand_work/services/seo.service'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 import { Clinic } from '../clinic/clinic.model'
 import { ClinicUserService } from '../clinic/clinic.service'
+import { Doctor } from './doctor.model'
 
 @Component({
 	selector: 'doctors',
@@ -20,6 +21,8 @@ export class DoctorsComponent implements OnInit {
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
 	unsubscribe$: Subject<any> = new Subject<any>()
+
+	doctors: Doctor[] = []
 
 	ngOnInit(): void {
 		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {

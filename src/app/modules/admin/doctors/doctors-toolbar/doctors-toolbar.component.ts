@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Doctor } from './../doctor.model'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 import { AddDoctorModal } from '../modals/doctor-add/doctor-add.service'
 
@@ -13,6 +14,8 @@ export class DoctorsToolbarComponent implements OnInit {
 	@Output() onSearch = new EventEmitter()
 
 	@Output() onFilter = new EventEmitter()
+
+	@Input() doctors: Doctor[] = []
 
 	keyword: string = ''
 

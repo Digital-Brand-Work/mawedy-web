@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Store } from '@ngrx/store'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
@@ -21,6 +21,8 @@ export class DoctorsTableComponent implements OnInit {
 		private doctorDetailsModal: DoctorDetailsModal,
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
 	) {}
+
+	@Output() onDoctorChanges = new EventEmitter<Doctor[]>()
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -45,6 +47,8 @@ export class DoctorsTableComponent implements OnInit {
 							doctors: doctors as Doctor[],
 						}),
 					)
+
+					this.onDoctorChanges.emit(doctors as Doctor[])
 				}
 			})
 	}
