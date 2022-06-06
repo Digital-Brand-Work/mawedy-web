@@ -51,7 +51,7 @@ export class PatientsComponent implements OnInit {
 				}
 
 				this.seoService.generateTags({
-					title: `${clinic.name} | ${clinic?.line_one}`,
+					title: `${clinic.name} | ${clinic?.address} | Patients`,
 				})
 
 				if (patients) {
