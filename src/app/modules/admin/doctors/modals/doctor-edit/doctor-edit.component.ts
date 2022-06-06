@@ -198,6 +198,17 @@ export class DoctorEditComponent implements OnInit {
 
 		form.append('departments[0]', this.form.value.departments)
 
+		console.log(this.currentTimeSlots)
+
+		for (let day in this.currentTimeSlots) {
+			for (let key in this.currentTimeSlots[day]) {
+				form.append(
+					`timeslots[${day}][${key}]`,
+					this.currentTimeSlots[day][key],
+				)
+			}
+		}
+
 		this._doctorService
 			.updateWithFile(this.form.value.id, form)
 			.subscribe({

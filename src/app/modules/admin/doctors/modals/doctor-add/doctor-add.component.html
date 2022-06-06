@@ -154,7 +154,7 @@
 						Department
 					</label>
 
-					<mat-select
+					<select
 						id="departments"
 						formControlName="departments"
 						[ngClass]="{
@@ -177,7 +177,7 @@
 						>
 							{{ department.name | titlecase }}
 						</option>
-					</mat-select>
+					</select>
 
 					<div
 						*ngIf="

@@ -36,34 +36,38 @@
 			</button>
 
 			<mat-menu #departmentMenu="matMenu">
-				<button
-					*ngFor="
-						let department of (departments$ | async).entities
-							| entities;
-						trackBy: identity;
-						let i = index
-					"
-					mat-menu-item
-					class="hover:bg-gray-200 text-gray-500 font-medium flex items-center"
-					(click)="department$.next(department)"
-					[ngClass]="{
-						'bg-emerald-500 text-white pointer-events-none':
-							(department$ | async).id === department.id,
-						'text-gray-500':
-							(department$ | async).id !== department.id
-					}"
-				>
-					<span class="mr-5"> {{ department.name | titlecase }}</span>
-
-					<mat-icon
+				<div *ngIf="department$ | async">
+					<button
+						*ngFor="
+							let department of (departments$ | async).entities
+								| entities;
+							trackBy: identity;
+							let i = index
+						"
+						mat-menu-item
+						class="hover:bg-gray-200 text-gray-500 font-medium flex items-center"
+						(click)="department$.next(department)"
 						[ngClass]="{
-							'text-white ':
-								(department$ | async).id === department.id
+							'bg-emerald-500 text-white pointer-events-none':
+								(department$ | async).id === department.id,
+							'text-gray-500':
+								(department$ | async).id !== department.id
 						}"
-						svgIcon="keyboard_arrow_right"
-						class="ml-auto"
-					></mat-icon>
-				</button>
+					>
+						<span class="mr-5">
+							{{ department.name | titlecase }}</span
+						>
+
+						<mat-icon
+							[ngClass]="{
+								'text-white ':
+									(department$ | async).id === department.id
+							}"
+							svgIcon="keyboard_arrow_right"
+							class="ml-auto"
+						></mat-icon>
+					</button>
+				</div>
 			</mat-menu>
 
 			<li

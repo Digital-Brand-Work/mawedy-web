@@ -34,16 +34,18 @@ export class DoctorScheduleSelectComponent implements OnInit {
 		minutes: '0',
 	}
 
-	setTime() {
-		this.timing = `${this.selectedTime.hour}:${this.selectedTime.minutes}`
-
+	setTime(): void {
 		if (this.selectedTime.meridian === 'AM') {
-			this.timing = `${parseInt(this.selectedTime.hour) + 12}:${
-				this.selectedTime.minutes
-			}`
+			this.timing = `${this.toFixedTwo(
+				parseInt(this.selectedTime.hour) + 12,
+			)}:${this.toFixedTwo(parseInt(this.selectedTime.minutes))}`
+		} else {
+			this.timing = `${this.toFixedTwo(
+				parseInt(this.selectedTime.hour),
+			)}:${this.toFixedTwo(parseInt(this.selectedTime.minutes))}`
 		}
 
-		this.onTimeSelected.emit(this.toFixedTwo(parseInt(this.timing)))
+		this.onTimeSelected.emit(this.timing)
 	}
 
 	ngOnInit(): void {}
