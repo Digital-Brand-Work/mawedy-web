@@ -17,3 +17,19 @@
 	height: 10px;
 	background: #6f7d8f 0% 0% no-repeat padding-box;
 }
+
+.checkbox-disabled {
+	.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+	.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+		background-color: #94a3b8 !important;
+	}
+	.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+	.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+		background-color: #94a3b8 !important;
+	}
+
+	.mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+		opacity: 0.03 !important;
+		background-color: #94a3b8 !important;
+	}
+}

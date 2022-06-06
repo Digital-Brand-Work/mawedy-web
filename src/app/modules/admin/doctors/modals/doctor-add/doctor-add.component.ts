@@ -1,16 +1,11 @@
-import { animate } from '@angular/animations'
-import { isPlatformBrowser } from '@angular/common'
 import {
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
-	Inject,
 	OnInit,
-	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
-import { createMask } from '@ngneat/input-mask'
 import { Store } from '@ngrx/store'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { Department } from 'app/modules/admin/clinic/department/department.model'
@@ -20,8 +15,12 @@ import { AddDoctorModal } from './doctor-add.service'
 import * as DepartmentActions from '../../../clinic/department//department.actions'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
-import { Doctor } from '../../doctor.model'
+import { Doctor, TimeSlot } from '../../doctor.model'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { DoctorService } from '../../doctor.service'
+import * as DoctorActions from '../../doctor.actions'
+import { AlertState } from 'app/components/alert/alert.service'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Component({
 	selector: 'doctor-add',
@@ -31,13 +30,15 @@ import { ErrorHandlerService } from 'app/misc/error-handler.service'
 })
 export class DoctorAddComponent implements OnInit {
 	constructor(
-		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _alert: AlertState,
 		private _addDoctorModal: AddDoctorModal,
 		private _cdr: ChangeDetectorRef,
 		private store: Store<{ department: Department[]; doctors: Doctor }>,
 		private _indexDBService: NgxIndexedDBService,
 		private _errorHandlerService: ErrorHandlerService,
 		private _formBuilder: FormBuilder,
+		private _doctorService: DoctorService,
+		private _store: Store<{ doctor: Doctor }>,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -65,6 +66,33 @@ export class DoctorAddComponent implements OnInit {
 		email: ['', [Validators.required, Validators.email]],
 		departments: ['', [Validators.required]],
 	})
+
+	errors = {
+		name: false,
+		profession: false,
+		experience: false,
+		about: false,
+		phone_number: false,
+		phone_country_code: false,
+		email: false,
+		departments: false,
+	}
+
+	timeslots: TimeSlot[] = []
+
+	currentTimeSlots: {
+		[key: string]: {
+			active: boolean
+			start: string
+			end: string
+		}
+	} = {}
+
+	picture: File | undefined | true = undefined
+
+	picturePreview: string | ArrayBuffer | undefined = undefined
+
+	isProcessing: boolean = false
 
 	ngOnInit(): void {
 		this.departments$ = this.store.select('department')
@@ -100,5 +128,106 @@ export class DoctorAddComponent implements OnInit {
 		this._cdr.detectChanges()
 	}
 
-	save() {}
+	readFile(event: any): void {
+		this.picture = event.target.files[0]
+
+		const reader = new FileReader()
+
+		reader.readAsDataURL(event.target.files[0])
+
+		reader.onload = (_event) => {
+			this.picturePreview = reader.result
+		}
+	}
+
+	handleMobileNumberChange(event: {
+		countryCode: string
+		phoneNumber: string
+	}): void {
+		this.form.value.phone_number = event.phoneNumber
+
+		this.form.value.phone_country_code = event.countryCode
+	}
+
+	changeSchedule(event: {
+		[key: string]: {
+			active: boolean
+			start: string
+			end: string
+		}
+	}): void {
+		this.currentTimeSlots = event
+	}
+
+	save(): void {
+		this.isProcessing = true
+
+		const form = new FormData()
+
+		if (this.picture !== undefined && this.picture !== true) {
+			form.append('picture', this.picture)
+		}
+
+		for (let key in this.form.value) {
+			if (key !== 'departments') {
+				form.append(key, this.form.value[key])
+			}
+		}
+
+		form.append('departments[0]', this.form.value.departments)
+
+		for (let day in this.currentTimeSlots) {
+			for (let key in this.currentTimeSlots[day]) {
+				form.append(
+					`timeslots[${day}][${key}]`,
+					this.currentTimeSlots[day][key],
+				)
+			}
+		}
+
+		this._doctorService
+			.post(form)
+			.subscribe({
+				next: (doctor: any) => {
+					this._indexDBService
+						.add(DB.DOCTOR, doctor.data)
+						.subscribe(() => {
+							this._store.dispatch(
+								DoctorActions.addDoctor({
+									doctor: doctor.data,
+								}),
+							)
+
+							this.form.reset()
+
+							this.picture = undefined
+
+							this.picturePreview = undefined
+
+							this.input.nativeElement.focus()
+
+							this._alert.add({
+								id: Math.floor(
+									Math.random() * 100000000000,
+								).toString(),
+								title: `${doctor.data.name} Successfully Added`,
+								message: `A new doctor has been successfully added to this branch`,
+								type: 'info',
+							})
+						})
+				},
+				error: (http: HttpErrorResponse) => {
+					this._errorHandlerService.handleError(http)
+
+					for (let key in http.error.errors) {
+						for (let errorKey in this.errors) {
+							if (key.includes(errorKey)) {
+								this.errors[errorKey] = true
+							}
+						}
+					}
+				},
+			})
+			.add(() => (this.isProcessing = false))
+	}
 }

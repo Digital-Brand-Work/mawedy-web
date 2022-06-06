@@ -4,13 +4,23 @@
 		<div class="ml-auto text-gray-400 text-base">Select Availability</div>
 	</div>
 
-	<div class="working-schedule-container">
+	<div
+		[ngClass]="{ 'pointer-events-none bg-gray-200': !isAvailable }"
+		class="working-schedule-container"
+	>
 		<div class="grid grid-cols-1 md:grid-cols-7 md:gap-x-10">
 			<div *ngFor="let day of weekdays; trackBy: identity">
-				<div class="flex flex-col items-center justify-center">
-					<div class="flex items-center justify-center">
+				<div
+					*ngIf="currentTimeSlots[day]"
+					class="flex flex-col items-center justify-center"
+				>
+					<div
+						[ngClass]="{ 'checkbox-disabled ': !isAvailable }"
+						class="flex items-center justify-center"
+					>
 						<mat-checkbox
-							matTooltip="Within the clinic schedule"
+							[(ngModel)]="currentTimeSlots[day].active"
+							matTooltip="ToggleAvailability"
 							style="transform: translateY(-3px)"
 							class="mr-1"
 						></mat-checkbox>
@@ -23,27 +33,64 @@
 					</div>
 
 					<div class="mt-5">
-						<doctor-schedule-select></doctor-schedule-select>
+						<doctor-schedule-select
+							[day]="day"
+							[timing]="currentTimeSlots[day].start"
+							[disabled]="!currentTimeSlots[day].active"
+							(onTimeSelected)="
+								currentTimeSlots[day].start = $event;
+								onChangeSchedule.emit(this.currentTimeSlots)
+							"
+						></doctor-schedule-select>
 					</div>
 
 					<div class="mt-5">
-						<doctor-schedule-select></doctor-schedule-select>
+						<doctor-schedule-select
+							[day]="day"
+							[timing]="currentTimeSlots[day].end"
+							[disabled]="!currentTimeSlots[day].active"
+							(onTimeSelected)="
+								currentTimeSlots[day].end = $event;
+								onChangeSchedule.emit(this.currentTimeSlots)
+							"
+						></doctor-schedule-select>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="flex my-5 items-center md:ml-5">
-		<div class="flex items-center mr-5">
-			<div class="available rounded-full mr-2"></div>
+	<div class="flex my-5 items-center">
+		<button
+			(click)="toggleAvailability(true)"
+			mat-button
+			class="flex items-center mr-5"
+		>
+			<div
+				[ngClass]="{
+					'not-available': !isAvailable,
+					available: isAvailable
+				}"
+				class="rounded-full mr-2"
+			></div>
 
 			<div class="text-gray-600">Available</div>
-		</div>
-		<div class="flex items-center">
-			<div class="not-available rounded-full mr-2"></div>
+		</button>
 
-			<div class="text-gray-600">Not Available</div>
-		</div>
+		<button
+			(click)="toggleAvailability(false)"
+			mat-button
+			class="flex items-center"
+		>
+			<div
+				[ngClass]="{
+					'not-available': isAvailable,
+					available: !isAvailable
+				}"
+				class="rounded-full mr-2"
+			></div>
+
+			<button class="text-gray-600">Not Available</button>
+		</button>
 	</div>
 </div>

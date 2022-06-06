@@ -9,23 +9,23 @@ export const PHONE = '+971501112222'
 export const EMAIL = 'info@mawedy.ae'
 
 export const weekDays: WeekDay[] = [
-	'Sunday',
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
+	'sunday',
+	'monday',
+	'tuesday',
+	'wednesday',
+	'thursday',
+	'friday',
+	'saturday',
 ]
 
 export type WeekDay =
-	| 'Monday'
-	| 'Tuesday'
-	| 'Wednesday'
-	| 'Thursday'
-	| 'Friday'
-	| 'Saturday'
-	| 'Sunday'
+	| 'monday'
+	| 'tuesday'
+	| 'wednesday'
+	| 'thursday'
+	| 'friday'
+	| 'saturday'
+	| 'sunday'
 
 export const BENEFITS: HomeSection2Feature[] = [
 	{ img: 1, feature: 'Advertise your clinic' },

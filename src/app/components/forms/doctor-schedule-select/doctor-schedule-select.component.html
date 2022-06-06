@@ -1,6 +1,10 @@
 <button
 	[matMenuTriggerFor]="schedule"
-	class="p-1 border border-gray-200 px-2 bg-white rounded-md accent-color hover:bg-gray-50 flex items-center"
+	[ngClass]="{
+		'bg-gray-400 text-white pointer-events-none': disabled,
+		'bg-white accent-color': !disabled
+	}"
+	class="p-1 border border-gray-200 px-2 rounded-md accent-color hover:bg-gray-50 flex items-center"
 >
 	{{ selectedTime.hour | toTime }}:{{ selectedTime.minutes | toTime }}
 	{{ selectedTime.meridian }}

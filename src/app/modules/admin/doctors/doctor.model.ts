@@ -15,7 +15,7 @@ export interface Doctor extends PHPBaseModel {
 
 export interface TimeSlot extends PHPBaseModel {
 	day: DayEnum
-	start: Date
-	end: Date
+	start: string
+	end: string
 	active: boolean
 }

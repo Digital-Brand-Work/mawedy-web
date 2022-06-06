@@ -4,6 +4,7 @@ import {
 	Output,
 	EventEmitter,
 	ChangeDetectorRef,
+	Input,
 } from '@angular/core'
 
 @Component({
@@ -16,12 +17,16 @@ export class DoctorScheduleSelectComponent implements OnInit {
 
 	@Output() onTimeSelected = new EventEmitter<string>()
 
+	@Input() timing: string
+
+	@Input() disabled: boolean
+
+	@Input() day: boolean
+
 	time = {
 		hours: [],
 		minutes: [],
 	}
-
-	timing?: string
 
 	selectedTime = {
 		meridian: 'AM',
