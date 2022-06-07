@@ -1,5 +1,5 @@
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
-import { countries } from './constants/country-codes.list'
+import { countries, DialCode } from './constants/country-codes.list'
 
 export const setPrefix = (country_code: string): string => {
 	return countries.find((country) => country.code === country_code).dial_code
@@ -17,4 +17,14 @@ export function toCardExpiry(digits: string) {
 
 export function toAddress(clinic: Clinic) {
 	return
+}
+
+export function removeDialCode(number: string, code: string): string {
+	if (number === '' || code === '' || code === null || number === null) {
+		return ''
+	}
+
+	return number.slice(
+		countries.find((country) => country.code === code).dial_code.length,
+	)
 }

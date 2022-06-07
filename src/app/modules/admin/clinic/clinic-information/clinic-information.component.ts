@@ -23,7 +23,11 @@ import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.contr
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { days } from 'app/mawedy-core/enums/day.enum'
 import { ClinicTimingSelectModal } from '../clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
-import { times } from 'lodash'
+import {
+	countries,
+	DialCode,
+} from 'app/mawedy-core/constants/country-codes.list'
+import { removeDialCode } from 'app/mawedy-core/helpers'
 
 @Component({
 	selector: 'clinic-information',
@@ -130,10 +134,6 @@ export class ClinicInformationComponent implements OnInit {
 				return
 			}
 
-			if (clinic.banner && clinic.banner.picture !== null) {
-				this.bannerPreview = clinic.banner.picture.url
-			}
-
 			this.bannerPreview
 
 			this.banner_picture = true
@@ -145,8 +145,14 @@ export class ClinicInformationComponent implements OnInit {
 				latitude: parseFloat(clinic.latitude) || 0,
 				longitude: parseFloat(clinic.longitude) || 0,
 				description: clinic.description || '',
-				phone_number_one: clinic.phone_number_one || '',
-				phone_number_two: clinic.phone_number_two || '',
+				phone_number_one: removeDialCode(
+					clinic.phone_number_one,
+					clinic.phone_number_one_country_code,
+				),
+				phone_number_two: removeDialCode(
+					clinic.phone_number_two,
+					clinic.phone_number_two_country_code,
+				),
 				phone_number_one_country_code:
 					clinic.phone_number_one_country_code || '',
 				phone_number_two_country_code:
