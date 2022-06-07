@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { MedicalService } from './../medical-service.model'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 @Component({
 	selector: 'clinic-service-item',
@@ -8,7 +9,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 export class ClinicServiceItemComponent implements OnInit {
 	constructor() {}
 
-	@Output() onSelectMedicalService = new EventEmitter<any>()
+	@Output() onSelectMedicalService = new EventEmitter<MedicalService>()
+
+	@Input() service: MedicalService
 
 	ngOnInit(): void {}
 }

@@ -18,10 +18,12 @@ import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 @Component({
 	selector: 'clinic-department-add',
 	templateUrl: './clinic-department-add.component.html',
 	styleUrls: ['./clinic-department-add.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class ClinicDepartmentAddComponent implements OnInit {
 	constructor(

@@ -1,3 +1,4 @@
+import { MedicalService } from './medical-service.model'
 import { empty } from 'app/mawedy-core/helpers'
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
@@ -12,6 +13,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { EditClinicDepartmentModal } from './modals/clinic-department-edit/clinic-department-edit.service'
+import { MedicalService_Service } from './medical-service.service'
 
 @Component({
 	selector: 'clinic-services',
@@ -21,12 +23,13 @@ import { EditClinicDepartmentModal } from './modals/clinic-department-edit/clini
 })
 export class ClinicServicesComponent implements OnInit {
 	constructor(
+		private _indexDBService: NgxIndexedDBService,
+		private _departmentService: DepartmentService,
 		private addDepartmentModal: AddDepartmentModal,
+		private store: Store<{ department: Department[] }>,
+		private _medicalServiceAPI: MedicalService_Service,
 		private addClinicServiceModal: AddClinicServiceModal,
 		private editClinicServiceModal: EditClinicServiceModal,
-		private store: Store<{ department: Department[] }>,
-		private _departmentService: DepartmentService,
-		private _indexDBService: NgxIndexedDBService,
 		private _editDepartmentModal: EditClinicDepartmentModal,
 	) {}
 
@@ -56,7 +59,7 @@ export class ClinicServicesComponent implements OnInit {
 		this.fetchFromIndexedDb()
 	}
 
-	fetchFromIndexedDb() {
+	fetchFromIndexedDb(): void {
 		this._indexDBService
 			.getAll(DB.DEPARTMENTS)
 			.subscribe((departments: Department[]) => {
@@ -74,9 +77,9 @@ export class ClinicServicesComponent implements OnInit {
 			})
 	}
 
-	identity = (item: any) => item
+	identity = (item: any): any => item
 
-	edit() {
+	edit(): void {
 		this.department$.pipe(take(1)).subscribe((department) => {
 			this._departmentService.current$.next(department)
 
@@ -84,7 +87,7 @@ export class ClinicServicesComponent implements OnInit {
 		})
 	}
 
-	remove() {
+	remove(): void {
 		this.department$.pipe(take(1)).subscribe((department) => {
 			if (!department) {
 				return
@@ -102,5 +105,11 @@ export class ClinicServicesComponent implements OnInit {
 					})
 			})
 		})
+	}
+
+	editMedicalService(service: MedicalService): void {
+		this.editClinicServiceModalOpened$.next(true)
+
+		this._medicalServiceAPI.current$.next(service)
 	}
 }

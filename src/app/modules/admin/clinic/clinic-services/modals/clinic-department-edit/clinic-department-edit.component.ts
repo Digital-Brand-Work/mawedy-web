@@ -19,11 +19,13 @@ import * as DepartmentActions from '../../../department/department.actions'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { HttpErrorResponse } from '@angular/common/http'
 import { empty } from 'app/mawedy-core/helpers'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
 	selector: 'clinic-department-edit',
 	templateUrl: './clinic-department-edit.component.html',
 	styleUrls: ['./clinic-department-edit.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class ClinicDepartmentEditComponent implements OnInit {
 	constructor(

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -6,10 +7,19 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { Store } from '@ngrx/store'
+import { AlertState } from 'app/components/alert/alert.service'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
+import { Department } from '../../../department/department.model'
+import { DepartmentService } from '../../../department/department.service'
+import { MedicalService_Service } from '../../medical-service.service'
 import { AddClinicServiceModal } from './clinic-services-add.service'
-
+import * as DepartmentActions from '../../../department/department.actions'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 @Component({
 	selector: 'clinic-services-add',
 	templateUrl: './clinic-services-add.component.html',
@@ -18,8 +28,15 @@ import { AddClinicServiceModal } from './clinic-services-add.service'
 })
 export class ClinicServicesAddComponent implements OnInit {
 	constructor(
-		private addMedicalService: AddClinicServiceModal,
-		private cdr: ChangeDetectorRef,
+		private _alert: AlertState,
+		private _cdr: ChangeDetectorRef,
+		private _formBuilder: FormBuilder,
+		private departmentService: DepartmentService,
+		private _indexDBService: NgxIndexedDBService,
+		private _addMedicalService: AddClinicServiceModal,
+		private _errorHandlerService: ErrorHandlerService,
+		private _medicalServiceAPI: MedicalService_Service,
+		private _store: Store<{ department: Department[] }>,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -27,34 +44,81 @@ export class ClinicServicesAddComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
+	@ViewChild('ngForm') ngForm: NgForm
+
 	@ViewChild('input') input!: ElementRef
 
 	@ViewChild('description', { read: ElementRef }) textArea: ElementRef
 
-	opened$: BehaviorSubject<boolean> = this.addMedicalService.opened$
+	unsubscribe$: Subject<any> = new Subject<any>()
 
-	_unsubscribeAll: Subject<any> = new Subject<any>()
+	opened$: BehaviorSubject<boolean> = this._addMedicalService.opened$
 
-	ngOnInit(): void {}
+	form: FormGroup = this._formBuilder.group({
+		department_id: '',
+		name: ['', Validators.required],
+		description: ['', Validators.required],
+	})
+
+	errors = {
+		name: false,
+		description: false,
+	}
+
+	picture: File | undefined | true = undefined
+
+	picturePreview: string | ArrayBuffer | undefined = undefined
+
+	isProcessing: boolean = false
+
+	ngOnInit(): void {
+		this.departmentService.current$
+			.pipe(take(1))
+			.subscribe((department) => {
+				this.form.setValue({
+					name: '',
+					description: '',
+					department_id: department.id,
+				})
+			})
+	}
+
+	readFile(event: any): void {
+		this.picture = event.target.files[0]
+
+		const reader = new FileReader()
+
+		reader.readAsDataURL(event.target.files[0])
+
+		reader.onload = (_event) => {
+			this.picturePreview = reader.result
+		}
+	}
 
 	ngAfterViewInit(): void {
-		this.opened$
-			.pipe(takeUntil(this._unsubscribeAll))
-			.subscribe((focused) => {
+		combineLatest([this.opened$, this.departmentService.current$])
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((results) => {
+				const [focused, department] = results
+
 				if (focused) {
 					this.input.nativeElement.focus()
 				}
+
+				if (department) {
+					this.form.value.department_id = department.id
+				}
 			})
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
-		this._unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this._unsubscribeAll.complete()
+		this.unsubscribe$.complete()
 
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 
 	autoGrow() {
@@ -65,5 +129,76 @@ export class ClinicServicesAddComponent implements OnInit {
 		textArea.style.height = '0px'
 
 		textArea.style.height = textArea.scrollHeight + 'px'
+	}
+
+	save() {
+		this.isProcessing = true
+
+		const form = new FormData()
+
+		if (this.picture !== undefined && this.picture !== true) {
+			form.append('picture', this.picture)
+		}
+
+		for (let key in this.form.value) {
+			form.append(key, this.form.value[key])
+		}
+
+		this.departmentService.current$
+			.pipe(take(1))
+			.subscribe((department) => {
+				this._medicalServiceAPI
+					.post(form)
+					.subscribe({
+						next: (medical_service: any) => {
+							this._indexDBService
+								.update(DB.DEPARTMENTS, department)
+								.subscribe(() => {
+									this.form.reset()
+
+									const newDepartment: any = {
+										...department,
+										services: [
+											...department.services,
+											medical_service.data,
+										],
+									}
+
+									this._store.dispatch(
+										DepartmentActions.updateDepartment({
+											department: newDepartment,
+										}),
+									)
+
+									this.picture = undefined
+
+									this.picturePreview = undefined
+
+									this.input.nativeElement.focus()
+
+									this._alert.add({
+										id: Math.floor(
+											Math.random() * 100000000000,
+										).toString(),
+										title: `${medical_service.data.name} Successfully Added`,
+										message: `A new medical service has been added on ${department.name}`,
+										type: 'success',
+									})
+								})
+						},
+						error: (http: HttpErrorResponse) => {
+							this._errorHandlerService.handleError(http)
+
+							for (let key in http.error.errors) {
+								for (let errorKey in this.errors) {
+									if (key.includes(errorKey)) {
+										this.errors[errorKey] = true
+									}
+								}
+							}
+						},
+					})
+					.add(() => (this.isProcessing = false))
+			})
 	}
 }

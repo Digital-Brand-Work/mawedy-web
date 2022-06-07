@@ -215,7 +215,7 @@ export class DoctorAddComponent implements OnInit {
 								).toString(),
 								title: `Dr. ${doctor.data.name} Successfully Added`,
 								message: `A new doctor has been successfully added to this branch`,
-								type: 'info',
+								type: 'success',
 							})
 						})
 				},

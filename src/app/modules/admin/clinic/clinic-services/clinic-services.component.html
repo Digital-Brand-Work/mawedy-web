@@ -115,10 +115,12 @@
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 				<clinic-service-item
-					(onSelectMedicalService)="
-						editClinicServiceModalOpened$.next(true)
+					[service]="service"
+					*ngFor="
+						let service of (department$ | async).services;
+						trackBy: identity
 					"
-					*ngFor="let item of [1, 2, 3, 4, 5, 6]; trackBy: identity"
+					(onSelectMedicalService)="editMedicalService($event)"
 				>
 				</clinic-service-item>
 			</div>
