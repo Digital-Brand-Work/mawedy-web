@@ -1,0 +1,64 @@
+<div
+	animateJs
+	stop-propagation
+	style="min-width: 500px"
+	class="m-auto bg-white h-auto w-full md:w-1/4 rounded-xl overflow-hidden animate__flipInX animate__faster"
+>
+	<modal-header
+		modalTitle="Edit Department"
+		(onClose)="opened$.next(false)"
+	></modal-header>
+
+	<form
+		[formGroup]="form"
+		#ngForm="ngForm"
+		class="px-10 py-5 h-auto bg-white"
+	>
+		<div class="mb-5">
+			<label for="name" class="mb-1 font-bold accent-color text-md"
+				>Department</label
+			>
+
+			<input
+				#input
+				type="text"
+				id="name"
+				formControlName="name"
+				autocomplete="department"
+				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+				placeholder="Type Department"
+				[ngClass]="{
+					'border-rose-500':
+						form.get('name')?.valid && form.get('name')?.touched
+				}"
+			/>
+
+			<div
+				*ngIf="form.get('name')?.valid && form.get('name')?.touched"
+				class="text-sm text-rose-500"
+			>
+				Department is required.
+			</div>
+		</div>
+
+		<div class="flex">
+			<button
+				(click)="save()"
+				matRipple
+				matRippleColor="rgba(11, 169, 118,.1)"
+				[disabled]="!form.valid || form.disabled"
+				[ngClass]="{
+					'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 shadow-emerald-500/50 shadow ':
+						form.valid && !form.disabled,
+					'bg-gray-400 pointer-events-none ':
+						!form.valid || form.disabled
+				}"
+				class="ml-auto rounded-lg px-10 py-2 font-bold border-2"
+			>
+				<spinner *ngIf="form.disabled"></spinner>
+
+				<div class="text-white" *ngIf="!form.disabled">Save</div>
+			</button>
+		</div>
+	</form>
+</div>

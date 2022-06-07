@@ -18,8 +18,8 @@ import { EditClinicServiceModal } from './clinic-services-edit.service'
 })
 export class ClinicServicesEditComponent implements OnInit {
 	constructor(
-		private editClinicServiceModal: EditClinicServiceModal,
-		private cdr: ChangeDetectorRef,
+		private _cdr: ChangeDetectorRef,
+		private _editClinicServiceModal: EditClinicServiceModal,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -31,30 +31,28 @@ export class ClinicServicesEditComponent implements OnInit {
 
 	@ViewChild('description', { read: ElementRef }) textArea: ElementRef
 
-	opened$: BehaviorSubject<boolean> = this.editClinicServiceModal.opened$
+	opened$: BehaviorSubject<boolean> = this._editClinicServiceModal.opened$
 
-	_unsubscribeAll: Subject<any> = new Subject<any>()
+	unsubscribe$: Subject<any> = new Subject<any>()
 
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
-		this.opened$
-			.pipe(takeUntil(this._unsubscribeAll))
-			.subscribe((focused) => {
-				if (focused) {
-					this.input.nativeElement.focus()
-				}
-			})
+		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {
+			if (focused) {
+				this.input.nativeElement.focus()
+			}
+		})
 
-		this.cdr.detectChanges()
+		this._cdr.detectChanges()
 	}
 
 	ngOnDestroy(): void {
-		this._unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this._unsubscribeAll.complete()
+		this.unsubscribe$.complete()
 
-		this.cdr.detach()
+		this._cdr.detach()
 	}
 
 	autoGrow() {

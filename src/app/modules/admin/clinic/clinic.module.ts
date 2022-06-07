@@ -29,8 +29,14 @@ const components = [
 	imports: [
 		SharedModule,
 		RouterModule.forChild(clinicRoutes),
-		StoreModule.forFeature(department.departmentsFeatureKey, department.reducer),
-		StoreModule.forFeature(medicalService.medicalServicesFeatureKey, medicalService.reducer),
+		StoreModule.forFeature(
+			department.departmentsFeatureKey,
+			department.reducer,
+		),
+		StoreModule.forFeature(
+			medicalService.medicalServicesFeatureKey,
+			medicalService.reducer,
+		),
 		EffectsModule.forFeature([DepartmentEffects, MedicalServiceEffects]),
 	],
 	exports: [...components],

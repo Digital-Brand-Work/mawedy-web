@@ -7,6 +7,15 @@
 	class="fixed w-screen h-screen flex"
 ></clinic-department-add>
 
+<clinic-department-edit
+	stop-propagation
+	(click)="editDepartmentModalOpened$.next(false)"
+	*ngIf="editDepartmentModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></clinic-department-edit>
+
 <clinic-services-add
 	stop-propagation
 	(click)="addClinicServiceModalOpened$.next(false)"

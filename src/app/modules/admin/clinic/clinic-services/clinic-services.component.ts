@@ -10,6 +10,7 @@ import { DepartmentService } from '../department/department.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { EditClinicDepartmentModal } from './modals/clinic-department-edit/clinic-department-edit.service'
 
 @Component({
 	selector: 'clinic-services',
@@ -25,6 +26,7 @@ export class ClinicServicesComponent implements OnInit {
 		private store: Store<{ department: Department[] }>,
 		private _departmentService: DepartmentService,
 		private _indexDBService: NgxIndexedDBService,
+		private _editDepartmentModal: EditClinicDepartmentModal,
 	) {}
 
 	unsubscribe$: Subject<any> = new Subject<any>()
@@ -62,6 +64,14 @@ export class ClinicServicesComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	edit() {
+		this.department$.pipe(take(1)).subscribe((department) => {
+			this._departmentService.current$.next(department)
+
+			this._editDepartmentModal.opened$.next(true)
+		})
+	}
 
 	remove() {
 		this.department$.pipe(take(1)).subscribe((department) => {

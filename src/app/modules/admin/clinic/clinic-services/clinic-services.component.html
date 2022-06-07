@@ -91,11 +91,23 @@
 			</li>
 		</ul>
 
-		<div style="min-height: 50vh" class="bg-emerald-50/70 w-full p-10 mb-5">
+		<div
+			@expandCollapse
+			*ngIf="department$ | async"
+			style="min-height: 50vh"
+			class="bg-emerald-50/70 w-full p-10 mb-5"
+		>
 			<div class="flex items-center mb-10">
 				<button
+					(click)="edit()"
+					class="ml-auto py-2 px-10 rounded-md text-white bg-emerald-500 hover:bg-emerald-600"
+				>
+					Edit
+				</button>
+
+				<button
 					(click)="remove()"
-					class="ml-auto bg-white border text-emerald-500 border-emerald-500 py-2 px-10 font-semibold tracking-wide rounded-md hover:bg-red-50 hover:text-red-500 hover:border-red-500 text-md"
+					class="ml-5 bg-white border text-emerald-500 border-emerald-500 py-2 px-10 font-semibold tracking-wide rounded-md hover:bg-red-50 hover:text-red-500 hover:border-red-500 text-md"
 				>
 					Delete
 				</button>

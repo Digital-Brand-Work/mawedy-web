@@ -6,6 +6,7 @@ import { ModalDoctorComponent } from './modal-doctor/modal-doctor.component'
 import { ModalSubscriptionComponent } from './modal-subscription/modal-subscription.component'
 import { SharedModule } from 'app/shared/shared.module'
 import { ModalPatientComponent } from './modal-patient/modal-patient.component'
+import { ClinicDepartmentEditComponent } from '../admin/clinic/clinic-services/modals/clinic-department-edit/clinic-department-edit.component'
 
 const components = [
 	ModalAppointmentComponent,
@@ -14,6 +15,7 @@ const components = [
 	ModalDoctorComponent,
 	ModalSubscriptionComponent,
 	ModalPatientComponent,
+	ClinicDepartmentEditComponent,
 ]
 
 @NgModule({

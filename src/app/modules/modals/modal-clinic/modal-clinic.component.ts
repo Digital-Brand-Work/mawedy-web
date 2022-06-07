@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { AddDepartmentModal } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-add/clinic-department-add.service'
+import { EditClinicDepartmentModal } from 'app/modules/admin/clinic/clinic-services/modals/clinic-department-edit/clinic-department-edit.service'
 import { AddClinicServiceModal } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-add/clinic-services-add.service'
 import { EditClinicServiceModal } from 'app/modules/admin/clinic/clinic-services/modals/clinic-services-edit/clinic-services-edit.service'
 import { ClinicTimingSelectModal } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
@@ -18,15 +19,23 @@ export class ModalClinicComponent implements OnInit {
 		private _addClinicServiceModal: AddClinicServiceModal,
 		private _editClinicServiceModal: EditClinicServiceModal,
 		private _clinicTimingSelectModal: ClinicTimingSelectModal,
+		private _editDepartmentModal: EditClinicDepartmentModal,
 	) {}
 
-	addDepartmentModalOpened$: BehaviorSubject<boolean> = this._addDepartmentModal.opened$
+	addDepartmentModalOpened$: BehaviorSubject<boolean> =
+		this._addDepartmentModal.opened$
 
-	addClinicServiceModalOpened$: BehaviorSubject<boolean> = this._addClinicServiceModal.opened$
+	editDepartmentModalOpened$: BehaviorSubject<boolean> =
+		this._editDepartmentModal.opened$
 
-	editClinicServiceModalOpened$: BehaviorSubject<boolean> = this._editClinicServiceModal.opened$
+	addClinicServiceModalOpened$: BehaviorSubject<boolean> =
+		this._addClinicServiceModal.opened$
 
-	clinicTimingSelectModalOpened$: BehaviorSubject<boolean> = this._clinicTimingSelectModal.opened$
+	editClinicServiceModalOpened$: BehaviorSubject<boolean> =
+		this._editClinicServiceModal.opened$
+
+	clinicTimingSelectModalOpened$: BehaviorSubject<boolean> =
+		this._clinicTimingSelectModal.opened$
 
 	ngOnInit(): void {}
 }
