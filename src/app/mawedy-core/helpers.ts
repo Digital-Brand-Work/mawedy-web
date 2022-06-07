@@ -19,8 +19,16 @@ export function toAddress(clinic: Clinic) {
 	return
 }
 
+export function empty(value: any): boolean {
+	if (!value || value === '' || value === null || value === undefined) {
+		return true
+	}
+
+	return false
+}
+
 export function removeDialCode(number: string, code: string): string {
-	if (number === '' || code === '' || code === null || number === null) {
+	if (empty(number) || empty(code)) {
 		return ''
 	}
 

@@ -1,5 +1,5 @@
 import { ClinicSubscriptionType } from './../../../mawedy-core/enums/clinic-subscription-type.enum'
-import { PHPBaseModel } from '@digital_brand_work/models/core.model'
+import { PHPBaseModel, PHPFile } from '@digital_brand_work/models/core.model'
 import {
 	ClinicRegistrationStatus,
 	ClinicRegistrationStatusEnum,
@@ -25,7 +25,7 @@ export interface Clinic extends PHPBaseModel {
 	latitude: string
 	longitude: string
 
-	banner: { picture: { url: string } }
+	banner: { picture: PHPFile }
 
 	phone_number_one: string
 	phone_number_two: string

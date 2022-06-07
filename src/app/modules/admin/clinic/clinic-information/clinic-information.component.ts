@@ -27,7 +27,7 @@ import {
 	countries,
 	DialCode,
 } from 'app/mawedy-core/constants/country-codes.list'
-import { removeDialCode } from 'app/mawedy-core/helpers'
+import { empty, removeDialCode, setPrefix } from 'app/mawedy-core/helpers'
 
 @Component({
 	selector: 'clinic-information',
@@ -134,7 +134,9 @@ export class ClinicInformationComponent implements OnInit {
 				return
 			}
 
-			this.bannerPreview
+			if (!empty(clinic.banner) && !empty(clinic.banner.picture)) {
+				this.bannerPreview = clinic.banner.picture.url
+			}
 
 			this.banner_picture = true
 
@@ -242,10 +244,28 @@ export class ClinicInformationComponent implements OnInit {
 		}
 
 		for (let key in this.form.value) {
-			if (this.form.value[key] !== '') {
+			if (
+				!empty(this.form.value[key]) ||
+				key !== 'phone_number_two' ||
+				key !== 'phone_number_two'
+			) {
 				form.append(key, this.form.value[key])
 			}
 		}
+
+		if (!empty(this.form.value.phone_number_two)) {
+			form.append(
+				'phone_number_two',
+				setPrefix(this.form.value.phone_number_two_country_code) +
+					this.form.value.phone_number_two,
+			)
+		}
+
+		form.append(
+			'phone_number_one',
+			setPrefix(this.form.value.phone_number_one_country_code) +
+				this.form.value.phone_number_one,
+		)
 
 		this.timeslots.forEach((slot) => {
 			form.append(
