@@ -1,6 +1,7 @@
+import { empty } from 'app/mawedy-core/helpers'
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { BehaviorSubject, Observable, Subject, take } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs'
 import { Department } from '../department/department.model'
 import { AddDepartmentModal } from './modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from './modals/clinic-services-add/clinic-services-add.service'
@@ -48,6 +49,14 @@ export class ClinicServicesComponent implements OnInit {
 	ngOnInit(): void {
 		this.departments$ = this.store.select('department')
 
+		this.departments$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+			this.fetchFromIndexedDb()
+		})
+
+		this.fetchFromIndexedDb()
+	}
+
+	fetchFromIndexedDb() {
 		this._indexDBService
 			.getAll(DB.DEPARTMENTS)
 			.subscribe((departments: Department[]) => {
@@ -57,9 +66,11 @@ export class ClinicServicesComponent implements OnInit {
 					}),
 				)
 
-				if (departments.length !== 0) {
-					this.department$.next(departments[0])
-				}
+				this.department$.pipe(take(1)).subscribe((department) => {
+					if (departments.length !== 0 && empty(department)) {
+						this.department$.next(departments[0])
+					}
+				})
 			})
 	}
 
