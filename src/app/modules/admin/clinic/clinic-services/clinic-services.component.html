@@ -71,7 +71,7 @@
 			</mat-menu>
 
 			<li
-				(click)="department$.next(department)"
+				(click)="setDepartment(department)"
 				*ngFor="
 					let department of (departments$ | async).entities
 						| entities;
@@ -112,12 +112,18 @@
 					Delete
 				</button>
 			</div>
-
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+			<div
+				*ngIf="medicalServices$ | async"
+				class="grid grid-cols-1 md:grid-cols-3 gap-10"
+				[@listAnimation]="
+					((medicalServices$ | async)?.entities | entities).length
+				"
+			>
 				<clinic-service-item
 					[service]="service"
 					*ngFor="
-						let service of (department$ | async).services;
+						let service of (medicalServices$ | async)?.entities
+							| entities;
 						trackBy: identity
 					"
 					(onSelectMedicalService)="editMedicalService($event)"

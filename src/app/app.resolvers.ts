@@ -48,6 +48,7 @@ export class InitialDataResolver implements Resolve<any> {
 				DB.PATIENTS,
 				DB.MEDICAL_SERVICES,
 				DB.PROMOTIONS,
+				DB.MEDICAL_SERVICES,
 			])
 
 			this._indexDBService.bulkAdd(

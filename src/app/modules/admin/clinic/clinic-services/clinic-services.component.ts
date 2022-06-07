@@ -1,3 +1,4 @@
+import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
 import { MedicalService } from './medical-service.model'
 import { empty } from 'app/mawedy-core/helpers'
 import { Component, OnInit } from '@angular/core'
@@ -7,13 +8,14 @@ import { Department } from '../department/department.model'
 import { AddDepartmentModal } from './modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from './modals/clinic-services-add/clinic-services-add.service'
 import { EditClinicServiceModal } from './modals/clinic-services-edit/clinic-services-edit.service'
-import * as DepartmentActions from '../../clinic/department//department.actions'
 import { DepartmentService } from '../department/department.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { EditClinicDepartmentModal } from './modals/clinic-department-edit/clinic-department-edit.service'
 import { MedicalService_Service } from './medical-service.service'
+import * as MedicalServiceActions from './medical-service.actions'
+import * as DepartmentActions from '../../clinic/department//department.actions'
 
 @Component({
 	selector: 'clinic-services',
@@ -26,11 +28,15 @@ export class ClinicServicesComponent implements OnInit {
 		private _indexDBService: NgxIndexedDBService,
 		private _departmentService: DepartmentService,
 		private addDepartmentModal: AddDepartmentModal,
-		private store: Store<{ department: Department[] }>,
 		private _medicalServiceAPI: MedicalService_Service,
 		private addClinicServiceModal: AddClinicServiceModal,
 		private editClinicServiceModal: EditClinicServiceModal,
 		private _editDepartmentModal: EditClinicDepartmentModal,
+		private _indexDBController: IndexedDbController,
+		private store: Store<{
+			department: Department[]
+			medicalService: MedicalService[]
+		}>,
 	) {}
 
 	unsubscribe$: Subject<any> = new Subject<any>()
@@ -49,8 +55,14 @@ export class ClinicServicesComponent implements OnInit {
 	department$: BehaviorSubject<Department | null> =
 		this._departmentService.current$
 
+	medicalServices$?: Observable<MedicalService[]>
+
 	ngOnInit(): void {
 		this.departments$ = this.store.select('department')
+
+		this.medicalServices$ = this.store.select('medicalService')
+
+		this.medicalServices$.subscribe((service) => console.log(service))
 
 		this.departments$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
 			this.fetchFromIndexedDb()
@@ -72,12 +84,40 @@ export class ClinicServicesComponent implements OnInit {
 				this.department$.pipe(take(1)).subscribe((department) => {
 					if (departments.length !== 0 && empty(department)) {
 						this.department$.next(departments[0])
+
+						this.store.dispatch(
+							MedicalServiceActions.loadMedicalServices({
+								medicalServices: departments[0].services,
+							}),
+						)
+
+						departments[0].services.forEach((services) => {
+							this._indexDBService
+								.add(DB.MEDICAL_SERVICES, services)
+								.subscribe()
+						})
 					}
 				})
 			})
 	}
 
 	identity = (item: any): any => item
+
+	setDepartment(department: Department) {
+		this.department$.next(department)
+
+		this.store.dispatch(
+			MedicalServiceActions.loadMedicalServices({
+				medicalServices: department.services,
+			}),
+		)
+
+		this._indexDBController.removeAll([DB.MEDICAL_SERVICES])
+
+		department.services.forEach((services) => {
+			this._indexDBService.add(DB.MEDICAL_SERVICES, services).subscribe()
+		})
+	}
 
 	edit(): void {
 		this.department$.pipe(take(1)).subscribe((department) => {

@@ -1,3 +1,4 @@
+import { MedicalService } from './../../medical-service.model'
 import { HttpErrorResponse } from '@angular/common/http'
 import {
 	ChangeDetectorRef,
@@ -19,6 +20,7 @@ import { DepartmentService } from '../../../department/department.service'
 import { MedicalService_Service } from '../../medical-service.service'
 import { AddClinicServiceModal } from './clinic-services-add.service'
 import * as DepartmentActions from '../../../department/department.actions'
+import * as MedicalServiceActions from '../../medical-service.actions'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 @Component({
 	selector: 'clinic-services-add',
@@ -36,7 +38,10 @@ export class ClinicServicesAddComponent implements OnInit {
 		private _addMedicalService: AddClinicServiceModal,
 		private _errorHandlerService: ErrorHandlerService,
 		private _medicalServiceAPI: MedicalService_Service,
-		private _store: Store<{ department: Department[] }>,
+		private _store: Store<{
+			department: Department
+			medicalService: MedicalService
+		}>,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -144,61 +149,76 @@ export class ClinicServicesAddComponent implements OnInit {
 			form.append(key, this.form.value[key])
 		}
 
+		this._medicalServiceAPI
+			.post(form)
+			.subscribe({
+				next: (medical_service: any) => {
+					this.form.reset()
+
+					this.picture = undefined
+
+					this.picturePreview = undefined
+
+					this.input.nativeElement.focus()
+
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						title: `${medical_service.data.name} Successfully Added`,
+						message: `A new medical service has been added on this department`,
+						type: 'success',
+					})
+
+					this.updateDepartment(medical_service.data)
+
+					this.addToMedicalServices(medical_service.data)
+				},
+				error: (http: HttpErrorResponse) => {
+					this._errorHandlerService.handleError(http)
+
+					for (let key in http.error.errors) {
+						for (let errorKey in this.errors) {
+							if (key.includes(errorKey)) {
+								this.errors[errorKey] = true
+							}
+						}
+					}
+				},
+			})
+			.add(() => (this.isProcessing = false))
+	}
+
+	addToMedicalServices(medical_service: MedicalService): void {
+		this._indexDBService
+			.add(DB.MEDICAL_SERVICES, medical_service)
+			.subscribe(() => {
+				this._store.dispatch(
+					MedicalServiceActions.addMedicalService({
+						medicalService: medical_service,
+					}),
+				)
+			})
+	}
+
+	updateDepartment(medical_service: MedicalService): void {
 		this.departmentService.current$
 			.pipe(take(1))
 			.subscribe((department) => {
-				this._medicalServiceAPI
-					.post(form)
-					.subscribe({
-						next: (medical_service: any) => {
-							this._indexDBService
-								.update(DB.DEPARTMENTS, department)
-								.subscribe(() => {
-									this.form.reset()
+				const newDepartment: any = {
+					...department,
+					services: [...department.services, medical_service],
+				}
 
-									const newDepartment: any = {
-										...department,
-										services: [
-											...department.services,
-											medical_service.data,
-										],
-									}
+				this._indexDBService
+					.update(DB.DEPARTMENTS, newDepartment)
+					.subscribe(() => {
+						this._store.dispatch(
+							DepartmentActions.updateDepartment({
+								department: newDepartment,
+							}),
+						)
 
-									this._store.dispatch(
-										DepartmentActions.updateDepartment({
-											department: newDepartment,
-										}),
-									)
-
-									this.picture = undefined
-
-									this.picturePreview = undefined
-
-									this.input.nativeElement.focus()
-
-									this._alert.add({
-										id: Math.floor(
-											Math.random() * 100000000000,
-										).toString(),
-										title: `${medical_service.data.name} Successfully Added`,
-										message: `A new medical service has been added on ${department.name}`,
-										type: 'success',
-									})
-								})
-						},
-						error: (http: HttpErrorResponse) => {
-							this._errorHandlerService.handleError(http)
-
-							for (let key in http.error.errors) {
-								for (let errorKey in this.errors) {
-									if (key.includes(errorKey)) {
-										this.errors[errorKey] = true
-									}
-								}
-							}
-						},
+						this.departmentService.current$.next(newDepartment)
 					})
-					.add(() => (this.isProcessing = false))
 			})
 	}
 }

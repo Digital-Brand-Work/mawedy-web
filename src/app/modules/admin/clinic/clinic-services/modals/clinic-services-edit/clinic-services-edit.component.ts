@@ -166,8 +166,6 @@ export class ClinicServicesEditComponent implements OnInit {
 							this._indexDBService
 								.update(DB.DEPARTMENTS, department)
 								.subscribe(() => {
-									this.form.reset()
-
 									const newDepartment: any = {
 										...department,
 										services: [
@@ -196,6 +194,10 @@ export class ClinicServicesEditComponent implements OnInit {
 										message: `${medical_service.data.name} has been updated on ${department.name}.`,
 										type: 'success',
 									})
+
+									this.departmentService.current$.next(
+										newDepartment,
+									)
 								})
 						},
 						error: (http: HttpErrorResponse) => {
