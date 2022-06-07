@@ -137,8 +137,14 @@
 					[multiple]="true"
 					class="py-3 px-4 rounded-md border-zinc-500/40 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
 				>
-					<mat-option>Dr. Iram Sarfraz</mat-option>
-					<mat-option>Dr. Hannadi Yassin</mat-option>
+					<mat-option
+						*ngFor="
+							let doctor of (department$ | async)?.doctors;
+							trackBy: identity
+						"
+					>
+						{{ doctor.name }}</mat-option
+					>
 				</mat-select>
 			</div>
 

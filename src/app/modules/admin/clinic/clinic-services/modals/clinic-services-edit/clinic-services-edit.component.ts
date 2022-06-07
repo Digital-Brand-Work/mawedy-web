@@ -20,6 +20,8 @@ import { Department } from '../../../department/department.model'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import * as DepartmentActions from '../../../department/department.actions'
 import { HttpErrorResponse } from '@angular/common/http'
+import * as MedicalServiceActions from '../../medical-service.actions'
+import { MedicalService } from '../../medical-service.model'
 
 @Component({
 	selector: 'clinic-services-edit',
@@ -156,63 +158,74 @@ export class ClinicServicesEditComponent implements OnInit {
 			form.append(key, this.form.value[key])
 		}
 
+		this._medicalServiceAPI
+			.updateWithFile(this.form.value.id, form)
+			.subscribe({
+				next: (medical_service: any) => {
+					this.picture = undefined
+
+					this.picturePreview = undefined
+
+					this.input.nativeElement.focus()
+
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						title: `${medical_service.data.name} Successfully Updated`,
+						message: `${medical_service.data.name} has been updated on this department.`,
+						type: 'success',
+					})
+
+					this.updateMedicalService(medical_service.data)
+
+					this.updateDepartment(medical_service.data)
+				},
+				error: (http: HttpErrorResponse) => {
+					this._errorHandlerService.handleError(http)
+
+					for (let key in http.error.errors) {
+						for (let errorKey in this.errors) {
+							if (key.includes(errorKey)) {
+								this.errors[errorKey] = true
+							}
+						}
+					}
+				},
+			})
+			.add(() => (this.isProcessing = false))
+	}
+
+	updateMedicalService(medical_service: MedicalService): void {
+		this._indexDBService
+			.update(DB.MEDICAL_SERVICES, medical_service)
+			.subscribe(() => {
+				this._store.dispatch(
+					MedicalServiceActions.updateMedicalService({
+						medicalService: medical_service as any,
+					}),
+				)
+			})
+	}
+
+	updateDepartment(medical_service: MedicalService): void {
 		this.departmentService.current$
 			.pipe(take(1))
 			.subscribe((department) => {
-				this._medicalServiceAPI
-					.updateWithFile(this.form.value.id, form)
-					.subscribe({
-						next: (medical_service: any) => {
-							this._indexDBService
-								.update(DB.DEPARTMENTS, department)
-								.subscribe(() => {
-									const newDepartment: any = {
-										...department,
-										services: [
-											...department.services,
-											medical_service.data,
-										],
-									}
+				const newDepartment: any = {
+					...department,
+					services: [...department.services, medical_service],
+				}
 
-									this._store.dispatch(
-										DepartmentActions.updateDepartment({
-											department: newDepartment,
-										}),
-									)
+				this._indexDBService
+					.update(DB.DEPARTMENTS, newDepartment)
+					.subscribe(() => {
+						this._store.dispatch(
+							DepartmentActions.updateDepartment({
+								department: newDepartment,
+							}),
+						)
 
-									this.picture = undefined
-
-									this.picturePreview = undefined
-
-									this.input.nativeElement.focus()
-
-									this._alert.add({
-										id: Math.floor(
-											Math.random() * 100000000000,
-										).toString(),
-										title: `${medical_service.data.name} Successfully Updated`,
-										message: `${medical_service.data.name} has been updated on ${department.name}.`,
-										type: 'success',
-									})
-
-									this.departmentService.current$.next(
-										newDepartment,
-									)
-								})
-						},
-						error: (http: HttpErrorResponse) => {
-							this._errorHandlerService.handleError(http)
-
-							for (let key in http.error.errors) {
-								for (let errorKey in this.errors) {
-									if (key.includes(errorKey)) {
-										this.errors[errorKey] = true
-									}
-								}
-							}
-						},
+						this.departmentService.current$.next(newDepartment)
 					})
-					.add(() => (this.isProcessing = false))
 			})
 	}
 
@@ -224,6 +237,16 @@ export class ClinicServicesEditComponent implements OnInit {
 					.remove(medical_service.id)
 					.subscribe(() => {
 						this.opened$.next(false)
+
+						this._indexDBService
+							.delete(DB.MEDICAL_SERVICES, medical_service.id)
+							.subscribe(() => {
+								this._store.dispatch(
+									MedicalServiceActions.deleteMedicalService({
+										id: medical_service.id,
+									}),
+								)
+							})
 
 						this._alert.add({
 							id: Math.floor(

@@ -7,7 +7,7 @@
 	style="min-width: 500px"
 >
 	<modal-header
-		[modalTitle]="'Dr. ' + (doctor$ | async).name"
+		[modalTitle]="' ' + (doctor$ | async).name"
 		(onClose)="opened$.next(false)"
 	></modal-header>
 
@@ -37,7 +37,7 @@
 
 		<div class="flex mt-6 items-center flex-col">
 			<div class="text-lg accent-color font-bold">
-				Dr. {{ doctor.name }}
+				{{ doctor.name }}
 			</div>
 
 			<div style="color: #6f7d8f" class="text-base font-medium">

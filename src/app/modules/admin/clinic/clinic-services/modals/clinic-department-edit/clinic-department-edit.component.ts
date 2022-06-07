@@ -113,6 +113,10 @@ export class ClinicDepartmentEditComponent implements OnInit {
 							})
 
 							this.input.nativeElement.focus()
+
+							this._departmentService.current$.next(
+								department.data,
+							)
 						})
 				},
 				error: (http: HttpErrorResponse) => {

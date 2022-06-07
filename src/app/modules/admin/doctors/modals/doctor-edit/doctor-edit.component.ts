@@ -241,7 +241,7 @@ export class DoctorEditComponent implements OnInit {
 									Math.random() * 100000000000,
 								).toString(),
 								title: `Doctor has been updated!`,
-								message: `Dr. ${doctor.data.name}'s data has been successfully updated`,
+								message: `${doctor.data.name}'s data has been successfully updated`,
 								type: 'info',
 							})
 						})

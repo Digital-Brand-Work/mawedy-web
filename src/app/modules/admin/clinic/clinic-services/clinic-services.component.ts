@@ -2,8 +2,15 @@ import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.contr
 import { MedicalService } from './medical-service.model'
 import { empty } from 'app/mawedy-core/helpers'
 import { Component, OnInit } from '@angular/core'
-import { Store } from '@ngrx/store'
-import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs'
+import { ActionsSubject, Store } from '@ngrx/store'
+import {
+	BehaviorSubject,
+	Observable,
+	skip,
+	Subject,
+	take,
+	takeUntil,
+} from 'rxjs'
 import { Department } from '../department/department.model'
 import { AddDepartmentModal } from './modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from './modals/clinic-services-add/clinic-services-add.service'
@@ -25,14 +32,15 @@ import * as DepartmentActions from '../../clinic/department//department.actions'
 })
 export class ClinicServicesComponent implements OnInit {
 	constructor(
+		private actionListener$: ActionsSubject,
 		private _indexDBService: NgxIndexedDBService,
 		private _departmentService: DepartmentService,
 		private addDepartmentModal: AddDepartmentModal,
+		private _indexDBController: IndexedDbController,
 		private _medicalServiceAPI: MedicalService_Service,
 		private addClinicServiceModal: AddClinicServiceModal,
 		private editClinicServiceModal: EditClinicServiceModal,
 		private _editDepartmentModal: EditClinicDepartmentModal,
-		private _indexDBController: IndexedDbController,
 		private store: Store<{
 			department: Department[]
 			medicalService: MedicalService[]
@@ -62,13 +70,32 @@ export class ClinicServicesComponent implements OnInit {
 
 		this.medicalServices$ = this.store.select('medicalService')
 
-		this.medicalServices$.subscribe((service) => console.log(service))
+		this.medicalServices$
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe(() => {
+				setTimeout(() => {
+					this._indexDBService
+						.getAll(DB.MEDICAL_SERVICES)
+						.subscribe((services) => {
+							this.store.dispatch(
+								MedicalServiceActions.loadMedicalServices({
+									medicalServices:
+										services as MedicalService[],
+								}),
+							)
+						})
+				}, 400)
+			})
 
 		this.departments$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-			this.fetchFromIndexedDb()
+			setTimeout(() => {
+				this.fetchFromIndexedDb()
+			})
 		})
 
-		this.fetchFromIndexedDb()
+		setTimeout(() => {
+			this.fetchFromIndexedDb()
+		}, 300)
 	}
 
 	fetchFromIndexedDb(): void {

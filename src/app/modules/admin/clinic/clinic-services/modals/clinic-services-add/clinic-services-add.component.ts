@@ -55,6 +55,9 @@ export class ClinicServicesAddComponent implements OnInit {
 
 	@ViewChild('description', { read: ElementRef }) textArea: ElementRef
 
+	department$: BehaviorSubject<Department | null> =
+		this.departmentService.current$
+
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	opened$: BehaviorSubject<boolean> = this._addMedicalService.opened$
@@ -77,28 +80,10 @@ export class ClinicServicesAddComponent implements OnInit {
 	isProcessing: boolean = false
 
 	ngOnInit(): void {
-		this.departmentService.current$
-			.pipe(take(1))
-			.subscribe((department) => {
-				this.form.setValue({
-					name: '',
-					description: '',
-					department_id: department.id,
-				})
-			})
+		this.reloadFormValues()
 	}
 
-	readFile(event: any): void {
-		this.picture = event.target.files[0]
-
-		const reader = new FileReader()
-
-		reader.readAsDataURL(event.target.files[0])
-
-		reader.onload = (_event) => {
-			this.picturePreview = reader.result
-		}
-	}
+	identity = (item: any) => item
 
 	ngAfterViewInit(): void {
 		combineLatest([this.opened$, this.departmentService.current$])
@@ -124,6 +109,30 @@ export class ClinicServicesAddComponent implements OnInit {
 		this.unsubscribe$.complete()
 
 		this._cdr.detach()
+	}
+
+	reloadFormValues() {
+		this.departmentService.current$
+			.pipe(take(1))
+			.subscribe((department) => {
+				this.form.setValue({
+					name: '',
+					description: '',
+					department_id: department.id,
+				})
+			})
+	}
+
+	readFile(event: any): void {
+		this.picture = event.target.files[0]
+
+		const reader = new FileReader()
+
+		reader.readAsDataURL(event.target.files[0])
+
+		reader.onload = (_event) => {
+			this.picturePreview = reader.result
+		}
 	}
 
 	autoGrow() {
@@ -154,6 +163,8 @@ export class ClinicServicesAddComponent implements OnInit {
 			.subscribe({
 				next: (medical_service: any) => {
 					this.form.reset()
+
+					this.reloadFormValues()
 
 					this.picture = undefined
 
