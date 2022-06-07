@@ -242,7 +242,7 @@ export class DoctorEditComponent implements OnInit {
 								).toString(),
 								title: `Doctor has been updated!`,
 								message: `${doctor.data.name}'s data has been successfully updated`,
-								type: 'info',
+								type: 'success',
 							})
 						})
 				},

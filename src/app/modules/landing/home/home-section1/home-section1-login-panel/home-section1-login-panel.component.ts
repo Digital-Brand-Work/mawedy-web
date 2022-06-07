@@ -112,7 +112,7 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 			title: `Welcome Back ${userAccount.data.name}!`,
 			message:
 				'We hope that you use our services to its full extent. Have a great day ahead.',
-			type: 'info',
+			type: 'success',
 		})
 
 		this._clinicUserService.toDashboard()

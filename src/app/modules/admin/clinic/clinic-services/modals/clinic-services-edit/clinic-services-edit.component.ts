@@ -254,7 +254,7 @@ export class ClinicServicesEditComponent implements OnInit {
 							).toString(),
 							title: `A service has been deleted.`,
 							message: `${medical_service.name} has been deleted.`,
-							type: 'info',
+							type: 'success',
 						})
 					})
 			})

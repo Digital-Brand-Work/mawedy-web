@@ -9,6 +9,8 @@ import * as PatientActions from '../patient.actions'
 import { BehaviorSubject, take } from 'rxjs'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { Router } from '@angular/router'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 @Component({
 	selector: 'patients-table',
@@ -20,6 +22,7 @@ export class PatientsTableComponent implements OnInit {
 	constructor(
 		private _router: Router,
 		private _patientService: PatientService,
+		private _indexDBService: NgxIndexedDBService,
 		private store: Store<{ patients: Patient[] }>,
 		private _clinicUserService: ClinicUserService,
 	) {}
@@ -50,9 +53,13 @@ export class PatientsTableComponent implements OnInit {
 
 	remove(patient: Patient) {
 		this._patientService.remove(patient.id).subscribe(() => {
-			this.store.dispatch(
-				PatientActions.deletePatient({ id: patient.id }),
-			)
+			this._indexDBService
+				.delete(DB.PATIENTS, patient.id)
+				.subscribe(() => {
+					this.store.dispatch(
+						PatientActions.deletePatient({ id: patient.id }),
+					)
+				})
 		})
 	}
 }

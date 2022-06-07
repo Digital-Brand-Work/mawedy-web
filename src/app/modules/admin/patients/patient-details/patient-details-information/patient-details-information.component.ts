@@ -183,7 +183,7 @@ export class PatientDetailsInformationComponent implements OnInit {
 								).toString(),
 								title: `Profile Successfully Updated`,
 								message: `You have update the profile of ${data.data.first_name}`,
-								type: 'info',
+								type: 'success',
 							})
 						})
 				},

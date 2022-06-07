@@ -41,6 +41,14 @@ export class PatientsComponent implements OnInit {
 	ngOnInit(): void {
 		this.patients$ = this.store.select('patients')
 
+		this.patients$
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((doctors: any) => {
+				this.fetchFromIndexDB()
+			})
+
+		this.fetchFromIndexDB()
+
 		combineLatest([this.clinic$, this._indexDBService.getAll(DB.PATIENTS)])
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe((results) => {
@@ -64,7 +72,20 @@ export class PatientsComponent implements OnInit {
 			})
 	}
 
-	view(patient: Patient) {
+	fetchFromIndexDB(): void {
+		this._indexDBService
+			.getAll(DB.PATIENTS)
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((patients) => {
+				this.store.dispatch(
+					PatientActions.loadPatients({
+						patients: patients as Patient[],
+					}),
+				)
+			})
+	}
+
+	view(patient: Patient): void {
 		this.patientEffects.current$.next(patient)
 	}
 

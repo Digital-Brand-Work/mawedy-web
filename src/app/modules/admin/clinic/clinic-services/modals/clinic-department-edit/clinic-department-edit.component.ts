@@ -109,7 +109,7 @@ export class ClinicDepartmentEditComponent implements OnInit {
 								).toString(),
 								title: `Changed to ${department.data.name}.`,
 								message: `This department has been successfully changed to  ${department.data.name}.`,
-								type: 'info',
+								type: 'success',
 							})
 
 							this.input.nativeElement.focus()

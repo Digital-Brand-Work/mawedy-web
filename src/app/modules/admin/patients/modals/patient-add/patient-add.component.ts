@@ -138,11 +138,15 @@ export class PatientAddComponent implements OnInit {
 					this._indexDBService
 						.add(DB.PATIENTS, patient.data)
 						.subscribe(() => {
-							this._store.dispatch(
-								PatientActions.addPatient({
-									patient: patient.data,
-								}),
-							)
+							this._indexDBService
+								.add(DB.PATIENTS, patient.data)
+								.subscribe(() => {
+									this._store.dispatch(
+										PatientActions.addPatient({
+											patient: patient.data,
+										}),
+									)
+								})
 
 							this.form.reset()
 
@@ -158,7 +162,7 @@ export class PatientAddComponent implements OnInit {
 								).toString(),
 								title: `${patient.data.first_name} Successfully Added`,
 								message: `A new patient has been successfully added to this branch`,
-								type: 'info',
+								type: 'success',
 							})
 						})
 				},

@@ -96,7 +96,7 @@ export class ClinicDepartmentAddComponent implements OnInit {
 								).toString(),
 								title: `${department.data.name} Successfully Added`,
 								message: `A new department has been successfully added to this branch`,
-								type: 'info',
+								type: 'success',
 							})
 
 							this.form.reset()
