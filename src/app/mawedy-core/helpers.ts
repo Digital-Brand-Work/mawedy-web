@@ -36,3 +36,11 @@ export function removeDialCode(number: string, code: string): string {
 		countries.find((country) => country.code === code).dial_code.length,
 	)
 }
+
+export function hasData(value: any[]): boolean {
+	if (value.length !== 0) {
+		return true
+	}
+
+	return false
+}

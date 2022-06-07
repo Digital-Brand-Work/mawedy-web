@@ -28,6 +28,7 @@ import * as DoctorActions from '../../doctor.actions'
 import { HttpErrorResponse } from '@angular/common/http'
 import { AlertState } from 'app/components/alert/alert.service'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { hasData } from 'app/mawedy-core/helpers'
 @Component({
 	selector: 'doctor-edit',
 	templateUrl: './doctor-edit.component.html',
@@ -71,7 +72,6 @@ export class DoctorEditComponent implements OnInit {
 	form: FormGroup = this._formBuilder.group({
 		id: ['', [Validators.required]],
 		name: ['', [Validators.required]],
-		title: ['', [Validators.required]],
 		profession: ['', [Validators.required]],
 		experience: ['', [Validators.required]],
 		about: ['', [Validators.required]],
@@ -124,14 +124,15 @@ export class DoctorEditComponent implements OnInit {
 		this.form.setValue({
 			id: doctor.id,
 			name: doctor.name,
-			title: doctor.title,
 			profession: doctor.profession,
 			experience: doctor.experience,
 			about: doctor.about,
 			phone_number: doctor.phone_number,
 			phone_country_code: doctor.phone_country_code,
 			email: doctor.email,
-			departments: doctor.departments[0].id,
+			departments: hasData(doctor.departments)
+				? doctor.departments[0].id
+				: '',
 		})
 
 		this.timeslots = doctor.timeslots

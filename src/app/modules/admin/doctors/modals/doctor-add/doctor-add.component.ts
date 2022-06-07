@@ -58,7 +58,6 @@ export class DoctorAddComponent implements OnInit {
 
 	form: FormGroup = this._formBuilder.group({
 		name: ['', [Validators.required]],
-		title: ['', [Validators.required]],
 		profession: ['', [Validators.required]],
 		experience: ['', [Validators.required]],
 		about: ['', [Validators.required]],
