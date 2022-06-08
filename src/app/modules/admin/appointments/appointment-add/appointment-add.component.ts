@@ -84,11 +84,16 @@ export class AppointmentAddComponent implements OnInit {
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
-	branches$: BehaviorSubject<any> = new BehaviorSubject([])
+	branches$: BehaviorSubject<any> = new BehaviorSubject<any>([])
 
-	patients$: BehaviorSubject<Patient[]> = new BehaviorSubject([])
+	patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([])
 
-	departments$: BehaviorSubject<Department[]> = new BehaviorSubject([])
+	departments$: BehaviorSubject<Department[]> = new BehaviorSubject<
+		Department[]
+	>([])
+
+	department$: BehaviorSubject<Department | null> =
+		new BehaviorSubject<Department | null>(null)
 
 	medicalServices$: BehaviorSubject<MedicalService[]> = new BehaviorSubject(
 		[],
@@ -116,6 +121,12 @@ export class AppointmentAddComponent implements OnInit {
 		this.setBranches()
 
 		this.setPatients()
+
+		this._indexDBService
+			.getAll(DB.DEPARTMENTS)
+			.subscribe((departments: Department[]) =>
+				this.setDepartments(departments),
+			)
 	}
 
 	setBranches() {
@@ -136,13 +147,21 @@ export class AppointmentAddComponent implements OnInit {
 			.subscribe((patients: Patient[]) => this.patients$.next(patients))
 	}
 
-	setDepartments(departments: Department[]) {}
+	setDepartments(departments: Department[]) {
+		this.departments$.next(departments)
+	}
 
-	setMedicalServices(medicalServices: MedicalService[]) {}
+	setMedicalServices(medicalServices: MedicalService[]) {
+		this.medicalServices$.next(medicalServices)
+	}
 
-	setDoctors(doctors: Doctor[]) {}
+	setDoctors(doctors: Doctor[]) {
+		this.doctors$.next(doctors)
+	}
 
-	setTimeSlots(timeSlots: TimeSlot[]) {}
+	setTimeSlots(timeSlots: TimeSlot[]) {
+		this.timeSlots$.next(timeSlots)
+	}
 
 	ngAfterViewInit(): void {
 		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {
