@@ -7,7 +7,7 @@ export function migrationFactory() {
 
 export const indexedDbConfig: DBConfig = {
 	name: 'mawedy',
-	version: 10,
+	version: 11,
 	objectStoresMeta: [
 		{
 			store: DB.SUBSCRIPTION_REQUEST,

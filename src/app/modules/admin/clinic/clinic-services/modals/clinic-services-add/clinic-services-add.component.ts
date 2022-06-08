@@ -66,6 +66,7 @@ export class ClinicServicesAddComponent implements OnInit {
 		department_id: '',
 		name: ['', Validators.required],
 		description: ['', Validators.required],
+		doctors: [''],
 	})
 
 	errors = {
@@ -119,6 +120,7 @@ export class ClinicServicesAddComponent implements OnInit {
 					name: '',
 					description: '',
 					department_id: department.id,
+					doctors: [''],
 				})
 			})
 	}
@@ -155,8 +157,14 @@ export class ClinicServicesAddComponent implements OnInit {
 		}
 
 		for (let key in this.form.value) {
-			form.append(key, this.form.value[key])
+			if (key !== 'doctors') {
+				form.append(key, this.form.value[key])
+			}
 		}
+
+		this.form.value.doctors.forEach((id: string, index: number) => {
+			form.append(`doctors[${index}]`, id)
+		})
 
 		this._medicalServiceAPI
 			.post(form)

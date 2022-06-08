@@ -118,11 +118,10 @@ export class ClinicServicesComponent implements OnInit {
 							}),
 						)
 
-						departments[0].services.forEach((services) => {
-							this._indexDBService
-								.add(DB.MEDICAL_SERVICES, services)
-								.subscribe()
-						})
+						this._indexDBService.bulkAdd(
+							DB.MEDICAL_SERVICES,
+							departments[0].services,
+						)
 					}
 				})
 			})
@@ -141,9 +140,7 @@ export class ClinicServicesComponent implements OnInit {
 
 		this._indexDBController.removeAll([DB.MEDICAL_SERVICES])
 
-		department.services.forEach((services) => {
-			this._indexDBService.add(DB.MEDICAL_SERVICES, services).subscribe()
-		})
+		this._indexDBService.bulkAdd(DB.MEDICAL_SERVICES, department.services)
 	}
 
 	edit(): void {

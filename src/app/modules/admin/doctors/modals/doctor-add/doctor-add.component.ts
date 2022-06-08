@@ -1,3 +1,4 @@
+import { empty } from 'app/mawedy-core/helpers'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -106,7 +107,9 @@ export class DoctorAddComponent implements OnInit {
 					}),
 				)
 
-				this.form.value.departments = departments[0].id
+				if (empty(this.form.value.departments)) {
+					this.form.value.departments = departments[0].id
+				}
 			})
 	}
 

@@ -1,3 +1,4 @@
+import { MedicalService } from './modules/admin/clinic/clinic-services/medical-service.model'
 import { Department } from './modules/admin/clinic/department/department.model'
 import { Patient } from './modules/admin/patients/patient.model'
 import { IndexedDbController } from './mawedy-core/indexed-db/indexed-db.controller'
@@ -64,6 +65,11 @@ export class InitialDataResolver implements Resolve<any> {
 			this._indexDBService.bulkAdd(
 				DB.DOCTORS,
 				doctors.data as Department[],
+			)
+
+			this._indexDBService.bulkAdd(
+				DB.MEDICAL_SERVICES,
+				departments.data[0].services as MedicalService[],
 			)
 		})
 

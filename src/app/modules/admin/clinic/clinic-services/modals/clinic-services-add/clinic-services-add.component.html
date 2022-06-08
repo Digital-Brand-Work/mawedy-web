@@ -127,17 +127,20 @@
 
 			<div class="mb-5">
 				<label
-					for=""
+					for="doctors"
 					class="mb-1 text-gray-400 font-semibold accent-color text-md"
 				>
 					Doctor Available
 				</label>
 
 				<mat-select
+					id="doctors"
+					formControlName="doctors"
 					[multiple]="true"
 					class="py-3 px-4 rounded-md border-zinc-500/40 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
 				>
 					<mat-option
+						[value]="doctor.id"
 						*ngFor="
 							let doctor of (department$ | async)?.doctors;
 							trackBy: identity
@@ -146,6 +149,13 @@
 						{{ doctor.name }}</mat-option
 					>
 				</mat-select>
+			</div>
+
+			<div
+				*ngIf="(department$ | async)?.doctors.length === 0"
+				class="border border-red-400 text-red-500 bg-red-50 p-3 rounded-md"
+			>
+				There are no doctors in this department.
 			</div>
 
 			<div class="flex mt-10 -mb-5">

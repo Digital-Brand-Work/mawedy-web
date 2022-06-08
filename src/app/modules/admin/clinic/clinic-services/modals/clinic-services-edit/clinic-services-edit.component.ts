@@ -57,11 +57,15 @@ export class ClinicServicesEditComponent implements OnInit {
 
 	opened$: BehaviorSubject<boolean> = this._editClinicServiceModal.opened$
 
+	department$: BehaviorSubject<Department | null> =
+		this.departmentService.current$
+
 	form: FormGroup = this._formBuilder.group({
 		id: '',
 		department_id: '',
 		name: ['', Validators.required],
 		description: ['', Validators.required],
+		doctors: [''],
 	})
 
 	errors = {
@@ -85,12 +89,21 @@ export class ClinicServicesEditComponent implements OnInit {
 				const [medical_service, department] = results
 
 				if (medical_service && department) {
+					const doctors = []
+
+					department.doctors.forEach((doctor) =>
+						doctors.push(doctor.id),
+					)
+
 					this.form.setValue({
 						id: medical_service.id,
 						name: medical_service.name,
 						description: medical_service.description,
 						department_id: department.id,
+						doctors: doctors,
 					})
+
+					console.log(this.form.value.doctors)
 
 					this.picturePreview = medical_service.picture.url
 				}
@@ -155,8 +168,14 @@ export class ClinicServicesEditComponent implements OnInit {
 		}
 
 		for (let key in this.form.value) {
-			form.append(key, this.form.value[key])
+			if (key !== 'doctors') {
+				form.append(key, this.form.value[key])
+			}
 		}
+
+		this.form.value.doctors.forEach((id: string, index: number) => {
+			form.append(`doctors[${index}]`, id)
+		})
 
 		this._medicalServiceAPI
 			.updateWithFile(this.form.value.id, form)
