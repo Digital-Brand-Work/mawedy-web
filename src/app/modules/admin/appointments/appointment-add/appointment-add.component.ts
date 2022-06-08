@@ -1,3 +1,22 @@
+import { hasData } from 'app/mawedy-core/helpers'
+import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
+import { MedicalService } from './../../clinic/clinic-services/medical-service.model'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs'
+import { AddAppointmentModal } from './appointment-add.service'
+import { createMask } from '@ngneat/input-mask'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { DashboardAppointmentSelectDoctorModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
+import { DashboardAppointmentSelectTimeSlotModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
+import { isPlatformBrowser } from '@angular/common'
+import { AlertState } from 'app/components/alert/alert.service'
+import { Store } from '@ngrx/store'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { Department } from '../../clinic/department/department.model'
+import { Patient } from '../../patients/patient.model'
+import { Clinic } from '../../clinic/clinic.model'
+import { ClinicUserService } from '../../clinic/clinic.service'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -8,15 +27,7 @@ import {
 	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
-import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
-import { AddAppointmentModal } from './appointment-add.service'
-import { createMask } from '@ngneat/input-mask'
-import { FormControl } from '@angular/forms'
-import { DashboardAppointmentSelectDoctorModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-doctor/dashboard-appointment-select-doctor.service'
-import { DashboardAppointmentSelectTimeSlotModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
-import { isPlatformBrowser } from '@angular/common'
-
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 @Component({
 	selector: 'appointment-add',
 	templateUrl: './appointment-add.component.html',
@@ -26,8 +37,14 @@ import { isPlatformBrowser } from '@angular/common'
 export class AppointmentAddComponent implements OnInit {
 	constructor(
 		@Inject(PLATFORM_ID) private _platformID: Object,
+		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
+		private _formBuilder: FormBuilder,
+		private _indexDBService: NgxIndexedDBService,
+		private _clinicUserService: ClinicUserService,
+		private _errorHandlerService: ErrorHandlerService,
 		private _addAppointmentModal: AddAppointmentModal,
+		private store: Store<{ department: Department; patient: Patient }>,
 		private _dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
 		private _dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 	) {}
@@ -65,7 +82,67 @@ export class AppointmentAddComponent implements OnInit {
 
 	currencyFC = new FormControl('')
 
-	ngOnInit(): void {}
+	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
+
+	branches$: BehaviorSubject<any> = new BehaviorSubject([])
+
+	patients$: BehaviorSubject<Patient[]> = new BehaviorSubject([])
+
+	departments$: BehaviorSubject<Department[]> = new BehaviorSubject([])
+
+	medicalServices$: BehaviorSubject<MedicalService[]> = new BehaviorSubject(
+		[],
+	)
+
+	doctors$: BehaviorSubject<Doctor[]> = new BehaviorSubject([])
+
+	timeSlots$: BehaviorSubject<TimeSlot[]> = new BehaviorSubject([])
+
+	form: FormGroup = this._formBuilder.group({
+		patient_id: ['', Validators.required],
+		department_id: ['', Validators.required],
+		service_id: ['', Validators.required],
+		doctor_id: ['', Validators.required],
+		date: ['', Validators.required],
+		start_time: ['', Validators.required],
+		end_time: ['', Validators.required],
+		type: ['Returning', Validators.required],
+		price: ['', Validators.required],
+		waiting: [false, Validators.required],
+		comments: [false, Validators.required],
+	})
+
+	ngOnInit(): void {
+		this.setBranches()
+
+		this.setPatients()
+	}
+
+	setBranches() {
+		this._indexDBService
+			.getByKey(DB.CLINIC, 1)
+			.subscribe((results: any) => {
+				const clinic = results.data
+
+				if (hasData(clinic.accounts)) {
+					this.branches$.next(clinic.accounts)
+				}
+			})
+	}
+
+	setPatients() {
+		this._indexDBService
+			.getAll(DB.PATIENTS)
+			.subscribe((patients: Patient[]) => this.patients$.next(patients))
+	}
+
+	setDepartments(departments: Department[]) {}
+
+	setMedicalServices(medicalServices: MedicalService[]) {}
+
+	setDoctors(doctors: Doctor[]) {}
+
+	setTimeSlots(timeSlots: TimeSlot[]) {}
 
 	ngAfterViewInit(): void {
 		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {

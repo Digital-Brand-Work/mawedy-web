@@ -37,17 +37,19 @@ export class InitialDataResolver implements Resolve<any> {
 	): Observable<any> {
 		forkJoin([
 			this._patientService.get(),
-			this._departmentService.get(),
-			this._doctorService.get(),
+			// this._departmentService.get(),
+			// this._doctorService.get(),
 		]).subscribe((results: any) => {
-			const [patients, departments, doctors] = results
+			const [
+				patients,
+				// departments,
+				// doctors
+			] = results
 
 			this._indexDBController.removeAll([
+				DB.PATIENTS,
 				DB.DEPARTMENTS,
 				DB.DOCTORS,
-				DB.DEPARTMENTS,
-				DB.PATIENTS,
-				DB.MEDICAL_SERVICES,
 				DB.PROMOTIONS,
 				DB.MEDICAL_SERVICES,
 			])
@@ -57,20 +59,20 @@ export class InitialDataResolver implements Resolve<any> {
 				patients.data as Patient[],
 			)
 
-			this._indexDBService.bulkAdd(
-				DB.DEPARTMENTS,
-				departments.data as Department[],
-			)
+			// this._indexDBService.bulkAdd(
+			// 	DB.DEPARTMENTS,
+			// 	departments.data as Department[],
+			// )
 
-			this._indexDBService.bulkAdd(
-				DB.DOCTORS,
-				doctors.data as Department[],
-			)
+			// this._indexDBService.bulkAdd(
+			// 	DB.DOCTORS,
+			// 	doctors.data as Department[],
+			// )
 
-			this._indexDBService.bulkAdd(
-				DB.MEDICAL_SERVICES,
-				departments.data[0].services as MedicalService[],
-			)
+			// this._indexDBService.bulkAdd(
+			// 	DB.MEDICAL_SERVICES,
+			// 	departments.data[0].services as MedicalService[],
+			// )
 		})
 
 		return forkJoin([

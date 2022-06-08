@@ -46,7 +46,7 @@
 						"
 						mat-menu-item
 						class="hover:bg-gray-200 text-gray-500 font-medium flex items-center"
-						(click)="department$.next(department)"
+						(click)="setDepartment(department)"
 						[ngClass]="{
 							'bg-emerald-500 text-white pointer-events-none':
 								(department$ | async).id === department.id,
