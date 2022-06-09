@@ -1,8 +1,12 @@
+export type AppointmentType_Types =
+	| AppointmentTypeEnum.RETURNING
+	| AppointmentTypeEnum.NEW_APPOINTMENT
+	| AppointmentTypeEnum.WALK_IN
+
 export enum AppointmentTypeEnum {
 	RETURNING = 'Returning',
-	THROUGH_CLINIC = 'Through Clinic',
-	PHONE_APPOINTMENT = 'Phone Appointment',
-	ONLINE = 'Online',
+	NEW_APPOINTMENT = 'New Appointment',
+	WALK_IN = 'Walk-in',
 }
 
 export const appointmentTypes = Object.keys(AppointmentTypeEnum)

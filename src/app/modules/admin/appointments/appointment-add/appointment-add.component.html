@@ -5,6 +5,7 @@
 	@slideOutRight
 	stop-propagation
 	class="ml-auto bg-white h-full w-full md:w-1/4"
+	style="min-width: 500px"
 >
 	<modal-header
 		modalTitle="New Appointment"
@@ -31,14 +32,12 @@
 			</label>
 
 			<input
-				#input
 				stop-propagation
 				(click)="patientListIsFocused = true"
 				[ngModelOptions]="{ standalone: true }"
 				[(ngModel)]="keyword"
 				type="text"
-				class="datalist py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-				list="patient-list"
+				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 			/>
 
 			<div
@@ -132,12 +131,10 @@
 					{{ service.name }}
 				</option>
 			</select>
-
-			<div class="text-sm text-rose-500">Service is required.</div>
 		</div>
 
 		<div
-			*ngIf="(doctors$ | async) && (doctors$ | async).length !== 0"
+			*ngIf="(doctor$ | async) && (doctor$ | async) !== null"
 			@slideInBottom
 			role="button"
 			class="mb-5"
@@ -151,36 +148,46 @@
 					Select Doctor
 				</label>
 
-				<select
-					id="doctor_id"
-					formControlName="doctor_id"
+				<input
+					[ngModelOptions]="{ standalone: true }"
+					[value]="(doctor$ | async)?.name"
+					type="text"
 					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-				>
-					<option
-						[value]="doctor.id"
-						*ngFor="
-							let doctor of doctors$ | async;
-							trackBy: identity
-						"
-					>
-						{{ doctor.name }}
-					</option>
-				</select>
+				/>
 			</div>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-5 items-center">
+		<div
+			*ngIf="(doctor$ | async) && (doctor$ | async) !== null"
+			@slideInBottom
+			class="grid grid-cols-1 md:grid-cols-2 md:gap-x-5 items-center"
+		>
 			<div class="mb-5">
-				<label for="" class="mb-1 font-bold accent-color text-base">
+				<label for="date" class="mb-1 font-bold accent-color text-base">
 					Select date
 				</label>
 
 				<input
+					id="date"
+					formControlName="date"
 					type="date"
+					[ngClass]="{
+						'border-red-500':
+							form.get('date')?.touched &&
+							!form.get('date')?.valid,
+						'text-red-500': errors.date
+					}"
 					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 				/>
 
-				<div class="text-sm text-rose-500">Date is required.</div>
+				<div
+					*ngIf="
+						form.get('date')?.touched && !form.get('date')?.valid
+					"
+					class="text-sm text-rose-500"
+				>
+					Date is required.
+				</div>
 			</div>
 
 			<div
@@ -199,34 +206,80 @@
 						class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					/>
 				</div>
-
-				<div class="text-sm text-rose-500">Time is required.</div>
 			</div>
 
 			<div class="mb-5">
-				<label for="" class="mb-1 font-bold accent-color text-base"
+				<label for="type" class="mb-1 font-bold accent-color text-base"
+					>Appointment Type</label
+				>
+
+				<select
+					id="type"
+					formControlName="type"
+					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					[ngClass]="{
+						'border-red-500':
+							form.get('type')?.touched &&
+							!form.get('type')?.valid,
+						'text-red-500': errors.type
+					}"
+				>
+					<option
+						*ngFor="let item of appointmentTypes; trackBy: identity"
+					>
+						{{ item }}
+					</option>
+				</select>
+
+				<div
+					*ngIf="
+						form.get('type')?.touched && !form.get('type')?.valid
+					"
+					class="text-sm text-rose-500"
+				>
+					>Amount is required.
+				</div>
+			</div>
+
+			<div class="mb-5">
+				<label for="price" class="mb-1 font-bold accent-color text-base"
 					>Amount</label
 				>
 
 				<input
+					id="price"
+					formArrayName="price"
 					*ssrExclude
 					[inputMask]="currencyInputMask"
 					[formControl]="currencyFC"
 					placeholder="AED 0.00"
 					class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+					[ngClass]="{
+						'border-red-500':
+							form.get('price')?.touched &&
+							!form.get('price')?.valid,
+						'text-red-500': errors.type
+					}"
 				/>
 
-				<div class="text-sm text-rose-500">Amount is required.</div>
+				<div
+					*ngIf="
+						form.get('price')?.touched && !form.get('type')?.valid
+					"
+					class="text-sm text-rose-500"
+				>
+					Amount is required.
+				</div>
 			</div>
-
-			<mat-radio-group class="-translate-y-2">
-				<mat-radio-button value="1">Waiting Patient</mat-radio-button>
-			</mat-radio-group>
 		</div>
 
-		<div class="mb-5">
+		<div
+			*ngIf="(doctor$ | async) && (doctor$ | async) !== null"
+			@slideInBottom
+			class="mb-5"
+		>
 			<label
-				for=""
+				for="comments"
 				class="mb-1 font-bold accent-color text-base flex items-center"
 			>
 				<div>Comments</div>
@@ -234,6 +287,9 @@
 			</label>
 
 			<textarea
+				id="comments"
+				formArrayName="comments"
+				style="min-height: 122px"
 				(keyup)="autoGrow()"
 				#comments
 				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"

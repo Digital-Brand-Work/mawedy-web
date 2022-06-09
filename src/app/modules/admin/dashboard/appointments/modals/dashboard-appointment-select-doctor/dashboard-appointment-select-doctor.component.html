@@ -2,6 +2,7 @@
 	*ngIf="opened$ | async"
 	stop-propagation
 	class="ml-auto h-full w-full md:w-1/4"
+	style="min-width: 500px"
 >
 	<div
 		class="px-10 py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md overflow-hidden"
@@ -39,6 +40,10 @@
 				class="overflow-y-auto overflow-x-hidden"
 			>
 				<div
+					[ngClass]="{
+						'pointer-events-none border-l-emerald-500 border-l-4 bg-emerald-50':
+							doctor.id === (doctor$ | async)?.id
+					}"
 					matTooltip="Select This Doctor"
 					(click)="opened$.next(false); doctor$.next(doctor)"
 					role="button"

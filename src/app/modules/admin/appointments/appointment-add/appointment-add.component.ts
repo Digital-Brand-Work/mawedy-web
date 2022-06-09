@@ -35,6 +35,10 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import {
+	appointmentTypes,
+	AppointmentType_Types,
+} from 'app/mawedy-core/enums/appointment-type.enum'
 @Component({
 	selector: 'appointment-add',
 	templateUrl: './appointment-add.component.html',
@@ -98,6 +102,8 @@ export class AppointmentAddComponent implements OnInit {
 
 	doctor$: BehaviorSubject<Doctor | null> = this._addAppointmentModal.doctor$
 
+	appointmentTypes: string[] = ['Returning', 'New Appointment', 'Walk-in']
+
 	timeSlots$: BehaviorSubject<TimeSlot[]> = new BehaviorSubject([])
 
 	keyword: string = ''
@@ -113,8 +119,10 @@ export class AppointmentAddComponent implements OnInit {
 		type: ['Returning', Validators.required],
 		price: ['', Validators.required],
 		waiting: [false, Validators.required],
-		comments: [false, Validators.required],
+		comments: [''],
 	})
+
+	errors: any = {}
 
 	patientListIsFocused: boolean = false
 
@@ -124,60 +132,22 @@ export class AppointmentAddComponent implements OnInit {
 		this.doctor$
 			.pipe(takeUntil(this.unsubscribe$), skip(1))
 			.subscribe((doctor) => {
-				if (!doctor) {
+				if (doctor) {
+					this.form.value.doctor_id = doctor.id
 				}
-
-				this.form.value.doctor_id = doctor.id
-
-				console.log(doctor.id)
 			})
+	}
 
+	ngAfterContentInit(): void {
 		this._indexDBService
 			.getAll(DB.DEPARTMENTS)
 			.subscribe((departments: Department[]) => {
 				this.departments = departments
 
-				if (
-					departments.length !== 0 &&
-					departments[0]?.services.length !== 0
-				) {
-					this.doctors$.next(departments[0].doctors)
-
+				if (hasData(departments)) {
 					this.setMedicalServices(departments[0].id)
 				}
 			})
-	}
-
-	setPatients() {
-		this._indexDBService
-			.getAll(DB.PATIENTS)
-			.subscribe((patients: Patient[]) => this.patients$.next(patients))
-	}
-
-	setMedicalServices(id: string) {
-		const services = this.departments.find(
-			(department) => department.id === id,
-		).services
-
-		this.medicalServices = services
-
-		this.form.value.service_id = services[0].id
-	}
-
-	setDoctors(doctors: Doctor[]) {
-		this.doctors$.next(doctors)
-	}
-
-	setTimeSlots(timeSlots: TimeSlot[]) {
-		this.timeSlots$.next(timeSlots)
-	}
-
-	ngAfterViewInit(): void {
-		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {
-			if (focused) {
-				this.input?.nativeElement.focus()
-			}
-		})
 
 		this._cdr.detectChanges()
 	}
@@ -188,6 +158,50 @@ export class AppointmentAddComponent implements OnInit {
 		this.unsubscribe$.complete()
 
 		this._cdr.detach()
+	}
+
+	setPatients() {
+		this._indexDBService
+			.getAll(DB.PATIENTS)
+			.subscribe((patients: Patient[]) => this.patients$.next(patients))
+	}
+
+	/**
+     * 
+     * @param id 
+        from department  id
+     */
+	setMedicalServices(id: string) {
+		this.setFormValue('department_id', id)
+
+		const department = this.departments.find(
+			(department) => department.id === id,
+		)
+
+		this.medicalServices = department.services
+
+		this.setFormValue(
+			'service_id',
+			hasData(department.services) ? department.services[0].id : '',
+		)
+
+		this.doctors$.next(department.doctors)
+
+		this.doctor$.next(
+			hasData(department.doctors) ? department.doctors[0] : null,
+		)
+	}
+
+	setFormValue(form: string, value: any) {
+		this.form.get(form)?.setValue(value)
+	}
+
+	setDoctors(doctors: Doctor[]) {
+		this.doctors$.next(doctors)
+	}
+
+	setTimeSlots(timeSlots: TimeSlot[]) {
+		this.timeSlots$.next(timeSlots)
 	}
 
 	autoGrow() {
