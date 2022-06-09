@@ -25,6 +25,8 @@
 				></mat-icon>
 
 				<input
+					#input
+					[(ngModel)]="keyword"
 					type="search"
 					class="w-full font-thin"
 					placeholder="Search by doctor, departments"
@@ -32,21 +34,25 @@
 			</div>
 
 			<div
+				@expandCollapse
 				style="height: 520px"
 				class="overflow-y-auto overflow-x-hidden"
 			>
 				<div
 					matTooltip="Select This Doctor"
-					(click)="opened$.next(false)"
+					(click)="opened$.next(false); doctor$.next(doctor)"
 					role="button"
 					*ngFor="
-						let item of [1, 2, 3, 4, 5, 6, 7];
+						let doctor of doctors$ | async | filter: keyword;
 						trackBy: identity
 					"
 				>
 					<div class="border-t border-gray-100 rounded-sm doctor">
-						<div class="name">Dr. Zaire Sultan</div>
-						<div class="profession">Neurologist . 25 Years</div>
+						<div class="name">{{ doctor.name }}</div>
+						<div class="profession">
+							{{ doctor.profession }} .
+							{{ doctor.experience }} Years
+						</div>
 					</div>
 				</div>
 			</div>

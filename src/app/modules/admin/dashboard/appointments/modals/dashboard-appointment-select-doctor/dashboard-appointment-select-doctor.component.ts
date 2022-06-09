@@ -1,5 +1,14 @@
-import { Component, HostListener, OnInit } from '@angular/core'
+import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	HostListener,
+	OnInit,
+	ViewChild,
+} from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-add/appointment-add.service'
+import { Doctor } from 'app/modules/admin/doctors/doctor.model'
 import { BehaviorSubject } from 'rxjs'
 import { DashboardAppointmentSelectDoctorModal } from './dashboard-appointment-select-doctor.service'
 
@@ -11,7 +20,9 @@ import { DashboardAppointmentSelectDoctorModal } from './dashboard-appointment-s
 })
 export class DashboardAppointmentSelectDoctorComponent implements OnInit {
 	constructor(
-		private dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
+		private _cdr: ChangeDetectorRef,
+		private _addAppointmentModal: AddAppointmentModal,
+		private _dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -19,10 +30,28 @@ export class DashboardAppointmentSelectDoctorComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
+	@ViewChild('input') input?: ElementRef
+
 	opened$: BehaviorSubject<boolean> =
-		this.dashboardAppointmentSelectDoctorModal.opened$
+		this._dashboardAppointmentSelectDoctorModal.opened$
+
+	doctors$: BehaviorSubject<Doctor[]> = this._addAppointmentModal.doctors$
+
+	doctor$: BehaviorSubject<Doctor | null> = this._addAppointmentModal.doctor$
+
+	keyword: string = ''
 
 	ngOnInit(): void {}
 
 	identity = (item: any) => item
+
+	ngAfterViewInit(): void {
+		this.input?.nativeElement.focus()
+
+		this._cdr.detectChanges()
+	}
+
+	ngOnDestroy(): void {
+		this._cdr.detach()
+	}
 }

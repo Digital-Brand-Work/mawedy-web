@@ -1,3 +1,4 @@
+import { AddAppointmentModal } from './../../../appointments/appointment-add/appointment-add.service'
 import { empty } from 'app/mawedy-core/helpers'
 import {
 	ChangeDetectorRef,
@@ -32,14 +33,15 @@ import { HttpErrorResponse } from '@angular/common/http'
 export class DoctorAddComponent implements OnInit {
 	constructor(
 		private _alert: AlertState,
-		private _addDoctorModal: AddDoctorModal,
 		private _cdr: ChangeDetectorRef,
-		private store: Store<{ department: Department[]; doctors: Doctor }>,
-		private _indexDBService: NgxIndexedDBService,
-		private _errorHandlerService: ErrorHandlerService,
 		private _formBuilder: FormBuilder,
 		private _doctorService: DoctorService,
+		private _addDoctorModal: AddDoctorModal,
 		private _store: Store<{ doctor: Doctor }>,
+		private _indexDBService: NgxIndexedDBService,
+		private _addAppointmentModal: AddAppointmentModal,
+		private _errorHandlerService: ErrorHandlerService,
+		private store: Store<{ department: Department[]; doctors: Doctor }>,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -50,6 +52,8 @@ export class DoctorAddComponent implements OnInit {
 	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
+
+	doctors$: BehaviorSubject<Doctor[]> = this._addAppointmentModal.doctors$
 
 	departments$?: Observable<Department[]>
 

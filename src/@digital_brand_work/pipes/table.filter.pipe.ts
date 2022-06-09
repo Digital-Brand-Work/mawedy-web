@@ -13,6 +13,10 @@ export class TableFilterPipe implements PipeTransform {
 			return items
 		}
 
+		if (value.split('').length === 1) {
+			return items
+		}
+
 		const newItems = []
 
 		items.forEach((item) => {
@@ -34,6 +38,6 @@ export class TableFilterPipe implements PipeTransform {
 			}
 		})
 
-		return newItems
+		return [...new Set(newItems)]
 	}
 }

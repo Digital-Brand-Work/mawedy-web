@@ -2,7 +2,14 @@ import { hasData } from 'app/mawedy-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 import { MedicalService } from './../../clinic/clinic-services/medical-service.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs'
+import {
+	BehaviorSubject,
+	Observable,
+	skip,
+	Subject,
+	take,
+	takeUntil,
+} from 'rxjs'
 import { AddAppointmentModal } from './appointment-add.service'
 import { createMask } from '@ngneat/input-mask'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -87,7 +94,9 @@ export class AppointmentAddComponent implements OnInit {
 
 	medicalServices: MedicalService[] = []
 
-	doctors$: BehaviorSubject<Doctor[]> = new BehaviorSubject([])
+	doctors$: BehaviorSubject<Doctor[]> = this._addAppointmentModal.doctors$
+
+	doctor$: BehaviorSubject<Doctor | null> = this._addAppointmentModal.doctor$
 
 	timeSlots$: BehaviorSubject<TimeSlot[]> = new BehaviorSubject([])
 
@@ -112,6 +121,17 @@ export class AppointmentAddComponent implements OnInit {
 	ngOnInit(): void {
 		this.setPatients()
 
+		this.doctor$
+			.pipe(takeUntil(this.unsubscribe$), skip(1))
+			.subscribe((doctor) => {
+				if (!doctor) {
+				}
+
+				this.form.value.doctor_id = doctor.id
+
+				console.log(doctor.id)
+			})
+
 		this._indexDBService
 			.getAll(DB.DEPARTMENTS)
 			.subscribe((departments: Department[]) => {
@@ -121,7 +141,9 @@ export class AppointmentAddComponent implements OnInit {
 					departments.length !== 0 &&
 					departments[0]?.services.length !== 0
 				) {
-					this.medicalServices = departments[0].services
+					this.doctors$.next(departments[0].doctors)
+
+					this.setMedicalServices(departments[0].id)
 				}
 			})
 	}
@@ -138,6 +160,8 @@ export class AppointmentAddComponent implements OnInit {
 		).services
 
 		this.medicalServices = services
+
+		this.form.value.service_id = services[0].id
 	}
 
 	setDoctors(doctors: Doctor[]) {
