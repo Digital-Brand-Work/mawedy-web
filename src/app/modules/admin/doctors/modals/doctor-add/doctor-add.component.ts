@@ -106,10 +106,6 @@ export class DoctorAddComponent implements OnInit {
 						departments: departments,
 					}),
 				)
-
-				if (empty(this.form.value.departments)) {
-					this.form.value.departments = departments[0].id
-				}
 			})
 	}
 
@@ -121,6 +117,10 @@ export class DoctorAddComponent implements OnInit {
 		this.unsubscribe$.complete()
 
 		this._cdr.detach()
+	}
+
+	ngAfterContentInit(): void {
+		this._cdr.detectChanges()
 	}
 
 	ngAfterViewInit(): void {

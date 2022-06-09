@@ -1,82 +1,73 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject, takeUntil } from 'rxjs';
-import { FuseLoadingService } from '@fuse/services/loading';
+import {
+	ChangeDetectorRef,
+	Component,
+	Input,
+	OnChanges,
+	OnDestroy,
+	OnInit,
+	SimpleChanges,
+	ViewEncapsulation,
+} from '@angular/core'
+import { coerceBooleanProperty } from '@angular/cdk/coercion'
+import { Subject, takeUntil, combineLatest, BehaviorSubject } from 'rxjs'
+import { FuseLoadingService } from '@fuse/services/loading'
 
 @Component({
-    selector     : 'fuse-loading-bar',
-    templateUrl  : './loading-bar.component.html',
-    styleUrls    : ['./loading-bar.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    exportAs     : 'fuseLoadingBar'
+	selector: 'fuse-loading-bar',
+	templateUrl: './loading-bar.component.html',
+	styleUrls: ['./loading-bar.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	exportAs: 'fuseLoadingBar',
 })
-export class FuseLoadingBarComponent implements OnChanges, OnInit, OnDestroy
-{
-    @Input() autoMode: boolean = true;
-    mode: 'determinate' | 'indeterminate';
-    progress: number = 0;
-    show: boolean = false;
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
+export class FuseLoadingBarComponent implements OnChanges, OnInit, OnDestroy {
+	constructor(
+		private _fuseLoadingService: FuseLoadingService,
+		private _cdr: ChangeDetectorRef,
+	) {}
 
-    /**
-     * Constructor
-     */
-    constructor(private _fuseLoadingService: FuseLoadingService)
-    {
-    }
+	@Input() autoMode: boolean = true
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+	mode: 'determinate' | 'indeterminate'
 
-    /**
-     * On changes
-     *
-     * @param changes
-     */
-    ngOnChanges(changes: SimpleChanges): void
-    {
-        // Auto mode
-        if ( 'autoMode' in changes )
-        {
-            // Set the auto mode in the service
-            this._fuseLoadingService.setAutoMode(coerceBooleanProperty(changes.autoMode.currentValue));
-        }
-    }
+	progress: number = 0
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Subscribe to the service
-        this._fuseLoadingService.mode$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((value) => {
-                this.mode = value;
-            });
+	show$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
 
-        this._fuseLoadingService.progress$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((value) => {
-                this.progress = value;
-            });
+	unsubscribe$: Subject<any> = new Subject<any>()
 
-        this._fuseLoadingService.show$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((value) => {
-                this.show = value;
-            });
+	ngOnChanges(changes: SimpleChanges): void {
+		if ('autoMode' in changes) {
+			this._fuseLoadingService.setAutoMode(
+				coerceBooleanProperty(changes.autoMode.currentValue),
+			)
+		}
+	}
 
-    }
+	ngOnInit(): void {}
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next(null);
-        this._unsubscribeAll.complete();
-    }
+	ngAfterContentInit(): void {
+		combineLatest([
+			this._fuseLoadingService.mode$,
+			this._fuseLoadingService.progress$,
+			this._fuseLoadingService.show$,
+		])
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((results) => {
+				const [mode, progress, show] = results
+
+				this.mode = mode
+
+				this.progress = progress
+
+				this.show$.next(show)
+
+				this._cdr.detectChanges()
+			})
+	}
+
+	ngOnDestroy(): void {
+		this.unsubscribe$.next(null)
+
+		this.unsubscribe$.complete()
+	}
 }

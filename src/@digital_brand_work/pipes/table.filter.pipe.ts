@@ -4,19 +4,36 @@ import { Pipe, PipeTransform } from '@angular/core'
 	name: 'filter',
 })
 export class TableFilterPipe implements PipeTransform {
-	transform(items: any[], key: string, value: string): any[] {
+	transform(items: any[], value: string): any[] {
 		if (!items || items === null) {
 			return []
 		}
 
-		if (!key || !value) {
+		if (value === undefined || value === '') {
 			return items
 		}
 
-		return items.filter(
-			(property) =>
-				property[key] !== null &&
-				property[key].toLowerCase().includes(value.toLowerCase()),
-		)
+		const newItems = []
+
+		items.forEach((item) => {
+			for (let key in item) {
+				if (
+					item !== null &&
+					item[key] !== null &&
+					typeof item[key] === 'string' &&
+					item[key].toLowerCase().includes(value.toLowerCase())
+				) {
+					const index = newItems.findIndex(
+						(array) => array.id === item[key].id,
+					)
+
+					if (index < 0) {
+						newItems.push(item)
+					}
+				}
+			}
+		})
+
+		return newItems
 	}
 }

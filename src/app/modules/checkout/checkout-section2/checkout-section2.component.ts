@@ -67,10 +67,24 @@ export class CheckoutSection2Component implements OnInit {
 		number: ['', [Validators.required]],
 		expiry: ['', [Validators.required]],
 		cvc: ['', [Validators.required]],
+		country: ['', [Validators.required]],
+		city: ['', [Validators.required]],
+		line1: ['', [Validators.required]],
+		postal_code: ['', [Validators.required]],
 	})
+
+	user: {
+		name: ''
+		email: ''
+		phone: ''
+	}
 
 	ngOnInit(): void {
 		this.showApplePay = false
+
+		this.form.value.country = 'United Arab Emirates'
+
+		this.form.value.city = 'Dubai'
 
 		if (window.ApplePaySession) {
 			const merchantIdentifier = 'example.com.store'
@@ -97,11 +111,11 @@ export class CheckoutSection2Component implements OnInit {
 						return
 					}
 
-					this.form.setValue({
-						number: '',
-						expiry: '',
-						cvc: '',
-					})
+					this.user = {
+						name: clinic.name,
+						email: clinic.email,
+						phone: clinic.phone_number_one,
+					}
 				})
 		}, 500)
 
@@ -147,6 +161,18 @@ export class CheckoutSection2Component implements OnInit {
 		let data: any = {}
 
 		data.accounts = { count: this.additionalUsers }
+
+		data.user = {
+			name: this.user.name,
+			email: this.user.email,
+			phone: this.user.phone,
+			address: {
+				country: this.form.value.country,
+				city: this.form.value.city,
+				line1: this.form.value.line1,
+				postal_code: this.form.value.postal_code,
+			},
+		}
 
 		data.card = {
 			number: this.form.value.number,

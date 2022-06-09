@@ -244,12 +244,10 @@ export class ClinicInformationComponent implements OnInit {
 		}
 
 		for (let key in this.form.value) {
-			if (
-				!empty(this.form.value[key]) ||
-				key !== 'phone_number_two' ||
-				key !== 'phone_number_two'
-			) {
-				form.append(key, this.form.value[key])
+			if (!empty(this.form.value[key]) || key !== 'phone_number_two') {
+				if (key !== 'phone_number_two_country_code') {
+					form.append(key, this.form.value[key])
+				}
 			}
 		}
 

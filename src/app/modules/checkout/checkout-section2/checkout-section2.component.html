@@ -6,6 +6,48 @@
 >
 	<div class="text-2xl accent-color mb-5">Pay with card</div>
 
+	<div class="text-lg text-gray-600 mb-1">Billing Address</div>
+	<div
+		@slideInTop
+		class="rounded-2xl border border-gray-200 w-full overflow-hidden shadow-md shadow-emerald-200/20 bg-white mb-10"
+	>
+		<div class="border-b border-b-gray-200 px-3">
+			<country-form
+				(onChangeCountry)="onChangeCountry($event)"
+			></country-form>
+		</div>
+
+		<div class="border-b border-b-gray-200 px-3">
+			<select
+				(input)="form.value.city = $event.target.value"
+				class="py-2 px-3 w-full"
+			>
+				<option *ngFor="let item of cities; trackBy: identity">
+					{{ item }}
+				</option>
+			</select>
+		</div>
+		<div class="border-b border-b-gray-200 px-3">
+			<input
+				type="text"
+				autocomplete="line1"
+				(input)="form.value.line1 = $event.target.value"
+				placeholder="Address line one"
+				class="py-2 px-3 w-full"
+			/>
+		</div>
+
+		<div class="px-3">
+			<input
+				type="text"
+				autocomplete="postal_code"
+				(input)="form.value.postal_code = $event.target.value"
+				placeholder="Postal Code"
+				class="py-2 px-3 w-full"
+			/>
+		</div>
+	</div>
+
 	<div class="text-lg text-gray-600 mb-1">Card Information</div>
 
 	<div

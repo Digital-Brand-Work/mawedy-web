@@ -41,7 +41,6 @@ export class AppointmentAddComponent implements OnInit {
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
 		private _indexDBService: NgxIndexedDBService,
-		private _clinicUserService: ClinicUserService,
 		private _errorHandlerService: ErrorHandlerService,
 		private _addAppointmentModal: AddAppointmentModal,
 		private store: Store<{ department: Department; patient: Patient }>,
@@ -54,7 +53,7 @@ export class AppointmentAddComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
-	@ViewChild('input') input!: ElementRef
+	@ViewChild('input') input?: ElementRef
 
 	@ViewChild('comments', { read: ElementRef }) textArea: ElementRef
 
@@ -82,26 +81,17 @@ export class AppointmentAddComponent implements OnInit {
 
 	currencyFC = new FormControl('')
 
-	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
-
-	branches$: BehaviorSubject<any> = new BehaviorSubject<any>([])
-
 	patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([])
 
-	departments$: BehaviorSubject<Department[]> = new BehaviorSubject<
-		Department[]
-	>([])
+	departments: Department[] = []
 
-	department$: BehaviorSubject<Department | null> =
-		new BehaviorSubject<Department | null>(null)
-
-	medicalServices$: BehaviorSubject<MedicalService[]> = new BehaviorSubject(
-		[],
-	)
+	medicalServices: MedicalService[] = []
 
 	doctors$: BehaviorSubject<Doctor[]> = new BehaviorSubject([])
 
 	timeSlots$: BehaviorSubject<TimeSlot[]> = new BehaviorSubject([])
+
+	keyword: string = ''
 
 	form: FormGroup = this._formBuilder.group({
 		patient_id: ['', Validators.required],
@@ -117,26 +107,21 @@ export class AppointmentAddComponent implements OnInit {
 		comments: [false, Validators.required],
 	})
 
-	ngOnInit(): void {
-		this.setBranches()
+	patientListIsFocused: boolean = false
 
+	ngOnInit(): void {
 		this.setPatients()
 
 		this._indexDBService
 			.getAll(DB.DEPARTMENTS)
-			.subscribe((departments: Department[]) =>
-				this.setDepartments(departments),
-			)
-	}
+			.subscribe((departments: Department[]) => {
+				this.departments = departments
 
-	setBranches() {
-		this._indexDBService
-			.getByKey(DB.CLINIC, 1)
-			.subscribe((results: any) => {
-				const clinic = results.data
-
-				if (hasData(clinic.accounts)) {
-					this.branches$.next(clinic.accounts)
+				if (
+					departments.length !== 0 &&
+					departments[0]?.services.length !== 0
+				) {
+					this.medicalServices = departments[0].services
 				}
 			})
 	}
@@ -147,12 +132,12 @@ export class AppointmentAddComponent implements OnInit {
 			.subscribe((patients: Patient[]) => this.patients$.next(patients))
 	}
 
-	setDepartments(departments: Department[]) {
-		this.departments$.next(departments)
-	}
+	setMedicalServices(id: string) {
+		const services = this.departments.find(
+			(department) => department.id === id,
+		).services
 
-	setMedicalServices(medicalServices: MedicalService[]) {
-		this.medicalServices$.next(medicalServices)
+		this.medicalServices = services
 	}
 
 	setDoctors(doctors: Doctor[]) {
@@ -166,7 +151,7 @@ export class AppointmentAddComponent implements OnInit {
 	ngAfterViewInit(): void {
 		this.opened$.pipe(takeUntil(this.unsubscribe$)).subscribe((focused) => {
 			if (focused) {
-				this.input.nativeElement.focus()
+				this.input?.nativeElement.focus()
 			}
 		})
 

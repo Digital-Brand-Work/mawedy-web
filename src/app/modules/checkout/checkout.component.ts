@@ -8,6 +8,8 @@ import { HomeSubscriptionState } from 'app/misc/home.state'
 import { BehaviorSubject, combineLatest, Observable, take } from 'rxjs'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { Clinic } from '../admin/clinic/clinic.model'
+import { ClinicUserService } from '../admin/clinic/clinic.service'
 @Component({
 	selector: 'checkout',
 	templateUrl: './checkout.component.html',
@@ -53,6 +55,10 @@ export class CheckoutComponent implements OnInit {
 				next: (results) => {
 					const [subscription_request, account_users_request]: any =
 						results
+
+					if (!subscription_request || !account_users_request) {
+						return ''
+					}
 
 					this.interval$.next(subscription_request.interval)
 

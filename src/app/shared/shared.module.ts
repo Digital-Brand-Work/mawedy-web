@@ -25,6 +25,7 @@ import { InitialsPipe } from '@digital_brand_work/pipes/initials.pipe'
 import { ToTimeSlotPipe } from '@digital_brand_work/pipes/time-slot.pipe'
 import { ShortenDayPipe } from '@digital_brand_work/pipes/shorten.day.pipe'
 import { TwentyFourToTwelveHoursPipe } from '@digital_brand_work/pipes/twenty-four-to-twelve.hours.pipe'
+import { TableFilterPipe } from '@digital_brand_work/pipes/table.filter.pipe'
 
 const components = [
 	...appComponents,
@@ -62,6 +63,7 @@ const directives = [
 	ToTimeSlotPipe,
 	ShortenDayPipe,
 	TwentyFourToTwelveHoursPipe,
+	TableFilterPipe,
 ]
 
 const pipes = []
