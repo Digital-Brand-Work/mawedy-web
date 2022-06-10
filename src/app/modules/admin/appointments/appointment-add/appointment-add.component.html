@@ -13,25 +13,30 @@
 	></modal-header>
 
 	<div
-		*ngIf="form"
 		[formGroup]="form"
-		#ngForm="ngForm"
 		class="px-10 py-5 bg-white"
 		style="max-height: calc(100vh - 5vh); overflow-y: scroll !important"
 	>
 		<div class="font-bold text-gray-500 mb-3">Patient Details</div>
 
 		<div
+			[ngClass]="{
+				'pointer-events-none grayscale opacity-87': form.disabled
+			}"
 			@fadeOutTop
 			@slideInBottom
 			*ngIf="(patients$ | async) && (patients$ | async)?.length !== 0"
 			class="mb-5 w-full"
 		>
-			<label for="" class="mb-1 font-bold accent-color text-base">
+			<label
+				for="patient_name"
+				class="mb-1 font-bold accent-color text-base"
+			>
 				Patient Name
 			</label>
 
 			<input
+				id="patient_name"
 				stop-propagation
 				(click)="patientListIsFocused = true"
 				[ngModelOptions]="{ standalone: true }"
@@ -57,7 +62,7 @@
 							patient.middle_name +
 							' ' +
 							patient.last_name;
-						form.value.patient_id = patient.id
+						form.get('patient_id').setValue(patient.id)
 					"
 					class="w-full hover:bg-emerald-500 hover:text-white flex items-center px-2 border border-b-gray-200"
 					mat-menu-item
@@ -120,6 +125,7 @@
 				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 			>
 				<option
+					[value]="service.id"
 					*ngFor="let service of medicalServices; trackBy: identity"
 				>
 					{{ service.name }}
@@ -292,11 +298,11 @@
 			</label>
 
 			<textarea
+				#comments
 				id="comments"
 				formControlName="comments"
 				style="min-height: 122px"
 				(keyup)="autoGrow()"
-				#comments
 				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 			></textarea>
 		</div>
@@ -316,14 +322,15 @@
 				(click)="save()"
 				[ngClass]="{
 					'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 shadow-emerald-500/50 shadow ':
-						!isProcessing,
-					'bg-gray-400 pointer-events-none ': isProcessing
+						!form.disabled && form.valid,
+					'bg-gray-400 pointer-events-none ':
+						form.disabled || !form.valid
 				}"
 				class="rounded-xl px-5 py-3 font-bold text-white"
 			>
-				<spinner *ngIf="isProcessing"></spinner>
+				<spinner *ngIf="form.disabled"></spinner>
 
-				<div class="text-white" *ngIf="!isProcessing">Schedule</div>
+				<div class="text-white" *ngIf="!form.disabled">Schedule</div>
 			</button>
 		</div>
 	</div>

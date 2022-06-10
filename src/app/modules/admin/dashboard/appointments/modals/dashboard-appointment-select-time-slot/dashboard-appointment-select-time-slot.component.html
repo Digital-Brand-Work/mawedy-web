@@ -42,17 +42,15 @@
 					class="grid grid-cols-1 md:grid-cols-2 gap-5"
 				>
 					<div
-						*ngFor="
-							let time of times;
-							trackBy: identity;
-							let i = index
-						"
+						*ngFor="let time of times; let i = index"
+						[class.hidden]="!times[i + 1]"
 					>
 						<div
+							*ngIf="times[i + 1]"
 							(click)="
 								appointmentSlot$.next({
 									start_time: time.start_time,
-									end_time: add30Mins(time.start_time)
+									end_time: times[i + 1]?.start_time
 								});
 								opened$.next(false)
 							"
@@ -65,7 +63,8 @@
 							class="w-full flex items-center justify-center rounded-xl text-base font-norm border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500"
 							style="height: 50px"
 						>
-							{{ time.start_time | toTime }}
+							{{ time.start_time }}
+							- {{ times[i + 1].start_time }}
 						</div>
 					</div>
 				</div>

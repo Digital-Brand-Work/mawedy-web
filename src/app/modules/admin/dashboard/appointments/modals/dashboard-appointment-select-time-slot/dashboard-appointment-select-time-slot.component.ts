@@ -90,16 +90,20 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 						: time <= END_OF_HOURS || time <= parseInt(endHour);
 					time++
 				) {
-					timings.push(`${time}:00`)
+					timings.push(`${this.toFixedTwo(time)}:00`)
 
-					timings.push(`${time}:${APPOINTMENT_INTERVAL} `)
+					timings.push(
+						`${this.toFixedTwo(time)}:${APPOINTMENT_INTERVAL} `,
+					)
 				}
 
 				if (isGraveYard) {
 					for (let time = 2; time < parseInt(endHour) + 1; time++) {
-						timings.push(`${time}:00`)
+						timings.push(`${this.toFixedTwo(time)}:00`)
 
-						timings.push(`${time}:${APPOINTMENT_INTERVAL} `)
+						timings.push(
+							`${this.toFixedTwo(time)}:${APPOINTMENT_INTERVAL} `,
+						)
 					}
 				}
 
@@ -107,10 +111,6 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 
 				for (let time of timings) {
 					const [hour, minutes] = time.split(':')
-
-					this.times.push({
-						start_time: time,
-					})
 
 					if (
 						parseInt(hour) === parseInt(endHour) ||
@@ -120,6 +120,10 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 					) {
 						break
 					}
+
+					this.times.push({
+						start_time: time,
+					})
 				}
 			})
 	}
@@ -132,8 +136,8 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 
 	identity = (item: any) => item
 
-	add30Mins(value: string): string {
-		return add30Mins(value)
+	toFixedTwo(value: number): string {
+		return (value < 10 ? '0' : '') + value
 	}
 
 	tOTime(value: string) {

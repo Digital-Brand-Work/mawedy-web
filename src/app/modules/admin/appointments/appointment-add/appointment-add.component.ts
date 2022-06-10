@@ -130,8 +130,6 @@ export class AppointmentAddComponent implements OnInit {
 		min: dayjs().format('YYYY-MM-DD'),
 	}
 
-	isProcessing: boolean = false
-
 	ngOnInit(): void {
 		this.setPatients()
 
@@ -145,13 +143,9 @@ export class AppointmentAddComponent implements OnInit {
 				}
 
 				if (!empty(appointment_slot)) {
-					this.form.value.start_time = tOTime(
-						appointment_slot.start_time,
-					).padStart(5, '0')
+					this.setFormValue('start_time', appointment_slot.start_time)
 
-					this.form.value.end_time = tOTime(
-						appointment_slot.end_time,
-					).padStart(5, '0')
+					this.setFormValue('end_time', appointment_slot.end_time)
 				}
 			})
 	}
@@ -242,9 +236,9 @@ export class AppointmentAddComponent implements OnInit {
 	}
 
 	save() {
-		this.isProcessing = true
+		this.form.disable()
 
-		if (this.form.value.type === 'Walk-in') {
+		if (this.form.get('type')?.value === 'Walk-in') {
 			this.setFormValue('waiting', true)
 		}
 
@@ -253,6 +247,17 @@ export class AppointmentAddComponent implements OnInit {
 			.subscribe({
 				next: (appointment: any) => {
 					console.log(appointment)
+
+					this.keyword = ''
+
+					this.form.reset()
+
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						title: `Appointment booked successfully`,
+						message: `Appointment for ${appointment.data.service.name} by ${appointment.data.patient.name} to ${appointment.data.doctor.name} has been scheduled.`,
+						type: 'success',
+					})
 				},
 				error: (http: HttpErrorResponse) => {
 					this._errorHandlerService.handleError(http)
@@ -266,6 +271,6 @@ export class AppointmentAddComponent implements OnInit {
 					}
 				},
 			})
-			.add(() => (this.isProcessing = false))
+			.add(() => this.form.enable())
 	}
 }
