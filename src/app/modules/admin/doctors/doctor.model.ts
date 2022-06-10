@@ -1,6 +1,6 @@
 import { Department } from 'app/modules/admin/clinic/department/department.model'
 import { PHPBaseModel, PHPFile } from '@digital_brand_work/models/core.model'
-import { DayEnum } from 'app/mawedy-core/enums/day.enum'
+import { DayEnum, DayTypes } from 'app/mawedy-core/enums/day.enum'
 
 export interface Doctor extends PHPBaseModel {
 	title: string
@@ -17,7 +17,7 @@ export interface Doctor extends PHPBaseModel {
 }
 
 export interface TimeSlot extends PHPBaseModel {
-	day: DayEnum
+	day: DayTypes
 	start: string
 	end: string
 	active: boolean

@@ -1,3 +1,12 @@
+export type DayTypes =
+	| 'Monday'
+	| 'Tuesday'
+	| 'Wednesday'
+	| 'Thursday'
+	| 'Friday'
+	| 'Saturday'
+	| 'Sunday'
+
 export enum DayEnum {
 	MONDAY = 'Monday',
 	TUESDAY = 'Tuesday',

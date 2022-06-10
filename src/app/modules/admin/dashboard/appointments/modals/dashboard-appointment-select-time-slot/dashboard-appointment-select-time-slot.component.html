@@ -24,17 +24,29 @@
 				class="overflow-y-auto overflow-x-hidden p-5"
 			>
 				<div class="font-bold text-gray-600 mb-10">
-					Selected Date - 12/10/2021
+					Selected Date -
+					{{ date$ | async | date: 'MMMM dd, yyyy - EEEE' }}
 				</div>
 
-				<div>
+				<div
+					@slideInBottom
+					*ngIf="!isActive"
+					class="border border-gray-200 text-gray-500 bg-gray-50 px-3 py-5 rounded-md"
+				>
+					{{ (doctor$ | async)?.name }} is not available on
+					{{ date$ | async | date: 'EEEE' }}s
+				</div>
+
+				<div
+					*ngIf="isActive"
+					class="grid grid-cols-1 md:grid-cols-2 gap-5"
+				>
 					<div
 						*ngFor="
-							let item of [1, 2, 4, 45, 5, 6, 76, 788];
+							let time of times;
 							trackBy: identity;
 							let i = index
 						"
-						class="grid grid-cols-1 md:grid-cols-2 gap-5"
 					>
 						<div
 							[ngClass]="{
@@ -47,28 +59,9 @@
 							style="height: 50px"
 						>
 							{{
-								'0' +
-									(i + 1) +
-									':00 AM - ' +
-									'0' +
-									(i + 1) +
-									':30 PM'
+								time.start_time | toTime | toTwelve | uppercase
 							}}
-						</div>
-
-						<div
-							role="button"
-							class="w-full flex items-center justify-center rounded-xl text-base font-normal text-gray-500 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 mb-5"
-							style="height: 50px"
-						>
-							{{
-								'0' +
-									(i + 1) +
-									':30 AM - ' +
-									'0' +
-									(i + 2) +
-									':30 PM'
-							}}
+							-
 						</div>
 					</div>
 				</div>

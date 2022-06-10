@@ -54,13 +54,15 @@ export class WorkingScheduleComponent implements OnInit {
 					(slot) => slot.day.toLowerCase() === day.toLowerCase(),
 				)
 
-				if (timeslot) {
+				if (timeslot && timeslot.start && timeslot.end) {
 					this.currentTimeSlots[day] = {
 						active: timeslot.active,
 						start: timeslot.start,
 						end: timeslot.end,
 					}
 				}
+
+				this.currentTimeSlots[day].active = timeslot.active
 			}
 		}, 200)
 

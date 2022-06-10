@@ -8,6 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatSelectModule } from '@angular/material/select'
 import { MatRippleModule } from '@angular/material/core'
+import { MatDatepickerModule } from '@angular/material/datepicker'
 
 export const matModules = [
 	MatIconModule,
@@ -20,4 +21,5 @@ export const matModules = [
 	MatSelectModule,
 	MatProgressSpinnerModule,
 	MatRippleModule,
+	MatDatepickerModule,
 ]

@@ -12,4 +12,8 @@ export class AddAppointmentModal {
 
 	doctor$: BehaviorSubject<Doctor | null> =
 		new BehaviorSubject<Doctor | null>(null)
+
+	date$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(
+		null,
+	)
 }

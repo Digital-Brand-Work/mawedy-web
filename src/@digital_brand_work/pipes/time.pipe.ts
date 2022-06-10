@@ -12,6 +12,13 @@ export class TimePipe implements PipeTransform {
 			return value.toString()
 		}
 
-		return (value < 10 ? '0' : '') + value
+		if (
+			value.toString().split(':')[1] &&
+			value.toString().split(':')[1].length === 3
+		) {
+			return (value < 10 ? '0' : '') + value.toString().slice(0, -1)
+		}
+
+		return ((value < 10 ? '0' : '') + value).toString()
 	}
 }

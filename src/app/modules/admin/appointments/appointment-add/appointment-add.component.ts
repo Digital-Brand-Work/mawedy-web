@@ -2,14 +2,7 @@ import { hasData } from 'app/mawedy-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 import { MedicalService } from './../../clinic/clinic-services/medical-service.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import {
-	BehaviorSubject,
-	Observable,
-	skip,
-	Subject,
-	take,
-	takeUntil,
-} from 'rxjs'
+import { BehaviorSubject, skip, Subject, takeUntil } from 'rxjs'
 import { AddAppointmentModal } from './appointment-add.service'
 import { createMask } from '@ngneat/input-mask'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -22,8 +15,6 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { Department } from '../../clinic/department/department.model'
 import { Patient } from '../../patients/patient.model'
-import { Clinic } from '../../clinic/clinic.model'
-import { ClinicUserService } from '../../clinic/clinic.service'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -35,10 +26,8 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
-import {
-	appointmentTypes,
-	AppointmentType_Types,
-} from 'app/mawedy-core/enums/appointment-type.enum'
+import * as dayjs from 'dayjs'
+
 @Component({
 	selector: 'appointment-add',
 	templateUrl: './appointment-add.component.html',
@@ -106,6 +95,8 @@ export class AppointmentAddComponent implements OnInit {
 
 	timeSlots$: BehaviorSubject<TimeSlot[]> = new BehaviorSubject([])
 
+	date$: BehaviorSubject<string | null> = this._addAppointmentModal.date$
+
 	keyword: string = ''
 
 	form: FormGroup = this._formBuilder.group({
@@ -125,6 +116,10 @@ export class AppointmentAddComponent implements OnInit {
 	errors: any = {}
 
 	patientListIsFocused: boolean = false
+
+	date = {
+		min: dayjs().format('YYYY-MM-DD'),
+	}
 
 	ngOnInit(): void {
 		this.setPatients()
