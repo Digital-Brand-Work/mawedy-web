@@ -46,6 +46,9 @@
 						[class.hidden]="!times[i + 1]"
 					>
 						<div
+							syncWithClinic
+							[day]="day"
+							[slot]="time.start_time"
 							*ngIf="times[i + 1]"
 							(click)="
 								appointmentSlot$.next({
@@ -54,17 +57,20 @@
 								});
 								opened$.next(false)
 							"
-							[ngClass]="{
-								'bg-gray-300 pointer-events-none text-white':
-									i === 2,
-								'text-gray-500': i !== 2
-							}"
 							role="button"
-							class="w-full flex items-center justify-center rounded-xl text-base font-norm border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500"
+							class="w-full flex text-gray-500 items-center justify-center rounded-xl text-base font-norm border border-gray-200 hover:bg-gray-50 hover:border-gray-500 hover:text-gray-500"
 							style="height: 50px"
+							[ngClass]="{
+								'bg-emerald-50 border-emerald-500 text-emerald-500':
+									(appointmentSlot$ | async)?.start_time ===
+										time.start_time &&
+									(appointmentSlot$ | async)?.end_time ===
+										times[i + 1]?.start_time
+							}"
 						>
-							{{ time.start_time }}
-							- {{ times[i + 1].start_time }}
+							{{ time.start_time | toTwelve | uppercase }}
+							-
+							{{ times[i + 1].start_time | toTwelve | uppercase }}
 						</div>
 					</div>
 				</div>

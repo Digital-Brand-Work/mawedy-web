@@ -1,3 +1,4 @@
+import { WeekDay } from './../../../../../../mawedy-core/constants/app.constant'
 import { add30Mins, empty, tOTime } from 'app/mawedy-core/helpers'
 import { TimeSlot } from './../../../../doctors/doctor.model'
 import { Component, HostListener, OnInit } from '@angular/core'
@@ -55,6 +56,8 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 
 	times: { start_time: string }[] = []
 
+	day?: DayTypes
+
 	ngOnInit(): void {
 		combineLatest([this.date$, this.doctor$])
 			.pipe(takeUntil(this.unsubscribe$))
@@ -65,8 +68,10 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 					return
 				}
 
+				this.day = dayjs(date).format('dddd') as DayTypes
+
 				const timeSlot = doctor.timeslots.find(
-					(slot) => slot.day === dayjs(date).format('dddd'),
+					(slot) => slot.day === this.day,
 				)
 
 				this.isActive = timeSlot.active

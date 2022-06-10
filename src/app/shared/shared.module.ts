@@ -27,6 +27,7 @@ import { ShortenDayPipe } from '@digital_brand_work/pipes/shorten.day.pipe'
 import { TwentyFourToTwelveHoursPipe } from '@digital_brand_work/pipes/twenty-four-to-twelve.hours.pipe'
 import { TableFilterPipe } from '@digital_brand_work/pipes/table.filter.pipe'
 import { add30MinutesPipe } from '@digital_brand_work/pipes/add-thirty-minutes.pipe'
+import { SyncWithClinicDirective } from 'app/mawedy-core/directives/doctor.time-slot.disabler.directive'
 
 const components = [
 	...appComponents,
@@ -55,6 +56,7 @@ const directives = [
 	AnimateJsDirective,
 	ParallaxDirective,
 	AutoSizeDirective,
+	SyncWithClinicDirective,
 	StopPropagation,
 	EntitiesPipe,
 	AgePipe,
