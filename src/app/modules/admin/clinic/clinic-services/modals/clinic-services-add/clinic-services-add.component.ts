@@ -8,7 +8,7 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Store } from '@ngrx/store'
 import { AlertState } from 'app/components/alert/alert.service'
@@ -48,8 +48,6 @@ export class ClinicServicesAddComponent implements OnInit {
 	onKeydownHandler() {
 		this.opened$.next(false)
 	}
-
-	@ViewChild('ngForm') ngForm: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

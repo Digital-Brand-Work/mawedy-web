@@ -5,7 +5,7 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
@@ -33,8 +33,6 @@ export class TalkToUsSection1Component implements OnInit {
 			description: 'Lets have a coffee ',
 		})
 	}
-
-	@ViewChild('NgForm') NgForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

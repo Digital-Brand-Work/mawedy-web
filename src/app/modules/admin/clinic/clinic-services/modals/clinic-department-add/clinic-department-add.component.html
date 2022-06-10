@@ -9,11 +9,7 @@
 		(onClose)="opened$.next(false)"
 	></modal-header>
 
-	<form
-		[formGroup]="form"
-		#ngForm="ngForm"
-		class="px-10 py-5 h-auto bg-white"
-	>
+	<form [formGroup]="form" class="px-10 py-5 h-auto bg-white">
 		<div class="mb-5">
 			<label for="name" class="mb-1 font-bold accent-color text-md"
 				>Department</label

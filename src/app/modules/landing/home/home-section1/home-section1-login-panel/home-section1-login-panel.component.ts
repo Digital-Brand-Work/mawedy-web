@@ -1,10 +1,8 @@
-import { ClinicRegistrationStatusEnum } from './../../../../../mawedy-core/enums/clinic-registration.enum'
-import { ClinicSubscriptionTypeEnum } from './../../../../../mawedy-core/enums/clinic-subscription-type.enum'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { AlertState } from 'app/components/alert/alert.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../../login.service'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 
@@ -22,8 +20,6 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 		private _clinicUserService: ClinicUserService,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
-
-	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

@@ -9,7 +9,7 @@ import {
 	Output,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
@@ -41,8 +41,6 @@ export class LandingSubscriptionSection1FormComponent implements OnInit {
 	$isInSubscription: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
 		true,
 	)
-
-	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

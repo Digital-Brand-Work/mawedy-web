@@ -16,7 +16,7 @@ import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { AddDoctorModal } from './doctor-add.service'
 import * as DepartmentActions from '../../../clinic/department//department.actions'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Doctor, TimeSlot } from '../../doctor.model'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { DoctorService } from '../../doctor.service'
@@ -48,8 +48,6 @@ export class DoctorAddComponent implements OnInit {
 	onKeydownHandler() {
 		this.opened$.next(false)
 	}
-
-	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

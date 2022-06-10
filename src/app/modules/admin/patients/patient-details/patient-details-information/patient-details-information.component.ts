@@ -5,7 +5,7 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { countries } from 'app/mawedy-core/constants/countries.constant'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
@@ -36,8 +36,6 @@ export class PatientDetailsInformationComponent implements OnInit {
 		private _indexDBService: NgxIndexedDBService,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
-
-	@ViewChild('ngForm') ngForm?: NgForm
 
 	@ViewChild('input') input?: ElementRef
 

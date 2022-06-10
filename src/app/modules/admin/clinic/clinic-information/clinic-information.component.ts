@@ -11,7 +11,7 @@ import {
 	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { createMask } from '@ngneat/input-mask'
 import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs'
 import { BranchApi, ClinicApi } from '../clinic.api.service'
@@ -23,10 +23,7 @@ import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.contr
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { days } from 'app/mawedy-core/enums/day.enum'
 import { ClinicTimingSelectModal } from '../clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
-import {
-	countries,
-	DialCode,
-} from 'app/mawedy-core/constants/country-codes.list'
+
 import { empty, removeDialCode, setPrefix } from 'app/mawedy-core/helpers'
 
 @Component({
@@ -47,8 +44,6 @@ export class ClinicInformationComponent implements OnInit {
 		private _errorHandlerService: ErrorHandlerService,
 		private _clinicTimingSelectModal: ClinicTimingSelectModal,
 	) {}
-
-	@ViewChild('ngForm') ngForm: NgForm
 
 	@ViewChild('clinicDescription', { read: ElementRef })
 	clinicDescription!: ElementRef

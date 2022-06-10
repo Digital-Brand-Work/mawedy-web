@@ -11,7 +11,7 @@ import {
 	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, NgForm } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import {
@@ -40,8 +40,6 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 		private _formBuilder: FormBuilder,
 		private _storeRegisterRule: StoreRegisterRule,
 	) {}
-
-	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

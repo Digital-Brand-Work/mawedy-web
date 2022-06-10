@@ -7,7 +7,6 @@ import {
 	Output,
 	ViewChild,
 } from '@angular/core'
-import { NgForm } from '@angular/forms'
 
 @Component({
 	selector: 'card-number-form',
@@ -18,8 +17,6 @@ export class CardNumberFormComponent implements OnInit {
 	constructor(private _cdr: ChangeDetectorRef) {}
 
 	@Output() onCardNumberChange = new EventEmitter<string>()
-
-	@ViewChild('ngForm') ngForm?: NgForm
 
 	@ViewChild('input') input?: ElementRef
 

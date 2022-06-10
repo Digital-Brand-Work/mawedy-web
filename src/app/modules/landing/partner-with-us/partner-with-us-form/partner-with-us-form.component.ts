@@ -8,7 +8,7 @@ import {
 	Output,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
@@ -41,8 +41,6 @@ export class PartnerWithUsFormComponent implements OnInit {
 	$isInSubscription: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
 		true,
 	)
-
-	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

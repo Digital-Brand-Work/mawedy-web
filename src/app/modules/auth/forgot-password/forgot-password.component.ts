@@ -6,13 +6,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core'
-import {
-	FormBuilder,
-	FormControl,
-	FormGroup,
-	NgForm,
-	Validators,
-} from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { BehaviorSubject, finalize, take } from 'rxjs'
 import { fuseAnimations } from '@fuse/animations'
 import { FuseAlertType } from '@fuse/components/alert'

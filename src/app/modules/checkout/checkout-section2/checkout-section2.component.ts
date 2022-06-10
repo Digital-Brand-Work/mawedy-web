@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -40,8 +40,6 @@ export class CheckoutSection2Component implements OnInit {
 		private _errorHandlerService: ErrorHandlerService,
 		private _indexDbService: NgxIndexedDBService,
 	) {}
-
-	@ViewChild('ngForm') ngForm?: NgForm
 
 	@Input() subscription$?: BehaviorSubject<Subscription | null>
 

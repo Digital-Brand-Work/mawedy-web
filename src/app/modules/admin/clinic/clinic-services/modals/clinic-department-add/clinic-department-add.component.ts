@@ -8,7 +8,7 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 import { AddDepartmentModal } from './clinic-department-add.service'
@@ -41,8 +41,6 @@ export class ClinicDepartmentAddComponent implements OnInit {
 	onKeydownHandler() {
 		this.opened$.next(false)
 	}
-
-	@ViewChild('NgForm') NgForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

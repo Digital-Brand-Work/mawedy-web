@@ -6,7 +6,7 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AlertState } from 'app/components/alert/alert.service'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
@@ -43,8 +43,6 @@ export class ClinicDepartmentEditComponent implements OnInit {
 	onKeydownHandler() {
 		this.opened$.next(false)
 	}
-
-	@ViewChild('NgForm') NgForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

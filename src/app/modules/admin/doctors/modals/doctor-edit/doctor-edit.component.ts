@@ -6,7 +6,7 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { Department } from 'app/modules/admin/clinic/department/department.model'
@@ -55,7 +55,6 @@ export class DoctorEditComponent implements OnInit {
 		this.doctorDetailsModalOpened$.next(true)
 	}
 
-	@ViewChild('ngForm') ngForm!: NgForm
 	@ViewChild('input') input!: ElementRef
 
 	unsubscribe$: Subject<any> = new Subject<any>()

@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -41,8 +41,6 @@ export class PartnerWithUsSection1FirstStepComponent implements OnInit {
 	$isInSubscription: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
 		true,
 	)
-
-	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

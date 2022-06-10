@@ -9,7 +9,7 @@ import {
 } from '@angular/core'
 import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { EditClinicServiceModal } from './clinic-services-edit.service'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DepartmentService } from '../../../department/department.service'
 import { AlertState } from 'app/components/alert/alert.service'
@@ -46,8 +46,6 @@ export class ClinicServicesEditComponent implements OnInit {
 	onKeydownHandler() {
 		this.opened$.next(false)
 	}
-
-	@ViewChild('ngForm') ngForm: NgForm
 
 	@ViewChild('input') input!: ElementRef
 

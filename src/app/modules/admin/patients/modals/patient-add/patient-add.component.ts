@@ -6,7 +6,7 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Store } from '@ngrx/store'
 import { countries } from 'app/mawedy-core/constants/countries.constant'
@@ -45,8 +45,6 @@ export class PatientAddComponent implements OnInit {
 	}
 
 	@ViewChild('input') input!: ElementRef
-
-	@ViewChild('ngForm') ngForm!: NgForm
 
 	@ViewChild('comments', { read: ElementRef }) textArea: ElementRef
 

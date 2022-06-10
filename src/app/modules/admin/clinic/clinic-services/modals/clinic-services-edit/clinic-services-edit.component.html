@@ -8,12 +8,7 @@
 		(onClose)="opened$.next(false)"
 	></modal-header>
 
-	<form
-		*ngIf="form"
-		[formGroup]="form"
-		#ngForm="ngForm"
-		class="p-10 py-5 bg-white"
-	>
+	<form *ngIf="form" [formGroup]="form" class="p-10 py-5 bg-white">
 		<div class="px-7 py-14 h-auto bg-gray-100 rounded-lg">
 			<div class="grid grid-cols-4 gap-x-5">
 				<div class="mb-5 col-span-3">
