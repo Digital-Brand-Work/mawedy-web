@@ -21,7 +21,7 @@
 
 		<div
 			[ngClass]="{
-				'pointer-events-none grayscale opacity-87': form.disabled
+				'pointer-events-none grayscale opacity-50': form.disabled
 			}"
 			@fadeOutTop
 			@slideInBottom
@@ -178,7 +178,8 @@
 					[ngClass]="{
 						'border-red-500':
 							form.get('date')?.touched &&
-							!form.get('date')?.valid,
+							!form.get('date')?.valid &&
+							!form.disabled,
 						'text-red-500': errors.date
 					}"
 					style="z-index: 999999999999999999999"
@@ -187,7 +188,9 @@
 
 				<div
 					*ngIf="
-						form.get('date')?.touched && !form.get('date')?.valid
+						form.get('date')?.touched &&
+						!form.get('date')?.valid &&
+						!form.disabled
 					"
 					class="text-sm text-rose-500"
 				>
@@ -233,7 +236,8 @@
 					[ngClass]="{
 						'border-red-500':
 							form.get('type')?.touched &&
-							!form.get('type')?.valid,
+							!form.get('type')?.valid &&
+							!form.disabled,
 						'text-red-500': errors.type
 					}"
 				>
@@ -246,7 +250,9 @@
 
 				<div
 					*ngIf="
-						form.get('type')?.touched && !form.get('type')?.valid
+						form.get('type')?.touched &&
+						!form.get('type')?.valid &&
+						!form.disabled
 					"
 					class="text-sm text-rose-500"
 				>
@@ -268,14 +274,17 @@
 					[ngClass]="{
 						'border-red-500':
 							form.get('price')?.touched &&
-							!form.get('price')?.valid,
+							!form.get('price')?.valid &&
+							!form.disabled,
 						'text-red-500': errors.type
 					}"
 				/>
 
 				<div
 					*ngIf="
-						form.get('price')?.touched && !form.get('type')?.valid
+						form.get('price')?.touched &&
+						!form.get('type')?.valid &&
+						!form.disabled
 					"
 					class="text-sm text-rose-500"
 				>

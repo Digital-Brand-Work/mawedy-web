@@ -95,7 +95,7 @@ export class AppointmentAddComponent implements OnInit {
 
 	doctor$: BehaviorSubject<Doctor | null> = this._addAppointmentModal.doctor$
 
-	appointmentTypes: string[] = ['Returning', 'New Appointment', 'Walk-in']
+	appointmentTypes: string[] = ['Returning', 'New Appointment', 'Walk In']
 
 	timeSlots$: BehaviorSubject<TimeSlot[]> = new BehaviorSubject([])
 
@@ -238,7 +238,7 @@ export class AppointmentAddComponent implements OnInit {
 	save() {
 		this.form.disable()
 
-		if (this.form.get('type')?.value === 'Walk-in') {
+		if (this.form.get('type')?.value === 'Walk In') {
 			this.setFormValue('waiting', true)
 		}
 
@@ -246,16 +246,12 @@ export class AppointmentAddComponent implements OnInit {
 			.post(this.form.value)
 			.subscribe({
 				next: (appointment: any) => {
-					console.log(appointment)
-
-					this.keyword = ''
-
-					this.form.reset()
+					this.opened$.next(false)
 
 					this._alert.add({
 						id: Math.floor(Math.random() * 100000000000).toString(),
 						title: `Appointment booked successfully`,
-						message: `Appointment for ${appointment.data.service.name} by ${appointment.data.patient.name} to ${appointment.data.doctor.name} has been scheduled.`,
+						message: `Appointment for ${appointment.data.service.name} by ${appointment.data.patient.first_name} to ${appointment.data.doctor.name} has been scheduled.`,
 						type: 'success',
 					})
 				},

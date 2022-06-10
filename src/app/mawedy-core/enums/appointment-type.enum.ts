@@ -6,7 +6,7 @@ export type AppointmentType_Types =
 export enum AppointmentTypeEnum {
 	RETURNING = 'Returning',
 	NEW_APPOINTMENT = 'New Appointment',
-	WALK_IN = 'Walk-in',
+	WALK_IN = 'Walk In',
 }
 
 export const appointmentTypes = Object.keys(AppointmentTypeEnum)
