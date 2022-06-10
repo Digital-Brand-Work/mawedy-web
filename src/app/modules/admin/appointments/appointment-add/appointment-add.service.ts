@@ -16,4 +16,12 @@ export class AddAppointmentModal {
 	date$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(
 		null,
 	)
+
+	appointmentSlot$: BehaviorSubject<{
+		start_time: string
+		end_time: string
+	} | null> = new BehaviorSubject<{
+		start_time: string
+		end_time: string
+	} | null>(null)
 }

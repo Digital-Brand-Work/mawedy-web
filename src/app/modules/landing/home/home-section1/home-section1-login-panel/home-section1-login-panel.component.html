@@ -13,7 +13,6 @@
 	<input
 		#input
 		type="email"
-		autocomplete="email"
 		placeholder="Email"
 		formControlName="email"
 		[ngClass]="{
@@ -43,7 +42,6 @@
 	<input
 		type="password"
 		placeholder="Password"
-		autocomplete="password"
 		formControlName="password"
 		[ngClass]="{
 			'text-red-500': errors.password && !isProcessing,

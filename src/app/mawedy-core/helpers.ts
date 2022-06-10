@@ -1,4 +1,5 @@
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
+import { APPOINTMENT_INTERVAL, END_OF_MINUTES } from './constants/app.constant'
 import { countries, DialCode } from './constants/country-codes.list'
 
 export const setPrefix = (country_code: string): string => {
@@ -43,4 +44,31 @@ export function hasData(value: any[]): boolean {
 	}
 
 	return false
+}
+
+export function tOTime(value: number | string): string {
+	if (value.toString().charAt(0) === '0' && value.toString().length === 2) {
+		return value.toString()
+	}
+
+	if (
+		value.toString().split(':')[1] &&
+		value.toString().split(':')[1].length === 3
+	) {
+		return (value < 10 ? '0' : '') + value.toString().slice(0, -1)
+	}
+
+	return ((value < 10 ? '0' : '') + value).toString()
+}
+
+export function add30Mins(value: string): string {
+	if (value.split(':').length === 0) return value
+
+	const [hour, minutes] = value.split(':')
+
+	if (parseInt(minutes) + APPOINTMENT_INTERVAL < END_OF_MINUTES) {
+		return `${hour}:${parseInt(minutes) + APPOINTMENT_INTERVAL}`
+	}
+
+	return `${parseInt(hour) + 1}:${parseInt(minutes) - APPOINTMENT_INTERVAL}`
 }

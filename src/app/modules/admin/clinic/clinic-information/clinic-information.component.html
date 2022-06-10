@@ -60,7 +60,6 @@
 				<input
 					id="name"
 					type="text"
-					autocomplete="name"
 					formControlName="name"
 					[ngClass]="{
 						'text-red-500': errors.name && !isProcessing
@@ -80,7 +79,6 @@
 				<input
 					id="address"
 					type="text"
-					autocomplete="address"
 					formControlName="address"
 					[ngClass]="{
 						'text-red-500': errors.address && !isProcessing
@@ -105,7 +103,6 @@
 						id="description"
 						placeholder="Aa"
 						#clinicDescription
-						autocomplete="description"
 						formControlName="description"
 						(keyup)="autoGrow()"
 						[ngClass]="{

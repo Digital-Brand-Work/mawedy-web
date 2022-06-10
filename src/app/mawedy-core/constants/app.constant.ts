@@ -8,6 +8,14 @@ export const PHONE = '+971501112222'
 
 export const EMAIL = 'info@mawedy.ae'
 
+export const PM = 13
+
+export const END_OF_HOURS = 23
+
+export const END_OF_MINUTES = 59
+
+export const APPOINTMENT_INTERVAL = 30
+
 export const weekDays: WeekDay[] = [
 	'monday',
 	'tuesday',

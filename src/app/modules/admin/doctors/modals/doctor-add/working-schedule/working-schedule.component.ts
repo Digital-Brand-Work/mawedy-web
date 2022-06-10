@@ -47,7 +47,7 @@ export class WorkingScheduleComponent implements OnInit {
 				this.currentTimeSlots[day] = {
 					active: true,
 					start: '00:00',
-					end: '00:01',
+					end: '00:30',
 				}
 
 				const timeslot = this.timeslots.find(
@@ -62,7 +62,9 @@ export class WorkingScheduleComponent implements OnInit {
 					}
 				}
 
-				this.currentTimeSlots[day].active = timeslot.active
+				if (timeslot) {
+					this.currentTimeSlots[day].active = timeslot.active
+				}
 			}
 		}, 200)
 

@@ -1,4 +1,4 @@
-import { empty } from 'app/mawedy-core/helpers'
+import { add30Mins, empty, tOTime } from 'app/mawedy-core/helpers'
 import { TimeSlot } from './../../../../doctors/doctor.model'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -11,6 +11,14 @@ import * as dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import * as utc from 'dayjs/plugin/utc'
 import * as timezone from 'dayjs/plugin/timezone'
+import {
+	APPOINTMENT_INTERVAL,
+	END_OF_HOURS,
+	END_OF_MINUTES,
+	PM,
+} from 'app/mawedy-core/constants/app.constant'
+import { parseInt } from 'lodash'
+import { parse } from 'crypto-js/enc-base64'
 
 @Component({
 	selector: 'dashboard-appointment-select-time-slot',
@@ -38,6 +46,11 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 
 	date$: BehaviorSubject<string | null> = this._addAppointmentModal.date$
 
+	appointmentSlot$: BehaviorSubject<{
+		start_time: string
+		end_time: string
+	} | null> = this._addAppointmentModal.appointmentSlot$
+
 	isActive: boolean = false
 
 	times: { start_time: string }[] = []
@@ -59,7 +72,7 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 				this.isActive = timeSlot.active
 
 				if (empty(timeSlot.end) || empty(timeSlot.start)) {
-					this.isActive = false
+					return (this.isActive = false)
 				}
 
 				let timings = []
@@ -68,74 +81,46 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 
 				const [endHour, endMinutes] = timeSlot.end.split(':')
 
-				const PM = 12
-
-				const END_OF_HOURS = 23
-
-				const END_OF_MINUTES = 59
-
-				const APPOINTMENT_INTERVAL = 30
+				const isGraveYard: boolean = parseInt(endHour) < PM
 
 				for (
 					let time = parseInt(startHour);
-					time <= END_OF_HOURS || time <= parseInt(endHour);
+					!isGraveYard
+						? time <= END_OF_HOURS && time <= parseInt(endHour)
+						: time <= END_OF_HOURS || time <= parseInt(endHour);
 					time++
 				) {
-					timings.push(`${time}:${startMinutes}`)
+					timings.push(`${time}:00`)
 
-					if (
-						parseInt(startMinutes) + APPOINTMENT_INTERVAL <
-						END_OF_MINUTES
-					) {
-						timings.push(
-							`${time}:${
-								parseInt(startMinutes) + APPOINTMENT_INTERVAL
-							}`,
-						)
-					} else {
-						timings.push(`${time}:${startMinutes}`)
-					}
+					timings.push(`${time}:${APPOINTMENT_INTERVAL} `)
 				}
 
-				if (parseInt(startHour) > PM) {
-					const [lastHour, lastMinutes] =
-						timings[timings.length - 1].split(':')
+				if (isGraveYard) {
+					for (let time = 2; time < parseInt(endHour) + 1; time++) {
+						timings.push(`${time}:00`)
 
-					if (
-						parseInt(lastMinutes) + APPOINTMENT_INTERVAL >
-						END_OF_MINUTES
-					) {
-						timings.push(
-							'00:' +
-								(parseInt(lastMinutes) - APPOINTMENT_INTERVAL),
-						)
-					}
-
-					for (let time = 0; time < parseInt(endHour); time++) {
-						timings.push(`${time}:${endMinutes}`)
-
-						if (
-							parseInt(endMinutes) + APPOINTMENT_INTERVAL <
-							END_OF_MINUTES
-						) {
-							timings.push(
-								`${time}:${
-									parseInt(endMinutes) + APPOINTMENT_INTERVAL
-								}`,
-							)
-						} else {
-							timings.push(`${time}:${endMinutes}`)
-						}
+						timings.push(`${time}:${APPOINTMENT_INTERVAL} `)
 					}
 				}
 
 				timings = [...new Set(timings)]
 
-				timings.forEach((time) => {
+				for (let time of timings) {
+					const [hour, minutes] = time.split(':')
+
 					this.times.push({
 						start_time: time,
 					})
-				})
+
+					if (
+						parseInt(hour) === parseInt(endHour) ||
+						(parseInt(hour) + 1 === parseInt(endHour) + 1 &&
+							parseInt(minutes) + APPOINTMENT_INTERVAL >
+								END_OF_MINUTES)
+					) {
+						break
+					}
+				}
 			})
 	}
 
@@ -146,4 +131,12 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	add30Mins(value: string): string {
+		return add30Mins(value)
+	}
+
+	tOTime(value: string) {
+		return tOTime(value)
+	}
 }

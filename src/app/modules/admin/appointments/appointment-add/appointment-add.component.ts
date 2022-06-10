@@ -1,8 +1,9 @@
-import { hasData } from 'app/mawedy-core/helpers'
+import { AppointmentService } from './../appointment.service'
+import { empty, hasData, tOTime } from 'app/mawedy-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 import { MedicalService } from './../../clinic/clinic-services/medical-service.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { BehaviorSubject, skip, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, skip, Subject, takeUntil } from 'rxjs'
 import { AddAppointmentModal } from './appointment-add.service'
 import { createMask } from '@ngneat/input-mask'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -27,6 +28,8 @@ import {
 } from '@angular/core'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import * as dayjs from 'dayjs'
+import { throws } from 'assert'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Component({
 	selector: 'appointment-add',
@@ -44,6 +47,7 @@ export class AppointmentAddComponent implements OnInit {
 		private _errorHandlerService: ErrorHandlerService,
 		private _addAppointmentModal: AddAppointmentModal,
 		private store: Store<{ department: Department; patient: Patient }>,
+		private _appointmentAPI: AppointmentService,
 		private _dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
 		private _dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 	) {}
@@ -97,6 +101,11 @@ export class AppointmentAddComponent implements OnInit {
 
 	date$: BehaviorSubject<string | null> = this._addAppointmentModal.date$
 
+	appointmentSlot$: BehaviorSubject<{
+		start_time: string
+		end_time: string
+	} | null> = this._addAppointmentModal.appointmentSlot$
+
 	keyword: string = ''
 
 	form: FormGroup = this._formBuilder.group({
@@ -121,14 +130,28 @@ export class AppointmentAddComponent implements OnInit {
 		min: dayjs().format('YYYY-MM-DD'),
 	}
 
+	isProcessing: boolean = false
+
 	ngOnInit(): void {
 		this.setPatients()
 
-		this.doctor$
+		combineLatest([this.doctor$, this.appointmentSlot$])
 			.pipe(takeUntil(this.unsubscribe$), skip(1))
-			.subscribe((doctor) => {
-				if (doctor) {
+			.subscribe((results) => {
+				const [doctor, appointment_slot] = results
+
+				if (!empty(doctor)) {
 					this.form.value.doctor_id = doctor.id
+				}
+
+				if (!empty(appointment_slot)) {
+					this.form.value.start_time = tOTime(
+						appointment_slot.start_time,
+					).padStart(5, '0')
+
+					this.form.value.end_time = tOTime(
+						appointment_slot.end_time,
+					).padStart(5, '0')
 				}
 			})
 	}
@@ -153,6 +176,10 @@ export class AppointmentAddComponent implements OnInit {
 		this.unsubscribe$.complete()
 
 		this._cdr.detach()
+	}
+
+	tOTime(value: string) {
+		return tOTime(value)
 	}
 
 	setPatients() {
@@ -185,6 +212,11 @@ export class AppointmentAddComponent implements OnInit {
 		this.doctor$.next(
 			hasData(department.doctors) ? department.doctors[0] : null,
 		)
+
+		this.setFormValue(
+			'doctor_id',
+			hasData(department.doctors) ? department.doctors[0]?.id : '',
+		)
 	}
 
 	setFormValue(form: string, value: any) {
@@ -207,5 +239,33 @@ export class AppointmentAddComponent implements OnInit {
 		textArea.style.height = '0px'
 
 		textArea.style.height = textArea.scrollHeight + 'px'
+	}
+
+	save() {
+		this.isProcessing = true
+
+		if (this.form.value.type === 'Walk-in') {
+			this.setFormValue('waiting', true)
+		}
+
+		this._appointmentAPI
+			.post(this.form.value)
+			.subscribe({
+				next: (appointment: any) => {
+					console.log(appointment)
+				},
+				error: (http: HttpErrorResponse) => {
+					this._errorHandlerService.handleError(http)
+
+					for (let key in http.error.errors) {
+						for (let errorKey in this.errors) {
+							if (key.includes(errorKey)) {
+								this.errors[errorKey] = true
+							}
+						}
+					}
+				},
+			})
+			.add(() => (this.isProcessing = false))
 	}
 }
