@@ -1,3 +1,9 @@
+export type AppointmentStatusTypes =
+	| 'Pending'
+	| 'Confirmed'
+	| 'Cancelled'
+	| 'Done'
+
 export enum AppointmentStatusEnum {
 	PENDING = 'Pending',
 	CONFIRMED = 'Confirmed',

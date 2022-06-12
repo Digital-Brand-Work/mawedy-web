@@ -74,9 +74,17 @@ export function add30Mins(value: string): string {
 }
 
 export function toTwelve(time: any): any {
+	if (empty(time)) {
+		return ''
+	}
+
 	let hour = time.split(':')[0]
 
 	let min = time.split(':')[1]
+
+	if (empty(min) || empty(hour)) {
+		return ''
+	}
 
 	let part = hour > 12 ? 'pm' : 'am'
 

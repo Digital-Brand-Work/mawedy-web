@@ -40,7 +40,11 @@
 				{{ doctor.name }}
 			</div>
 
-			<div style="color: #6f7d8f" class="text-base font-medium">
+			<div
+				*ngIf="doctor.departments"
+				style="color: #6f7d8f"
+				class="text-base font-medium"
+			>
 				{{ doctor.departments[0]?.name }}
 			</div>
 
@@ -98,6 +102,7 @@
 		</div>
 
 		<doctor-details-working-schedule
+			*ngIf="doctor.timeslots"
 			[timeslots]="doctor.timeslots"
 		></doctor-details-working-schedule>
 

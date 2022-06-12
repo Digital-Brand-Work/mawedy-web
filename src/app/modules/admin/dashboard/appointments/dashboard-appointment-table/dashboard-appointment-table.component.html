@@ -14,64 +14,77 @@
 						<th></th>
 					</tr>
 				</thead>
-				<tbody [@listAnimation]="15">
+				<tbody [@listAnimation]="appointments.length">
 					<tr
 						style="height: 60px"
 						class="accent-color font-semibold"
 						*ngFor="
-							let item of [
-								1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6,
-								7
-							];
+							let appointment of appointments;
 							trackBy: identity
 						"
 					>
-						<td>10 December</td>
-						<td>10:30 AM - 11:00 AM</td>
-						<td
-							routerLink="/aster_clinic/jumeirah/patients/jamel"
-							role="button"
-							class="underline hover:text-emerald-500"
-						>
-							Riyad Abdallah
-						</td>
-						<td
-							(click)="doctorDetailsModalOpened$.next(true)"
-							role="button"
-							class="underline hover:text-emerald-500"
-						>
-							Dr. Hanadi Yassin
-						</td>
-						<td>Returning Patient</td>
+						<td>{{ appointment.date | date: 'dd MMMM' }}</td>
 						<td>
+							{{ appointment.start_time | toTwelve }} -
+							{{ appointment.end_time | toTwelve }}
+						</td>
+						<td role="button" class="underline">
+							{{ appointment.patient.first_name }}
+							{{ appointment.patient.middle_name }}
+							{{ appointment.patient.last_name }}
+						</td>
+						<td role="button" class="underline">
+							{{ appointment.doctor.name }}
+						</td>
+						<td>{{ appointment.type }}</td>
+						<td role="button" [matMenuTriggerFor]="userStatus">
 							<div class="flex items-center">
 								<dashboard-status
-									[color]="'red'"
+									[color]="resolveColor(appointment)"
 								></dashboard-status>
 
-								<div class="ml-2">Cancelled</div>
+								<div class="ml-2">{{ appointment.status }}</div>
 
 								<mat-icon
-									[matMenuTriggerFor]="userStatus"
 									role="button"
 									class="ml-2"
 									svgIcon="mat_solid:arrow_drop_down"
 								></mat-icon>
 
+								<!-- *ngIf="
+										appointment.status === 'Pending' ||
+										appointment.status === 'Confirmed'
+									" -->
 								<mat-menu
 									[xPosition]="'after'"
 									#userStatus="matMenu"
 									class="rounded-md"
 								>
-									<button mat-menu-item>
-										<span>Confirmed</span>
-									</button>
+									<button
+										class="flex items-center"
+										(click)="
+											setStatus(appointment, 'Cancelled')
+										"
+										mat-menu-item
+									>
+										<dashboard-status
+											class="mr-2"
+											[color]="'red'"
+										></dashboard-status>
 
-									<button mat-menu-item>
 										<span>Canceled</span>
 									</button>
 
-									<button mat-menu-item>
+									<button
+										class="flex items-center"
+										(click)="setStatus(appointment, 'Done')"
+										mat-menu-item
+									>
+										<dashboard-status
+											class="mr-2"
+											[color]="'blue'"
+										></dashboard-status>
+
 										<span>Done</span>
 									</button>
 								</mat-menu>

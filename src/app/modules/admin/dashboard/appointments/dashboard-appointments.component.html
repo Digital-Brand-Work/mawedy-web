@@ -1,1 +1,4 @@
-<dashboard-appointment-table></dashboard-appointment-table>
+<dashboard-appointment-table
+	*ngIf="(appointments$ | async)?.entities"
+	[appointments]="(appointments$ | async).entities | entities"
+></dashboard-appointment-table>

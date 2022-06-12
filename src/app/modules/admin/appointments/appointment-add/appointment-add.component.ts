@@ -1,6 +1,6 @@
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { AppointmentService } from './../appointment.service'
-import { empty, hasData, tOTime } from 'app/mawedy-core/helpers'
+import { empty, hasData, tOTime, toTwelve } from 'app/mawedy-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 import { MedicalService } from './../../clinic/clinic-services/medical-service.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -175,6 +175,10 @@ export class AppointmentAddComponent implements OnInit {
 
 	tOTime(value: string) {
 		return tOTime(value)
+	}
+
+	toTwelve(value: string) {
+		toTwelve(value)
 	}
 
 	setPatients() {
