@@ -1,3 +1,4 @@
+import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { AppointmentService } from './../appointment.service'
 import { empty, hasData, tOTime } from 'app/mawedy-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
@@ -248,6 +249,16 @@ export class AppointmentAddComponent implements OnInit {
 				next: (appointment: any) => {
 					this.opened$.next(false)
 
+					this.doctor$.next(null)
+
+					this.date$.next(null)
+
+					this.appointmentSlot$.next(null)
+
+					this.form.reset()
+
+					this.saveLocally(appointment.data)
+
 					this._alert.add({
 						id: Math.floor(Math.random() * 100000000000).toString(),
 						title: `Appointment booked successfully`,
@@ -268,5 +279,24 @@ export class AppointmentAddComponent implements OnInit {
 				},
 			})
 			.add(() => this.form.enable())
+	}
+
+	saveLocally(appointment: Appointment) {
+		const databases = [DB.APPOINTMENTS]
+
+		if (
+			dayjs().format('MMMM-DD-YYY') ===
+			dayjs(appointment.date).format('MMMM-DD-YYY')
+		) {
+			if (appointment.waiting) {
+				databases.push(DB.DASHBOARD_WAITING_PATIENTS)
+			} else {
+				databases.push(DB.DASHBOARD_APPOINTMENTS)
+			}
+		}
+
+		databases.forEach((db: string) =>
+			this._indexDBService.add(db, appointment),
+		)
 	}
 }

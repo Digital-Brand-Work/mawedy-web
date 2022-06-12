@@ -47,8 +47,13 @@
 					>
 						<div
 							syncWithClinic
-							[day]="day"
+							checkForAppointments
+							[date]="date$ | async"
+							[schedule]="schedule$ | async"
 							[slot]="time.start_time"
+							[start]="time.start_time"
+							[end]="times[i + 1]?.start_time"
+							[day]="day"
 							*ngIf="times[i + 1]"
 							(click)="
 								appointmentSlot$.next({

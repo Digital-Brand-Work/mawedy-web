@@ -1,25 +1,20 @@
-import { WeekDay } from './../../../../../../mawedy-core/constants/app.constant'
-import { add30Mins, empty, tOTime } from 'app/mawedy-core/helpers'
-import { TimeSlot } from './../../../../doctors/doctor.model'
+import { Appointment } from './../../../../appointments/appointment.model'
+import { DoctorService } from './../../../../doctors/doctor.service'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-add/appointment-add.service'
 import { Doctor } from 'app/modules/admin/doctors/doctor.model'
-import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { DashboardAppointmentSelectTimeSlotModal } from './dashboard-appointment-select-time-slot.service'
 import { DayTypes } from 'app/mawedy-core/enums/day.enum'
-import * as dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-import * as utc from 'dayjs/plugin/utc'
-import * as timezone from 'dayjs/plugin/timezone'
 import {
 	APPOINTMENT_INTERVAL,
 	END_OF_HOURS,
 	END_OF_MINUTES,
 	PM,
 } from 'app/mawedy-core/constants/app.constant'
-import { parseInt } from 'lodash'
-import { parse } from 'crypto-js/enc-base64'
+import { empty, tOTime } from 'app/mawedy-core/helpers'
+import * as dayjs from 'dayjs'
 
 @Component({
 	selector: 'dashboard-appointment-select-time-slot',
@@ -29,6 +24,7 @@ import { parse } from 'crypto-js/enc-base64'
 })
 export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 	constructor(
+		private _doctorAPI: DoctorService,
 		private _addAppointmentModal: AddAppointmentModal,
 		private dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 	) {}
@@ -47,6 +43,8 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 
 	date$: BehaviorSubject<string | null> = this._addAppointmentModal.date$
 
+	schedule$: BehaviorSubject<Appointment[]> = new BehaviorSubject([])
+
 	appointmentSlot$: BehaviorSubject<{
 		start_time: string
 		end_time: string
@@ -59,6 +57,19 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 	day?: DayTypes
 
 	ngOnInit(): void {
+		this.doctor$.pipe(take(1)).subscribe((doctor) => {
+			this._doctorAPI
+				.getSchedule(doctor)
+				.pipe(take(1))
+				.subscribe((appointments) => {
+					this.schedule$.next(appointments.data)
+
+					this.renderTimeSlots()
+				})
+		})
+	}
+
+	renderTimeSlots() {
 		combineLatest([this.date$, this.doctor$])
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe((results) => {

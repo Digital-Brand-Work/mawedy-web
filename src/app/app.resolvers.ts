@@ -1,3 +1,4 @@
+import { Appointment } from './modules/admin/appointments/appointment.model'
 import { MedicalService } from './modules/admin/clinic/clinic-services/medical-service.model'
 import { Department } from './modules/admin/clinic/department/department.model'
 import { Patient } from './modules/admin/patients/patient.model'
@@ -16,6 +17,8 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from './mawedy-core/enums/index.db.enum'
 import { UserService } from './core/user/user.service'
 import { DoctorService } from './modules/admin/doctors/doctor.service'
+import { AppointmentService } from './modules/admin/appointments/appointment.service'
+import * as dayjs from 'dayjs'
 
 @Injectable({
 	providedIn: 'root',
@@ -24,9 +27,10 @@ export class InitialDataResolver implements Resolve<any> {
 	constructor(
 		private _notificationsService: NotificationsService,
 		private _userService: UserService,
-		private _patientService: PatientService,
-		private _departmentService: DepartmentService,
-		private _doctorService: DoctorService,
+		private _patientAPI: PatientService,
+		private _doctorAPI: DoctorService,
+		private _departmentAPI: DepartmentService,
+		private _appointmentAPI: AppointmentService,
 		private _indexDBService: NgxIndexedDBService,
 		private _indexDBController: IndexedDbController,
 	) {}
@@ -36,11 +40,23 @@ export class InitialDataResolver implements Resolve<any> {
 		state: RouterStateSnapshot,
 	): Observable<any> {
 		forkJoin([
-			this._patientService.get(),
-			this._departmentService.get(),
-			this._doctorService.get(),
+			this._patientAPI.get(),
+			this._departmentAPI.get(),
+			this._doctorAPI.get(),
+			this._appointmentAPI.query(`?date=${dayjs().toJSON()}`),
+			this._appointmentAPI.query(
+				`?date=${dayjs().toJSON()}&waiting=true`,
+			),
+			this._appointmentAPI.query(``),
 		]).subscribe((results: any) => {
-			const [patients, departments, doctors] = results
+			const [
+				patients,
+				departments,
+				doctors,
+				dashboardAppointments,
+				waitingPatients,
+				appointments,
+			] = results
 
 			this._indexDBController.removeAll([
 				DB.PATIENTS,
@@ -48,6 +64,9 @@ export class InitialDataResolver implements Resolve<any> {
 				DB.DOCTORS,
 				DB.PROMOTIONS,
 				DB.MEDICAL_SERVICES,
+				DB.DASHBOARD_APPOINTMENTS,
+				DB.DASHBOARD_WAITING_PATIENTS,
+				DB.APPOINTMENTS,
 			])
 
 			this._indexDBService.bulkAdd(
@@ -68,6 +87,21 @@ export class InitialDataResolver implements Resolve<any> {
 			this._indexDBService.bulkAdd(
 				DB.MEDICAL_SERVICES,
 				departments.data[0].services as MedicalService[],
+			)
+
+			this._indexDBService.bulkAdd(
+				DB.DASHBOARD_APPOINTMENTS,
+				dashboardAppointments.data as Appointment[],
+			)
+
+			this._indexDBService.bulkAdd(
+				DB.DASHBOARD_WAITING_PATIENTS,
+				waitingPatients.data as Appointment[],
+			)
+
+			this._indexDBService.bulkAdd(
+				DB.APPOINTMENTS,
+				appointments.data as Appointment[],
 			)
 		})
 

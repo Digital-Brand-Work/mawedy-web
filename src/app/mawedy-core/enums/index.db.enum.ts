@@ -4,6 +4,9 @@ export enum DB {
 	ACCOUNT_USERS_REQUEST = 'account_users_request',
 	ACCESS_TOKEN = 'access_token',
 
+	DASHBOARD_APPOINTMENTS = 'dashboard-appointments',
+	DASHBOARD_WAITING_PATIENTS = 'dashboard-waiting-patients',
+
 	APPOINTMENTS = 'appointments',
 	APPOINTMENT = 'appointment',
 
