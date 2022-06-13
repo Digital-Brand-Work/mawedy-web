@@ -23,6 +23,7 @@ import { DoctorService } from '../../doctor.service'
 import * as DoctorActions from '../../doctor.actions'
 import { AlertState } from 'app/components/alert/alert.service'
 import { HttpErrorResponse } from '@angular/common/http'
+import { take } from 'lodash'
 
 @Component({
 	selector: 'doctor-add',
@@ -108,6 +109,10 @@ export class DoctorAddComponent implements OnInit {
 						departments: departments,
 					}),
 				)
+
+				if (departments.length !== 0) {
+					this.form.get('departments')?.setValue(departments[0].id)
+				}
 			})
 	}
 

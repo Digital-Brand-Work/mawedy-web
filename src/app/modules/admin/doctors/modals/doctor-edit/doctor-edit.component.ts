@@ -102,7 +102,7 @@ export class DoctorEditComponent implements OnInit {
 		combineLatest([
 			this._indexDBService.getAll(DB.DEPARTMENTS),
 			this.doctor$,
-		]).subscribe((results) => {
+		]).subscribe((results: [departments: Department[], doctor: Doctor]) => {
 			const [departments, doctor] = results
 
 			if (!doctor || !departments) {
@@ -111,9 +111,13 @@ export class DoctorEditComponent implements OnInit {
 
 			this._store.dispatch(
 				DepartmentActions.loadDepartments({
-					departments: departments as Department[],
+					departments: departments,
 				}),
 			)
+
+			if (departments.length !== 0) {
+				this.form.get('departments')?.setValue(departments[0].id)
+			}
 
 			this.setForm(doctor)
 		})

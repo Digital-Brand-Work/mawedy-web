@@ -17,7 +17,13 @@
 		class="px-10 py-5 bg-white"
 		style="max-height: calc(100vh - 5vh); overflow-y: scroll !important"
 	>
-		<div class="font-bold text-gray-500 mb-3">Patient Details</div>
+		<div
+			@slideInBottom
+			*ngIf="(patients$ | async) && (patients$ | async)?.length !== 0"
+			class="font-bold text-gray-500 mb-3"
+		>
+			Patient Details
+		</div>
 
 		<div
 			[ngClass]="{
@@ -315,6 +321,40 @@
 				(keyup)="autoGrow()"
 				class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 			></textarea>
+		</div>
+
+		<div
+			*ngIf="(patients$ | async).length === 0"
+			class="flex border border-amber-400 text-amber-500 bg-amber-50 p-3 rounded-md items-center 3 my-3"
+		>
+			<mat-icon class="text-amber-500 mr-2" svgIcon="warning"></mat-icon>
+
+			No patients found.
+		</div>
+
+		<div
+			*ngIf="departments.length === 0"
+			class="flex border border-amber-400 text-amber-500 bg-amber-50 p-3 rounded-md items-center 3 my-3"
+		>
+			<mat-icon class="text-amber-500 mr-2" svgIcon="warning"></mat-icon>
+
+			No departments found.
+		</div>
+
+		<div
+			*ngIf="medicalServices.length === 0"
+			class="flex border border-amber-400 text-amber-500 bg-amber-50 p-3 rounded-md items-center 3 my-3"
+		>
+			<mat-icon class="text-amber-500 mr-2" svgIcon="warning"></mat-icon>
+			No medical service found.
+		</div>
+
+		<div
+			*ngIf="(doctors$ | async).length === 0"
+			class="flex border border-amber-400 text-amber-500 bg-amber-50 p-3 rounded-md items-center 3 my-3"
+		>
+			<mat-icon class="text-amber-500 mr-2" svgIcon="warning"></mat-icon>
+			No doctors found
 		</div>
 
 		<div
