@@ -29,6 +29,7 @@ import { TableFilterPipe } from '@digital_brand_work/pipes/table.filter.pipe'
 import { add30MinutesPipe } from '@digital_brand_work/pipes/add-thirty-minutes.pipe'
 import { SyncWithClinicDirective } from 'app/mawedy-core/directives/doctor.time-slot.disabler.directive'
 import { CheckForAppointmentsDirective } from 'app/mawedy-core/directives/doctor.time-slot.blocked.directive'
+import { DayIntervalPipe } from '@digital_brand_work/pipes/day-interval.count.pipe'
 
 const components = [
 	...appComponents,
@@ -65,6 +66,7 @@ const directives = [
 	TimePipe,
 	AppendCountryCodePipe,
 	InitialsPipe,
+	DayIntervalPipe,
 	ToTimeSlotPipe,
 	ShortenDayPipe,
 	TwentyFourToTwelveHoursPipe,

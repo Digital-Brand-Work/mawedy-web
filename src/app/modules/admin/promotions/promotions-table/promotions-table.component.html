@@ -7,7 +7,9 @@
 			style="max-width: 200px"
 			class="text-gray-400 text-2xl ml-5 font-semibold py-2 border-b-4 border-emerald-500 w-auto"
 		>
-			Clinic Promotions (5)
+			Clinic Promotions ({{
+				((promotions$ | async).entities | entities).length
+			}})
 		</div>
 
 		<div
@@ -23,7 +25,6 @@
 					class="sticky top-0 bg-white pt-4 text-lg z-10"
 				>
 					<tr class="border-b border-b-gray-100">
-						<th class="font-normal">Clinic Name</th>
 						<th class="font-normal">Promotion Name</th>
 						<th class="font-normal">Validity</th>
 						<th class="font-normal">Running Days</th>
@@ -31,22 +32,35 @@
 						<th class="font-normal">Delete</th>
 					</tr>
 				</thead>
-				<tbody [@listAnimation]="15">
+				<tbody
+					[@listAnimation]="
+						((promotions$ | async).entities | entities).length
+					"
+				>
 					<tr
 						style="height: 60px"
 						class="accent-color font-bold border-b border-b-gray-100 hover:bg-gray-50"
 						*ngFor="
-							let item of [
-								1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6,
-								7
-							];
+							let promotion of (promotions$ | async).entities
+								| entities;
 							trackBy: identity
 						"
 					>
-						<td>Aster Clinic (Bur Dubai Branch)</td>
-						<td>Get %50 off on your check up</td>
-						<td>05/01/22 - 15/01/22</td>
-						<td>10 Days</td>
+						<td>{{ promotion.promotion_name }}</td>
+						<td>
+							{{
+								promotion.validity_start_date | date: 'MM/dd/yy'
+							}}
+							-
+							{{ promotion.validity_end_date | date: 'MM/dd/yy' }}
+						</td>
+						<td>
+							{{
+								promotion.validity_start_date
+									| day_interval: promotion.validity_end_date
+							}}
+							Days
+						</td>
 						<td>
 							<a
 								routerLink="/aster_clinic/jumeirah/promotions/edit/SLLSDFKNDK"

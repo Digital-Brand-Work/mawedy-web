@@ -12,15 +12,11 @@ import { Observable, of, Subject, takeUntil } from 'rxjs'
 })
 export class PromotionsComponent implements OnInit {
 	constructor(private router: Router) {
-		this.router.events
-			.pipe(takeUntil(this.unsubscribeAll))
-			.subscribe(() => {
-				this.isInAdd$ = of(this.router.url.includes('add'))
+		this.isInAdd$ = of(this.router.url.includes('add'))
 
-				this.isInEdit$ = of(this.router.url.includes('edit'))
+		this.isInEdit$ = of(this.router.url.includes('edit'))
 
-				this.isInViewing$ = of(this.router.url.includes('view'))
-			})
+		this.isInViewing$ = of(this.router.url.includes('view'))
 	}
 
 	unsubscribeAll: Subject<any> = new Subject<any>()

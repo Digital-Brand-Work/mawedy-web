@@ -19,6 +19,7 @@ import { UserService } from './core/user/user.service'
 import { DoctorService } from './modules/admin/doctors/doctor.service'
 import { AppointmentService } from './modules/admin/appointments/appointment.service'
 import * as dayjs from 'dayjs'
+import { PromotionServiceService } from './modules/admin/promotions/promotion.service'
 
 @Injectable({
 	providedIn: 'root',
@@ -32,6 +33,7 @@ export class InitialDataResolver implements Resolve<any> {
 		private _departmentAPI: DepartmentService,
 		private _appointmentAPI: AppointmentService,
 		private _indexDBService: NgxIndexedDBService,
+		private _promotionAPI: PromotionServiceService,
 		private _indexDBController: IndexedDbController,
 	) {}
 
@@ -48,6 +50,7 @@ export class InitialDataResolver implements Resolve<any> {
 				`?date=${dayjs().toJSON()}&waiting=true`,
 			),
 			this._appointmentAPI.query(``),
+			this._promotionAPI.get(),
 		]).subscribe((results: any) => {
 			const [
 				patients,
@@ -56,6 +59,7 @@ export class InitialDataResolver implements Resolve<any> {
 				dashboardAppointments,
 				waitingPatients,
 				appointments,
+				promotions,
 			] = results
 
 			this._indexDBController.removeAll([
@@ -67,6 +71,7 @@ export class InitialDataResolver implements Resolve<any> {
 				DB.DASHBOARD_APPOINTMENTS,
 				DB.DASHBOARD_WAITING_PATIENTS,
 				DB.APPOINTMENTS,
+				DB.PROMOTIONS,
 			])
 
 			this._indexDBService.bulkAdd(
@@ -102,6 +107,11 @@ export class InitialDataResolver implements Resolve<any> {
 			this._indexDBService.bulkAdd(
 				DB.APPOINTMENTS,
 				appointments.data as Appointment[],
+			)
+
+			this._indexDBService.bulkAdd(
+				DB.PROMOTIONS,
+				promotions.data as Appointment[],
 			)
 		})
 
