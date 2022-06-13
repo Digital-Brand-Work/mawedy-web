@@ -137,10 +137,7 @@ export class PromotionsAddComponent implements OnInit {
 			.subscribe({
 				next: (promotion: any) => {
 					this._indexDbService
-						.add(DB.PROMOTIONS, {
-							id: 1,
-							data: promotion.data,
-						})
+						.add(DB.PROMOTIONS, promotion.data)
 						.subscribe(() =>
 							this._store.dispatch(
 								PromotionActions.addPromotion({

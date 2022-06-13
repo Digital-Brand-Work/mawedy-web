@@ -1,10 +1,15 @@
 <div @slideInBottom class="md:px-10 px-0 w-full">
-	<div class="md:rounded-xl bg-white py-5 px-10 w-full min-h-screen mb-40">
+	<div
+		*ngIf="form"
+		[formGroup]="form"
+		[ngClass]="{ 'pointer-events-none opacity-80': isProcessing }"
+		class="md:rounded-xl bg-white py-5 px-10 w-full min-h-screen mb-40"
+	>
 		<div class="flex items-center mb-1">
 			<div class="text-gray-400 text-2xl font-semibold">
 				Promotion:
 				<span class="font-normal text-teal-500 text-xl">
-					ASTER-FDGF-DGGFD-GDFSD</span
+					{{ form.value.id }}</span
 				>
 			</div>
 
@@ -13,124 +18,271 @@
 				class="ml-auto text-teal-500 hover:underline flex items-center"
 				accept="image/*"
 			>
-				Change Promotion Banner
+				Upload Banner
 
 				<mat-icon
 					svgIcon="file_upload"
 					class="ml-2 text-teal-500"
 				></mat-icon>
 			</button>
-
-			<input type="file" class="hidden" #banner />
-		</div>
-
-		<div
-			class="w-full bg-emerald-100 flex items-center justify-center"
-			style="height: 569px"
-		>
-			<img
-				class="object-contain h-full mb-5"
-				src="./assets/app/logo.svg"
-				alt="Mawedy logo"
+			<input
+				accept="image/*"
+				(change)="readFile($event)"
+				type="file"
+				class="hidden"
+				#banner
 			/>
 		</div>
 
+		<button
+			(click)="banner.click()"
+			class="w-full bg-gray-100 hover:bg-gray-200/80 flex items-center justify-center"
+			style="height: 569px"
+		>
+			<img
+				[ngClass]="{
+					'object-contain  grayscale  opacity-30  mb-5':
+						!banner_picture
+				}"
+				class="h-full w-full"
+				[src]="bannerPreview"
+				alt="Mawedy logo"
+			/>
+		</button>
+
 		<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mt-10">
-			<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mt-10">
+			<div class="grid grid-cols-1 mt-10">
 				<div class="mb-5">
-					<div class="mb-2 font-semibold text-gray-400 text-lg">
-						Clinic Name
-					</div>
-
-					<input
-						#input
-						type="text"
-						class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
-					/>
-				</div>
-
-				<div class="mb-5">
-					<div class="mb-2 font-semibold text-gray-400 text-lg">
+					<label
+						for="promotion_name"
+						class="mb-2 font-semibold text-gray-400 text-lg"
+					>
 						Promotion Name
-					</div>
+					</label>
 
 					<input
+						id="promotion_name"
+						formControlName="promotion_name"
+						autocomplete="off"
 						type="text"
 						class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+						[ngClass]="{
+							'border-red-500':
+								form.get('promotion_name')?.touched &&
+								!form.get('promotion_name')?.valid,
+							'text-red-500': errors.promotion_name
+						}"
 					/>
+
+					<div
+						*ngIf="
+							form.get('promotion_name')?.touched &&
+							!form.get('promotion_name')?.valid
+						"
+						class="text-sm text-rose-500"
+					>
+						Promotion Name is required.
+					</div>
 				</div>
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mt-10">
 				<div class="mb-5">
-					<div class="mb-2 font-semibold text-gray-400 text-lg">
-						Valid From
-					</div>
+					<label
+						for="validity_start_date"
+						class="mb-2 font-semibold text-gray-400 text-lg"
+					>
+						Valid from
+					</label>
 
 					<input
+						[min]="dateMinimum"
+						id="validity_start_date"
+						formControlName="validity_start_date"
+						autocomplete="off"
 						type="date"
 						class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+						[ngClass]="{
+							'border-red-500':
+								form.get('validity_start_date')?.touched &&
+								!form.get('validity_start_date')?.valid,
+							'text-red-500': errors.validity_start_date
+						}"
 					/>
+
+					<div
+						*ngIf="
+							form.get('validity_start_date')?.touched &&
+							!form.get('validity_start_date')?.valid
+						"
+						class="text-sm text-rose-500"
+					>
+						Valid from is required.
+					</div>
 				</div>
 
 				<div class="mb-5">
-					<div class="mb-2 font-semibold text-gray-400 text-lg">
-						Valid Until
-					</div>
+					<label
+						for="validity_end_date"
+						class="mb-2 font-semibold text-gray-400 text-lg"
+					>
+						Valid until
+					</label>
 
 					<input
+						[min]="dateMinimum"
+						id="validity_end_date"
+						formControlName="validity_end_date"
+						autocomplete="off"
 						type="date"
 						class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+						[ngClass]="{
+							'border-red-500':
+								form.get('validity_end_date')?.touched &&
+								!form.get('validity_end_date')?.valid,
+							'text-red-500': errors.validity_end_date
+						}"
 					/>
+
+					<div
+						*ngIf="
+							form.get('validity_end_date')?.touched &&
+							!form.get('validity_end_date')?.valid
+						"
+						class="text-sm text-rose-500"
+					>
+						Valid Until is required.
+					</div>
 				</div>
 			</div>
 
 			<div class="mb-5">
-				<div class="mb-2 font-semibold text-gray-400 text-lg">
+				<label
+					for="highlights"
+					class="mb-2 font-semibold text-gray-400 text-lg"
+				>
 					Highlights
-				</div>
+				</label>
 
 				<textarea
+					id="highlights"
+					formControlName="highlights"
+					autocomplete="off"
 					style="min-height: 199px"
 					placeholder="Aa"
 					class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 w-full"
+					[ngClass]="{
+						'border-red-500':
+							form.get('highlights')?.touched &&
+							!form.get('highlights')?.valid,
+						'text-red-500': errors.highlights
+					}"
 				></textarea>
-			</div>
 
-			<div class="mb-5">
-				<div class="mb-2 font-semibold text-gray-400 text-lg">
-					Terms & Conditions
-				</div>
-
-				<textarea
-					style="min-height: 199px"
-					placeholder="Aa"
-					class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 w-full"
-				></textarea>
-			</div>
-
-			<div class="mb-5">
 				<div
+					*ngIf="
+						form.get('validity_end_date')?.touched &&
+						!form.get('highlights')?.valid
+					"
+					class="text-sm text-rose-500"
+				>
+					Highlights is required.
+				</div>
+			</div>
+
+			<div class="mb-5">
+				<label
+					for="terms_and_conditions"
+					class="mb-2 font-semibold text-gray-400 text-lg"
+				>
+					Terms & Conditions
+				</label>
+
+				<textarea
+					id="terms_and_conditions"
+					formControlName="terms_and_conditions"
+					autocomplete="off"
+					style="min-height: 199px"
+					placeholder="Aa"
+					class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 w-full"
+					[ngClass]="{
+						'border-red-500':
+							form.get('terms_and_conditions')?.touched &&
+							!form.get('terms_and_conditions')?.valid,
+						'text-red-500': errors.terms_and_conditions
+					}"
+				></textarea>
+
+				<div
+					*ngIf="
+						form.get('terms_and_conditions')?.touched &&
+						!form.get('terms_and_conditions')?.valid
+					"
+					class="text-sm text-rose-500"
+				>
+					Terms & Conditions field is required.
+				</div>
+			</div>
+
+			<div *ngIf="doctors$ | async" class="mb-5">
+				<label
+					for="doctors"
 					class="mb-1 text-gray-400 font-semibold accent-color text-md"
 				>
 					Doctor Available
-				</div>
+				</label>
 
 				<mat-select
+					id="doctors"
+					formControlName="doctors"
+					autocomplete="off"
 					[multiple]="true"
 					class="py-3 px-4 rounded-md border-zinc-500/40 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
+					[ngClass]="{
+						'border-red-500':
+							form.get('doctors')?.touched &&
+							!form.get('doctors')?.valid,
+						'text-red-500': errors.doctors
+					}"
 				>
-					<mat-option>Dr. Iram Sarfraz</mat-option>
-					<mat-option>Dr. Hannadi Yassin</mat-option>
+					<mat-option
+						[value]="doctor.id"
+						*ngFor="
+							let doctor of (doctors$ | async).entities
+								| entities;
+							trackBy: identity
+						"
+						>{{ doctor.name }}</mat-option
+					>
 				</mat-select>
+
+				<div
+					*ngIf="
+						form.get('doctors')?.touched &&
+						!form.get('doctors')?.valid
+					"
+					class="text-sm text-rose-500"
+				>
+					Must have at least one doctor.
+				</div>
 			</div>
 
 			<div class="mb-5 flex items-end">
 				<button
 					mat-button
-					class="hover:bg-emerald-600 ml-auto rounded-lg px-5 py-5 font-bold text-white bg-emerald-500 border-2 border-emerald-500"
+					(click)="save()"
+					[disabled]="isProcessing || banner_picture === undefined"
+					[ngClass]="{
+						'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 ':
+							!isProcessing && banner_picture !== undefined,
+						'bg-gray-400 pointer-events-none text-white':
+							isProcessing || banner_picture === undefined
+					}"
+					class="ml-auto rounded-lg px-5 py-3 font-bold text-white border-2 flex items-center justify-center"
 				>
-					Publish
+					<spinner *ngIf="isProcessing"></spinner>
+
+					<div class="text-white" *ngIf="!isProcessing">Update</div>
 				</button>
 			</div>
 		</div>

@@ -23,6 +23,7 @@
 				></mat-icon>
 			</button>
 			<input
+				accept="image/*"
 				(change)="readFile($event)"
 				type="file"
 				class="hidden"
@@ -282,7 +283,7 @@
 				>
 					<spinner *ngIf="isProcessing"></spinner>
 
-					<div *ngIf="!isProcessing">Publish</div>
+					<div class="text-white" *ngIf="!isProcessing">Publish</div>
 				</button>
 			</div>
 		</div>

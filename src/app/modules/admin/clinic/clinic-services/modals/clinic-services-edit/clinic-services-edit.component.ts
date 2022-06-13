@@ -101,8 +101,6 @@ export class ClinicServicesEditComponent implements OnInit {
 						doctors: doctors,
 					})
 
-					console.log(this.form.value.doctors)
-
 					this.picturePreview = medical_service.picture.url
 				}
 			})

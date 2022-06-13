@@ -1,14 +1,26 @@
+import { slugify } from './../../../../../@digital_brand_work/helpers/helpers'
 import { Promotion } from './../promotion.model'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
+import {
+	BehaviorSubject,
+	combineLatest,
+	Observable,
+	Subject,
+	take,
+	takeUntil,
+} from 'rxjs'
 import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import * as PromotionActions from '../promotion.actions'
+import { PromotionServiceService } from '../promotion.service'
+import { AlertState } from 'app/components/alert/alert.service'
+import { Router } from '@angular/router'
+import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
 
 @Component({
 	selector: 'promotions-table',
@@ -18,10 +30,14 @@ import * as PromotionActions from '../promotion.actions'
 })
 export class PromotionsTableComponent implements OnInit {
 	constructor(
+		private _router: Router,
+		private _alert: AlertState,
 		private seoService: SeoService,
-		private _clinicUserService: ClinicUserService,
-		private _store: Store<{ promotions: Promotion[] }>,
 		private _indexDbService: NgxIndexedDBService,
+		private _clinicUserService: ClinicUserService,
+		private _promotionAPI: PromotionServiceService,
+		private _indexDBController: IndexedDbController,
+		private _store: Store<{ promotions: Promotion[] }>,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
@@ -63,4 +79,47 @@ export class PromotionsTableComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	viewPromotion(promotion: Promotion) {
+		combineLatest([
+			this._clinicUserService.resolveClinicPath(),
+			this.clinic$,
+		])
+			.pipe(take(1))
+			.subscribe((results) => {
+				const [resolvedPath, clinic] = results
+
+				this._indexDBController.upsert(DB.PROMOTION, {
+					data: promotion,
+					id: 1,
+				})
+
+				if (resolvedPath && clinic) {
+					this._router.navigate([
+						`${resolvedPath}/promotions/edit/${slugify(
+							promotion.id,
+						)}`,
+					])
+				}
+			})
+	}
+
+	deletePromotion(promotion: Promotion) {
+		this._promotionAPI.remove(promotion.id).subscribe(() => {
+			this._indexDbService
+				.deleteByKey(DB.PROMOTIONS, promotion.id)
+				.subscribe(() => {
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						title: `Promotion removed successfully`,
+						message: `You have removed ${promotion.promotion_name} .`,
+						type: 'info',
+					})
+
+					this._store.dispatch(
+						PromotionActions.deletePromotion({ id: promotion.id }),
+					)
+				})
+		})
+	}
 }

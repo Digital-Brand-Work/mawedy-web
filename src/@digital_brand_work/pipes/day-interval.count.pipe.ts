@@ -5,8 +5,8 @@ import * as dayjs from 'dayjs'
 	name: 'day_interval',
 })
 export class DayIntervalPipe implements PipeTransform {
-	transform(from: Date, to: Date): string {
-		const intervalFrom = dayjs(from)
+	transform(to: Date): string {
+		const intervalFrom = dayjs()
 
 		const intervalTo = dayjs(to)
 

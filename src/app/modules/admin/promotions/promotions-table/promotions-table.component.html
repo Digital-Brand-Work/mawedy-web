@@ -54,16 +54,23 @@
 							-
 							{{ promotion.validity_end_date | date: 'MM/dd/yy' }}
 						</td>
-						<td>
+						<td
+							[ngClass]="{
+								'line-through text-red-500':
+									(promotion.validity_end_date
+										| day_interval) < 0
+							}"
+						>
 							{{
-								promotion.validity_start_date
-									| day_interval: promotion.validity_end_date
+								(promotion.validity_end_date | day_interval) < 0
+									? 'Expired'
+									: (promotion.validity_end_date
+											| day_interval) + ' Days'
 							}}
-							Days
 						</td>
 						<td>
-							<a
-								routerLink="/aster_clinic/jumeirah/promotions/edit/SLLSDFKNDK"
+							<button
+								(click)="viewPromotion(promotion)"
 								mat-icon-button
 								matTooltip="Edit Promotion"
 								class="hover:bg-emerald-600 bg-emerald-500 relative z-0"
@@ -73,10 +80,11 @@
 									class="text-white icon-size-5"
 									svgIcon="heroicons_outline:pencil-alt"
 								></mat-icon>
-							</a>
+							</button>
 						</td>
 						<td>
 							<button
+								(click)="deletePromotion(promotion)"
 								mat-icon-button
 								matTooltip="Delete Promotion"
 								class="hover:bg-rose-600 bg-rose-500 relative z-0"
