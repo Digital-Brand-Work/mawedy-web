@@ -84,43 +84,31 @@ export class DashboardAppointmentTableComponent implements OnInit {
 		this._appointmentAPI
 			.update(appointment.id, { status: status })
 			.subscribe((data: any) => {
+				const databases = [DB.APPOINTMENTS, DB.DASHBOARD_APPOINTMENTS]
+
+				databases.forEach((db: string) =>
+					this._indexDBService
+						.update(db, data.data)
+						.subscribe((newAppointment) => {
+							this._store.dispatch(
+								DashboardAppointmentActions.updateDashboardAppointment(
+									{
+										dashboardAppointment: {
+											...newAppointment,
+											status: status,
+										},
+									},
+								),
+							)
+						}),
+				)
+
 				this._alert.add({
 					id: Math.floor(Math.random() * 100000000000).toString(),
 					title: `You set the status to ${status}`,
 					message: `Appointment successfully Updated`,
 					type: 'success',
 				})
-
-				const databases = [
-					DB.APPOINTMENTS,
-					DB.DASHBOARD_WAITING_PATIENTS,
-					DB.DASHBOARD_APPOINTMENTS,
-				]
-
-				if (
-					dayjs().format('MMMM-DD-YYY') ===
-					dayjs(appointment.date).format('MMMM-DD-YYY')
-				) {
-					if (appointment.waiting) {
-						databases.push(DB.DASHBOARD_WAITING_PATIENTS)
-					} else {
-						databases.push(DB.DASHBOARD_APPOINTMENTS)
-					}
-				}
-
-				databases.forEach((db: string) =>
-					this._indexDBService
-						.update(db, data.data)
-						.subscribe((appointment) => {
-							this._store.dispatch(
-								DashboardAppointmentActions.updateDashboardAppointment(
-									{
-										dashboardAppointment: appointment,
-									},
-								),
-							)
-						}),
-				)
 			})
 	}
 

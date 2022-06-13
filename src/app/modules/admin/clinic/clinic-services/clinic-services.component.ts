@@ -2,7 +2,7 @@ import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.contr
 import { MedicalService } from './medical-service.model'
 import { empty } from 'app/mawedy-core/helpers'
 import { Component, OnInit } from '@angular/core'
-import { ActionsSubject, Store } from '@ngrx/store'
+import { ActionsSubject, select, Store } from '@ngrx/store'
 import {
 	BehaviorSubject,
 	Observable,
@@ -58,44 +58,19 @@ export class ClinicServicesComponent implements OnInit {
 	editClinicServiceModalOpened$: BehaviorSubject<boolean> =
 		this.editClinicServiceModal.opened$
 
-	departments$?: Observable<Department[]>
+	departments$?: Observable<Department[]> = this.store.pipe(
+		select('department'),
+	)
 
 	department$: BehaviorSubject<Department | null> =
 		this._departmentService.current$
 
-	medicalServices$?: Observable<MedicalService[]>
+	medicalServices$?: Observable<MedicalService[]> = this.store.pipe(
+		select('medicalService'),
+	)
 
 	ngOnInit(): void {
-		this.departments$ = this.store.select('department')
-
-		this.medicalServices$ = this.store.select('medicalService')
-
-		this.medicalServices$
-			.pipe(takeUntil(this.unsubscribe$))
-			.subscribe(() => {
-				setTimeout(() => {
-					this._indexDBService
-						.getAll(DB.MEDICAL_SERVICES)
-						.subscribe((services) => {
-							this.store.dispatch(
-								MedicalServiceActions.loadMedicalServices({
-									medicalServices:
-										services as MedicalService[],
-								}),
-							)
-						})
-				}, 400)
-			})
-
-		this.departments$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-			setTimeout(() => {
-				this.fetchFromIndexedDb()
-			})
-		})
-
-		setTimeout(() => {
-			this.fetchFromIndexedDb()
-		}, 300)
+		this.fetchFromIndexedDb()
 	}
 
 	fetchFromIndexedDb(): void {

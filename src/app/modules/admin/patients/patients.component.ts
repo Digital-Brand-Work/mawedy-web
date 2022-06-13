@@ -9,7 +9,7 @@ import {
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { PatientEffects } from 'app/modules/admin/patients/patient.effects'
 import { ClinicUserService } from '../clinic/clinic.service'
 import { Clinic } from '../clinic/clinic.model'
@@ -36,40 +36,18 @@ export class PatientsComponent implements OnInit {
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
-	patients$?: Observable<Patient[]>
+	patients$?: Observable<Patient[]> = this.store.pipe(select('patients'))
 
 	ngOnInit(): void {
-		this.patients$ = this.store.select('patients')
-
-		this.patients$
-			.pipe(takeUntil(this.unsubscribe$))
-			.subscribe((doctors: any) => {
-				this.fetchFromIndexDB()
-			})
-
-		this.fetchFromIndexDB()
-
-		combineLatest([this.clinic$, this._indexDBService.getAll(DB.PATIENTS)])
-			.pipe(takeUntil(this.unsubscribe$))
-			.subscribe((results) => {
-				const [clinic, patients] = results
-
-				if (!clinic) {
-					return
-				}
-
+		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
+			if (clinic) {
 				this.seoService.generateTags({
 					title: `${clinic.name} | ${clinic?.address} | Patients`,
 				})
+			}
 
-				if (patients) {
-					this.store.dispatch(
-						PatientActions.loadPatients({
-							patients: patients as Patient[],
-						}),
-					)
-				}
-			})
+			this.fetchFromIndexDB()
+		})
 	}
 
 	fetchFromIndexDB(): void {

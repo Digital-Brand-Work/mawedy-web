@@ -12,7 +12,7 @@ import {
 	take,
 	takeUntil,
 } from 'rxjs'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import * as DashboardAppointmentActions from './dashboard-appointment.actions'
@@ -39,8 +39,8 @@ export class DashboardAppointmentsComponent implements OnInit {
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
-	appointments$: Observable<Appointment[]> = this._store.select(
-		'dashboardAppointments',
+	appointments$: Observable<Appointment[]> = this._store.pipe(
+		select('dashboardAppointments'),
 	)
 
 	ngOnInit(): void {
@@ -52,13 +52,14 @@ export class DashboardAppointmentsComponent implements OnInit {
 			}
 		})
 
+		this.appointments$.subscribe((data) => console.log(data))
 		this.fetchFromIndexDB()
 	}
 
 	fetchFromIndexDB() {
 		this._indexDBService
 			.getAll(DB.DASHBOARD_APPOINTMENTS)
-			.pipe(take(1))
+			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe((appointments) => {
 				this._store.dispatch(
 					DashboardAppointmentActions.loadDashboardAppointments({

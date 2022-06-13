@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
@@ -34,23 +34,9 @@ export class DoctorsTableComponent implements OnInit {
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.doctorDetailsModal.opened$
 
-	doctors$?: Observable<Doctor[]>
+	doctors$?: Observable<Doctor[]> = this.store.pipe(select('doctors'))
 
 	ngOnInit(): void {
-		this.doctors$ = this.store.select('doctors')
-
-		this.doctors$
-			.pipe(takeUntil(this.unsubscribe$))
-			.subscribe((doctors: any) => {
-				if (doctors) {
-					this.onDoctorChanges.emit(
-						Object.values(doctors.entities) as Doctor[],
-					)
-
-					this.fetchAndLoadDoctors()
-				}
-			})
-
 		this.fetchAndLoadDoctors()
 	}
 

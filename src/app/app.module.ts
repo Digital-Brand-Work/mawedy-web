@@ -35,6 +35,9 @@ import { AgmCoreModule } from '@agm/core'
 		StoreModule.forRoot(reducers, { metaReducers }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		EffectsModule.forRoot(effects),
+		StoreDevtoolsModule.instrument({
+			maxAge: 25,
+		}),
 
 		BrowserAnimationsModule,
 		AppRoutingModule,
@@ -51,6 +54,10 @@ import { AgmCoreModule } from '@agm/core'
 		ModalModule,
 		PagesModule,
 		PlaceholderModule,
+		StoreDevtoolsModule.instrument({
+			maxAge: 25,
+			logOnly: environment.production,
+		}),
 	],
 
 	bootstrap: [AppComponent],
