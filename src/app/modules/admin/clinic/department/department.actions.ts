@@ -14,7 +14,7 @@ export const addDepartment = createAction(
 
 export const updateDepartment = createAction(
 	'[Department/API] Update Department',
-	props<{ department: Update<Department> }>(),
+	props<{ department: Department }>(),
 )
 
 export const deleteDepartment = createAction(

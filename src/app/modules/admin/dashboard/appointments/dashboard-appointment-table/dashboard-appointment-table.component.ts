@@ -91,12 +91,9 @@ export class DashboardAppointmentTableComponent implements OnInit {
 						.update(db, data.data)
 						.subscribe((newAppointment) => {
 							this._store.dispatch(
-								DashboardAppointmentActions.updateDashboardAppointment(
+								DashboardAppointmentActions.upsertDashboardAppointment(
 									{
-										dashboardAppointment: {
-											...newAppointment,
-											status: status,
-										},
+										dashboardAppointment: newAppointment,
 									},
 								),
 							)

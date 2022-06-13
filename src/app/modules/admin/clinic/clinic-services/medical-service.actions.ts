@@ -14,7 +14,7 @@ export const addMedicalService = createAction(
 
 export const updateMedicalService = createAction(
 	'[MedicalService/API] Update MedicalService',
-	props<{ medicalService: Update<MedicalService> }>(),
+	props<{ medicalService: MedicalService }>(),
 )
 
 export const deleteMedicalService = createAction(

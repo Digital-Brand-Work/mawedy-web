@@ -17,6 +17,11 @@ export const updateDoctor = createAction(
 	props<{ doctor: Update<Doctor> }>(),
 )
 
+export const upsertDoctor = createAction(
+	'[Doctor/API] Update Doctor',
+	props<{ doctor: Doctor }>(),
+)
+
 export const deleteDoctor = createAction(
 	'[Doctor/API] Delete Doctor',
 	props<{ id: string }>(),

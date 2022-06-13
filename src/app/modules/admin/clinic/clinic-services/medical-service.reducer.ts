@@ -28,7 +28,7 @@ export const reducer = createReducer(
 	),
 
 	on(MedicalServiceActions.updateMedicalService, (state, action) =>
-		adapter.updateOne(action.medicalService, state),
+		adapter.upsertOne(action.medicalService, state),
 	),
 
 	on(MedicalServiceActions.deleteMedicalService, (state, action) =>

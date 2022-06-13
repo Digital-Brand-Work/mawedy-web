@@ -222,7 +222,7 @@ export class DoctorEditComponent implements OnInit {
 						.update(DB.DOCTORS, doctor.data)
 						.subscribe(() => {
 							this._store.dispatch(
-								DoctorActions.updateDoctor({
+								DoctorActions.upsertDoctor({
 									doctor: doctor.data,
 								}),
 							)

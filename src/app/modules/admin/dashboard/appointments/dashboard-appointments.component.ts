@@ -4,19 +4,11 @@ import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { Clinic } from '../../clinic/clinic.model'
-import {
-	BehaviorSubject,
-	combineLatest,
-	Observable,
-	Subject,
-	take,
-	takeUntil,
-} from 'rxjs'
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import * as DashboardAppointmentActions from './dashboard-appointment.actions'
-import { empty, hasData } from 'app/mawedy-core/helpers'
 import { DashboardAppointment } from './dashboard-appointment.model'
 
 @Component({
@@ -29,10 +21,10 @@ export class DashboardAppointmentsComponent implements OnInit {
 	constructor(
 		private seoService: SeoService,
 		private _clinicUserService: ClinicUserService,
+		private _indexDBService: NgxIndexedDBService,
 		private _store: Store<{
 			dashboardAppointments: DashboardAppointment[]
 		}>,
-		private _indexDBService: NgxIndexedDBService,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
@@ -52,7 +44,6 @@ export class DashboardAppointmentsComponent implements OnInit {
 			}
 		})
 
-		this.appointments$.subscribe((data) => console.log(data))
 		this.fetchFromIndexDB()
 	}
 

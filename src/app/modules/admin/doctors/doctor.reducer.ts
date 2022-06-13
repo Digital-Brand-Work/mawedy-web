@@ -26,6 +26,10 @@ export const reducer = createReducer(
 		adapter.addOne(action.doctor, state),
 	),
 
+	on(DoctorActions.upsertDoctor, (state, action) =>
+		adapter.upsertOne(action.doctor, state),
+	),
+
 	on(DoctorActions.updateDoctor, (state, action) =>
 		adapter.updateOne(action.doctor, state),
 	),

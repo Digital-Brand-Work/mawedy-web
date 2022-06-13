@@ -17,6 +17,11 @@ export const updateDashboardAppointment = createAction(
 	props<{ dashboardAppointment: Update<DashboardAppointment> }>(),
 )
 
+export const upsertDashboardAppointment = createAction(
+	'[DashboardAppointment/API] Upsert DashboardAppointment',
+	props<{ dashboardAppointment: DashboardAppointment }>(),
+)
+
 export const deleteDashboardAppointment = createAction(
 	'[DashboardAppointment/API] Delete DashboardAppointment',
 	props<{ id: string }>(),

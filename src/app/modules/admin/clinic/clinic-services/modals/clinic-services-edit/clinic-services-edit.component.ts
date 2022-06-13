@@ -212,10 +212,10 @@ export class ClinicServicesEditComponent implements OnInit {
 	updateMedicalService(medical_service: MedicalService): void {
 		this._indexDBService
 			.update(DB.MEDICAL_SERVICES, medical_service)
-			.subscribe(() => {
+			.subscribe((newMedicalService) => {
 				this._store.dispatch(
 					MedicalServiceActions.updateMedicalService({
-						medicalService: medical_service as any,
+						medicalService: newMedicalService,
 					}),
 				)
 			})

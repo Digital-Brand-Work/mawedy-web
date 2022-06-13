@@ -5,12 +5,14 @@
 	>
 		<div>Appointments</div>
 
-		<span class="block md:hidden">(20)</span>
+		<span class="block md:hidden"
+			>({{ ((appointments$ | async).entities | entities).length }})</span
+		>
 
 		<div
-			class="bg-emerald-500 badge text-white rounded-full text-sm font-normal ml-5 -translate-y-1 hidden md:block"
+			class="bg-emerald-500 badge text-white rounded-full text-sm font-normal ml-5 -translate-y-.5 hidden md:block"
 		>
-			20
+			{{ ((appointments$ | async).entities | entities).length }}
 		</div>
 	</a>
 
@@ -24,7 +26,7 @@
 		<span class="block md:hidden">(04)</span>
 
 		<div
-			class="bg-gray-100 badge text-gray-500 font-bold rounded-full text-sm ml-5 -translate-y-1 hidden md:block"
+			class="bg-gray-100 badge text-gray-500 font-bold rounded-full text-sm ml-5 -translate-y-.5 hidden md:block"
 		>
 			04
 		</div>

@@ -34,6 +34,12 @@ export const reducer = createReducer(
 	),
 
 	on(
+		DashboardAppointmentActions.upsertDashboardAppointment,
+		(state, action) =>
+			adapter.upsertOne(action.dashboardAppointment, state),
+	),
+
+	on(
 		DashboardAppointmentActions.deleteDashboardAppointment,
 		(state, action) => adapter.removeOne(action.id, state),
 	),
