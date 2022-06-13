@@ -3,11 +3,13 @@
 	<span class="relative">
 		<img
 			class="w-10 h-10 rounded-full"
-			*ngIf="(clinic$ | async)?.banner"
-			src="../../../../assets/app/navbar/ruth.jpg"
+			*ngIf="(clinic$ | async)?.logo"
+			[src]="(clinic$ | async)?.logo.picture.url"
 		/>
 
-		<avatar-placeholder *ngIf="!(clinic$ | async)?.banner"></avatar-placeholder>
+		<avatar-placeholder
+			*ngIf="!(clinic$ | async)?.logo"
+		></avatar-placeholder>
 
 		<span class="absolute -right-7 bottom-0 text-gray-500">
 			<mat-icon svgIcon="heroicons_solid:chevron-down"></mat-icon
@@ -19,26 +21,42 @@
 	<div
 		(click)="resolvePath('/clinic')"
 		@slideInTop
-		*ngIf="(clinic$ | async) && ((breakpoint$ | async) === 'phone' || (breakpoint$ | async) === 'tablet')"
+		*ngIf="
+			(clinic$ | async) &&
+			((breakpoint$ | async) === 'phone' ||
+				(breakpoint$ | async) === 'tablet')
+		"
 		class="accent-color font-semibold mx-0 w-full mb-3"
 	>
 		{{ (clinic$ | async)?.name }}
-		<span class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md mx-1">
+		<span
+			class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md mx-1"
+		>
 			{{ (clinic$ | async)?.account_type }} Branch</span
 		>
 	</div>
 
-	<div *ngIf="(clinic$ | async)?.accounts.length !== 0" class="accent-color font-bold flex items-center my-5">
+	<div
+		*ngIf="(clinic$ | async)?.accounts.length !== 0"
+		class="accent-color font-bold flex items-center my-5"
+	>
 		<div>Branches</div>
 
-		<mat-icon class="ml-auto text-teal-500" [svgIcon]="'account_tree'"></mat-icon>
+		<mat-icon
+			class="ml-auto text-teal-500"
+			[svgIcon]="'account_tree'"
+		></mat-icon>
 	</div>
 
-	<div *ngIf="(clinic$ | async)?.accounts.length !== 0" class="mt-2 mb-4 w-full text-gray-500">
+	<div
+		*ngIf="(clinic$ | async)?.accounts.length !== 0"
+		class="mt-2 mb-4 w-full text-gray-500"
+	>
 		<button
 			(click)="switchAccount()"
 			[ngClass]="{
-				'bg-teal-500 text-white rounded-tr-lg': (clinic$ | async)?.account_type === 'Main'
+				'bg-teal-500 text-white rounded-tr-lg':
+					(clinic$ | async)?.account_type === 'Main'
 			}"
 			mat-menu-item
 			class="flex items-center"
@@ -47,25 +65,36 @@
 
 			<mat-icon
 				[ngClass]="{
-					'bg-teal-500 text-white': (clinic$ | async)?.account_type === 'Main'
+					'bg-teal-500 text-white':
+						(clinic$ | async)?.account_type === 'Main'
 				}"
 				class="ml-auto icon-size-4 translate-x-3"
 				[svgIcon]="'feather:chevron-right'"
 			></mat-icon>
 		</button>
 
-		<div class="border-b border-b-gray-100" *ngFor="let account of (clinic$ | async)?.accounts; trackBy: identity">
+		<div
+			class="border-b border-b-gray-100"
+			*ngFor="
+				let account of (clinic$ | async)?.accounts;
+				trackBy: identity
+			"
+		>
 			<button
 				(click)="switchAccount(account.id)"
 				mat-menu-item
 				class="flex items-center mx-0 rounded-md"
 				[ngClass]="{
 					'bg-teal-500 text-white rounded-tr-lg':
-						account.id === (clinic$ | async)?.id && (clinic$ | async)?.account_type === 'Branch'
+						account.id === (clinic$ | async)?.id &&
+						(clinic$ | async)?.account_type === 'Branch'
 				}"
 			>
 				{{ account.name || '@' + account.username }}
-				<mat-icon class="ml-auto icon-size-4 translate-x-3" [svgIcon]="'feather:chevron-right'"></mat-icon>
+				<mat-icon
+					class="ml-auto icon-size-4 translate-x-3"
+					[svgIcon]="'feather:chevron-right'"
+				></mat-icon>
 			</button>
 		</div>
 	</div>
@@ -76,7 +105,10 @@
 
 	<mat-divider class="my-2 block md:hidden"></mat-divider>
 
-	<button (click)="resolvePath('/account-setting/user-account')" mat-menu-item>
+	<button
+		(click)="resolvePath('/account-setting/user-account')"
+		mat-menu-item
+	>
 		<span>User Accounts</span>
 	</button>
 

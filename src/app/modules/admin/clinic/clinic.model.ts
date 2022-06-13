@@ -26,6 +26,7 @@ export interface Clinic extends PHPBaseModel {
 	longitude: string
 
 	banner: { picture: PHPFile }
+	logo: { picture: PHPFile }
 
 	phone_number_one: string
 	phone_number_two: string

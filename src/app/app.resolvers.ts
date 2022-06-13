@@ -20,6 +20,7 @@ import { DoctorService } from './modules/admin/doctors/doctor.service'
 import { AppointmentService } from './modules/admin/appointments/appointment.service'
 import * as dayjs from 'dayjs'
 import { PromotionServiceService } from './modules/admin/promotions/promotion.service'
+import { ClinicUserService } from './modules/admin/clinic/clinic.service'
 
 @Injectable({
 	providedIn: 'root',
@@ -35,6 +36,7 @@ export class InitialDataResolver implements Resolve<any> {
 		private _indexDBService: NgxIndexedDBService,
 		private _promotionAPI: PromotionServiceService,
 		private _indexDBController: IndexedDbController,
+		private _clinicUserService: ClinicUserService,
 	) {}
 
 	resolve(
@@ -52,6 +54,8 @@ export class InitialDataResolver implements Resolve<any> {
 			this._appointmentAPI.query(``),
 			this._promotionAPI.get(),
 		]).subscribe((results: any) => {
+			this._clinicUserService.update()
+
 			const [
 				patients,
 				departments,
