@@ -182,14 +182,14 @@ export class PromotionsEditComponent implements OnInit {
 							),
 						)
 
-					this.form.reset()
-
 					this._alert.add({
 						id: Math.floor(Math.random() * 100000000000).toString(),
 						title: `Promotion updated successfully`,
 						message: `You have updated ${promotion.data.promotion_name} .`,
 						type: 'success',
 					})
+
+					this.setForm(promotion.data)
 				},
 				error: (http: HttpErrorResponse) => {
 					for (let key in http.error.errors) {
