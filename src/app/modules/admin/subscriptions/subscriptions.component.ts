@@ -18,13 +18,11 @@ export class SubscriptionsComponent implements OnInit {
 		private router: Router,
 		private _clinicUserService: ClinicUserService,
 	) {
-		this.router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-			this.isInCurrent$ = of(this.router.url.includes('current'))
+		this.isInCurrent$ = of(this.router.url.includes('current'))
 
-			this.isInPackages$ = of(this.router.url.includes('packages'))
+		this.isInPackages$ = of(this.router.url.includes('packages'))
 
-			this.isInSuccess$ = of(this.router.url.includes('success'))
-		})
+		this.isInSuccess$ = of(this.router.url.includes('success'))
 	}
 
 	unsubscribe$: Subject<any> = new Subject<any>()

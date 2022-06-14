@@ -207,8 +207,10 @@ export class UserAccountsComponent implements OnInit {
 				const confirm = this._confirm.open({
 					title: `You have Added ${newUsers} users`,
 					message: `Bill will be reflected on your next ${
-						clinic.subscription_interval
-					}i invoice. Additional Fee: AED ${
+						clinic.subscription_interval === 'year'
+							? 'yearly'
+							: 'monthly'
+					} invoice. Additional Fee: AED ${
 						newUsers *
 						60 *
 						(clinic.subscription_interval === 'year' ? 12 : 1)
