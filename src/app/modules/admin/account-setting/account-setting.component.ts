@@ -64,7 +64,7 @@ export class AccountSettingComponent implements OnInit {
 		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
 			if (clinic) {
 				this._seoService.generateTags({
-					title: `${clinic.name} | ${clinic?.address}`,
+					title: `${clinic.name} | ${clinic?.address} | Settings`,
 				})
 
 				this.form.get('email')?.setValue(clinic.email)

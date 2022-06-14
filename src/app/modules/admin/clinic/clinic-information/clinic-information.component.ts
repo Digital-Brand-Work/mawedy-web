@@ -13,7 +13,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { createMask } from '@ngneat/input-mask'
-import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { BranchApi, ClinicApi } from '../clinic.api.service'
 import { Clinic, ClinicTimeSlot } from '../clinic.model'
 import { ClinicUserService } from '../clinic.service'
@@ -318,7 +318,111 @@ export class ClinicInformationComponent implements OnInit {
 			.add(() => (this.isProcessing = false))
 	}
 
-	saveAsBranch(): void {}
+	saveAsBranch(): void {
+		let form = new FormData()
+
+		if (this.banner_picture !== undefined && this.banner_picture !== true) {
+			form.append('banner_picture', this.banner_picture as any)
+		}
+
+		const excludes = [
+			'phone_number_two',
+			'phone_number_two_country_code',
+			'phone_number_one',
+			'phone_number_one_country_code',
+		]
+
+		for (let key in this.form.value) {
+			if (!empty(this.form.value[key]) || !excludes.includes(key)) {
+				form.append(key, this.form.value[key])
+			}
+		}
+
+		if (!empty(this.form.value.phone_number_two)) {
+			form.append(
+				'phone_number_two',
+				setPrefix(this.form.value.phone_number_two_country_code) +
+					this.form.value.phone_number_two,
+			)
+		}
+
+		if (!empty(this.form.value.phone_number_one)) {
+			form.append(
+				'phone_number_one',
+				setPrefix(this.form.value.phone_number_one_country_code) +
+					this.form.value.phone_number_one,
+			)
+		}
+
+		this.timeslots.forEach((slot) => {
+			form.append(
+				`timeslots[${slot.day.toLowerCase()}][active]`,
+				slot.active + '',
+			)
+
+			if (slot.start && slot.start !== null) {
+				form.append(
+					`timeslots[${slot.day.toLowerCase()}][start]`,
+					slot.start + '',
+				)
+			}
+
+			if (slot.end && slot.end !== null) {
+				form.append(
+					`timeslots[${slot.day.toLowerCase()}][end]`,
+					slot.end + '',
+				)
+			}
+		})
+
+		combineLatest([this.clinic$, this._branchApi.post(form)])
+			.pipe(take(1))
+			.subscribe((results) => {
+				const [oldClinic, clinic] = results
+
+				this.clinic$.next({
+					...clinic.data,
+					accounts: oldClinic.accounts,
+				})
+
+				this._indexDbController.upsert(DB.CLINIC, {
+					id: 1,
+					data: { ...clinic.data, accounts: oldClinic.accounts },
+				})
+
+				this._alert.add({
+					id: Math.floor(Math.random() * 100000000000).toString(),
+					title: `Success`,
+					message: `You have updated the clinic profile of ${
+						clinic.data.name
+					} ${
+						clinic.data.address
+					} ${clinic.data.account_type.toLowerCase()}.`,
+					type: 'success',
+				})
+			})
+			.add(() => (this.isProcessing = false))
+
+		// this._branchApi
+		// 	.post(form)
+		// 	.subscribe({
+		// 		next: (clinic) => {
+
+		// 		},
+		// 		error: (http: HttpErrorResponse) => {
+		// 			for (let key in http.error.errors) {
+		// 				for (let errorKey in this.errors) {
+		// 					if (key.includes(errorKey)) {
+		// 						this.errors[errorKey] = true
+		// 					}
+		// 				}
+		// 			}
+
+		// 			this._errorHandlerService.handleError(http)
+		// 		},
+		// 	})
+		// 	.add(() => (this.isProcessing = false))
+	}
 
 	autoGrow(): void {
 		const textArea = this.clinicDescription.nativeElement

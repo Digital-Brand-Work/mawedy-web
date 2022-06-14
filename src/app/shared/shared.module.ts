@@ -30,6 +30,7 @@ import { add30MinutesPipe } from '@digital_brand_work/pipes/add-thirty-minutes.p
 import { SyncWithClinicDirective } from 'app/mawedy-core/directives/doctor.time-slot.disabler.directive'
 import { CheckForAppointmentsDirective } from 'app/mawedy-core/directives/doctor.time-slot.blocked.directive'
 import { DayIntervalPipe } from '@digital_brand_work/pipes/day-interval.count.pipe'
+import { FuseConfirmationModule } from '@fuse/services/confirmation'
 
 const components = [
 	...appComponents,
@@ -50,7 +51,7 @@ const modules = [
 	NgxMaskModule.forRoot(),
 	FuseCardModule,
 	SSRExcludeModule,
-
+	FuseConfirmationModule,
 	...matModules,
 ]
 

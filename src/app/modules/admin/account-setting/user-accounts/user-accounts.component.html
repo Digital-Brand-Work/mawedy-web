@@ -1,58 +1,166 @@
 <div *ngIf="true" @slideInTop class="w-full">
-	<app-toolbar class="w-full" [toolbar]="noToolbar"></app-toolbar>
-	<ng-template #noToolbar></ng-template>
+	<app-toolbar
+		class="w-full"
+		[toolbar]="accountSettingsToolbar"
+	></app-toolbar>
+
+	<ng-template #accountSettingsToolbar>
+		<div class="flex w-full">
+			<button
+				[ngClass]="{
+					'bg-emerald-500 hover:bg-emerald-600  border-emerald-500 ':
+						!isProcessing && form.valid,
+					'bg-gray-400 pointer-events-none ':
+						isProcessing || !form.valid
+				}"
+				(click)="save()"
+				mat-button
+				class="ml-auto bg-emerald-500 text-lg text-white rounded-xl shadow-md shadow-emerald-500/20 px-4 py-5 font-normal hover:bg-emerald-600/90 mx-8 items-center justify-center hidden md:flex"
+			>
+				<spinner *ngIf="isProcessing"></spinner>
+
+				<div *ngIf="!isProcessing">Save Changes</div>
+			</button>
+		</div>
+	</ng-template>
 </div>
 
 <div class="md:px-10 px-0 w-full">
-	<div
-		style="min-height: 80vh"
-		class="md:rounded-xl bg-white px-5 pr-0 w-full pt-5"
-	>
-		<div class="accent-color text-3xl ml-5 font-semibold py-2">
-			User Account
-		</div>
-
-		<div class="text-xs text-gray-400 ml-5">Manage your account users.</div>
-
-		<div class="custom-border-green translate-y-5"></div>
-
-		<hr class="mt-4" />
-
-		<div class="grid grid-cols-3 gap-x-10 w-full pr-5">
-			<div
-				*ngFor="let item of [1, 2, 3]; trackBy: identity"
-				class="flex items-center col-span-1"
-			>
-				<button
-					(click)="avatar.click()"
-					class="photo flex flex-col items-center justify-center hover:bg-gray-50 rounded-sm mr-5"
-				>
-					<mat-icon
-						class="text-gray-400 icon-size-10"
-						svgIcon="feather:upload"
-					></mat-icon>
-				</button>
-
+	<div style="height: 80vh" class="md:rounded-xl bg-white px-5 pr-0 w-full">
+		<div
+			class="flex flex-col flex-auto overflow-x-auto h-full bg-white pb-20"
+		>
+			<div class="flex items-center mt-3">
 				<div>
-					<div class="text-xl font-extrabold accent-color mb-5">
-						User 1
+					<div class="accent-color text-3xl ml-5 font-semibold py-2">
+						User Accounts({{ form.value.accounts.length }})
 					</div>
 
-					<input
-						#input
-						type="text"
-						class="py-3 mb-5 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20 shadow-sm shadow-gray-500/10"
-						placeholder="Name"
-					/>
-
-					<input
-						#input
-						type="text"
-						class="py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20 shadow-sm shadow-gray-500/10"
-						placeholder="Description"
-					/>
+					<div class="text-base text-gray-400 ml-5">
+						Manage your account users.
+					</div>
 				</div>
+
+				<button
+					(click)="addAccount()"
+					mat-button
+					class="ml-auto bg-emerald-500 text-lg text-white rounded-xl shadow-md shadow-emerald-500/20 px-4 py-5 font-normal hover:bg-emerald-600/90 mx-8 items-center justify-center hidden md:flex"
+				>
+					<mat-icon
+						class="text-white mr-2"
+						svgIcon="feather:plus"
+					></mat-icon>
+
+					Add another branch
+				</button>
 			</div>
+
+			<div class="custom-border-green translate-y-5"></div>
+
+			<hr class="mt-4" />
+
+			<form [formGroup]="form" class="w-full">
+				<div
+					formArrayName="accounts"
+					class="grid grid-cols-3 gap-x-10 gap-y-4 w-full"
+				>
+					<div
+						[formGroupName]="i"
+						*ngFor="
+							let child of form.get('accounts')?.controls;
+							let i = index;
+							trackBy: identity
+						"
+						class="flex items-center w-full"
+					>
+						<div
+							*ngIf="child.value.logo_preview === ''"
+							class="photo mr-5"
+						>
+							<button
+								(click)="logo.click()"
+								class="photo flex flex-col items-center justify-center hover:bg-gray-50 rounded-sm"
+							>
+								<mat-icon
+									class="text-gray-400 icon-size-10"
+									svgIcon="feather:upload"
+								></mat-icon>
+							</button>
+						</div>
+
+						<img
+							*ngIf="child.value.logo_preview !== ''"
+							(click)="logo.click()"
+							class="photo object-fill hover:bg-gray-50 rounded-sm mr-5"
+							[src]="child.value.logo_preview"
+							alt="logo"
+						/>
+
+						<input
+							(change)="readFile(i, $event)"
+							type="file"
+							class="hidden"
+							accept="image/*"
+							#logo
+						/>
+
+						<div class="flex flex-col w-full">
+							<div class="ml-auto">
+								<button
+									(click)="
+										child.value.active
+											? (form.value.accounts[
+													i
+											  ].active = false)
+											: (form.value.accounts[
+													i
+											  ].active = true)
+									"
+									[ngClass]="{
+										'text-sky-500': !child.value.active,
+										'text-red-500': child.value.active
+									}"
+									mat-button
+								>
+									{{
+										!child.value.active
+											? 'Enable'
+											: 'Disable'
+									}}
+								</button>
+							</div>
+
+							<div
+								class="text-xl font-extrabold accent-color mb-5 -mt-4"
+							>
+								{{ 'User ' + (i + 1) }}
+							</div>
+
+							<input
+								formControlName="name"
+								class="py-3 mb-5 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20"
+								placeholder="Name"
+								[ngClass]="{
+									'border-red-600 ':
+										!form.get('name')?.valid &&
+										form.get('name')?.touched
+								}"
+							/>
+
+							<input
+								formControlName="description"
+								class="py-3 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20"
+								placeholder="Description"
+								[ngClass]="{
+									'border-red-600 ':
+										!form.get('description')?.valid &&
+										form.get('description')?.touched
+								}"
+							/>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

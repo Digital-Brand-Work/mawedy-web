@@ -5,6 +5,7 @@ import { AlertState } from './components/alert/alert.service'
 import { Alert } from './mawedy-core/models/utility.models'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
+import { ClinicUserService } from './modules/admin/clinic/clinic.service'
 
 @Component({
 	selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
 	constructor(
 		private _alert: AlertState,
 		private _mediaService: MediaService,
+		private _clinicUserService: ClinicUserService,
 	) {}
 
 	alerts$: Observable<Alert[]> = this._alert.get()
@@ -35,4 +37,8 @@ export class AppComponent {
 	}
 
 	identity = (item: any) => item
+
+	ngOnInit(): void {
+		this._clinicUserService.switched$.next()
+	}
 }

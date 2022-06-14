@@ -2,7 +2,15 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { IndexedDbController } from '../../../mawedy-core/indexed-db/indexed-db.controller'
 import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject, combineLatest, forkJoin, map, of, take } from 'rxjs'
+import {
+	BehaviorSubject,
+	combineLatest,
+	forkJoin,
+	map,
+	of,
+	Subject,
+	take,
+} from 'rxjs'
 import { Clinic } from './clinic.model'
 import { Router } from '@angular/router'
 import { Injectable } from '@angular/core'
@@ -29,6 +37,8 @@ export class ClinicUserService {
 
 	clinic$: BehaviorSubject<Clinic | null> =
 		new BehaviorSubject<Clinic | null>(null)
+
+	switched$: Subject<void> = new Subject<void>()
 
 	clinic?: Clinic | null
 
@@ -74,6 +84,8 @@ export class ClinicUserService {
 		this.clinic = data.data
 
 		this.clinic$.next(data.data)
+
+		this.switched$.next()
 	}
 
 	update(): void {

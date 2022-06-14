@@ -27,12 +27,6 @@ export class SyncWithClinicDirective {
 	@Input() slot?: string
 
 	ngAfterViewInit() {
-		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
-			if (clinic) {
-				console.log(clinic.timeslots)
-			}
-		})
-
 		this._indexedDBService
 			.getByKey(DB.CLINIC, 1)
 			.subscribe((results: any) => {

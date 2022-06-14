@@ -45,6 +45,8 @@ export interface Clinic extends PHPBaseModel {
 	subscription_type: ClinicSubscriptionType
 
 	timeslots: ClinicTimeSlot[]
+
+	subscription_interval: 'year' | 'month'
 }
 
 export interface ClinicTimeSlot extends PHPBaseModel {
@@ -55,13 +57,16 @@ export interface ClinicTimeSlot extends PHPBaseModel {
 }
 
 export interface Branch extends PHPBaseModel {
+	logo: { picture: PHPFile }
+	banner: { picture: PHPFile }
+	clinic: Clinic
 	clinic_id: string
 	username: string
 	password: string
 	first_name: string
 	last_name: string
-	branch_name: string
-	branch_address: string
+	name: string
+	address: string
 	email: string
 	phone_number_one: string
 	phone_number_one_country_code: string

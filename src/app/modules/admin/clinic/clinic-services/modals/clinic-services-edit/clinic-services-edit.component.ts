@@ -98,7 +98,9 @@ export class ClinicServicesEditComponent implements OnInit {
 						name: medical_service.name,
 						description: medical_service.description,
 						department_id: department.id,
-						doctors: doctors,
+						doctors: medical_service.doctors.map(
+							(doctor) => doctor.id,
+						),
 					})
 
 					this.picturePreview = medical_service.picture.url

@@ -74,6 +74,7 @@
 		</button>
 
 		<div
+			[class.hidden]="!account.active"
 			class="border-b border-b-gray-100"
 			*ngFor="
 				let account of (clinic$ | async)?.accounts;
@@ -106,13 +107,18 @@
 	<mat-divider class="my-2 block md:hidden"></mat-divider>
 
 	<button
+		*ngIf="(clinic$ | async) && (clinic$ | async).account_type === 'Main'"
 		(click)="resolvePath('/account-setting/user-account')"
 		mat-menu-item
 	>
 		<span>User Accounts</span>
 	</button>
 
-	<button (click)="resolvePath('/account-setting')" mat-menu-item>
+	<button
+		*ngIf="(clinic$ | async) && (clinic$ | async).account_type === 'Main'"
+		(click)="resolvePath('/account-setting')"
+		mat-menu-item
+	>
 		<span>Settings</span>
 	</button>
 
