@@ -1,3 +1,4 @@
+import { environment } from './../../../../../environments/environment'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 import { AddPatientModal } from '../modals/patient-add/patient-add.service'
@@ -16,6 +17,8 @@ export class PatientsToolbarComponent implements OnInit {
 	@Output() onFilter = new EventEmitter()
 
 	@Input() patients: Patient[] = []
+
+	API_URL = environment.api
 
 	opened$: BehaviorSubject<boolean> = this.addPatientModal.opened$
 

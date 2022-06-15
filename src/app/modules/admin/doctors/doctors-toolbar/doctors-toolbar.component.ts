@@ -1,3 +1,4 @@
+import { environment } from './../../../../../environments/environment'
 import { Doctor } from './../doctor.model'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
@@ -16,6 +17,8 @@ export class DoctorsToolbarComponent implements OnInit {
 	@Output() onFilter = new EventEmitter()
 
 	@Input() doctors: Doctor[] = []
+
+	API_URL = environment.api
 
 	keyword: string = ''
 
