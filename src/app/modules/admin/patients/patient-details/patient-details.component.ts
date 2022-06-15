@@ -20,10 +20,10 @@ import { AppointmentService } from '../../appointments/appointment.service'
 export class PatientDetailsComponent implements OnInit {
 	constructor(
 		private seoService: SeoService,
-		private _clinicUserService: ClinicUserService,
 		private _patientService: PatientService,
 		private _indexDBService: NgxIndexedDBService,
 		private _appointmentAPI: AppointmentService,
+		private _clinicUserService: ClinicUserService,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
@@ -35,33 +35,35 @@ export class PatientDetailsComponent implements OnInit {
 	appointments: Appointment[] = []
 
 	ngOnInit(): void {
-		combineLatest([
-			this.clinic$,
-			this._indexDBService.getByKey(DB.PATIENT, 1),
-		])
-			.pipe(takeUntil(this.unsubscribe$))
-			.subscribe(
-				(results: [clinic: Clinic, patient: { data: Patient }]) => {
-					const [clinic, patient] = results
+		setTimeout(() => {
+			combineLatest([
+				this.clinic$,
+				this._indexDBService.getByKey(DB.PATIENT, 1),
+			])
+				.pipe(takeUntil(this.unsubscribe$))
+				.subscribe(
+					(results: [clinic: Clinic, patient: { data: Patient }]) => {
+						const [clinic, patient] = results
 
-					if (!clinic || !patient) {
-						return
-					}
+						if (!clinic || !patient) {
+							return
+						}
 
-					this.seoService.generateTags({
-						title: `${clinic.name} | ${clinic?.address} | ${patient.data.first_name} ${patient.data.middle_name} ${patient.data.last_name}`,
-					})
+						this.getPatientAppointments(patient.data)
 
-					this.getPatientAppointments(patient.data)
-				},
-			)
+						this.seoService.generateTags({
+							title: `${clinic.name} | ${clinic?.address} | ${patient.data.first_name} ${patient.data.middle_name} ${patient.data.last_name}`,
+						})
+					},
+				)
+		}, 500)
 	}
 
 	getPatientAppointments(patient: Patient) {
-		this._appointmentAPI
-			.query(`?status=Done`)
+		this._patientService
+			.query(`/${patient.id}?appointments[status]=Done`)
 			.subscribe(
-				(appointments: any) => (this.appointments = appointments.data),
+				(data: any) => (this.appointments = data.data.appointments),
 			)
 	}
 
