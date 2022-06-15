@@ -20,6 +20,8 @@ export class DoctorsToolbarComponent implements OnInit {
 
 	API_URL = environment.api
 
+	token = localStorage.getItem('access_token')
+
 	keyword: string = ''
 
 	opened$: BehaviorSubject<boolean> = this.addDoctorModal.opened$

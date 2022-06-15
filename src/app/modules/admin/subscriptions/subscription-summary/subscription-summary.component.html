@@ -4,11 +4,26 @@
 	class="md:px-10 px-0 w-full"
 >
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full">
-		<div class="text-gray-700 text-2xl font-semibold mb-10">
+		<div
+			class="text-gray-700 text-2xl font-semibold mb-10 flex items-center"
+		>
 			Subscription
+
+			<div class="flex ml-auto">
+				<div class="text-base mr-2 accent-color">Automated Renewal</div>
+
+				<mat-slide-toggle
+					(change)="setToAutomatic($event.checked)"
+					color="primary"
+					[checked]="clinic.payment_mode === 'Manual' ? false : true"
+				>
+				</mat-slide-toggle>
+			</div>
 		</div>
 
-		<div class="flex items-center border-b border-b-gray-400/50 pb-10">
+		<div
+			class="flex flex-col justify-start-center border-b border-b-gray-400/50 pb-10"
+		>
 			<div>
 				<div class="accent-color text-4xl font-bold mb-2">
 					{{ (clinic$ | async).subscription_type }}
@@ -17,29 +32,34 @@
 						(clinic$ | async).subscription_interval === 'year'
 							? ('yearly' | titlecase)
 							: ('monthly' | titlecase)
-					}}y Subscription
+					}}
+					Subscription
 				</div>
 
 				<div class="text-gray-600 font-semibold mb-1 text-lg max-w-md">
-					Your subscription renewal is automatic and your account will
-					be automatically charger every billing period
+					Your subscription payment mode is
+					{{ clinic.payment_mode | lowercase }} and your account
+
+					{{ clinic.payment_mode !== 'Manual' ? 'will' : 'will not' }}
+					be automatically charged every billing period.
 				</div>
 			</div>
 
-			<div class="flex flex-col ml-auto">
+			<div class="flex mt-10">
 				<button
 					routerLink="/aster_clinic/jumeirah/subscription/packages"
 					style="width: 189px"
-					class="text-teal-500 tracking-wide drop-shadow-md border border-teal-500 font-semibold bg-white hover:bg-gray-50 rounded-md py-3 mb-5"
+					class="bg-emerald-500 text-white tracking-wide drop-shadow-md border font-semibold hover:bg-emerald-600 rounded-md py-3 mr-10"
 				>
 					Upgrade
 				</button>
 
 				<button
+					(click)="setToAutomatic(false)"
 					style="width: 189px"
 					class="text-teal-500 tracking-wide drop-shadow-md border border-teal-500 font-semibold bg-white hover:bg-gray-50 rounded-md py-3"
 				>
-					Cancel Renewal
+					Cancel Subscription
 				</button>
 			</div>
 		</div>
@@ -64,7 +84,7 @@
 					style="color: #0070ff"
 					class="hover:underline font-bold"
 				>
-					Check Billing History
+					Manage Billing
 				</button>
 			</div>
 		</div>

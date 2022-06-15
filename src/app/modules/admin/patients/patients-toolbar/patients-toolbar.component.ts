@@ -20,6 +20,8 @@ export class PatientsToolbarComponent implements OnInit {
 
 	API_URL = environment.api
 
+	token = localStorage.getItem('access_token')
+
 	opened$: BehaviorSubject<boolean> = this.addPatientModal.opened$
 
 	keyword: string = ''

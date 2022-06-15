@@ -4,46 +4,76 @@
 			Subscription
 		</div>
 
-		<div class="flex items-center border-b border-b-gray-400/50">
+		<div>
+			<div class="accent-color text-4xl font-bold mb-2">
+				{{ (clinic$ | async).subscription_type }}
+				{{
+					(clinic$ | async).subscription_interval ||
+					(clinic$ | async).subscription_interval === 'year'
+						? ('yearly' | titlecase)
+						: ('monthly' | titlecase)
+				}}
+				Subscription
+			</div>
+
+			<div class="text-gray-600 font-semibold mb-1 text-lg max-w-md">
+				Your subscription renewal is automatic and your account will be
+				automatically charged every billing period.
+			</div>
+		</div>
+
+		<div class="flex items-center">
 			<div>
-				<div class="text-gray-600 font-semibold mb-1 text-lg">
-					Soon will expire
+				<div class="text-gray-700 font-extrabold text-6xl mt-10">
+					Plans and Pricing
 				</div>
-				<div class="text-gray-700 text-3xl font-bold mb-2">
-					Trial Account
+
+				<div class="text-gray-700 font-medium text-xl">
+					Start small and free upgrade as you go. Take control of
+					everything.
+				</div>
+			</div>
+
+			<div class="ml-auto">
+				<div
+					style="width: 300px"
+					class="border border-emerald-500 rounded-xl grid grid-cols-2 my-10 overflow-hidden"
+				>
+					<button
+						(click)="billing$.next(item)"
+						style="height: 50px"
+						[ngClass]="{
+							'bg-emerald-500 text-white pointer-events-none  ':
+								(billing$ | async) === item,
+							'text-gray-400 bg-white':
+								(billing$ | async) !== item
+						}"
+						class="hover:bg-emerald-50 hover:text-emerald-800 font-medium"
+						*ngFor="let item of billings; trackBy: identity"
+					>
+						{{ item | titlecase }} Plan
+					</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="text-gray-600 max-w-sm font-semibold mb-1 text-lg my-10">
-			Your Trial will expire on the next 18 Days. Please Subscribe on us
-			to get the full access of Dashboard.
-		</div>
-
 		<div
 			[@listAnimation]="3"
-			class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10"
+			class="grid grid-cols-1 md:grid-cols-3 gap-20 max-w-screen-xl mt-20"
 		>
-			<subscription-package-item
-				class="text-center p-10 w-full package"
-				itemTitle="Standard"
-				[price]="150"
-				[features]="subscription.standard"
-			></subscription-package-item>
-
-			<subscription-package-item
-				class="text-center p-10 w-full package"
-				itemTitle="Golden"
-				[price]="180"
-				[features]="subscription.golden"
-			></subscription-package-item>
-
-			<subscription-package-item
-				class="text-center p-10 w-full package"
-				itemTitle="Platinum"
-				[price]="220"
-				[features]="subscription.platinum"
-			></subscription-package-item>
+			<div
+				[class.hidden]="!subscription[billing$ | async]"
+				*ngFor="
+					let subscription of mawedySubscriptions;
+					trackBy: identity
+				"
+			>
+				<subscription-package-item
+					*ngIf="subscription[billing$ | async]"
+					[interval]="billing$ | async"
+					[subscription]="subscription[billing$ | async]"
+				></subscription-package-item>
+			</div>
 		</div>
 	</div>
 </div>

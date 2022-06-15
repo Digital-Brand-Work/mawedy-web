@@ -7,6 +7,9 @@ import { AlertState } from 'app/components/alert/alert.service'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { Clinic } from '../../clinic/clinic.model'
+import { BaseService } from '@digital_brand_work/api/base.api'
+import { HttpClient } from '@angular/common/http'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 
 @Component({
 	selector: 'subscription-summary',
@@ -16,9 +19,11 @@ import { Clinic } from '../../clinic/clinic.model'
 })
 export class SubscriptionSummaryComponent implements OnInit {
 	constructor(
+		private _http: HttpClient,
 		private _alert: AlertState,
 		private billingPortalAPI: BillingPortalAPi,
 		private _clinicUserService: ClinicUserService,
+		private _indexedDBService: NgxIndexedDBService,
 		private _errorHandlerService: ErrorHandlerService,
 		private subscriptionInvoicesModal: SubscriptionInvoicesModal,
 	) {}
@@ -34,6 +39,32 @@ export class SubscriptionSummaryComponent implements OnInit {
 
 	ngOnInit(): void {}
 
+	setToAutomatic(mode: boolean) {
+		new BaseService(
+			this._http,
+			this._indexedDBService,
+			'v1/subscriptions/update',
+		)
+			.post({ payment_mode: mode ? 'Automatic' : 'Manual' })
+			.subscribe({
+				next: () => {
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						message: `${
+							mode
+								? 'Your bill will be deducted on your account every billing period'
+								: "Your account's payment mode is manual will give you an automated invoice every billing period"
+						}`,
+						title: `Switched to ${mode ? 'Automatic' : 'Manual'}`,
+						type: 'success',
+					})
+				},
+				error: (http) => {
+					this._errorHandlerService.handleError(http)
+				},
+			})
+	}
+
 	openBillingPortal() {
 		this._clinicUserService
 			.resolveClinicPath()
@@ -48,7 +79,13 @@ export class SubscriptionSummaryComponent implements OnInit {
 					})
 					.subscribe({
 						next: (data) => {
-							window.location.href = data.url
+							let a = document.createElement('a')
+
+							a.target = '_blank'
+
+							a.href = data.url
+
+							a.click()
 						},
 						error: (http) => {
 							this._errorHandlerService.handleError(http)

@@ -34,6 +34,7 @@ export interface Clinic extends PHPBaseModel {
 	phone_number_two_country_code: string
 
 	payment_received: 0
+	payment_mode: 'Manual' | 'Automatic'
 
 	is_twenty_four_hours: boolean
 
