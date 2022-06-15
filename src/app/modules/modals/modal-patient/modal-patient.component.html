@@ -6,3 +6,13 @@
 	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
 	class="fixed w-screen h-screen flex"
 ></patient-add>
+
+<patient-details-booking-list-uploading-result
+	stop-propagation
+	(click)="uploadResultOpened$.next(false)"
+	*ngIf="uploadResultOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+>
+</patient-details-booking-list-uploading-result>

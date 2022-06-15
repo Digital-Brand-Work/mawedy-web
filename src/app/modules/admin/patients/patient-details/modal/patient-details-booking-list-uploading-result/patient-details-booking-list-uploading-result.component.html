@@ -1,1 +1,38 @@
-<p>patient-details-booking-list-uploading-result works!</p>
+<div
+	stop-propagation
+	@zoomIn
+	style="min-width: 500px"
+	class="m-auto bg-white h-auto w-full md:w-1/4 rounded-xl overflow-hidden"
+>
+	<modal-header modalTitle="" (onClose)="opened$.next(false)"></modal-header>
+
+	<div class="flex flex-col items-center justify-center p-2">
+		<div
+			@slideInBottom
+			*ngIf="file$"
+			class="accent-color font-bold text-xl my-5 text-center flex"
+		>
+			{{ file$ | async }}
+		</div>
+
+		<div
+			class="overflow-hidden rounded-full"
+			style="background: #00b074; transition: 0.3s ease"
+		>
+			<img
+				[ngStyle]="{ width: width + '%' }"
+				class="object-none"
+				style="height: 22.9px; transition: 0.3s ease"
+				src="/assets/app/progressbar.svg"
+				alt=""
+			/>
+		</div>
+
+		<button
+			(click)="opened$.next(false)"
+			class="rounded-xl text-emerald-500 border-2 border-emerald-500 my-5 font-bold py-3 px-10 text-base hover:bg-emerald-50"
+		>
+			Close
+		</button>
+	</div>
+</div>

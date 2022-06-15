@@ -36,6 +36,9 @@
 
 		<patient-details-information></patient-details-information>
 
-		<patient-details-booking-list></patient-details-booking-list>
+		<patient-details-booking-list
+			*ngIf="appointments.length !== 0"
+			[appointments]="appointments"
+		></patient-details-booking-list>
 	</div>
 </div>

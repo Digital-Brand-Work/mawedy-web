@@ -1,3 +1,4 @@
+import { Appointment } from './../../appointments/appointment.model'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
@@ -8,6 +9,7 @@ import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { Patient } from '../patient.model'
 import { PatientService } from '../patient.service'
+import { AppointmentService } from '../../appointments/appointment.service'
 
 @Component({
 	selector: 'patient-details',
@@ -21,6 +23,7 @@ export class PatientDetailsComponent implements OnInit {
 		private _clinicUserService: ClinicUserService,
 		private _patientService: PatientService,
 		private _indexDBService: NgxIndexedDBService,
+		private _appointmentAPI: AppointmentService,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
@@ -28,6 +31,8 @@ export class PatientDetailsComponent implements OnInit {
 	patient$: BehaviorSubject<Patient | null> = this._patientService.current$
 
 	unsubscribe$: Subject<any> = new Subject<any>()
+
+	appointments: Appointment[] = []
 
 	ngOnInit(): void {
 		combineLatest([
@@ -46,7 +51,17 @@ export class PatientDetailsComponent implements OnInit {
 					this.seoService.generateTags({
 						title: `${clinic.name} | ${clinic?.address} | ${patient.data.first_name} ${patient.data.middle_name} ${patient.data.last_name}`,
 					})
+
+					this.getPatientAppointments(patient.data)
 				},
+			)
+	}
+
+	getPatientAppointments(patient: Patient) {
+		this._appointmentAPI
+			.query(`?status=Done`)
+			.subscribe(
+				(appointments: any) => (this.appointments = appointments.data),
 			)
 	}
 

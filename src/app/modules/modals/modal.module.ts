@@ -7,6 +7,7 @@ import { ModalSubscriptionComponent } from './modal-subscription/modal-subscript
 import { SharedModule } from 'app/shared/shared.module'
 import { ModalPatientComponent } from './modal-patient/modal-patient.component'
 import { ClinicDepartmentEditComponent } from '../admin/clinic/clinic-services/modals/clinic-department-edit/clinic-department-edit.component'
+import { PatientDetailsBookingListUploadingResultComponent } from '../admin/patients/patient-details/modal/patient-details-booking-list-uploading-result/patient-details-booking-list-uploading-result.component'
 
 const components = [
 	ModalAppointmentComponent,
@@ -16,6 +17,7 @@ const components = [
 	ModalSubscriptionComponent,
 	ModalPatientComponent,
 	ClinicDepartmentEditComponent,
+	PatientDetailsBookingListUploadingResultComponent,
 ]
 
 @NgModule({

@@ -1,6 +1,6 @@
 <div class="px-5">
 	<div class="flex items-center font-semibold text-2xl accent-color">
-		Booking List
+		Booking List ({{ appointments.length }})
 	</div>
 
 	<div
@@ -9,7 +9,7 @@
 		<table class="min-w-240 overflow-y-visible md:overflow-x-hidden">
 			<thead style="height: 42px" class="sticky top-0 bg-white pt-4">
 				<tr class="text-gray-400 border-b border-b-gray-100">
-					<th>Booking No.:</th>
+					<th>Booking No.</th>
 					<th>Doctor</th>
 					<th>Department</th>
 					<th>Date</th>
@@ -17,23 +17,51 @@
 					<th class="text-center">Follow Up Check Up</th>
 				</tr>
 			</thead>
-			<tbody [@listAnimation]="3">
+			<tbody [@listAnimation]="appointments.length">
 				<tr
 					style="height: 48px"
 					class="text-gray-500 font-semibold border-b border-b-gray-100"
-					*ngFor="
-						let item of [
-							1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 3, 1, 2, 3, 1,
-							2, 3, 1, 2
-						];
-						trackBy: identity
-					"
+					*ngFor="let appointment of appointments; trackBy: identity"
 				>
-					<td>AAP954685432UI</td>
-					<td>Dr. Hanadi Yassin</td>
-					<td>Cardiologist</td>
-					<td>Sun, 19 Apr 2021 10:30 Am - 11:00 Am</td>
-					<td>Clarrise_Dermaresult.Pdf</td>
+					<td>
+						{{ appointment.type_code
+						}}{{ appointment.id | uppercase }}
+					</td>
+					<td>{{ appointment.doctor.name }}</td>
+					<td>{{ appointment.doctor.profession }}</td>
+					<td>
+						{{ appointment.date | date: 'EEE, dd MMM YYY' }}
+						{{ appointment.start_time | toTwelve }} -
+						{{ appointment.end_time | toTwelve }}
+					</td>
+
+					<td>
+						<button
+							(click)="resultFile.click()"
+							*ngIf="appointment.result === null"
+							mat-button
+							class="text-sky-500"
+						>
+							Upload Result
+
+							<mat-icon
+								class="text-sky-500 icon-size-4 ml-2"
+								svgIcon="feather:upload"
+							></mat-icon>
+						</button>
+
+						<input
+							type="file"
+							#resultFile
+							class="hidden"
+							(change)="readFile($event, appointment)"
+						/>
+
+						<div *ngIf="appointment.result !== null">
+							{{ appointment.result.name }}
+						</div>
+					</td>
+
 					<td class="text-center">
 						<div class="flex items-center">
 							<mat-checkbox class="mx-auto"></mat-checkbox>

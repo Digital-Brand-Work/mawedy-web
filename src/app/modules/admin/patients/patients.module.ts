@@ -25,7 +25,6 @@ const components = [
 	PatientDetailsToolbarComponent,
 	PatientDetailsInformationComponent,
 	PatientDetailsBookingListComponent,
-	PatientDetailsBookingListUploadingResultComponent,
 ]
 
 @NgModule({
