@@ -39,7 +39,7 @@ export class DashboardAppointmentsComponent implements OnInit {
 		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
 			if (clinic) {
 				this.seoService.generateTags({
-					title: `${clinic.name} | ${clinic?.address} | Profile`,
+					title: `${clinic.name} | ${clinic?.address} | Dashboard Appointments`,
 				})
 			}
 		})

@@ -138,13 +138,13 @@ export class PatientAddComponent implements OnInit {
 						.subscribe(() => {
 							this._indexDBService
 								.add(DB.PATIENTS, patient.data)
-								.subscribe(() => {
-									this._store.dispatch(
-										PatientActions.addPatient({
-											patient: patient.data,
-										}),
-									)
-								})
+								.subscribe(() => {})
+
+							this._store.dispatch(
+								PatientActions.addPatient({
+									patient: patient.data,
+								}),
+							)
 
 							this.form.reset()
 

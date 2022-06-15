@@ -4,7 +4,15 @@ import { empty, hasData, tOTime, toTwelve } from 'app/mawedy-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 import { MedicalService } from './../../clinic/clinic-services/medical-service.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { BehaviorSubject, combineLatest, skip, Subject, takeUntil } from 'rxjs'
+import {
+	BehaviorSubject,
+	combineLatest,
+	map,
+	Observable,
+	skip,
+	Subject,
+	takeUntil,
+} from 'rxjs'
 import { AddAppointmentModal } from './appointment-add.service'
 import { createMask } from '@ngneat/input-mask'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -12,7 +20,7 @@ import { DashboardAppointmentSelectDoctorModal } from '../../dashboard/appointme
 import { DashboardAppointmentSelectTimeSlotModal } from '../../dashboard/appointments/modals/dashboard-appointment-select-time-slot/dashboard-appointment-select-time-slot.service'
 import { isPlatformBrowser } from '@angular/common'
 import { AlertState } from 'app/components/alert/alert.service'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { Department } from '../../clinic/department/department.model'
@@ -29,9 +37,9 @@ import {
 } from '@angular/core'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import * as dayjs from 'dayjs'
-import { throws } from 'assert'
 import { HttpErrorResponse } from '@angular/common/http'
-
+import * as DashboardAppointmentActions from '../../dashboard/appointments/dashboard-appointment.actions'
+import * as DashboardWaitingPatientsActions from '../../dashboard/waiting-patients/dashboard-waiting-patient.actions'
 @Component({
 	selector: 'appointment-add',
 	templateUrl: './appointment-add.component.html',
@@ -47,7 +55,11 @@ export class AppointmentAddComponent implements OnInit {
 		private _indexDBService: NgxIndexedDBService,
 		private _errorHandlerService: ErrorHandlerService,
 		private _addAppointmentModal: AddAppointmentModal,
-		private store: Store<{ department: Department; patient: Patient }>,
+		private _store: Store<{
+			department: Department
+			patient: Patient
+			patients: Patient[]
+		}>,
 		private _appointmentAPI: AppointmentService,
 		private _dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
 		private _dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
@@ -86,7 +98,7 @@ export class AppointmentAddComponent implements OnInit {
 
 	currencyFC = new FormControl('')
 
-	patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([])
+	patients$: Observable<Patient[]> = this._store.pipe(select('patients'))
 
 	departments: Department[] = []
 
@@ -132,8 +144,6 @@ export class AppointmentAddComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.setPatients()
-
 		combineLatest([this.doctor$, this.appointmentSlot$])
 			.pipe(takeUntil(this.unsubscribe$), skip(1))
 			.subscribe((results) => {
@@ -179,12 +189,6 @@ export class AppointmentAddComponent implements OnInit {
 
 	toTwelve(value: string) {
 		toTwelve(value)
-	}
-
-	setPatients() {
-		this._indexDBService
-			.getAll(DB.PATIENTS)
-			.subscribe((patients: Patient[]) => this.patients$.next(patients))
 	}
 
 	/**
@@ -262,6 +266,24 @@ export class AppointmentAddComponent implements OnInit {
 					this.form.reset()
 
 					this.saveLocally(appointment.data)
+
+					if (appointment.data.waiting) {
+						this._store.dispatch(
+							DashboardWaitingPatientsActions.addDashboardWaitingPatient(
+								{
+									dashboardWaitingPatient: appointment.data,
+								},
+							),
+						)
+					} else {
+						this._store.dispatch(
+							DashboardAppointmentActions.addDashboardAppointment(
+								{
+									dashboardAppointment: appointment.data,
+								},
+							),
+						)
+					}
 
 					this._alert.add({
 						id: Math.floor(Math.random() * 100000000000).toString(),

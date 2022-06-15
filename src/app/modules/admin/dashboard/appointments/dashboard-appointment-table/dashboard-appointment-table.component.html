@@ -28,16 +28,31 @@
 							{{ appointment.start_time | toTwelve }} -
 							{{ appointment.end_time | toTwelve }}
 						</td>
-						<td role="button" class="underline">
+						<td
+							(click)="viewPatient(appointment.patient)"
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
 							{{ appointment.patient.first_name }}
 							{{ appointment.patient.middle_name }}
 							{{ appointment.patient.last_name }}
 						</td>
-						<td role="button" class="underline">
+						<td
+							(click)="viewDoctor(appointment.doctor)"
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
 							{{ appointment.doctor.name }}
 						</td>
 						<td>{{ appointment.type }}</td>
-						<td role="button" [matMenuTriggerFor]="userStatus">
+						<td
+							[ngClass]="{
+								'pointer-events-none':
+									appointment.status !== 'Confirmed'
+							}"
+							role="button"
+							[matMenuTriggerFor]="userStatus"
+						>
 							<div class="flex items-center">
 								<dashboard-status
 									[color]="resolveColor(appointment)"
@@ -47,14 +62,11 @@
 
 								<mat-icon
 									role="button"
+									*ngIf="appointment.status === 'Confirmed'"
 									class="ml-2"
 									svgIcon="mat_solid:arrow_drop_down"
 								></mat-icon>
 
-								<!-- *ngIf="
-										appointment.status === 'Pending' ||
-										appointment.status === 'Confirmed'
-									" -->
 								<mat-menu
 									[xPosition]="'after'"
 									#userStatus="matMenu"
@@ -90,7 +102,10 @@
 								</mat-menu>
 							</div>
 						</td>
-						<td>Aa586468870</td>
+						<td>
+							{{ appointment.type_code
+							}}{{ appointment.id | uppercase }}
+						</td>
 						<td
 							(click)="
 								dashboardAppointmentDetailsModalOpened$.next(

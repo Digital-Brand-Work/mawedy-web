@@ -9,69 +9,47 @@
 						<th>Patient</th>
 						<th>Doctor</th>
 						<th>Type</th>
-						<th>Status</th>
-						<th>Via Promotion</th>
+						<th>Booking Ref</th>
 						<th></th>
 					</tr>
 				</thead>
-				<tbody [@listAnimation]="4">
+				<tbody [@listAnimation]="appointments.length">
 					<tr
 						style="height: 60px"
-						*ngFor="let item of [1, 2, 3, 4]; trackBy: identity"
 						class="accent-color font-semibold"
+						*ngFor="
+							let appointment of appointments;
+							trackBy: identity
+						"
 					>
-						<td>10 December</td>
-						<td>10:30 AM - 11:00 AM</td>
-						<td
-							routerLink="/aster_clinic/jumeirah/patients/jamel"
-							role="button"
-							class="underline hover:text-emerald-500"
-						>
-							Riyad Abdallah
-						</td>
-						<td
-							(click)="doctorDetailsModalOpened$.next(true)"
-							role="button"
-							class="underline hover:text-emerald-500"
-						>
-							Dr. Hanadi Yassin
-						</td>
-						<td>Returning Patient</td>
+						<td>{{ appointment.date | date: 'dd MMMM' }}</td>
 						<td>
-							<div class="flex items-center">
-								<dashboard-status
-									[color]="'red'"
-								></dashboard-status>
-
-								<div class="ml-2">Cancelled</div>
-
-								<mat-icon
-									[matMenuTriggerFor]="userStatus"
-									role="button"
-									class="ml-2"
-									svgIcon="mat_solid:arrow_drop_down"
-								></mat-icon>
-
-								<mat-menu
-									[xPosition]="'after'"
-									#userStatus="matMenu"
-									class="rounded-md"
-								>
-									<button mat-menu-item>
-										<span>Confirmed</span>
-									</button>
-
-									<button mat-menu-item>
-										<span>Canceled</span>
-									</button>
-
-									<button mat-menu-item>
-										<span>Done</span>
-									</button>
-								</mat-menu>
-							</div>
+							{{ appointment.start_time | toTwelve }} -
+							{{ appointment.end_time | toTwelve }}
 						</td>
-						<td>Yes</td>
+						<td
+							(click)="viewPatient(appointment.patient)"
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
+							{{ appointment.patient.first_name }}
+							{{ appointment.patient.middle_name }}
+							{{ appointment.patient.last_name }}
+						</td>
+						<td
+							(click)="viewDoctor(appointment.doctor)"
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
+							{{ appointment.doctor.name }}
+						</td>
+
+						<td>{{ appointment.type }}</td>
+
+						<td>
+							{{ appointment.type_code
+							}}{{ appointment.id | uppercase }}
+						</td>
 						<td
 							(click)="
 								dashboardAppointmentDetailsModalOpened$.next(
@@ -81,7 +59,7 @@
 							role="button"
 							class="underline hover:text-emerald-500"
 						>
-							Outreach
+							Details
 						</td>
 					</tr>
 				</tbody>

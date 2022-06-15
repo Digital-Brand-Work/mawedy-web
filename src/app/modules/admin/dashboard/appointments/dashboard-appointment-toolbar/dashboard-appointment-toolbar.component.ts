@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { Observable } from 'rxjs'
+import { DashboardWaitingPatient } from '../../waiting-patients/dashboard-waiting-patient.model'
 import { DashboardAppointment } from '../dashboard-appointment.model'
 
 @Component({
@@ -13,6 +14,7 @@ export class DashboardAppointmentToolbarComponent implements OnInit {
 	constructor(
 		private _store: Store<{
 			dashboardAppointments: DashboardAppointment[]
+			dashboardWaitingPatients: DashboardWaitingPatient[]
 		}>,
 	) {}
 
@@ -20,8 +22,12 @@ export class DashboardAppointmentToolbarComponent implements OnInit {
 
 	@Output() onFilter = new EventEmitter()
 
-	appointments$: Observable<Appointment[]> = this._store.pipe(
+	dashboardAppointments$: Observable<Appointment[]> = this._store.pipe(
 		select('dashboardAppointments'),
+	)
+
+	dashboardWaitingPatients$: Observable<Appointment[]> = this._store.pipe(
+		select('dashboardWaitingPatients'),
 	)
 
 	today = new Date(Date.now())

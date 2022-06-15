@@ -19,7 +19,9 @@ export class DashboardComponent implements OnInit {
 	}
 	private _unsubscribeAll: Subject<any> = new Subject<any>()
 
-	isInWaitingPatients$: Observable<boolean> = of(true)
+	isInWaitingPatients$: Observable<boolean> = of(
+		this.router.url.includes('waiting-list'),
+	)
 
 	ngOnInit(): void {}
 

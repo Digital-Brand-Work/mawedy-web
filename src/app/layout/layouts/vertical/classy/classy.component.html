@@ -46,8 +46,9 @@
 			<span
 				class="p-1 bg-rose-500 text-white text-xs shadow-md shadow-rose-500/50 rounded-md ml-1"
 			>
-				{{ (clinic$ | async)?.account_type }} Branch</span
-			>
+				{{ (clinic$ | async)?.account_type }}
+				{{ (clinic$ | async)?.account_type === 'Main' ? 'Branch' : '' }}
+			</span>
 		</button>
 
 		<button

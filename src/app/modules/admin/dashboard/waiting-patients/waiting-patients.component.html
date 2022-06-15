@@ -1,1 +1,4 @@
-<waiting-patients-table></waiting-patients-table>
+<waiting-patients-table
+	*ngIf="(appointments$ | async)?.entities"
+	[appointments]="(appointments$ | async).entities | entities"
+></waiting-patients-table>

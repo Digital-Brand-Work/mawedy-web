@@ -74,7 +74,9 @@
 					class="w-full hover:bg-emerald-500 hover:text-white flex items-center px-5 border-b border-gray-400"
 					mat-menu-item
 					*ngFor="
-						let patient of patients$ | async | filter: keyword;
+						let patient of (patients$ | async).entities
+							| entities
+							| filter: keyword;
 						trackBy: identity
 					"
 				>

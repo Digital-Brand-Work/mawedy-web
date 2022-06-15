@@ -87,6 +87,8 @@ export class SuccessComponent implements OnInit {
 			.subscribe((hasLoggedIn) => {
 				if (hasLoggedIn) {
 					this._clinicUserService.toDashboard()
+
+					this._clinicUserService.switched$.next()
 				} else {
 					return this._router.navigate(['/'])
 				}

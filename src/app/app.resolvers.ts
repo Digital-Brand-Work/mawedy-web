@@ -76,7 +76,9 @@ export class InitialDataResolver implements Resolve<any> {
 					this._patientAPI.get(),
 					this._departmentAPI.get(),
 					this._doctorAPI.get(),
-					this._appointmentAPI.query(`?date=${dayjs().toJSON()}`),
+					this._appointmentAPI.query(
+						`?date=${dayjs().toJSON()}&waiting=false`,
+					),
 					this._appointmentAPI.query(
 						`?date=${dayjs().toJSON()}&waiting=true`,
 					),

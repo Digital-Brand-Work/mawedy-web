@@ -59,9 +59,13 @@ export class DashboardAppointmentTableComponent implements OnInit {
 	identity = (item: any) => item
 
 	viewDoctor(doctor: Doctor) {
-		this._doctorService.current$.next(doctor)
+		this._indexDBService
+			.getByKey(DB.DOCTORS, doctor.id)
+			.subscribe((selectedDoctor: Doctor) => {
+				this._doctorService.current$.next(selectedDoctor)
 
-		this.doctorDetailsModalOpened$.next(true)
+				this.doctorDetailsModalOpened$.next(true)
+			})
 	}
 
 	viewPatient(patient: Patient) {
@@ -69,14 +73,18 @@ export class DashboardAppointmentTableComponent implements OnInit {
 			.resolveClinicPath()
 			.pipe(take(1))
 			.subscribe((resolvedPath) => {
-				this.patient$.next(patient)
+				this._indexDBService
+					.getByKey(DB.PATIENTS, patient.id)
+					.subscribe((selectedPatient: Patient) => {
+						this.patient$.next(selectedPatient)
 
-				this._router.navigate([
-					resolvedPath +
-						`patients/${slugify(
-							`${patient.first_name} ${patient.middle_name} ${patient.last_name}`,
-						)}`,
-				])
+						this._router.navigate([
+							resolvedPath +
+								`patients/${slugify(
+									`${selectedPatient.first_name} ${selectedPatient.middle_name} ${selectedPatient.last_name}`,
+								)}`,
+						])
+					})
 			})
 	}
 
