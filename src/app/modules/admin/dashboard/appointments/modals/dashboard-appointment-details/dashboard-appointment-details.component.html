@@ -142,7 +142,9 @@
 						Patient Name
 					</div>
 					<div class="text-base accent-color font-bold">
-						Rafiq Sadri
+						{{ appointment.patient.first_name }}
+						{{ appointment.patient.middle_name }}
+						{{ appointment.patient.last_name }}
 					</div>
 				</div>
 
@@ -150,14 +152,18 @@
 					<div class="text-base font-light text-gray-500 mb-1">
 						Sex
 					</div>
-					<div class="text-base accent-color font-bold">Male</div>
+					<div class="text-base accent-color font-bold">
+						{{ appointment.patient.gender }}
+					</div>
 				</div>
 
 				<div class="relative z-10">
 					<div class="text-base font-light text-gray-500 mb-1">
 						Age
 					</div>
-					<div class="text-base accent-color font-bold">25</div>
+					<div class="text-base accent-color font-bold">
+						<td>{{ appointment.patient.birth_day | age }}</td>
+					</div>
 				</div>
 
 				<div

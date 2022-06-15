@@ -15,6 +15,7 @@ import { Patient } from 'app/modules/admin/patients/patient.model'
 import { PatientService } from 'app/modules/admin/patients/patient.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, take } from 'rxjs'
+import { DashboardAppointmentService } from '../../appointments/dashboard-appointment.service'
 import { DashboardAppointmentDetailsModal } from '../../appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
 import { DashboardWaitingPatient } from '../dashboard-waiting-patient.model'
 
@@ -40,6 +41,7 @@ export class WaitingPatientsTableComponent implements OnInit {
 		}>,
 		private doctorDetailsModal: DoctorDetailsModal,
 		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
+		private _dashboardAppointmentService: DashboardAppointmentService,
 	) {}
 
 	@Input() appointments?: Appointment[]
@@ -84,5 +86,11 @@ export class WaitingPatientsTableComponent implements OnInit {
 						])
 					})
 			})
+	}
+
+	viewAppointment(appointment: Appointment) {
+		this._dashboardAppointmentService.current$.next(appointment)
+
+		this.dashboardAppointmentDetailsModalOpened$.next(true)
 	}
 }

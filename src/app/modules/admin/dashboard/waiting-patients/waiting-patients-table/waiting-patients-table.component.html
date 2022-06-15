@@ -51,11 +51,7 @@
 							}}{{ appointment.id | uppercase }}
 						</td>
 						<td
-							(click)="
-								dashboardAppointmentDetailsModalOpened$.next(
-									true
-								)
-							"
+							(click)="viewAppointment(appointment)"
 							role="button"
 							class="underline hover:text-emerald-500"
 						>

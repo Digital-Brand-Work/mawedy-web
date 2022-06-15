@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs'
 import { DayTypes } from '../enums/day.enum'
 import * as dayjs from 'dayjs'
 import { toTwelve } from '../helpers'
+import * as customFormatter from 'dayjs/plugin/customParseFormat'
 
 @Directive({
 	selector: '[checkForAppointments]',
@@ -17,6 +18,10 @@ export class CheckForAppointmentsDirective {
 		private renderer: Renderer2,
 		private hostElement: ElementRef,
 	) {}
+
+	// customParseFormat = require('dayjs/plugin/customParseFormat')
+
+	customParseFormat = customFormatter
 
 	unsubscribe$: BehaviorSubject<any> = new BehaviorSubject<any>(null)
 
@@ -33,9 +38,7 @@ export class CheckForAppointmentsDirective {
 	@Input() schedule?: Appointment[]
 
 	ngAfterViewInit() {
-		// var customParseFormat = require('dayjs/plugin/customParseFormat')
-
-		// dayjs.extend(customParseFormat)
+		// dayjs.extend(this.customParseFormat)
 
 		// console.log(dayjs(this.start, 'HH:mm').format('HH:mm'))
 

@@ -50,13 +50,21 @@ export class DashboardAppointmentDetailsComponent implements OnInit {
 	ngOnInit(): void {}
 
 	resolveColor(appointment: Appointment): string {
-		if (appointment.status === AppointmentStatusEnum.CANCELLED) return `red`
+		if (appointment.status === AppointmentStatusEnum.CANCELLED) {
+			return `red`
+		}
 
-		if (appointment.status === AppointmentStatusEnum.CONFIRMED)
+		if (appointment.status === AppointmentStatusEnum.CONFIRMED) {
 			return `green`
-		if (appointment.status === AppointmentStatusEnum.DONE) return `blue`
+		}
 
-		if (appointment.status === AppointmentStatusEnum.PENDING) return `red`
+		if (appointment.status === AppointmentStatusEnum.DONE) {
+			return `blue`
+		}
+
+		if (appointment.status === AppointmentStatusEnum.PENDING) {
+			return `red`
+		}
 	}
 
 	send(type: 'sms' | 'mail') {

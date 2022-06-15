@@ -24,7 +24,6 @@ const components = [
 	DashboardComponent,
 	DashboardAppointmentTableComponent,
 	DashboardAppointmentToolbarComponent,
-	DashboardStatusComponent,
 	DashboardAppointmentFilterComponent,
 
 	WaitingPatientsComponent,

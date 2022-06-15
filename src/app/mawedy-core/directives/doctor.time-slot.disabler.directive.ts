@@ -6,6 +6,8 @@ import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { BehaviorSubject, takeUntil } from 'rxjs'
 import { empty } from '../helpers'
 import { DayTypes } from '../enums/day.enum'
+import * as customFormatter from 'dayjs/plugin/customParseFormat'
+import * as dayjs from 'dayjs'
 
 @Directive({
 	selector: '[syncWithClinic]',
@@ -21,6 +23,8 @@ export class SyncWithClinicDirective {
 	unsubscribe$: BehaviorSubject<any> = new BehaviorSubject<any>(null)
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
+
+	customParseFormat = customFormatter
 
 	@Input() day?: DayTypes
 
@@ -40,9 +44,17 @@ export class SyncWithClinicDirective {
 							(slot) => slot.day === this.day,
 						)
 
+						dayjs.extend(this.customParseFormat)
+
+						const timeSlotHasPassed = dayjs(
+							this.slot,
+							'HH:mm',
+						).isBefore(dayjs())
+
 						if (
 							timeSlot.start > this.slot ||
-							timeSlot.end < this.slot
+							timeSlot.end < this.slot ||
+							timeSlotHasPassed
 						) {
 							const disabled =
 								'bg-gray-300 pointer-events-none text-white'
