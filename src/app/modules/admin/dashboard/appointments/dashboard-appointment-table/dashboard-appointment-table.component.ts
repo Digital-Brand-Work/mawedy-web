@@ -21,6 +21,7 @@ import { DashboardAppointment } from '../dashboard-appointment.model'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import * as dayjs from 'dayjs'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DashboardAppointmentService } from '../dashboard-appointment.service'
 
 @Component({
 	selector: 'dashboard-appointment-table',
@@ -39,6 +40,7 @@ export class DashboardAppointmentTableComponent implements OnInit {
 		private _clinicUserService: ClinicUserService,
 		private _doctorDetailsModal: DoctorDetailsModal,
 		private _dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
+		private _dashboardAppointmentService: DashboardAppointmentService,
 		private _store: Store<{
 			dashboardAppointment: DashboardAppointment
 		}>,
@@ -125,5 +127,11 @@ export class DashboardAppointmentTableComponent implements OnInit {
 		if (appointment.status === AppointmentStatusEnum.DONE) return `blue`
 
 		if (appointment.status === AppointmentStatusEnum.PENDING) return `red`
+	}
+
+	viewAppointment(appointment: Appointment) {
+		this._dashboardAppointmentService.current$.next(appointment)
+
+		this.dashboardAppointmentDetailsModalOpened$.next(true)
 	}
 }
