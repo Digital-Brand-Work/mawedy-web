@@ -4,6 +4,7 @@ import { AlertState } from 'app/components/alert/alert.service'
 import { AppointmentStatusEnum } from 'app/mawedy-core/enums/appointment-status.enum'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, take } from 'rxjs'
 import { DashboardAppointmentService } from '../../dashboard-appointment.service'
 import { DashboardAppointmentConfirmCancelAppointmentModal } from '../dashboard-appointment-confirm-cancel-appointment/dashboard-appointment-confirm-cancel-appointment.service'
@@ -91,6 +92,16 @@ export class DashboardAppointmentDetailsComponent implements OnInit {
 						},
 					})
 			}
+		})
+	}
+
+	reschedule() {
+		this.appointment$.pipe(take(1)).subscribe((appointment) => {
+			this.dashboardAppointmentConfirmReassignSlotModal.doctor$.next(
+				appointment.doctor,
+			)
+
+			this.dashboardAppointmentConfirmReassignSlotModalOpened$.next(true)
 		})
 	}
 }

@@ -43,7 +43,7 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 
 	date$: BehaviorSubject<string | null> = this._addAppointmentModal.date$
 
-	schedule$: BehaviorSubject<Appointment[]> = new BehaviorSubject([])
+	doctorSchedules$: BehaviorSubject<Appointment[]> = new BehaviorSubject([])
 
 	appointmentSlot$: BehaviorSubject<{
 		start_time: string
@@ -62,7 +62,7 @@ export class DashboardAppointmentSelectTimeSlotComponent implements OnInit {
 				.getSchedule(doctor)
 				.pipe(take(1))
 				.subscribe((appointments) => {
-					this.schedule$.next(appointments.data)
+					this.doctorSchedules$.next(appointments.data)
 
 					this.renderTimeSlots()
 				})

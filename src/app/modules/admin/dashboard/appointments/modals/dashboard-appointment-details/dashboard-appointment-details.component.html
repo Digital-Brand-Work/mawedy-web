@@ -106,7 +106,7 @@
 						Consultation Fee
 					</div>
 					<div class="text-base accent-color font-bold">
-						{{ appointment.price }}
+						{{ appointment.price | currency: ' AED ' }}
 					</div>
 					<div
 						class="paid text-emerald-500 flex items-center justify-center mt-3 font-bold text-base"
@@ -122,7 +122,7 @@
 						Comment
 					</div>
 					<div class="text-base accent-color font-bold">
-						{{ appointment.comment }}
+						{{ appointment.comment || 'N/A' }}
 					</div>
 				</div>
 			</div>
@@ -173,7 +173,13 @@
 				</div>
 			</div>
 
-			<div class="col-span-2 grid-cols-1 grid md:grid-cols-2">
+			<div
+				*ngIf="
+					appointment.status !== 'Cancelled' &&
+					appointment.status !== 'Done'
+				"
+				class="col-span-2 grid-cols-1 grid md:grid-cols-2"
+			>
 				<div>
 					<div class="text-base font-light text-gray-500 mb-1">
 						Remind The Patient
@@ -214,13 +220,14 @@
 				</div>
 			</div>
 
-			<div class="col-span-2">
+			<div *ngIf="appointment.status !== 'Done'" class="col-span-2">
 				<div class="text-base font-bold accent-color mb-1">
 					Make changes to this appointment
 				</div>
 
 				<div class="flex items-center mt-6">
 					<button
+						*ngIf="appointment.status !== 'Cancelled'"
 						(click)="
 							dashboardAppointmentConfirmCancelAppointmentModalOpened$.next(
 								true
@@ -234,11 +241,7 @@
 
 					<div>
 						<button
-							(click)="
-								dashboardAppointmentConfirmReassignSlotModalOpened$.next(
-									true
-								)
-							"
+							(click)="reschedule()"
 							class="bg-white border-2 text-emerald-500 border-emerald-500 py-2 px-6 font-semibold tracking-wide rounded-xl hover:bg-emerald-100 hover:text-emerald-700 text-base"
 						>
 							Reschedule

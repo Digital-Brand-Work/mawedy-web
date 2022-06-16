@@ -2,6 +2,7 @@
 	*ngIf="opened$ | async"
 	stop-propagation
 	class="ml-auto h-full w-full md:w-1/4"
+	style="min-width: 500px"
 >
 	<div
 		style="height: calc(100vh)"
@@ -26,13 +27,7 @@
 				</button>
 
 				<button
-					(click)="
-						opened$.next(false);
-						dashboardAppointmentDetailsModalOpened$.next(false);
-						dashboardAppointmentCancelAndAssignSlotModalOpened$.next(
-							true
-						)
-					"
+					(click)="cancel()"
 					class="hover:bg-emerald-600 rounded-xl px-9 py-2 font-bold text-white bg-emerald-500 border-2 border-emerald-500"
 				>
 					Yes

@@ -18,10 +18,7 @@
 					<tr
 						style="height: 60px"
 						class="accent-color font-semibold"
-						*ngFor="
-							let appointment of appointments;
-							trackBy: identity
-						"
+						*ngFor="let appointment of appointments"
 					>
 						<td>{{ appointment.date | date: 'dd MMMM' }}</td>
 						<td>

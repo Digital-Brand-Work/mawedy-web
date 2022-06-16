@@ -2,15 +2,13 @@
 	*ngIf="opened$ | async"
 	stop-propagation
 	class="ml-auto h-full w-full md:w-1/4"
+	style="min-width: 500px"
 >
 	<div
 		class="px-10 py-5 flex flex-col items-center justify-center bg-zinc-200/50 backdrop-blur-md overflow-hidden"
 		style="height: calc(100vh)"
 	>
-		<div
-			@fadeInBottom
-			class="container-time-slot w-full overflow-x-hidden bg-white"
-		>
+		<div @fadeInBottom class="container-time-slot w-full overflow-x-hidden">
 			<div
 				stop-propagation
 				class="w-full flex px-5 py-5 items-center"
@@ -26,51 +24,53 @@
 				class="overflow-y-auto overflow-x-hidden p-5"
 			>
 				<div class="font-bold text-gray-600 mb-10">
-					Selected Date - 12/10/2021
+					Selected Date -
+					{{
+						(appointment$ | async).date
+							| date: 'MMMM dd, yyyy - EEEE'
+					}}
 				</div>
 
-				<div>
+				<div
+					*ngIf="isActive"
+					class="grid grid-cols-1 md:grid-cols-2 gap-5"
+				>
 					<div
-						*ngFor="
-							let item of [1, 2, 4, 45, 5, 6, 76, 788];
-							trackBy: identity;
-							let i = index
-						"
-						class="grid grid-cols-1 md:grid-cols-2 gap-5"
+						*ngFor="let time of times; let i = index"
+						[class.hidden]="!times[i + 1]"
 					>
 						<div
+							matRipple
+							matRippleColor="rgba(11, 169, 118,.1)"
+							syncWithClinic
+							checkForAppointments
+							[schedule]="doctorSchedules$ | async"
+							[date]="date$ | async"
+							[day]="day"
+							[slot]="time.start_time"
+							[start]="time.start_time"
+							[end]="times[i + 1]?.start_time"
+							*ngIf="times[i + 1]"
+							(click)="
+								appointmentSlot$.next({
+									start_time: time.start_time,
+									end_time: times[i + 1]?.start_time
+								})
+							"
+							role="button"
+							class="w-full flex text-gray-500 items-center justify-center rounded-xl text-base font-norm border border-gray-200 hover:bg-gray-50 hover:border-gray-500 hover:text-gray-500"
+							style="height: 50px"
 							[ngClass]="{
-								'bg-gray-300 pointer-events-none text-white':
-									i === 2,
-								'text-gray-500': i !== 2
+								'bg-emerald-50 border-emerald-500 text-emerald-500 pointer-events-none':
+									(appointmentSlot$ | async)?.start_time ===
+										time.start_time &&
+									(appointmentSlot$ | async)?.end_time ===
+										times[i + 1]?.start_time
 							}"
-							role="button"
-							class="w-full flex items-center justify-center rounded-xl text-base font-norm border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500"
-							style="height: 50px"
 						>
-							{{
-								'0' +
-									(i + 1) +
-									':00 AM - ' +
-									'0' +
-									(i + 1) +
-									':30 PM'
-							}}
-						</div>
-
-						<div
-							role="button"
-							class="w-full flex items-center justify-center rounded-xl text-base font-normal text-gray-500 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 mb-5"
-							style="height: 50px"
-						>
-							{{
-								'0' +
-									(i + 1) +
-									':30 AM - ' +
-									'0' +
-									(i + 2) +
-									':30 PM'
-							}}
+							{{ time.start_time | toTwelve | uppercase }}
+							-
+							{{ times[i + 1].start_time | toTwelve | uppercase }}
 						</div>
 					</div>
 				</div>
@@ -78,8 +78,15 @@
 
 			<div class="footer w-full items-center flex">
 				<button
+					(click)="reSchedule()"
+					class="ml-auto rounded-xl px-10 py-2.5 font-bold bg-emerald-500 text-white hover:bg-emerald-600 mr-3 border-2 border-emerald-500"
+				>
+					Add
+				</button>
+
+				<button
 					(click)="opened$.next(false)"
-					class="ml-auto hover:bg-emerald-50 rounded-xl px-7 py-2.5 font-bold border-2 border-emerald-500 text-emerald-500 mr-3"
+					class="hover:bg-emerald-50 rounded-xl px-7 py-2.5 font-bold border-2 border-emerald-500 text-emerald-500"
 				>
 					Cancel
 				</button>
