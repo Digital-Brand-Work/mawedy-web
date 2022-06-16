@@ -58,11 +58,12 @@
 							[ngClass]="{
 								'border-red-500 shadow-sm  placeholder-red-400 ':
 									form.get('name')?.invalid &&
-									form.get('name')?.touched
+									form.get('name')?.touched,
+								'text-red-500': errors.name
 							}"
 							formControlName="name"
 							type="text"
-							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
+							class="rounded-md w-full border-gray-300 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
 							[placeholder]="
 								form.get('name')?.invalid &&
 								form.get('name')?.touched
@@ -77,11 +78,12 @@
 							[ngClass]="{
 								'border-red-500 shadow-sm  placeholder-red-400':
 									form.get('email')?.invalid &&
-									form.get('email')?.touched
+									form.get('email')?.touched,
+								'text-red-500': errors.email
 							}"
 							formControlName="email"
 							type="text"
-							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
+							class="rounded-md w-full border-gray-300 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
 							[placeholder]="
 								form.get('email')?.invalid &&
 								form.get('email')?.touched
@@ -92,22 +94,23 @@
 					</div>
 
 					<div class="mt-3 w-full">
+						<input type="hidden" formControlName="phone_number" />
+
 						<input
-							[ngClass]="{
-								'border-red-500 shadow-sm  placeholder-red-400':
-									form.get('phone')?.invalid &&
-									form.get('email')?.touched
-							}"
-							formControlName="phone"
-							type="text"
-							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
-							[placeholder]="
-								form.get('phone')?.invalid &&
-								form.get('phone')?.touched
-									? 'Your phone is required.'
-									: 'Your phone'
-							"
+							type="hidden"
+							formControlName="phone_number_country_code"
 						/>
+
+						<mobile-number-form
+							(onMobileNumberChange)="
+								handleMobileNumberChange($event)
+							"
+							[phoneNumber]="form.value.phone_number"
+							[phoneErrors]="errors.phone_number"
+							[bordered]="true"
+							[rounded]="true"
+							class="w-full"
+						></mobile-number-form>
 					</div>
 
 					<div class="mt-3 w-full">
@@ -115,11 +118,12 @@
 							[ngClass]="{
 								'border-red-500 shadow-sm  placeholder-red-400':
 									form.get('message')?.invalid &&
-									form.get('message')?.touched
+									form.get('message')?.touched,
+								'text-red-500': errors.message
 							}"
 							formControlName="message"
 							style="height: 265px"
-							class="rounded-md w-full border-zinc-400/80 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
+							class="rounded-md w-full border-gray-300 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
 							[placeholder]="
 								form.get('message')?.invalid &&
 								form.get('message')?.touched
@@ -131,16 +135,17 @@
 
 					<div class="flex w-full">
 						<button
-							[disabled]="!form.valid || form.disabled"
+							(click)="send()"
+							[disabled]="!form.valid || isProcessing"
 							[ngClass]="{
-								'pointer-events-none opacity-40':
-									!form.valid || form.disabled
+								'pointer-events-none bg-gray-500':
+									!form.valid || isProcessing
 							}"
 							class="rounded-lg text-white bg-black py-3 px-10 ml-auto mt-5 tracking-widest uppercase w-full md:w-auto"
 						>
-							<span *ngIf="!form.disabled"> SEND </span>
+							<span *ngIf="!isProcessing"> SEND </span>
 
-							<span *ngIf="form.disabled"> sending... </span>
+							<span *ngIf="isProcessing"> sending... </span>
 						</button>
 					</div>
 				</div>
