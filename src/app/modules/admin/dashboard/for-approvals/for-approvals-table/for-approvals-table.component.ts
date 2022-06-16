@@ -116,23 +116,30 @@ export class ForApprovalsTableComponent implements OnInit {
 
 				this._indexDBService
 					.delete(DB.DASHBOARD_FOR_APPROVAL_PATIENTS, data.data.id)
-					.subscribe(() =>
+					.subscribe(() => {
 						this._store.dispatch(
 							DashboardForApprovalPatients.deleteDashboardForApprovalPatient(
-								{ id: data.data.id },
+								{ id: appointment.id },
 							),
-						),
-					)
+						)
+					})
 
 				this._indexDBService
 					.add(DB.DASHBOARD_APPOINTMENTS, data.data)
-					.subscribe(() =>
+					.subscribe(() => {
 						this._store.dispatch(
 							DashboardAppointmentActions.addDashboardAppointment(
-								data.data,
+								{ dashboardAppointment: data.data },
 							),
-						),
-					)
+						)
+					})
+
+				this._alert.add({
+					title: 'Successfully Transferred to Appointments',
+					type: 'success',
+					message: `You have successfully transfered ${data.data.patient.first_name} appointed to ${data.data.doctor.name} to appointments`,
+					id: Math.floor(Math.random() * 100000000000).toString(),
+				})
 			})
 	}
 }

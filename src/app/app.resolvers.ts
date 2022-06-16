@@ -243,7 +243,7 @@ export class InitialDataResolver implements Resolve<any> {
 	loadForApprovalPatients(appointments: Appointment[]) {
 		this._indexDBService
 			.bulkAdd(
-				DB.DASHBOARD_APPOINTMENTS,
+				DB.DASHBOARD_FOR_APPROVAL_PATIENTS,
 				appointments as DashboardForApprovalPatient[],
 			)
 			.subscribe(() =>
