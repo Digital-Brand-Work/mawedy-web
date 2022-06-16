@@ -1,20 +1,16 @@
-import { dashboardTabs } from './../../dashboard.tabs'
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
-import { select, Store } from '@ngrx/store'
-import { Appointment } from 'app/modules/admin/appointments/appointment.model'
-import { Observable, Subject, take, takeUntil } from 'rxjs'
-import { DashboardWaitingPatient } from '../../waiting-patients/dashboard-waiting-patient.model'
-import { DashboardAppointment } from '../dashboard-appointment.model'
+import { Router } from '@angular/router'
 import { HomeNav } from 'app/mawedy-core/navigation/landing.navigation'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import { Router } from '@angular/router'
+import { Subject, take, takeUntil } from 'rxjs'
+import { dashboardTabs } from '../../dashboard.tabs'
 
 @Component({
-	selector: 'dashboard-toolbar',
-	templateUrl: './dashboard-appointment-toolbar.component.html',
-	styleUrls: ['./dashboard-appointment-toolbar.component.scss'],
+	selector: 'for-approvals-toolbar',
+	templateUrl: './for-approvals-toolbar.component.html',
+	styleUrls: ['./for-approvals-toolbar.component.scss'],
 })
-export class DashboardAppointmentToolbarComponent implements OnInit {
+export class ForApprovalsToolbarComponent implements OnInit {
 	constructor(
 		private _router: Router,
 		private _clinicUserService: ClinicUserService,

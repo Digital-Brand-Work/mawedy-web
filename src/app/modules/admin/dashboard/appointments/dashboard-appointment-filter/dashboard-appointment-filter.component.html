@@ -1,6 +1,6 @@
 <div
 	role="button"
-	[matMenuTriggerFor]="dashboardAppointmentFilter"
+	[matMenuTriggerFor]="patientsFilter"
 	style="width: 219px"
 	class="ml-5 flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 cursor-pointer hover:bg-gray-50"
 >
@@ -14,30 +14,7 @@
 	<mat-icon class="text-gray-400 ml-auto" svgIcon="feather:filter"></mat-icon>
 </div>
 
-<mat-menu
-	[xPosition]="'before'"
-	#dashboardAppointmentFilter="matMenu"
-	class="rounded-md"
->
-	<button mat-menu-item>
-		<span>App Patient</span>
-	</button>
-
-	<button mat-menu-item>
-		<span>Walk-in Patient</span>
-	</button>
-
-	<mat-divider class="my-2"></mat-divider>
-
-	<button mat-menu-item class="flex items-center">
-		<span>Date</span>
-
-		<mat-icon
-			class="text-gray-400 ml-auto"
-			svgIcon="feather:arrow-up"
-		></mat-icon>
-	</button>
-
+<mat-menu [xPosition]="'before'" #patientsFilter="matMenu" class="rounded-md">
 	<button mat-menu-item class="flex items-center">
 		<span>Time</span>
 
@@ -47,17 +24,62 @@
 		></mat-icon>
 	</button>
 
-	<mat-divider class="my-2"></mat-divider>
+	<button class="flex items-center" mat-menu-item>
+		<dashboard-status class="mr-2" [color]="'green'"></dashboard-status>
 
-	<button mat-menu-item>
-		<span>Attended</span>
+		<span>Confirmed</span>
 	</button>
 
-	<button mat-menu-item>
+	<button class="flex items-center" mat-menu-item>
+		<dashboard-status class="mr-2" [color]="'red'"></dashboard-status>
+
 		<span>Cancelled</span>
 	</button>
 
-	<button mat-menu-item>
+	<button class="flex items-center" mat-menu-item>
+		<dashboard-status class="mr-2" [color]="'blue'"></dashboard-status>
+
 		<span>Done</span>
 	</button>
+
+	<mat-divider class="my-2 mb-5"></mat-divider>
+
+	<div stop-propagation class="flex-col px-5">
+		<div class="mb-1 font-bold text-gray-500 text-md">Doctor</div>
+
+		<select
+			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+		>
+			<option>Dr. Hanadi Yassin</option>
+		</select>
+	</div>
+
+	<div stop-propagation class="flex-col px-5 mt-2">
+		<div class="mb-1 font-bold text-gray-500 text-md">Department</div>
+
+		<select
+			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+		>
+			<option>Dentistry</option>
+		</select>
+	</div>
+
+	<div stop-propagation class="flex-col px-5 mt-2">
+		<div class="mb-1 font-bold text-gray-500 text-md">Service</div>
+
+		<select
+			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+		>
+			<option>Braces</option>
+		</select>
+	</div>
+
+	<div class="flex-col px-5 mt-5 mb-5">
+		<button
+			mat-menu-item
+			class="flex bg-emerald-300 border-emerald-900 border text-emerald-900 rounded-md text-center items-center justify-center"
+		>
+			<span>Apply Filter</span>
+		</button>
+	</div>
 </mat-menu>

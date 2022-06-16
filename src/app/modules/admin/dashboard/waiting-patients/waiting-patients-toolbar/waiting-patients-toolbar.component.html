@@ -1,49 +1,38 @@
 <div class="flex items-center w-full">
-	<a
-		role="button"
-		routerLink="/aster_clinic/jumeirah/dashboard/appointments"
-		class="bold md:text-xl text-gray-500 flex items-baseline mr-5"
+	<button
+		(click)="resolvePath(nav.link)"
+		matRipple
+		matRippleColor="rgba(11, 169, 118,.1)"
+		*ngFor="let nav of dashboardTabs; trackBy: identity"
+		[ngClass]="{
+			' text-emerald-500 border-b-4 border-emerald-500':
+				activeNavigation === nav.id,
+			'text-gray-500': activeNavigation !== nav.id
+		}"
+		class="flex font-bold text-xl flex-row items-baseline mr-20 py-3 relative z-0 overflow-visible"
 	>
-		<div class="hover:underline">Appointments</div>
-
-		<span class="block md:hidden"
-			>(
-			{{
-				((dashboardAppointments$ | async).entities | entities).length
-			}})</span
-		>
-
-		<div
-			class="bg-gray-100 badge text-gray-500 font-bold rounded-full text-sm ml-5 -translate-y-.5 hidden md:block"
-		>
-			{{ ((dashboardAppointments$ | async).entities | entities).length }}
+		<div>
+			{{ nav.name }}
 		</div>
-	</a>
-
-	<a
-		routerLink="/aster_clinic/jumeirah/dashboard/waiting-list"
-		class="font-bold md:text-xl text-emerald-500 flex items-baseline"
-	>
-		<div class="hover:underline">Outreach Patients</div>
-
-		<span class="block md:hidden"
-			>(
-			{{
-				((dashboardWaitingPatients$ | async).entities | entities)
-					.length
-			}})</span
-		>
 
 		<div
-			class="bg-emerald-500 badge text-white rounded-full text-sm font-normal ml-5 -translate-y-.5 hidden md:block"
+			*ngIf="nav.id | dashboard_count | async"
+			[ngClass]="{
+				'bg-emerald-500 badge text-white   font-normal':
+					activeNavigation === nav.id,
+				'bg-gray-100 badge text-gray-500 font-bold ':
+					activeNavigation !== nav.id
+			}"
+			class="text-sm ml-3 -translate-y-.5 translate-x-10 z-10 rounded-full py-1 px-2 absolute right-0"
 		>
 			{{
-				((dashboardWaitingPatients$ | async).entities | entities).length
+				((nav.id | dashboard_count | async)?.entities | entities).length
+					| toTime
 			}}
 		</div>
-	</a>
+	</button>
 
-	<div class="ml-auto hidden md:flex items-center">
+	<div class="ml-auto items-cente flex">
 		<mat-icon
 			class="text-gray-400 mr-2 icon-size-5"
 			svgIcon="heroicons_outline:calendar"
@@ -60,7 +49,11 @@
 		style="width: 219px"
 		class="ml-5 hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
 	>
-		<input type="search" class="w-full" placeholder="Search Appointments" />
+		<input
+			type="search"
+			class="w-full"
+			placeholder="Search Outreach Patients"
+		/>
 
 		<mat-icon
 			class="text-gray-400 ml-auto"

@@ -18,7 +18,11 @@ export const dashboardRoutes: Routes = [
 				component: DashboardAppointmentsComponent,
 			},
 			{
-				path: 'waiting-list',
+				path: 'outreach',
+				component: WaitingPatientsComponent,
+			},
+			{
+				path: 'for-approvals',
 				component: WaitingPatientsComponent,
 			},
 		],

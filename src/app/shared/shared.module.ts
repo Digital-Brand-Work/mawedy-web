@@ -31,6 +31,7 @@ import { SyncWithClinicDirective } from 'app/mawedy-core/directives/doctor.time-
 import { CheckForAppointmentsDirective } from 'app/mawedy-core/directives/doctor.time-slot.blocked.directive'
 import { DayIntervalPipe } from '@digital_brand_work/pipes/day-interval.count.pipe'
 import { FuseConfirmationModule } from '@fuse/services/confirmation'
+import { DashboardCountPipe } from 'app/mawedy-core/pipes/dashboard-count.pipe'
 
 const components = [
 	...appComponents,
@@ -73,6 +74,7 @@ const directives = [
 	TwentyFourToTwelveHoursPipe,
 	TableFilterPipe,
 	add30MinutesPipe,
+	DashboardCountPipe,
 ]
 
 const pipes = []

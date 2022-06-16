@@ -49,7 +49,7 @@
 		style="width: 219px"
 		class="ml-5 hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
 	>
-		<input type="search" class="w-full" placeholder="Search Appointments" />
+		<input type="search" class="w-full" placeholder="Search Patients" />
 
 		<mat-icon
 			class="text-gray-400 ml-auto"
@@ -57,8 +57,8 @@
 		></mat-icon>
 	</div>
 
-	<dashboard-appointment-filter
+	<for-approvals-filter
 		class="flex"
 		(onFilter)="onFilter.emit()"
-	></dashboard-appointment-filter>
+	></for-approvals-filter>
 </div>

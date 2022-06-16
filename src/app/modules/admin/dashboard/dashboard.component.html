@@ -2,9 +2,11 @@
 	<app-toolbar
 		class="w-full"
 		[toolbar]="
-			!(isInWaitingPatients$ | async)
+			activeNavigation === 1
 				? appointMentsToolbar
-				: waitingPatientsToolbar
+				: activeNavigation === 2
+				? waitingPatientsToolbar
+				: forApprovalsToolBar
 		"
 	></app-toolbar>
 </div>
@@ -23,6 +25,14 @@
 		(onSearch)="filter()"
 		class="w-full"
 	></waiting-patients-toolbar>
+</ng-template>
+
+<ng-template #forApprovalsToolBar>
+	<for-approvals-toolbar
+		(onFilter)="filter()"
+		(onSearch)="filter()"
+		class="w-full"
+	></for-approvals-toolbar>
 </ng-template>
 
 <!-- <div @fadeInLeft *ngIf="true" class="px-10 -mt-5 mb-5">

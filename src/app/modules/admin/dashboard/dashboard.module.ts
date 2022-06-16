@@ -19,6 +19,10 @@ import * as fromDashboardAppointment from './appointments/dashboard-appointment.
 import { EffectsModule } from '@ngrx/effects'
 import { DashboardAppointmentEffects } from 'app/modules/admin/dashboard/appointments/dashboard-appointment.effects'
 import { DashboardWaitingPatientEffects } from 'app/modules/admin/dashboard/waiting-patients/dashboard-waiting-patient.effects'
+import { ForApprovalsComponent } from './for-approvals/for-approvals.component'
+import { ForApprovalsFilterComponent } from './for-approvals/for-approvals-filter/for-approvals-filter.component'
+import { ForApprovalsTableComponent } from './for-approvals/for-approvals-table/for-approvals-table.component'
+import { ForApprovalsToolbarComponent } from './for-approvals/for-approvals-toolbar/for-approvals-toolbar.component'
 
 const components = [
 	DashboardComponent,
@@ -31,6 +35,11 @@ const components = [
 	WaitingPatientsToolbarComponent,
 	WaitingPatientsFilterComponent,
 	DashboardAppointmentsComponent,
+
+	ForApprovalsComponent,
+	ForApprovalsFilterComponent,
+	ForApprovalsTableComponent,
+	ForApprovalsToolbarComponent,
 ]
 
 @NgModule({

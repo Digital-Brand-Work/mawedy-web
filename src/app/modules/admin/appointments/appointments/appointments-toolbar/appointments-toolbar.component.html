@@ -93,6 +93,15 @@
 	>
 		<select class="w-full">
 			<option>All Doctors</option>
+
+			<option
+				*ngFor="
+					let doctor of (doctors$ | async).entities | entities;
+					trackBy: identity
+				"
+			>
+				{{ doctor.name }}
+			</option>
 		</select>
 	</div>
 </div>

@@ -76,13 +76,7 @@ export class InitialDataResolver implements Resolve<any> {
 					this._patientAPI.get(),
 					this._departmentAPI.get(),
 					this._doctorAPI.get(),
-					this._appointmentAPI.query(
-						`?date=${dayjs().toJSON()}&waiting=false`,
-					),
-					this._appointmentAPI.query(
-						`?date=${dayjs().toJSON()}&waiting=true`,
-					),
-					this._appointmentAPI.query(``),
+					this._appointmentAPI.get(),
 					this._promotionAPI.get(),
 				]).subscribe((results: any) => {
 					this._clinicUserService.update()
@@ -91,8 +85,6 @@ export class InitialDataResolver implements Resolve<any> {
 						patients,
 						departments,
 						doctors,
-						dashboardAppointments,
-						waitingPatients,
 						appointments,
 						promotions,
 					] = results
@@ -115,9 +107,25 @@ export class InitialDataResolver implements Resolve<any> {
 
 					this.loadDoctors(doctors.data)
 
-					this.loadDashboardAppointments(dashboardAppointments.data)
+					this.loadDashboardAppointments(
+						appointments.data.filter(
+							(appointment: Appointment) =>
+								appointment.waiting === false &&
+								dayjs(appointment.date).format(
+									'YYYY-MMMM-DDDD',
+								) === dayjs().format('YYYY-MMMM-DDDD'),
+						),
+					)
 
-					this.loadDashboardWaitingPatients(waitingPatients.data)
+					this.loadDashboardWaitingPatients(
+						appointments.data.filter(
+							(appointment: Appointment) =>
+								appointment.waiting === true &&
+								dayjs(appointment.date).format(
+									'YYYY-MMMM-DDDD',
+								) === dayjs().format('YYYY-MMMM-DDDD'),
+						),
+					)
 
 					this.loadAppointments(appointments.data)
 

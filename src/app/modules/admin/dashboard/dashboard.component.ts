@@ -11,24 +11,38 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class DashboardComponent implements OnInit {
-	constructor(private router: Router) {
-		this.isInWaitingPatients$ = this.router.events.pipe(
-			map(() => this.router.url.includes('waiting-list')),
-			takeUntil(this._unsubscribeAll),
-		)
+	constructor(private _router: Router) {
+		this._router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+			this.resolveActiveNav()
+		})
 	}
-	private _unsubscribeAll: Subject<any> = new Subject<any>()
 
-	isInWaitingPatients$: Observable<boolean> = of(
-		this.router.url.includes('waiting-list'),
-	)
+	private unsubscribe$: Subject<any> = new Subject<any>()
 
-	ngOnInit(): void {}
+	activeNavigation: number = 1
+
+	ngOnInit(): void {
+		this.resolveActiveNav()
+	}
 
 	ngOnDestroy(): void {
-		this._unsubscribeAll.next(null)
+		this.unsubscribe$.next(null)
 
-		this._unsubscribeAll.complete()
+		this.unsubscribe$.complete()
+	}
+
+	resolveActiveNav() {
+		if (this._router.url.includes('appointments')) {
+			this.activeNavigation = 1
+		}
+
+		if (this._router.url.includes('outreach')) {
+			this.activeNavigation = 2
+		}
+
+		if (this._router.url.includes('for-approvals')) {
+			this.activeNavigation = 3
+		}
 	}
 
 	filter() {}
