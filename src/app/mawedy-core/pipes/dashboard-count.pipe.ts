@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { DashboardAppointment } from 'app/modules/admin/dashboard/appointments/dashboard-appointment.model'
+import { DashboardForApprovalPatient } from 'app/modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.model'
 import { DashboardWaitingPatient } from 'app/modules/admin/dashboard/waiting-patients/dashboard-waiting-patient.model'
 import { map, Observable, Subject, takeUntil } from 'rxjs'
 
@@ -13,6 +14,7 @@ export class DashboardCountPipe implements PipeTransform {
 		private _store: Store<{
 			dashboardAppointments: DashboardAppointment[]
 			dashboardWaitingPatients: DashboardWaitingPatient[]
+			dashboardForApprovalPatients: DashboardForApprovalPatient[]
 		}>,
 	) {}
 
@@ -27,7 +29,7 @@ export class DashboardCountPipe implements PipeTransform {
 	)
 
 	forApprovalPatients$: Observable<Appointment[]> = this._store.pipe(
-		select('dashboardWaitingPatients'),
+		select('dashboardForApprovalPatients'),
 	)
 
 	transform(id: number): Observable<any> {
@@ -44,9 +46,7 @@ export class DashboardCountPipe implements PipeTransform {
 		}
 
 		if (id === 3) {
-			return this.dashboardAppointments$.pipe(
-				takeUntil(this.unsubscribe$),
-			)
+			return this.forApprovalPatients$.pipe(takeUntil(this.unsubscribe$))
 		}
 	}
 

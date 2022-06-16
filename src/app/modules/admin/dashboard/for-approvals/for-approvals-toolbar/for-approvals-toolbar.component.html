@@ -19,7 +19,10 @@
 				'bg-emerald-500 badge text-white   font-normal':
 					activeNavigation === nav.id,
 				'bg-gray-100 badge text-gray-500 font-bold ':
-					activeNavigation !== nav.id
+					activeNavigation !== nav.id,
+				hidden:
+					((nav.id | dashboard_count | async)?.entities | entities)
+						.length === 0
 			}"
 			class="text-sm ml-3 -translate-y-.5 translate-x-10 z-10 rounded-full py-1 px-2 absolute right-0"
 		>

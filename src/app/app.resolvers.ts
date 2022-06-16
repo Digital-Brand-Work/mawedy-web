@@ -131,12 +131,14 @@ export class InitialDataResolver implements Resolve<any> {
 						),
 					)
 
-					this.loadForApprovalPatients(appointments.data)
-					// .filter(
-					// 	(appointment: Appointment) =>
-					// 		appointment.status ===
-					// 		AppointmentStatusEnum.CANCELLED,
-					// ),
+					this.loadForApprovalPatients(
+						appointments.data.filter(
+							(appointment: Appointment) =>
+								appointment.status ===
+								AppointmentStatusEnum.PENDING,
+						),
+					)
+
 					this.loadAppointments(appointments.data)
 
 					this.loadPromotions(promotions.data)
