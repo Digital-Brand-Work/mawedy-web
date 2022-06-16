@@ -1,1 +1,4 @@
-<p>for-approvals works!</p>
+<for-approvals-table
+	*ngIf="(appointments$ | async)?.entities"
+	[appointments]="(appointments$ | async).entities | entities"
+></for-approvals-table>

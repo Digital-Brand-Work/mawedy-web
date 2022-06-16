@@ -31,10 +31,6 @@ export class DashboardCountPipe implements PipeTransform {
 	)
 
 	transform(id: number): Observable<any> {
-		console.log(
-			this.dashboardAppointments$.pipe(takeUntil(this.unsubscribe$)),
-		)
-
 		if (id === 1) {
 			return this.dashboardAppointments$.pipe(
 				takeUntil(this.unsubscribe$),

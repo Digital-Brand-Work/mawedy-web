@@ -32,10 +32,13 @@ import * as DoctorActions from './modules/admin/doctors/doctor.actions'
 import * as DepartmentActions from './modules/admin/clinic/department/department.actions'
 import * as MedicalServiceActions from './modules/admin/clinic/clinic-services/medical-service.actions'
 import * as DashboardAppointmentActions from './modules/admin/dashboard/appointments/dashboard-appointment.actions'
-
 import * as DashboardWaitingPatientsActions from './modules/admin/dashboard/waiting-patients/dashboard-waiting-patient.actions'
 import * as AppointmentActions from './modules/admin/appointments/appointment.actions'
 import * as PromotionsActions from './modules/admin/promotions/promotion.actions'
+import { DashboardForApprovalPatient } from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.model'
+import * as DashboardForApprovalPatients from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
+import { AppointmentStatusEnum } from './mawedy-core/enums/appointment-status.enum'
+
 @Injectable({
 	providedIn: 'root',
 })
@@ -97,6 +100,7 @@ export class InitialDataResolver implements Resolve<any> {
 						DB.MEDICAL_SERVICES,
 						DB.DASHBOARD_APPOINTMENTS,
 						DB.DASHBOARD_WAITING_PATIENTS,
+						DB.DASHBOARD_FOR_APPROVAL_PATIENTS,
 						DB.APPOINTMENTS,
 						DB.PROMOTIONS,
 					])
@@ -127,6 +131,12 @@ export class InitialDataResolver implements Resolve<any> {
 						),
 					)
 
+					this.loadForApprovalPatients(appointments.data)
+					// .filter(
+					// 	(appointment: Appointment) =>
+					// 		appointment.status ===
+					// 		AppointmentStatusEnum.CANCELLED,
+					// ),
 					this.loadAppointments(appointments.data)
 
 					this.loadPromotions(promotions.data)
@@ -224,6 +234,23 @@ export class InitialDataResolver implements Resolve<any> {
 					DashboardWaitingPatientsActions.loadDashboardWaitingPatients(
 						{
 							dashboardWaitingPatients: dashboardWaitingPatients,
+						},
+					),
+				),
+			)
+	}
+
+	loadForApprovalPatients(appointments: Appointment[]) {
+		this._indexDBService
+			.bulkAdd(
+				DB.DASHBOARD_APPOINTMENTS,
+				appointments as DashboardForApprovalPatient[],
+			)
+			.subscribe(() =>
+				this.store.dispatch(
+					DashboardForApprovalPatients.loadDashboardForApprovalPatients(
+						{
+							dashboardForApprovalPatients: appointments,
 						},
 					),
 				),

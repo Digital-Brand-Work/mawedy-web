@@ -15,7 +15,7 @@ export const addAppointment = createAction(
 
 export const updateAppointment = createAction(
 	'[Appointment/API] Update Appointment',
-	props<{ appointment: Update<Appointment> }>(),
+	props<{ appointment: Appointment }>(),
 )
 
 export const deleteAppointment = createAction(

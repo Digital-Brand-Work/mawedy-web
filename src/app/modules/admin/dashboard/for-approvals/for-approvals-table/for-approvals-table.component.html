@@ -1,1 +1,68 @@
-<p>for-approvals-table works!</p>
+<div class="md:px-10 px-0 w-full">
+	<div style="height: 80vh" class="md:rounded-xl bg-white px-5 pr-0 w-full">
+		<div class="flex flex-col flex-auto overflow-x-auto h-full bg-white">
+			<table class="min-w-240 overflow-y-visible mt-4">
+				<thead style="height: 42px" class="sticky top-0 bg-white pt-4">
+					<tr class="text-gray-400 border-b border-b-gray-100">
+						<th>Date</th>
+						<th>Time</th>
+						<th>Patient</th>
+						<th>Doctor</th>
+						<th>Type</th>
+						<th>Booking Ref</th>
+						<th class="text-center">Confirm Booking</th>
+					</tr>
+				</thead>
+				<tbody [@listAnimation]="appointments.length">
+					<tr
+						style="height: 60px"
+						class="accent-color font-semibold"
+						*ngFor="
+							let appointment of appointments;
+							trackBy: identity
+						"
+					>
+						<td>{{ appointment.date | date: 'dd MMMM' }}</td>
+						<td>
+							{{ appointment.start_time | toTwelve }} -
+							{{ appointment.end_time | toTwelve }}
+						</td>
+						<td
+							(click)="viewPatient(appointment.patient)"
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
+							{{ appointment.patient.first_name }}
+							{{ appointment.patient.middle_name }}
+							{{ appointment.patient.last_name }}
+						</td>
+						<td
+							(click)="viewDoctor(appointment.doctor)"
+							role="button"
+							class="underline hover:text-emerald-500"
+						>
+							{{ appointment.doctor.name }}
+						</td>
+						<td>{{ appointment.type }}</td>
+
+						<td>
+							{{ appointment.type_code
+							}}{{ appointment.id | uppercase }}
+						</td>
+
+						<td>
+							<div class="flex items-center justify-center">
+								<button
+									(click)="approve(appointment)"
+									class="py-1 px-5 shadow-md shadow-emerald-500/50 hover:bg-emerald-600 bg-emerald-500 text-white rounded-md"
+								>
+									Approve
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

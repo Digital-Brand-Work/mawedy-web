@@ -28,7 +28,7 @@ export const reducer = createReducer(
 	),
 
 	on(AppointmentActions.updateAppointment, (state, action) =>
-		adapter.updateOne(action.appointment, state),
+		adapter.upsertOne(action.appointment, state),
 	),
 
 	on(AppointmentActions.deleteAppointment, (state, action) =>

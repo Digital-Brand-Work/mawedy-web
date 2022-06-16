@@ -31,14 +31,8 @@ export class WaitingPatientsTableComponent implements OnInit {
 		private _alert: AlertState,
 		private _doctorService: DoctorService,
 		private _patientService: PatientService,
-		private _appointmentAPI: AppointmentService,
 		private _indexDBService: NgxIndexedDBService,
 		private _clinicUserService: ClinicUserService,
-		private _doctorDetailsModal: DoctorDetailsModal,
-		private _dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
-		private _store: Store<{
-			dashboardWaitingPatient: DashboardWaitingPatient
-		}>,
 		private doctorDetailsModal: DoctorDetailsModal,
 		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
 		private _dashboardAppointmentService: DashboardAppointmentService,

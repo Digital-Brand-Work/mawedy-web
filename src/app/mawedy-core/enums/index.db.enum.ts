@@ -6,6 +6,7 @@ export enum DB {
 
 	DASHBOARD_APPOINTMENTS = 'dashboard-appointments',
 	DASHBOARD_WAITING_PATIENTS = 'dashboard-waiting-patients',
+	DASHBOARD_FOR_APPROVAL_PATIENTS = 'dashboard-for-approval-patients',
 
 	APPOINTMENTS = 'appointments',
 	APPOINTMENT = 'appointment',

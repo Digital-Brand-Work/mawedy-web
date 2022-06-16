@@ -23,6 +23,7 @@ import { ForApprovalsComponent } from './for-approvals/for-approvals.component'
 import { ForApprovalsFilterComponent } from './for-approvals/for-approvals-filter/for-approvals-filter.component'
 import { ForApprovalsTableComponent } from './for-approvals/for-approvals-table/for-approvals-table.component'
 import { ForApprovalsToolbarComponent } from './for-approvals/for-approvals-toolbar/for-approvals-toolbar.component'
+import * as fromDashboardForApprovalPatient from './for-approvals/dashboard-for-approval-patient.reducer'
 
 const components = [
 	DashboardComponent,
@@ -59,6 +60,10 @@ const components = [
 			DashboardAppointmentEffects,
 			DashboardWaitingPatientEffects,
 		]),
+		StoreModule.forFeature(
+			fromDashboardForApprovalPatient.dashboardForApprovalPatientsFeatureKey,
+			fromDashboardForApprovalPatient.reducer,
+		),
 	],
 	exports: [...components],
 })

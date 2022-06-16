@@ -38,14 +38,6 @@ export class CheckForAppointmentsDirective {
 	@Input() schedule?: Appointment[]
 
 	ngAfterViewInit() {
-		// dayjs.extend(this.customParseFormat)
-
-		// console.log(dayjs(this.start, 'HH:mm').format('HH:mm'))
-
-		// console.log(this.start)
-
-		// TODO: dayjs
-
 		const hasAppointment = this.schedule.find(
 			(appointment) =>
 				dayjs(appointment.date).format('YYYY-MM-DD') ===
