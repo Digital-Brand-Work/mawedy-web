@@ -156,9 +156,9 @@ export class DoctorAddComponent implements OnInit {
 		countryCode: string
 		phoneNumber: string
 	}): void {
-		this.form.value.phone_number = event.phoneNumber
+		this.form.get('phone_number')?.setValue(event.phoneNumber)
 
-		this.form.value.phone_country_code = event.countryCode
+		this.form.get('phone_country_code')?.setValue(event.countryCode)
 	}
 
 	changeSchedule(event: {

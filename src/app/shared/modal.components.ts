@@ -20,7 +20,7 @@ import { SubscriptionInvoicesComponent } from 'app/modules/admin/subscriptions/m
 import { DashboardAppointmentCancelAndAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.component'
 import { ClinicTimingsSelectModalComponent } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings-select-modal.component'
 
-export const modalComponents = [
+export const modalComponents: any[] = [
 	AppointmentAddComponent,
 	AppointmentEditComponent,
 

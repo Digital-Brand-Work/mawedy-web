@@ -1,3 +1,4 @@
+import { AppointmentTypeEnum } from 'app/mawedy-core/enums/appointment-type.enum'
 import { AppointmentStatusEnum } from './../../../../../../mawedy-core/enums/appointment-status.enum'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -240,36 +241,51 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 							)
 						}
 
-						this._appointmentAPI
-							.update(markedAppointment.id, {
-								start_time: appointmentSlot.start_time,
-								end_time: appointmentSlot.end_time,
-								patient_id: appointment.patient.id,
-							})
-							.subscribe({
-								next: (data: any) => {
-									this._indexDBService
-										.update(DB.APPOINTMENTS, data.data)
-										.subscribe(() => {
-											this._store.dispatch(
-												AppointmentActions.updateAppointment(
-													{
-														appointment: data.data,
-													},
-												),
-											)
-
-											this.resolveTransfer(data.data)
-										})
-								},
-								error: (http) => {
-									this._errorHandlerService.handleError(http)
-								},
-							})
+						this.swapSchedule(
+							markedAppointment,
+							appointmentSlot,
+							appointment,
+						)
 					})
 			})
 
 		this.opened$.next(false)
+	}
+
+	swapSchedule(
+		markedAppointment: Appointment,
+		appointmentSlot: any,
+		appointment: Appointment,
+	): void {
+		this._appointmentAPI
+			.update(markedAppointment.id, {
+				type: AppointmentTypeEnum.RETURNING,
+				waiting: false,
+				status: AppointmentStatusEnum.CONFIRMED,
+				start_time: appointmentSlot.start_time,
+				end_time: appointmentSlot.end_time,
+				patient_id: appointment.patient.id,
+			})
+			.subscribe({
+				next: (data: any) => {
+					this.resolveTransfer(data.data)
+
+					this.appointment$.next(data.data)
+
+					this._indexDBService
+						.update(DB.APPOINTMENTS, data.data)
+						.subscribe(() => {
+							this._store.dispatch(
+								AppointmentActions.updateAppointment({
+									appointment: data.data,
+								}),
+							)
+						})
+				},
+				error: (http) => {
+					this._errorHandlerService.handleError(http)
+				},
+			})
 	}
 
 	updateAppointment(
@@ -299,8 +315,6 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 							this.appointment$.next(data.data)
 
 							this.resolveTransfer(data.data)
-
-							console.log(data.data)
 						})
 				},
 				error: (http) => {
@@ -313,8 +327,6 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 		this._indexDBService
 			.update(DB.DASHBOARD_APPOINTMENTS, appointment)
 			.subscribe(() => {
-				console.log('nag update')
-
 				this._store.dispatch(
 					DashboardAppointmentActions.upsertDashboardAppointment({
 						dashboardAppointment: appointment,
@@ -322,18 +334,16 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 				)
 			})
 
-		if (appointment.waiting) {
-			this._indexDBService
-				.deleteByKey(DB.DASHBOARD_WAITING_PATIENTS, appointment.id)
-				.subscribe(() => {
-					this._store.dispatch(
-						DashboardWaitingPatientsActions.deleteDashboardWaitingPatient(
-							{
-								id: appointment.id,
-							},
-						),
-					)
-				})
-		}
+		this._indexDBService
+			.deleteByKey(DB.DASHBOARD_WAITING_PATIENTS, appointment.id)
+			.subscribe(() => {
+				this._store.dispatch(
+					DashboardWaitingPatientsActions.deleteDashboardWaitingPatient(
+						{
+							id: appointment.id,
+						},
+					),
+				)
+			})
 	}
 }

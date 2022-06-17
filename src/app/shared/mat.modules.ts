@@ -11,7 +11,7 @@ import { MatRippleModule } from '@angular/material/core'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
-export const matModules = [
+export const matModules: any[] = [
 	MatIconModule,
 	MatMenuModule,
 	MatDividerModule,

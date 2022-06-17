@@ -1,10 +1,14 @@
-<div *ngIf="true" @slideInTop class="w-full">
-	<app-toolbar class="w-full" [toolbar]="noToolbar"></app-toolbar>
-	<ng-template #noToolbar></ng-template>
+<div class="overscroll-y-scroll overflow-x-hidden pb-40">
+	<div *ngIf="true" @slideInTop class="w-full">
+		<app-toolbar class="w-full" [toolbar]="noToolbar"></app-toolbar>
+		<ng-template #noToolbar></ng-template>
+	</div>
+
+	<subscription-packages
+		*ngIf="isInPackages$ | async"
+	></subscription-packages>
+
+	<subscription-success *ngIf="isInSuccess$ | async"></subscription-success>
+
+	<subscription-summary *ngIf="isInCurrent$ | async"></subscription-summary>
 </div>
-
-<subscription-packages *ngIf="isInPackages$ | async"></subscription-packages>
-
-<subscription-success *ngIf="isInSuccess$ | async"></subscription-success>
-
-<subscription-summary *ngIf="isInCurrent$ | async"></subscription-summary>

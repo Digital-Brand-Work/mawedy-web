@@ -33,14 +33,14 @@ import { DayIntervalPipe } from '@digital_brand_work/pipes/day-interval.count.pi
 import { FuseConfirmationModule } from '@fuse/services/confirmation'
 import { DashboardCountPipe } from 'app/mawedy-core/pipes/dashboard-count.pipe'
 
-const components = [
-	...appComponents,
-	...modalComponents,
+const components: any[] = [
+	...(appComponents as any[]),
+	...(modalComponents as any[]),
 	UnderMaintenanceComponent,
 	UnderConstructionComponent,
 ]
 
-const modules = [
+const modules: any[] = [
 	NgxIndexedDBModule.forRoot(indexedDbConfig),
 	AgmCoreModule.forRoot({
 		apiKey: 'AIzaSyAVSgFcc_sKMdkAgXTc3vJQWUUy2XJK6ck',
@@ -56,12 +56,7 @@ const modules = [
 	...matModules,
 ]
 
-const directives = [
-	AnimateJsDirective,
-	ParallaxDirective,
-	AutoSizeDirective,
-	SyncWithClinicDirective,
-	CheckForAppointmentsDirective,
+const pipes: any[] = [
 	StopPropagation,
 	EntitiesPipe,
 	AgePipe,
@@ -77,12 +72,23 @@ const directives = [
 	DashboardCountPipe,
 ]
 
-const pipes = []
+const directives: any[] = [
+	AnimateJsDirective,
+	ParallaxDirective,
+	AutoSizeDirective,
+	SyncWithClinicDirective,
+	CheckForAppointmentsDirective,
+	...pipes,
+]
 
 @NgModule({
-	declarations: [...components, ...directives, ...pipes],
+	declarations: [...components, ...directives],
 	imports: [...modules],
-	exports: [...components, ...directives, ...pipes, ...modules],
-	providers: [{ provide: 'isBrowser', useValue: true }],
+	exports: [
+		...(components as any[]),
+		...(directives as any[]),
+		...(modules as any[]),
+	],
+	providers: [],
 })
 export class SharedModule {}

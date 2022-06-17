@@ -17,7 +17,7 @@ export class DoctorService extends BaseService<Doctor> {
 
 	getSchedule(doctor: Doctor): Observable<any> {
 		return this.http.get(
-			`${environment.api}v1/doctors/${doctor.id}/appointments?status=Confirmed`,
+			`${environment.api}v1/doctors/${doctor.id}/appointments?status=Confirmed&waiting=false`,
 			this.headers(),
 		)
 	}

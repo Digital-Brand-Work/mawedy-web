@@ -21,7 +21,7 @@ import { DoctorImagePlaceholderComponent } from 'app/components/placeholders/doc
 import { DashboardStatusComponent } from 'app/modules/admin/dashboard/dashboard-status/dashboard-status.component'
 import { HomeNavbarComponent } from 'app/modules/landing/common/home-navbar/home-navbar.component'
 
-export const appComponents = [
+export const appComponents: any[] = [
 	GooglePlayButtonComponent,
 	AppStoreButtonComponent,
 	GooglePayButtonComponent,
