@@ -45,22 +45,7 @@ export class PatientsComponent implements OnInit {
 					title: `${clinic.name} | ${clinic?.address} | Patients`,
 				})
 			}
-
-			this.fetchFromIndexDB()
 		})
-	}
-
-	fetchFromIndexDB(): void {
-		this._indexDBService
-			.getAll(DB.PATIENTS)
-			.pipe(takeUntil(this.unsubscribe$))
-			.subscribe((patients) => {
-				this.store.dispatch(
-					PatientActions.loadPatients({
-						patients: patients as Patient[],
-					}),
-				)
-			})
 	}
 
 	view(patient: Patient): void {
