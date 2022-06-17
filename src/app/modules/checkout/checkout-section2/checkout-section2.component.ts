@@ -129,15 +129,15 @@ export class CheckoutSection2Component implements OnInit {
 	identity = (item: any) => item
 
 	onCardNumberChange(cardNumber: string) {
-		this.form.value.number = cardNumber
+		this.form.get('number')?.setValue(cardNumber)
 	}
 
 	onChangeCountry(country: string) {
 		this.cities = this.countryJson[country]
 
-		this.form.value.country = country
+		this.form.get('country')?.setValue(country)
 
-		this.form.value.city = this.cities[0]
+		this.form.get('city')?.setValue(this.cities[0])
 	}
 
 	pay() {
@@ -174,7 +174,7 @@ export class CheckoutSection2Component implements OnInit {
 
 		data.card = {
 			number: this.form.value.number,
-			expiry: toCardExpiry(this.form.value.expiry),
+			expiry: toCardExpiry(this.form.get('expiry')?.value),
 			cvc: this.form.value.cvc,
 		}
 

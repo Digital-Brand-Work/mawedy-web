@@ -10,10 +10,14 @@ import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthForgotPasswordComponent } from 'app/modules/auth/forgot-password/forgot-password.component';
 import { authForgotPasswordRoutes } from 'app/modules/auth/forgot-password/forgot-password.routing';
+import { ForgotPasswordForm1Component } from './forgot-password-form1/forgot-password-form1.component';
+import { ForgotPasswordForm2Component } from './forgot-password-form2/forgot-password-form2.component';
 
 @NgModule({
     declarations: [
-        AuthForgotPasswordComponent
+        AuthForgotPasswordComponent,
+        ForgotPasswordForm1Component,
+        ForgotPasswordForm2Component
     ],
     imports     : [
         RouterModule.forChild(authForgotPasswordRoutes),

@@ -11,9 +11,9 @@ export function slugToSentence(slug: string): string {
 }
 
 export function toCardExpiry(digits: string) {
-	const expiry = digits.split('/')
+	const expiry = digits.split('')
 
-	return { month: expiry[0], year: '20' + expiry[1] }
+	return { month: expiry[0] + expiry[1], year: '20' + expiry[2] + expiry[3] }
 }
 
 export function toAddress(clinic: Clinic) {

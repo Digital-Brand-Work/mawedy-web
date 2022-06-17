@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -11,7 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
+import { AlertState } from 'app/components/alert/alert.service'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { LoginService } from 'app/modules/landing/home/login.service'
+import { PasswordResetAPI } from './reset-password.service'
 
 @Component({
 	selector: 'auth-reset-password',
@@ -21,26 +26,32 @@ import { LoginService } from 'app/modules/landing/home/login.service'
 })
 export class AuthResetPasswordComponent implements OnInit {
 	constructor(
-		private _route: ActivatedRoute,
 		private _router: Router,
+		private _alert: AlertState,
+		private _route: ActivatedRoute,
 		private _cdr: ChangeDetectorRef,
-		// private _userService: UserService,
-		// private _passwordFinalizeService: ResetFinalizeService,
 		private _loginService: LoginService,
 		private _scrollService: ScrollService,
+		private _passwordResetAPI: PasswordResetAPI,
+		private _clinicUserService: ClinicUserService,
+		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
 	@ViewChild('password') password?: ElementRef
 
 	form = new FormGroup({
-		email: new FormControl(''),
-		token: new FormControl(''),
+		email: new FormControl(localStorage.getItem('email')),
+		verification_id: new FormControl(
+			localStorage.getItem('verification_id'),
+		),
 		password: new FormControl('', [
 			Validators.required,
 			Validators.minLength(6),
 		]),
 		password_confirmation: new FormControl('', [Validators.required]),
 	})
+
+	errors: any = {}
 
 	validated: boolean = false
 
@@ -57,57 +68,112 @@ export class AuthResetPasswordComponent implements OnInit {
 	}
 
 	ngOnDestroy(): void {
+		localStorage.clear()
+
 		this._cdr.detach()
 	}
 
 	send() {
-		this._route.queryParams.subscribe((params) => {
-			if (Object.keys(params).length !== 0) {
-				const { email, token } = params
+		this._passwordResetAPI.post(this.form.value).subscribe({
+			next: () => {
+				this._alert.add({
+					id: Math.floor(Math.random() * 100000000000).toString(),
+					title: `Password has been successfully reset.`,
+					message:
+						'We are happy to help you recover your password have a great time using our services.',
+					type: 'success',
+				})
 
-				this.form.value.email = email
+				this.validated = true
+			},
+			error: (http: HttpErrorResponse) => {
+				for (let key in http.error.errors) {
+					for (let errorKey in this.errors) {
+						if (key.includes(errorKey)) {
+							this.errors[errorKey] = true
+						}
+					}
+				}
 
-				this.form.value.token = token
-			}
+				this._errorHandlerService.handleError(http)
+			},
 		})
-
-		// this._passwordFinalizeService.post(this.form.value).subscribe({
-		// 	next: () => {
-		// 		this.validated = true
-		// 	},
-		// 	error: (error) => {
-		// 		alert(
-		// 			`${error.error.message} You will be redirected to forgot password page`,
-		// 		)
-
-		// 		this._router.navigate(['/forgot-password'])
-		// 	},
-		// })
 	}
 
 	login() {
+		for (let key in this.errors) {
+			this.errors[key] = false
+		}
+
 		this.isProcessing = true
 
-		this._route.queryParams.subscribe((params) => {
-			this.form.value.email = params.email
+		this._loginService
+			.post(this.form.value)
+			.subscribe({
+				next: (userAccount) => {
+					// if (
+					// 	userAccount.data.subscription_type ===
+					// 		ClinicSubscriptionTypeEnum.FREE &&
+					// 	ClinicRegistrationStatusEnum.PENDING
+					// ) {
+					// 	return this._alert.add({
+					// 		id: Math.floor(
+					// 			Math.random() * 100000000000,
+					// 		).toString(),
+					// 		title: `We are asking for your patience.`,
+					// 		message: `It seems that your account hasn't been approved yet. We ask for
+					//     				your patience as we review your information. Best Regards,
+					//     				Mawedy Team`,
+					// 		type: 'info',
+					// 	})
+					// }
 
-			this.form.value.token = params.token
+					// if (
+					// 	userAccount.data.subscription_type !==
+					// 	ClinicSubscriptionTypeEnum.FREE
+					// ) {
+					// 	this.proceedToDashboard(userAccount)
+					// }
+
+					// if (
+					// 	userAccount.data.subscription_type ===
+					// 		ClinicSubscriptionTypeEnum.FREE &&
+					// 	(userAccount.data.account_status ===
+					// 		ClinicRegistrationStatusEnum.DONE ||
+					// 		userAccount.data.account_status ===
+					// 			ClinicRegistrationStatusEnum.CONFIRMED)
+					// ) {
+					// 	this.proceedToDashboard(userAccount)
+					// }
+
+					this.proceedToDashboard(userAccount)
+				},
+				error: (http) => {
+					for (let key in http.error.errors) {
+						for (let errorKey in this.errors) {
+							if (key.includes(errorKey)) {
+								this.errors[errorKey] = true
+							}
+						}
+					}
+
+					this._errorHandlerService.handleError(http)
+				},
+			})
+			.add(() => (this.isProcessing = false))
+	}
+
+	proceedToDashboard(userAccount) {
+		this._clinicUserService.saveDataLocally(userAccount)
+
+		this._alert.add({
+			id: Math.floor(Math.random() * 100000000000).toString(),
+			title: `Welcome Back ${userAccount.data.name}!`,
+			message:
+				'We hope that you use our services to its full extent. Have a great day ahead.',
+			type: 'success',
 		})
 
-		this._loginService.post(this.form.value).subscribe({
-			next: (data) => {
-				this.isProcessing = false
-
-				localStorage.setItem('access_token', data.access_token)
-
-				localStorage.setItem('expiry', data.expiry)
-
-				localStorage.setItem('user', JSON.stringify(data.user))
-
-				// this._userService.setUser(data.user)
-
-				this._router.navigate(['/dashboard'])
-			},
-		})
+		this._clinicUserService.toDashboard()
 	}
 }

@@ -88,11 +88,11 @@ export class LandingSubscriptionSection1FormComponent implements OnInit {
 		countryCode: string
 		phoneNumber: string
 	}) {
-		if (event.phoneNumber !== '') {
-			this.form.value.phone_number_one = event.phoneNumber
-		}
+		this.form.get('phone_number_one')?.setValue(event.phoneNumber)
 
-		this.form.value.phone_number_one_country_code = event.countryCode
+		this.form
+			.get('phone_number_one_country_code')
+			?.setValue(event.countryCode)
 	}
 
 	setTradeLicense(event: any): void {

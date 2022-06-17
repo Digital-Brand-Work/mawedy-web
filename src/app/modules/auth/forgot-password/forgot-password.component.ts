@@ -12,74 +12,52 @@ import { fuseAnimations } from '@fuse/animations'
 import { FuseAlertType } from '@fuse/components/alert'
 import { AuthService } from 'app/core/auth/auth.service'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
+import { ForgotPasswordService } from './forgot-password.service'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
 	selector: 'auth-forgot-password',
 	templateUrl: './forgot-password.component.html',
 	encapsulation: ViewEncapsulation.None,
-	animations: fuseAnimations,
+	animations: [...dbwAnimations],
 })
 export class AuthForgotPasswordComponent implements OnInit {
-	constructor(
-		// private _passwordResetSendService: ResetSendService,-
-		private _cdr: ChangeDetectorRef,
-		private _scrollService: ScrollService,
-	) {}
-
-	@ViewChild('email') email?: ElementRef
+	constructor() {}
 
 	throttle$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 
-	form = new FormGroup({
-		email: new FormControl('', [
-			Validators.email,
-			Validators.required,
-			Validators.minLength(3),
-		]),
-	})
-
-	hasErrorEmail: boolean = false
+	email: string = ''
 
 	validated: boolean = false
 
 	throttled: boolean = false
 
+	otp_id: string = ''
+
 	ngOnInit(): void {}
 
-	ngAfterViewInit(): void {
-		this.email?.nativeElement.focus()
+	resolveSuccess(successEvent: {
+		throttled: boolean
+		validated: boolean
+		otp_id: string
+		email: string
+	}): void {
+		this.throttled = successEvent.throttled
 
-		this._scrollService.scrollToTop()
+		this.validated = successEvent.validated
 
-		this._cdr.detectChanges()
+		this.otp_id = successEvent.otp_id
+
+		this.email = successEvent.email
+
+		if (successEvent.throttled) {
+			this.throttle$.next(60)
+
+			this.setTimer()
+		}
 	}
 
-	ngOnDestroy(): void {
-		this._cdr.detach()
-	}
-
-	send() {
-		this.form.disable()
-
-		// this._passwordResetSendService.post(this.form.value).subscribe({
-		// 	next: () => {
-		// 		this.throttled = false
-
-		// 		this.validated = true
-
-		// 		this.throttle$.next(60)
-
-		// 		this.setTimer()
-		// 	},
-		// 	error: () => {
-		// 		this.form.enable()
-
-		// 		this.throttled = true
-		// 	},
-		// })
-	}
-
-	setTimer() {
+	setTimer(): void {
 		setInterval(() => {
 			this.throttle$.pipe(take(1)).subscribe((value) => {
 				if (value > 0) {

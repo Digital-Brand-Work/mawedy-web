@@ -1,3 +1,4 @@
+import { FooterComponent } from './../modules/landing/common/footer/footer.component'
 import { AppToolbarComponent } from './../components/app-toolbar/app-toolbar.component'
 import { SpinnerComponent } from 'app/components/spinner/spinner.component'
 import { MobileNumberFormComponent } from 'app/components/forms/mobile-number-form/mobile-number-form.component'
@@ -18,6 +19,7 @@ import { DoctorScheduleSelectComponent } from 'app/components/forms/doctor-sched
 import { ClinicScheduleSelectComponent } from 'app/components/forms/clinic-schedule-select/clinic-schedule-select.component'
 import { DoctorImagePlaceholderComponent } from 'app/components/placeholders/doctor-image-placeholder/doctor-image-placeholder.component'
 import { DashboardStatusComponent } from 'app/modules/admin/dashboard/dashboard-status/dashboard-status.component'
+import { HomeNavbarComponent } from 'app/modules/landing/common/home-navbar/home-navbar.component'
 
 export const appComponents = [
 	GooglePlayButtonComponent,
@@ -40,4 +42,6 @@ export const appComponents = [
 	ClinicScheduleSelectComponent,
 	DoctorImagePlaceholderComponent,
 	DashboardStatusComponent,
+	HomeNavbarComponent,
+	FooterComponent,
 ]
