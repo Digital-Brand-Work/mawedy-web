@@ -35,6 +35,7 @@ import { DashboardAppointmentConfirmReassignSlotModal } from './dashboard-appoin
 import * as AppointmentActions from '../../../../appointments/appointment.actions'
 import * as DashboardWaitingPatientsActions from '../../../waiting-patients/dashboard-waiting-patient.actions'
 import * as DashboardAppointmentActions from '../../dashboard-appointment.actions'
+import { DashboardAppointmentDetailsModal } from '../dashboard-appointment-details/dashboard-appointment-details.service'
 
 @Component({
 	selector: 'dashboard-appointment-confirm-reassign-slot',
@@ -49,8 +50,9 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 		private _doctorAPI: DoctorService,
 		private _appointmentAPI: AppointmentService,
 		private _indexDBService: NgxIndexedDBService,
-		private _dashboardAppointmentService: DashboardAppointmentService,
 		private _errorHandlerService: ErrorHandlerService,
+		private _dashboardAppointmentService: DashboardAppointmentService,
+		private dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
 		private _dashboardAppointmentConfirmReassignSlotModal: DashboardAppointmentConfirmReassignSlotModal,
 		private _store: Store<{
 			dashboardForApprovalPatients: DashboardForApprovalPatient[]
@@ -324,6 +326,10 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 	}
 
 	resolveTransfer(appointment: Appointment): void {
+		this.opened$.next(false)
+
+		this.dashboardAppointmentDetailsModal.opened$.next(false)
+
 		this._indexDBService
 			.update(DB.DASHBOARD_APPOINTMENTS, appointment)
 			.subscribe(() => {

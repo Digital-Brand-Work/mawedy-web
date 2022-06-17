@@ -8,6 +8,7 @@ import { empty } from '../helpers'
 import { DayTypes } from '../enums/day.enum'
 import * as customFormatter from 'dayjs/plugin/customParseFormat'
 import * as dayjs from 'dayjs'
+import * as isToday from 'dayjs/plugin/isToday'
 
 @Directive({
 	selector: '[syncWithClinic]',
@@ -26,9 +27,13 @@ export class SyncWithClinicDirective {
 
 	customParseFormat = customFormatter
 
+	isToday = isToday
+
 	@Input() day?: DayTypes
 
 	@Input() slot?: string
+
+	@Input() date?: Date
 
 	ngAfterViewInit() {
 		this._indexedDBService
@@ -51,10 +56,12 @@ export class SyncWithClinicDirective {
 							'HH:mm',
 						).isBefore(dayjs())
 
+						dayjs.extend(this.isToday)
+
 						if (
 							timeSlot.start > this.slot ||
 							timeSlot.end < this.slot ||
-							timeSlotHasPassed
+							(timeSlotHasPassed && dayjs(this.date).isToday())
 						) {
 							const disabled =
 								'bg-gray-300 pointer-events-none text-white'

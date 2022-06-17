@@ -8,6 +8,7 @@ import { DashboardAppointment } from '../dashboard-appointment.model'
 import { HomeNav } from 'app/mawedy-core/navigation/landing.navigation'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Router } from '@angular/router'
+import { DashboardFilter } from '../../dashboard.component'
 
 @Component({
 	selector: 'dashboard-toolbar',
@@ -24,7 +25,7 @@ export class DashboardAppointmentToolbarComponent implements OnInit {
 		})
 	}
 
-	@Output() onSearch = new EventEmitter()
+	@Output() onSearch = new EventEmitter<DashboardFilter>()
 
 	@Output() onFilter = new EventEmitter()
 

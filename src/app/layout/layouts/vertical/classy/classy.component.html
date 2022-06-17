@@ -1,6 +1,20 @@
 <fuse-loading-bar></fuse-loading-bar>
 
 <div
+	*ngIf="
+		(breakpoint$ | async) === 'tablet' || (breakpoint$ | async) === 'phone'
+	"
+	class="h-screen w-screen flex items-center justify-center"
+>
+	This app does not support your current screen size
+</div>
+
+<div
+	*ngIf="
+		(breakpoint$ | async) === 'laptop' ||
+		(breakpoint$ | async) === 'desktop' ||
+		(breakpoint$ | async) === 'max'
+	"
 	class="relative flex items-center w-full px-4 md:px-6 z-49 bg-card print:hidden py-2 md:py-0 border-b border-gray-200"
 >
 	<a @zoomIn class="h-20 w-50 mr-12 hidden md:block" routerLink="/">

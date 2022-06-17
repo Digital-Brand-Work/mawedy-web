@@ -3,6 +3,8 @@ import { Router } from '@angular/router'
 import { Component, OnInit } from '@angular/core'
 import { Observable, of, Subject } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { DashboardAppointmentService } from './appointments/dashboard-appointment.service'
+import * as dayjs from 'dayjs'
 
 @Component({
 	selector: 'dashboard',
@@ -11,7 +13,10 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class DashboardComponent implements OnInit {
-	constructor(private _router: Router) {
+	constructor(
+		private _router: Router,
+		private _dashboardAppointmentService: DashboardAppointmentService,
+	) {
 		this._router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
 			this.resolveActiveNav()
 		})
@@ -45,5 +50,22 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 
-	filter() {}
+	filter(event: DashboardFilter) {
+		if (event.type === 'dashboardAppointments') {
+			const search = {
+				keyword: event.keyword,
+				waiting: 'false',
+				date: dayjs().toJSON(),
+			}
+
+			this._dashboardAppointmentService
+				.query(`?` + new URLSearchParams(search).toString())
+				.subscribe((data) => {})
+		}
+	}
+}
+
+export interface DashboardFilter {
+	keyword: string
+	type: 'dashboardAppointments' | 'outreachPatients' | 'forApprovals'
 }

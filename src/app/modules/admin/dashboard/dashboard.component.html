@@ -14,7 +14,7 @@
 <ng-template #appointMentsToolbar>
 	<dashboard-toolbar
 		(onFilter)="filter()"
-		(onSearch)="filter()"
+		(onSearch)="filter($event)"
 		class="w-full"
 	></dashboard-toolbar>
 </ng-template>
