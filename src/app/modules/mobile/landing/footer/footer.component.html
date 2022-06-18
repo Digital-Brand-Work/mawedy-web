@@ -1,0 +1,121 @@
+<div class="grid grid-cols-2 p-5 py-10 gap-x-10">
+	<div>
+		<button
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			class="text-lg block font-semibold mb-3 px-2 rounded-full"
+		>
+			Company
+		</button>
+
+		<button
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			class="text-lg block font-semibold mb-3 px-2 rounded-full"
+		>
+			Features
+		</button>
+
+		<button
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			class="text-lg block font-semibold mb-3 px-2 rounded-full"
+		>
+			Pricing
+		</button>
+
+		<button
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			class="text-lg block font-semibold mb-3 px-2 rounded-full"
+		>
+			Career
+		</button>
+
+		<button
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			class="text-lg block font-semibold mb-3 px-2 rounded-full"
+		>
+			Terms & Conditions
+		</button>
+
+		<button
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			class="text-lg block font-semibold mb-3 px-2 rounded-full"
+		>
+			Privacy Policy
+		</button>
+	</div>
+
+	<div>
+		<div class="text-lg">Contact Us</div>
+
+		<div
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			role="button"
+			class="text-lg mb-3 px-2 rounded-full"
+		>
+			<a
+				class="text-lg mb-3 text-emerald-200"
+				[href]="'https//:wa.me/' + phone"
+				target="_blank"
+			>
+				{{ phone }}</a
+			>
+		</div>
+
+		<div class="text-lg">Email Us</div>
+
+		<div
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.5)"
+			role="button"
+			class="text-lg mb-3 px-2 rounded-full"
+		>
+			<a class="text-emerald-200" [href]="'mailto:' + email">{{
+				email
+			}}</a>
+		</div>
+
+		<div class="text-lg">Find us on</div>
+
+		<div class="grid grid-cols-4 gap-x-2 py-2">
+			<button
+				class="pb-2 rounded-full flex items-center text-center justify-center"
+				matRipple
+				matRippleColor="rgba(250, 250, 250,.5)"
+			>
+				<i class="bi bi-instagram text-2xl text-emerald-200"></i>
+			</button>
+
+			<button
+				class="pb-2 rounded-full flex items-center text-center justify-center"
+				matRipple
+				matRippleColor="rgba(250, 250, 250,.5)"
+			>
+				<i class="bi bi-facebook text-2xl text-emerald-200"></i>
+			</button>
+
+			<a
+				target="_blank"
+				class="pb-2 rounded-full flex items-center text-center justify-center"
+				[href]="'https//:wa.me/' + phone"
+				matRipple
+				matRippleColor="rgba(250, 250, 250,.5)"
+			>
+				<i class="bi bi-whatsapp text-2xl text-emerald-200"></i>
+			</a>
+
+			<button
+				class="pb-2 rounded-full flex items-center text-center justify-center"
+				matRipple
+				matRippleColor="rgba(250, 250, 250,.5)"
+			>
+				<i class="bi bi-youtube text-2xl text-emerald-200"></i>
+			</button>
+		</div>
+	</div>
+</div>

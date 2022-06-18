@@ -1,7 +1,9 @@
-<div class="md:min-h-screen w-full flex relative pt-20 md:py-0 justify-center">
+<div
+	class="md:min-h-screen w-full flex relative pt-20 md:py-0 justify-center -mb-5"
+>
 	<img
 		src="/assets/app/home/wave.svg"
-		class="w-screen h-screen object-fill md:object-cover absolute z-0 -bottom-80 self-end mt-auto scale-y-60"
+		class="w-screen h-screen object-cover absolute z-0 -bottom-80 self-end mt-auto md:scale-y-60 scale-150"
 		alt=""
 	/>
 
@@ -16,18 +18,22 @@
 				<div
 					*ngIf="true"
 					@expandCollapse
-					class="text-6xl md:text-4xl text-emerald-500 font-bold leading-none text-center md:text-left"
+					class="text-4xl md:text-4xl text-emerald-500 font-bold leading-none text-center md:text-left"
 				>
 					Join our Community!
 				</div>
 
 				<div
-					class="text-gray-500 font-normal text-xl md:text-2xl text-center md:text-left"
+					*ngIf="(breakpoint$ | async) === 'phone'"
+					class="grid grid-cols-2 gap-x-3 mt-15"
 				>
-					Help people to discovery you when they are in need.
+					<mobile-apple-pay-button></mobile-apple-pay-button>
+
+					<mobile-google-play-button></mobile-google-play-button>
 				</div>
 
 				<div
+					*ngIf="(breakpoint$ | async) !== 'phone'"
 					[@listAnimation]="2"
 					[ngClass]="{
 						'flex-col': (breakpoint$ | async) === 'phone',
@@ -42,7 +48,7 @@
 				</div>
 			</div>
 
-			<preview-section class="mt-32"></preview-section>
+			<preview-section class="md:mt-32"></preview-section>
 		</div>
 	</div>
 </div>
