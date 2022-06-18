@@ -32,10 +32,12 @@ import { CheckForAppointmentsDirective } from 'app/mawedy-core/directives/doctor
 import { DayIntervalPipe } from '@digital_brand_work/pipes/day-interval.count.pipe'
 import { FuseConfirmationModule } from '@fuse/services/confirmation'
 import { DashboardCountPipe } from 'app/mawedy-core/pipes/dashboard-count.pipe'
+import { mobileComponents } from './landing.mobile.component'
 
 const components: any[] = [
 	...(appComponents as any[]),
 	...(modalComponents as any[]),
+	...mobileComponents,
 	UnderMaintenanceComponent,
 	UnderConstructionComponent,
 ]
@@ -78,13 +80,13 @@ const directives: any[] = [
 	AutoSizeDirective,
 	SyncWithClinicDirective,
 	CheckForAppointmentsDirective,
-	...pipes,
 ]
 
 @NgModule({
-	declarations: [...components, ...directives],
+	declarations: [...components, ...directives, ...pipes],
 	imports: [...modules],
 	exports: [
+		...pipes,
 		...(components as any[]),
 		...(directives as any[]),
 		...(modules as any[]),

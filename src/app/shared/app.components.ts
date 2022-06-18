@@ -20,6 +20,7 @@ import { ClinicScheduleSelectComponent } from 'app/components/forms/clinic-sched
 import { DoctorImagePlaceholderComponent } from 'app/components/placeholders/doctor-image-placeholder/doctor-image-placeholder.component'
 import { DashboardStatusComponent } from 'app/modules/admin/dashboard/dashboard-status/dashboard-status.component'
 import { HomeNavbarComponent } from 'app/modules/landing/common/home-navbar/home-navbar.component'
+import { HomeNavbarResponsiveComponent } from 'app/modules/landing/common/home-navbar-responsive/home-navbar-responsive.component'
 
 export const appComponents: any[] = [
 	GooglePlayButtonComponent,
@@ -44,4 +45,5 @@ export const appComponents: any[] = [
 	DashboardStatusComponent,
 	HomeNavbarComponent,
 	FooterComponent,
+	HomeNavbarResponsiveComponent,
 ]

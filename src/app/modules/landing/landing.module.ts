@@ -42,8 +42,6 @@ import { SitBackRelexSection2Component } from './sit-back-relex/sit-back-relex-s
 import { LandingSubscriptionSection1FormComponent } from './landing-subscription/landing-subscription-section1/landing-subscription-section1-form/landing-subscription-section1-form.component'
 
 const components = [
-	HomeNavbarResponsiveComponent,
-
 	LandingComponent,
 	HomeMainComponent,
 

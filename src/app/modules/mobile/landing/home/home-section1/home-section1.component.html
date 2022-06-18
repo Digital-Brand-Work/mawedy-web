@@ -1,0 +1,51 @@
+<div class="relative z-10 mt-5 flex h-screen flex-col justify-center">
+	<img
+		@zoomIn
+		src="/assets/app/home/home-section-v2.png"
+		class="w-screen h-full object-cover relative left-0 top-0 z-0"
+		alt=""
+	/>
+
+	<div @slideInLeft class="absolute z-10 px-5">
+		<div
+			@slideInLeft
+			class="accent-color text-5xl font-extrabold tracking-tighter"
+		>
+			Forget the long calls
+		</div>
+
+		<div
+			@slideInLeft
+			class="accent-color text-4xl font-extrabold tracking-tighter -mt-2"
+		>
+			Book your appointments!
+		</div>
+
+		<div
+			@slideInBottom
+			class="text-lg text-gray-500 font-semibold w-3/4 my-5"
+		>
+			A reliable, detailed booking solution made to serve you.
+		</div>
+
+		<div class="grid grid-cols-2 gap-x-3 mt-15">
+			<mobile-apple-pay-button></mobile-apple-pay-button>
+
+			<mobile-google-play-button></mobile-google-play-button>
+		</div>
+
+		<div
+			@slideInBottom
+			class="flex w-full items-center justify-center mt-20"
+		>
+			<a
+				matRipple
+				matRippleColor="rgba(250, 250, 250,.5)"
+				routerLink="/partner-with-us"
+				class="py-3 px-10 font-medium text-white rounded-lg bg-emerald-500 tracking-wider text-xl shadow-lg"
+			>
+				Join Mawedy
+			</a>
+		</div>
+	</div>
+</div>

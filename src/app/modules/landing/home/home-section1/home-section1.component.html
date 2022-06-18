@@ -1,4 +1,13 @@
+<mobile-home-section1
+	*ngIf="(breakpoint$ | async) === 'phone'"
+></mobile-home-section1>
+
 <div
+	*ngIf="
+		(breakpoint$ | async) === 'laptop' ||
+		(breakpoint$ | async) === 'desktop' ||
+		(breakpoint$ | async) === 'max'
+	"
 	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
 	class="w-full flex items-center justify-center relative"
 >
