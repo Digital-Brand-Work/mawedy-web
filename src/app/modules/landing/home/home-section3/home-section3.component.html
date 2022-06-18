@@ -1,11 +1,11 @@
 <div
-	class="min-h-screen w-full flex flex-col items-center justify-center relative py-20 bg-gray-50/40"
+	class="min-h-screen w-full flex flex-col items-center justify-center relative pt-10 md:py-20 bg-gray-50/40"
 >
-	<div class="text-gray-700 font-extrabold text-6xl mt-40">
+	<div class="text-gray-700 font-extrabold text-6xl md:mt-40 text-center">
 		Plans and Pricing
 	</div>
 
-	<div class="text-gray-700 font-medium text-xl">
+	<div class="text-gray-700 font-medium text-xl text-center px-20">
 		Start small and free upgrade as you go. Take control of everything.
 	</div>
 
@@ -21,7 +21,7 @@
 					(billing$ | async) === item,
 				'text-gray-400 bg-white': (billing$ | async) !== item
 			}"
-			class="hover:bg-emerald-50 hover:text-emerald-800 font-medium"
+			class="md:hover:bg-emerald-50 md:hover:text-emerald-800 font-medium"
 			*ngFor="let item of billings; trackBy: identity"
 		>
 			{{ item | titlecase }} Plan
@@ -30,16 +30,52 @@
 
 	<div
 		[@listAnimation]="3"
-		class="grid grid-cols-1 md:grid-cols-3 gap-20 max-w-screen-xl mt-20"
+		*ngIf="billing$ | async as billing"
+		class="md:hidden grid grid-cols-3 text-center justify-center items-center mb-15"
 	>
 		<div
-			[class.hidden]="!subscription[billing$ | async]"
+			[class.hidden]="!subscription[billing]"
 			*ngFor="let subscription of mawedySubscriptions; trackBy: identity"
 		>
+			<button
+				*ngIf="subscription[billing]"
+				(click)="currentType = subscription[billing]?.type"
+				matRipple
+				[ngClass]="{
+					'accent-color': currentType !== subscription[billing]?.type,
+					'text-emerald-500':
+						currentType === subscription[billing]?.type
+				}"
+				matRippleColor="rgba(150, 150, 150,.2)"
+				class="p-2 px-5 rounded-full"
+			>
+				<div class="text-2xl font-bold">
+					{{ subscription[billing]?.type }}
+				</div>
+			</button>
+		</div>
+	</div>
+
+	<div
+		*ngIf="billing$ | async as billing"
+		[@listAnimation]="3"
+		class="grid grid-cols-1 md:grid-cols-3 gap-x-20 max-w-screen-xl md:mt-20 px-5 items-start justify-start"
+	>
+		<div
+			@zoomIn
+			@zoomOut
+			[class.hidden]="!subscription[billing]"
+			*ngFor="let subscription of mawedySubscriptions"
+		>
 			<home-section3-pricing
-				*ngIf="subscription[billing$ | async]"
-				[interval]="billing$ | async"
-				[subscription]="subscription[billing$ | async]"
+				*ngIf="subscription[billing]"
+				[ngClass]="{
+					hidden:
+						(breakpoint$ | async) === 'phone' &&
+						currentType !== subscription[billing]?.type
+				}"
+				[interval]="billing"
+				[subscription]="subscription[billing]"
 			></home-section3-pricing>
 		</div>
 	</div>

@@ -32,6 +32,7 @@ import { CheckForAppointmentsDirective } from 'app/mawedy-core/directives/doctor
 import { DayIntervalPipe } from '@digital_brand_work/pipes/day-interval.count.pipe'
 import { FuseConfirmationModule } from '@fuse/services/confirmation'
 import { DashboardCountPipe } from 'app/mawedy-core/pipes/dashboard-count.pipe'
+import { RouterModule } from '@angular/router'
 import { mobileComponents } from './landing.mobile.component'
 
 const components: any[] = [
@@ -55,6 +56,7 @@ const modules: any[] = [
 	FuseCardModule,
 	SSRExcludeModule,
 	FuseConfirmationModule,
+	RouterModule,
 	...matModules,
 ]
 

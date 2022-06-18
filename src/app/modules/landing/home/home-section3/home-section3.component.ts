@@ -1,4 +1,5 @@
-import { BehaviorSubject } from 'rxjs'
+import { MediaService } from '@digital_brand_work/utilities/media.service'
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
 import {
 	BILL_INTERVALS,
@@ -6,6 +7,7 @@ import {
 } from 'app/mawedy-core/constants/app.constant'
 import { MawedySubscription } from 'app/mawedy-core/models/utility.models'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { BreakPoint } from '@digital_brand_work/models/core.model'
 
 @Component({
 	selector: 'home-section3',
@@ -14,17 +16,37 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class HomeSection3Component implements OnInit {
-	constructor() {}
+	constructor(private media: MediaService) {}
+
+	unsubscribe$: Subject<any> = new Subject<any>()
+
+	breakpoint$: Observable<BreakPoint> = this.media.breakpoints$
+
+	billing$: BehaviorSubject<'yearly' | 'monthly' | string> =
+		new BehaviorSubject<string>(BILL_INTERVALS[1])
 
 	billings: string[] = BILL_INTERVALS
 
 	mawedySubscriptions: MawedySubscription[] = mawedySubscriptions
 
-	billing$: BehaviorSubject<string> = new BehaviorSubject<string>(
-		BILL_INTERVALS[1],
-	)
+	currentType: string = 'Standard'
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.billing$
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((billing) => {
+				if (billing === 'yearly') {
+					return (this.currentType = 'Standard')
+				}
+
+				return (this.currentType = 'Golden')
+			})
+	}
+	ngOnDestroy(): void {
+		this.unsubscribe$.next(null)
+
+		this.unsubscribe$.complete()
+	}
 
 	identity = (item: any) => item
 }

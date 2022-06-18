@@ -25,9 +25,9 @@ export const homeNavigation: HomeNav[] = [
 		name: 'Join Mawedy',
 		link: 'partner-with-us',
 	},
-	{
-		id: 5,
-		name: 'AR',
-		link: '',
-	},
+	// {
+	// 	id: 5,
+	// 	name: 'AR',
+	// 	link: '',
+	// },
 ]
