@@ -1,0 +1,4 @@
+Sitemap: http://mawedy.ae/
+
+User-agent: *
+Disallow:
