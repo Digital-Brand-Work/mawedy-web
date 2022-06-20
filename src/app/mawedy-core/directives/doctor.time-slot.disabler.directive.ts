@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from '../enums/index.db.enum'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import { BehaviorSubject, takeUntil } from 'rxjs'
+import { BehaviorSubject, take } from 'rxjs'
 import { empty } from '../helpers'
 import { DayTypes } from '../enums/day.enum'
 import * as customFormatter from 'dayjs/plugin/customParseFormat'
@@ -21,8 +21,6 @@ export class SyncWithClinicDirective {
 		private hostElement: ElementRef,
 	) {}
 
-	unsubscribe$: BehaviorSubject<any> = new BehaviorSubject<any>(null)
-
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
 	customParseFormat = customFormatter
@@ -38,6 +36,7 @@ export class SyncWithClinicDirective {
 	ngAfterViewInit() {
 		this._indexedDBService
 			.getByKey(DB.CLINIC, 1)
+			.pipe(take(1))
 			.subscribe((results: any) => {
 				if (!empty(results)) {
 					const clinic: Clinic = results.data
@@ -63,24 +62,17 @@ export class SyncWithClinicDirective {
 							timeSlot.end < this.slot ||
 							(timeSlotHasPassed && dayjs(this.date).isToday())
 						) {
-							const disabled =
-								'bg-gray-300 pointer-events-none text-white'
-
-							disabled.split(' ').forEach((className: string) => {
-								this.renderer.addClass(
-									this.hostElement.nativeElement,
-									className,
-								)
-							})
+							'bg-gray-300 pointer-events-none text-white'
+								.split(' ')
+								.forEach((className: string) => {
+									this.renderer.addClass(
+										this.hostElement.nativeElement,
+										className,
+									)
+								})
 						}
 					}
 				}
 			})
-	}
-
-	ngOnDestroy(): void {
-		this.unsubscribe$.next(null)
-
-		this.unsubscribe$.complete()
 	}
 }

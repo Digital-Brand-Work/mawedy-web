@@ -1,6 +1,10 @@
 import { Appointment } from './../../modules/admin/appointments/appointment.model'
 import { Component, Input, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { DashboardAppointmentDetailsModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
+import { DashboardAppointmentService } from 'app/modules/admin/dashboard/appointments/dashboard-appointment.service'
+import { select, Store } from '@ngrx/store'
+import { Observable } from 'rxjs'
 
 @Component({
 	selector: 'calendar-items',
@@ -9,13 +13,27 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 	animations: [...dbwAnimations],
 })
 export class CalendarItemComponent implements OnInit {
-	constructor() {}
+	constructor(
+		private _dashboardAppointmentService: DashboardAppointmentService,
+		private _dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
+		private _store: Store<{
+			appointments: Appointment[]
+		}>,
+	) {}
 
-	@Input() appointments: Appointment[] = []
+	appointments$: Observable<Appointment[]> = this._store.pipe(
+		select('appointments'),
+	)
 
 	@Input() date: Date
 
 	ngOnInit(): void {}
 
 	identity = (item: any) => item
+
+	viewAppointment(appointment: Appointment) {
+		this._dashboardAppointmentService.current$.next(appointment)
+
+		this._dashboardAppointmentDetailsModal.opened$.next(true)
+	}
 }

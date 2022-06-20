@@ -1,11 +1,21 @@
-<div *ngIf="appointments.length !== 0" [@listAnimation]="appointments.length">
+<div
+	*ngIf="((appointments$ | async).entities | entities)?.length !== 0"
+	[@listAnimation]="
+		((appointments$ | async).entities | entities)?.length.length
+	"
+>
 	<div
+		(click)="viewAppointment(appointment)"
 		[ngClass]="{
 			blue: appointment.type_code === 'Aw',
 			green: appointment.type_code !== 'Aw'
 		}"
 		*ngFor="
-			let appointment of appointments | sortBy: 'date' | limitBy: 3;
+			let appointment of (appointments$ | async).entities
+				| entities
+				| filter_by_date: date
+				| sortBy: 'date'
+				| limitBy: 2;
 			trackBy: identity
 		"
 		filterByCurrentDate
@@ -19,7 +29,21 @@
 		{{ appointment.patient.last_name }}
 	</div>
 
-	<div *ngIf="(appointments | appointmentsCount: date) > 0" class="mt-1">
-		{{ appointments | appointmentsCount: date }} more..
+	<div
+		*ngIf="
+			((appointments$ | async).entities
+				| entities
+				| filter_by_date: date
+				| appointmentsCount: date) > 0
+		"
+		class="mt-1"
+	>
+		{{
+			(appointments$ | async).entities
+				| entities
+				| filter_by_date: date
+				| appointmentsCount: date
+		}}
+		more..
 	</div>
 </div>

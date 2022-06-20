@@ -48,8 +48,6 @@ export class ForgotPasswordForm2Component implements OnInit {
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
-		console.log(this.form.value.otp_id)
-
 		this.code?.nativeElement.focus()
 
 		this._scrollService.scrollToTop()

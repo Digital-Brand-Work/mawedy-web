@@ -27,11 +27,7 @@
 					routerLink="/aster_clinic/jumeirah/appointments/day"
 					role="button"
 					class="day hover:bg-gray-50"
-					*ngFor="
-						let calendar of days;
-						trackBy: identity;
-						let i = index
-					"
+					*ngFor="let calendar of days; let i = index"
 				>
 					<div>
 						<div class="flex items-center">
@@ -45,9 +41,6 @@
 						</div>
 
 						<calendar-items
-							[appointments]="
-								(appointments$ | async).entities | entities
-							"
 							[date]="calendar.date"
 							stop-propagation
 						></calendar-items>

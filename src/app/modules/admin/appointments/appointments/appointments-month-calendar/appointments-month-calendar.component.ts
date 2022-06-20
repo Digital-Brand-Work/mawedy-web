@@ -32,15 +32,8 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 	constructor(
 		private seoService: SeoService,
 		private _clinicUserService: ClinicUserService,
-		private _store: Store<{
-			appointments: Appointment[]
-		}>,
 		private _appointmentToolbarService: AppointmentToolbarService,
 	) {}
-
-	appointments$: Observable<Appointment[]> = this._store.pipe(
-		select('appointments'),
-	)
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 

@@ -39,6 +39,7 @@ import { SortByPipe } from '@digital_brand_work/pipes/sort-by.pipe'
 import { LimitByPipe } from '@digital_brand_work/pipes/limit-by.pipe'
 import { FilterByCurrentDateDirective } from 'app/mawedy-core/directives/filter-by-current-date.directive'
 import { AppointmentCountsPipe } from 'app/mawedy-core/pipes/appointment-day-count.pipe'
+import { FilterByDatePipe } from '@digital_brand_work/pipes/filterBy.pipe'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -82,6 +83,7 @@ const pipes: any[] = [
 	SortByPipe,
 	LimitByPipe,
 	AppointmentCountsPipe,
+	FilterByDatePipe,
 ]
 
 const directives: any[] = [

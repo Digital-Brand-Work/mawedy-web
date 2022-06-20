@@ -42,8 +42,6 @@ export class PatientDetailsBookingListComponent implements OnInit {
 
 		form.append('file', event.target.files[0])
 
-		console.log('ari')
-
 		new BaseService(
 			this._http,
 			this._indexDBService,

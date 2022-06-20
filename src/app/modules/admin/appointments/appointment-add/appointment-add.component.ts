@@ -1,4 +1,4 @@
-import { Appointment } from 'app/modules/admin/appointments/appointment.model'
+import { Appointment } from './../appointment.model'
 import { AppointmentService } from './../appointment.service'
 import { empty, hasData, tOTime, toTwelve } from 'app/mawedy-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
@@ -40,6 +40,8 @@ import * as dayjs from 'dayjs'
 import { HttpErrorResponse } from '@angular/common/http'
 import * as DashboardAppointmentActions from '../../dashboard/appointments/dashboard-appointment.actions'
 import * as DashboardWaitingPatientsActions from '../../dashboard/waiting-patients/dashboard-waiting-patient.actions'
+import * as AppointmentActions from '../../../admin/appointments/appointment.actions'
+
 @Component({
 	selector: 'appointment-add',
 	templateUrl: './appointment-add.component.html',
@@ -309,6 +311,10 @@ export class AppointmentAddComponent implements OnInit {
 
 	saveLocally(appointment: Appointment) {
 		const databases = [DB.APPOINTMENTS]
+
+		this._store.dispatch(
+			AppointmentActions.addAppointment({ appointment: appointment }),
+		)
 
 		if (
 			dayjs().format('MMMM-DD-YYY') ===
