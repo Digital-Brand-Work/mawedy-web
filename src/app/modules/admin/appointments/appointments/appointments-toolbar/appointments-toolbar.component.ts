@@ -36,6 +36,9 @@ export class AppointmentsToolbarComponent implements OnInit {
 
 	date$: BehaviorSubject<Date> = this._appointmentToolbarService.date$
 
+	weekDays$: BehaviorSubject<Date[]> =
+		this._appointmentToolbarService.weekDays$
+
 	doctors$?: Observable<Doctor[]> = this._store.pipe(select('doctors'))
 
 	unsubscribe$: Subject<any> = new Subject<any>()
@@ -78,28 +81,44 @@ export class AppointmentsToolbarComponent implements OnInit {
 
 	identity = (item: any) => item
 
-	moveCalendarMonth(mode: 'add' | 'subtract') {
+	moveCalendarMonth(mode: 'add' | 'subtract'): void {
 		combineLatest([this.date$])
 			.pipe(take(1))
 			.subscribe((results) => {
 				const [date] = results
 
-				if (mode === 'add') {
-					this.date$.next(dayjs(date).add(1, 'month').toDate())
-
-					return this.currentMonth$.next(
-						dayjs(date).add(1, 'month').month(),
-					)
+				if (this.mode === 'month') {
+					return this.setMonthlyMode(mode, date)
 				}
 
-				if (mode === 'subtract') {
-					this.date$.next(dayjs(date).subtract(1, 'month').toDate())
-
-					return this.currentMonth$.next(
-						dayjs(date).subtract(1, 'month').month(),
-					)
+				if (this.mode === 'week') {
+					return this.setWeeklyMode(mode, date)
 				}
 			})
+	}
+
+	setWeeklyMode(mode: 'add' | 'subtract', date: Date): void {
+		if (mode === 'add') {
+			return this.date$.next(dayjs(date).add(1, 'day').toDate())
+		}
+
+		return this.date$.next(dayjs(date).subtract(1, 'day').toDate())
+	}
+
+	setMonthlyMode(mode: 'add' | 'subtract', date: Date): void {
+		if (mode === 'add') {
+			this.date$.next(dayjs(date).add(1, 'month').toDate())
+
+			return this.currentMonth$.next(dayjs(date).add(1, 'month').month())
+		}
+
+		if (mode === 'subtract') {
+			this.date$.next(dayjs(date).subtract(1, 'month').toDate())
+
+			return this.currentMonth$.next(
+				dayjs(date).subtract(1, 'month').month(),
+			)
+		}
 	}
 
 	filter(doctor: string | null) {

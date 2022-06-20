@@ -4,6 +4,7 @@ import { SeoService } from '@digital_brand_work/services/seo.service'
 import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
+import { TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 
 @Component({
@@ -27,14 +28,19 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 	timings: number[] = []
 
 	ngOnInit(): void {
-		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
-			if (!clinic) {
-				return
-			}
+		// TODO: get date from toolbar
+		// TODO: set range starting monday current date should be thursday
+		// TODO: set day + 1 and minus 1
+		// TODO: pop and push array
 
-			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.address}  | Weekly Appointments`,
-			})
+		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
+			if (clinic) {
+				this.seoService.generateTags({
+					title: `${clinic.name} | ${clinic?.address}  | Weekly Appointments`,
+				})
+
+				// const timeSlot: TimeSlot = clinic.timeslots.find()
+			}
 		})
 
 		for (let i = 1; i <= 12; i++) {

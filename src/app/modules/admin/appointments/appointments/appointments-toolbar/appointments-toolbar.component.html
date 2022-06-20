@@ -29,9 +29,23 @@
 			svgIcon="heroicons_outline:calendar"
 		></mat-icon>
 
+		<!-- Week -->
 		<div
 			@slideInBottom
-			*ngIf="date$ | async"
+			*ngIf="mode === 'week' && weekDays$ | async"
+			class="font-bold text-gray-700 mr-2 text-lg"
+		>
+			{{ (weekDays$ | async)[0] | date: 'MMM' }}
+			{{ (weekDays$ | async)[0] | date: 'dd' }}-{{
+				(weekDays$ | async)[(weekDays$ | async).length - 1] | date: 'dd'
+			}}
+			{{ (weekDays$ | async)[0] | date: 'YYYY' }}
+		</div>
+
+		<!-- Month -->
+		<div
+			@slideInBottom
+			*ngIf="(mode === 'month' || mode === 'day') && date$ | async"
 			class="font-bold text-gray-700 mr-2 text-lg"
 		>
 			{{ date$ | async | date: 'MMMM yyyy' }}

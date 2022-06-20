@@ -37,6 +37,8 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
+	date$: BehaviorSubject<Date> = this._appointmentToolbarService.date$
+
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	weekDays: WeekDay[] = weekDays2
