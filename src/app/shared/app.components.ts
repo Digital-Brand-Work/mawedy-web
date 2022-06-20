@@ -21,6 +21,7 @@ import { DoctorImagePlaceholderComponent } from 'app/components/placeholders/doc
 import { DashboardStatusComponent } from 'app/modules/admin/dashboard/dashboard-status/dashboard-status.component'
 import { HomeNavbarComponent } from 'app/modules/landing/common/home-navbar/home-navbar.component'
 import { HomeNavbarResponsiveComponent } from 'app/modules/landing/common/home-navbar-responsive/home-navbar-responsive.component'
+import { CalendarItemComponent } from 'app/components/calendar-item/calendar-item.component'
 
 export const appComponents: any[] = [
 	GooglePlayButtonComponent,
@@ -46,4 +47,5 @@ export const appComponents: any[] = [
 	HomeNavbarComponent,
 	FooterComponent,
 	HomeNavbarResponsiveComponent,
+	CalendarItemComponent,
 ]

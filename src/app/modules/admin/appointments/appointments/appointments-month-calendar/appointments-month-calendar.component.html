@@ -44,18 +44,7 @@
 							</div>
 						</div>
 
-						<appointments-month-calendar-appointment-item
-							stop-propagation
-							*ngFor="
-								let item of [1, 2];
-								trackBy: identity;
-								let j = index
-							"
-							[color]="'green'"
-							[class.hidden]="i !== 3"
-						></appointments-month-calendar-appointment-item>
-
-						<div class="more" *ngIf="i === 3">3 more..</div>
+						<calendar-items stop-propagation></calendar-items>
 					</div>
 				</div>
 			</div>
