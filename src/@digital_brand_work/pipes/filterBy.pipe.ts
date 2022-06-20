@@ -8,8 +8,8 @@ export class FilterByDatePipe implements PipeTransform {
 	transform(items: any[], date: Date): any[] {
 		return items.filter(
 			(item) =>
-				dayjs(item.date).format('MM-DD') ===
-				dayjs(date).format('MM-DD'),
+				dayjs(item.date).format('MM-DD-YY') ===
+				dayjs(date).format('MM-DD-YY'),
 		)
 	}
 }

@@ -11,7 +11,7 @@ export class IsNotThisMonthDirective {
 
 	ngAfterContentInit(): void {
 		const currentMonth =
-			dayjs().format('MM') === dayjs(this.date).format('MM')
+			dayjs().format('MM-YY') === dayjs(this.date).format('MM-YY')
 
 		if (!currentMonth) {
 			this.renderer.addClass(

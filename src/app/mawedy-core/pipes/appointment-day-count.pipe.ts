@@ -12,8 +12,8 @@ export class AppointmentCountsPipe implements PipeTransform {
 
 		appointments.forEach((appointment) => {
 			if (
-				dayjs(appointment.date).format('MM-DD') ===
-				dayjs(date).format('MM-DD')
+				dayjs(appointment.date).format('MM-DD-YY') ===
+				dayjs(date).format('MM-DD-YY')
 			) {
 				count++
 			}
