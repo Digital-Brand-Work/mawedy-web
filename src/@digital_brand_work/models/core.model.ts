@@ -17,4 +17,6 @@ export interface PHPFile extends PHPBaseModel {
 	size: string
 }
 
+export type Time = `${string}:${string}`
+
 export type BreakPoint = 'phone' | 'tablet' | 'laptop' | 'desktop' | 'max'

@@ -32,20 +32,16 @@
 		<!-- Week -->
 		<div
 			@slideInBottom
-			*ngIf="mode === 'week' && weekDays$ | async"
+			*ngIf="(mode === 'week' || mode === 'day') && weekDays$ | async"
 			class="font-bold text-gray-700 mr-2 text-lg"
 		>
-			{{ (weekDays$ | async)[0] | date: 'MMM' }}
-			{{ (weekDays$ | async)[0] | date: 'dd' }}-{{
-				(weekDays$ | async)[(weekDays$ | async).length - 1] | date: 'dd'
-			}}
-			{{ (weekDays$ | async)[0] | date: 'YYYY' }}
+			{{ date$ | async | date: 'MMMM dd yyyy' }}
 		</div>
 
 		<!-- Month -->
 		<div
 			@slideInBottom
-			*ngIf="(mode === 'month' || mode === 'day') && date$ | async"
+			*ngIf="mode === 'month' && date$ | async"
 			class="font-bold text-gray-700 mr-2 text-lg"
 		>
 			{{ date$ | async | date: 'MMMM yyyy' }}

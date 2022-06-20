@@ -98,3 +98,7 @@ export function toTwelve(time: any): any {
 
 	return `${hour}:${min} ${part}`
 }
+
+export function toFixedTwo(value: number): string {
+	return (value < 10 ? '0' : '') + value
+}

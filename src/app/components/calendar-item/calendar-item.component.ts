@@ -7,6 +7,7 @@ import { select, Store } from '@ngrx/store'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { Doctor } from 'app/modules/admin/doctors/doctor.model'
 import { AppointmentToolbarService } from 'app/modules/admin/appointments/appointments/appointment-toolbar.service'
+import { Time } from '@digital_brand_work/models/core.model'
 
 @Component({
 	selector: 'calendar-items',
@@ -32,6 +33,12 @@ export class CalendarItemComponent implements OnInit {
 	)
 
 	@Input() date: Date
+
+	@Input() time?: Time
+
+	@Input() matchTime: boolean = false
+
+	@Input() weekly: boolean = false
 
 	ngOnInit(): void {}
 

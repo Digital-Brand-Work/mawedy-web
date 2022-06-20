@@ -1,11 +1,19 @@
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
-import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
+import {
+	END_OF_HOURS,
+	PM,
+	WeekDay,
+	weekDays,
+} from 'app/mawedy-core/constants/app.constant'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import { TimeSlot } from 'app/modules/admin/doctors/doctor.model'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs'
+import { AppointmentToolbarService } from '../appointment-toolbar.service'
+import * as dayjs from 'dayjs'
+import { empty, toFixedTwo } from 'app/mawedy-core/helpers'
+import { Time } from '@digital_brand_work/models/core.model'
 
 @Component({
 	selector: 'appointments-week-calendar',
@@ -17,35 +25,89 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 	constructor(
 		private seoService: SeoService,
 		private _clinicUserService: ClinicUserService,
+		private _appointmentToolbarService: AppointmentToolbarService,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
+
+	date$: BehaviorSubject<Date> = this._appointmentToolbarService.date$
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	weekDays: WeekDay[] = weekDays
 
-	timings: number[] = []
+	weekDays$: BehaviorSubject<Date[]> =
+		this._appointmentToolbarService.weekDays$
+
+	timings: Time[] = []
+
+	closed: boolean = true
 
 	ngOnInit(): void {
-		// TODO: get date from toolbar
-		// TODO: set range starting monday current date should be thursday
-		// TODO: set day + 1 and minus 1
-		// TODO: pop and push array
+		combineLatest([this._appointmentToolbarService.date$, this.clinic$])
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((results) => {
+				const [date, clinic] = results
 
-		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
-			if (clinic) {
-				this.seoService.generateTags({
-					title: `${clinic.name} | ${clinic?.address}  | Weekly Appointments`,
-				})
+				if (clinic && date) {
+					this.seoService.generateTags({
+						title: `${clinic.name} | ${clinic?.address}  | Weekly Appointments`,
+					})
 
-				// const timeSlot: TimeSlot = clinic.timeslots.find()
-			}
-		})
+					const timeSlot = clinic.timeslots.find((slot) => {
+						return slot.day === dayjs(date).format('dddd')
+					})
 
-		for (let i = 1; i <= 12; i++) {
-			this.timings.push(i)
-		}
+					if (!timeSlot.active) {
+						return (this.closed = true)
+					} else {
+						this.closed = false
+					}
+
+					if (!empty(timeSlot) || timeSlot.active) {
+						const [startHour, startMinutes] =
+							timeSlot.start.split(':')
+
+						const [endHour, endMinutes] = timeSlot.end.split(':')
+
+						const isGraveYard: boolean = parseInt(endHour) < PM
+
+						let timings = []
+
+						for (
+							let time = parseInt(startHour);
+							!isGraveYard
+								? time <= END_OF_HOURS &&
+								  time <= parseInt(endHour)
+								: time <= END_OF_HOURS ||
+								  time <= parseInt(endHour);
+							time++
+						) {
+							timings.push(`${toFixedTwo(time)}:00`)
+						}
+
+						if (isGraveYard) {
+							for (
+								let time = 2;
+								time < parseInt(endHour) + 1;
+								time++
+							) {
+								timings.push(`${toFixedTwo(time)}:00`)
+							}
+						}
+
+						if (timeSlot.end === '23:59') {
+							timings.push('24:00')
+						} else {
+							timings.push(timeSlot.end as Time)
+						}
+
+						timings = [...new Set(timings)]
+
+						this.timings = timings
+					}
+				}
+			})
 	}
 
 	ngOnDestroy(): void {

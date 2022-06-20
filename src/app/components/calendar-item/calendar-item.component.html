@@ -5,6 +5,10 @@
 	"
 >
 	<div
+		[class.hidden]="weekly"
+		hideIfDoesNotMatchTime
+		[matchTime]="matchTime"
+		[time]="time"
 		(click)="viewAppointment(appointment)"
 		[ngClass]="{
 			blue: appointment.type_code === 'Aw',
@@ -31,6 +35,35 @@
 	</div>
 
 	<div
+		[class.hidden]="!weekly"
+		hideIfDoesNotMatchTime
+		[matchTime]="matchTime"
+		[time]="time"
+		(click)="viewAppointment(appointment)"
+		[ngClass]="{
+			blue: appointment.type_code === 'Aw',
+			green: appointment.type_code !== 'Aw'
+		}"
+		*ngFor="
+			let appointment of (appointments$ | async).entities
+				| entities
+				| filter_by_date: date
+				| sortBy: 'start_time'
+				| filter_by_doctor: (doctor$ | async);
+			trackBy: identity
+		"
+		filterByCurrentDate
+		[appointment]="appointment"
+		[date]="date"
+		class="blue whitespace-nowrap overflow-hidden text-ellipsis py-0.5 px-2 text-sm mt-1 accent-color font-bold"
+	>
+		{{ appointment.start_time | toTwelve | uppercase }} -
+		{{ appointment.doctor.name }} & {{ appointment.patient.first_name }}
+		{{ appointment.patient.middle_name }}
+		{{ appointment.patient.last_name }}
+	</div>
+
+	<div
 		*ngIf="
 			((appointments$ | async).entities
 				| entities
@@ -39,6 +72,7 @@
 				| appointmentsCount: date) > 0
 		"
 		class="mt-1"
+		[class.hidden]="weekly"
 	>
 		{{
 			(appointments$ | async).entities

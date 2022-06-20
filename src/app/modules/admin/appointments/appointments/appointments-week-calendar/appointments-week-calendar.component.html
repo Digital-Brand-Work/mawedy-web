@@ -4,12 +4,27 @@
 	>
 		<div class="md:rounded-md">
 			<div
+				style="min-height: 70vh"
+				class="flex flex-col items-center justify-center text-gray-400 text-3xl"
+				*ngIf="closed"
+			>
+				<mat-icon
+					class="ext-gray-300 icon-size-24 mb-5"
+					svgIcon="block"
+				></mat-icon>
+
+				Clinic is Closed Every {{ date$ | async | date: 'EEEE' }}
+			</div>
+
+			<div
+				*ngIf="!closed"
 				style="border-right: 1px solid #cfdae8"
 				class="grid grid-cols-8 rounded-tr-md relative"
 			>
 				<div></div>
 
 				<div
+					[@listAnimation]="(weekDays$ | async).length"
 					style="
 						border: 1px solid #cfdae8c7;
 						background: #f7f8fa;
@@ -25,34 +40,30 @@
 						}"
 						class="text-center font-bold uppercase rounded-xl flex items-center justify-center flex-col"
 						*ngFor="
-							let day of weekDays;
+							let day of weekDays$ | async;
 							trackBy: identity;
 							let weekDayIndex = index
 						"
 					>
 						<div class="text-sm">
-							{{ day | shortened }}
+							{{ day | date: 'EEE' }}
 						</div>
 
 						<div class="font-extrabold text-lg">
-							{{ 21 + weekDayIndex }}
+							{{ day | date: 'dd' }}
 						</div>
 					</div>
 				</div>
 
 				<div
-					*ngFor="
-						let timing of timings;
-						trackBy: identity;
-						let timingIndex = index
-					"
+					*ngFor="let timing of timings; let timingIndex = index"
 					class="grid grid-cols-8 col-span-8"
 				>
 					<div
 						style="height: 70px"
 						class="text-gray-400 text-right mr-5"
 					>
-						{{ timing }}:00 AM
+						{{ timing | toTwelve }}
 					</div>
 
 					<div
@@ -61,7 +72,7 @@
 						routerLink="/aster_clinic/jumeirah/appointments/day"
 						role="button"
 						*ngFor="
-							let day of weekDays;
+							let day of weekDays$ | async;
 							trackBy: identity;
 							let dayIndex = index
 						"
@@ -70,9 +81,11 @@
 					>
 						<!-- line  -->
 						<div
+							weekCalendarCursor
+							[time]="timing"
+							[date]="day"
 							stop-propagation
-							*ngIf="timingIndex === 4 && dayIndex === 3"
-							class="absolute col-span-8 right-0 z-10 flex items-center w-full"
+							class="absolute col-span-8 top-8 right-0 z-10 flex items-center w-full"
 						>
 							<div
 								matTooltip="Time today: 1 PM"
@@ -85,12 +98,13 @@
 						</div>
 						<!-- line  -->
 
-						<appointments-month-calendar-appointment-item
+						<calendar-items
+							[weekly]="true"
+							[matchTime]="true"
+							[time]="timing"
+							[date]="day"
 							stop-propagation
-							*ngFor="let item of [1, 2]; trackBy: identity"
-							[color]="'violet'"
-							[class.hidden]="timingIndex !== 3"
-						></appointments-month-calendar-appointment-item>
+						></calendar-items>
 					</div>
 				</div>
 			</div>

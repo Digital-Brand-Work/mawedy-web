@@ -139,7 +139,17 @@ export class InitialDataResolver implements Resolve<any> {
 						),
 					)
 
-					this.loadAppointments(appointments.data)
+					this.loadAppointments(
+						appointments.data.filter(
+							(appointment: Appointment) =>
+								appointment.waiting === false &&
+								dayjs(appointment.date).format(
+									'YYYY-MMMM-DDDD',
+								) === dayjs().format('YYYY-MMMM-DDDD') &&
+								appointment.status ===
+									AppointmentStatusEnum.CONFIRMED,
+						),
+					)
 
 					this.loadPromotions(promotions.data)
 				})

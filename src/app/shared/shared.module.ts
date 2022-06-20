@@ -41,6 +41,8 @@ import { FilterByCurrentDateDirective } from 'app/mawedy-core/directives/filter-
 import { AppointmentCountsPipe } from 'app/mawedy-core/pipes/appointment-day-count.pipe'
 import { FilterByDatePipe } from '@digital_brand_work/pipes/filterBy.pipe'
 import { FilterByDoctorPipe } from 'app/mawedy-core/pipes/filter-by-doctor.pipe'
+import { HideIfDoesNotMatchTimeDirective } from 'app/mawedy-core/directives/hide-appointment-if-time-does-not-match.directive'
+import { WeekCalendarCursorDirective } from 'app/mawedy-core/directives/week-calendar-cursor.directive'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -96,6 +98,8 @@ const directives: any[] = [
 	CheckForAppointmentsDirective,
 	IsNotThisMonthDirective,
 	FilterByCurrentDateDirective,
+	HideIfDoesNotMatchTimeDirective,
+	WeekCalendarCursorDirective,
 ]
 
 @NgModule({
