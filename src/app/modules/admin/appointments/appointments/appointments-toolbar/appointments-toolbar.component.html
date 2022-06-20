@@ -1,13 +1,31 @@
-<div class="flex items-center w-full">
-	<div class="flex items-center mr-5">
-		<button mat-icon-button matTooltip="View March Appointments">
+<div *ngIf="currentMonth$ | async" class="flex items-center w-full">
+	<div
+		@slideInBottom
+		*ngIf="currentMonth$ | async as currentMonth"
+		class="flex items-center mr-5"
+	>
+		<button
+			[ngClass]="{ 'opacity-70 pointer-events-none': currentMonth === 1 }"
+			[disabled]="currentMonth === 1"
+			(click)="moveCalendarMonth('subtract')"
+			mat-icon-button
+			matTooltip="View March Appointments"
+		>
 			<mat-icon
 				class="text-gray-400"
 				svgIcon="heroicons_solid:chevron-left"
 			></mat-icon>
 		</button>
 
-		<button mat-icon-button matTooltip="View May Appointment">
+		<button
+			[ngClass]="{
+				'opacity-70 pointer-events-none': currentMonth === 11
+			}"
+			[disabled]="currentMonth === 11"
+			(click)="moveCalendarMonth('add')"
+			mat-icon-button
+			matTooltip="View May Appointment"
+		>
 			<mat-icon
 				class="text-gray-400"
 				svgIcon="heroicons_solid:chevron-right"
@@ -21,8 +39,12 @@
 			svgIcon="heroicons_outline:calendar"
 		></mat-icon>
 
-		<div class="font-bold text-gray-700 mr-2 text-lg">
-			{{ today | date: 'MMMM yyyy' }}
+		<div
+			@slideInBottom
+			*ngIf="date$ | async"
+			class="font-bold text-gray-700 mr-2 text-lg"
+		>
+			{{ date$ | async | date: 'MMMM yyyy' }}
 		</div>
 	</div>
 

@@ -26,6 +26,16 @@ export const weekDays: WeekDay[] = [
 	'sunday',
 ]
 
+export const weekDays2: WeekDay[] = [
+	'sunday',
+	'monday',
+	'tuesday',
+	'wednesday',
+	'thursday',
+	'friday',
+	'saturday',
+]
+
 export type WeekDay =
 	| 'monday'
 	| 'tuesday'

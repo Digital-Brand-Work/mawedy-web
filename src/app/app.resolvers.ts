@@ -212,8 +212,6 @@ export class InitialDataResolver implements Resolve<any> {
 	}
 
 	loadDashboardAppointments(dashboardAppointments: DashboardAppointment[]) {
-		console.log(dashboardAppointments)
-
 		this._indexDBService
 			.bulkAdd(
 				DB.DASHBOARD_APPOINTMENTS,

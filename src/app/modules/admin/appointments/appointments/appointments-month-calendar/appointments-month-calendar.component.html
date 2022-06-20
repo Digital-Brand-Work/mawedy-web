@@ -27,17 +27,20 @@
 					routerLink="/aster_clinic/jumeirah/appointments/day"
 					role="button"
 					class="day hover:bg-gray-50"
-					*ngFor="let day of days; trackBy: identity; let i = index"
+					*ngFor="
+						let calendar of days;
+						trackBy: identity;
+						let i = index
+					"
 				>
-					<div
-						[ngClass]="{
-							'text-gray-400': i === 0,
-							'accent-color': i !== 0
-						}"
-					>
+					<div>
 						<div class="flex items-center">
-							<div class="mr-5 ml-auto text-xl">
-								{{ day }}
+							<div
+								isNotThisMonth
+								[date]="calendar.date"
+								class="mr-5 ml-auto text-xl"
+							>
+								{{ calendar.day }}
 							</div>
 						</div>
 

@@ -34,6 +34,7 @@ import { FuseConfirmationModule } from '@fuse/services/confirmation'
 import { DashboardCountPipe } from 'app/mawedy-core/pipes/dashboard-count.pipe'
 import { RouterModule } from '@angular/router'
 import { mobileComponents } from './landing.mobile.component'
+import { IsNotThisMonthDirective } from 'app/mawedy-core/directives/is-not-this-month.directive'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -82,6 +83,7 @@ const directives: any[] = [
 	AutoSizeDirective,
 	SyncWithClinicDirective,
 	CheckForAppointmentsDirective,
+	IsNotThisMonthDirective,
 ]
 
 @NgModule({
