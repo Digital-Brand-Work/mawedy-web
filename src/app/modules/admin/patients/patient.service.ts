@@ -14,7 +14,7 @@ export class PatientService extends BaseService<Patient> {
 		_indexDbService: NgxIndexedDBService,
 		private _indexDBController: IndexedDbController,
 	) {
-		super(_http, _indexDbService, 'v1/patients')
+		super(_http, _indexDbService, 'v1/clinic/patients')
 
 		this.current$.subscribe((patient: Patient) => {
 			if (!patient || patient === null) {

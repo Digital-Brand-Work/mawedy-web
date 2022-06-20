@@ -8,8 +8,9 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class DepartmentService extends BaseService<Department> {
 	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
-		super(http, indexDbService, 'v1/departments')
+		super(http, indexDbService, 'v1/clinic/departments')
 	}
 
-	current$: BehaviorSubject<Department | null> = new BehaviorSubject<Department | null>(null)
+	current$: BehaviorSubject<Department | null> =
+		new BehaviorSubject<Department | null>(null)
 }

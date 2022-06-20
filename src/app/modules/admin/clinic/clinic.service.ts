@@ -98,7 +98,7 @@ export class ClinicUserService {
 				new BaseService(
 					this._http,
 					this._indexedDBService,
-					'v1/auth/check',
+					'v1/clinic/auth/check',
 				)
 					.get()
 					.pipe(take(1))

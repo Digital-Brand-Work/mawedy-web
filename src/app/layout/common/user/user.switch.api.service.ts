@@ -6,6 +6,6 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class SwitchAccountApi extends BaseService<any> {
 	constructor(_http: HttpClient, _indexDbService: NgxIndexedDBService) {
-		super(_http, _indexDbService, 'v1/accounts/switch')
+		super(_http, _indexDbService, 'v1/clinic/accounts/switch')
 	}
 }

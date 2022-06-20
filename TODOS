@@ -28,6 +28,10 @@ Guards
 
 Fix SEO
 
+https://github.com/rxgx/json-calendar
+
+# ACCOUNTS
+
 Twillo:
 Username: info@mawedy.ae
 Password: MzmwTeam@1711001
@@ -44,32 +48,45 @@ Remove Default Subscription
 Tab Index
 Mobile Number Validation
 
-OLD
+# OLD
+
 https://xd.adobe.com/view/380a5382-30a0-41cd-9df4-60f31249ba76-6d59/screen/71478ea3-fc01-4802-89ee-5e35ba9360fd/
 
-NEW
+# MAWEDY MOBILE LANDING PAGE
+
+https://xd.adobe.com/view/a6d7040b-fef6-4765-84e7-d9a2a2e5cd41-f384/specs/
+
+# NEW
+
 https://xd.adobe.com/view/49b7730f-7a9c-4984-b569-e6ec1bce31a9-1ce4/
 
-MAWEDY MASTER ADMIN DESIGN LINK
+# MAWEDY MASTER ADMIN DESIGN LINK
+
 https://xd.adobe.com/view/22cd4d72-ff89-4961-a76f-d69373974725-779e/
 
+# DEVELOP LINK
+
 https://develop.mawedy.ae
+
+# USERNAME AND PASSWORD
 
 Username: admin
 Password: QVSEKywyD69945A
 
-Scaffold Entity
+# Scaffold Entity
+
 ng generate entity DashboardWaitingPatient --reducers store/app.state.ts -m modules/admin/dashboard/dashboard.module.ts --flat false
 
-Scaffold Effects
+# Scaffold Effects
+
 ng g effect Patient -c true --flat false -g true -a true -m modules/admin/patients/patients.module.ts
+
+# DOCUMENTER
 
 https://documenter.getpostman.com/view/20654750/UyxqD45a?fbclid=IwAR2RreWciaxjYBphx0XvwZWGqviKDKGjKwD3DZllCW5FdB5Lo53kX8GK8r0
 
-GOOGLE OAUTH
+# MISSING
 
 https://www.mawedy.ae/privacy-policy
 
 https://www.mawedy.ae/terms-of-service
-
-https://github.com/rxgx/json-calendar

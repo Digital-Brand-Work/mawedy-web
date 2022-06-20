@@ -8,6 +8,6 @@ import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 })
 export class LoginService extends BaseService<any> {
 	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
-		super(http, indexDbService, 'v1/auth/login')
+		super(http, indexDbService, 'v1/clinic/auth/login')
 	}
 }

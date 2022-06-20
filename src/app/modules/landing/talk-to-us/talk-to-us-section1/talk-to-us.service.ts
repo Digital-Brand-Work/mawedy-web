@@ -6,6 +6,6 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class TalkToUsService extends BaseService<any> {
 	constructor(_http: HttpClient, _indexDbService: NgxIndexedDBService) {
-		super(_http, _indexDbService, 'v1/contact-us')
+		super(_http, _indexDbService, 'v1/clinic/contact-us')
 	}
 }

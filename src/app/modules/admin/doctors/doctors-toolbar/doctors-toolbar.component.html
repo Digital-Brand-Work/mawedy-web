@@ -1,5 +1,7 @@
 <div class="flex items-center w-full">
-	<div class="font-bold text-xl">Doctors ({{ doctors.length }})</div>
+	<div class="font-bold text-xl">
+		Doctors ({{ ((doctors$ | async).entities | entities).length }})
+	</div>
 
 	<div
 		style="width: 219px"

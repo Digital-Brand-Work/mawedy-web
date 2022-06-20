@@ -1,8 +1,8 @@
 {
 	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
-  "cli": {
-    "analytics": false,
+	"cli": {
+		"analytics": false,
 		"defaultCollection": "@ngrx/schematics"
 	},
 	"newProjectRoot": "projects",
@@ -82,9 +82,7 @@
 							"src/styles/vendors.scss",
 							"src/@fuse/styles/main.scss",
 							"src/styles/styles.scss",
-							"src/styles/tailwind.scss",
-							"src/styles/overrides/fuse.override.scss",
-							"src/styles/overrides/material.override.scss"
+							"src/styles/tailwind.scss"
 						],
 						"scripts": []
 					},

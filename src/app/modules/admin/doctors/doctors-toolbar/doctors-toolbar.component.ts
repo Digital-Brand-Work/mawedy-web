@@ -1,8 +1,9 @@
 import { environment } from './../../../../../environments/environment'
 import { Doctor } from './../doctor.model'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { AddDoctorModal } from '../modals/doctor-add/doctor-add.service'
+import { select, Store } from '@ngrx/store'
 
 @Component({
 	selector: 'doctors-toolbar',
@@ -10,13 +11,18 @@ import { AddDoctorModal } from '../modals/doctor-add/doctor-add.service'
 	styleUrls: ['./doctors-toolbar.component.scss'],
 })
 export class DoctorsToolbarComponent implements OnInit {
-	constructor(private addDoctorModal: AddDoctorModal) {}
+	constructor(
+		private addDoctorModal: AddDoctorModal,
+		private store: Store<{ doctors: Doctor[] }>,
+	) {}
 
 	@Output() onSearch = new EventEmitter()
 
 	@Output() onFilter = new EventEmitter()
 
 	@Input() doctors: Doctor[] = []
+
+	doctors$?: Observable<Doctor[]> = this.store.pipe(select('doctors'))
 
 	API_URL = environment.api
 

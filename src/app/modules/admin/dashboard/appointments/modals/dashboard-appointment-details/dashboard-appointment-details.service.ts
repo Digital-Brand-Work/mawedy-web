@@ -14,6 +14,6 @@ export class DashboardAppointmentDetailsModal {
 @Injectable({ providedIn: 'root' })
 export class AppointmentNotificationService extends BaseService<any> {
 	constructor(_http: HttpClient, _indexDBService: NgxIndexedDBService) {
-		super(_http, _indexDBService, 'v1/notifications/appointment')
+		super(_http, _indexDBService, 'v1/clinic/notifications/appointment')
 	}
 }

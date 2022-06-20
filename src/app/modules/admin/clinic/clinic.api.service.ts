@@ -6,13 +6,13 @@ import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 @Injectable({ providedIn: 'root' })
 export class ClinicApi extends BaseService<any> {
 	constructor(_http: HttpClient, _indexDbService: NgxIndexedDBService) {
-		super(_http, _indexDbService, 'v1/my/clinic/update')
+		super(_http, _indexDbService, 'v1/clinic/my/clinic/update')
 	}
 }
 
 @Injectable({ providedIn: 'root' })
 export class BranchApi extends BaseService<any> {
 	constructor(_http: HttpClient, _indexDbService: NgxIndexedDBService) {
-		super(_http, _indexDbService, 'v1/my/self/update')
+		super(_http, _indexDbService, 'v1/clinic/my/self/update')
 	}
 }

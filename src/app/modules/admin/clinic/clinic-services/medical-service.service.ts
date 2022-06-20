@@ -8,7 +8,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class MedicalService_Service extends BaseService<MedicalService> {
 	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
-		super(http, indexDbService, 'v1/services')
+		super(http, indexDbService, 'v1/clinic/services')
 
 		/* 
 		    ->except('index', 'show')

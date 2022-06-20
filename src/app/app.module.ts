@@ -37,6 +37,7 @@ import { AgmCoreModule } from '@agm/core'
 		EffectsModule.forRoot(effects),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
+			logOnly: environment.production, // Restrict extension to log-only mode
 		}),
 
 		BrowserAnimationsModule,

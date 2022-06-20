@@ -9,7 +9,7 @@ import { environment } from 'environments/environment'
 @Injectable({ providedIn: 'root' })
 export class DoctorService extends BaseService<Doctor> {
 	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
-		super(http, indexDbService, 'v1/doctors')
+		super(http, indexDbService, 'v1/clinic/doctors')
 	}
 
 	current$: BehaviorSubject<Doctor | null> =
@@ -17,7 +17,7 @@ export class DoctorService extends BaseService<Doctor> {
 
 	getSchedule(doctor: Doctor): Observable<any> {
 		return this.http.get(
-			`${environment.api}v1/doctors/${doctor.id}/appointments?status=Confirmed&waiting=false`,
+			`${environment.api}v1/clinic/doctors/${doctor.id}/appointments?status=Confirmed&waiting=false`,
 			this.headers(),
 		)
 	}

@@ -8,7 +8,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class AppointmentService extends BaseService<Appointment> {
 	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
-		super(http, indexDbService, 'v1/appointments')
+		super(http, indexDbService, 'v1/clinic/appointments')
 	}
 
 	current$: BehaviorSubject<Appointment | null> =
