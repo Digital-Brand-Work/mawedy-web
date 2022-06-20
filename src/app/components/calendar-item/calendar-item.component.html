@@ -14,7 +14,8 @@
 			let appointment of (appointments$ | async).entities
 				| entities
 				| filter_by_date: date
-				| sortBy: 'date'
+				| sortBy: 'start_time'
+				| filter_by_doctor: (doctor$ | async)
 				| limitBy: 2;
 			trackBy: identity
 		"
@@ -23,7 +24,7 @@
 		[date]="date"
 		class="blue whitespace-nowrap overflow-hidden text-ellipsis py-0.5 px-2 text-sm mt-1 accent-color font-bold"
 	>
-		{{ appointment.start_time | toTwelve }} -
+		{{ appointment.start_time | toTwelve | uppercase }} -
 		{{ appointment.doctor.name }} & {{ appointment.patient.first_name }}
 		{{ appointment.patient.middle_name }}
 		{{ appointment.patient.last_name }}
@@ -33,6 +34,7 @@
 		*ngIf="
 			((appointments$ | async).entities
 				| entities
+				| filter_by_doctor: (doctor$ | async)
 				| filter_by_date: date
 				| appointmentsCount: date) > 0
 		"
@@ -41,6 +43,7 @@
 		{{
 			(appointments$ | async).entities
 				| entities
+				| filter_by_doctor: (doctor$ | async)
 				| filter_by_date: date
 				| appointmentsCount: date
 		}}

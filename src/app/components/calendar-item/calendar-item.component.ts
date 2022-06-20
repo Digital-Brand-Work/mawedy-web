@@ -4,7 +4,9 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { DashboardAppointmentDetailsModal } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-details/dashboard-appointment-details.service'
 import { DashboardAppointmentService } from 'app/modules/admin/dashboard/appointments/dashboard-appointment.service'
 import { select, Store } from '@ngrx/store'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { Doctor } from 'app/modules/admin/doctors/doctor.model'
+import { AppointmentToolbarService } from 'app/modules/admin/appointments/appointments/appointment-toolbar.service'
 
 @Component({
 	selector: 'calendar-items',
@@ -14,12 +16,16 @@ import { Observable } from 'rxjs'
 })
 export class CalendarItemComponent implements OnInit {
 	constructor(
+		private _appointmentToolbarService: AppointmentToolbarService,
 		private _dashboardAppointmentService: DashboardAppointmentService,
 		private _dashboardAppointmentDetailsModal: DashboardAppointmentDetailsModal,
 		private _store: Store<{
 			appointments: Appointment[]
 		}>,
 	) {}
+
+	doctor$: BehaviorSubject<string | null> =
+		this._appointmentToolbarService.doctorFilter$
 
 	appointments$: Observable<Appointment[]> = this._store.pipe(
 		select('appointments'),

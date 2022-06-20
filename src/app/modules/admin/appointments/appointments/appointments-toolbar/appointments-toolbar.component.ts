@@ -1,6 +1,4 @@
-import { AppointmentToolbarService } from './../appointment-toolbar.service'
-import { isPlatformBrowser } from '@angular/common'
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { select, Store } from '@ngrx/store'
@@ -14,6 +12,7 @@ import {
 	take,
 	takeUntil,
 } from 'rxjs'
+import { AppointmentToolbarService } from '../appointment-toolbar.service'
 
 @Component({
 	selector: 'appointments-toolbar',
@@ -101,5 +100,9 @@ export class AppointmentsToolbarComponent implements OnInit {
 					)
 				}
 			})
+	}
+
+	filter(doctor: string | null) {
+		this._appointmentToolbarService.doctorFilter$.next(doctor)
 	}
 }

@@ -18,7 +18,8 @@
 						style="height: 60px"
 						class="accent-color font-semibold"
 						*ngFor="
-							let appointment of appointments;
+							let appointment of appointments
+								| sortBy: 'start_time';
 							trackBy: identity
 						"
 					>

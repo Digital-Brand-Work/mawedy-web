@@ -9,7 +9,7 @@ export class TwentyFourToTwelveHoursPipe implements PipeTransform {
 
 		let min = time.split(':')[1]
 
-		let part = hour > 12 ? 'pm' : 'am'
+		let part = hour > 12 ? 'PM' : 'AM'
 
 		if (parseInt(hour) === 0) hour = 12
 

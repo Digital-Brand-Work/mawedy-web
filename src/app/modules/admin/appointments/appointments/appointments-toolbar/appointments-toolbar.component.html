@@ -103,10 +103,11 @@
 		style="width: 250px"
 		class="ml-5 hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80"
 	>
-		<select class="w-full">
-			<option>All Doctors</option>
+		<select (change)="filter($event.target.value)" class="w-full">
+			<option [value]="null">All Doctors</option>
 
 			<option
+				[value]="doctor.id"
 				*ngFor="
 					let doctor of (doctors$ | async).entities | entities;
 					trackBy: identity

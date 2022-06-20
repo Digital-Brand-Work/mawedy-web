@@ -1,4 +1,6 @@
 <for-approvals-table
 	*ngIf="(appointments$ | async)?.entities"
-	[appointments]="(appointments$ | async).entities | entities"
+	[appointments]="
+		(appointments$ | async).entities | entities | sortBy: 'start_time'
+	"
 ></for-approvals-table>
