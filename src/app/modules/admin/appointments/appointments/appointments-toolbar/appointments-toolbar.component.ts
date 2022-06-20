@@ -1,3 +1,4 @@
+import { AppointmentToolbarService } from './../appointment-toolbar.service'
 import { isPlatformBrowser } from '@angular/common'
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core'
 import { Router } from '@angular/router'
@@ -13,7 +14,6 @@ import {
 	take,
 	takeUntil,
 } from 'rxjs'
-import { AppointmentToolbarService } from '../appointment-toolbar.service'
 
 @Component({
 	selector: 'appointments-toolbar',
@@ -80,12 +80,12 @@ export class AppointmentsToolbarComponent implements OnInit {
 	identity = (item: any) => item
 
 	moveCalendarMonth(mode: 'add' | 'subtract') {
-		combineLatest([this.date$, this.currentMonth$])
+		combineLatest([this.date$])
 			.pipe(take(1))
 			.subscribe((results) => {
-				const [date, currentMonth] = results
+				const [date] = results
 
-				if (mode === 'add' && currentMonth <= 12) {
+				if (mode === 'add') {
 					this.date$.next(dayjs(date).add(1, 'month').toDate())
 
 					return this.currentMonth$.next(
@@ -93,11 +93,13 @@ export class AppointmentsToolbarComponent implements OnInit {
 					)
 				}
 
-				this.date$.next(dayjs(date).subtract(1, 'month').toDate())
+				if (mode === 'subtract') {
+					this.date$.next(dayjs(date).subtract(1, 'month').toDate())
 
-				return this.currentMonth$.next(
-					dayjs(date).subtract(1, 'month').month(),
-				)
+					return this.currentMonth$.next(
+						dayjs(date).subtract(1, 'month').month(),
+					)
+				}
 			})
 	}
 }

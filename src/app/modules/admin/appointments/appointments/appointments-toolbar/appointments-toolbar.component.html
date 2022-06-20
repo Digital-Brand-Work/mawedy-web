@@ -1,12 +1,6 @@
-<div *ngIf="currentMonth$ | async" class="flex items-center w-full">
-	<div
-		@slideInBottom
-		*ngIf="currentMonth$ | async as currentMonth"
-		class="flex items-center mr-5"
-	>
+<div class="flex items-center w-full">
+	<div @slideInBottom class="flex items-center mr-5">
 		<button
-			[ngClass]="{ 'opacity-70 pointer-events-none': currentMonth === 1 }"
-			[disabled]="currentMonth === 1"
 			(click)="moveCalendarMonth('subtract')"
 			mat-icon-button
 			matTooltip="View March Appointments"
@@ -18,10 +12,6 @@
 		</button>
 
 		<button
-			[ngClass]="{
-				'opacity-70 pointer-events-none': currentMonth === 11
-			}"
-			[disabled]="currentMonth === 11"
 			(click)="moveCalendarMonth('add')"
 			mat-icon-button
 			matTooltip="View May Appointment"
