@@ -44,7 +44,13 @@
 							</div>
 						</div>
 
-						<calendar-items stop-propagation></calendar-items>
+						<calendar-items
+							[appointments]="
+								(appointments$ | async).entities | entities
+							"
+							[date]="calendar.date"
+							stop-propagation
+						></calendar-items>
 					</div>
 				</div>
 			</div>

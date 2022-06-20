@@ -1,5 +1,25 @@
-<div
-	class="blue whitespace-nowrap overflow-hidden text-ellipsis py-0.5 px-2 text-sm mt-1 accent font-bold"
->
-	8:00 AM Dr Khamil Naik & Jamel Eid Yassin
+<div *ngIf="appointments.length !== 0" [@listAnimation]="appointments.length">
+	<div
+		[ngClass]="{
+			blue: appointment.type_code === 'Aw',
+			green: appointment.type_code !== 'Aw'
+		}"
+		*ngFor="
+			let appointment of appointments | sortBy: 'date' | limitBy: 3;
+			trackBy: identity
+		"
+		filterByCurrentDate
+		[appointment]="appointment"
+		[date]="date"
+		class="blue whitespace-nowrap overflow-hidden text-ellipsis py-0.5 px-2 text-sm mt-1 accent-color font-bold"
+	>
+		{{ appointment.start_time | toTwelve }} -
+		{{ appointment.doctor.name }} & {{ appointment.patient.first_name }}
+		{{ appointment.patient.middle_name }}
+		{{ appointment.patient.last_name }}
+	</div>
+
+	<div *ngIf="(appointments | appointmentsCount: date) > 0" class="mt-1">
+		{{ appointments | appointmentsCount: date }} more..
+	</div>
 </div>

@@ -35,6 +35,10 @@ import { DashboardCountPipe } from 'app/mawedy-core/pipes/dashboard-count.pipe'
 import { RouterModule } from '@angular/router'
 import { mobileComponents } from './landing.mobile.component'
 import { IsNotThisMonthDirective } from 'app/mawedy-core/directives/is-not-this-month.directive'
+import { SortByPipe } from '@digital_brand_work/pipes/sort-by.pipe'
+import { LimitByPipe } from '@digital_brand_work/pipes/limit-by.pipe'
+import { FilterByCurrentDateDirective } from 'app/mawedy-core/directives/filter-by-current-date.directive'
+import { AppointmentCountsPipe } from 'app/mawedy-core/pipes/appointment-day-count.pipe'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -75,6 +79,9 @@ const pipes: any[] = [
 	TableFilterPipe,
 	add30MinutesPipe,
 	DashboardCountPipe,
+	SortByPipe,
+	LimitByPipe,
+	AppointmentCountsPipe,
 ]
 
 const directives: any[] = [
@@ -84,6 +91,7 @@ const directives: any[] = [
 	SyncWithClinicDirective,
 	CheckForAppointmentsDirective,
 	IsNotThisMonthDirective,
+	FilterByCurrentDateDirective,
 ]
 
 @NgModule({
