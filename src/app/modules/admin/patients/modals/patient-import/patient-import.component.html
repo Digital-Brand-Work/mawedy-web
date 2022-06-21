@@ -1,1 +1,57 @@
-<p>patient-import works!</p>
+<div
+	*ngIf="opened$ | async"
+	stop-propagation
+	class="m-auto bg-white w-full md:w-1/4 rounded-xl overflow-hidden"
+	@zoomIn
+>
+	<modal-header
+		modalTitle="Import Patients"
+		(onClose)="opened$.next(false)"
+	></modal-header>
+
+	<div class="px-10 py-10 w-full">
+		<div
+			class="rounded-xl overflow-x-hidden bg-gray-200/80 w-full flex items-center"
+		>
+			<button
+				(click)="patientFileInput.click()"
+				matRipple
+				matRippleColor="rgba(250, 250, 250,.5)"
+				class="flex items-center flex-1 p-3 text-gray-500 text-ellipsis hover:bg-gray-200"
+			>
+				{{ !file ? 'Select File' : file.name }}
+			</button>
+
+			<input
+				(change)="readFile($event)"
+				accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+				type="file"
+				class="hidden"
+				#patientFileInput
+			/>
+
+			<button
+				(click)="import()"
+				[disabled]="!file"
+				[ngClass]="{
+					'bg-emerald-500': file,
+					'pointer-events-none bg-gray-400': !file
+				}"
+				matRipple
+				matRippleColor="rgba(250, 250, 250,.5)"
+				class="flex items-center ml-auto rounded-l-none text-white p-3 hover:bg-emerald-600"
+			>
+				Upload Excel Form
+			</button>
+		</div>
+
+		<a
+			href="/assets/excel_sample/doctor.xlsx"
+			class="mt-8 text-sky-500 font-semibold flex items-center hover:underline"
+		>
+			Download Excel form
+
+			<mat-icon class="text-sky-500 ml-2" svgIcon="info"></mat-icon>
+		</a>
+	</div>
+</div>

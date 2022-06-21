@@ -46,9 +46,9 @@
 
 <doctor-import
 	stop-propagation
-	(click)="_doctorImportModalOpened$.next(false)"
-	*ngIf="_doctorImportModalOpened$ | async"
+	(click)="doctorImportModalOpened$.next(false)"
+	*ngIf="doctorImportModalOpened$ | async"
 	@fadeOut
-	style="z-index: 999"
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
 	class="fixed w-screen h-screen flex"
 ></doctor-import>

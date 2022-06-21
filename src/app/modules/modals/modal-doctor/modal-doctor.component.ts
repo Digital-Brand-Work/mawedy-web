@@ -39,7 +39,7 @@ export class ModalDoctorComponent implements OnInit {
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.doctorDetailsModal.opened$
 
-	_doctorImportModalOpened$: BehaviorSubject<boolean> =
+	doctorImportModalOpened$: BehaviorSubject<boolean> =
 		this._doctorImportModal.opened$
 
 	ngOnInit(): void {}
