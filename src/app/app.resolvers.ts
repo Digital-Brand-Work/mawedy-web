@@ -38,6 +38,7 @@ import * as PromotionsActions from './modules/admin/promotions/promotion.actions
 import { DashboardForApprovalPatient } from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.model'
 import * as DashboardForApprovalPatients from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
 import { AppointmentStatusEnum } from './mawedy-core/enums/appointment-status.enum'
+import { days } from './mawedy-core/enums/day.enum'
 
 @Injectable({
 	providedIn: 'root',
@@ -79,8 +80,11 @@ export class InitialDataResolver implements Resolve<any> {
 					this._patientAPI.get(),
 					this._departmentAPI.get(),
 					this._doctorAPI.get(),
-					this._appointmentAPI.get(),
+					this._appointmentAPI.query(`?date=${dayjs().toJSON()}`),
 					this._promotionAPI.get(),
+					this._appointmentAPI.query(
+						`?status=${AppointmentStatusEnum.PENDING}`,
+					),
 				]).subscribe((results: any) => {
 					this._clinicUserService.update()
 
@@ -90,6 +94,7 @@ export class InitialDataResolver implements Resolve<any> {
 						doctors,
 						appointments,
 						promotions,
+						approvals,
 					] = results
 
 					this._indexDBController.removeAll([
@@ -131,13 +136,7 @@ export class InitialDataResolver implements Resolve<any> {
 						),
 					)
 
-					this.loadForApprovalPatients(
-						appointments.data.filter(
-							(appointment: Appointment) =>
-								appointment.status ===
-								AppointmentStatusEnum.PENDING,
-						),
-					)
+					this.loadForApprovalPatients(approvals.data)
 
 					this.loadPromotions(promotions.data)
 				})

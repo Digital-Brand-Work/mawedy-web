@@ -4,31 +4,21 @@ line real time
 
 Remove to calendar when canceling appointments
 
-Checkout Yearly x 5
-
 colors of confirm
 
-ADD Pagination. Add new Tab
+ADD Pagination
 
 Confirm Delete Modal
 
-Delete Confirm
-
 Auto Grow Directive
 
-Disable Subscription if already subscribed
-
 Add Modal Exit Transition
-
-Virtual Scroll
-
-Pagination
 
 lint
 
 link to app store
 
-Interceptors
+Interceptor to login direct sa checkout
 
 Guards
 
