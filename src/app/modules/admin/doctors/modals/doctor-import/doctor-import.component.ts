@@ -1,10 +1,10 @@
+import { ErrorHandlerService } from './../../../../../misc/error-handler.service'
+import { AlertState } from './../../../../../components/alert/alert.service'
+import { DoctorImportModal } from './doctor-import.service'
+import { dbwAnimations } from './../../../../../../@digital_brand_work/animations/animation.api'
 import { BehaviorSubject } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
-import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { DoctorImportModal } from './doctor-import.service'
-import { ImportPatientService } from 'app/mawedy-core/utilities/import.service'
-import { AlertState } from 'app/components/alert/alert.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ImportDoctorService } from 'app/mawedy-core/utilities/import.service'
 
 @Component({
 	selector: 'doctor-import',
@@ -17,7 +17,7 @@ export class DoctorImportComponent implements OnInit {
 		private _alert: AlertState,
 		private _doctorImportModal: DoctorImportModal,
 		private _errorHandlerService: ErrorHandlerService,
-		private _importPatientService: ImportPatientService,
+		private _importDoctorService: ImportDoctorService,
 	) {}
 
 	opened$: BehaviorSubject<boolean> = this._doctorImportModal.opened$
@@ -33,9 +33,9 @@ export class DoctorImportComponent implements OnInit {
 	import() {
 		let form = new FormData()
 
-		form.append('file', this.file)
+		form.append('file', this.file as Blob)
 
-		this._importPatientService.post(form).subscribe({
+		this._importDoctorService.post(form).subscribe({
 			next: () => {
 				this._alert.add({
 					id: Math.floor(Math.random() * 100000000000).toString(),
