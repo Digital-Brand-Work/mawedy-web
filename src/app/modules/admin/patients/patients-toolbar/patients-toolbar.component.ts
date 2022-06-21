@@ -1,8 +1,11 @@
+import { ExportPatientService } from './../../../../mawedy-core/utilities/export.service'
 import { environment } from './../../../../../environments/environment'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 import { AddPatientModal } from '../modals/patient-add/patient-add.service'
 import { Patient } from '../patient.model'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { AlertState } from 'app/components/alert/alert.service'
 
 @Component({
 	selector: 'patients-toolbar',
@@ -10,7 +13,12 @@ import { Patient } from '../patient.model'
 	styleUrls: ['./patients-toolbar.component.scss'],
 })
 export class PatientsToolbarComponent implements OnInit {
-	constructor(private addPatientModal: AddPatientModal) {}
+	constructor(
+		private _alert: AlertState,
+		private _exportService: ExportPatientService,
+		private addPatientModal: AddPatientModal,
+		private _errorHandlerService: ErrorHandlerService,
+	) {}
 
 	@Output() onSearch = new EventEmitter()
 
@@ -27,4 +35,21 @@ export class PatientsToolbarComponent implements OnInit {
 	keyword: string = ''
 
 	ngOnInit(): void {}
+
+	export() {
+		this._exportService.post({}).subscribe({
+			next: () => {
+				this._alert.add({
+					id: Math.floor(Math.random() * 100000000000).toString(),
+					title: `Exporting data!`,
+					message:
+						'Your exports are underway! We will email you the exported patients list once it is done. Thank you for your patience',
+					type: 'info',
+				})
+			},
+			error: (http) => {
+				this._errorHandlerService.handleError(http)
+			},
+		})
+	}
 }
