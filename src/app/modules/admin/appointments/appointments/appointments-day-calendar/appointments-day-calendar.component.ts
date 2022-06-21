@@ -3,7 +3,12 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs'
+import { AppointmentToolbarService } from '../appointment-toolbar.service'
+import * as dayjs from 'dayjs'
+import { empty, toFixedTwo } from 'app/mawedy-core/helpers'
+import { END_OF_HOURS, PM } from 'app/mawedy-core/constants/app.constant'
+import { Time } from '@digital_brand_work/models/core.model'
 
 @Component({
 	selector: 'appointments-day-calendar',
@@ -15,26 +20,84 @@ export class AppointmentsDayCalendarComponent implements OnInit {
 	constructor(
 		private seoService: SeoService,
 		private _clinicUserService: ClinicUserService,
+		private _appointmentToolbarService: AppointmentToolbarService,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
+	date$: BehaviorSubject<Date> = this._appointmentToolbarService.date$
+
 	unsubscribe$: Subject<any> = new Subject<any>()
 
+	closed: boolean = true
+
+	timings: Time[] = []
+
 	ngOnInit(): void {
-		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
-			if (!clinic) {
-				return
-			}
+		combineLatest([this._appointmentToolbarService.date$, this.clinic$])
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((results) => {
+				const [date, clinic] = results
 
-			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.address}  | Daily Appointments`,
+				if (clinic && date) {
+					this.seoService.generateTags({
+						title: `${clinic.name} | ${clinic?.address}  | Daily Appointments`,
+					})
+
+					const timeSlot = clinic.timeslots.find((slot) => {
+						return slot.day === dayjs(date).format('dddd')
+					})
+
+					if (!timeSlot.active) {
+						return (this.closed = true)
+					} else {
+						this.closed = false
+					}
+
+					if (!empty(timeSlot) || timeSlot.active) {
+						const [startHour, startMinutes] =
+							timeSlot.start.split(':')
+
+						const [endHour, endMinutes] = timeSlot.end.split(':')
+
+						const isGraveYard: boolean = parseInt(endHour) < PM
+
+						let timings = []
+
+						for (
+							let time = parseInt(startHour);
+							!isGraveYard
+								? time <= END_OF_HOURS &&
+								  time <= parseInt(endHour)
+								: time <= END_OF_HOURS ||
+								  time <= parseInt(endHour);
+							time++
+						) {
+							timings.push(`${toFixedTwo(time)}:00`)
+						}
+
+						if (isGraveYard) {
+							for (
+								let time = 2;
+								time < parseInt(endHour) + 1;
+								time++
+							) {
+								timings.push(`${toFixedTwo(time)}:00`)
+							}
+						}
+
+						if (timeSlot.end === '23:59') {
+							timings.push('24:00')
+						} else {
+							timings.push(timeSlot.end as Time)
+						}
+
+						timings = [...new Set(timings)]
+
+						this.timings = timings
+					}
+				}
 			})
-		})
-
-		for (let i = 1; i <= 12; i++) {
-			this.timings.push(i)
-		}
 	}
 
 	ngOnDestroy(): void {
@@ -42,8 +105,6 @@ export class AppointmentsDayCalendarComponent implements OnInit {
 
 		this.unsubscribe$.complete()
 	}
-
-	timings: number[] = []
 
 	identity = (item: any) => item
 }

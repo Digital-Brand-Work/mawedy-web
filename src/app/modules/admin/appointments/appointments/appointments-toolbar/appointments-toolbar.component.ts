@@ -91,7 +91,7 @@ export class AppointmentsToolbarComponent implements OnInit {
 					return this.setMonthlyMode(mode, date)
 				}
 
-				if (this.mode === 'week') {
+				if (this.mode === 'week' || this.mode === 'day') {
 					return this.setWeeklyMode(mode, date)
 				}
 			})

@@ -4,6 +4,7 @@ import { DoctorImagePlaceholderComponent } from './placeholders/doctor-image-pla
 import { MobileGooglePlayButtonComponent } from './mobile/buttons/mobile-google-play-button/mobile-google-play-button.component'
 import { MobileApplePayButtonComponent } from './mobile/buttons/mobile-apple-store-button/mobile-apple-pay-button.component'
 import { CalendarItemComponent } from './calendar-item/calendar-item.component'
+import { CalendarItemDayComponent } from './calendar-item-day/calendar-item-day.component'
 
 const components = []
 

@@ -22,6 +22,7 @@ import { DashboardStatusComponent } from 'app/modules/admin/dashboard/dashboard-
 import { HomeNavbarComponent } from 'app/modules/landing/common/home-navbar/home-navbar.component'
 import { HomeNavbarResponsiveComponent } from 'app/modules/landing/common/home-navbar-responsive/home-navbar-responsive.component'
 import { CalendarItemComponent } from 'app/components/calendar-item/calendar-item.component'
+import { CalendarItemDayComponent } from 'app/components/calendar-item-day/calendar-item-day.component'
 
 export const appComponents: any[] = [
 	GooglePlayButtonComponent,
@@ -48,4 +49,5 @@ export const appComponents: any[] = [
 	FooterComponent,
 	HomeNavbarResponsiveComponent,
 	CalendarItemComponent,
+	CalendarItemDayComponent,
 ]
