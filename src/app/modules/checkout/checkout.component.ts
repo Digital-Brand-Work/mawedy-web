@@ -60,6 +60,10 @@ export class CheckoutComponent implements OnInit {
 						return ''
 					}
 
+					if (subscription_request.interval === 'yearly') {
+						this.billMultiplier = 12
+					}
+
 					this.interval$.next(subscription_request.interval)
 
 					this.subscription$.next(subscription_request.subscription)

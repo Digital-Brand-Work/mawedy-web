@@ -6,7 +6,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class CheckoutService extends BaseService<any> {
 	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
-		super(http, indexDbService, 'v1/subscriptions/checkout')
+		super(http, indexDbService, 'v1/clinic/subscriptions/checkout')
 	}
 
 	// * POST *
@@ -15,7 +15,7 @@ export class CheckoutService extends BaseService<any> {
 @Injectable({ providedIn: 'root' })
 export class BillingService extends BaseService<any> {
 	constructor(http: HttpClient, indexDbService: NgxIndexedDBService) {
-		super(http, indexDbService, 'v1/subscriptions/billing')
+		super(http, indexDbService, 'v1/clinic/subscriptions/billing')
 	}
 
 	// * POST *
