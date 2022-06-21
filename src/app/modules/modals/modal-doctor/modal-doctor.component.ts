@@ -5,6 +5,7 @@ import { DoctorAvailabilityModal } from 'app/modules/admin/doctors/modals/doctor
 import { ConfirmDeleteDoctorModal } from 'app/modules/admin/doctors/modals/doctor-confirm-delete/doctor-confirm-delete.service'
 import { DoctorDetailsModal } from 'app/modules/admin/doctors/modals/doctor-details/doctor-details.service'
 import { EditDoctorModal } from 'app/modules/admin/doctors/modals/doctor-edit/doctor-edit.service'
+import { DoctorImportModal } from 'app/modules/admin/doctors/modals/doctor-import/doctor-import.service'
 import { BehaviorSubject } from 'rxjs'
 
 @Component({
@@ -17,6 +18,7 @@ export class ModalDoctorComponent implements OnInit {
 	constructor(
 		private addDoctorModal: AddDoctorModal,
 		private editDoctorModal: EditDoctorModal,
+		private _doctorImportModal: DoctorImportModal,
 		private doctorDetailsModal: DoctorDetailsModal,
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
 		private confirmDeleteDoctorModal: ConfirmDeleteDoctorModal,
@@ -36,6 +38,9 @@ export class ModalDoctorComponent implements OnInit {
 
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.doctorDetailsModal.opened$
+
+	_doctorImportModalOpened$: BehaviorSubject<boolean> =
+		this._doctorImportModal.opened$
 
 	ngOnInit(): void {}
 }

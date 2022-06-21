@@ -43,3 +43,12 @@
 	style="z-index: 999"
 	class="fixed w-screen h-screen flex"
 ></doctor-confirm-delete>
+
+<doctor-import
+	stop-propagation
+	(click)="_doctorImportModalOpened$.next(false)"
+	*ngIf="_doctorImportModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999"
+	class="fixed w-screen h-screen flex"
+></doctor-import>

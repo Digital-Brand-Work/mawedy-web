@@ -7,6 +7,7 @@ import { AddDoctorModal } from '../modals/doctor-add/doctor-add.service'
 import { select, Store } from '@ngrx/store'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
+import { DoctorImportModal } from '../modals/doctor-import/doctor-import.service'
 
 @Component({
 	selector: 'doctors-toolbar',
@@ -19,6 +20,7 @@ export class DoctorsToolbarComponent implements OnInit {
 		private _exportService: ExportDoctorService,
 		private addDoctorModal: AddDoctorModal,
 		private store: Store<{ doctors: Doctor[] }>,
+		private _doctorImportModal: DoctorImportModal,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
@@ -27,6 +29,9 @@ export class DoctorsToolbarComponent implements OnInit {
 	@Output() onFilter = new EventEmitter()
 
 	@Input() doctors: Doctor[] = []
+
+	doctorImportModalOpened$: BehaviorSubject<boolean> =
+		this._doctorImportModal.opened$
 
 	doctors$?: Observable<Doctor[]> = this.store.pipe(select('doctors'))
 

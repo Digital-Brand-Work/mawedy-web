@@ -19,6 +19,8 @@ import { DashboardAppointmentAssignSlotComponent } from 'app/modules/admin/dashb
 import { SubscriptionInvoicesComponent } from 'app/modules/admin/subscriptions/modals/subscription-invoices/subscription-invoices.component'
 import { DashboardAppointmentCancelAndAssignSlotComponent } from 'app/modules/admin/dashboard/appointments/modals/dashboard-appointment-cancel-and-assign-slot/dashboard-appointment-cancel-and-assign-slot.component'
 import { ClinicTimingsSelectModalComponent } from 'app/modules/admin/clinic/clinic-timings/modals/clinic-timings-select-modal/clinic-timings-select-modal.component'
+import { DoctorImportComponent } from 'app/modules/admin/doctors/modals/doctor-import/doctor-import.component'
+import { PatientImportComponent } from 'app/modules/admin/patients/modals/patient-import/patient-import.component'
 
 export const modalComponents: any[] = [
 	AppointmentAddComponent,
@@ -38,8 +40,10 @@ export const modalComponents: any[] = [
 	DoctorConfirmDeleteComponent,
 	DoctorDetailsComponent,
 	DoctorEditComponent,
+	DoctorImportComponent,
 
 	PatientAddComponent,
+	PatientImportComponent,
 
 	ClinicServicesAddComponent,
 	ClinicDepartmentAddComponent,

@@ -16,3 +16,12 @@
 	class="fixed w-screen h-screen flex"
 >
 </patient-details-booking-list-uploading-result>
+
+<patient-import
+	stop-propagation
+	(click)="_patientImportModalOpened$.next(false)"
+	*ngIf="_patientImportModalOpened$ | async"
+	@fadeOut
+	style="z-index: 999; background: rgba(10, 36, 64, 0.7)"
+	class="fixed w-screen h-screen flex"
+></patient-import>

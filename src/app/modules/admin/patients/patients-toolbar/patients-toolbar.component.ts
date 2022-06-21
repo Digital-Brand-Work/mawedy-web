@@ -6,6 +6,7 @@ import { AddPatientModal } from '../modals/patient-add/patient-add.service'
 import { Patient } from '../patient.model'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
+import { PatientImportModal } from '../modals/patient-import/patient-import.service'
 
 @Component({
 	selector: 'patients-toolbar',
@@ -15,10 +16,14 @@ import { AlertState } from 'app/components/alert/alert.service'
 export class PatientsToolbarComponent implements OnInit {
 	constructor(
 		private _alert: AlertState,
-		private _exportService: ExportPatientService,
 		private addPatientModal: AddPatientModal,
+		private _exportService: ExportPatientService,
+		private _patientImportModal: PatientImportModal,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
+
+	patientImportModalOpened$: BehaviorSubject<boolean> =
+		this._patientImportModal.opened$
 
 	@Output() onSearch = new EventEmitter()
 

@@ -7,7 +7,6 @@ import { PatientDetailsComponent } from './patient-details/patient-details.compo
 import { PatientDetailsToolbarComponent } from './patient-details/patient-details-toolbar/patient-details-toolbar.component'
 import { PatientDetailsInformationComponent } from './patient-details/patient-details-information/patient-details-information.component'
 import { PatientDetailsBookingListComponent } from './patient-details/patient-details-booking-list/patient-details-booking-list.component'
-import { PatientDetailsBookingListUploadingResultComponent } from './patient-details/modal/patient-details-booking-list-uploading-result/patient-details-booking-list-uploading-result.component'
 import { SharedModule } from 'app/shared/shared.module'
 import { RouterModule } from '@angular/router'
 import { patientRoutes } from 'app/mawedy-core/routes/admin/patients.routing'
