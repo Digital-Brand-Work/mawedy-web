@@ -38,3 +38,13 @@ export class AppointmentToolbarService {
 		string | null
 	>(null)
 }
+
+export const toolbars: AppointmentCalendarToolBar[] = [
+	{ name: 'Month', link: 'month' },
+	{ name: 'Week', link: 'week' },
+	{ name: 'Day', link: 'day' },
+]
+export interface AppointmentCalendarToolBar {
+	name: string
+	link: string
+}

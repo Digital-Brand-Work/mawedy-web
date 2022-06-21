@@ -69,7 +69,7 @@
 					<div
 						stop-propagation
 						matTooltip="View appointments this day"
-						routerLink="/aster_clinic/jumeirah/appointments/day"
+						(click)="resolveRoute('day'); setDate(day)"
 						role="button"
 						*ngFor="
 							let day of weekDays$ | async;

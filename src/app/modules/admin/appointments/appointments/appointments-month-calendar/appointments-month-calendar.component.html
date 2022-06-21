@@ -24,7 +24,7 @@
 				<div
 					matTooltip="View all scheduled appointments"
 					stop-propagation
-					routerLink="/aster_clinic/jumeirah/appointments/day"
+					(click)="resolveRoute('day'); setDate(calendar.date)"
 					role="button"
 					class="day hover:bg-gray-50"
 					*ngFor="let calendar of days; let i = index"

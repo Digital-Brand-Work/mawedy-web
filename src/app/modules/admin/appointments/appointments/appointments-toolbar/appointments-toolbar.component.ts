@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { select, Store } from '@ngrx/store'
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Doctor } from 'app/modules/admin/doctors/doctor.model'
 import * as dayjs from 'dayjs'
 import {
@@ -12,7 +13,11 @@ import {
 	take,
 	takeUntil,
 } from 'rxjs'
-import { AppointmentToolbarService } from '../appointment-toolbar.service'
+import {
+	AppointmentCalendarToolBar,
+	AppointmentToolbarService,
+	toolbars,
+} from '../appointment-toolbar.service'
 
 @Component({
 	selector: 'appointments-toolbar',
@@ -24,6 +29,7 @@ export class AppointmentsToolbarComponent implements OnInit {
 	constructor(
 		private _router: Router,
 		private _store: Store<{ doctors: Doctor[] }>,
+		private _clinicUserService: ClinicUserService,
 		private _appointmentToolbarService: AppointmentToolbarService,
 	) {
 		this._router.events.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
@@ -49,6 +55,8 @@ export class AppointmentsToolbarComponent implements OnInit {
 
 	timer: any
 
+	toolbars: AppointmentCalendarToolBar[] = toolbars
+
 	ngOnInit(): void {
 		this.timer = setInterval(() => {
 			this.today = new Date(Date.now())
@@ -69,6 +77,16 @@ export class AppointmentsToolbarComponent implements OnInit {
 		if (this._router.url.includes('day')) {
 			this.mode = 'day'
 		}
+	}
+
+	resolveRoute(path: string) {
+		this._clinicUserService
+			.resolveClinicPath()
+			.pipe(take(1))
+
+			.subscribe((clinicPath) => {
+				this._router.navigate([`${clinicPath}appointments/${path}`])
+			})
 	}
 
 	ngOnDestroy(): void {

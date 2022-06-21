@@ -64,48 +64,19 @@
 		class="ml-auto md:mx-auto px-1 py-1 bg-gray-100 rounded-md md:-translate-x-20 flex items-center"
 	>
 		<div
+			*ngFor="let toolbar of toolbars; trackBy: identity"
 			mat-button
-			matTooltip="Month Layout"
+			[matTooltip]="toolbar.name + ' Layout'"
+			(click)="resolveRoute(toolbar.link)"
 			[ngClass]="{
 				'text-emerald-500 bg-white pointer-events-none font-bold':
-					mode === 'month',
-				'text-gray-400 font-semibold': mode !== 'month'
+					mode === toolbar.link,
+				'text-gray-400 font-semibold': mode !== toolbar.link
 			}"
-			routerLink="/aster_clinic/jumeirah/appointments/month"
-			role="button"
-			class="px-5 py-1 hover:bg-gray-400/20 rounded-md hover:text-gray-600 mr-1"
-		>
-			Month
-		</div>
-
-		<div
-			mat-button
-			matTooltip="Week Layout"
-			[ngClass]="{
-				'text-emerald-500 bg-white pointer-events-none font-bold':
-					mode === 'week',
-				'text-gray-400 font-semibold': mode !== 'week'
-			}"
-			routerLink="/aster_clinic/jumeirah/appointments/week"
-			role="button"
-			class="px-5 py-1 hover:bg-gray-400/20 rounded-md hover:text-gray-600 mr-1"
-		>
-			Week
-		</div>
-
-		<div
-			mat-button
-			matTooltip="Day Layout"
-			[ngClass]="{
-				'text-emerald-500 bg-white pointer-events-none font-bold':
-					mode === 'day',
-				'text-gray-400 font-semibold': mode !== 'day'
-			}"
-			routerLink="/aster_clinic/jumeirah/appointments/day"
 			role="button"
 			class="px-5 py-1 hover:bg-gray-400/20 rounded-md hover:text-gray-600"
 		>
-			Day
+			{{ toolbar.name }}
 		</div>
 	</div>
 

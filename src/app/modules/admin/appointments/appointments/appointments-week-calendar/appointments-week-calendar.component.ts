@@ -9,11 +9,12 @@ import {
 } from 'app/mawedy-core/constants/app.constant'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { AppointmentToolbarService } from '../appointment-toolbar.service'
 import * as dayjs from 'dayjs'
 import { empty, toFixedTwo } from 'app/mawedy-core/helpers'
 import { Time } from '@digital_brand_work/models/core.model'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'appointments-week-calendar',
@@ -23,6 +24,7 @@ import { Time } from '@digital_brand_work/models/core.model'
 })
 export class AppointmentsWeekCalendarComponent implements OnInit {
 	constructor(
+		private _router: Router,
 		private seoService: SeoService,
 		private _clinicUserService: ClinicUserService,
 		private _appointmentToolbarService: AppointmentToolbarService,
@@ -117,4 +119,18 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	resolveRoute(path: string) {
+		this._clinicUserService
+			.resolveClinicPath()
+			.pipe(take(1))
+
+			.subscribe((clinicPath) => {
+				this._router.navigate([`${clinicPath}appointments/${path}`])
+			})
+	}
+
+	setDate(date: Date): void {
+		this.date$.next(dayjs(date).toDate())
+	}
 }

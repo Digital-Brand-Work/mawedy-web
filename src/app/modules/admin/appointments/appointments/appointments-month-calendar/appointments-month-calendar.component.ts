@@ -1,26 +1,14 @@
-import { result } from 'lodash'
-import { Appointment } from './../../appointment.model'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
-import {
-	WeekDay,
-	weekDays,
-	weekDays2,
-} from 'app/mawedy-core/constants/app.constant'
+import { WeekDay, weekDays2 } from 'app/mawedy-core/constants/app.constant'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
-import {
-	BehaviorSubject,
-	combineLatest,
-	Observable,
-	Subject,
-	takeUntil,
-} from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { JsonCalendar } from 'json-calendar'
 import * as dayjs from 'dayjs'
-import { select, Store } from '@ngrx/store'
 import { AppointmentToolbarService } from '../appointment-toolbar.service'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'appointments-month-calendar',
@@ -30,6 +18,7 @@ import { AppointmentToolbarService } from '../appointment-toolbar.service'
 })
 export class AppointmentsMonthCalendarComponent implements OnInit {
 	constructor(
+		private _router: Router,
 		private seoService: SeoService,
 		private _clinicUserService: ClinicUserService,
 		private _appointmentToolbarService: AppointmentToolbarService,
@@ -60,6 +49,14 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 			})
 	}
 
+	ngOnDestroy(): void {
+		this.unsubscribe$.next(null)
+
+		this.unsubscribe$.complete()
+	}
+
+	identity = (item: any) => item
+
 	setCalendar(date: Date) {
 		const calendar = new JsonCalendar({ today: date })
 
@@ -76,13 +73,19 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 		}
 	}
 
-	ngOnDestroy(): void {
-		this.unsubscribe$.next(null)
+	resolveRoute(path: string) {
+		this._clinicUserService
+			.resolveClinicPath()
+			.pipe(take(1))
 
-		this.unsubscribe$.complete()
+			.subscribe((clinicPath) => {
+				this._router.navigate([`${clinicPath}appointments/${path}`])
+			})
 	}
 
-	identity = (item: any) => item
+	setDate(date: Date): void {
+		this.date$.next(dayjs(date).toDate())
+	}
 }
 
 export interface CalendarDay {
