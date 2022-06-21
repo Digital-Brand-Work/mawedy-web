@@ -9,6 +9,8 @@ import { JsonCalendar } from 'json-calendar'
 import * as dayjs from 'dayjs'
 import { AppointmentToolbarService } from '../appointment-toolbar.service'
 import { Router } from '@angular/router'
+import { AppointmentService } from '../../appointment.service'
+import { InitialDataResolver } from 'app/app.resolvers'
 
 @Component({
 	selector: 'appointments-month-calendar',
@@ -20,7 +22,9 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 	constructor(
 		private _router: Router,
 		private seoService: SeoService,
+		private _appointmentAPI: AppointmentService,
 		private _clinicUserService: ClinicUserService,
+		private _initialDataResolver: InitialDataResolver,
 		private _appointmentToolbarService: AppointmentToolbarService,
 	) {}
 
@@ -71,6 +75,17 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 		for (let i = 0; i <= 6; i++) {
 			this.days.pop()
 		}
+
+		const param = {
+			from: this.days[0].date.toJSON(),
+			to: this.days[this.days.length - 1].date.toJSON(),
+		}
+
+		this._appointmentAPI
+			.query(`?` + new URLSearchParams(param).toString())
+			.subscribe((data: any) =>
+				this._initialDataResolver.loadAppointments(data.data),
+			)
 	}
 
 	resolveRoute(path: string) {

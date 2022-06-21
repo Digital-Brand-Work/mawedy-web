@@ -1,3 +1,4 @@
+import { ClinicTimeSlot } from './../../../clinic/clinic.model'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
@@ -9,6 +10,8 @@ import * as dayjs from 'dayjs'
 import { empty, toFixedTwo } from 'app/mawedy-core/helpers'
 import { END_OF_HOURS, PM } from 'app/mawedy-core/constants/app.constant'
 import { Time } from '@digital_brand_work/models/core.model'
+import { InitialDataResolver } from 'app/app.resolvers'
+import { AppointmentService } from '../../appointment.service'
 
 @Component({
 	selector: 'appointments-day-calendar',
@@ -19,7 +22,9 @@ import { Time } from '@digital_brand_work/models/core.model'
 export class AppointmentsDayCalendarComponent implements OnInit {
 	constructor(
 		private seoService: SeoService,
+		private _appointmentAPI: AppointmentService,
 		private _clinicUserService: ClinicUserService,
+		private _initialDataResolver: InitialDataResolver,
 		private _appointmentToolbarService: AppointmentToolbarService,
 	) {}
 
@@ -39,6 +44,16 @@ export class AppointmentsDayCalendarComponent implements OnInit {
 			.subscribe((results) => {
 				const [date, clinic] = results
 
+				const param = {
+					date: date.toJSON(),
+				}
+
+				this._appointmentAPI
+					.query(`?` + new URLSearchParams(param).toString())
+					.subscribe((data: any) =>
+						this._initialDataResolver.loadAppointments(data.data),
+					)
+
 				if (clinic && date) {
 					this.seoService.generateTags({
 						title: `${clinic.name} | ${clinic?.address}  | Daily Appointments`,
@@ -55,49 +70,46 @@ export class AppointmentsDayCalendarComponent implements OnInit {
 					}
 
 					if (!empty(timeSlot) || timeSlot.active) {
-						const [startHour, startMinutes] =
-							timeSlot.start.split(':')
-
-						const [endHour, endMinutes] = timeSlot.end.split(':')
-
-						const isGraveYard: boolean = parseInt(endHour) < PM
-
-						let timings = []
-
-						for (
-							let time = parseInt(startHour);
-							!isGraveYard
-								? time <= END_OF_HOURS &&
-								  time <= parseInt(endHour)
-								: time <= END_OF_HOURS ||
-								  time <= parseInt(endHour);
-							time++
-						) {
-							timings.push(`${toFixedTwo(time)}:00`)
-						}
-
-						if (isGraveYard) {
-							for (
-								let time = 2;
-								time < parseInt(endHour) + 1;
-								time++
-							) {
-								timings.push(`${toFixedTwo(time)}:00`)
-							}
-						}
-
-						if (timeSlot.end === '23:59') {
-							timings.push('24:00')
-						} else {
-							timings.push(timeSlot.end as Time)
-						}
-
-						timings = [...new Set(timings)]
-
-						this.timings = timings
+						this.resolveTimeSlots(timeSlot)
 					}
 				}
 			})
+	}
+
+	resolveTimeSlots(timeSlot: ClinicTimeSlot): void {
+		const [startHour] = timeSlot.start.split(':')
+
+		const [endHour] = timeSlot.end.split(':')
+
+		const isGraveYard: boolean = parseInt(endHour) < PM
+
+		let timings = []
+
+		for (
+			let time = parseInt(startHour);
+			!isGraveYard
+				? time <= END_OF_HOURS && time <= parseInt(endHour)
+				: time <= END_OF_HOURS || time <= parseInt(endHour);
+			time++
+		) {
+			timings.push(`${toFixedTwo(time)}:00`)
+		}
+
+		if (isGraveYard) {
+			for (let time = 2; time < parseInt(endHour) + 1; time++) {
+				timings.push(`${toFixedTwo(time)}:00`)
+			}
+		}
+
+		if (timeSlot.end === '23:59') {
+			timings.push('24:00')
+		} else {
+			timings.push(timeSlot.end as Time)
+		}
+
+		timings = [...new Set(timings)]
+
+		this.timings = timings
 	}
 
 	ngOnDestroy(): void {
