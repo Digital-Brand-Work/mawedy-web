@@ -34,14 +34,9 @@
 		<span class="text-sm">/ {{ interval$ | async | titlecase }}</span>
 	</div>
 
-	<div class="text-left my-2 self-start text-lg font-bold hidden md:block">
-		Incl.
-	</div>
+	<div class="text-left my-2 self-start text-lg font-bold">Incl.</div>
 
-	<ul
-		@slideInBottom
-		class="w-full md:min-w-140 px-10 font-normal hidden md:block"
-	>
+	<ul @slideInBottom class="w-full md:min-w-140 px-10 font-normal">
 		<li
 			class="text-gray flex items-end py-4 border-b border-b-emerald-400 w-full"
 		>
