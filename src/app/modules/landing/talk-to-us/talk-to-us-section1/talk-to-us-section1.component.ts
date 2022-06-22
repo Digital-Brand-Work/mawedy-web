@@ -70,9 +70,11 @@ export class TalkToUsSection1Component implements OnInit {
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
-		this.input.nativeElement.focus()
+		setTimeout(() => {
+			this.input.nativeElement.focus()
 
-		this._scrollService.scrollToTop()
+			this._scrollService.scrollToTop()
+		}, 400)
 
 		this._cdr.detectChanges()
 	}

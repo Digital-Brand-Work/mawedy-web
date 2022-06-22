@@ -54,28 +54,23 @@
 					}"
 				>
 					<div
-						class="accent-color text-2xl md:text-4xl text-center md:text-left"
+						animateJs
+						animation="animate__bounceInDown"
+						class="accent-color text-2xl md:text-3xl text-center md:text-left"
 					>
 						Forget the long calls
 					</div>
 
 					<div
-						[ngClass]="{
-							'text-5xl -mt-50':
-								(breakpoint$ | async) === 'phone',
-							'text-6xl px-30 ':
-								(breakpoint$ | async) === 'tablet',
-							'text-8xl':
-								(breakpoint$ | async) !== 'phone' &&
-								(breakpoint$ | async) !== 'tablet'
-						}"
-						@expandCollapse
-						class="accent-color my-2 font-bold leading-none text-center md:text-left whitespace-nowrap"
+						animateJs
+						animation="animate__bounceInDown"
+						class="accent-color text-base md:text-8xl my-2 font-bold leading-none text-center md:text-left whitespace-nowrap"
 					>
 						Book your appointments!
 					</div>
 
 					<div
+						@slideInBottom
 						class="accent-color text-xl md:text-2xl text-center md:text-left"
 					>
 						A reliable, detailed booking solution made to serve you.
@@ -91,9 +86,16 @@
 						}"
 						class="flex mt-10"
 					>
-						<app-store-button class="md:mr-5"></app-store-button>
+						<app-store-button
+							animateJs
+							animation="animate__flipInX"
+							class="md:mr-5"
+						></app-store-button>
 
-						<google-play-button></google-play-button>
+						<google-play-button
+							animateJs
+							animation="animate__flipInX"
+						></google-play-button>
 					</div>
 				</div>
 			</div>
