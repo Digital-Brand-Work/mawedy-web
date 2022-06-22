@@ -1,3 +1,4 @@
+import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import { setPrefix } from './../../../../mawedy-core/helpers'
 import { Router } from '@angular/router'
 import { FormGroup } from '@angular/forms'
@@ -30,15 +31,18 @@ import { DB } from 'app/mawedy-core/enums/index.db.enum'
 })
 export class LandingSubscriptionSection1Component implements OnInit {
 	constructor(
+		private _router: Router,
+		private _mediaService: MediaService,
+		private _scrollService: ScrollService,
+		private _registerService: RegisterService,
+		private _clinicUserService: ClinicUserService,
 		private _indexedDbService: NgxIndexedDBService,
 		private _indexedDbController: IndexedDbController,
 		private _errorHandlerService: ErrorHandlerService,
-		private _mediaService: MediaService,
-		private _router: Router,
 		private _homeSubscriptionState: HomeSubscriptionState,
-		private _registerService: RegisterService,
-		private _clinicUserService: ClinicUserService,
 	) {}
+
+	onMobileNext: boolean = false
 
 	hasLoggedIn$: BehaviorSubject<boolean> =
 		this._clinicUserService.hasLoggedIn$
@@ -76,17 +80,30 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		this.subscription$.complete()
 	}
 
+	scrollTopTop() {
+		this._scrollService.scrollToTop()
+	}
+
 	fetchFromIndexDB() {
 		combineLatest([
 			this._indexedDbService.getByKey(DB.SUBSCRIPTION_REQUEST, 1),
 			this._indexedDbService.getByKey(DB.ACCOUNT_USERS_REQUEST, 1),
 			this._indexedDbService.getByKey(DB.CLINIC, 1),
+			this.breakpoint$,
 		])
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe({
 				next: (request: any) => {
-					const [subscription_request, account_user_request, clinic] =
-						request
+					const [
+						subscription_request,
+						account_user_request,
+						clinic,
+						breakpoint,
+					] = request
+
+					if (breakpoint) {
+						this.onMobileNext = false
+					}
 
 					if (clinic) {
 						this.hasLoggedIn$.next(true)

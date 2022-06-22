@@ -4,18 +4,28 @@
 	class="w-full flex items-center justify-center relative py-20"
 >
 	<div
-		class="max-w-screen-xl w-full items-center justify-center relative z-20 grid grid-cols-1 md:grid-cols-2 mt-20"
+		class="max-w-screen-xl w-full items-center justify-center relative z-20 grid grid-cols-1 md:grid-cols-2 md:mt-20"
 	>
-		<div>
+		<div
+			*ngIf="
+				(breakpoint$ | async) !== 'phone' ||
+				((breakpoint$ | async) === 'phone' && onMobileNext === false)
+			"
+			class="px-5 md:px-0"
+		>
 			<div
 				*ngIf="interval$ | async as interval"
-				class="border border-gray-200 bg-gray-100 p-10 rounded-3xl w-full"
+				class="border border-gray-300/80 bg-gray-100 py-10 px-5 md:px-10 rounded-3xl w-full"
 			>
-				<div class="text-5xl font-extrabold text-emerald-500">
+				<div
+					class="text-5xl font-extrabold text-emerald-500 text-center md:text-left"
+				>
 					{{ subscription.type }}
 				</div>
 
-				<div class="mb-5 accent-color text-2xl font-bold">
+				<div
+					class="mb-5 accent-color text-2xl font-bold text-center md:text-left"
+				>
 					{{ subscription.price | number }} AED /
 					{{ interval | titlecase }}
 				</div>
@@ -28,10 +38,10 @@
 
 				<ul
 					[@listAnimation]="subscription.features.length"
-					class="grid grid-cols-2 gap-x-10"
+					class="grid grid-cols-1 md:grid-cols-2 gap-x-10"
 				>
 					<li
-						class="text-gray flex items-center py-2 w-full"
+						class="text-gray flex items-center py-1 md:py-2 w-full text-sm md:text-base"
 						*ngFor="
 							let item of subscription.features;
 							trackBy: identity
@@ -47,34 +57,36 @@
 				</ul>
 			</div>
 
-			<div class="flex items-center mt-10 text-2xl font-normal">
+			<div
+				class="flex items-center mt-10 text-md md:text-2xl font-normal"
+			>
 				<div>{{ subscription.name }}</div>
 
 				<div class="ml-auto">{{ subscription.price | number }} AED</div>
 			</div>
 
-			<div class="flex items-center mt-2 text-2xl font-normal">
-				<div>
+			<div class="flex items-center mt-2 text-md md:text-2xl font-normal">
+				<div class="flex justify-center flex-col">
 					<span class="text-emerald-500"
 						>{{ subscription.users }} Free users
 					</span>
-					<div class="flex items-center">
+
+					<div
+						class="flex items-start justify-center flex-col md:flex-row"
+					>
 						{{ additionalUsers }} Additional users
 
-						<div class="flex items-center ml-10">
+						<div
+							class="flex justify-center items-start md:items-center md:ml-10 mt-3 md:mt-0"
+						>
 							<button
-								(click)="
-									additionalUsers =
-										additionalUsers === 0
-											? 0
-											: additionalUsers - 1
-								"
+								class="border-1 border-gray-200 md:border-none"
+								(click)="additionalUsers = additionalUsers + 1"
 								mat-icon-button
-								matTooltip="Remove User"
+								matTooltip="Add user"
 							>
 								<mat-icon
-									maticc
-									svgIcon="heroicons_outline:minus"
+									svgIcon="heroicons_outline:plus"
 								></mat-icon>
 							</button>
 
@@ -86,16 +98,22 @@
 									min-width: 36px;
 									max-width: 50px;
 								"
-								class="p-3 items-center justify-center flex border border-emerald-500 rounded-md mx-1 text-lg font-bold accent-color text-center"
+								class="md:p-3 p-1 items-center justify-center flex border border-emerald-500 rounded-md mx-1 text-lg font-bold accent-color text-center"
 							/>
 
 							<button
-								(click)="additionalUsers = additionalUsers + 1"
+								class="border-1 border-gray-200 md:border-none"
+								(click)="
+									additionalUsers =
+										additionalUsers === 0
+											? 0
+											: additionalUsers - 1
+								"
 								mat-icon-button
-								matTooltip="Add user"
+								matTooltip="Remove User"
 							>
 								<mat-icon
-									svgIcon="heroicons_outline:plus"
+									svgIcon="heroicons_outline:minus"
 								></mat-icon>
 							</button>
 						</div>
@@ -121,10 +139,10 @@
 				</div>
 			</div>
 
-			<mat-divider class="my-5 border-gray-300"></mat-divider>
+			<mat-divider class="md:my-5 my-2 border-gray-300"></mat-divider>
 
-			<div class="flex items-center mt-2 text-2xl font-normal">
-				<div class="ml-auto">Total Amount</div>
+			<div class="flex items-center mt-2 textlg md:text-2xl font-normal">
+				<div class="mr-auto md:ml-auto">Total Amount</div>
 
 				<div class="ml-10 font-bold accent-color">
 					{{
@@ -137,7 +155,24 @@
 			</div>
 		</div>
 
-		<div class="px-5 md:p-10 items-start md:-translate-y-20">
+		<button
+			(click)="onMobileNext = true; scrollTopTop()"
+			*ngIf="(breakpoint$ | async) === 'phone' && onMobileNext === false"
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.4)"
+			[ngClass]="{ hidden: (breakpoint$ | async) !== 'phone' }"
+			class="bg-sky-500 rounded-xl mx-20 py-3 text-white font-normal mt-20"
+		>
+			Next
+		</button>
+
+		<div
+			[ngClass]="{
+				hidden:
+					(breakpoint$ | async) === 'phone' && onMobileNext === false
+			}"
+			class="px-5 md:p-10 items-start md:-translate-y-20"
+		>
 			<button
 				@fadeOutBottom
 				@slideInRight
