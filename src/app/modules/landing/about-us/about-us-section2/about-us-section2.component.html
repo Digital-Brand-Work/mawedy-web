@@ -1,15 +1,19 @@
 <div
 	@slideInBottom
-	class="min-h-screen w-full flex flex-col items-center justify-center relative py-20 md:py-0"
+	class="md:min-h-screen w-full flex flex-col items-center justify-center relative py-20 md:py-0"
 >
-	<div class="text-emerald-500 font-extrabold text-6xl">
+	<div
+		class="text-emerald-500 font-extrabold text-2xl md:text-6xl text-center"
+	>
 		Guaranteed Benefits
 	</div>
 
 	<div
-		class="max-w-screen-xl w-full flex flex-col items-center justify-center relative z-20 md:mt-20"
+		class="max-w-screen-xl w-full flex flex-col items-center justify-center relative z-20 mt-10 md:mt-20 px-10"
 	>
-		<div class="grid grid-cols-3 items-center justify-center gap-20 w-full">
+		<div
+			class="grid grid-cols-3 items-center justify-center gap-x-15 md:gap-20 w-full"
+		>
 			<div
 				class="w-full flex-col items-center"
 				*ngFor="let item of benefits; trackBy: identity"
@@ -21,16 +25,18 @@
 					class="object-contain"
 				/>
 
-				<div class="font-bold text-2xl text-center mt-5 accent-color">
+				<div
+					class="font-bold text-xs md:text-2xl text-center md:mt-5 accent-color"
+				>
 					{{ item.feature }}
 				</div>
 			</div>
 		</div>
 
-		<div class="flex w-full items-center justify-center mt-20">
+		<div class="flex w-full items-center justify-center mt-10 md:mt-20">
 			<a
 				routerLink="/partner-with-us"
-				class="text-white px-20 bg-emerald-500 hover:bg-emerald-600 py-4 font-semibold text-lg rounded-lg mx-auto w-full md:w-auto drop-shadow-xl"
+				class="text-white px-10 md:px-20 bg-emerald-500 hover:bg-emerald-600 py-4 font-semibold text-lg md:rounded-lg rounded-full mx-auto w-full md:w-auto drop-shadow-xl items-center justify-center flex"
 			>
 				Ready to join us?
 			</a>
