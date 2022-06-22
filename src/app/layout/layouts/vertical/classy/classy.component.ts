@@ -45,6 +45,8 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
+	media$: Observable<number> = this._mediaService.media$
+
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$

@@ -15,11 +15,9 @@ export class MediaService {
 		)
 	}
 
-	public breakpoints$ = new BehaviorSubject<BreakPoint>('phone')
+	breakpoints$ = new BehaviorSubject<BreakPoint>('phone')
 
-	private media$ = new BehaviorSubject<number>(
-		typeof window === 'undefined' ? 0 : 0,
-	)
+	media$ = new BehaviorSubject<number>(typeof window === 'undefined' ? 0 : 0)
 
 	private scrollTop$ = new BehaviorSubject<number>(
 		typeof window === 'undefined' ? 0 : 0,

@@ -6,7 +6,7 @@ import { SeoService } from '@digital_brand_work/services/seo.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
-import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs'
+import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { empty } from 'app/mawedy-core/helpers'
@@ -54,7 +54,7 @@ export class UserAccountsComponent implements OnInit {
 	isProcessing: boolean = false
 
 	ngOnInit(): void {
-		this.clinic$.pipe(take(1)).subscribe((clinic) => {
+		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
 			if (clinic) {
 				this._seoService.generateTags({
 					title: `${clinic.name} | ${clinic?.address} | Settings`,

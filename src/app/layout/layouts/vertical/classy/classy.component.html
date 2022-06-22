@@ -1,20 +1,21 @@
 <fuse-loading-bar></fuse-loading-bar>
 
 <div
-	*ngIf="
-		(breakpoint$ | async) === 'tablet' || (breakpoint$ | async) === 'phone'
-	"
-	class="h-screen w-screen flex items-center justify-center"
+	*ngIf="(media$ | async) <= 1650"
+	class="h-screen w-screen flex items-center justify-center bg-white flex-col text-center px-10"
 >
-	This app does not support your current screen size
+	<img
+		class="object-contain h-40 mb-5"
+		src="/assets/app/logo.svg"
+		alt="Mawedy logo"
+	/>
+
+	The system only supports desktop mode. <br />
+	Screen width should be greater than or equal to 1650px.
 </div>
 
 <div
-	*ngIf="
-		(breakpoint$ | async) === 'laptop' ||
-		(breakpoint$ | async) === 'desktop' ||
-		(breakpoint$ | async) === 'max'
-	"
+	*ngIf="(media$ | async) >= 1650"
 	class="relative flex items-center w-full px-4 md:px-6 z-49 bg-card print:hidden py-2 md:py-0 border-b border-gray-200"
 >
 	<a @zoomIn class="h-20 w-50 mr-12 hidden md:block" routerLink="/">

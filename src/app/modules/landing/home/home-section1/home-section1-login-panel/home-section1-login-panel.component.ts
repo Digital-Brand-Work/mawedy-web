@@ -95,6 +95,8 @@ export class HomeSection1LoginPanelComponent implements OnInit {
 					}
 
 					this._errorHandlerService.handleError(http)
+
+					this._clinicUserService.logout()
 				},
 			})
 			.add(() => (this.isProcessing = false))

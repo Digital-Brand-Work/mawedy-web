@@ -62,7 +62,7 @@
 			<form [formGroup]="form" class="w-full">
 				<div
 					formArrayName="accounts"
-					class="grid grid-cols-3 gap-x-10 gap-y-4 w-full"
+					class="grid grid-cols-3 gap-x-10 gap-y-10 w-full"
 				>
 					<div
 						[formGroupName]="i"
@@ -82,7 +82,8 @@
 								class="photo flex flex-col items-center justify-center hover:bg-gray-50 rounded-sm"
 							>
 								<mat-icon
-									class="text-gray-400 icon-size-10"
+									style="color: #cfdae8"
+									class="icon-size-10"
 									svgIcon="feather:upload"
 								></mat-icon>
 							</button>
@@ -138,7 +139,7 @@
 
 							<input
 								formControlName="name"
-								class="py-3 mb-5 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20"
+								class="py-3 mb-2 px-4 rounded-md border-gray-500/20 border w-full focus:border-teal-500 focus:border-2 focus:shadow-sm focus:shadow-teal-500/20"
 								placeholder="Name"
 								[ngClass]="{
 									'border-red-600 ':
