@@ -1,3 +1,4 @@
+import { MediaService } from '@digital_brand_work/utilities/media.service'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -11,8 +12,9 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 
 @Component({
 	selector: 'partner-with-us-form',
@@ -22,10 +24,11 @@ import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 })
 export class PartnerWithUsFormComponent implements OnInit {
 	constructor(
+		private _router: Router,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
+		private _mediaService: MediaService,
 		private _storeRegisterRule: StoreRegisterRule,
-		private _router: Router,
 	) {
 		this._router.events
 			.pipe(takeUntil(this.unsubscribe$))
@@ -35,6 +38,8 @@ export class PartnerWithUsFormComponent implements OnInit {
 				),
 			)
 	}
+
+	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 

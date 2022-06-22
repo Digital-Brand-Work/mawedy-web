@@ -1,15 +1,16 @@
 <div
 	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
-	class="w-screen flex items-center justify-center relative"
+	class="mb-20 md:mb-0 w-screen flex items-center justify-center relative"
 >
 	<img
 		[ngClass]="{
 			' h-screen ':
 				(breakpoint$ | async) !== 'tablet' &&
-				(breakpoint$ | async) !== 'phone'
+				(breakpoint$ | async) !== 'phone',
+			'resolve-mobile-img': (breakpoint$ | async) === 'phone'
 		}"
 		src="/assets/app/partner-with-us/partner.png"
-		class="w-screen h-full object-cover absolute top-0 z-0"
+		class="w-screen h-full object-fill absolute top-0 z-0"
 		alt="partner-with-us"
 	/>
 
@@ -39,14 +40,4 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <partner-with-us-section1-first-step
-				[emailErrors]="emailErrors"
-				[phoneErrors]="phoneErrors"
-				@slideInBottom
-				class="w-full"
-				(onNext)="register($event)"
-				[isProcessing]="isProcessing"
-				[focus$]="focus$"
-			></partner-with-us-section1-first-step> -->
 </div>
