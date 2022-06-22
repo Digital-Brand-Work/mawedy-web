@@ -9,8 +9,10 @@
 			class="grid grid-cols-1 md:grid-cols-2 md:gap-40 items-center w-full justify-center mt-10 md:mt-0"
 		>
 			<div @slideInTop class="text-center flex flex-col text-gray-400">
-				<div class="flex flex-col self-end -mb-30">
-					<div class="font-extrabold text-5xl mb-5 text-emerald-500">
+				<div class="flex flex-col self-center md:self-end md:-mb-30">
+					<div
+						class="font-extrabold text-5xl mb-5 md:mt-0 mt-20 text-emerald-500"
+					>
 						Talk to us!
 					</div>
 
@@ -18,11 +20,11 @@
 						target="_blank"
 						[href]="'https://wa.me/' + phone"
 						role="button"
-						class="hover:underline mb-3 accent-color text-lg px-10 md:px-0 accent-color font-bold flex items-center justify-center"
+						class="hover:underline mb-3 accent-color text-lg px-10 md:px-0 accent-color font-bold flex items-center justify-center md:ml-0 -ml-10"
 					>
 						<span>
 							<img
-								src="../../../../../assets/app/talk-to-us/whats-app-icon.svg"
+								src="/assets/app/talk-to-us/whats-app-icon.svg"
 								class="mr-10 h-7"
 								alt="whats-app-icon"
 							/>
@@ -33,13 +35,14 @@
 				</div>
 
 				<img
-					src="../../../../../assets/app/talk-to-us/talk-to-us.svg"
+					class="md:mt-0 mt-30 md:scale-100 scale-125"
+					src="/assets/app/talk-to-us/talk-to-us.svg"
 					alt=""
 				/>
 			</div>
 
 			<div
-				class="p-10 rounded-lg mr-30"
+				class="md:px-10 py-10 px-0 rounded-lg md:mr-30"
 				style="box-shadow: 0px 3px 6px #00000029"
 			>
 				<div
