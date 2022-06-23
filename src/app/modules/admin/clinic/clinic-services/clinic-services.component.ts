@@ -2,15 +2,8 @@ import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.contr
 import { MedicalService } from './medical-service.model'
 import { empty } from 'app/mawedy-core/helpers'
 import { Component, OnInit } from '@angular/core'
-import { ActionsSubject, select, Store } from '@ngrx/store'
-import {
-	BehaviorSubject,
-	Observable,
-	skip,
-	Subject,
-	take,
-	takeUntil,
-} from 'rxjs'
+import { select, Store } from '@ngrx/store'
+import { BehaviorSubject, Observable, Subject, take } from 'rxjs'
 import { Department } from '../department/department.model'
 import { AddDepartmentModal } from './modals/clinic-department-add/clinic-department-add.service'
 import { AddClinicServiceModal } from './modals/clinic-services-add/clinic-services-add.service'
@@ -23,6 +16,7 @@ import { EditClinicDepartmentModal } from './modals/clinic-department-edit/clini
 import { MedicalService_Service } from './medical-service.service'
 import * as MedicalServiceActions from './medical-service.actions'
 import * as DepartmentActions from '../../clinic/department//department.actions'
+import { FuseConfirmationService } from '@fuse/services/confirmation'
 
 @Component({
 	selector: 'clinic-services',
@@ -32,16 +26,16 @@ import * as DepartmentActions from '../../clinic/department//department.actions'
 })
 export class ClinicServicesComponent implements OnInit {
 	constructor(
-		private actionListener$: ActionsSubject,
+		private _confirm: FuseConfirmationService,
 		private _indexDBService: NgxIndexedDBService,
 		private _departmentService: DepartmentService,
-		private addDepartmentModal: AddDepartmentModal,
+		private _addDepartmentModal: AddDepartmentModal,
 		private _indexDBController: IndexedDbController,
 		private _medicalServiceAPI: MedicalService_Service,
-		private addClinicServiceModal: AddClinicServiceModal,
-		private editClinicServiceModal: EditClinicServiceModal,
+		private _addClinicServiceModal: AddClinicServiceModal,
+		private _editClinicServiceModal: EditClinicServiceModal,
 		private _editDepartmentModal: EditClinicDepartmentModal,
-		private store: Store<{
+		private _store: Store<{
 			department: Department[]
 			medicalService: MedicalService[]
 		}>,
@@ -50,22 +44,22 @@ export class ClinicServicesComponent implements OnInit {
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	addMedicalServiceOpened$: BehaviorSubject<boolean> =
-		this.addDepartmentModal.opened$
+		this._addDepartmentModal.opened$
 
 	addClinicServiceOpened$: BehaviorSubject<boolean> =
-		this.addClinicServiceModal.opened$
+		this._addClinicServiceModal.opened$
 
 	editClinicServiceModalOpened$: BehaviorSubject<boolean> =
-		this.editClinicServiceModal.opened$
+		this._editClinicServiceModal.opened$
 
-	departments$?: Observable<Department[]> = this.store.pipe(
+	departments$?: Observable<Department[]> = this._store.pipe(
 		select('department'),
 	)
 
 	department$: BehaviorSubject<Department | null> =
 		this._departmentService.current$
 
-	medicalServices$?: Observable<MedicalService[]> = this.store.pipe(
+	medicalServices$?: Observable<MedicalService[]> = this._store.pipe(
 		select('medicalService'),
 	)
 
@@ -77,7 +71,7 @@ export class ClinicServicesComponent implements OnInit {
 		this._indexDBService
 			.getAll(DB.DEPARTMENTS)
 			.subscribe((departments: Department[]) => {
-				this.store.dispatch(
+				this._store.dispatch(
 					DepartmentActions.loadDepartments({
 						departments: departments,
 					}),
@@ -87,7 +81,7 @@ export class ClinicServicesComponent implements OnInit {
 					if (departments.length !== 0 && empty(department)) {
 						this.department$.next(departments[0])
 
-						this.store.dispatch(
+						this._store.dispatch(
 							MedicalServiceActions.loadMedicalServices({
 								medicalServices: departments[0].services,
 							}),
@@ -107,7 +101,7 @@ export class ClinicServicesComponent implements OnInit {
 	setDepartment(department: Department) {
 		this.department$.next(department)
 
-		this.store.dispatch(
+		this._store.dispatch(
 			MedicalServiceActions.loadMedicalServices({
 				medicalServices: department.services,
 			}),
@@ -128,21 +122,47 @@ export class ClinicServicesComponent implements OnInit {
 
 	remove(): void {
 		this.department$.pipe(take(1)).subscribe((department) => {
-			if (!department) {
-				return
-			}
-
-			this._departmentService.remove(department.id).subscribe(() => {
-				this._indexDBService
-					.deleteByKey(DB.DEPARTMENTS, department.id)
-					.subscribe(() => {
-						this.store.dispatch(
-							DepartmentActions.deleteDepartment({
-								id: department.id,
-							}),
-						)
+			if (department) {
+				this._confirm
+					.open({
+						title: `Are you sure you want to remove ${department.name}?`,
+						message: `Appointments and medical services bound to this department will be removed. Continue?`,
+						dismissible: true,
+						icon: {
+							name: 'delete',
+							color: 'accent',
+						},
+						actions: {
+							confirm: {
+								color: 'accent',
+								label: 'Remove',
+							},
+						},
 					})
-			})
+					.afterClosed()
+					.subscribe((result) => {
+						if (result && result !== 'cancelled') {
+							this._departmentService
+								.remove(department.id)
+								.subscribe(() => {
+									this._indexDBService
+										.deleteByKey(
+											DB.DEPARTMENTS,
+											department.id,
+										)
+										.subscribe(() => {
+											this._store.dispatch(
+												DepartmentActions.deleteDepartment(
+													{
+														id: department.id,
+													},
+												),
+											)
+										})
+								})
+						}
+					})
+			}
 		})
 	}
 

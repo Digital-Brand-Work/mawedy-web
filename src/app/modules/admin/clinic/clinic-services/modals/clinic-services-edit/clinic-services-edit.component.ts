@@ -37,7 +37,7 @@ export class ClinicServicesEditComponent implements OnInit {
 		private _formBuilder: FormBuilder,
 		private _confirm: FuseConfirmationService,
 		private _indexDBService: NgxIndexedDBService,
-		private departmentService: DepartmentService,
+		private _departmentService: DepartmentService,
 		private _errorHandlerService: ErrorHandlerService,
 		private _medicalServiceAPI: MedicalService_Service,
 		private _store: Store<{ department: Department[] }>,
@@ -58,7 +58,7 @@ export class ClinicServicesEditComponent implements OnInit {
 	opened$: BehaviorSubject<boolean> = this._editClinicServiceModal.opened$
 
 	department$: BehaviorSubject<Department | null> =
-		this.departmentService.current$
+		this._departmentService.current$
 
 	form: FormGroup = this._formBuilder.group({
 		id: '',
@@ -82,7 +82,7 @@ export class ClinicServicesEditComponent implements OnInit {
 	ngOnInit(): void {
 		combineLatest([
 			this._medicalServiceAPI.current$,
-			this.departmentService.current$,
+			this._departmentService.current$,
 		])
 			.pipe(take(1))
 			.subscribe((results) => {
@@ -123,7 +123,7 @@ export class ClinicServicesEditComponent implements OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		combineLatest([this.opened$, this.departmentService.current$])
+		combineLatest([this.opened$, this._departmentService.current$])
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe((results) => {
 				const [focused, department] = results
@@ -226,7 +226,7 @@ export class ClinicServicesEditComponent implements OnInit {
 	}
 
 	updateDepartment(medical_service: MedicalService): void {
-		this.departmentService.current$
+		this._departmentService.current$
 			.pipe(take(1))
 			.subscribe((department) => {
 				const newDepartment: any = {
@@ -243,7 +243,7 @@ export class ClinicServicesEditComponent implements OnInit {
 							}),
 						)
 
-						this.departmentService.current$.next(newDepartment)
+						this._departmentService.current$.next(newDepartment)
 					})
 			})
 	}

@@ -196,3 +196,13 @@ mat-checkbox {
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
+.fuse-confirmation-dialog-panel {
+	* {
+		box-shadow: none !important;
+	}
+}
+
+.cdk-global-scrollblock {
+	overflow-y: hidden !important;
+}
