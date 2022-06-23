@@ -1,0 +1,46 @@
+<div
+	*ngIf="items.length !== 0"
+	class="flex px-5 py-3 bg-white min-w-1/2 drop-shadow-sm rounded-md items-center"
+>
+	<button mat-icon-button>
+		<mat-icon class="icon-size-5" svgIcon="chevron_left"></mat-icon>
+	</button>
+
+	<button
+		[ngClass]="{
+			'pointer-events-none bg-emerald-500 text-white': active === i + 1,
+			'text-gray-400': active !== i + 1
+		}"
+		mat-icon-button
+		class="mx-0.5"
+		*ngFor="let item of items; trackBy: identity; let i = index"
+	>
+		{{ i + 1 }}
+	</button>
+
+	<button mat-icon-button>
+		<mat-icon class="icon-size-5" svgIcon="chevron_right"></mat-icon>
+	</button>
+
+	<div class="mx-5"></div>
+
+	<div class="flex ml-auto text-gray-400">Go to page</div>
+
+	<input
+		type="number"
+		class="ml-3 p-2 bg-white rounded-lg px-2 border border-emerald-400"
+		style="width: 50px"
+	/>
+
+	<button
+		matRipple
+		matRippleColor="rgba(11, 169, 118,.1)"
+		class="flex mx-2 font-bold accent-color items-center p-3 rounded-md hover:bg-emerald-100"
+	>
+		Go
+		<mat-icon
+			class="accent-color ml-1 icon-size-5"
+			svgIcon="chevron_right"
+		></mat-icon>
+	</button>
+</div>

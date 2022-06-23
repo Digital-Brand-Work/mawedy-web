@@ -5,6 +5,7 @@ import { MobileGooglePlayButtonComponent } from './mobile/buttons/mobile-google-
 import { MobileApplePayButtonComponent } from './mobile/buttons/mobile-apple-store-button/mobile-apple-pay-button.component'
 import { CalendarItemComponent } from './calendar-item/calendar-item.component'
 import { CalendarItemDayComponent } from './calendar-item-day/calendar-item-day.component'
+import { PaginationComponent } from './pagination/pagination.component'
 
 const components = []
 

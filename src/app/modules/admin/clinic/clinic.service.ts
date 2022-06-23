@@ -16,6 +16,7 @@ import { Router } from '@angular/router'
 import { Injectable } from '@angular/core'
 import { slugify } from '@digital_brand_work/helpers/helpers'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { LaravelNotificationService } from 'app/misc/laravel.notificaion.service'
 
 export interface User {
 	access: {
@@ -31,8 +32,9 @@ export class ClinicUserService {
 	constructor(
 		private _router: Router,
 		private _http: HttpClient,
-		private _indexedDBController: IndexedDbController,
 		private _indexedDBService: NgxIndexedDBService,
+		private _indexedDBController: IndexedDbController,
+		private _laravelNotificationService: LaravelNotificationService,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> =
@@ -84,6 +86,8 @@ export class ClinicUserService {
 		this.clinic = data.data
 
 		this.clinic$.next(data.data)
+
+		this._laravelNotificationService.init(data.access.token, data.data)
 
 		this.switched$.next()
 	}

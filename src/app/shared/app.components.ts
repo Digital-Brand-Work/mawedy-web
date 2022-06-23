@@ -23,6 +23,7 @@ import { HomeNavbarComponent } from 'app/modules/landing/common/home-navbar/home
 import { HomeNavbarResponsiveComponent } from 'app/modules/landing/common/home-navbar-responsive/home-navbar-responsive.component'
 import { CalendarItemComponent } from 'app/components/calendar-item/calendar-item.component'
 import { CalendarItemDayComponent } from 'app/components/calendar-item-day/calendar-item-day.component'
+import { PaginationComponent } from 'app/components/pagination/pagination.component'
 
 export const appComponents: any[] = [
 	GooglePlayButtonComponent,
@@ -50,4 +51,5 @@ export const appComponents: any[] = [
 	HomeNavbarResponsiveComponent,
 	CalendarItemComponent,
 	CalendarItemDayComponent,
+	PaginationComponent,
 ]

@@ -5,6 +5,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 import { environment } from 'environments/environment'
 import { AppModule } from 'app/app.module'
 
+;(window as any).Pusher = require('pusher-js')
+
 if (environment.production) {
 	enableProdMode()
 }

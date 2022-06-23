@@ -27,4 +27,6 @@ export enum DB {
 	PROMOTION = 'promotion',
 
 	SUBSCRIPTIONS = 'subscriptions',
+
+	PAGINATION = 'pages',
 }

@@ -45,16 +45,16 @@ import { days } from './mawedy-core/enums/day.enum'
 })
 export class InitialDataResolver implements Resolve<any> {
 	constructor(
-		private _notificationsService: NotificationsService,
 		private _userService: UserService,
 		private _patientAPI: PatientService,
 		private _doctorAPI: DoctorService,
 		private _departmentAPI: DepartmentService,
 		private _appointmentAPI: AppointmentService,
 		private _indexDBService: NgxIndexedDBService,
+		private _clinicUserService: ClinicUserService,
 		private _promotionAPI: PromotionServiceService,
 		private _indexDBController: IndexedDbController,
-		private _clinicUserService: ClinicUserService,
+		private _notificationsService: NotificationsService,
 		private store: Store<{
 			patients: Patient[]
 			doctors: Doctor[]
@@ -206,6 +206,8 @@ export class InitialDataResolver implements Resolve<any> {
 					DoctorActions.loadDoctors({ doctors: doctors }),
 				),
 			)
+
+		// this._indexDBController
 	}
 
 	loadDashboardAppointments(dashboardAppointments: DashboardAppointment[]) {

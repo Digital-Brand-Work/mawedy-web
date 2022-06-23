@@ -7,7 +7,7 @@ export function migrationFactory() {
 
 export const indexedDbConfig: DBConfig = {
 	name: 'mawedy',
-	version: 13,
+	version: 14,
 	objectStoresMeta: [
 		{
 			store: DB.SUBSCRIPTION_REQUEST,
@@ -141,7 +141,37 @@ export const indexedDbConfig: DBConfig = {
 				{ name: 'data', keypath: 'data', options: { unique: false } },
 			],
 		},
+
+		{
+			store: DB.PAGINATION,
+			storeConfig: { keyPath: 'id', autoIncrement: true },
+			storeSchema: [
+				{
+					name: DB.DASHBOARD_APPOINTMENTS,
+					keypath: DB.DASHBOARD_APPOINTMENTS,
+					options: { unique: false },
+				},
+				{
+					name: DB.DASHBOARD_WAITING_PATIENTS,
+					keypath: DB.DASHBOARD_WAITING_PATIENTS,
+					options: { unique: false },
+				},
+				{
+					name: DB.DASHBOARD_FOR_APPROVAL_PATIENTS,
+					keypath: DB.DASHBOARD_FOR_APPROVAL_PATIENTS,
+					options: { unique: false },
+				},
+				{
+					name: DB.DOCTORS,
+					keypath: DB.DOCTORS,
+					options: { unique: false },
+				},
+				{
+					name: DB.PATIENTS,
+					keypath: DB.PATIENTS,
+					options: { unique: false },
+				},
+			],
+		},
 	],
 }
-
-// delete kag v3
