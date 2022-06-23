@@ -16,7 +16,7 @@
 					<tr
 						style="height: 60px"
 						class="accent-color font-semibold border-b border-b-gray-100 hover:bg-gray-50"
-						*ngFor="let patient of patients; trackBy: identity"
+						*ngFor="let patient of patients"
 					>
 						<td>
 							{{ patient.first_name }} {{ patient.middle_name }}
@@ -58,9 +58,13 @@
 
 		<div class="flex items-center">
 			<pagination
+				*ngIf="paginatedData$ | async as table"
+				@expandCollapse
 				class="ml-auto min-w-3/4"
-				[items]="patients"
-				[active]="5"
+				[items]="table.meta.links"
+				[active]="table.meta.current_page"
+				[table]="table"
+				(onPageChange)="paginate($event)"
 			></pagination>
 		</div>
 	</div>

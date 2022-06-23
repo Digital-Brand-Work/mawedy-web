@@ -39,6 +39,7 @@ import { DashboardForApprovalPatient } from './modules/admin/dashboard/for-appro
 import * as DashboardForApprovalPatients from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
 import { AppointmentStatusEnum } from './mawedy-core/enums/appointment-status.enum'
 import { days } from './mawedy-core/enums/day.enum'
+import { PaginationService } from './misc/pagination.service'
 
 @Injectable({
 	providedIn: 'root',
@@ -53,6 +54,7 @@ export class InitialDataResolver implements Resolve<any> {
 		private _indexDBService: NgxIndexedDBService,
 		private _clinicUserService: ClinicUserService,
 		private _promotionAPI: PromotionServiceService,
+		private _paginationService: PaginationService,
 		private _indexDBController: IndexedDbController,
 		private _notificationsService: NotificationsService,
 		private store: Store<{
@@ -111,6 +113,10 @@ export class InitialDataResolver implements Resolve<any> {
 					])
 
 					this.loadPatients(patients.data)
+					this._paginationService.patients$.next({
+						links: patients.link,
+						meta: patients.meta,
+					})
 
 					this.loadDepartments(departments.data)
 
@@ -206,8 +212,6 @@ export class InitialDataResolver implements Resolve<any> {
 					DoctorActions.loadDoctors({ doctors: doctors }),
 				),
 			)
-
-		// this._indexDBController
 	}
 
 	loadDashboardAppointments(dashboardAppointments: DashboardAppointment[]) {
@@ -281,4 +285,29 @@ export class InitialDataResolver implements Resolve<any> {
 				),
 			)
 	}
+}
+
+export interface PaginationData {
+	links: {
+		first: string
+		last: string
+		next: string | number | null
+		prev: string | number | null
+	}
+	meta: {
+		current_page: number
+		from: number
+		last_page: number
+		path: number
+		per_page: number
+		to: number
+		total: number
+		links: PaginationLink[]
+	}
+}
+
+export interface PaginationLink {
+	active: boolean
+	label: string
+	url: string
 }

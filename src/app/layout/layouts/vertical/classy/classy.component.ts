@@ -24,6 +24,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Router } from '@angular/router'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
+import { LaravelNotificationService } from 'app/misc/laravel.notificaion.service'
 
 @Component({
 	selector: 'classy-layout',
@@ -41,6 +42,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 		private _fuseNavigationService: FuseNavigationService,
 		private _adminNavigationService: AdminNavigationService,
 		private _fuseMediaWatcherService: FuseMediaWatcherService,
+		private _laravelNotificationService: LaravelNotificationService,
 	) {}
 
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
@@ -77,6 +79,11 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 					const [clinic, user, { matchingAliases }] = results
 
 					if (clinic) {
+						this._laravelNotificationService.init(
+							localStorage.getItem('access_token'),
+							clinic,
+						)
+
 						this._adminNavigationService
 							.get(clinic.subscription_type)
 							.pipe(takeUntil(this.unsubscribe$))

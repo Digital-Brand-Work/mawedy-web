@@ -1,3 +1,4 @@
+import { PaginationData } from 'app/app.resolvers'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 @Component({
@@ -6,11 +7,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 	styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnInit {
-	@Output() onPageChange = new EventEmitter<number>()
+	@Output() onPageChange = new EventEmitter<string>()
 
 	@Input() items: any[] = []
 
 	@Input() active?: number
+
+	@Input() table?: PaginationData
 
 	constructor() {}
 

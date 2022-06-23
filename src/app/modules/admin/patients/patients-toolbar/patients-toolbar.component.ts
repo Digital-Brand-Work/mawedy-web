@@ -7,17 +7,23 @@ import { Patient } from '../patient.model'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { PatientImportModal } from '../modals/patient-import/patient-import.service'
+import { PaginationData } from 'app/app.resolvers'
+import { PatientService } from '../patient.service'
+import { PaginationService } from 'app/misc/pagination.service'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
 	selector: 'patients-toolbar',
 	templateUrl: './patients-toolbar.component.html',
 	styleUrls: ['./patients-toolbar.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class PatientsToolbarComponent implements OnInit {
 	constructor(
 		private _alert: AlertState,
 		private addPatientModal: AddPatientModal,
 		private _exportService: ExportPatientService,
+		private _paginationService: PaginationService,
 		private _patientImportModal: PatientImportModal,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
@@ -28,6 +34,9 @@ export class PatientsToolbarComponent implements OnInit {
 	@Output() onSearch = new EventEmitter()
 
 	@Output() onFilter = new EventEmitter()
+
+	paginatedData$: BehaviorSubject<PaginationData | null> =
+		this._paginationService.patients$
 
 	@Input() patients: Patient[] = []
 

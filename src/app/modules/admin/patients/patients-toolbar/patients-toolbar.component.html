@@ -1,5 +1,11 @@
 <div class="flex items-center w-full">
-	<div class="font-bold text-xl">Patients ({{ patients.length }})</div>
+	<div
+		@slideInBottom
+		*ngIf="paginatedData$ | async as table"
+		class="font-bold text-xl"
+	>
+		Patients ({{ table.meta.total }})
+	</div>
 
 	<div
 		style="width: 219px"
