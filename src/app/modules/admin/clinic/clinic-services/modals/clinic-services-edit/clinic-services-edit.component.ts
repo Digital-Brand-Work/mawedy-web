@@ -22,6 +22,7 @@ import * as DepartmentActions from '../../../department/department.actions'
 import { HttpErrorResponse } from '@angular/common/http'
 import * as MedicalServiceActions from '../../medical-service.actions'
 import { MedicalService } from '../../medical-service.model'
+import { FuseConfirmationService } from '@fuse/services/confirmation'
 
 @Component({
 	selector: 'clinic-services-edit',
@@ -34,6 +35,7 @@ export class ClinicServicesEditComponent implements OnInit {
 		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
+		private _confirm: FuseConfirmationService,
 		private _indexDBService: NgxIndexedDBService,
 		private departmentService: DepartmentService,
 		private _errorHandlerService: ErrorHandlerService,
@@ -250,29 +252,55 @@ export class ClinicServicesEditComponent implements OnInit {
 		this._medicalServiceAPI.current$
 			.pipe(take(1))
 			.subscribe((medical_service) => {
-				this._medicalServiceAPI
-					.remove(medical_service.id)
-					.subscribe(() => {
-						this.opened$.next(false)
+				this._confirm
+					.open({
+						title: `Are you sure you want to remove ${medical_service.name}?`,
+						message: `Appointments bound to this medical service will be removed. Continue?`,
+						dismissible: true,
+						icon: {
+							name: 'delete',
+							color: 'accent',
+						},
+						actions: {
+							confirm: {
+								color: 'accent',
+								label: 'Remove',
+							},
+						},
+					})
+					.afterClosed()
+					.subscribe((result) => {
+						if (result && result !== 'cancelled') {
+							this._medicalServiceAPI
+								.remove(medical_service.id)
+								.subscribe(() => {
+									this.opened$.next(false)
 
-						this._indexDBService
-							.delete(DB.MEDICAL_SERVICES, medical_service.id)
-							.subscribe(() => {
-								this._store.dispatch(
-									MedicalServiceActions.deleteMedicalService({
-										id: medical_service.id,
-									}),
-								)
-							})
+									this._indexDBService
+										.delete(
+											DB.MEDICAL_SERVICES,
+											medical_service.id,
+										)
+										.subscribe(() => {
+											this._store.dispatch(
+												MedicalServiceActions.deleteMedicalService(
+													{
+														id: medical_service.id,
+													},
+												),
+											)
+										})
 
-						this._alert.add({
-							id: Math.floor(
-								Math.random() * 100000000000,
-							).toString(),
-							title: `A service has been deleted.`,
-							message: `${medical_service.name} has been deleted.`,
-							type: 'success',
-						})
+									this._alert.add({
+										id: Math.floor(
+											Math.random() * 100000000000,
+										).toString(),
+										title: `A service has been deleted.`,
+										message: `${medical_service.name} has been deleted.Appointments bound to ${medical_service.name} has been removed.`,
+										type: 'info',
+									})
+								})
+						}
 					})
 			})
 	}

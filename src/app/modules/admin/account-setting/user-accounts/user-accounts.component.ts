@@ -218,56 +218,56 @@ export class UserAccountsComponent implements OnInit {
 				})
 
 				confirm.afterClosed().subscribe((result) => {
-					if (!result) {
-						return
-					}
+					if (result && result !== 'cancelled') {
+						let accounts = []
 
-					let accounts = []
-
-					this.form.value.accounts.forEach(
-						(account: [key: string], index: number) => {
-							if (account['id'] === '') {
-								accounts.push(account)
-							}
-						},
-					)
-
-					accounts.forEach((account) => {
-						let form = new FormData()
-
-						for (let key in account) {
-							form.append(key, account[key])
-						}
-						new BaseService(
-							this._http,
-							this._indexedDBService,
-							'v1/accounts/add',
+						this.form.value.accounts.forEach(
+							(account: [key: string], index: number) => {
+								if (account['id'] === '') {
+									accounts.push(account)
+								}
+							},
 						)
-							.post(form)
-							.subscribe({
-								next: (data: any) => {
-									this._alert.add({
-										id: Math.floor(
-											Math.random() * 100000000000,
-										).toString(),
-										title: `An account has been added successfully`,
-										message: `${data.data.name} is now a new branch!`,
-										type: 'success',
-									})
-								},
-								error: (http) => {
-									for (let key in http.error.errors) {
-										for (let errorKey in this.errors) {
-											if (key.includes(errorKey)) {
-												this.errors[errorKey] = true
+
+						accounts.forEach((account) => {
+							let form = new FormData()
+
+							for (let key in account) {
+								form.append(key, account[key])
+							}
+							new BaseService(
+								this._http,
+								this._indexedDBService,
+								'v1/accounts/add',
+							)
+								.post(form)
+								.subscribe({
+									next: (data: any) => {
+										this._alert.add({
+											id: Math.floor(
+												Math.random() * 100000000000,
+											).toString(),
+											title: `An account has been added successfully`,
+											message: `${data.data.name} is now a new branch!`,
+											type: 'success',
+										})
+									},
+									error: (http) => {
+										for (let key in http.error.errors) {
+											for (let errorKey in this.errors) {
+												if (key.includes(errorKey)) {
+													this.errors[errorKey] = true
+												}
 											}
 										}
-									}
 
-									this._errorHandlerService.handleError(http)
-								},
-							})
-					})
+										this._errorHandlerService.handleError(
+											http,
+										)
+									},
+								})
+						})
+					}
 				})
 			}
 		})
