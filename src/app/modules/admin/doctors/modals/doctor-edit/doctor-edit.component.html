@@ -163,6 +163,7 @@
 					</label>
 
 					<mobile-number-form
+						[code]="form.get('phone_country_code')?.value"
 						[phoneNumber]="form.value.phone_number"
 						[bordered]="true"
 						[rounded]="true"

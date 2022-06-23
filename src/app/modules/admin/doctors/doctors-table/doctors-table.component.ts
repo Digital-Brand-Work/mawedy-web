@@ -9,8 +9,8 @@ import { DoctorAvailabilityModal } from '../modals/doctor-availability/doctor-av
 import { DoctorDetailsModal } from '../modals/doctor-details/doctor-details.service'
 import * as DoctorActions from '../doctor.actions'
 import { DoctorService } from '../doctor.service'
+import { InitialDataResolver, PaginationData } from 'app/app.resolvers'
 import { PaginationService } from 'app/misc/pagination.service'
-import { PaginationData } from 'app/app.resolvers'
 @Component({
 	selector: 'doctors-table',
 	templateUrl: './doctors-table.component.html',
@@ -19,12 +19,13 @@ import { PaginationData } from 'app/app.resolvers'
 })
 export class DoctorsTableComponent implements OnInit {
 	constructor(
-		private store: Store<{ doctors: Doctor[] }>,
 		private _doctorService: DoctorService,
 		private _indexDBService: NgxIndexedDBService,
-		private doctorDetailsModal: DoctorDetailsModal,
+		private _store: Store<{ doctors: Doctor[] }>,
 		private _paginationService: PaginationService,
-		private doctorAvailabilityModal: DoctorAvailabilityModal,
+		private _doctorDetailsModal: DoctorDetailsModal,
+		private _initialDataResolver: InitialDataResolver,
+		private _doctorAvailabilityModal: DoctorAvailabilityModal,
 	) {}
 
 	@Output() onDoctorChanges = new EventEmitter<Doctor[]>()
@@ -35,15 +36,26 @@ export class DoctorsTableComponent implements OnInit {
 		this._paginationService.doctors$
 
 	doctorAvailabilityModalOpened$: BehaviorSubject<boolean> =
-		this.doctorAvailabilityModal.opened$
+		this._doctorAvailabilityModal.opened$
 
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
-		this.doctorDetailsModal.opened$
+		this._doctorDetailsModal.opened$
 
-	doctors$?: Observable<Doctor[]> = this.store.pipe(select('doctors'))
+	doctors$?: Observable<Doctor[]> = this._store.pipe(select('doctors'))
 
 	ngOnInit(): void {
 		this.fetchAndLoadDoctors()
+	}
+
+	paginate(url: string) {
+		this._doctorService.paginate(url).subscribe((patients: any) => {
+			this._initialDataResolver.loadPatients(patients.data)
+
+			this.paginatedData$.next({
+				links: patients.link,
+				meta: patients.meta,
+			})
+		})
 	}
 
 	fetchAndLoadDoctors() {
@@ -52,7 +64,7 @@ export class DoctorsTableComponent implements OnInit {
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe((doctors) => {
 				if (doctors) {
-					this.store.dispatch(
+					this._store.dispatch(
 						DoctorActions.loadDoctors({
 							doctors: doctors as Doctor[],
 						}),

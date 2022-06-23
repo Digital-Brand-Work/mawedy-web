@@ -79,8 +79,7 @@
 						[href]="'https://wa.me/0' + doctor.phone_number"
 					>
 						{{
-							doctor.phone_number
-								| appendCountryCode: doctor.phone_country_code
+							doctor.phone_number | remove_white_space_and_dash
 						}}</a
 					>
 				</div>

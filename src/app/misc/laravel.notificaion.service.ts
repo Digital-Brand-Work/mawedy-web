@@ -78,8 +78,6 @@ export class LaravelNotificationService {
 			) {
 				this.reloadDoctors()
 			}
-
-			console.log(e)
 		})
 	}
 

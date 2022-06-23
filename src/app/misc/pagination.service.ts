@@ -9,4 +9,17 @@ export class PaginationService {
 	)
 
 	doctors$: BehaviorSubject<PaginationData | null> = new BehaviorSubject(null)
+
+	dashboardAppointments$: BehaviorSubject<PaginationData | null> =
+		new BehaviorSubject(null)
+
+	dashboardWaitingPatients$: BehaviorSubject<PaginationData | null> =
+		new BehaviorSubject(null)
+
+	dashboardApprovals$: BehaviorSubject<PaginationData | null> =
+		new BehaviorSubject(null)
+
+	promotions$: BehaviorSubject<PaginationData | null> = new BehaviorSubject(
+		null,
+	)
 }

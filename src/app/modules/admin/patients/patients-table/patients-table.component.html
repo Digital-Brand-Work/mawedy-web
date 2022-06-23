@@ -29,7 +29,10 @@
 								role="button"
 								target="_blank"
 								class="underline hover:text-emerald-500 text-center"
-								[href]="'https://wa.me/' + patient.phone_number"
+								[href]="
+									'https://wa.me/' + patient.phone_number
+										| remove_white_space_and_dash
+								"
 							>
 								{{ patient.phone_number }}</a
 							>

@@ -44,13 +44,13 @@
 								role="button"
 								target="_blank"
 								class="hover:text-emerald-500 hover:underline text-center"
-								[href]="'https://wa.me/0' + doctor.phone_number"
+								[href]="
+									'https://wa.me/' +
+									(doctor.phone_number
+										| remove_white_space_and_dash)
+								"
 							>
-								{{
-									doctor.phone_number
-										| appendCountryCode
-											: doctor.phone_country_code
-								}}</a
+								{{ doctor.phone_number }}</a
 							>
 
 							{{

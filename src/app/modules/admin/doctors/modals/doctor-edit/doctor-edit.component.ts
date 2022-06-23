@@ -16,6 +16,7 @@ import {
 	combineLatest,
 	Observable,
 	Subject,
+	take,
 	takeUntil,
 } from 'rxjs'
 import { Doctor, TimeSlot } from '../../doctor.model'
@@ -124,18 +125,28 @@ export class DoctorEditComponent implements OnInit {
 	}
 
 	setForm(doctor: Doctor) {
-		this.form.setValue({
-			id: doctor.id,
-			name: doctor.name,
-			profession: doctor.profession,
-			experience: doctor.experience,
-			about: doctor.about,
-			phone_number: doctor.phone_number,
-			phone_country_code: doctor.phone_country_code,
-			email: doctor.email,
-			departments: hasData(doctor.departments)
-				? doctor.departments[0].id
-				: '',
+		this.departments$.pipe(take(1)).subscribe((store: any) => {
+			const departments: Department[] = Object.values(store.entities)
+
+			let defaultDepartment = null
+
+			if (departments.length !== 0) {
+				defaultDepartment = departments[0].id
+			}
+
+			this.form.setValue({
+				id: doctor.id,
+				name: doctor.name,
+				profession: doctor.profession,
+				experience: doctor.experience,
+				about: doctor.about,
+				phone_number: doctor.phone_number,
+				phone_country_code: doctor.phone_country_code || 'AE',
+				email: doctor.email,
+				departments: hasData(doctor.departments)
+					? doctor.departments[0].id
+					: defaultDepartment,
+			})
 		})
 
 		this.timeslots = doctor.timeslots

@@ -1,4 +1,3 @@
-import { loadAppointments } from './modules/admin/appointments/appointment.actions'
 import { DashboardAppointment } from './modules/admin/dashboard/appointments/dashboard-appointment.model'
 import { Doctor } from './modules/admin/doctors/doctor.model'
 import { Appointment } from './modules/admin/appointments/appointment.model'
@@ -38,7 +37,6 @@ import * as PromotionsActions from './modules/admin/promotions/promotion.actions
 import { DashboardForApprovalPatient } from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.model'
 import * as DashboardForApprovalPatients from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
 import { AppointmentStatusEnum } from './mawedy-core/enums/appointment-status.enum'
-import { days } from './mawedy-core/enums/day.enum'
 import { PaginationService } from './misc/pagination.service'
 
 @Injectable({
@@ -53,8 +51,8 @@ export class InitialDataResolver implements Resolve<any> {
 		private _appointmentAPI: AppointmentService,
 		private _indexDBService: NgxIndexedDBService,
 		private _clinicUserService: ClinicUserService,
-		private _promotionAPI: PromotionServiceService,
 		private _paginationService: PaginationService,
+		private _promotionAPI: PromotionServiceService,
 		private _indexDBController: IndexedDbController,
 		private _notificationsService: NotificationsService,
 		private store: Store<{
@@ -82,8 +80,13 @@ export class InitialDataResolver implements Resolve<any> {
 					this._patientAPI.get(),
 					this._departmentAPI.get(),
 					this._doctorAPI.get(),
-					this._appointmentAPI.query(`?date=${dayjs().toJSON()}`),
 					this._promotionAPI.get(),
+					this._appointmentAPI.query(
+						`?date=${dayjs().toJSON()}&waiting=false`,
+					),
+					this._appointmentAPI.query(
+						`?date=${dayjs().toJSON()}&waiting=true`,
+					),
 					this._appointmentAPI.query(
 						`?status=${AppointmentStatusEnum.PENDING}`,
 					),
@@ -94,8 +97,9 @@ export class InitialDataResolver implements Resolve<any> {
 						patients,
 						departments,
 						doctors,
-						appointments,
 						promotions,
+						dashboardAppointments,
+						waitingPatients,
 						approvals,
 					] = results
 
@@ -126,29 +130,29 @@ export class InitialDataResolver implements Resolve<any> {
 						meta: doctors.meta,
 					})
 
-					this.loadDashboardAppointments(
-						appointments.data.filter(
-							(appointment: Appointment) =>
-								appointment.waiting === false &&
-								dayjs(appointment.date).format(
-									'YYYY-MMMM-DDDD',
-								) === dayjs().format('YYYY-MMMM-DDDD'),
-						),
-					)
+					this.loadDashboardAppointments(dashboardAppointments.data)
+					this._paginationService.dashboardAppointments$.next({
+						links: dashboardAppointments.link,
+						meta: dashboardAppointments.meta,
+					})
 
-					this.loadDashboardWaitingPatients(
-						appointments.data.filter(
-							(appointment: Appointment) =>
-								appointment.waiting === true &&
-								dayjs(appointment.date).format(
-									'YYYY-MMMM-DDDD',
-								) === dayjs().format('YYYY-MMMM-DDDD'),
-						),
-					)
+					this.loadDashboardWaitingPatients(waitingPatients.data)
+					this._paginationService.dashboardWaitingPatients$.next({
+						links: waitingPatients.link,
+						meta: waitingPatients.meta,
+					})
 
 					this.loadForApprovalPatients(approvals.data)
+					this._paginationService.dashboardApprovals$.next({
+						links: approvals.link,
+						meta: approvals.meta,
+					})
 
 					this.loadPromotions(promotions.data)
+					this._paginationService.promotions$.next({
+						links: promotions.link,
+						meta: promotions.meta,
+					})
 				})
 			}, 500)
 		})

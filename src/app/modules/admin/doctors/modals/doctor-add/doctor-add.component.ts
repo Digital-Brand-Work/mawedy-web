@@ -1,5 +1,5 @@
 import { AddAppointmentModal } from './../../../appointments/appointment-add/appointment-add.service'
-import { empty } from 'app/mawedy-core/helpers'
+import { empty, setPrefix } from 'app/mawedy-core/helpers'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -180,13 +180,21 @@ export class DoctorAddComponent implements OnInit {
 			form.append('picture', this.picture)
 		}
 
+		const excludes = ['phone_number', 'departments']
+
 		for (let key in this.form.value) {
-			if (key !== 'departments') {
+			if (!excludes.includes(key)) {
 				form.append(key, this.form.value[key])
 			}
 		}
 
 		form.append('departments[0]', this.form.value.departments)
+
+		form.append(
+			'phone_number',
+			setPrefix(this.form.value.phone_country_code) +
+				this.form.value.phone_number,
+		)
 
 		for (let day in this.currentTimeSlots) {
 			for (let key in this.currentTimeSlots[day]) {

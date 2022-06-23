@@ -21,9 +21,21 @@ export class MobileNumberFormComponent implements OnInit {
 
 	@Input() rounded: boolean = false
 
-	countries = countries.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)).reverse()
-
 	@Input() phoneNumber: string = ''
+
+	@Input('code') set setCode(code: any) {
+		this.country_code = code
+
+		this.country_code1 = code.toLowerCase()
+
+		this.emit()
+	}
+
+	code: boolean = false
+
+	countries = countries
+		.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
+		.reverse()
 
 	country_code = 'AE'
 
@@ -40,6 +52,11 @@ export class MobileNumberFormComponent implements OnInit {
 	emit() {
 		if (this.country_code !== '' && this.phoneNumber !== '') {
 			this.onMobileNumberChange.emit({
+				countryCode: this.country_code,
+				phoneNumber: this.phoneNumber,
+			})
+
+			console.log({
 				countryCode: this.country_code,
 				phoneNumber: this.phoneNumber,
 			})
