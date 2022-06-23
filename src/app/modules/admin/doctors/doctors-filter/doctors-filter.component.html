@@ -20,31 +20,72 @@
 	class="rounded-md"
 >
 	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
-		<div class="mb-1 font-bold text-gray-500 text-md">Department</div>
+		<label for="departments" class="mb-1 font-bold text-gray-500 text-md"
+			>Department</label
+		>
 
 		<select
-			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+			[(ngModel)]="department"
+			id="departments"
+			type="text"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		>
-			<option>Cardiology</option>
+			<option
+				[value]="department.id"
+				*ngFor="
+					let department of (departments$ | async).entities
+						| entities;
+					trackBy: identity
+				"
+			>
+				{{ department.name | titlecase }}
+			</option>
 		</select>
 	</div>
 
 	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
-		<div class="mb-1 font-bold text-gray-500 text-md">Availability</div>
+		<label for="availability" class="mb-1 font-bold text-gray-500 text-md"
+			>Availability</label
+		>
 
 		<select
+			[(ngModel)]="availability"
+			id="availability"
 			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 		>
-			<option>Monday</option>
+			<option
+				[value]="day"
+				*ngFor="let day of weekDays; trackBy: identity"
+			>
+				{{ day | titlecase }}
+			</option>
 		</select>
 	</div>
 
 	<div class="flex-col px-5 mt-5 mb-5">
 		<button
+			(click)="
+				onFilter.emit({
+					department: department,
+					availability: availability
+				})
+			"
+			matRipple
+			matRippleColor="rgba(11, 169, 118,.3)"
 			mat-menu-item
-			class="flex bg-emerald-300 border-emerald-900 border text-emerald-900 rounded-md text-center items-center justify-center"
+			class="flex bg-emerald-300 hover:bg-emeral-400 border-emerald-900 border text-emerald-900 rounded-md text-center items-center justify-center"
 		>
 			<span>Apply Filter</span>
+		</button>
+
+		<button
+			(click)="onReset.emit()"
+			matRipple
+			matRippleColor="rgba(11, 169, 118,.3)"
+			mat-menu-item
+			class="flex bg-gray-50 text-gray-900 hover:bg-gray-100 rounded-md text-center items-center justify-center"
+		>
+			<span>Reset Filter</span>
 		</button>
 	</div>
 </mat-menu>

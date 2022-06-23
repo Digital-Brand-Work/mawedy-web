@@ -1,0 +1,54 @@
+<div class="flex flex-col relative z-50 bg-white">
+	<div
+		(click)="isSearching = true"
+		stop-propagation
+		style="width: 219px"
+		class="hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 ml-auto relative z-0"
+	>
+		<input
+			(input)="search()"
+			[(ngModel)]="keyword"
+			type="search"
+			class="w-full"
+			placeholder="Search Doctors"
+			(keydown.enter)="onEnter()"
+		/>
+
+		<mat-icon
+			*ngIf="!isSearching || keyword === ''"
+			class="text-gray-400 ml-auto"
+			svgIcon="feather:search"
+		></mat-icon>
+
+		<mat-icon
+			(click)="onReset()"
+			*ngIf="isSearching && keyword !== ''"
+			role="button"
+			svgIcon="feather:x"
+		></mat-icon>
+	</div>
+
+	<div
+		*ngIf="isSearching && keyword !== '' && doctors.length !== 0"
+		class="mt-2 bg-white drop-shadow-xl w-full absolute z-50 top-8 overflow-y-hidden"
+		style="max-height: 80vh"
+	>
+		<ul>
+			<li
+				(click)="onEnter()"
+				role="button"
+				matRipple
+				matRippleColor="rgba(11, 169, 118,.1)"
+				class="px-2 py-3 hover:bg-gray-100 flex items-center"
+				*ngFor="let doctor of doctors; trackBy: identity"
+			>
+				<mat-icon
+					class="icon-size-5 mr-3 -translate-y-0.5"
+					svgIcon="feather:search"
+				></mat-icon>
+
+				<div>{{ doctor.name }}</div>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,4 +1,4 @@
-<div class="flex items-center w-full">
+<div class="flex items-center w-full relative z-10">
 	<div
 		@slideInBottom
 		*ngIf="paginatedData$ | async as table"
@@ -7,17 +7,7 @@
 		Doctors ({{ table.meta.total }})
 	</div>
 
-	<div
-		style="width: 219px"
-		class="hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 ml-auto"
-	>
-		<input type="search" class="w-full" placeholder="Search Doctors" />
-
-		<mat-icon
-			class="text-gray-400 ml-auto"
-			svgIcon="feather:search"
-		></mat-icon>
-	</div>
+	<doctor-search-results class="ml-auto"></doctor-search-results>
 
 	<doctors-filter
 		class="hidden md:flex"

@@ -9,7 +9,8 @@ import { DoctorsToolbarComponent } from './doctors-toolbar/doctors-toolbar.compo
 import { StoreModule } from '@ngrx/store'
 import * as fromDoctor from './doctor.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { DoctorEffects } from './doctor.effects'
+import { DoctorEffects } from './doctor.effects';
+import { DoctorSearchResultsComponent } from './doctor-search-results/doctor-search-results.component'
 
 const components = [
 	DoctorsComponent,
@@ -19,7 +20,7 @@ const components = [
 ]
 
 @NgModule({
-	declarations: [...components],
+	declarations: [...components, DoctorSearchResultsComponent],
 	imports: [
 		SharedModule,
 		RouterModule.forChild(doctorRoutes),

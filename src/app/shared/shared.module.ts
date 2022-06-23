@@ -45,6 +45,7 @@ import { HideIfDoesNotMatchTimeDirective } from 'app/mawedy-core/directives/hide
 import { WeekCalendarCursorDirective } from 'app/mawedy-core/directives/week-calendar-cursor.directive'
 import { NgxFullpageModule } from 'ngx-free-fullpage'
 import { RemoveWhiteSpaceAndDashPipe } from '@digital_brand_work/pipes/remove-white-space-and-dash.pipe'
+import { ToPatientFullName } from 'app/mawedy-core/pipes/patient.fullname.pipe'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -92,6 +93,7 @@ const pipes: any[] = [
 	FilterByDatePipe,
 	FilterByDoctorPipe,
 	RemoveWhiteSpaceAndDashPipe,
+	ToPatientFullName,
 ]
 
 const directives: any[] = [
