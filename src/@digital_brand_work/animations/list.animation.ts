@@ -14,12 +14,12 @@ export const listAnimation = trigger('listAnimation', [
 			[
 				style({
 					opacity: 0,
-					transform: 'translate(0,15rem)',
+					transform: 'translate(0,5rem)',
 				}),
 				stagger(
 					'40ms',
 					animate(
-						'500ms cubic-bezier(.28,-0.86,0,1.11)',
+						'300ms cubic-bezier(.28,-0.86,0,1.11)',
 						style({
 							opacity: 1,
 							transform: 'translate(0px,0) ',
@@ -31,7 +31,10 @@ export const listAnimation = trigger('listAnimation', [
 		),
 		query(
 			':leave',
-			animate('100ms', style({ opacity: 0, transform: 'translate(-15rem,0) ' })),
+			animate(
+				'100ms',
+				style({ opacity: 0, transform: 'translate(-15rem,0) ' }),
+			),
 			{ optional: true },
 		),
 	]),

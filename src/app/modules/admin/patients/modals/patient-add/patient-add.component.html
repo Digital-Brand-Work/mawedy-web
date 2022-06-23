@@ -377,9 +377,11 @@
 						}"
 						class="ml-auto rounded-lg px-10 py-3 font-bold border-2"
 					>
-						<spinner *ngIf="form.disabled"></spinner>
+						<spinner @slideInBottom *ngIf="form.disabled"></spinner>
 
-						<div class="text-white" *ngIf="!form.disabled">Add</div>
+						<div class="text-white" @zoomIn *ngIf="!form.disabled">
+							Add
+						</div>
 					</button>
 				</div>
 			</div>

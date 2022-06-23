@@ -1,38 +1,40 @@
-animation when processing
+ADD Pagination
 
-Multiple departments, multiple doctors
-
-line real time
+Filters
 
 Remove to calendar when canceling appointments
 
-colors of confirm
+line real time
 
-ADD Pagination
+Hide Alert when clicked
 
-Confirm Delete Modal
+Doctor Timeslot Update sa appointment
 
-Auto Grow Directive
-
-Add Modal Exit Transition
+Subscription Type Direcive
 
 Subscription Expired
 
-Filter by Subscription Type
-
-lint
-
-link to app store
+Fetch after 4 mins
 
 Interceptor to login direct sa checkout
 
 Guards
 
-Fix SEO
-
 landing animations
 
 catch images error
+
+Auto Grow Directive
+
+Add Modal Exit Transition
+
+Multiple departments, multiple doctors
+
+lint
+
+link to app store
+
+Fix SEO
 
 https://github.com/rxgx/json-calendar
 

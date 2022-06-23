@@ -386,9 +386,11 @@
 				}"
 				class="rounded-xl px-5 py-3 font-bold text-white"
 			>
-				<spinner *ngIf="form.disabled"></spinner>
+				<spinner @slideInBottom *ngIf="form.disabled"></spinner>
 
-				<div class="text-white" *ngIf="!form.disabled">Schedule</div>
+				<div class="text-white" @zoomIn *ngIf="!form.disabled">
+					Schedule
+				</div>
 			</button>
 		</div>
 	</div>

@@ -297,9 +297,9 @@
 				}"
 				class="ml-auto rounded-lg px-10 py-3 font-bold border-2"
 			>
-				<spinner *ngIf="isProcessing"></spinner>
+				<spinner @slideInBottom *ngIf="isProcessing"></spinner>
 
-				<div class="text-white" *ngIf="!isProcessing">Add</div>
+				<div class="text-white" @zoomIn *ngIf="!isProcessing">Add</div>
 			</button>
 		</div>
 	</div>
