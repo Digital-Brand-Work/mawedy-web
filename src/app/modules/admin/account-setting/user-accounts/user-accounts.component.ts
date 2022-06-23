@@ -144,7 +144,7 @@ export class UserAccountsComponent implements OnInit {
 		new BaseService(
 			this._http,
 			this._indexedDBService,
-			'v1/accounts/update',
+			'v1/clinic/accounts/update',
 		)
 			.post(form)
 			.subscribe({
@@ -215,6 +215,17 @@ export class UserAccountsComponent implements OnInit {
 						60 *
 						(clinic.subscription_interval === 'year' ? 12 : 1)
 					}`,
+					dismissible: true,
+					icon: {
+						name: 'credit_card',
+						color: 'accent',
+					},
+					actions: {
+						confirm: {
+							color: 'accent',
+							label: `Pay for ${newUsers} users`,
+						},
+					},
 				})
 
 				confirm.afterClosed().subscribe((result) => {
@@ -238,7 +249,7 @@ export class UserAccountsComponent implements OnInit {
 							new BaseService(
 								this._http,
 								this._indexedDBService,
-								'v1/accounts/add',
+								'v1/clinic/accounts/add',
 							)
 								.post(form)
 								.subscribe({
