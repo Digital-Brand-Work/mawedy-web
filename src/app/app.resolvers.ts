@@ -121,6 +121,10 @@ export class InitialDataResolver implements Resolve<any> {
 					this.loadDepartments(departments.data)
 
 					this.loadDoctors(doctors.data)
+					this._paginationService.doctors$.next({
+						links: doctors.link,
+						meta: doctors.meta,
+					})
 
 					this.loadDashboardAppointments(
 						appointments.data.filter(

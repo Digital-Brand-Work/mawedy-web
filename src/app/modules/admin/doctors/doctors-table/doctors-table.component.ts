@@ -9,6 +9,8 @@ import { DoctorAvailabilityModal } from '../modals/doctor-availability/doctor-av
 import { DoctorDetailsModal } from '../modals/doctor-details/doctor-details.service'
 import * as DoctorActions from '../doctor.actions'
 import { DoctorService } from '../doctor.service'
+import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationData } from 'app/app.resolvers'
 @Component({
 	selector: 'doctors-table',
 	templateUrl: './doctors-table.component.html',
@@ -21,12 +23,16 @@ export class DoctorsTableComponent implements OnInit {
 		private _doctorService: DoctorService,
 		private _indexDBService: NgxIndexedDBService,
 		private doctorDetailsModal: DoctorDetailsModal,
+		private _paginationService: PaginationService,
 		private doctorAvailabilityModal: DoctorAvailabilityModal,
 	) {}
 
 	@Output() onDoctorChanges = new EventEmitter<Doctor[]>()
 
 	unsubscribe$: Subject<any> = new Subject<any>()
+
+	paginatedData$: BehaviorSubject<PaginationData | null> =
+		this._paginationService.doctors$
 
 	doctorAvailabilityModalOpened$: BehaviorSubject<boolean> =
 		this.doctorAvailabilityModal.opened$

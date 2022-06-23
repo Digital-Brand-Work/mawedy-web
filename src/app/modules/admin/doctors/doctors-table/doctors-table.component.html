@@ -1,5 +1,5 @@
 <div class="md:px-10 px-0 w-full">
-	<div style="height: 80vh" class="md:rounded-xl bg-white px-5 pr-0 w-full">
+	<div style="height: 70vh" class="md:rounded-xl bg-white px-5 pr-0 w-full">
 		<div class="flex flex-col flex-auto overflow-x-auto h-full bg-white">
 			<table class="min-w-240 overflow-y-visible mt-4">
 				<thead style="height: 42px" class="sticky top-0 bg-white pt-4">
@@ -21,18 +21,26 @@
 						style="height: 60px"
 						class="accent-color font-semibold border-b border-b-gray-100 hover:bg-gray-50"
 						*ngFor="
-							let doctor of (doctors$ | async).entities
-								| entities;
-							trackBy: identity
+							let doctor of (doctors$ | async).entities | entities
 						"
 					>
 						<td>{{ doctor.name }}</td>
-						<td>{{ doctor.departments[0]?.name }}</td>
+						<td>
+							{{
+								doctor.departments.length === 0
+									? 'N/A'
+									: doctor.departments[0]?.name
+							}}
+						</td>
 						<td class="text-center">
 							{{ doctor.experience }} Years
 						</td>
 						<td class="text-center">
 							<a
+								*ngIf="
+									doctor.phone_number &&
+									doctor.phone_number !== null
+								"
 								role="button"
 								target="_blank"
 								class="hover:text-emerald-500 hover:underline text-center"
@@ -44,6 +52,13 @@
 											: doctor.phone_country_code
 								}}</a
 							>
+
+							{{
+								!doctor.phone_number ||
+								doctor.phone_number === null
+									? 'N/A'
+									: ''
+							}}
 						</td>
 						<td
 							(click)="view(doctor)"
@@ -63,6 +78,18 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+
+		<div class="flex items-center">
+			<pagination
+				*ngIf="paginatedData$ | async as table"
+				@expandCollapse
+				class="ml-auto min-w-3/4"
+				[items]="table.meta.links"
+				[active]="table.meta.current_page"
+				[table]="table"
+				(onPageChange)="paginate($event)"
+			></pagination>
 		</div>
 	</div>
 </div>

@@ -18,11 +18,14 @@ import { MedicalService } from 'app/modules/admin/clinic/clinic-services/medical
 import { Promotion } from 'app/modules/admin/promotions/promotion.model'
 import * as PatientActions from '../modules/admin/patients/patient.actions'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DoctorService } from 'app/modules/admin/doctors/doctor.service'
+import * as DoctorActions from '../modules/admin/doctors/doctor.actions'
 
 @Injectable({ providedIn: 'root' })
 export class LaravelNotificationService {
 	constructor(
 		private _alert: AlertState,
+		private _doctorAPI: DoctorService,
 		private _patientAPI: PatientService,
 		private _paginationService: PaginationService,
 		private _indexDBService: NgxIndexedDBService,
@@ -69,7 +72,42 @@ export class LaravelNotificationService {
 				this.reloadPatients()
 			}
 
+			if (
+				e.type === 'imports.successful' &&
+				e.import_type === 'Doctors'
+			) {
+				this.reloadDoctors()
+			}
+
 			console.log(e)
+		})
+	}
+
+	reloadDoctors() {
+		this._doctorAPI.get().subscribe((doctors: any) => {
+			this._indexDBService.clear(DB.DOCTORS).subscribe(() => {
+				this._paginationService.doctors$.next({
+					links: doctors.link,
+					meta: doctors.meta,
+				})
+
+				this._indexDBService
+					.bulkAdd(DB.DOCTORS, doctors.data)
+					.subscribe(() =>
+						this.store.dispatch(
+							DoctorActions.loadDoctors({
+								doctors: doctors.data,
+							}),
+						),
+					)
+
+				this._alert.add({
+					id: Math.floor(Math.random() * 100000000000).toString(),
+					title: `Import of Doctors successful!`,
+					message: 'Doctors are successfully imported.',
+					type: 'success',
+				})
+			})
 		})
 	}
 

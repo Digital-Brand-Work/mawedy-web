@@ -8,11 +8,15 @@ import { select, Store } from '@ngrx/store'
 import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { DoctorImportModal } from '../modals/doctor-import/doctor-import.service'
+import { PaginationData } from 'app/app.resolvers'
+import { PaginationService } from 'app/misc/pagination.service'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 
 @Component({
 	selector: 'doctors-toolbar',
 	templateUrl: './doctors-toolbar.component.html',
 	styleUrls: ['./doctors-toolbar.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class DoctorsToolbarComponent implements OnInit {
 	constructor(
@@ -21,6 +25,7 @@ export class DoctorsToolbarComponent implements OnInit {
 		private addDoctorModal: AddDoctorModal,
 		private store: Store<{ doctors: Doctor[] }>,
 		private _doctorImportModal: DoctorImportModal,
+		private _paginationService: PaginationService,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
@@ -29,6 +34,9 @@ export class DoctorsToolbarComponent implements OnInit {
 	@Output() onFilter = new EventEmitter()
 
 	@Input() doctors: Doctor[] = []
+
+	paginatedData$: BehaviorSubject<PaginationData | null> =
+		this._paginationService.patients$
 
 	doctorImportModalOpened$: BehaviorSubject<boolean> =
 		this._doctorImportModal.opened$

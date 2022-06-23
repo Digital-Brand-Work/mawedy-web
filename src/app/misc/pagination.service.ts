@@ -7,4 +7,6 @@ export class PaginationService {
 	patients$: BehaviorSubject<PaginationData | null> = new BehaviorSubject(
 		null,
 	)
+
+	doctors$: BehaviorSubject<PaginationData | null> = new BehaviorSubject(null)
 }
