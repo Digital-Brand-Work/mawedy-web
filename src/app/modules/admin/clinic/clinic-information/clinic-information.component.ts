@@ -1,3 +1,4 @@
+import { dbwAnimations } from './../../../../../@digital_brand_work/animations/animation.api'
 import { Coordinates } from './../clinic-information-map/clinic-information-map.component'
 import { HttpErrorResponse } from '@angular/common/http'
 import { AccountTypeEnum } from './../../../../mawedy-core/enums/account.type.enum'
@@ -23,13 +24,13 @@ import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.contr
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { days } from 'app/mawedy-core/enums/day.enum'
 import { ClinicTimingSelectModal } from '../clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
-
 import { empty, removeDialCode, setPrefix } from 'app/mawedy-core/helpers'
 
 @Component({
 	selector: 'clinic-information',
 	templateUrl: './clinic-information.component.html',
 	styleUrls: ['./clinic-information.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class ClinicInformationComponent implements OnInit {
 	constructor(
