@@ -19,7 +19,7 @@
 	>
 		<div
 			@slideInBottom
-			*ngIf="(patients$ | async) && (patients$ | async)?.length !== 0"
+			*ngIf="patients.length !== 0"
 			class="font-bold text-gray-500 mb-3"
 		>
 			Patient Details
@@ -31,7 +31,6 @@
 			}"
 			@fadeOutTop
 			@slideInBottom
-			*ngIf="(patients$ | async) && (patients$ | async)?.length !== 0"
 			class="mb-5 w-full"
 		>
 			<label
@@ -45,6 +44,7 @@
 				id="patient_name"
 				autocomplete="off"
 				stop-propagation
+				(input)="onSearchPatients()"
 				(click)="patientListIsFocused = true"
 				[ngModelOptions]="{ standalone: true }"
 				[(ngModel)]="keyword"
@@ -54,37 +54,34 @@
 
 			<div
 				@fadeInTop
-				*ngIf="
-					patientListIsFocused &&
-					(patients$ | async | filter: keyword).length !== 0
-				"
-				class="w-full shadow-md rounded-md mb-5"
+				*ngIf="patientListIsFocused && patients.length !== 0"
+				class="mt-2 bg-white drop-shadow-xl w-full overflow-y-hidden"
+				style="max-height: 40vh"
 			>
-				<button
-					(click)="
-						patientListIsFocused = false;
-						keyword =
-							patient.first_name +
-							' ' +
-							patient.middle_name +
-							' ' +
-							patient.last_name;
-						form.get('patient_id').setValue(patient.id)
-					"
-					class="w-full hover:bg-emerald-500 hover:text-white flex items-center px-5 border-b border-gray-400"
-					mat-menu-item
-					*ngFor="
-						let patient of (patients$ | async).entities
-							| entities
-							| filter: keyword;
-						trackBy: identity
-					"
-				>
-					<div>
-						{{ patient.first_name }} {{ patient.middle_name }}
-						{{ patient.last_name }}
-					</div>
-				</button>
+				<ul>
+					<li
+						role="button"
+						(click)="
+							patientListIsFocused = false;
+							keyword =
+								patient.first_name +
+								' ' +
+								patient.middle_name +
+								' ' +
+								patient.last_name;
+							form.get('patient_id').setValue(patient.id)
+						"
+						class="px-2 py-3 hover:bg-gray-100 flex items-center"
+						*ngFor="let patient of patients; trackBy: identity"
+					>
+						<mat-icon
+							class="icon-size-5 mr-3 -translate-y-0.5"
+							svgIcon="feather:search"
+						></mat-icon>
+
+						<div>{{ patient | full_name }}</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 
@@ -332,7 +329,7 @@
 		</div>
 
 		<div
-			*ngIf="(patients$ | async).length === 0"
+			*ngIf="patients.length === 0"
 			class="flex border border-amber-400 text-amber-500 bg-amber-50 p-3 rounded-md items-center 3 my-3"
 		>
 			<mat-icon class="text-amber-500 mr-2" svgIcon="warning"></mat-icon>

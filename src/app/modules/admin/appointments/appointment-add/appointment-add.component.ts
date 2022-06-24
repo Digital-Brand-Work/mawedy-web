@@ -1,3 +1,4 @@
+import { PatientService } from './../../patients/patient.service'
 import { Appointment } from './../appointment.model'
 import { AppointmentService } from './../appointment.service'
 import { empty, hasData, tOTime, toTwelve } from 'app/mawedy-core/helpers'
@@ -54,17 +55,18 @@ export class AppointmentAddComponent implements OnInit {
 		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
+		private _patientApi: PatientService,
+		private _appointmentAPI: AppointmentService,
 		private _indexDBService: NgxIndexedDBService,
 		private _errorHandlerService: ErrorHandlerService,
 		private _addAppointmentModal: AddAppointmentModal,
+		private _dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
+		private _dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 		private _store: Store<{
 			department: Department
 			patient: Patient
 			patients: Patient[]
 		}>,
-		private _appointmentAPI: AppointmentService,
-		private _dashboardAppointmentSelectDoctorModal: DashboardAppointmentSelectDoctorModal,
-		private _dashboardAppointmentSelectTimeSlotModal: DashboardAppointmentSelectTimeSlotModal,
 	) {}
 
 	@HostListener('document:keydown.escape')
@@ -98,9 +100,9 @@ export class AppointmentAddComponent implements OnInit {
 				placeholder: '0',
 		  })
 
-	currencyFC = new FormControl('')
+	isReady: boolean = true
 
-	patients$: Observable<Patient[]> = this._store.pipe(select('patients'))
+	patients: Patient[] = []
 
 	departments: Department[] = []
 
@@ -191,6 +193,22 @@ export class AppointmentAddComponent implements OnInit {
 
 	toTwelve(value: string) {
 		toTwelve(value)
+	}
+
+	onSearchPatients() {
+		if (this.isReady) {
+			this.isReady = false
+
+			this._patientApi
+				.query(`?keyword=${this.keyword}`)
+				.subscribe((patients: any) => {
+					this.patients = patients.data
+
+					setTimeout(() => {
+						this.isReady = true
+					}, 250)
+				})
+		}
 	}
 
 	/**
