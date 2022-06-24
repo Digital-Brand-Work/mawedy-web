@@ -13,7 +13,7 @@
 			[(ngModel)]="keyword"
 			type="search"
 			class="w-full"
-			placeholder="Search Promotions"
+			placeholder="Search Appointments"
 			(keydown.enter)="onEnter()"
 		/>
 
@@ -32,7 +32,7 @@
 	</div>
 
 	<div
-		*ngIf="isSearching && keyword !== '' && promotions.length !== 0"
+		*ngIf="isSearching && keyword !== '' && appointments.length !== 0"
 		class="mt-2 bg-white drop-shadow-xl w-full absolute z-50 top-8 overflow-y-hidden"
 		style="max-height: 80vh"
 	>
@@ -43,14 +43,25 @@
 				matRipple
 				matRippleColor="rgba(11, 169, 118,.1)"
 				class="px-2 py-3 hover:bg-gray-100 flex items-center"
-				*ngFor="let promotion of promotions; trackBy: identity"
+				*ngFor="let appointment of appointments; trackBy: identity"
 			>
 				<mat-icon
 					class="icon-size-5 mr-3 -translate-y-0.5"
 					svgIcon="feather:search"
 				></mat-icon>
 
-				<div>{{ promotion.promotion_name }}</div>
+				<div class="text-xs">
+					<div>Doctor: {{ appointment.doctor.name }}</div>
+
+					<div>Patient: {{ appointment.patient | full_name }}</div>
+
+					<div>
+						Time: {{ appointment.start_time | toTwelve }} -
+						{{ appointment.end_time | toTwelve }}
+					</div>
+
+					<div>Status: {{ appointment.status }}</div>
+				</div>
 			</li>
 		</ul>
 	</div>

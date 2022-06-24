@@ -6,6 +6,7 @@ import { PaginationService } from 'app/misc/pagination.service'
 import { PromotionServiceService } from '../promotion.service'
 import * as PromotionActions from '../promotion.actions'
 import * as dayjs from 'dayjs'
+import { ErrorHandlerService } from 'app/misc/error-handler.service'
 
 @Component({
 	selector: 'promotions-filter',
@@ -14,6 +15,7 @@ import * as dayjs from 'dayjs'
 })
 export class PromotionsFilterComponent implements OnInit {
 	constructor(
+		private _errorHandlerService: ErrorHandlerService,
 		private _promotionAPI: PromotionServiceService,
 		private _paginationService: PaginationService,
 		private _store: Store<{
@@ -56,17 +58,22 @@ export class PromotionsFilterComponent implements OnInit {
 
 		this._promotionAPI
 			.query(`?` + new URLSearchParams(filter).toString())
-			.subscribe((promotions: any) => {
-				this._paginationService.doctors$.next({
-					links: promotions.links,
-					meta: promotions.meta,
-				})
+			.subscribe({
+				next: (promotions: any) => {
+					this._paginationService.doctors$.next({
+						links: promotions.links,
+						meta: promotions.meta,
+					})
 
-				this._store.dispatch(
-					PromotionActions.loadPromotions({
-						promotions: promotions.data,
-					}),
-				)
+					this._store.dispatch(
+						PromotionActions.loadPromotions({
+							promotions: promotions.data,
+						}),
+					)
+				},
+				error: (http) => {
+					this._errorHandlerService.handleError(http)
+				},
 			})
 	}
 }
