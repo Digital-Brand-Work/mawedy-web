@@ -8,6 +8,8 @@ import { ClinicSubscriptionTypeEnum } from 'app/mawedy-core/enums/clinic-subscri
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { BehaviorSubject, Observable, Subject } from 'rxjs'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 @Component({
 	selector: 'home-section1',
@@ -19,6 +21,7 @@ export class HomeSection1Component implements OnInit {
 	constructor(
 		private _mediaService: MediaService,
 		private _clinicUserService: ClinicUserService,
+		private _indexedDBService: NgxIndexedDBService,
 	) {}
 
 	unsubscribe$: Subject<any> = new Subject<any>()
@@ -41,7 +44,7 @@ export class HomeSection1Component implements OnInit {
 	getClinicData() {
 		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
 			if (!clinic) {
-				return
+				return this.fetchToIndexDB()
 			}
 
 			const isConfirmedOrDone =
@@ -57,6 +60,14 @@ export class HomeSection1Component implements OnInit {
 				this.showSignInPanel = false
 			}
 		})
+	}
+
+	fetchToIndexDB() {
+		this._indexedDBService
+			.getByKey(DB.CLINIC, 1)
+			.subscribe((clinic: any) => {
+				this.clinic$.next(clinic.data)
+			})
 	}
 
 	ngOnDestroy(): void {
