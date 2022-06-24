@@ -44,7 +44,7 @@ export class PatientSearchResultsComponent implements OnInit {
 			this.patients = []
 
 			this._paginationService.doctors$.next({
-				links: patients.link,
+				links: patients.links,
 				meta: patients.meta,
 			})
 
@@ -74,7 +74,7 @@ export class PatientSearchResultsComponent implements OnInit {
 					this.patients = patients.data
 
 					this.temporaryPaginatedData = {
-						links: patients.link,
+						links: patients.links,
 						meta: patients.meta,
 					}
 

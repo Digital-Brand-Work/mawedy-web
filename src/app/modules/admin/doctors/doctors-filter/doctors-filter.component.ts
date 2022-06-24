@@ -99,7 +99,7 @@ export class DoctorsFilterComponent implements OnInit {
 	onReset() {
 		this._doctorService.get().subscribe((doctors: any) => {
 			this._paginationService.doctors$.next({
-				links: doctors.link,
+				links: doctors.links,
 				meta: doctors.meta,
 			})
 
@@ -126,7 +126,7 @@ export class DoctorsFilterComponent implements OnInit {
 			.query(`?` + new URLSearchParams(filter).toString())
 			.subscribe((doctors: any) => {
 				this._paginationService.doctors$.next({
-					links: doctors.link,
+					links: doctors.links,
 					meta: doctors.meta,
 				})
 

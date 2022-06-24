@@ -118,7 +118,7 @@ export class InitialDataResolver implements Resolve<any> {
 
 					this.loadPatients(patients.data)
 					this._paginationService.patients$.next({
-						links: patients.link,
+						links: patients.links,
 						meta: patients.meta,
 					})
 
@@ -126,13 +126,13 @@ export class InitialDataResolver implements Resolve<any> {
 
 					this.loadDoctors(doctors.data)
 					this._paginationService.doctors$.next({
-						links: doctors.link,
+						links: doctors.links,
 						meta: doctors.meta,
 					})
 
 					this.loadDashboardAppointments(dashboardAppointments.data)
 					this._paginationService.dashboardAppointments$.next({
-						links: dashboardAppointments.link,
+						links: dashboardAppointments.links,
 						meta: dashboardAppointments.meta,
 					})
 
@@ -144,13 +144,13 @@ export class InitialDataResolver implements Resolve<any> {
 
 					this.loadForApprovalPatients(approvals.data)
 					this._paginationService.dashboardApprovals$.next({
-						links: approvals.link,
+						links: approvals.links,
 						meta: approvals.meta,
 					})
 
 					this.loadPromotions(promotions.data)
 					this._paginationService.promotions$.next({
-						links: promotions.link,
+						links: promotions.links,
 						meta: promotions.meta,
 					})
 				})

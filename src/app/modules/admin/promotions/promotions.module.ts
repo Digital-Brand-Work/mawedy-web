@@ -11,7 +11,8 @@ import { promotionsRoutes } from 'app/mawedy-core/routes/admin/promotions.routin
 import { StoreModule } from '@ngrx/store'
 import * as fromPromotion from './promotion.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { PromotionEffects } from 'app/modules/admin/promotions/promotion.effects'
+import { PromotionEffects } from 'app/modules/admin/promotions/promotion.effects';
+import { PromotionsSearchResultsComponent } from './promotions-search-results/promotions-search-results.component'
 
 const components = [
 	PromotionsComponent,
@@ -22,7 +23,7 @@ const components = [
 	PromotionsEditComponent,
 ]
 @NgModule({
-	declarations: [...components],
+	declarations: [...components, PromotionsSearchResultsComponent],
 	imports: [
 		SharedModule,
 		RouterModule.forChild(promotionsRoutes),

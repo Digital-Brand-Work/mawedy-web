@@ -21,6 +21,8 @@ import { PromotionServiceService } from '../promotion.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { Router } from '@angular/router'
 import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
+import { InitialDataResolver, PaginationData } from 'app/app.resolvers'
+import { PaginationService } from 'app/misc/pagination.service'
 
 @Component({
 	selector: 'promotions-table',
@@ -37,10 +39,15 @@ export class PromotionsTableComponent implements OnInit {
 		private _clinicUserService: ClinicUserService,
 		private _promotionAPI: PromotionServiceService,
 		private _indexDBController: IndexedDbController,
+		private _paginationService: PaginationService,
 		private _store: Store<{ promotions: Promotion[] }>,
+		private InitialDataResolver: InitialDataResolver,
 	) {}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
+
+	paginatedData$: BehaviorSubject<PaginationData | null> =
+		this._paginationService.promotions$
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -50,26 +57,23 @@ export class PromotionsTableComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.clinic$.pipe(takeUntil(this.unsubscribe$)).subscribe((clinic) => {
-			if (!clinic) {
-				return
+			if (clinic) {
+				this.seoService.generateTags({
+					title: `${clinic.name} | ${clinic?.address} | Promotions`,
+				})
 			}
-
-			this.seoService.generateTags({
-				title: `${clinic.name} | ${clinic?.address} | Promotions`,
-			})
 		})
-
-		this.fetchFromIndexDb()
 	}
 
-	fetchFromIndexDb() {
-		this._indexDbService
-			.getAll(DB.PROMOTIONS)
-			.subscribe((promotions: Promotion[]) =>
-				this._store.dispatch(
-					PromotionActions.loadPromotions({ promotions: promotions }),
-				),
-			)
+	paginate(url: string) {
+		this._promotionAPI.paginate(url).subscribe((patients: any) => {
+			this.InitialDataResolver.loadPromotions(patients.data)
+
+			this.paginatedData$.next({
+				links: patients.links,
+				meta: patients.meta,
+			})
+		})
 	}
 
 	ngOnDestroy(): void {

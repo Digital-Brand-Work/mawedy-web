@@ -52,7 +52,7 @@ export class DoctorsTableComponent implements OnInit {
 			this._initialDataResolver.loadPatients(patients.data)
 
 			this.paginatedData$.next({
-				links: patients.link,
+				links: patients.links,
 				meta: patients.meta,
 			})
 		})
