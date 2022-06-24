@@ -8,7 +8,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 export class PatientsFilterComponent implements OnInit {
 	constructor() {}
 
-	@Output() onFilter = new EventEmitter()
+	filter = {
+		date: 'DESC',
+		time: 'DESC',
+	}
 
 	ngOnInit(): void {}
+
+	onFilter() {}
+
+	onReset() {}
 }

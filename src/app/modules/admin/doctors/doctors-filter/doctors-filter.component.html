@@ -19,12 +19,13 @@
 	#dashboardAppointmentFilter="matMenu"
 	class="rounded-md"
 >
-	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-10">
+	<div stop-propagation class="flex-col px-5 mt-10">
 		<label for="departments" class="mb-1 font-bold text-gray-500 text-md"
 			>Department</label
 		>
 
 		<select
+			(change)="setMedicalServices($event.target.value)"
 			[(ngModel)]="department"
 			id="departments"
 			type="text"
@@ -41,6 +42,31 @@
 				"
 			>
 				{{ department.name | titlecase }}
+			</option>
+		</select>
+	</div>
+
+	<div
+		*ngIf="medicalServices.length !== 0"
+		stop-propagation
+		class="flex-col px-5 mt-5"
+	>
+		<label for="service" class="mb-1 font-bold text-gray-500 text-md"
+			>Medical Service</label
+		>
+
+		<select
+			id="service"
+			[(ngModel)]="service_id"
+			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
+		>
+			<option value="">All</option>
+
+			<option
+				[value]="service.id"
+				*ngFor="let service of medicalServices; trackBy: identity"
+			>
+				{{ service.name }}
 			</option>
 		</select>
 	</div>

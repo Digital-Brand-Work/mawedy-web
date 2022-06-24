@@ -10,6 +10,7 @@ import { Doctor } from '../doctor.model'
 import * as DoctorActions from '../doctor.actions'
 import * as dayjs from 'dayjs'
 import { toSentenceCase } from 'app/mawedy-core/helpers'
+import { MedicalService } from '../../clinic/clinic-services/medical-service.model'
 
 @Component({
 	selector: 'doctors-filter',
@@ -27,6 +28,8 @@ export class DoctorsFilterComponent implements OnInit {
 		}>,
 	) {}
 
+	medicalServices: MedicalService[] = []
+
 	departments$?: Observable<Department[]> = this._store.pipe(
 		select('department'),
 	)
@@ -36,6 +39,8 @@ export class DoctorsFilterComponent implements OnInit {
 	availability: string = dayjs().format('dddd').toLowerCase()
 
 	department: string = ''
+
+	service_id: string = ''
 
 	weekDays = weekDays
 
@@ -47,6 +52,10 @@ export class DoctorsFilterComponent implements OnInit {
 
 				if (departments.length !== 0) {
 					this.department = departments[0].id
+
+					this.medicalServices = departments[0].services
+
+					this.service_id = departments[0].services[0].id
 				}
 
 				this._cdr.detectChanges()
@@ -65,6 +74,28 @@ export class DoctorsFilterComponent implements OnInit {
 
 	identity = (item: any) => item
 
+	setMedicalServices(id: string): void {
+		this.departments$.pipe(take(1)).subscribe((store: any) => {
+			const departments: Department[] = Object.values(store.entities)
+
+			const department: Department = departments.find(
+				(department) => department.id === id,
+			)
+
+			if (!department) {
+				this.service_id = ''
+
+				return
+			}
+
+			if (department.services.length !== 0) {
+				this.medicalServices = department.services
+
+				this.service_id = department.services[0].id
+			}
+		})
+	}
+
 	onReset() {
 		this._doctorService.get().subscribe((doctors: any) => {
 			this._paginationService.doctors$.next({
@@ -81,7 +112,8 @@ export class DoctorsFilterComponent implements OnInit {
 	onFilter() {
 		const filter = {
 			day_of_week: toSentenceCase(this.availability),
-			department: this.department,
+			department_id: this.department,
+			service_id: this.service_id,
 		}
 
 		for (let key in filter) {
