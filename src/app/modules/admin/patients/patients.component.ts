@@ -13,9 +13,7 @@ import { select, Store } from '@ngrx/store'
 import { PatientEffects } from 'app/modules/admin/patients/patient.effects'
 import { ClinicUserService } from '../clinic/clinic.service'
 import { Clinic } from '../clinic/clinic.model'
-import * as PatientActions from './patient.actions'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
 
 @Component({
 	selector: 'patients',

@@ -1,7 +1,6 @@
 import { InitialDataResolver } from 'app/app.resolvers'
 import { PaginationData } from './../../../../app.resolvers'
 import { slugify } from '@digital_brand_work/helpers/helpers'
-import { Department } from 'app/modules/admin/clinic/department/department.model'
 import { Patient } from './../patient.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Component, Input, OnInit } from '@angular/core'

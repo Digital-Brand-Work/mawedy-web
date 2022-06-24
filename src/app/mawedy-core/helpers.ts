@@ -102,3 +102,7 @@ export function toTwelve(time: any): any {
 export function toFixedTwo(value: number): string {
 	return (value < 10 ? '0' : '') + value
 }
+
+export function toSentenceCase(string: string) {
+	return string.charAt(0).toUpperCase() + string.slice(1)
+}

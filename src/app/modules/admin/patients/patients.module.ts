@@ -13,7 +13,8 @@ import { patientRoutes } from 'app/mawedy-core/routes/admin/patients.routing'
 import { StoreModule } from '@ngrx/store'
 import * as fromPatient from './patient.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { PatientEffects } from 'app/modules/admin/patients/patient.effects'
+import { PatientEffects } from 'app/modules/admin/patients/patient.effects';
+import { PatientSearchResultsComponent } from './patient-search-results/patient-search-results.component'
 
 const components = [
 	PatientsComponent,
@@ -27,7 +28,7 @@ const components = [
 ]
 
 @NgModule({
-	declarations: [...components],
+	declarations: [...components, PatientSearchResultsComponent],
 	imports: [
 		SharedModule,
 		RouterModule.forChild(patientRoutes),

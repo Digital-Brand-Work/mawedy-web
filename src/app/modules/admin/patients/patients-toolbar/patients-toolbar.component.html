@@ -7,17 +7,7 @@
 		Patients ({{ table.meta.total }})
 	</div>
 
-	<div
-		style="width: 219px"
-		class="hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 ml-auto"
-	>
-		<input type="search" class="w-full" placeholder="Search Patients" />
-
-		<mat-icon
-			class="text-gray-400 ml-auto"
-			svgIcon="feather:search"
-		></mat-icon>
-	</div>
+	<patient-search-results class="ml-auto"></patient-search-results>
 
 	<patients-filter
 		class="hidden md:flex"

@@ -9,6 +9,7 @@ import { PaginationService } from 'app/misc/pagination.service'
 import { Doctor } from '../doctor.model'
 import * as DoctorActions from '../doctor.actions'
 import * as dayjs from 'dayjs'
+import { toSentenceCase } from 'app/mawedy-core/helpers'
 
 @Component({
 	selector: 'doctors-filter',
@@ -79,7 +80,7 @@ export class DoctorsFilterComponent implements OnInit {
 
 	onFilter() {
 		const filter = {
-			day_of_week: this.availability,
+			day_of_week: toSentenceCase(this.availability),
 			department: this.department,
 		}
 
