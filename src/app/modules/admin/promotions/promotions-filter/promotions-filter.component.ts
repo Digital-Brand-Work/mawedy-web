@@ -1,4 +1,11 @@
+import { empty } from 'app/mawedy-core/helpers'
+import { Promotion } from 'app/modules/admin/promotions/promotion.model'
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { PaginationService } from 'app/misc/pagination.service'
+import { PromotionServiceService } from '../promotion.service'
+import * as PromotionActions from '../promotion.actions'
+import * as dayjs from 'dayjs'
 
 @Component({
 	selector: 'promotions-filter',
@@ -6,9 +13,60 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 	styleUrls: ['./promotions-filter.component.scss'],
 })
 export class PromotionsFilterComponent implements OnInit {
-	constructor() {}
+	constructor(
+		private _promotionAPI: PromotionServiceService,
+		private _paginationService: PaginationService,
+		private _store: Store<{
+			promotions: Promotion[]
+		}>,
+	) {}
 
-	@Output() onFilter = new EventEmitter()
+	validity_start_date: string = ''
+
+	validity_end_date: string = ''
 
 	ngOnInit(): void {}
+
+	onReset() {
+		this._promotionAPI.get().subscribe((promotions: any) => {
+			this._paginationService.doctors$.next({
+				links: promotions.links,
+				meta: promotions.meta,
+			})
+
+			this._store.dispatch(
+				PromotionActions.loadPromotions({
+					promotions: promotions.data,
+				}),
+			)
+		})
+	}
+
+	onFilter() {
+		const filter = {
+			validity_start_date: dayjs(this.validity_start_date).toJSON(),
+			validity_end_date: dayjs(this.validity_end_date).toJSON(),
+		}
+
+		for (let key in filter) {
+			if (empty(filter[key])) {
+				delete filter[key]
+			}
+		}
+
+		this._promotionAPI
+			.query(`?` + new URLSearchParams(filter).toString())
+			.subscribe((promotions: any) => {
+				this._paginationService.doctors$.next({
+					links: promotions.links,
+					meta: promotions.meta,
+				})
+
+				this._store.dispatch(
+					PromotionActions.loadPromotions({
+						promotions: promotions.data,
+					}),
+				)
+			})
+	}
 }

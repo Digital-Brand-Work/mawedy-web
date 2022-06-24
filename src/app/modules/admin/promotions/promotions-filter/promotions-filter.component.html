@@ -14,31 +14,60 @@
 	<mat-icon class="text-gray-400 ml-auto" svgIcon="feather:filter"></mat-icon>
 </div>
 
-<mat-menu [xPosition]="'before'" #promotionsFilter="matMenu" class="rounded-md">
-	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
-		<div class="mb-1 font-bold text-gray-500 text-md">From</div>
+<mat-menu
+	[xPosition]="'before'"
+	#promotionsFilter="matMenu"
+	class="rounded-md w-ful"
+>
+	<div stop-propagation class="flex-col px-5 mt-5 w-full">
+		<label
+			for="validity_start_date"
+			class="mb-1 font-bold text-gray-500 text-md"
+			>From</label
+		>
 
 		<input
 			type="date"
-			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+			id="validity_start_date"
+			[(ngModel)]="validity_start_date"
+			class="py-3 pl-4 pr-2 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 		/>
 	</div>
 
-	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
-		<div class="mb-1 font-bold text-gray-500 text-md">Until</div>
+	<div stop-propagation class="flex-col px-5 mt-5 w-full">
+		<label
+			for="validity_end_date"
+			class="mb-1 font-bold text-gray-500 text-md"
+			>Until</label
+		>
 
 		<input
 			type="date"
-			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
+			id="validity_end_date"
+			[(ngModel)]="validity_end_date"
+			class="py-3 pl-4 pr-2 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 		/>
 	</div>
 
-	<div class="flex-col px-5 mt-5 mb-5">
+	<div class="flex-col px-5 mt-5 mb-5 w-full">
 		<button
+			(click)="onFilter()"
+			matRipple
+			matRippleColor="rgba(11, 169, 118,.3)"
 			mat-menu-item
-			class="flex bg-emerald-300 border-emerald-900 border text-emerald-900 rounded-md text-center items-center justify-center"
+			class="flex bg-emerald-300 hover:bg-emeral-400 border-emerald-900 border text-emerald-900 rounded-md text-center items-center justify-center"
 		>
 			<span>Apply Filter</span>
+		</button>
+
+		<button
+			(click)="onReset()"
+			matRipple
+			matRippleColor="rgba(11, 169, 118,.3)"
+			mat-menu-item
+			class="flex bg-gray-50 text-gray-900 hover:bg-gray-100 rounded-md text-center items-center justify-center"
+		>
+			<span>Reset Filter</span>
 		</button>
 	</div>
 </mat-menu>
