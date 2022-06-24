@@ -19,7 +19,7 @@
 	#dashboardAppointmentFilter="matMenu"
 	class="rounded-md"
 >
-	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
+	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-10">
 		<label for="departments" class="mb-1 font-bold text-gray-500 text-md"
 			>Department</label
 		>
@@ -30,6 +30,8 @@
 			type="text"
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		>
+			<option value="">All</option>
+
 			<option
 				[value]="department.id"
 				*ngFor="
@@ -43,7 +45,7 @@
 		</select>
 	</div>
 
-	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-2">
+	<div (click)="$event.stopPropagation()" class="flex-col px-5 mt-5">
 		<label for="availability" class="mb-1 font-bold text-gray-500 text-md"
 			>Availability</label
 		>
@@ -53,6 +55,8 @@
 			id="availability"
 			class="py-3 pl-4 pr-20 rounded-md border-gray-300/80 border w-full focus:border-emerald-500 focus:border-2 focus:shadow-md focus:shadow-emerald-500/20"
 		>
+			<option value="">All</option>
+
 			<option
 				[value]="day"
 				*ngFor="let day of weekDays; trackBy: identity"
@@ -64,12 +68,7 @@
 
 	<div class="flex-col px-5 mt-5 mb-5">
 		<button
-			(click)="
-				onFilter.emit({
-					department: department,
-					availability: availability
-				})
-			"
+			(click)="onFilter()"
 			matRipple
 			matRippleColor="rgba(11, 169, 118,.3)"
 			mat-menu-item
@@ -79,7 +78,7 @@
 		</button>
 
 		<button
-			(click)="onReset.emit()"
+			(click)="onReset()"
 			matRipple
 			matRippleColor="rgba(11, 169, 118,.3)"
 			mat-menu-item

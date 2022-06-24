@@ -4,6 +4,9 @@
 		stop-propagation
 		style="width: 219px"
 		class="hidden md:flex items-center py-1.5 px-4 rounded-md border border-gray-300/80 ml-auto relative z-0"
+		[ngClass]="{
+			'border-teal-500 border-2 shadow-md shadow-teal-500/20': isSearching
+		}"
 	>
 		<input
 			(input)="search()"

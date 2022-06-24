@@ -1,15 +1,14 @@
 import { takeUntil } from 'rxjs/operators'
 import { weekDays } from './../../../../mawedy-core/constants/app.constant'
-import {
-	ChangeDetectorRef,
-	Component,
-	EventEmitter,
-	OnInit,
-	Output,
-} from '@angular/core'
-import { BehaviorSubject, Observable, Subject, take } from 'rxjs'
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
+import { Observable, Subject, take } from 'rxjs'
 import { Department } from '../../clinic/department/department.model'
 import { select, Store } from '@ngrx/store'
+import { DoctorService } from '../doctor.service'
+import { PaginationService } from 'app/misc/pagination.service'
+import { Doctor } from '../doctor.model'
+import * as DoctorActions from '../doctor.actions'
+import * as dayjs from 'dayjs'
 
 @Component({
 	selector: 'doctors-filter',
@@ -19,14 +18,13 @@ import { select, Store } from '@ngrx/store'
 export class DoctorsFilterComponent implements OnInit {
 	constructor(
 		private _cdr: ChangeDetectorRef,
+		private _doctorService: DoctorService,
+		private _paginationService: PaginationService,
 		private _store: Store<{
 			department: Department[]
+			doctors: Doctor[]
 		}>,
 	) {}
-
-	@Output() onFilter = new EventEmitter<DoctorFilter>()
-
-	@Output() onReset = new EventEmitter()
 
 	departments$?: Observable<Department[]> = this._store.pipe(
 		select('department'),
@@ -34,7 +32,7 @@ export class DoctorsFilterComponent implements OnInit {
 
 	unsubscribe$: Subject<any> = new Subject()
 
-	availability: string = weekDays[0]
+	availability: string = dayjs().format('dddd').toLowerCase()
 
 	department: string = ''
 
@@ -65,6 +63,45 @@ export class DoctorsFilterComponent implements OnInit {
 	}
 
 	identity = (item: any) => item
+
+	onReset() {
+		this._doctorService.get().subscribe((doctors: any) => {
+			this._paginationService.doctors$.next({
+				links: doctors.link,
+				meta: doctors.meta,
+			})
+
+			this._store.dispatch(
+				DoctorActions.loadDoctors({ doctors: doctors.data }),
+			)
+		})
+	}
+
+	onFilter() {
+		const filter = {
+			day_of_week: this.availability,
+			department: this.department,
+		}
+
+		for (let key in filter) {
+			if (filter[key] === '') {
+				delete filter[key]
+			}
+		}
+
+		this._doctorService
+			.query(`?` + new URLSearchParams(filter).toString())
+			.subscribe((doctors: any) => {
+				this._paginationService.doctors$.next({
+					links: doctors.link,
+					meta: doctors.meta,
+				})
+
+				this._store.dispatch(
+					DoctorActions.loadDoctors({ doctors: doctors.data }),
+				)
+			})
+	}
 }
 
 export interface DoctorFilter {
