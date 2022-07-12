@@ -29,7 +29,7 @@
 			/>
 
 			<div
-				*ngIf="form.get('name')?.valid && form.get('name')?.touched"
+				*ngIf="!form.get('name')?.valid && form.get('name')?.touched"
 				class="text-sm text-rose-500"
 			>
 				Department is required.
