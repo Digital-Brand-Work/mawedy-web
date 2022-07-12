@@ -1,28 +1,52 @@
-<div *ngIf="opened$ | async" stop-propagation class="mr-auto h-full w-full md:w-1/4">
+<div
+	*ngIf="opened$ | async"
+	stop-propagation
+	class="mx-auto h-full w-full md:w-1/4"
+>
 	<div
 		*ngIf="timing$ | async as timeSlot"
-		class="px-10 py-5 flex flex-col items-center justify-center bg-slate-50/80 backdrop-blur-md overflow-hidden"
+		class="px-10 py-5 flex flex-col items-center justify-center overflow-hidden"
 		style="height: calc(100vh)"
 	>
-		<div @slideInLeft class="container-time-slot w-full overflow-x-hidden">
-			<div stop-propagation class="w-full flex px-5 py-5 items-center" style="background: #f7f8fa">
-				<div class="font-extrabold text-xl accent-color">{{ timeSlot.day | titlecase }} Timings</div>
+		<div
+			@zoomIn
+			class="container-time-slot w-full overflow-x-hidden mx-auto"
+		>
+			<div
+				stop-propagation
+				class="w-full flex px-5 py-5 items-center"
+				style="background: #f7f8fa"
+			>
+				<div class="font-extrabold text-xl accent-color">
+					{{ timeSlot.day | titlecase }} Timings
+				</div>
 			</div>
 
-			<div style="height: 520px" class="overflow-y-auto overflow-x-hidden p-5">
+			<div
+				style="height: 520px"
+				class="overflow-y-auto overflow-x-hidden p-5"
+			>
 				<button
 					(click)="handleOpenAndClose('custom')"
 					matRipple
 					matRippleColor="rgba(11, 169, 118,.1)"
 					[ngClass]="{
 						'bg-emerald-500 text-white pointer-events-none':
-							timeSlot?.start !== '00:00' && end?.start !== '23:59' && timeSlot.active
+							timeSlot?.start !== '00:00' &&
+							end?.start !== '23:59' &&
+							timeSlot.active
 					}"
 					role="button"
 					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
 					style="height: 50px"
 				>
-					<div [class.text-white]="timeSlot?.start !== '00:00' && end?.start !== '23:59' && timeSlot.active">
+					<div
+						[class.text-white]="
+							timeSlot?.start !== '00:00' &&
+							end?.start !== '23:59' &&
+							timeSlot.active
+						"
+					>
 						Custom
 					</div>
 				</button>
@@ -33,13 +57,19 @@
 					matRippleColor="rgba(11, 169, 118,.1)"
 					[ngClass]="{
 						'bg-emerald-500 text-white pointer-events-none':
-							timeSlot?.start === '00:00' && timeSlot?.end === '23:59'
+							timeSlot?.start === '00:00' &&
+							timeSlot?.end === '23:59'
 					}"
 					role="button"
 					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
 					style="height: 50px"
 				>
-					<div [class.text-white]="timeSlot?.start === '00:00' && timeSlot?.end === '23:59'">
+					<div
+						[class.text-white]="
+							timeSlot?.start === '00:00' &&
+							timeSlot?.end === '23:59'
+						"
+					>
 						Available 24hrs
 					</div>
 				</button>
@@ -49,7 +79,8 @@
 					matRipple
 					matRippleColor="rgba(11, 169, 118,.1)"
 					[ngClass]="{
-						'bg-emerald-500 text-white pointer-events-none': !timeSlot?.active
+						'bg-emerald-500 text-white pointer-events-none':
+							!timeSlot?.active
 					}"
 					role="button"
 					class="w-full flex items-center justify-center rounded-xl text-base font-normal border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 text-gray-500 mb-5"
@@ -60,14 +91,25 @@
 
 				<div
 					[@listAnimation]="48"
-					*ngIf="timeSlot.active && timeSlot?.start !== '00:00' && timeSlot?.end !== '23:59'"
+					*ngIf="
+						timeSlot.active &&
+						timeSlot?.start !== '00:00' &&
+						timeSlot?.end !== '23:59'
+					"
 				>
 					<div
-						*ngFor="let item of [1, 2, 4, 45, 5, 6, 76, 7, 8, 8, 10, 11]; let i = index"
+						*ngFor="
+							let item of [
+								1, 2, 4, 45, 5, 6, 76, 7, 8, 8, 10, 11
+							];
+							let i = index
+						"
 						class="grid grid-cols-1 md:grid-cols-2 gap-5"
 					>
 						<button
-							(click)="selectedTime = toFixedTwo(i + 1) + ':00 AM'"
+							(click)="
+								selectedTime = toFixedTwo(i + 1) + ':00 AM'
+							"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -75,19 +117,25 @@
 							style="height: 50px"
 							[ngClass]="{
 								'bg-rose-700/70 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':00 AM' === timeWithMeridian(timeSlot.end),
+									toFixedTwo(i + 1) + ':00 AM' ===
+									timeWithMeridian(timeSlot.end),
 								'bg-emerald-500 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':00 AM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':00 AM' ===
+									timeWithMeridian(timeSlot.start)
 							}"
 							[class.pointer-events-none]="
-								toFixedTwo(i + 1) + ':00 AM' === timeWithMeridian(timeSlot.end) ||
-								toFixedTwo(i + 1) + ':00 AM' === timeWithMeridian(timeSlot.start)
+								toFixedTwo(i + 1) + ':00 AM' ===
+									timeWithMeridian(timeSlot.end) ||
+								toFixedTwo(i + 1) + ':00 AM' ===
+									timeWithMeridian(timeSlot.start)
 							"
 						>
 							<div
 								[class.text-white]="
-									toFixedTwo(i + 1) + ':00 AM' === timeWithMeridian(timeSlot.end) ||
-									toFixedTwo(i + 1) + ':00 AM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':00 AM' ===
+										timeWithMeridian(timeSlot.end) ||
+									toFixedTwo(i + 1) + ':00 AM' ===
+										timeWithMeridian(timeSlot.start)
 								"
 							>
 								{{ toFixedTwo(i + 1) + ':00 AM' }}
@@ -95,7 +143,9 @@
 						</button>
 
 						<button
-							(click)="selectedTime = toFixedTwo(i + 1) + ':30 AM'"
+							(click)="
+								selectedTime = toFixedTwo(i + 1) + ':30 AM'
+							"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -103,19 +153,25 @@
 							class="w-full flex items-center justify-center rounded-xl text-base font-normal text-gray-500 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 mb-5"
 							[ngClass]="{
 								'bg-rose-700/70 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':30 AM' === timeWithMeridian(timeSlot.end),
+									toFixedTwo(i + 1) + ':30 AM' ===
+									timeWithMeridian(timeSlot.end),
 								'bg-emerald-500 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':30 AM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':30 AM' ===
+									timeWithMeridian(timeSlot.start)
 							}"
 							[class.pointer-events-none]="
-								toFixedTwo(i + 1) + ':30 AM' === timeWithMeridian(timeSlot.end) ||
-								toFixedTwo(i + 1) + ':30 AM' === timeWithMeridian(timeSlot.start)
+								toFixedTwo(i + 1) + ':30 AM' ===
+									timeWithMeridian(timeSlot.end) ||
+								toFixedTwo(i + 1) + ':30 AM' ===
+									timeWithMeridian(timeSlot.start)
 							"
 						>
 							<div
 								[class.text-white]="
-									toFixedTwo(i + 1) + ':30 AM' === timeWithMeridian(timeSlot.end) ||
-									toFixedTwo(i + 1) + ':30 AM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':30 AM' ===
+										timeWithMeridian(timeSlot.end) ||
+									toFixedTwo(i + 1) + ':30 AM' ===
+										timeWithMeridian(timeSlot.start)
 								"
 							>
 								{{ toFixedTwo(i + 1) + ':30 AM' }}
@@ -123,16 +179,25 @@
 						</button>
 					</div>
 
-					<div class="bg-gray-100 accent-color text-2xl p-2 mb-2 font-extrabold rounded-sm text-center">
+					<div
+						class="bg-gray-100 accent-color text-2xl p-2 mb-2 font-extrabold rounded-sm text-center"
+					>
 						PM
 					</div>
 
 					<div
-						*ngFor="let item of [1, 2, 4, 45, 5, 6, 76, 7, 8, 8, 10, 11]; let i = index"
+						*ngFor="
+							let item of [
+								1, 2, 4, 45, 5, 6, 76, 7, 8, 8, 10, 11
+							];
+							let i = index
+						"
 						class="grid grid-cols-1 md:grid-cols-2 gap-5"
 					>
 						<button
-							(click)="selectedTime = toFixedTwo(i + 1) + ':00 PM'"
+							(click)="
+								selectedTime = toFixedTwo(i + 1) + ':00 PM'
+							"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -140,19 +205,25 @@
 							class="w-full flex items-center justify-center rounded-xl text-base font-normal text-gray-500 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 mb-5"
 							[ngClass]="{
 								'bg-rose-700/70 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':00 PM' === timeWithMeridian(timeSlot.end),
+									toFixedTwo(i + 1) + ':00 PM' ===
+									timeWithMeridian(timeSlot.end),
 								'bg-emerald-500 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':00 PM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':00 PM' ===
+									timeWithMeridian(timeSlot.start)
 							}"
 							[class.pointer-events-none]="
-								toFixedTwo(i + 1) + ':00 PM' === timeWithMeridian(timeSlot.end) ||
-								toFixedTwo(i + 1) + ':00 PM' === timeWithMeridian(timeSlot.start)
+								toFixedTwo(i + 1) + ':00 PM' ===
+									timeWithMeridian(timeSlot.end) ||
+								toFixedTwo(i + 1) + ':00 PM' ===
+									timeWithMeridian(timeSlot.start)
 							"
 						>
 							<div
 								[class.text-white]="
-									toFixedTwo(i + 1) + ':00 PM' === timeWithMeridian(timeSlot.end) ||
-									toFixedTwo(i + 1) + ':00 PM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':00 PM' ===
+										timeWithMeridian(timeSlot.end) ||
+									toFixedTwo(i + 1) + ':00 PM' ===
+										timeWithMeridian(timeSlot.start)
 								"
 							>
 								{{ toFixedTwo(i + 1) + ':00 PM' }}
@@ -160,7 +231,9 @@
 						</button>
 
 						<button
-							(click)="selectedTime = toFixedTwo(i + 1) + ':30 PM'"
+							(click)="
+								selectedTime = toFixedTwo(i + 1) + ':30 PM'
+							"
 							[matMenuTriggerFor]="timing"
 							matRipple
 							matRippleColor="rgba(11, 169, 118,.1)"
@@ -168,19 +241,25 @@
 							class="w-full flex items-center justify-center rounded-xl text-base font-normal text-gray-500 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-500 mb-5"
 							[ngClass]="{
 								'bg-rose-700/70 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':30 PM' === timeWithMeridian(timeSlot.end),
+									toFixedTwo(i + 1) + ':30 PM' ===
+									timeWithMeridian(timeSlot.end),
 								'bg-emerald-500 font-extrabold text-white ':
-									toFixedTwo(i + 1) + ':30 PM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':30 PM' ===
+									timeWithMeridian(timeSlot.start)
 							}"
 							[class.pointer-events-none]="
-								toFixedTwo(i + 1) + ':30 PM' === timeWithMeridian(timeSlot.end) ||
-								toFixedTwo(i + 1) + ':30 PM' === timeWithMeridian(timeSlot.start)
+								toFixedTwo(i + 1) + ':30 PM' ===
+									timeWithMeridian(timeSlot.end) ||
+								toFixedTwo(i + 1) + ':30 PM' ===
+									timeWithMeridian(timeSlot.start)
 							"
 						>
 							<div
 								[class.text-white]="
-									toFixedTwo(i + 1) + ':30 PM' === timeWithMeridian(timeSlot.end) ||
-									toFixedTwo(i + 1) + ':30 PM' === timeWithMeridian(timeSlot.start)
+									toFixedTwo(i + 1) + ':30 PM' ===
+										timeWithMeridian(timeSlot.end) ||
+									toFixedTwo(i + 1) + ':30 PM' ===
+										timeWithMeridian(timeSlot.start)
 								"
 							>
 								{{ toFixedTwo(i + 1) + ':30 PM' }}
@@ -201,7 +280,9 @@
 					class="text-gray-600 mb-1"
 				>
 					Opened at:
-					<span class="font-bold text-teal-500">{{ timeWithMeridian(timeSlot.start) }}</span>
+					<span class="font-bold text-teal-500">{{
+						timeWithMeridian(timeSlot.start)
+					}}</span>
 				</div>
 
 				<div
@@ -214,21 +295,36 @@
 					"
 					class="text-gray-600"
 				>
-					Closed at: <span class="font-bold text-teal-500">{{ timeWithMeridian(timeSlot.end) }}</span>
+					Closed at:
+					<span class="font-bold text-teal-500">{{
+						timeWithMeridian(timeSlot.end)
+					}}</span>
 				</div>
 
 				<div
 					@slideInBottom
-					*ngIf="timeSlot?.start === '00:00' && timeSlot?.end === '23:59'"
+					*ngIf="
+						timeSlot?.start === '00:00' && timeSlot?.end === '23:59'
+					"
 					class="text-emerald-500 flex items-center"
 				>
-					<mat-icon class="mr-2 text-emerald-500" svgIcon="check_circle"></mat-icon>
+					<mat-icon
+						class="mr-2 text-emerald-500"
+						svgIcon="check_circle"
+					></mat-icon>
 
 					24 hrs Available
 				</div>
 
-				<div @slideInBottom *ngIf="!timeSlot.active" class="text-gray-500 flex items-center">
-					<mat-icon class="mr-2 text-gray-500" svgIcon="block"></mat-icon>
+				<div
+					@slideInBottom
+					*ngIf="!timeSlot.active"
+					class="text-gray-500 flex items-center"
+				>
+					<mat-icon
+						class="mr-2 text-gray-500"
+						svgIcon="block"
+					></mat-icon>
 					Closed
 				</div>
 			</div>
@@ -250,11 +346,19 @@
 </div>
 
 <mat-menu [xPosition]="'before'" #timing="matMenu">
-	<button mat-menu-item (click)="handleTimeChange('start')" class="hover:bg-emerald-100">
+	<button
+		mat-menu-item
+		(click)="handleTimeChange('start')"
+		class="hover:bg-emerald-100"
+	>
 		<span>Opening</span>
 	</button>
 
-	<button mat-menu-item (click)="handleTimeChange('end')" class="hover:bg-emerald-100">
+	<button
+		mat-menu-item
+		(click)="handleTimeChange('end')"
+		class="hover:bg-emerald-100"
+	>
 		<span>Closing</span>
 	</button>
 </mat-menu>
