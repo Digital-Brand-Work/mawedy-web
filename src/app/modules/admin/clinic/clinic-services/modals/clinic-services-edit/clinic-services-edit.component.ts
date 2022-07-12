@@ -174,7 +174,7 @@ export class ClinicServicesEditComponent implements OnInit {
 		}
 
 		this.form.value.doctors.forEach((id: string, index: number) => {
-			form.append(`doctors[${index}]`, id)
+			if (id && id.length > 0) form.append(`doctors[${index}]`, id)
 		})
 
 		this._medicalServiceAPI
