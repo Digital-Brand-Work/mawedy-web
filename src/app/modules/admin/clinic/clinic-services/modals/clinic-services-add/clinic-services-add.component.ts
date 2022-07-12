@@ -185,6 +185,8 @@ export class ClinicServicesAddComponent implements OnInit {
 						type: 'success',
 					})
 
+					this.opened$.next(false)
+
 					this.updateDepartment(medical_service.data)
 
 					this.addToMedicalServices(medical_service.data)

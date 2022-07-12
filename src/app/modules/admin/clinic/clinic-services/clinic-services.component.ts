@@ -1,3 +1,4 @@
+import { InitialDataResolver } from 'app/app.resolvers'
 import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
 import { MedicalService } from './medical-service.model'
 import { empty } from 'app/mawedy-core/helpers'
@@ -26,11 +27,13 @@ import { FuseConfirmationService } from '@fuse/services/confirmation'
 })
 export class ClinicServicesComponent implements OnInit {
 	constructor(
+		private resolver: InitialDataResolver,
 		private _confirm: FuseConfirmationService,
+		private _departmentAPI: DepartmentService,
 		private _indexDBService: NgxIndexedDBService,
 		private _departmentService: DepartmentService,
-		private _addDepartmentModal: AddDepartmentModal,
 		private _indexDBController: IndexedDbController,
+		private _addDepartmentModal: AddDepartmentModal,
 		private _medicalServiceAPI: MedicalService_Service,
 		private _addClinicServiceModal: AddClinicServiceModal,
 		private _editClinicServiceModal: EditClinicServiceModal,
@@ -64,36 +67,9 @@ export class ClinicServicesComponent implements OnInit {
 	)
 
 	ngOnInit(): void {
-		this.fetchFromIndexedDb()
-	}
-
-	fetchFromIndexedDb(): void {
-		this._indexDBService
-			.getAll(DB.DEPARTMENTS)
-			.subscribe((departments: Department[]) => {
-				this._store.dispatch(
-					DepartmentActions.loadDepartments({
-						departments: departments,
-					}),
-				)
-
-				this.department$.pipe(take(1)).subscribe((department) => {
-					if (departments.length !== 0 && empty(department)) {
-						this.department$.next(departments[0])
-
-						this._store.dispatch(
-							MedicalServiceActions.loadMedicalServices({
-								medicalServices: departments[0].services,
-							}),
-						)
-
-						this._indexDBService.bulkAdd(
-							DB.MEDICAL_SERVICES,
-							departments[0].services,
-						)
-					}
-				})
-			})
+		this._departmentAPI.get().subscribe((departments: any) => {
+			this.resolver.loadDepartments(departments.data)
+		})
 	}
 
 	identity = (item: any): any => item

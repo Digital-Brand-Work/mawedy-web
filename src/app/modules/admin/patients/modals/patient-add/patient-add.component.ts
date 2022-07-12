@@ -162,6 +162,8 @@ export class PatientAddComponent implements OnInit {
 								message: `A new patient has been successfully added to this branch`,
 								type: 'success',
 							})
+
+							this.opened$.next(false)
 						})
 				},
 				error: (http: HttpErrorResponse) => {

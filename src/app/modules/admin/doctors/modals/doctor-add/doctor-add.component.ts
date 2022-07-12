@@ -234,6 +234,8 @@ export class DoctorAddComponent implements OnInit {
 								message: `A new doctor has been successfully added to this branch`,
 								type: 'success',
 							})
+
+							this.opened$.next(false)
 						})
 				},
 				error: (http: HttpErrorResponse) => {

@@ -115,6 +115,8 @@ export class ClinicDepartmentEditComponent implements OnInit {
 							this._departmentService.current$.next(
 								department.data,
 							)
+
+							this.opened$.next(false)
 						})
 				},
 				error: (http: HttpErrorResponse) => {

@@ -100,6 +100,8 @@ export class ClinicDepartmentAddComponent implements OnInit {
 							this.form.reset()
 
 							this.input.nativeElement.focus()
+
+							this.opened$.next(false)
 						})
 				},
 				error: (http: HttpErrorResponse) => {

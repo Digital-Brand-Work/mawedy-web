@@ -197,6 +197,8 @@ export class ClinicServicesEditComponent implements OnInit {
 					this.updateMedicalService(medical_service.data)
 
 					this.updateDepartment(medical_service.data)
+
+					this.opened$.next(false)
 				},
 				error: (http: HttpErrorResponse) => {
 					this._errorHandlerService.handleError(http)
