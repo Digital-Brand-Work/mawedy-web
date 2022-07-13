@@ -4,7 +4,7 @@
 		*ngIf="paginatedData$ | async as table"
 		class="font-bold text-xl"
 	>
-		Doctors ({{ table.meta.total }})
+		Doctors ({{ (paginatedData$.meta?.total | async) || 0 }})
 	</div>
 
 	<doctor-search-results class="ml-auto"></doctor-search-results>

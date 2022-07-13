@@ -9,7 +9,7 @@ import { PaginationService } from 'app/misc/pagination.service'
 import { Doctor } from '../doctor.model'
 import * as DoctorActions from '../doctor.actions'
 import * as dayjs from 'dayjs'
-import { toSentenceCase } from 'app/mawedy-core/helpers'
+import { hasData, toSentenceCase } from 'app/mawedy-core/helpers'
 import { MedicalService } from '../../clinic/clinic-services/medical-service.model'
 
 @Component({
@@ -55,7 +55,9 @@ export class DoctorsFilterComponent implements OnInit {
 
 					this.medicalServices = departments[0].services
 
-					this.service_id = departments[0].services[0].id
+					if (hasData(departments[0].services)) {
+						this.service_id = departments[0].services[0].id
+					}
 				}
 
 				this._cdr.detectChanges()

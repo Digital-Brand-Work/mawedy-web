@@ -4,6 +4,8 @@ import { BehaviorSubject } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
 export class PaginationService {
+	constructor() {}
+
 	patients$: BehaviorSubject<PaginationData | null> = new BehaviorSubject(
 		null,
 	)

@@ -190,11 +190,16 @@ export class DoctorAddComponent implements OnInit {
 
 		form.append('departments[0]', this.form.value.departments)
 
-		form.append(
-			'phone_number',
-			setPrefix(this.form.value.phone_country_code) +
-				this.form.value.phone_number,
-		)
+		if (
+			!empty(this.form.get('phone_country_code').value) &&
+			!empty(this.form.get('phone_country_code').value)
+		) {
+			form.append(
+				'phone_number',
+				setPrefix(this.form.value.phone_country_code) +
+					this.form.value.phone_number,
+			)
+		}
 
 		for (let day in this.currentTimeSlots) {
 			for (let key in this.currentTimeSlots[day]) {

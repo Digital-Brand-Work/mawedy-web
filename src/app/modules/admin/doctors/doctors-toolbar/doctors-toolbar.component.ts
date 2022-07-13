@@ -36,7 +36,7 @@ export class DoctorsToolbarComponent implements OnInit {
 	@Input() doctors: Doctor[] = []
 
 	paginatedData$: BehaviorSubject<PaginationData | null> =
-		this._paginationService.patients$
+		this._paginationService.doctors$
 
 	doctorImportModalOpened$: BehaviorSubject<boolean> =
 		this._doctorImportModal.opened$
