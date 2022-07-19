@@ -45,7 +45,7 @@ export class PatientDetailsBookingListComponent implements OnInit {
 		new BaseService(
 			this._http,
 			this._indexDBService,
-			`v1/appointments/${appointment.id}/result`,
+			`v1/clinic/appointments/${appointment.id}/result`,
 		)
 			.post(form)
 			.subscribe({
