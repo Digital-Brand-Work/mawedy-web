@@ -11,4 +11,6 @@ export interface Promotion extends PHPBaseModel {
 	terms_and_conditions: string
 	doctors: Doctor[]
 	picture: PHPFile
+	department_id: string
+	service_id: string
 }

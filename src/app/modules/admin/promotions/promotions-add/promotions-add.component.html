@@ -221,7 +221,43 @@
 				</div>
 			</div>
 
-			<div *ngIf="doctors$ | async" class="mb-5">
+			<div
+				@fadeOutTop
+				@slideInBottom
+				*ngIf="departments.length !== 0"
+				class="mb-5"
+			>
+				<label
+					for="department_id"
+					class="mb-2 font-semibold text-gray-400 text-lg"
+				>
+					Department
+				</label>
+
+				<select
+					autocomplete="off"
+					id="department_id"
+					formControlName="department_id"
+					(change)="setMedicalServices($event.target.value)"
+					class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 w-full"
+				>
+					<option
+						[value]="department.id"
+						*ngFor="
+							let department of departments;
+							trackBy: identity
+						"
+					>
+						{{ department.name }}
+					</option>
+				</select>
+			</div>
+
+			<div
+				@slideInBottom
+				*ngIf="doctors && doctors.length !== 0"
+				class="mb-5"
+			>
 				<label
 					for="doctors"
 					class="mb-1 text-gray-400 font-semibold accent-color text-md"
@@ -262,6 +298,36 @@
 				>
 					Must have at least one doctor.
 				</div>
+			</div>
+
+			<div
+				@slideInBottom
+				*ngIf="medicalServices && medicalServices.length !== 0"
+				class="mb-5"
+			>
+				<label
+					for="service_id"
+					class="mb-2 font-semibold text-gray-400 text-lg"
+				>
+					Service
+				</label>
+
+				<select
+					autocomplete="off"
+					id="service_id"
+					formControlName="service_id"
+					class="py-3 font-bold accent-color px-4 rounded-md border-gray-300/80 border focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 w-full"
+				>
+					<option
+						[value]="service.id"
+						*ngFor="
+							let service of medicalServices;
+							trackBy: identity
+						"
+					>
+						{{ service.name }}
+					</option>
+				</select>
 			</div>
 
 			<div class="mb-5 flex items-end">

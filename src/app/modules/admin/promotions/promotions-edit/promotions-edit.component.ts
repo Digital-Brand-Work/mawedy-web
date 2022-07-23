@@ -1,5 +1,11 @@
+import { empty, hasData } from 'app/mawedy-core/helpers'
 import { ErrorHandlerService } from './../../../../misc/error-handler.service'
-import { Component, HostListener, OnInit } from '@angular/core'
+import {
+	ChangeDetectorRef,
+	Component,
+	HostListener,
+	OnInit,
+} from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
@@ -23,6 +29,8 @@ import * as dayjs from 'dayjs'
 import * as DoctorActions from '../../doctors/doctor.actions'
 import * as PromotionActions from '../promotion.actions'
 import { HttpErrorResponse } from '@angular/common/http'
+import { Department } from '../../clinic/department/department.model'
+import { MedicalService } from '../../clinic/clinic-services/medical-service.model'
 
 @Component({
 	selector: 'promotion-edit',
@@ -34,6 +42,7 @@ export class PromotionsEditComponent implements OnInit {
 	constructor(
 		private _alert: AlertState,
 		private seoService: SeoService,
+		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
 		private _indexDbService: NgxIndexedDBService,
 		private _clinicUserService: ClinicUserService,
@@ -61,7 +70,15 @@ export class PromotionsEditComponent implements OnInit {
 		validity_end_date: ['', Validators.required],
 		terms_and_conditions: ['', Validators.required],
 		doctors: ['', Validators.required],
+		department_id: ['', Validators.required],
+		service_id: ['', Validators.required],
 	})
+
+	departments: Department[] = []
+
+	medicalServices: MedicalService[] = []
+
+	doctors: Doctor[] = []
 
 	errors: any = {}
 
@@ -75,6 +92,20 @@ export class PromotionsEditComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.fetchFromIndexDB()
+	}
+
+	ngAfterContentInit(): void {
+		this._indexDbService
+			.getAll(DB.DEPARTMENTS)
+			.subscribe((departments: Department[]) => {
+				this.departments = departments
+
+				if (hasData(departments)) {
+					this.setMedicalServices(departments[0].id)
+				}
+			})
+
+		this._cdr.detectChanges()
 	}
 
 	fetchFromIndexDB() {
@@ -111,6 +142,27 @@ export class PromotionsEditComponent implements OnInit {
 			)
 	}
 
+	setMedicalServices(id: string) {
+		this.setFormValue('department_id', id)
+
+		const department = this.departments.find(
+			(department) => department.id === id,
+		)
+
+		this.medicalServices = department.services
+
+		this.setFormValue(
+			'service_id',
+			hasData(department.services) ? department.services[0].id : '',
+		)
+
+		this.doctors = department.doctors
+	}
+
+	setFormValue(form: string, value: any) {
+		this.form.get(form)?.setValue(value)
+	}
+
 	setForm(promotion: Promotion) {
 		this.form.setValue({
 			id: promotion.id,
@@ -124,6 +176,10 @@ export class PromotionsEditComponent implements OnInit {
 			),
 			terms_and_conditions: promotion.terms_and_conditions,
 			doctors: promotion.doctors.map((doctor) => doctor.id),
+			department_id: empty(promotion.department_id)
+				? ''
+				: promotion.department_id,
+			service_id: empty(promotion.service_id) ? '' : promotion.service_id,
 		})
 
 		if (promotion.picture) {

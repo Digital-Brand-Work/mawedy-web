@@ -1,5 +1,10 @@
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { Component, HostListener, OnInit } from '@angular/core'
+import {
+	ChangeDetectorRef,
+	Component,
+	HostListener,
+	OnInit,
+} from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SeoService } from '@digital_brand_work/services/seo.service'
@@ -17,6 +22,9 @@ import { Promotion } from '../promotion.model'
 import * as DoctorActions from '../../doctors/doctor.actions'
 import * as PromotionActions from '../promotion.actions'
 import * as dayjs from 'dayjs'
+import { Department } from '../../clinic/department/department.model'
+import { MedicalService } from '../../clinic/clinic-services/medical-service.model'
+import { hasData } from 'app/mawedy-core/helpers'
 
 @Component({
 	selector: 'promotion-add',
@@ -27,11 +35,13 @@ import * as dayjs from 'dayjs'
 export class PromotionsAddComponent implements OnInit {
 	constructor(
 		private _alert: AlertState,
+		private _cdr: ChangeDetectorRef,
 		private _seoService: SeoService,
 		private _formBuilder: FormBuilder,
+		private _indexDbService: NgxIndexedDBService,
+		private _indexDBService: NgxIndexedDBService,
 		private _clinicUserService: ClinicUserService,
 		private _promotionAPI: PromotionServiceService,
-		private _indexDbService: NgxIndexedDBService,
 		private _errorHandlerService: ErrorHandlerService,
 		private _store: Store<{ doctors: Doctor[]; promotions: Promotion[] }>,
 	) {}
@@ -54,7 +64,15 @@ export class PromotionsAddComponent implements OnInit {
 		validity_end_date: ['', Validators.required],
 		terms_and_conditions: ['', Validators.required],
 		doctors: ['', Validators.required],
+		department_id: ['', Validators.required],
+		service_id: ['', Validators.required],
 	})
+
+	departments: Department[] = []
+
+	medicalServices: MedicalService[] = []
+
+	doctors: Doctor[] = []
 
 	errors: any = {}
 
@@ -84,6 +102,41 @@ export class PromotionsAddComponent implements OnInit {
 		this.unsubscribe$.next(null)
 
 		this.unsubscribe$.complete()
+	}
+
+	ngAfterContentInit(): void {
+		this._indexDBService
+			.getAll(DB.DEPARTMENTS)
+			.subscribe((departments: Department[]) => {
+				this.departments = departments
+
+				if (hasData(departments)) {
+					this.setMedicalServices(departments[0].id)
+				}
+			})
+
+		this._cdr.detectChanges()
+	}
+
+	setMedicalServices(id: string) {
+		this.setFormValue('department_id', id)
+
+		const department = this.departments.find(
+			(department) => department.id === id,
+		)
+
+		this.medicalServices = department.services
+
+		this.setFormValue(
+			'service_id',
+			hasData(department.services) ? department.services[0].id : '',
+		)
+
+		this.doctors = department.doctors
+	}
+
+	setFormValue(form: string, value: any) {
+		this.form.get(form)?.setValue(value)
 	}
 
 	fetchAndLoadDoctors() {
