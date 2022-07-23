@@ -1,12 +1,2 @@
-export interface Notification
-{
-    id: string;
-    icon?: string;
-    image?: string;
-    title?: string;
-    description?: string;
-    time: string;
-    link?: string;
-    useRouter?: boolean;
-    read: boolean;
-}
+import { Appointment } from 'app/modules/admin/appointments/appointment.model'
+export interface Notification extends Appointment {}
