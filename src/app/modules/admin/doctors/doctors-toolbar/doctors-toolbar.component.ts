@@ -53,10 +53,6 @@ export class DoctorsToolbarComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	ngAfterViewInit(): void {
-		this.paginatedData$.subscribe((data) => console.log(data))
-	}
-
 	export() {
 		this._exportService.post({}).subscribe({
 			next: () => {

@@ -1,3 +1,4 @@
+import { empty } from 'app/mawedy-core/helpers'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { countries } from 'app/mawedy-core/constants/country-codes.list'
 @Component({
@@ -20,6 +21,12 @@ export class MobileNumberFormComponent implements OnInit {
 	@Input() bordered: boolean = false
 
 	@Input() rounded: boolean = false
+
+	@Input('countryCode') set setCountryCode(code: string) {
+		this.country_code = code
+
+		this.change(code)
+	}
 
 	@Input() phoneNumber: string = ''
 
@@ -44,7 +51,9 @@ export class MobileNumberFormComponent implements OnInit {
 	ngOnInit(): void {}
 
 	change(event) {
-		this.country_code1 = event.target.value.toLowerCase()
+		if (!empty(this.country_code)) {
+			this.country_code1 = event.target.value.toLowerCase()
+		}
 
 		this.emit()
 	}
@@ -52,11 +61,6 @@ export class MobileNumberFormComponent implements OnInit {
 	emit() {
 		if (this.country_code !== '' && this.phoneNumber !== '') {
 			this.onMobileNumberChange.emit({
-				countryCode: this.country_code,
-				phoneNumber: this.phoneNumber,
-			})
-
-			console.log({
 				countryCode: this.country_code,
 				phoneNumber: this.phoneNumber,
 			})

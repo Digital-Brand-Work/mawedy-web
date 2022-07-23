@@ -78,8 +78,12 @@ export class LaravelNotificationService {
 			) {
 				this.reloadDoctors()
 			}
+
+			console.log(e)
 		})
 	}
+
+	addNotification() {}
 
 	reloadDoctors() {
 		this._doctorAPI.get().subscribe((doctors: any) => {

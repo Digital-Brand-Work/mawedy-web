@@ -81,8 +81,6 @@ export class WaitingPatientsSearchResultsComponent implements OnInit {
 				.subscribe((appointments: any) => {
 					this.appointments = appointments.data
 
-					console.log(appointments.data)
-
 					setTimeout(() => {
 						this.isReady = true
 					}, 250)

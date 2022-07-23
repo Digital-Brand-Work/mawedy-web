@@ -183,7 +183,7 @@ export class PromotionsEditComponent implements OnInit {
 		})
 
 		if (promotion.picture) {
-			this.bannerPreview = promotion.picture.url
+			this.bannerPreview = promotion.banner.picture.url
 		}
 	}
 

@@ -1,3 +1,4 @@
+import { empty } from 'app/mawedy-core/helpers'
 import { takeUntil } from 'rxjs/operators'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -66,7 +67,9 @@ export class HomeSection1Component implements OnInit {
 		this._indexedDBService
 			.getByKey(DB.CLINIC, 1)
 			.subscribe((clinic: any) => {
-				this.clinic$.next(clinic.data)
+				if (!empty(clinic)) {
+					this.clinic$.next(clinic.data)
+				}
 			})
 	}
 

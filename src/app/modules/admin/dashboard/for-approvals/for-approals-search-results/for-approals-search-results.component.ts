@@ -1,16 +1,16 @@
-import { Appointment } from './../../../appointments/appointment.model';
-import { AppointmentService } from 'app/modules/admin/appointments/appointment.service';
-import { AppointmentStatusEnum } from './../../../../../mawedy-core/enums/appointment-status.enum';
-import { Component, HostListener, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { dbwAnimations } from '@digital_brand_work/animations/animation.api';
+import { Appointment } from './../../../appointments/appointment.model'
+import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
+import { AppointmentStatusEnum } from './../../../../../mawedy-core/enums/appointment-status.enum'
+import { Component, HostListener, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import * as ForApprovalActions from '../dashboard-for-approval-patient.actions'
 
 @Component({
 	selector: 'for-approals-search-results',
 	templateUrl: './for-approals-search-results.component.html',
 	styleUrls: ['./for-approals-search-results.component.scss'],
-	animations:[...dbwAnimations]
+	animations: [...dbwAnimations],
 })
 export class ForApproalsSearchResultsComponent implements OnInit {
 	constructor(
@@ -78,8 +78,6 @@ export class ForApproalsSearchResultsComponent implements OnInit {
 				.query(`?` + new URLSearchParams(search).toString())
 				.subscribe((appointments: any) => {
 					this.appointments = appointments.data
-
-					console.log(appointments.data)
 
 					setTimeout(() => {
 						this.isReady = true

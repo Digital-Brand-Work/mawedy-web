@@ -13,4 +13,7 @@ export interface Promotion extends PHPBaseModel {
 	picture: PHPFile
 	department_id: string
 	service_id: string
+	banner: {
+		picture: PHPFile
+	}
 }

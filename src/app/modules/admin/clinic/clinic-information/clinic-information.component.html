@@ -143,6 +143,7 @@
 						/>
 
 						<mobile-number-form
+							[countryCode]="phone_number_one_country_code"
 							[bold]="true"
 							[rounded]="true"
 							[bordered]="true"
@@ -164,6 +165,7 @@
 							[bordered]="true"
 							[phoneErrors]="errors.phone_number_two"
 							[phoneNumber]="form.value.phone_number_two"
+							[countryCode]="phone_number_two_country_code"
 							(onMobileNumberChange)="
 								handleMobileNumberChange(
 									$event,
