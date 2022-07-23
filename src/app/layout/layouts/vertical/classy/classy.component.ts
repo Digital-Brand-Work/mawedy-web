@@ -25,6 +25,7 @@ import { Router } from '@angular/router'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { LaravelNotificationService } from 'app/misc/laravel.notificaion.service'
+import { AnimateBellService } from 'app/layout/common/user/user-bell.service'
 
 @Component({
 	selector: 'classy-layout',
@@ -43,6 +44,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 		private _adminNavigationService: AdminNavigationService,
 		private _fuseMediaWatcherService: FuseMediaWatcherService,
 		private _laravelNotificationService: LaravelNotificationService,
+		private _animateBellService: AnimateBellService,
 	) {}
 
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
@@ -54,6 +56,10 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
 	opened$: BehaviorSubject<boolean> = this._addAppointmentModal.opened$
+
+	animate$ = this._animateBellService.animate$
+
+	animated: boolean
 
 	isScreenSmall: boolean
 
@@ -110,6 +116,14 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
 					).style.position = 'fixed'
 				},
 			})
+
+		this.animate$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
+			this.animated = true
+
+			setTimeout(() => {
+				this.animated = false
+			}, 5000)
+		})
 	}
 
 	ngOnDestroy(): void {

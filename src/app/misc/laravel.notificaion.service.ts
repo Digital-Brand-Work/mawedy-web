@@ -20,6 +20,7 @@ import * as PatientActions from '../modules/admin/patients/patient.actions'
 import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { DoctorService } from 'app/modules/admin/doctors/doctor.service'
 import * as DoctorActions from '../modules/admin/doctors/doctor.actions'
+import { AnimateBellService } from 'app/layout/common/user/user-bell.service'
 
 @Injectable({ providedIn: 'root' })
 export class LaravelNotificationService {
@@ -29,6 +30,7 @@ export class LaravelNotificationService {
 		private _patientAPI: PatientService,
 		private _paginationService: PaginationService,
 		private _indexDBService: NgxIndexedDBService,
+		private _animateBellService: AnimateBellService,
 		private store: Store<{
 			patients: Patient[]
 			doctors: Doctor[]
@@ -42,6 +44,8 @@ export class LaravelNotificationService {
 	) {}
 
 	echo?: Echo
+
+	animate$ = this._animateBellService.animate$
 
 	init(token: string, clinic: Clinic) {
 		this.echo = new Echo({
@@ -79,11 +83,32 @@ export class LaravelNotificationService {
 				this.reloadDoctors()
 			}
 
+			if (e.type.includes('appointment.new')) {
+				this.addNotification()
+			}
+
+			if (e.type.includes('appointment.cancelled')) {
+				this.removeNotification()
+			}
+
 			console.log(e)
 		})
 	}
 
-	addNotification() {}
+	addNotification() {
+		this.animate$.next(true)
+
+		this._alert.add({
+			id: Math.floor(Math.random() * 100000000000).toString(),
+			title: `You have new notification`,
+			message: 'Someone wants an appointment from mawedy app.',
+			type: 'success',
+		})
+	}
+
+	removeNotification() {
+		this.animate$.next(true)
+	}
 
 	reloadDoctors() {
 		this._doctorAPI.get().subscribe((doctors: any) => {

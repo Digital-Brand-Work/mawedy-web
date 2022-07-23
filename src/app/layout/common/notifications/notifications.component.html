@@ -5,12 +5,17 @@
 			class="absolute top-0 right-0 left-0 flex items-center justify-center h-3"
 		>
 			<span
+				[ngClass]="{ 'animate-bounce': animated }"
 				class="flex items-center justify-center shrink-0 min-w-2.5 h-2.5 px-1 ml-4 mt-2.5 rounded-full bg-amber-500 text-indigo-50 text-xs font-medium"
 			>
 			</span>
 		</span>
 	</ng-container>
-	<mat-icon [svgIcon]="'feather:bell'"></mat-icon>
+
+	<mat-icon
+		[ngClass]="{ ring: animated }"
+		[svgIcon]="'feather:bell'"
+	></mat-icon>
 </button>
 
 <!-- Notifications panel -->

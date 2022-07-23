@@ -28,6 +28,7 @@ import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { SwitchAccountApi } from './user.switch.api.service'
 import { AlertState } from 'app/components/alert/alert.service'
+import { AnimateBellService } from './user-bell.service'
 
 @Component({
 	selector: 'user',
