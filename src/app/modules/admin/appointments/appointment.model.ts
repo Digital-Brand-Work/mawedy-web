@@ -28,4 +28,5 @@ export interface Appointment extends PHPBaseModel {
 	patient: Patient
 	service: MedicalService
 	result: null | PHPFile
+	follow_up: boolean
 }

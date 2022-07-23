@@ -1,3 +1,4 @@
+import { AppointmentStatusEnum } from './../../../../mawedy-core/enums/appointment-status.enum'
 import { Appointment } from './../../appointments/appointment.model'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -59,9 +60,21 @@ export class PatientDetailsComponent implements OnInit {
 		}, 500)
 	}
 
+	updateAppointment(appointment: Appointment) {
+		const index = this.appointments.findIndex(
+			(schedule) => schedule.id === appointment.id,
+		)
+
+		if (index >= 0) {
+			this.appointments[index] = appointment
+		}
+	}
+
 	getPatientAppointments(patient: Patient) {
 		this._patientService
-			.query(`/${patient.id}?appointments[status]=Done`)
+			.query(
+				`/${patient.id}?appointments[status]=${AppointmentStatusEnum.DONE}`,
+			)
 			.subscribe(
 				(data: any) => (this.appointments = data.data.appointments),
 			)

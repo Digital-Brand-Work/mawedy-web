@@ -1,7 +1,8 @@
+import { AppointmentService } from './../../../appointments/appointment.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { HttpClient } from '@angular/common/http'
 import { BaseService } from './../../../../../../@digital_brand_work/api/base.api'
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { BehaviorSubject } from 'rxjs'
@@ -22,7 +23,10 @@ export class PatientDetailsBookingListComponent implements OnInit {
 		private _indexDBService: NgxIndexedDBService,
 		private _uploadResultModal: UploadResultModal,
 		private _errorHandlerService: ErrorHandlerService,
+		private _appointmentAPI: AppointmentService,
 	) {}
+
+	@Output() onUpdateAppointment = new EventEmitter<Appointment>()
 
 	@Input() appointments: Appointment[] = []
 
@@ -32,6 +36,32 @@ export class PatientDetailsBookingListComponent implements OnInit {
 	ngOnInit(): void {}
 
 	identity = (item: any) => item
+
+	followUp(appointment: Appointment) {
+		this._appointmentAPI
+			.update(appointment.id, {
+				follow_up: !appointment.follow_up,
+			})
+			.subscribe({
+				next: (data: any) => {
+					this._alert.add({
+						id: Math.floor(Math.random() * 100000000000).toString(),
+						title: `${
+							appointment.follow_up
+								? 'Request for follow up cancelled'
+								: 'Appointment Follow up success'
+						}`,
+						message: `Patient will be notified for his follow up`,
+						type: 'success',
+					})
+
+					this.onUpdateAppointment.emit(data.data)
+				},
+				error: (http) => {
+					this._errorHandlerService.handleError(http)
+				},
+			})
+	}
 
 	readFile(event: any, appointment: Appointment): void {
 		this.uploadResultOpened$.next(true)
@@ -55,17 +85,11 @@ export class PatientDetailsBookingListComponent implements OnInit {
 					this._alert.add({
 						id: Math.floor(Math.random() * 100000000000).toString(),
 						title: `Medical Result uploaded successfully`,
-						message: `${appointment.patient.first_name} will see the results if she has the mawedy mobile application`,
+						message: `Patient will see the results if she has the mawedy mobile application`,
 						type: 'success',
 					})
 
-					const index = this.appointments.findIndex(
-						(schedule) => schedule.id === appointment.id,
-					)
-
-					if (index >= 0) {
-						this.appointments[index] = data.data
-					}
+					this.onUpdateAppointment.emit(data.data)
 				},
 				error: (http) => {
 					this._errorHandlerService.handleError(http)

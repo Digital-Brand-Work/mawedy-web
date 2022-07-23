@@ -37,6 +37,7 @@
 		<patient-details-information></patient-details-information>
 
 		<patient-details-booking-list
+			(onUpdateAppointment)="updateAppointment($event)"
 			*ngIf="appointments.length !== 0"
 			[appointments]="appointments"
 		></patient-details-booking-list>

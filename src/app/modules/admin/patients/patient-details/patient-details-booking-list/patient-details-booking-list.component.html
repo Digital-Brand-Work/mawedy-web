@@ -64,7 +64,10 @@
 
 					<td class="text-center">
 						<div class="flex items-center">
-							<mat-checkbox class="mx-auto"></mat-checkbox>
+							<mat-checkbox
+								(change)="followUp(appointment)"
+								class="mx-auto"
+							></mat-checkbox>
 						</div>
 					</td>
 				</tr>

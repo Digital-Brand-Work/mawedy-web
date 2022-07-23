@@ -41,4 +41,8 @@ export class AppComponent {
 	ngOnInit(): void {
 		this._clinicUserService.switched$.next()
 	}
+
+	removeAlert(id: string) {
+		this._alert.remove(id)
+	}
 }
