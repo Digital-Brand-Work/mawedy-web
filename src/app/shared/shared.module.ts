@@ -47,6 +47,8 @@ import { NgxFullpageModule } from 'ngx-free-fullpage'
 import { RemoveWhiteSpaceAndDashPipe } from '@digital_brand_work/pipes/remove-white-space-and-dash.pipe'
 import { ToPatientFullName } from 'app/mawedy-core/pipes/patient.fullname.pipe'
 import { DashboardStatusPipe } from 'app/mawedy-core/pipes/resolve-status.color.pipe'
+import { AddAnimationDirective } from '@digital_brand_work/directives/animate-on-scroll.directive'
+import { IsInViewPipe } from '@digital_brand_work/pipes/element-is-in-view.pipe'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -96,6 +98,7 @@ const pipes: any[] = [
 	RemoveWhiteSpaceAndDashPipe,
 	DashboardStatusPipe,
 	ToPatientFullName,
+	IsInViewPipe,
 ]
 
 const directives: any[] = [
@@ -108,6 +111,7 @@ const directives: any[] = [
 	FilterByCurrentDateDirective,
 	HideIfDoesNotMatchTimeDirective,
 	WeekCalendarCursorDirective,
+	AddAnimationDirective,
 ]
 
 @NgModule({

@@ -1,5 +1,4 @@
 <nav
-	@fadeInTop
 	[ngClass]="{
 		'bg-transparent': isInPartnerWithUs,
 		'bg-white': !isInPartnerWithUs
@@ -7,11 +6,11 @@
 	class="flex items-center justify-center fixed z-50 w-full"
 >
 	<div class="w-full max-w-screen-xl flex items-center justify-center">
-		<a routerLink="/">
+		<a @fadeInBottom routerLink="/">
 			<img class="h-28 max-w-50" src="/assets/app/logo.svg" alt="" />
 		</a>
 
-		<ul class="ml-auto flex">
+		<ul @slideInRight class="ml-auto flex">
 			<li
 				*ngFor="let nav of navigation"
 				[class.hidden]="nav.id === 2 && (hasLoggedIn$ | async)"
