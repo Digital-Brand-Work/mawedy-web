@@ -1,3 +1,4 @@
+import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { ExportDoctorService } from './../../../../mawedy-core/utilities/export.service'
 import { environment } from './../../../../../environments/environment'
 import { Doctor } from './../doctor.model'
@@ -21,13 +22,16 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 export class DoctorsToolbarComponent implements OnInit {
 	constructor(
 		private _alert: AlertState,
-		private _exportService: ExportDoctorService,
 		private addDoctorModal: AddDoctorModal,
+		private _exportService: ExportDoctorService,
 		private store: Store<{ doctors: Doctor[] }>,
 		private _doctorImportModal: DoctorImportModal,
 		private _paginationService: PaginationService,
+		private _clinicUserService: ClinicUserService,
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
+
+	clinic$ = this._clinicUserService.clinic$
 
 	@Output() onSearch = new EventEmitter()
 

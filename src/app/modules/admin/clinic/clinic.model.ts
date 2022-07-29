@@ -11,10 +11,8 @@ export interface Clinic extends PHPBaseModel {
 	accounts: Branch[]
 	account_status: ClinicRegistrationStatus
 	account_type: AccountType
-
 	email: string
 	password: string
-
 	name: string
 	description: string
 	country: string
@@ -24,29 +22,21 @@ export interface Clinic extends PHPBaseModel {
 	address: string
 	latitude: string
 	longitude: string
-
 	banner: { picture: PHPFile }
 	logo: { picture: PHPFile }
-
 	phone_number_one: string
 	phone_number_two: string
 	phone_number_one_country_code: string
 	phone_number_two_country_code: string
-
 	payment_received: 0
 	payment_mode: 'Manual' | 'Automatic'
-
 	is_twenty_four_hours: boolean
-
 	stripe_session_id: string
-
 	subscription_date: Date
 	stripe_status: StripeStatusEnum
 	status: ClinicRegistrationStatusEnum
 	subscription_type: ClinicSubscriptionType
-
 	timeslots: ClinicTimeSlot[]
-
 	subscription_interval: 'year' | 'month'
 }
 

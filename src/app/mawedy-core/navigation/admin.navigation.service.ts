@@ -72,7 +72,10 @@ export class AdminNavigationService {
 		return this.clinic$.pipe(
 			take(1),
 			map((clinic) => {
-				if (clinic.subscription_type === 'Free') {
+				if (
+					clinic.subscription_type === 'Free' ||
+					clinic.subscription_type === 'Standard'
+				) {
 					return this.getNavigation(
 						slugify(clinic.name),
 						slugify(clinic.address || clinic.account_type),

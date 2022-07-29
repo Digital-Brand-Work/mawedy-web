@@ -9,7 +9,7 @@ import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
-import { empty } from 'app/mawedy-core/helpers'
+import { empty, hasData } from 'app/mawedy-core/helpers'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { HttpClient } from '@angular/common/http'
 import { BaseService } from '@digital_brand_work/api/base.api'
@@ -140,55 +140,56 @@ export class UserAccountsComponent implements OnInit {
 				}
 			}
 		}
+		if (hasData(this.form.value.accounts)) {
+			new BaseService(
+				this._http,
+				this._indexedDBService,
+				'v1/clinic/accounts/update',
+			)
+				.post(form)
+				.subscribe({
+					next: (data: any) => {
+						this._clinicUserService.update()
 
-		new BaseService(
-			this._http,
-			this._indexedDBService,
-			'v1/clinic/accounts/update',
-		)
-			.post(form)
-			.subscribe({
-				next: (data: any) => {
-					this._clinicUserService.update()
-
-					this._clinicUserService.clinic$
-						.pipe(take(1))
-						.subscribe((clinic) => {
-							this.clinic$.next({
-								...clinic,
-								accounts: data.data,
-							})
-
-							this._indexedDBController.upsert(DB.CLINIC, {
-								data: {
+						this._clinicUserService.clinic$
+							.pipe(take(1))
+							.subscribe((clinic) => {
+								this.clinic$.next({
 									...clinic,
 									accounts: data.data,
-								},
-							})
+								})
 
-							this._alert.add({
-								id: Math.floor(
-									Math.random() * 100000000000,
-								).toString(),
-								title: `Accounts updated!`,
-								message:
-									'Your accounts was successfully updated',
-								type: 'success',
+								this._indexedDBController.upsert(DB.CLINIC, {
+									data: {
+										...clinic,
+										accounts: data.data,
+									},
+								})
+
+								this._alert.add({
+									id: Math.floor(
+										Math.random() * 100000000000,
+									).toString(),
+									title: `Accounts updated!`,
+									message:
+										'Your accounts was successfully updated',
+									type: 'success',
+								})
 							})
-						})
-				},
-				error: (http) => {
-					for (let key in http.error.errors) {
-						for (let errorKey in this.errors) {
-							if (key.includes(errorKey)) {
-								this.errors[errorKey] = true
+					},
+					error: (http) => {
+						for (let key in http.error.errors) {
+							for (let errorKey in this.errors) {
+								if (key.includes(errorKey)) {
+									this.errors[errorKey] = true
+								}
 							}
 						}
-					}
 
-					this._errorHandlerService.handleError(http)
-				},
-			})
+						this._errorHandlerService.handleError(http)
+					},
+				})
+		}
 
 		this.resolveNewBranches()
 	}
@@ -240,12 +241,17 @@ export class UserAccountsComponent implements OnInit {
 							},
 						)
 
+						if (!hasData(accounts)) {
+							return
+						}
+
 						accounts.forEach((account) => {
 							let form = new FormData()
 
 							for (let key in account) {
 								form.append(key, account[key])
 							}
+
 							new BaseService(
 								this._http,
 								this._indexedDBService,
