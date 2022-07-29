@@ -69,16 +69,26 @@ export class AdminNavigationService {
 	get(
 		subscription: ClinicSubscriptionType,
 	): Observable<FuseNavigationItem[]> {
-		// TODO: Filter user types
-
 		return this.clinic$.pipe(
 			take(1),
-			map((clinic) =>
-				this.getNavigation(
+			map((clinic) => {
+				if (clinic.subscription_type === 'Free') {
+					return this.getNavigation(
+						slugify(clinic.name),
+						slugify(clinic.address || clinic.account_type),
+					).filter(
+						(navigation) =>
+							navigation.title !== 'Patients' &&
+							navigation.title !== 'Appointments' &&
+							navigation.title !== 'Promotions',
+					)
+				}
+
+				return this.getNavigation(
 					slugify(clinic.name),
 					slugify(clinic.address || clinic.account_type),
-				),
-			),
+				)
+			}),
 		)
 	}
 }

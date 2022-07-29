@@ -43,7 +43,7 @@ export class SubscriptionSummaryComponent implements OnInit {
 		new BaseService(
 			this._http,
 			this._indexedDBService,
-			'v1/subscriptions/update',
+			'v1/clinic/subscriptions/update',
 		)
 			.post({ payment_mode: mode ? 'Automatic' : 'Manual' })
 			.subscribe({

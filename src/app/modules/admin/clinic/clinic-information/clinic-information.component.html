@@ -143,12 +143,14 @@
 						/>
 
 						<mobile-number-form
-							[countryCode]="phone_number_one_country_code"
 							[bold]="true"
 							[rounded]="true"
 							[bordered]="true"
 							[phoneErrors]="errors.phone_number_one"
 							[phoneNumber]="form.value.phone_number_one"
+							[countryCode]="
+								phone_number_one_country_code || 'AE'
+							"
 							(onMobileNumberChange)="
 								handleMobileNumberChange(
 									$event,
@@ -165,7 +167,9 @@
 							[bordered]="true"
 							[phoneErrors]="errors.phone_number_two"
 							[phoneNumber]="form.value.phone_number_two"
-							[countryCode]="phone_number_two_country_code"
+							[countryCode]="
+								phone_number_two_country_code || 'AE'
+							"
 							(onMobileNumberChange)="
 								handleMobileNumberChange(
 									$event,
