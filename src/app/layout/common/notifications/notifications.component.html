@@ -1,19 +1,20 @@
 <!-- Notifications toggle -->
 <button mat-icon-button (click)="openPanel()" #notificationsOrigin>
-	<ng-container *ngIf="unreadCount > 0">
+	<ng-container class="no-outline">
 		<span
 			class="absolute top-0 right-0 left-0 flex items-center justify-center h-3"
 		>
 			<span
 				[ngClass]="{ 'animate-bounce': animated }"
-				class="flex items-center justify-center shrink-0 min-w-2.5 h-2.5 px-1 ml-4 mt-2.5 rounded-full bg-amber-500 text-indigo-50 text-xs font-medium"
+				class="flex items-center justify-center shrink-0 min-w-2.5 h-2.5 py-2 px-1 ml-4 mt-2.5 rounded-full bg-amber-500 text-indigo-50 font-bold"
 			>
+				{{ notifications.length }}
 			</span>
 		</span>
 	</ng-container>
 
 	<mat-icon
-		[ngClass]="{ ring: animated }"
+		[ngClass]="{ ring1: animated }"
 		[svgIcon]="'feather:bell'"
 	></mat-icon>
 </button>
@@ -59,13 +60,18 @@
 					role="button"
 					class="border-b border-b-gray-200 py-3 hover:bg-gray-50"
 					*ngFor="
-						let notification of [1, 2, 3, 4, 5];
+						let appointment of notifications;
 						trackBy: trackByFn
 					"
 				>
-					<div class="accent-color font-bold">Clarisse Umaire</div>
+					<div class="accent-color font-bold">
+						{{ appointment.patient | full_name }}
+					</div>
 
-					<div style="color: #5b738d">Booking No. 866765432</div>
+					<div style="color: #5b738d">
+						Booking No. {{ appointment.type_code
+						}}{{ appointment.id | uppercase }}
+					</div>
 				</li>
 			</ul>
 

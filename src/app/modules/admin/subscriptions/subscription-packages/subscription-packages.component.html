@@ -1,4 +1,4 @@
-<div class="md:px-10 px-0 w-full">
+<div *ngIf="clinic$ | async as clinic" class="md:px-10 px-0 w-full">
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full pb-40">
 		<div class="text-gray-700 text-2xl font-semibold mb-10">
 			Subscription
@@ -6,10 +6,10 @@
 
 		<div>
 			<div class="accent-color text-4xl font-bold mb-2">
-				{{ (clinic$ | async).subscription_type }}
+				{{ clinic.subscription_type }}
 				{{
-					(clinic$ | async).subscription_interval ||
-					(clinic$ | async).subscription_interval === 'year'
+					clinic.subscription_interval ||
+					clinic.subscription_interval === 'year'
 						? ('yearly' | titlecase)
 						: ('monthly' | titlecase)
 				}}

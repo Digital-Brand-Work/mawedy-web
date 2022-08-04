@@ -1,10 +1,11 @@
+import { InitialDataResolver } from 'app/app.resolvers'
+import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
 import { Clinic } from './../modules/admin/clinic/clinic.model'
 import { environment } from './../../environments/environment'
 import { Injectable } from '@angular/core'
 import Echo, { Channel } from 'laravel-echo'
 import { PatientService } from 'app/modules/admin/patients/patient.service'
 import { AlertState } from 'app/components/alert/alert.service'
-import { InitialDataResolver } from 'app/app.resolvers'
 import { PaginationService } from './pagination.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { Store } from '@ngrx/store'
@@ -21,7 +22,9 @@ import { DB } from 'app/mawedy-core/enums/index.db.enum'
 import { DoctorService } from 'app/modules/admin/doctors/doctor.service'
 import * as DoctorActions from '../modules/admin/doctors/doctor.actions'
 import { AnimateBellService } from 'app/layout/common/user/user-bell.service'
-
+import { NotificationsService } from 'app/layout/common/notifications/notifications.service'
+import { take } from 'rxjs'
+import * as ForApprovalActions from '../modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
 @Injectable({ providedIn: 'root' })
 export class LaravelNotificationService {
 	constructor(
@@ -41,6 +44,8 @@ export class LaravelNotificationService {
 			medicalServices: MedicalService[]
 			promotions: Promotion[]
 		}>,
+		private _notificationService: NotificationsService,
+		private _appointmentAPI: AppointmentService,
 	) {}
 
 	echo?: Echo
@@ -50,11 +55,13 @@ export class LaravelNotificationService {
 	init(token: string, clinic: Clinic) {
 		this.echo = new Echo({
 			broadcaster: 'pusher',
-			key: 'YY-i5Q.er4icw',
-			wsHost: 'realtime-pusher.ably.io',
-			wsPort: 443,
-			disableStats: true,
+			key: environment.socket.key,
+			wsHost: environment.socket.wsHost,
+			wsPort: environment.socket.wsPort,
+			forceTLS: false,
 			encrypted: true,
+			disableStats: true,
+			enabledTransports: ['ws', 'wss'],
 			namespace: '',
 			auth: {
 				headers: {
@@ -83,20 +90,36 @@ export class LaravelNotificationService {
 				this.reloadDoctors()
 			}
 
-			if (e.type.includes('appointment.new')) {
-				this.addNotification()
+			if (
+				e.type.includes('appointment.new') ||
+				e.type.includes('appointment.cancelled')
+			) {
+				this.addNotification(e)
 			}
-
-			if (e.type.includes('appointment.cancelled')) {
-				this.removeNotification()
-			}
-
-			console.log(e)
 		})
 	}
 
-	addNotification() {
+	addNotification(event: any) {
 		this.animate$.next(true)
+
+		this._appointmentAPI
+			.findOne(event.appointment_id)
+			.subscribe((appointment: any) => {
+				this.store.dispatch(
+					ForApprovalActions.addDashboardForApprovalPatient({
+						dashboardForApprovalPatient: appointment.data,
+					}),
+				)
+
+				this._notificationService.notifications$
+					.pipe(take(1))
+					.subscribe((notifications) => {
+						this._notificationService.notifications$.next([
+							...notifications,
+							appointment.data,
+						])
+					})
+			})
 
 		this._alert.add({
 			id: Math.floor(Math.random() * 100000000000).toString(),

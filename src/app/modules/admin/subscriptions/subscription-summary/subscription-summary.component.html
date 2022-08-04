@@ -9,7 +9,10 @@
 		>
 			Subscription
 
-			<div class="flex ml-auto">
+			<div
+				*ngIf="clinic.subscription_type !== 'Free'"
+				class="flex ml-auto"
+			>
 				<div class="text-base mr-2 accent-color">Automated Renewal</div>
 
 				<mat-slide-toggle
@@ -55,6 +58,7 @@
 				</button>
 
 				<button
+					*ngIf="clinic.subscription_type !== 'Free'"
 					(click)="setToAutomatic(false)"
 					style="width: 189px"
 					class="text-teal-500 tracking-wide drop-shadow-md border border-teal-500 font-semibold bg-white hover:bg-gray-50 rounded-md py-3"
@@ -78,7 +82,10 @@
 				</div>
 			</div>
 
-			<div class="ml-auto md:mr-10">
+			<div
+				*ngIf="(clinic$ | async).subscription_type !== 'Free'"
+				class="ml-auto md:mr-10"
+			>
 				<button
 					(click)="openBillingPortal()"
 					style="color: #0070ff"

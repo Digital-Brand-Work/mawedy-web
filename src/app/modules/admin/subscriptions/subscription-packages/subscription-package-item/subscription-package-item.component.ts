@@ -1,3 +1,4 @@
+import { Router } from '@angular/router'
 import { HttpClient } from '@angular/common/http'
 import { Component, Input, OnInit } from '@angular/core'
 import { BaseService } from '@digital_brand_work/api/base.api'
@@ -7,7 +8,7 @@ import { ErrorHandlerService } from 'app/misc/error-handler.service'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, take } from 'rxjs'
 
 @Component({
 	selector: 'subscription-package-item',
@@ -21,11 +22,12 @@ export class SubscriptionPackageItemComponent implements OnInit {
 		private _indexedDBService: NgxIndexedDBService,
 		private _errorHandlerService: ErrorHandlerService,
 		private _clinicUserService: ClinicUserService,
+		private _router: Router,
 	) {}
 
 	@Input() isGradient: boolean = false
 
-	@Input() subscription!: Subscription
+	@Input() subscription?: Subscription
 
 	@Input() interval?: 'yearly' | 'monthly' | null
 
@@ -35,31 +37,11 @@ export class SubscriptionPackageItemComponent implements OnInit {
 
 	identity = (item: any) => item
 
-	resolve(clinic: Clinic): boolean {
-		const goldenToPlatinum =
-			clinic.subscription_type === 'Golden' &&
-			this.subscription.type === 'Platinum'
-
-		const standardToGolden =
-			clinic.subscription_type === 'Standard' &&
-			this.subscription.type === 'Golden'
-
-		const standardToPlatinum =
-			clinic.subscription_type === 'Standard' &&
-			this.subscription.type === 'Platinum'
-
-		if (goldenToPlatinum || standardToGolden || standardToPlatinum) {
-			return true
-		}
-
-		return false
-	}
-
 	subscribe() {
 		new BaseService(
 			this._http,
 			this._indexedDBService,
-			'v1/subscriptions/swap',
+			'v1/clinic/subscriptions/swap',
 		)
 			.post({
 				interval: this.interval === 'yearly' ? 'year' : 'month',
@@ -73,9 +55,29 @@ export class SubscriptionPackageItemComponent implements OnInit {
 						message: `You have successfully changed your subscription ${this.subscription.type}`,
 						type: 'success',
 					})
+
+					this._clinicUserService.clinic$
+						.pipe(take(1))
+						.subscribe((oldClinic) => {
+							this._clinicUserService.clinic$.next({
+								...oldClinic,
+								subscription_interval:
+									this.interval === 'yearly'
+										? 'year'
+										: 'month',
+								subscription_type: this.subscription.type,
+							})
+						})
 				},
 				error: (http) => {
-					this._errorHandlerService.handleError(http)
+					if (
+						http.error.key === 'SWAP_SUBSCRIPTION_ERROR' &&
+						http.error.sub_key === 'MISSING_SUBSCRIPTION'
+					) {
+						this._router.navigate(['/checkout'])
+					} else {
+						this._errorHandlerService.handleError(http)
+					}
 				},
 			})
 	}

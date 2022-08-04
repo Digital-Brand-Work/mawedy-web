@@ -87,6 +87,13 @@ export class AdminNavigationService {
 					)
 				}
 
+				if (clinic.subscription_type === 'Golden') {
+					return this.getNavigation(
+						slugify(clinic.name),
+						slugify(clinic.address || clinic.account_type),
+					).filter((navigation) => navigation.title !== 'Promotions')
+				}
+
 				return this.getNavigation(
 					slugify(clinic.name),
 					slugify(clinic.address || clinic.account_type),

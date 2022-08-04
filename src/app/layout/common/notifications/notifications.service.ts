@@ -1,6 +1,15 @@
+import { Appointment } from './../../../modules/admin/appointments/appointment.model'
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { map, Observable, ReplaySubject, switchMap, take, tap } from 'rxjs'
+import {
+	BehaviorSubject,
+	map,
+	Observable,
+	ReplaySubject,
+	switchMap,
+	take,
+	tap,
+} from 'rxjs'
 import { Notification } from 'app/layout/common/notifications/notifications.types'
 
 @Injectable({
@@ -13,9 +22,11 @@ export class NotificationsService {
 
 	constructor(private _httpClient: HttpClient) {}
 
-	get notifications$(): Observable<Notification[]> {
-		return this._notifications.asObservable()
-	}
+	notifications$: BehaviorSubject<Appointment[]> = new BehaviorSubject([])
+
+	// get notifications$(): Observable<Notification[]> {
+	// 	return this._notifications.asObservable()
+	// }
 
 	getAll(): Observable<Notification[]> {
 		return this._httpClient

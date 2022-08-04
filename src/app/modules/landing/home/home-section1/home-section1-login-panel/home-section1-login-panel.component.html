@@ -17,15 +17,12 @@
 		formControlName="email"
 		[ngClass]="{
 			'text-red-500': errors.email && !isProcessing,
-			'border border-red-500 bg-red-50':
+			'border-red-500/95':
 				!form.get('email')?.valid &&
 				form.get('email')?.touched &&
-				!isProcessing,
-			'bg-white border border-gray-300/80':
-				(form.get('email')?.valid && form.get('email')?.touched) ||
-				!form.get('email')?.touched
+				!isProcessing
 		}"
-		class="py-4 px-5 rounded-md -md w-full focus:border-teal-500 focus:border-2 focus:-md focus:-teal-500/20 mt-5"
+		class="py-4 bg-white px-5 border border-gray-300/80 rounded-md -md w-full focus:border-teal-500 mt-5"
 	/>
 
 	<div
@@ -45,16 +42,12 @@
 		formControlName="password"
 		[ngClass]="{
 			'text-red-500': errors.password && !isProcessing,
-			'border border-red-500 bg-red-50':
+			'border-red-500/95':
 				!form.get('password')?.valid &&
 				form.get('password')?.touched &&
-				!isProcessing,
-			'bg-white border border-gray-300/80':
-				(form.get('password')?.valid &&
-					form.get('password')?.touched) ||
-				!form.get('password')?.touched
+				!isProcessing
 		}"
-		class="py-4 px-5 rounded-md -md w-full focus:border-teal-500 focus:border-2 focus:-md focus:-teal-500/20 mt-5"
+		class="py-4 bg-white px-5 border border-gray-300/80 rounded-md -md w-full focus:border-teal-500 mt-5"
 	/>
 
 	<div

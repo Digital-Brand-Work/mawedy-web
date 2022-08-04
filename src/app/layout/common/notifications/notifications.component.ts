@@ -14,10 +14,11 @@ import {
 import { Overlay, OverlayRef } from '@angular/cdk/overlay'
 import { TemplatePortal } from '@angular/cdk/portal'
 import { MatButton } from '@angular/material/button'
-import { Subject, takeUntil } from 'rxjs'
+import { shareReplay, Subject, takeUntil } from 'rxjs'
 import { Notification } from 'app/layout/common/notifications/notifications.types'
 import { NotificationsService } from 'app/layout/common/notifications/notifications.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 
 @Component({
 	selector: 'notifications',
@@ -40,21 +41,23 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
 	@Input() animated: boolean = false
 
-	notifications: Notification[]
+	notifications: Appointment[] = []
 
 	unreadCount: number = 0
 
 	constructor(
 		private _overlay: Overlay,
-		private _cdr: ChangeDetectorRef,
 		private _viewContainerRef: ViewContainerRef,
 		private _notificationsService: NotificationsService,
-		private _appointmentNotificationService: AppointmentNotificationService,
-	) {}
-
-	ngOnInit(): void {
-		this.getNotifications()
+	) {
+		this._notificationsService.notifications$
+			.pipe(shareReplay(1), takeUntil(this.unsubscribe$))
+			.subscribe((notifications) => {
+				this.notifications = [...new Set(notifications)]
+			})
 	}
+
+	ngOnInit(): void {}
 
 	ngOnDestroy(): void {
 		this.unsubscribe$.next(null)
@@ -64,12 +67,6 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 		if (this._overlayRef) {
 			this._overlayRef.dispose()
 		}
-	}
-
-	getNotifications() {
-		this._appointmentNotificationService
-			.get()
-			.subscribe((appointment) => console.log(appointment))
 	}
 
 	openPanel(): void {

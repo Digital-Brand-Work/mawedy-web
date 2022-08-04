@@ -63,7 +63,7 @@
     "ngx-free-fullpage": "^1.0.1-beta.1",
     "ngx-indexed-db": "^11.0.0",
     "ngx-markdown": "13.1.0",
-    "ngx-mask": "^13.1.12",
+    "ngx-mask": "^13.1.15",
     "ngx-quill": "16.1.2",
     "ngx-ssr-exclude": "^1.1.0",
     "node": "^17.7.2",
