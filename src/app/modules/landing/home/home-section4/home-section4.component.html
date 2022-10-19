@@ -1,24 +1,21 @@
-<div
-	class="md:min-h-screen w-full flex relative pt-20 md:py-0 justify-center -mb-5"
->
-	<img
+<div class="relative flex justify-center w-full py-10">
+	<!-- <img
 		src="/assets/app/home/wave.svg"
-		class="w-screen h-screen object-cover absolute z-0 -bottom-80 self-end mt-auto md:scale-y-60 scale-150"
+		class="absolute bottom-0 z-0 object-contain w-screen h-full scale-x-125"
 		alt=""
-	/>
+	/> -->
 
-	<div class="max-w-screen-xl w-full flex justify-center relative z-20">
-		<div class="grid grid-cols-1 md:grid-cols-2 px-5">
+	<div class="relative z-20 flex justify-center w-full max-w-screen-md">
+		<div class="grid grid-cols-1 px-5 md:grid-cols-2 gap-x-20">
 			<div
 				[ngClass]="{
 					'mb-20': (breakpoint$ | async) === 'tablet'
 				}"
-				class="flex-col flex my-auto text-center"
+				class="flex flex-col my-auto text-center"
 			>
 				<div
-					*ngIf="true"
 					@expandCollapse
-					class="text-4xl md:text-4xl text-emerald-500 font-bold leading-none text-center md:text-left"
+					class="text-4xl font-bold leading-none text-center md:text-4xl text-emerald-500 md:text-left"
 				>
 					Join our Community!
 				</div>
@@ -40,7 +37,7 @@
 						'justify-center items-center':
 							(breakpoint$ | async) === 'tablet'
 					}"
-					class="flex mt-10 w-full items-center justify-center"
+					class="flex items-center justify-center w-full mt-10"
 				>
 					<app-store-button class="md:mr-5"></app-store-button>
 
@@ -48,7 +45,9 @@
 				</div>
 			</div>
 
-			<preview-section class="md:mt-32"></preview-section>
+			<div class="flex items-center justify-center w-full">
+				<preview-section class="w-full"></preview-section>
+			</div>
 		</div>
 	</div>
 </div>
