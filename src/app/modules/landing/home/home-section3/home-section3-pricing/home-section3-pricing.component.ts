@@ -20,11 +20,14 @@ export class HomeSection3PricingComponent implements OnInit {
 		private _homeSubscriptionState: HomeSubscriptionState,
 	) {}
 
-	@Input() isGradient: boolean = false
+	@Input()
+	isGradient: boolean = false
 
-	@Input() subscription?: Subscription
+	@Input()
+	subscription?: Subscription
 
-	@Input() interval?: 'yearly' | 'monthly' | null
+	@Input()
+	interval?: 'yearly' | 'monthly' | null
 
 	ngOnInit(): void {}
 
@@ -61,6 +64,10 @@ export class HomeSection3PricingComponent implements OnInit {
 
 			this._homeSubscriptionState.interval$.next(this.interval)
 
+			if (this._router.url.includes('subscription')) {
+				location.reload()
+				return
+			}
 			this._router.navigate(['/subscription'])
 		})
 	}

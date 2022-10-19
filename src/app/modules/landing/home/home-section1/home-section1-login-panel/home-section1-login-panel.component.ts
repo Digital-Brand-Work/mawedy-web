@@ -1,3 +1,4 @@
+import { ClinicRegistrationStatusEnum } from 'app/app-core/enums/clinic-registration.enum'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { AlertState } from 'app/components/alert/alert.service'
@@ -6,7 +7,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../../login.service'
 import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { ClinicSubscriptionTypeEnum } from 'app/app-core/enums/clinic-subscription-type.enum'
-import { ClinicRegistrationStatusEnum } from 'app/app-core/enums/clinic-registration.enum'
 
 @Component({
 	selector: 'home-section1-login-panel',

@@ -1,5 +1,4 @@
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
-import { setPrefix } from '../../../../app-core/helpers'
 import { Router } from '@angular/router'
 import { FormGroup } from '@angular/forms'
 import { Subscription } from 'app/app-core/models/utility.models'
@@ -15,13 +14,14 @@ import {
 	takeUntil,
 } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { HomeSubscriptionState } from 'app/app-core/misc/home.state'
 import { RegisterService } from '../../home/register.service'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
 import { DB } from 'app/app-core/enums/index.db.enum'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
+import { HomeSubscriptionState } from 'app/app-core/misc/home.state'
+import { setPrefix } from 'app/app-core/helpers'
 
 @Component({
 	selector: 'landing-subscription-section1',
@@ -68,15 +68,12 @@ export class LandingSubscriptionSection1Component implements OnInit {
 
 	ngOnInit(): void {}
 
-	ngAfterViewInit(): void {
-		setTimeout(() => {
-			this.fetchFromIndexDB()
-		}, 500)
+	ngAfterContentInit(): void {
+		this.fetchFromIndexDB()
 	}
 
 	ngOnDestroy(): void {
 		this.subscription$.next(null)
-
 		this.subscription$.complete()
 	}
 
