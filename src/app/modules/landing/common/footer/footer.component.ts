@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { EMAIL, PHONE } from 'app/mawedy-core/constants/app.constant'
+import { EMAIL, PHONE } from 'app/app-core/constants/app.constant'
 
 @Component({
 	selector: 'footer',

@@ -9,7 +9,7 @@ import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { DashboardWaitingPatient } from '../waiting-patients/dashboard-waiting-patient.model'
 import { DashboardForApprovalPatient } from './dashboard-for-approval-patient.model'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import * as DashboardForApprovalPatients from './dashboard-for-approval-patient.actions'
 @Component({
 	selector: 'for-approvals',

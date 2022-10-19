@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
+import { WeekDay, weekDays } from 'app/app-core/constants/app.constant'
 import { BehaviorSubject } from 'rxjs'
 import { Doctor } from '../../doctor.model'
 import { DoctorService } from '../../doctor.service'

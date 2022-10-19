@@ -17,14 +17,14 @@ import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import {
 	BILL_INTERVALS,
 	mawedySubscriptions,
-} from 'app/mawedy-core/constants/app.constant'
-import { clinicSubscriptionTypes } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
+} from 'app/app-core/constants/app.constant'
+import { clinicSubscriptionTypes } from 'app/app-core/enums/clinic-subscription-type.enum'
 import {
 	BillInterval,
 	MawedySubscription,
 	Subscription,
-} from 'app/mawedy-core/models/utility.models'
-import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
+} from 'app/app-core/models/utility.models'
+import { StoreRegisterRule } from 'app/app-core/rules/register.request'
 
 @Component({
 	selector: 'partner-with-us-section1-second-step',

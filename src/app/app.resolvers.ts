@@ -4,7 +4,7 @@ import { Appointment } from './modules/admin/appointments/appointment.model'
 import { MedicalService } from './modules/admin/clinic/clinic-services/medical-service.model'
 import { Department } from './modules/admin/clinic/department/department.model'
 import { Patient } from './modules/admin/patients/patient.model'
-import { IndexedDbController } from './mawedy-core/indexed-db/indexed-db.controller'
+import { IndexedDbController } from './app-core/indexed-db/indexed-db.controller'
 import { Injectable } from '@angular/core'
 import {
 	ActivatedRouteSnapshot,
@@ -16,7 +16,7 @@ import { NotificationsService } from 'app/layout/common/notifications/notificati
 import { PatientService } from './modules/admin/patients/patient.service'
 import { DepartmentService } from './modules/admin/clinic/department/department.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from './mawedy-core/enums/index.db.enum'
+import { DB } from './app-core/enums/index.db.enum'
 import { UserService } from './core/user/user.service'
 import { DoctorService } from './modules/admin/doctors/doctor.service'
 import { AppointmentService } from './modules/admin/appointments/appointment.service'
@@ -36,8 +36,8 @@ import * as AppointmentActions from './modules/admin/appointments/appointment.ac
 import * as PromotionsActions from './modules/admin/promotions/promotion.actions'
 import { DashboardForApprovalPatient } from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.model'
 import * as DashboardForApprovalPatients from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
-import { AppointmentStatusEnum } from './mawedy-core/enums/appointment-status.enum'
-import { PaginationService } from './misc/pagination.service'
+import { AppointmentStatusEnum } from './app-core/enums/appointment-status.enum'
+import { PaginationService } from './app-core/misc/pagination.service'
 
 @Injectable({
 	providedIn: 'root',

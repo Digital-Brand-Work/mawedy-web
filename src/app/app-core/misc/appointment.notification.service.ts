@@ -1,4 +1,4 @@
-import { BaseService } from './../../@digital_brand_work/api/base.api'
+import { BaseService } from '../../../@digital_brand_work/api/base.api'
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { NgxIndexedDBService } from 'ngx-indexed-db'

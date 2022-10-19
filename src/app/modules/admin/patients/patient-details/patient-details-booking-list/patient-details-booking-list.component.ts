@@ -8,7 +8,7 @@ import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { BehaviorSubject } from 'rxjs'
 import { UploadResultModal } from '../modal/patient-details-booking-list-uploading-result/patient-details-booking-list-uploading-result.service'
 import { AlertState } from 'app/components/alert/alert.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 
 @Component({
 	selector: 'patient-details-booking-list',

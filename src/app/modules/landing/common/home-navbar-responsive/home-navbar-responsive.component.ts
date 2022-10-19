@@ -5,7 +5,7 @@ import { BehaviorSubject, map, Subscription, tap } from 'rxjs'
 import {
 	HomeNav,
 	homeNavigation,
-} from '../../../../mawedy-core/navigation/landing.navigation'
+} from '../../../../app-core/navigation/landing.navigation'
 
 @Component({
 	selector: 'home-navbar-responsive',

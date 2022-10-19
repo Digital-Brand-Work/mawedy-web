@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
-import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
+import { StoreRegisterRule } from 'app/app-core/rules/register.request'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 
 @Component({

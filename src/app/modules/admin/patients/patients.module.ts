@@ -9,11 +9,11 @@ import { PatientDetailsInformationComponent } from './patient-details/patient-de
 import { PatientDetailsBookingListComponent } from './patient-details/patient-details-booking-list/patient-details-booking-list.component'
 import { SharedModule } from 'app/shared/shared.module'
 import { RouterModule } from '@angular/router'
-import { patientRoutes } from 'app/mawedy-core/routes/admin/patients.routing'
+import { patientRoutes } from 'app/app-core/routes/admin/patients.routing'
 import { StoreModule } from '@ngrx/store'
 import * as fromPatient from './patient.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { PatientEffects } from 'app/modules/admin/patients/patient.effects';
+import { PatientEffects } from 'app/modules/admin/patients/patient.effects'
 import { PatientSearchResultsComponent } from './patient-search-results/patient-search-results.component'
 
 const components = [

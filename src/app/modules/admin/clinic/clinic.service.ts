@@ -1,5 +1,5 @@
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { IndexedDbController } from '../../../mawedy-core/indexed-db/indexed-db.controller'
+import { IndexedDbController } from '../../../app-core/indexed-db/indexed-db.controller'
 import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 import { HttpClient } from '@angular/common/http'
 import {
@@ -15,8 +15,8 @@ import { Clinic } from './clinic.model'
 import { Router } from '@angular/router'
 import { Injectable } from '@angular/core'
 import { slugify } from '@digital_brand_work/helpers/helpers'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
-import { LaravelNotificationService } from 'app/misc/laravel.notificaion.service'
+import { DB } from 'app/app-core/enums/index.db.enum'
+import { LaravelNotificationService } from 'app/app-core/misc/laravel.notificaion.service'
 
 export interface User {
 	access: {

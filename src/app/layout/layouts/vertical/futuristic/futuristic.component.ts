@@ -11,7 +11,7 @@ import { Navigation } from 'app/core/navigation/navigation.types'
 import { NavigationService } from 'app/core/navigation/navigation.service'
 import { User } from 'app/core/user/user.types'
 import { UserService } from 'app/core/user/user.service'
-import { AdminNavigationService } from 'app/mawedy-core/navigation/admin.navigation.service'
+import { AdminNavigationService } from 'app/app-core/navigation/admin.navigation.service'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 
 @Component({

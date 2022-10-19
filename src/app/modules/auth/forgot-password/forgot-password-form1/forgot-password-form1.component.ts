@@ -11,7 +11,7 @@ import {
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
 import { ForgotPasswordService } from '../forgot-password.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 
 @Component({
 	selector: 'forgot-password-form1',

@@ -1,5 +1,5 @@
 import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
-import { empty, hasData } from 'app/mawedy-core/helpers'
+import { empty, hasData } from 'app/app-core/helpers'
 import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { Department } from 'app/modules/admin/clinic/department/department.model'
 import { Observable, take } from 'rxjs'

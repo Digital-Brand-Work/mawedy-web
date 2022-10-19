@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Store } from '@ngrx/store'
 import { AlertState } from 'app/components/alert/alert.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { Department } from '../../../department/department.model'
@@ -21,7 +21,7 @@ import { MedicalService_Service } from '../../medical-service.service'
 import { AddClinicServiceModal } from './clinic-services-add.service'
 import * as DepartmentActions from '../../../department/department.actions'
 import * as MedicalServiceActions from '../../medical-service.actions'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 @Component({
 	selector: 'clinic-services-add',
 	templateUrl: './clinic-services-add.component.html',

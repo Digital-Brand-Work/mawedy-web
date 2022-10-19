@@ -2,11 +2,11 @@ import {
 	BILL_INTERVALS,
 	mawedySubscriptions,
 	subscription,
-} from 'app/mawedy-core/constants/app.constant'
+} from 'app/app-core/constants/app.constant'
 import {
 	MawedySubscription,
 	SubscriptionFeatures,
-} from 'app/mawedy-core/models/utility.models'
+} from 'app/app-core/models/utility.models'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ClinicUserService } from '../../clinic/clinic.service'

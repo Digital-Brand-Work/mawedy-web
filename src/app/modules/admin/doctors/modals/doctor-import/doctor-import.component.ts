@@ -1,10 +1,10 @@
-import { ErrorHandlerService } from './../../../../../misc/error-handler.service'
+import { ErrorHandlerService } from '../../../../../app-core/misc/error-handler.service'
 import { AlertState } from './../../../../../components/alert/alert.service'
 import { DoctorImportModal } from './doctor-import.service'
 import { dbwAnimations } from './../../../../../../@digital_brand_work/animations/animation.api'
 import { BehaviorSubject } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
-import { ImportDoctorService } from 'app/mawedy-core/utilities/import.service'
+import { ImportDoctorService } from 'app/app-core/utilities/import.service'
 
 @Component({
 	selector: 'doctor-import',

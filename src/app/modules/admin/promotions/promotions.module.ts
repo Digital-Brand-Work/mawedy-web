@@ -7,11 +7,11 @@ import { PromotionsFilterComponent } from './promotions-filter/promotions-filter
 import { PromotionsAddComponent } from './promotions-add/promotions-add.component'
 import { PromotionsEditComponent } from './promotions-edit/promotions-edit.component'
 import { SharedModule } from 'app/shared/shared.module'
-import { promotionsRoutes } from 'app/mawedy-core/routes/admin/promotions.routing'
+import { promotionsRoutes } from 'app/app-core/routes/admin/promotions.routing'
 import { StoreModule } from '@ngrx/store'
 import * as fromPromotion from './promotion.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { PromotionEffects } from 'app/modules/admin/promotions/promotion.effects';
+import { PromotionEffects } from 'app/modules/admin/promotions/promotion.effects'
 import { PromotionsSearchResultsComponent } from './promotions-search-results/promotions-search-results.component'
 
 const components = [

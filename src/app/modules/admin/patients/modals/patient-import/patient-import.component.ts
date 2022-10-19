@@ -4,8 +4,8 @@ import { AlertState } from 'app/components/alert/alert.service'
 import {
 	ImportDoctorService,
 	ImportPatientService,
-} from 'app/mawedy-core/utilities/import.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+} from 'app/app-core/utilities/import.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { BehaviorSubject } from 'rxjs'
 import { PatientImportModal } from './patient-import.service'
 

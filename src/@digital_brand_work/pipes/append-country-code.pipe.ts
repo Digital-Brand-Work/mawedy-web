@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { countries } from 'app/mawedy-core/constants/country-codes.list'
+import { countries } from 'app/app-core/constants/country-codes.list'
 import * as dayjs from 'dayjs'
 
 @Pipe({

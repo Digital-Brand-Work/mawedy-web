@@ -1,4 +1,4 @@
-import { empty } from 'app/mawedy-core/helpers'
+import { empty } from 'app/app-core/helpers'
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'

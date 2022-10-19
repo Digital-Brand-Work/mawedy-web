@@ -1,4 +1,4 @@
-import { HomeNav } from 'app/mawedy-core/navigation/landing.navigation'
+import { HomeNav } from 'app/app-core/navigation/landing.navigation'
 
 export const dashboardTabs: HomeNav[] = [
 	{

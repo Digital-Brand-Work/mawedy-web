@@ -11,7 +11,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
+import { StoreRegisterRule } from 'app/app-core/rules/register.request'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 
 @Component({

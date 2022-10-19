@@ -1,6 +1,6 @@
 /* tslint:disable:max-line-length */
 import { FuseNavigationItem } from '@fuse/components/navigation'
-import { platinumUser } from 'app/mawedy-core/navigation/admin.navigations'
+import { platinumUser } from 'app/app-core/navigation/admin.navigations'
 
 export const defaultNavigation: FuseNavigationItem[] = platinumUser
 

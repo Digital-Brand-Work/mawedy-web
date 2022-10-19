@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { subscription } from 'app/mawedy-core/constants/app.constant'
-import { SubscriptionFeatures } from 'app/mawedy-core/models/utility.models'
+import { subscription } from 'app/app-core/constants/app.constant'
+import { SubscriptionFeatures } from 'app/app-core/models/utility.models'
 
 @Component({
 	selector: 'subscription-success',

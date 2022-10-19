@@ -1,9 +1,9 @@
 import { Router } from '@angular/router'
 import { Component, Input, OnInit } from '@angular/core'
-import { Subscription } from 'app/mawedy-core/models/utility.models'
-import { HomeSubscriptionState } from 'app/misc/home.state'
-import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { Subscription } from 'app/app-core/models/utility.models'
+import { HomeSubscriptionState } from 'app/app-core/misc/home.state'
+import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { take } from 'rxjs'
 

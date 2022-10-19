@@ -1,9 +1,9 @@
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
-import { setPrefix } from './../../../../mawedy-core/helpers'
+import { setPrefix } from '../../../../app-core/helpers'
 import { Router } from '@angular/router'
 import { FormGroup } from '@angular/forms'
-import { Subscription } from 'app/mawedy-core/models/utility.models'
-import { PRICE_PER_USER } from 'app/mawedy-core/constants/app.constant'
+import { Subscription } from 'app/app-core/models/utility.models'
+import { PRICE_PER_USER } from 'app/app-core/constants/app.constant'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { Component, OnInit } from '@angular/core'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
@@ -15,13 +15,13 @@ import {
 	takeUntil,
 } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { HomeSubscriptionState } from 'app/misc/home.state'
+import { HomeSubscriptionState } from 'app/app-core/misc/home.state'
 import { RegisterService } from '../../home/register.service'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
-import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
+import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
+import { DB } from 'app/app-core/enums/index.db.enum'
 
 @Component({
 	selector: 'landing-subscription-section1',

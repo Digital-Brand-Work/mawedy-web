@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { Router } from '@angular/router'
 import { select, Store } from '@ngrx/store'
-import { HomeNav } from 'app/mawedy-core/navigation/landing.navigation'
+import { HomeNav } from 'app/app-core/navigation/landing.navigation'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Observable, Subject, take, takeUntil } from 'rxjs'
 import { DashboardAppointment } from '../../appointments/dashboard-appointment.model'

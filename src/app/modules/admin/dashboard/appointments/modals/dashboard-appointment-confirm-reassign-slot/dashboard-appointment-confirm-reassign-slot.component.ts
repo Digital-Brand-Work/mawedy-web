@@ -1,5 +1,5 @@
-import { AppointmentTypeEnum } from 'app/mawedy-core/enums/appointment-type.enum'
-import { AppointmentStatusEnum } from './../../../../../../mawedy-core/enums/appointment-status.enum'
+import { AppointmentTypeEnum } from 'app/app-core/enums/appointment-type.enum'
+import { AppointmentStatusEnum } from '../../../../../../app-core/enums/appointment-status.enum'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Store } from '@ngrx/store'
@@ -8,11 +8,11 @@ import {
 	END_OF_HOURS,
 	END_OF_MINUTES,
 	PM,
-} from 'app/mawedy-core/constants/app.constant'
-import { DayTypes } from 'app/mawedy-core/enums/day.enum'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
-import { empty, tOTime } from 'app/mawedy-core/helpers'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+} from 'app/app-core/constants/app.constant'
+import { DayTypes } from 'app/app-core/enums/day.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
+import { empty, tOTime } from 'app/app-core/helpers'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
 import { Doctor } from 'app/modules/admin/doctors/doctor.model'

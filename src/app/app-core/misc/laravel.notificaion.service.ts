@@ -1,7 +1,7 @@
 import { InitialDataResolver } from 'app/app.resolvers'
 import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
-import { Clinic } from './../modules/admin/clinic/clinic.model'
-import { environment } from './../../environments/environment'
+import { Clinic } from '../../modules/admin/clinic/clinic.model'
+import { environment } from '../../../environments/environment'
 import { Injectable } from '@angular/core'
 import Echo, { Channel } from 'laravel-echo'
 import { PatientService } from 'app/modules/admin/patients/patient.service'
@@ -17,14 +17,14 @@ import { DashboardWaitingPatient } from 'app/modules/admin/dashboard/waiting-pat
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { MedicalService } from 'app/modules/admin/clinic/clinic-services/medical-service.model'
 import { Promotion } from 'app/modules/admin/promotions/promotion.model'
-import * as PatientActions from '../modules/admin/patients/patient.actions'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import * as PatientActions from '../../modules/admin/patients/patient.actions'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import { DoctorService } from 'app/modules/admin/doctors/doctor.service'
-import * as DoctorActions from '../modules/admin/doctors/doctor.actions'
+import * as DoctorActions from '../../modules/admin/doctors/doctor.actions'
 import { AnimateBellService } from 'app/layout/common/user/user-bell.service'
 import { NotificationsService } from 'app/layout/common/notifications/notifications.service'
 import { take } from 'rxjs'
-import * as ForApprovalActions from '../modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
+import * as ForApprovalActions from '../../modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
 @Injectable({ providedIn: 'root' })
 export class LaravelNotificationService {
 	constructor(

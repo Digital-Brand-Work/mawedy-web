@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 import {
 	APPOINTMENT_INTERVAL,
 	END_OF_MINUTES,
-} from 'app/mawedy-core/constants/app.constant'
+} from 'app/app-core/constants/app.constant'
 
 @Pipe({
 	name: 'add30Minutes',

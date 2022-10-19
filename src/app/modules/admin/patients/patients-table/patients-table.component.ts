@@ -11,8 +11,8 @@ import { BehaviorSubject, take } from 'rxjs'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { Router } from '@angular/router'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
-import { PaginationService } from 'app/misc/pagination.service'
+import { DB } from 'app/app-core/enums/index.db.enum'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 
 @Component({
 	selector: 'patients-table',

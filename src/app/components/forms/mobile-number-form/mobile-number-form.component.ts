@@ -1,6 +1,6 @@
-import { empty } from 'app/mawedy-core/helpers'
+import { empty } from 'app/app-core/helpers'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { countries } from 'app/mawedy-core/constants/country-codes.list'
+import { countries } from 'app/app-core/constants/country-codes.list'
 @Component({
 	selector: 'mobile-number-form',
 	templateUrl: './mobile-number-form.component.html',

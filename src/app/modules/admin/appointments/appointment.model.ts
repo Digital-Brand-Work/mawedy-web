@@ -1,7 +1,7 @@
 import { MedicalService } from './../clinic/clinic-services/medical-service.model'
 import { Department } from 'app/modules/admin/clinic/department/department.model'
-import { AppointmentStatusEnum } from 'app/mawedy-core/enums/appointment-status.enum'
-import { AppointmentTypeEnum } from 'app/mawedy-core/enums/appointment-type.enum'
+import { AppointmentStatusEnum } from 'app/app-core/enums/appointment-status.enum'
+import { AppointmentTypeEnum } from 'app/app-core/enums/appointment-type.enum'
 import {
 	PHPBaseModel,
 	PHPFile,

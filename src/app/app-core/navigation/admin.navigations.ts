@@ -1,4 +1,4 @@
-import { Navigation } from './../../core/navigation/navigation.types'
+import { Navigation } from '../../core/navigation/navigation.types'
 import { slugify } from '@digital_brand_work/helpers/helpers'
 import { FuseNavigationItem } from '@fuse/components/navigation'
 import { BehaviorSubject, of, zip } from 'rxjs'

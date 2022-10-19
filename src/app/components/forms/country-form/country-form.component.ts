@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { countries } from 'app/mawedy-core/constants/countries.constant'
-import { iso } from 'app/mawedy-core/constants/countries.iso.constant'
+import { countries } from 'app/app-core/constants/countries.constant'
+import { iso } from 'app/app-core/constants/countries.iso.constant'
 
 @Component({
 	selector: 'country-form',

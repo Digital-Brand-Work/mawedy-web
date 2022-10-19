@@ -1,4 +1,4 @@
-import { ForApprovalsComponent } from './../../../modules/admin/dashboard/for-approvals/for-approvals.component'
+import { ForApprovalsComponent } from '../../../modules/admin/dashboard/for-approvals/for-approvals.component'
 import { DashboardAppointmentsComponent } from '../../../modules/admin/dashboard/appointments/dashboard-appointments.component'
 import { Routes } from '@angular/router'
 import { DashboardComponent } from 'app/modules/admin/dashboard/dashboard.component'

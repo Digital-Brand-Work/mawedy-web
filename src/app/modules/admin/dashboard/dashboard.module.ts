@@ -10,7 +10,7 @@ import { WaitingPatientsComponent } from './waiting-patients/waiting-patients.co
 import { WaitingPatientsTableComponent } from './waiting-patients/waiting-patients-table/waiting-patients-table.component'
 import { WaitingPatientsToolbarComponent } from './waiting-patients/waiting-patients-toolbar/waiting-patients-toolbar.component'
 import { WaitingPatientsFilterComponent } from './waiting-patients/waiting-patients-filter/waiting-patients-filter.component'
-import { dashboardRoutes } from 'app/mawedy-core/routes/admin/dashboard.routing'
+import { dashboardRoutes } from 'app/app-core/routes/admin/dashboard.routing'
 import { DashboardAppointmentsComponent } from './appointments/dashboard-appointments.component'
 import { DashboardComponent } from './dashboard.component'
 import { StoreModule } from '@ngrx/store'
@@ -23,9 +23,9 @@ import { ForApprovalsComponent } from './for-approvals/for-approvals.component'
 import { ForApprovalsFilterComponent } from './for-approvals/for-approvals-filter/for-approvals-filter.component'
 import { ForApprovalsTableComponent } from './for-approvals/for-approvals-table/for-approvals-table.component'
 import { ForApprovalsToolbarComponent } from './for-approvals/for-approvals-toolbar/for-approvals-toolbar.component'
-import * as fromDashboardForApprovalPatient from './for-approvals/dashboard-for-approval-patient.reducer';
-import { DashboardAppointmentSearchResultsComponent } from './appointments/dashboard-appointment-search-results/dashboard-appointment-search-results.component';
-import { WaitingPatientsSearchResultsComponent } from './waiting-patients/waiting-patients-search-results/waiting-patients-search-results.component';
+import * as fromDashboardForApprovalPatient from './for-approvals/dashboard-for-approval-patient.reducer'
+import { DashboardAppointmentSearchResultsComponent } from './appointments/dashboard-appointment-search-results/dashboard-appointment-search-results.component'
+import { WaitingPatientsSearchResultsComponent } from './waiting-patients/waiting-patients-search-results/waiting-patients-search-results.component'
 import { ForApproalsSearchResultsComponent } from './for-approvals/for-approals-search-results/for-approals-search-results.component'
 
 const components = [
@@ -47,7 +47,12 @@ const components = [
 ]
 
 @NgModule({
-	declarations: [...components, DashboardAppointmentSearchResultsComponent, WaitingPatientsSearchResultsComponent, ForApproalsSearchResultsComponent],
+	declarations: [
+		...components,
+		DashboardAppointmentSearchResultsComponent,
+		WaitingPatientsSearchResultsComponent,
+		ForApproalsSearchResultsComponent,
+	],
 	imports: [
 		SharedModule,
 		RouterModule.forChild(dashboardRoutes),

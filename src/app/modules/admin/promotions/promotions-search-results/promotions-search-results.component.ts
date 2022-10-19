@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { PaginationData } from 'app/app.resolvers'
-import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 import { PatientService } from '../../patients/patient.service'
 import { Promotion } from '../promotion.model'
 import * as PromotionActions from '../promotion.actions'

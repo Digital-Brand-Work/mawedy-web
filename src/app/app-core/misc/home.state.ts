@@ -1,4 +1,4 @@
-import { Subscription } from './../mawedy-core/models/utility.models'
+import { Subscription } from '../models/utility.models'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 

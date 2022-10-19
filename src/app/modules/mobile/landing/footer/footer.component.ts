@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { EMAIL, PHONE } from 'app/mawedy-core/constants/app.constant'
+import { EMAIL, PHONE } from 'app/app-core/constants/app.constant'
 
 @Component({
 	selector: 'mobile-footer',

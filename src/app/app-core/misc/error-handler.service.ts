@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { AlertState } from 'app/components/alert/alert.service'
-import { slugToSentence } from 'app/mawedy-core/helpers'
+import { slugToSentence } from 'app/app-core/helpers'
 
 @Injectable({ providedIn: 'root' })
 export class ErrorHandlerService {

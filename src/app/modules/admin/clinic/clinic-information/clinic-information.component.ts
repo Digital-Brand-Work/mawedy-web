@@ -1,7 +1,7 @@
 import { dbwAnimations } from './../../../../../@digital_brand_work/animations/animation.api'
 import { Coordinates } from './../clinic-information-map/clinic-information-map.component'
 import { HttpErrorResponse } from '@angular/common/http'
-import { AccountTypeEnum } from './../../../../mawedy-core/enums/account.type.enum'
+import { AccountTypeEnum } from '../../../../app-core/enums/account.type.enum'
 import { isPlatformBrowser } from '@angular/common'
 import {
 	ChangeDetectorRef,
@@ -18,13 +18,13 @@ import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { BranchApi, ClinicApi } from '../clinic.api.service'
 import { Clinic, ClinicTimeSlot } from '../clinic.model'
 import { ClinicUserService } from '../clinic.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { AlertState } from 'app/components/alert/alert.service'
-import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
-import { days } from 'app/mawedy-core/enums/day.enum'
+import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
+import { DB } from 'app/app-core/enums/index.db.enum'
+import { days } from 'app/app-core/enums/day.enum'
 import { ClinicTimingSelectModal } from '../clinic-timings/modals/clinic-timings-select-modal/clinic-timings.select-moda.service'
-import { empty, removeDialCode, setPrefix } from 'app/mawedy-core/helpers'
+import { empty, removeDialCode, setPrefix } from 'app/app-core/helpers'
 
 @Component({
 	selector: 'clinic-information',

@@ -6,7 +6,7 @@ import { BreakPoint } from '@digital_brand_work/models/core.model'
 import {
 	FEATURES,
 	HomeSection2Feature,
-} from 'app/mawedy-core/constants/app.constant'
+} from 'app/app-core/constants/app.constant'
 
 @Component({
 	selector: 'home-section2',

@@ -1,11 +1,11 @@
-import { ClinicSubscriptionType } from './../../../mawedy-core/enums/clinic-subscription-type.enum'
+import { ClinicSubscriptionType } from '../../../app-core/enums/clinic-subscription-type.enum'
 import { PHPBaseModel, PHPFile } from '@digital_brand_work/models/core.model'
 import {
 	ClinicRegistrationStatus,
 	ClinicRegistrationStatusEnum,
-} from '../../../mawedy-core/enums/clinic-registration.enum'
-import { StripeStatusEnum } from '../../../mawedy-core/enums/strape-status.enum'
-import { AccountType } from 'app/mawedy-core/enums/account.type.enum'
+} from '../../../app-core/enums/clinic-registration.enum'
+import { StripeStatusEnum } from '../../../app-core/enums/strape-status.enum'
+import { AccountType } from 'app/app-core/enums/account.type.enum'
 
 export interface Clinic extends PHPBaseModel {
 	accounts: Branch[]

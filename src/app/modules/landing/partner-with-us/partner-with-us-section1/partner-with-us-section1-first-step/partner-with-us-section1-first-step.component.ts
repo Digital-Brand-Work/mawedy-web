@@ -11,7 +11,7 @@ import {
 } from '@angular/core'
 import { BehaviorSubject, map, Observable, Subject, takeUntil } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { StoreRegisterRule } from 'app/mawedy-core/rules/register.request'
+import { StoreRegisterRule } from 'app/app-core/rules/register.request'
 import { Router } from '@angular/router'
 
 @Component({

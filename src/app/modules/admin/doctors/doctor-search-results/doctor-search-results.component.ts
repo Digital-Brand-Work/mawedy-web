@@ -1,7 +1,7 @@
 import { PaginationData } from './../../../../app.resolvers'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 import { Doctor } from '../doctor.model'
 import { DoctorService } from '../doctor.service'
 import * as DoctorActions from '../doctor.actions'

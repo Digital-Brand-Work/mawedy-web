@@ -1,4 +1,4 @@
-import { weekDays } from './../../../../mawedy-core/constants/app.constant'
+import { weekDays } from '../../../../app-core/constants/app.constant'
 import { Injectable } from '@angular/core'
 import * as dayjs from 'dayjs'
 import { BehaviorSubject } from 'rxjs'

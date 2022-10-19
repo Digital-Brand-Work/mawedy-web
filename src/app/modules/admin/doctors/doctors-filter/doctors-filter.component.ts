@@ -1,15 +1,15 @@
 import { takeUntil } from 'rxjs/operators'
-import { weekDays } from './../../../../mawedy-core/constants/app.constant'
+import { weekDays } from '../../../../app-core/constants/app.constant'
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { Observable, Subject, take } from 'rxjs'
 import { Department } from '../../clinic/department/department.model'
 import { select, Store } from '@ngrx/store'
 import { DoctorService } from '../doctor.service'
-import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 import { Doctor } from '../doctor.model'
 import * as DoctorActions from '../doctor.actions'
 import * as dayjs from 'dayjs'
-import { hasData, toSentenceCase } from 'app/mawedy-core/helpers'
+import { hasData, toSentenceCase } from 'app/app-core/helpers'
 import { MedicalService } from '../../clinic/clinic-services/medical-service.model'
 
 @Component({

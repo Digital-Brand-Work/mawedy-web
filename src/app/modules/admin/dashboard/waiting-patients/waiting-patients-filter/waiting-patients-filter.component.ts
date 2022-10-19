@@ -1,4 +1,4 @@
-import { empty, hasData } from 'app/mawedy-core/helpers'
+import { empty, hasData } from 'app/app-core/helpers'
 import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
 import { Department } from './../../../clinic/department/department.model'
 import { MedicalService } from './../../../clinic/clinic-services/medical-service.model'

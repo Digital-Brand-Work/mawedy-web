@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { Router } from '@angular/router'
-import { HomeNav } from 'app/mawedy-core/navigation/landing.navigation'
+import { HomeNav } from 'app/app-core/navigation/landing.navigation'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Subject, take, takeUntil } from 'rxjs'
 import { dashboardTabs } from '../../dashboard.tabs'

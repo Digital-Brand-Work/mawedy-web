@@ -7,7 +7,7 @@ import { Clinic } from '../../clinic/clinic.model'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import * as DashboardAppointmentActions from './dashboard-appointment.actions'
 import { DashboardAppointment } from './dashboard-appointment.model'
 

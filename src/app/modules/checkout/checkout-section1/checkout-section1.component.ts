@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { PRICE_PER_USER } from 'app/mawedy-core/constants/app.constant'
+import { PRICE_PER_USER } from 'app/app-core/constants/app.constant'
 import { BehaviorSubject, Subscription } from 'rxjs'
 
 @Component({

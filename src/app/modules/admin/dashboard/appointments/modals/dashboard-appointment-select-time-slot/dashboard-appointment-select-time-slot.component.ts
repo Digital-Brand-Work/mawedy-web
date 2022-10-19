@@ -6,14 +6,14 @@ import { AddAppointmentModal } from 'app/modules/admin/appointments/appointment-
 import { Doctor } from 'app/modules/admin/doctors/doctor.model'
 import { BehaviorSubject, combineLatest, Subject, take, takeUntil } from 'rxjs'
 import { DashboardAppointmentSelectTimeSlotModal } from './dashboard-appointment-select-time-slot.service'
-import { DayTypes } from 'app/mawedy-core/enums/day.enum'
+import { DayTypes } from 'app/app-core/enums/day.enum'
 import {
 	APPOINTMENT_INTERVAL,
 	END_OF_HOURS,
 	END_OF_MINUTES,
 	PM,
-} from 'app/mawedy-core/constants/app.constant'
-import { empty, tOTime } from 'app/mawedy-core/helpers'
+} from 'app/app-core/constants/app.constant'
+import { empty, tOTime } from 'app/app-core/helpers'
 import * as dayjs from 'dayjs'
 
 @Component({

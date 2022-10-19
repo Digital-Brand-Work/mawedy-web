@@ -1,5 +1,5 @@
 import { AddAppointmentModal } from './../../../appointments/appointment-add/appointment-add.service'
-import { empty, setPrefix } from 'app/mawedy-core/helpers'
+import { empty, setPrefix } from 'app/app-core/helpers'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -9,7 +9,7 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import { Department } from 'app/modules/admin/clinic/department/department.model'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
@@ -18,7 +18,7 @@ import * as DepartmentActions from '../../../clinic/department//department.actio
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Doctor, TimeSlot } from '../../doctor.model'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { DoctorService } from '../../doctor.service'
 import * as DoctorActions from '../../doctor.actions'
 import { AlertState } from 'app/components/alert/alert.service'

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { select, Store } from '@ngrx/store'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { Doctor } from '../doctor.model'
@@ -10,7 +10,7 @@ import { DoctorDetailsModal } from '../modals/doctor-details/doctor-details.serv
 import * as DoctorActions from '../doctor.actions'
 import { DoctorService } from '../doctor.service'
 import { InitialDataResolver, PaginationData } from 'app/app.resolvers'
-import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 @Component({
 	selector: 'doctors-table',
 	templateUrl: './doctors-table.component.html',

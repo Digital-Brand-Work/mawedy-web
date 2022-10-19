@@ -1,5 +1,5 @@
-import { empty, hasData } from 'app/mawedy-core/helpers'
-import { ErrorHandlerService } from './../../../../misc/error-handler.service'
+import { empty, hasData } from 'app/app-core/helpers'
+import { ErrorHandlerService } from '../../../../app-core/misc/error-handler.service'
 import {
 	ChangeDetectorRef,
 	Component,
@@ -24,7 +24,7 @@ import { PromotionServiceService } from '../promotion.service'
 import { select, Store } from '@ngrx/store'
 import { Doctor } from '../../doctors/doctor.model'
 import { Promotion } from '../promotion.model'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import * as dayjs from 'dayjs'
 import * as DoctorActions from '../../doctors/doctor.actions'
 import * as PromotionActions from '../promotion.actions'

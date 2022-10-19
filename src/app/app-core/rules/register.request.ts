@@ -1,4 +1,4 @@
-import { ClinicSubscriptionTypeEnum } from './../enums/clinic-subscription-type.enum'
+import { ClinicSubscriptionTypeEnum } from '../enums/clinic-subscription-type.enum'
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
 import { Injectable } from '@angular/core'
 

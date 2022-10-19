@@ -1,4 +1,4 @@
-import { authRotes } from './../../mawedy-core/routes/auth.routes'
+import { authRotes } from '../../app-core/routes/auth.routes'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { SharedModule } from 'app/shared/shared.module'

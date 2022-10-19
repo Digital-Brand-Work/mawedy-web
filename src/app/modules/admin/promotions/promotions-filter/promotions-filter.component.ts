@@ -1,12 +1,12 @@
-import { empty } from 'app/mawedy-core/helpers'
+import { empty } from 'app/app-core/helpers'
 import { Promotion } from 'app/modules/admin/promotions/promotion.model'
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 import { PromotionServiceService } from '../promotion.service'
 import * as PromotionActions from '../promotion.actions'
 import * as dayjs from 'dayjs'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 
 @Component({
 	selector: 'promotions-filter',

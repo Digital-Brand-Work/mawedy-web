@@ -2,7 +2,7 @@ import { AppointmentService } from 'app/modules/admin/appointments/appointment.s
 import { Component, HostListener, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
-import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 import { PaginationData } from 'app/app.resolvers'
 import * as DashboardAppointmentActions from '../dashboard-appointment.actions'
 import * as dayjs from 'dayjs'

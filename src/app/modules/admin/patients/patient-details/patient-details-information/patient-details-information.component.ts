@@ -6,8 +6,8 @@ import {
 	ViewChild,
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { countries } from 'app/mawedy-core/constants/countries.constant'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { countries } from 'app/app-core/constants/countries.constant'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
@@ -18,7 +18,7 @@ import * as dayjs from 'dayjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { AlertState } from 'app/components/alert/alert.service'
 import { HttpErrorResponse } from '@angular/common/http'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 
 @Component({
 	selector: 'patient-details-information',

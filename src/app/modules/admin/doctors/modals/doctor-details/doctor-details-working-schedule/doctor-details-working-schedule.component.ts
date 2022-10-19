@@ -1,6 +1,6 @@
 import { TimeSlot } from './../../../doctor.model'
 import { Component, Input, OnInit } from '@angular/core'
-import { WeekDay, weekDays } from 'app/mawedy-core/constants/app.constant'
+import { WeekDay, weekDays } from 'app/app-core/constants/app.constant'
 
 @Component({
 	selector: 'doctor-details-working-schedule',

@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core'
 import {
 	BILL_INTERVALS,
 	mawedySubscriptions,
-} from 'app/mawedy-core/constants/app.constant'
-import { MawedySubscription } from 'app/mawedy-core/models/utility.models'
+} from 'app/app-core/constants/app.constant'
+import { MawedySubscription } from 'app/app-core/models/utility.models'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 

@@ -1,11 +1,11 @@
-import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
+import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
 import { Patient } from './patient.model'
 import { BehaviorSubject } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { BaseService } from '../../../../@digital_brand_work/api/base.api'
 import { Injectable } from '@angular/core'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 
 @Injectable({ providedIn: 'root' })
 export class PatientService extends BaseService<Patient> {

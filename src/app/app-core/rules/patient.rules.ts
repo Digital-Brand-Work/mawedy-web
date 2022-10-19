@@ -1,4 +1,4 @@
-import { genders } from './../enums/strape-status.enum'
+import { genders } from '../enums/strape-status.enum'
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
 import { GenderEnum } from '../enums/gender.enum'
 

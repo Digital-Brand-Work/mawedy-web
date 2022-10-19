@@ -8,7 +8,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import { Department } from 'app/modules/admin/clinic/department/department.model'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import {
@@ -28,8 +28,8 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import * as DoctorActions from '../../doctor.actions'
 import { HttpErrorResponse } from '@angular/common/http'
 import { AlertState } from 'app/components/alert/alert.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
-import { hasData } from 'app/mawedy-core/helpers'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
+import { hasData } from 'app/app-core/helpers'
 @Component({
 	selector: 'doctor-edit',
 	templateUrl: './doctor-edit.component.html',

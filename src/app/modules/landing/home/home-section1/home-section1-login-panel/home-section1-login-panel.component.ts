@@ -4,9 +4,9 @@ import { AlertState } from 'app/components/alert/alert.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../../login.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
-import { ClinicSubscriptionTypeEnum } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
-import { ClinicRegistrationStatusEnum } from 'app/mawedy-core/enums/clinic-registration.enum'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
+import { ClinicSubscriptionTypeEnum } from 'app/app-core/enums/clinic-subscription-type.enum'
+import { ClinicRegistrationStatusEnum } from 'app/app-core/enums/clinic-registration.enum'
 
 @Component({
 	selector: 'home-section1-login-panel',

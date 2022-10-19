@@ -15,14 +15,14 @@ import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import * as PromotionActions from '../promotion.actions'
 import { PromotionServiceService } from '../promotion.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { Router } from '@angular/router'
-import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
+import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
 import { InitialDataResolver, PaginationData } from 'app/app.resolvers'
-import { PaginationService } from 'app/misc/pagination.service'
+import { PaginationService } from 'app/app-core/misc/pagination.service'
 
 @Component({
 	selector: 'promotions-table',

@@ -1,16 +1,16 @@
-import { empty } from 'app/mawedy-core/helpers'
+import { empty } from 'app/app-core/helpers'
 import { takeUntil } from 'rxjs/operators'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
-import { ClinicRegistrationStatusEnum } from 'app/mawedy-core/enums/clinic-registration.enum'
-import { ClinicSubscriptionTypeEnum } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
+import { ClinicRegistrationStatusEnum } from 'app/app-core/enums/clinic-registration.enum'
+import { ClinicSubscriptionTypeEnum } from 'app/app-core/enums/clinic-subscription-type.enum'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { BehaviorSubject, Observable, Subject } from 'rxjs'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 
 @Component({
 	selector: 'home-section1',

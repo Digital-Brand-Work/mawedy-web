@@ -9,7 +9,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { BehaviorSubject } from 'rxjs'
 import { ForgotPasswordVerify } from '../forgot-password.service'
 

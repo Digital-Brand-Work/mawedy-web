@@ -7,7 +7,7 @@ import { ConfirmDeleteDoctorModal } from './doctor-confirm-delete.service'
 import * as DoctorActions from '../../doctor.actions'
 import { DoctorDetailsModal } from '../doctor-details/doctor-details.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 @Component({
 	selector: 'doctor-confirm-delete',

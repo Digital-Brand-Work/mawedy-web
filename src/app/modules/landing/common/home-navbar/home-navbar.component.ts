@@ -5,11 +5,11 @@ import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import {
 	HomeNav,
 	homeNavigation,
-} from '../../../../mawedy-core/navigation/landing.navigation'
+} from '../../../../app-core/navigation/landing.navigation'
 import { BehaviorSubject, forkJoin, Subject, take, takeUntil } from 'rxjs'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
-import { ClinicSubscriptionTypeEnum } from 'app/mawedy-core/enums/clinic-subscription-type.enum'
-import { ClinicRegistrationStatusEnum } from 'app/mawedy-core/enums/clinic-registration.enum'
+import { ClinicSubscriptionTypeEnum } from 'app/app-core/enums/clinic-subscription-type.enum'
+import { ClinicRegistrationStatusEnum } from 'app/app-core/enums/clinic-registration.enum'
 
 @Component({
 	selector: 'home-navbar',

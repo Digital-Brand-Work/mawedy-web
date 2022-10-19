@@ -1,5 +1,5 @@
-import { ClinicSubscriptionType } from './../enums/clinic-subscription-type.enum'
-import { PHPBaseModel } from './../../../@digital_brand_work/models/core.model'
+import { ClinicSubscriptionType } from '../enums/clinic-subscription-type.enum'
+import { PHPBaseModel } from '../../../@digital_brand_work/models/core.model'
 export interface Alert {
 	id: string
 	title: string

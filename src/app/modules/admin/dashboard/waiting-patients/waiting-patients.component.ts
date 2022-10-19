@@ -6,7 +6,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import * as DashboardWaitingActions from './dashboard-waiting-patient.actions'
 @Component({
 	selector: 'waiting-patients',

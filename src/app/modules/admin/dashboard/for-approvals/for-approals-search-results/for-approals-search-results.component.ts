@@ -1,6 +1,6 @@
 import { Appointment } from './../../../appointments/appointment.model'
 import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
-import { AppointmentStatusEnum } from './../../../../../mawedy-core/enums/appointment-status.enum'
+import { AppointmentStatusEnum } from '../../../../../app-core/enums/appointment-status.enum'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'

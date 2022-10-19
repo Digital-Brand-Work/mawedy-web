@@ -1,15 +1,15 @@
-import { IndexedDbController } from './../../../mawedy-core/indexed-db/indexed-db.controller'
-import { Subscription } from 'app/mawedy-core/models/utility.models'
+import { IndexedDbController } from '../../../app-core/indexed-db/indexed-db.controller'
+import { Subscription } from 'app/app-core/models/utility.models'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { mawedySubscriptions } from 'app/mawedy-core/constants/app.constant'
+import { mawedySubscriptions } from 'app/app-core/constants/app.constant'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { Observable, take } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 
 @Component({
 	selector: 'success',

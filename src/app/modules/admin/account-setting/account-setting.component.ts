@@ -1,4 +1,4 @@
-import { IndexedDbController } from 'app/mawedy-core/indexed-db/indexed-db.controller'
+import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
 import { HttpErrorResponse } from '@angular/common/http'
 import { take, takeUntil } from 'rxjs/operators'
 import {
@@ -16,9 +16,9 @@ import { ClinicUserService } from '../clinic/clinic.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { BranchApi, ClinicApi } from '../clinic/clinic.api.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
-import { empty } from 'app/mawedy-core/helpers'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
+import { DB } from 'app/app-core/enums/index.db.enum'
+import { empty } from 'app/app-core/helpers'
 
 @Component({
 	selector: 'account-setting',

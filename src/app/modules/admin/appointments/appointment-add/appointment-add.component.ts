@@ -1,7 +1,7 @@
 import { PatientService } from './../../patients/patient.service'
 import { Appointment } from './../appointment.model'
 import { AppointmentService } from './../appointment.service'
-import { empty, hasData, tOTime, toTwelve } from 'app/mawedy-core/helpers'
+import { empty, hasData, tOTime, toTwelve } from 'app/app-core/helpers'
 import { Doctor, TimeSlot } from 'app/modules/admin/doctors/doctor.model'
 import { MedicalService } from './../../clinic/clinic-services/medical-service.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -23,7 +23,7 @@ import { isPlatformBrowser } from '@angular/common'
 import { AlertState } from 'app/components/alert/alert.service'
 import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { ErrorHandlerService } from 'app/misc/error-handler.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { Department } from '../../clinic/department/department.model'
 import { Patient } from '../../patients/patient.model'
 import {
@@ -36,7 +36,7 @@ import {
 	PLATFORM_ID,
 	ViewChild,
 } from '@angular/core'
-import { DB } from 'app/mawedy-core/enums/index.db.enum'
+import { DB } from 'app/app-core/enums/index.db.enum'
 import * as dayjs from 'dayjs'
 import { HttpErrorResponse } from '@angular/common/http'
 import * as DashboardAppointmentActions from '../../dashboard/appointments/dashboard-appointment.actions'
