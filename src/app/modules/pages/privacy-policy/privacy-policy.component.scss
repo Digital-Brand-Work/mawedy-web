@@ -1,0 +1,23 @@
+@tailwind components;
+
+@layer components {
+	* {
+		@apply text-gray-700 font-normal text-base;
+	}
+
+	.content {
+		@apply my-4 leading-loose;
+	}
+
+	.title {
+		@apply text-xl font-black -mb-3  mt-4;
+	}
+
+	ul {
+		@apply ml-5;
+	}
+
+	li {
+		@apply ml-3 list-disc pl-3;
+	}
+}

@@ -2,7 +2,7 @@
 	@zoomIn
 	[formGroup]="form"
 	[ngClass]="{ 'pointer-events-none opacity-40': isProcessing }"
-	class="flex flex-col items-center justify-center w-full px-5 py-10 bg-white md:rounded-lg drop-shadow-lg md:px-10 mt-[69px] max-w-screen-sm ml-auto"
+	class="flex flex-col items-center justify-center w-full px-5 py-10 bg-white md:rounded-lg drop-shadow-lg mt-[69px] max-w-screen-sm ml-auto"
 >
 	<img
 		class="mb-5 h-36 max-w-50"
@@ -10,61 +10,67 @@
 		alt="Mawedy Logo"
 	/>
 
-	<input
-		#input
-		type="email"
-		placeholder="Email"
-		formControlName="email"
-		[ngClass]="{
-			'text-red-500': errors.email && !isProcessing,
-			'border-red-500/95':
-				!form.get('email')?.valid &&
-				form.get('email')?.touched &&
-				!isProcessing
-		}"
-		class="w-full px-3 py-2 mt-5 bg-white border rounded-md border-gray-300/80 -md focus:border-teal-500"
-	/>
+	<mat-form-field class="w-full">
+		<mat-icon
+			matPrefix
+			class="icon-size-5 text-emerald-500/40"
+			[svgIcon]="'alternate_email'"
+		></mat-icon>
 
-	<div
-		*ngIf="
-			!form.get('email')?.valid &&
-			form.get('email')?.touched &&
-			!isProcessing
-		"
-		class="text-sm text-left text-rose-500 self-baseline"
-	>
-		Invalid email format.
-	</div>
+		<input
+			#input
+			matInput
+			type="email"
+			placeholder="Email"
+			formControlName="email"
+		/>
 
-	<input
-		type="password"
-		placeholder="Password"
-		formControlName="password"
-		[ngClass]="{
-			'text-red-500': errors.password && !isProcessing,
-			'border-red-500/95':
-				!form.get('password')?.valid &&
-				form.get('password')?.touched &&
-				!isProcessing
-		}"
-		class="w-full px-3 py-2 mt-3 bg-white border rounded-md border-gray-300/80 -md focus:border-teal-500"
-	/>
+		<mat-error>Invalid email format.</mat-error>
+	</mat-form-field>
 
-	<div
-		*ngIf="
-			!form.get('password')?.valid &&
-			form.get('password')?.touched &&
-			!isProcessing
-		"
-		class="text-sm text-left text-rose-500 self-baseline"
-	>
-		Password is required.
-	</div>
+	<mat-form-field class="w-full">
+		<mat-icon
+			matPrefix
+			class="icon-size-5 text-emerald-500/40"
+			[svgIcon]="'lock_open'"
+		></mat-icon>
+
+		<input
+			matInput
+			type="password"
+			placeholder="Password"
+			formControlName="password"
+			#passwordField
+		/>
+
+		<button
+			mat-icon-button
+			type="button"
+			(click)="
+				passwordField.type === 'password'
+					? (passwordField.type = 'text')
+					: (passwordField.type = 'password')
+			"
+			matSuffix
+		>
+			<mat-icon
+				class="icon-size-5 text-gray-400"
+				*ngIf="passwordField.type === 'password'"
+				[svgIcon]="'heroicons_solid:eye'"
+			></mat-icon>
+			<mat-icon
+				class="icon-size-5 text-gray-400"
+				*ngIf="passwordField.type === 'text'"
+				[svgIcon]="'heroicons_solid:eye-off'"
+			></mat-icon>
+		</button>
+		<mat-error>Password is required.</mat-error>
+	</mat-form-field>
 
 	<a
-		routerLink="/auth"
 		role="button"
-		class="self-end mt-5 text-right text-gray-400 hover:underline"
+		routerLink="/auth"
+		class="self-end text-right accent-color hover:underline"
 		>Forgot Password ?</a
 	>
 
