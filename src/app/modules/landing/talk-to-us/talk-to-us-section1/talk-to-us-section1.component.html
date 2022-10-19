@@ -1,17 +1,14 @@
-<div
-	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
-	class="w-full flex items-center justify-center relative md:-mb-40"
->
+<div class="relative flex items-center justify-center w-full py-20">
 	<div
-		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
+		class="relative z-20 flex items-center justify-center w-full max-w-screen-md"
 	>
 		<div
-			class="grid grid-cols-1 md:grid-cols-2 md:gap-40 items-center w-full justify-center mt-10 md:mt-0"
+			class="grid items-center justify-center w-full grid-cols-1 mt-10 md:grid-cols-2 md:gap-40"
 		>
-			<div @slideInTop class="text-center flex flex-col text-gray-400">
-				<div class="flex flex-col self-center md:self-end md:-mb-30">
+			<div @zoomIn class="flex flex-col text-center text-gray-400">
+				<div class="flex flex-col self-center md:self-end">
 					<div
-						class="font-extrabold text-5xl mb-5 md:mt-0 mt-20 text-emerald-500"
+						class="mt-20 mb-1 text-3xl font-extrabold text-emerald-500"
 					>
 						Talk to us!
 					</div>
@@ -20,7 +17,7 @@
 						target="_blank"
 						[href]="'https://wa.me/' + phone"
 						role="button"
-						class="hover:underline mb-3 accent-color text-lg px-10 md:px-0 accent-color font-bold flex items-center justify-center md:ml-0 -ml-10"
+						class="flex items-center justify-center px-10 mb-3 -ml-10 text-lg font-bold hover:underline accent-color md:px-0 md:ml-0"
 					>
 						<span>
 							<img
@@ -35,68 +32,43 @@
 				</div>
 
 				<img
-					class="md:mt-0 mt-30 md:scale-100 scale-125"
+					class="scale-125 md:mt-0 mt-30 md:scale-100"
 					src="/assets/app/talk-to-us/talk-to-us.svg"
 					alt=""
 				/>
 			</div>
 
 			<div
-				class="md:px-10 py-10 px-0 rounded-lg md:mr-30"
-				style="box-shadow: 0px 3px 6px #00000029"
+				class="py-10 bg-white rounded-lg md:mr-30 drop-shadow-xl w-full max-w-screen-sm"
 			>
-				<div
-					@slideInBottom
+				<form
 					*ngIf="form"
 					[formGroup]="form"
-					class="w-full flex flex-col md:items-start items-center px-5 md:px-0 mt-20 md:mt-0"
+					class="flex flex-col items-center w-full px-5 mt-20 md:items-start md:mt-0"
 				>
-					<div class="font-semibold text-xl mb-5 text-emerald-500">
+					<div class="mb-5 text-xl font-semibold text-emerald-500">
 						How can we Help?
 					</div>
 
-					<div class="mt-3 w-full">
+					<mat-form-field class="w-full">
 						<input
-							#input
-							[ngClass]="{
-								'border-red-500 shadow-sm  placeholder-red-400 ':
-									form.get('name')?.invalid &&
-									form.get('name')?.touched,
-								'text-red-500': errors.name
-							}"
+							matInput
 							formControlName="name"
-							type="text"
-							class="rounded-md w-full border-gray-300 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
-							[placeholder]="
-								form.get('name')?.invalid &&
-								form.get('name')?.touched
-									? 'Your name is required.'
-									: 'Your name'
-							"
+							placeholder="Name"
 						/>
-					</div>
+						<mat-error>Name is required</mat-error>
+					</mat-form-field>
 
-					<div class="mt-3 w-full">
+					<mat-form-field class="w-full">
 						<input
-							[ngClass]="{
-								'border-red-500 shadow-sm  placeholder-red-400':
-									form.get('email')?.invalid &&
-									form.get('email')?.touched,
-								'text-red-500': errors.email
-							}"
+							matInput
 							formControlName="email"
-							type="text"
-							class="rounded-md w-full border-gray-300 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
-							[placeholder]="
-								form.get('email')?.invalid &&
-								form.get('email')?.touched
-									? 'Your email is required.'
-									: 'Your email'
-							"
+							placeholder="Email Address"
 						/>
-					</div>
+						<mat-error>Invalid email format</mat-error>
+					</mat-form-field>
 
-					<div class="mt-3 w-full">
+					<div class="w-full mb-3">
 						<input type="hidden" formControlName="phone_number" />
 
 						<input
@@ -116,42 +88,31 @@
 						></mobile-number-form>
 					</div>
 
-					<div class="mt-3 w-full">
+					<mat-form-field class="w-full">
 						<textarea
-							[ngClass]="{
-								'border-red-500 shadow-sm  placeholder-red-400':
-									form.get('message')?.invalid &&
-									form.get('message')?.touched,
-								'text-red-500': errors.message
-							}"
+							matInput
 							formControlName="message"
-							style="height: 265px"
-							class="rounded-md w-full border-gray-300 py-3 px-5 border focus:border-teal-500 focus:border-2 focus:shadow-md"
-							[placeholder]="
-								form.get('message')?.invalid &&
-								form.get('message')?.touched
-									? 'Your message is required.'
-									: 'Your message'
-							"
+							placeholder="Your message"
 						></textarea>
-					</div>
+						<mat-error>Your message is required</mat-error>
+					</mat-form-field>
 
 					<div class="flex w-full">
 						<button
 							(click)="send()"
 							[disabled]="!form.valid || isProcessing"
 							[ngClass]="{
-								'pointer-events-none bg-gray-500':
+								'pointer-events-none opacity-40':
 									!form.valid || isProcessing
 							}"
-							class="rounded-lg text-white bg-black py-3 px-10 ml-auto mt-5 tracking-widest uppercase w-full md:w-auto"
+							class="w-full px-10 py-3 mt-5 ml-auto tracking-widest text-white uppercase bg-emerald-500 hover:drop-shadow-2xl rounded-lg"
 						>
 							<span *ngIf="!isProcessing"> SEND </span>
 
 							<span *ngIf="isProcessing"> sending... </span>
 						</button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>

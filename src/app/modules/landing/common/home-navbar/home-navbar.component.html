@@ -15,7 +15,7 @@
 						nav.id === 4,
 					'hover:bg-emerald-100  hover:text-emerald-500 ':
 						nav.name !== 'AR' && nav.id !== 4,
-					'text-emerald-500': nav.id !== 4
+					'text-black': nav.id !== 4
 				}"
 				(click)="nav.id === 4 ? toDashboard() : null"
 				[routerLink]="nav.link"

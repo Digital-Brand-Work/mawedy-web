@@ -1,7 +1,4 @@
-<div
-	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
-	class="mb-20 md:mb-0 w-screen flex items-center justify-center relative"
->
+<div class="w-full py-20 mt-[69px] flex items-center justify-center relative">
 	<img
 		[ngClass]="{
 			' h-screen ':
@@ -10,11 +7,11 @@
 			'resolve-mobile-img': (breakpoint$ | async) === 'phone'
 		}"
 		src="/assets/app/partner-with-us/partner.png"
-		class="w-screen h-full object-fill absolute top-0 z-0"
+		class="absolute top-0 z-0 object-fill w-screen h-full"
 		alt="partner-with-us"
 	/>
 
-	<div class="w-full flex items-center justify-center relative z-20">
+	<div class="relative z-20 flex items-center justify-center w-full">
 		<div
 			[ngClass]="{
 				'pb-20  grid-cols-1':
@@ -25,7 +22,7 @@
 					(breakpoint$ | async) === 'desktop' ||
 					(breakpoint$ | async) === 'max'
 			}"
-			class="grid md:gap-x-20 w-full"
+			class="grid w-full md:gap-x-20"
 		>
 			<div class="w-full"></div>
 

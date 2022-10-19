@@ -7,21 +7,32 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatSelectModule } from '@angular/material/select'
-import { MatRippleModule } from '@angular/material/core'
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatMomentDateModule } from '@angular/material-moment-adapter'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
-export const matModules: any[] = [
+export const matModules = [
 	MatIconModule,
 	MatMenuModule,
-	MatDividerModule,
-	MatButtonModule,
-	MatTooltipModule,
-	MatCheckboxModule,
+	MatInputModule,
 	MatRadioModule,
 	MatSelectModule,
-	MatProgressSpinnerModule,
 	MatRippleModule,
+	MatButtonModule,
+	MatButtonModule,
+	MatDividerModule,
+	MatTooltipModule,
+	MatCheckboxModule,
+	MatFormFieldModule,
 	MatDatepickerModule,
 	MatSlideToggleModule,
+	MatProgressSpinnerModule,
+	MatProgressSpinnerModule,
+	MatNativeDateModule,
+	MatMomentDateModule,
+	MatProgressBarModule,
 ]
