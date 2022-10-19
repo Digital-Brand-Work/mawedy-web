@@ -55,15 +55,31 @@ export const BENEFITS: HomeSection2Feature[] = [
 ]
 
 export const FEATURES: HomeSection2Feature[] = [
-	{ img: 1, feature: 'Reliable, detailed booking solution' },
-	{ img: 2, feature: 'Professional way to connect clinics and patients' },
-	{ img: 3, feature: 'Saves Time and Effort' },
-	{ img: 4, feature: 'Never miss out on offers' },
-	{ img: 5, feature: 'Patient onboarding a lot easier' },
-	{ img: 6, feature: 'Membership plan with lots of benefits' },
+	{
+		img: 1,
+		feature: 'Reliable, detailed booking solution',
+		color: '#FE646F',
+	},
+	{
+		img: 2,
+		feature: 'Professional way to connect clinics and patients',
+		color: '#0593FC',
+	},
+	{ img: 3, feature: 'Saves Time and Effort', color: '#FE646F' },
+	{ img: 4, feature: 'Never miss out on offers', color: '#05E39C' },
+	{ img: 5, feature: 'Patient onboarding a lot easier', color: '#FEDF30' },
+	{
+		img: 6,
+		feature: 'Membership plan with lots of benefits',
+		color: '#FFA816',
+	},
 ]
 
-export type HomeSection2Feature = { feature: string; img: number }
+export type HomeSection2Feature = {
+	feature: string
+	img: number
+	color?: string
+}
 
 export const PRICE_PER_USER: number = 60
 

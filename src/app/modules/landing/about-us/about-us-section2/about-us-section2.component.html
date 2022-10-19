@@ -1,44 +1,52 @@
 <div
 	@slideInBottom
-	class="md:min-h-screen w-full flex flex-col items-center justify-center relative py-20 md:py-0"
+	class="relative flex flex-col items-center justify-center w-full py-20"
 >
-	<div
-		class="text-emerald-500 font-extrabold text-2xl md:text-6xl text-center"
-	>
+	<div class="text-2xl font-black text-center text-emerald-500 md:text-6xl">
 		Guaranteed Benefits
 	</div>
 
 	<div
-		class="max-w-screen-xl w-full flex flex-col items-center justify-center relative z-20 mt-10 md:mt-20 px-10"
+		class="relative z-20 flex flex-col items-center justify-center w-full max-w-screen-xl px-10 mt-10 md:mt-20"
 	>
 		<div
-			class="grid grid-cols-3 items-center justify-center gap-x-15 md:gap-20 w-full"
+			class="grid items-center justify-center w-full grid-cols-3 gap-x-15 md:gap-20"
 		>
 			<div
-				class="w-full flex-col items-center"
+				class="flex-col items-center w-full"
 				*ngFor="let item of benefits; trackBy: identity"
 			>
 				<img
-					style="height: 127px"
+					style="
+						height: calc(127px / 1.5);
+						transition-timing-function: cubic-bezier(
+							0.175,
+							0.885,
+							0.32,
+							1.275
+						);
+						transition-duration: 0.5s;
+						transition-property: transform, opacity;
+					"
 					[src]="'/assets/app/about-us/benefits/' + item.img + '.png'"
 					alt="benefit-time"
-					class="object-contain"
+					class="object-contain hover:scale-x-[-1]"
 				/>
 
 				<div
-					class="font-bold text-xs md:text-2xl text-center md:mt-5 accent-color"
+					class="text-xs font-bold text-center md:text-lg md:mt-5 accent-color"
 				>
 					{{ item.feature }}
 				</div>
 			</div>
 		</div>
 
-		<div class="flex w-full items-center justify-center mt-10 md:mt-20">
+		<div class="flex items-center justify-center w-full mt-10 md:mt-20">
 			<a
 				routerLink="/partner-with-us"
-				class="text-white px-10 md:px-20 bg-emerald-500 hover:bg-emerald-600 py-4 font-semibold text-lg md:rounded-lg rounded-full mx-auto w-full md:w-auto drop-shadow-xl items-center justify-center flex"
+				class="flex items-center justify-center w-full py-3 mx-auto text-lg font-semibold text-white rounded-full md:px-8 bg-emerald-500 hover:bg-emerald-600 md:rounded-lg md:w-auto drop-shadow-xl"
 			>
-				Ready to join us?
+				Ready to Join Us?
 			</a>
 		</div>
 	</div>

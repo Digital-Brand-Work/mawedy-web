@@ -1,10 +1,6 @@
-<div
-	@slideInBottom
-	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
-	class="w-full flex items-center justify-center relative"
->
+<div @slideInBottom class="relative flex justify-center w-full py-20">
 	<div
-		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
+		class="relative z-20 flex items-center justify-center w-full max-w-screen-md"
 	>
 		<div
 			[ngClass]="{
@@ -18,13 +14,13 @@
 					[ngClass]="{
 						'mt-20': (breakpoint$ | async) === 'phone'
 					}"
-					class="text-5xl text-emerald-500 font-bold my-3"
+					class="my-3 text-2xl font-black md:text-6xl text-emerald-500"
 				>
 					Who we are
 				</div>
 
 				<div
-					class="text-md md:text-xl md:font-normal text-gray-600 md:pr-10"
+					class="text-gray-600 text-md md:font-normal md:pr-10"
 					style="line-height: 1.8rem"
 				>
 					Mawedy is the premier solution to offer a comprehensive
@@ -41,10 +37,10 @@
 				</div>
 			</div>
 
-			<div class="md:mt-0 scale-108 md:scale-100 mt-10">
+			<div class="mt-10 scale-108 md:scale-100">
 				<img
-					src="/assets/app/about-us/section-1-icon.svg"
 					alt="About Us"
+					src="/assets/app/about-us/section-1-icon.svg"
 					class="object-contain"
 				/>
 			</div>

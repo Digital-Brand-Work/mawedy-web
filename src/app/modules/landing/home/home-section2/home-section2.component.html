@@ -20,8 +20,8 @@
 				*ngFor="let item of features; trackBy: identity"
 			>
 				<img
-					style="background: #00b074"
-					class="w-10 h-10 mr-3 rounded-full"
+					[class]="'bg-[' + item.color + ']'"
+					class="mr-3 rounded-full w-14 h-1w-14"
 					[src]="'/assets/app/home/feature/' + item.img + '.svg'"
 					alt=""
 				/>
