@@ -1,3 +1,4 @@
+import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Router } from '@angular/router'
 import {
 	ChangeDetectorRef,
@@ -9,14 +10,15 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
-import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { BehaviorSubject } from 'rxjs'
 import { ForgotPasswordVerify } from '../forgot-password.service'
+import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 
 @Component({
 	selector: 'forgot-password-form2',
 	templateUrl: './forgot-password-form2.component.html',
 	styleUrls: ['./forgot-password-form2.component.scss'],
+	animations: [...dbwAnimations],
 })
 export class ForgotPasswordForm2Component implements OnInit {
 	constructor(

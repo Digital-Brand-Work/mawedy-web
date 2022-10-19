@@ -12,8 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { ScrollService } from '@digital_brand_work/services/scroll.service'
-import { AlertState } from 'app/components/alert/alert.service'
 import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
+import { AlertState } from 'app/components/alert/alert.service'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { LoginService } from 'app/modules/landing/home/login.service'
 import { PasswordResetAPI } from './reset-password.service'
@@ -26,9 +26,7 @@ import { PasswordResetAPI } from './reset-password.service'
 })
 export class AuthResetPasswordComponent implements OnInit {
 	constructor(
-		private _router: Router,
 		private _alert: AlertState,
-		private _route: ActivatedRoute,
 		private _cdr: ChangeDetectorRef,
 		private _loginService: LoginService,
 		private _scrollService: ScrollService,
@@ -46,7 +44,7 @@ export class AuthResetPasswordComponent implements OnInit {
 		),
 		password: new FormControl('', [
 			Validators.required,
-			Validators.minLength(6),
+			Validators.minLength(8),
 		]),
 		password_confirmation: new FormControl('', [Validators.required]),
 	})
