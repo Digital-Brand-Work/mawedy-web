@@ -18,7 +18,7 @@
 					'text-black': nav.id !== 4
 				}"
 				(click)="nav.id === 4 ? toDashboard() : null"
-				[routerLink]="nav.link"
+				[routerLink]="'/' + nav.link"
 				role="button"
 				class="flex items-center px-5 py-2 rounded-lg"
 			>

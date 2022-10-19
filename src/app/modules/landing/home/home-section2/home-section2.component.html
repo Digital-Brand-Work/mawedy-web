@@ -1,6 +1,8 @@
 <div
 	id="features"
+	is-in-screen
 	fragment="features"
+	(onElementShow)="renderAnimation = true"
 	class="relative z-10 flex flex-col items-center justify-center w-full py-20 bg-white"
 >
 	<div class="text-3xl font-extrabold text-gray-700 md:text-left">
@@ -9,11 +11,12 @@
 
 	<div class="w-full max-w-screen-md">
 		<div
-			[@listAnimation]="features.length"
-			[ngClass]="{
-				'pb-20': (breakpoint$ | async) === 'tablet'
-			}"
+			animateJs
 			class="grid grid-cols-1 mt-10 md:grid-cols-2 md:gap-x-20 gap-y-8 md:gap-y-10"
+			[ngClass]="{
+				'pb-20': (breakpoint$ | async) === 'tablet',
+				animate__pulse: renderAnimation
+			}"
 		>
 			<div
 				class="flex items-center px-5 md:px-0"
@@ -26,9 +29,7 @@
 					alt=""
 				/>
 
-				<div>
-					{{ item.feature }}
-				</div>
+				<div>{{ item.feature }}</div>
 			</div>
 		</div>
 	</div>

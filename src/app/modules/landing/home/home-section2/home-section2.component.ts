@@ -17,6 +17,8 @@ import {
 export class HomeSection2Component implements OnInit {
 	constructor(private _mediaService: MediaService) {}
 
+	renderAnimation: boolean = false
+
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 
 	features: HomeSection2Feature[] = FEATURES

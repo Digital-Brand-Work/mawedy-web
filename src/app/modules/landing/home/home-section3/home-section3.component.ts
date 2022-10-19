@@ -18,6 +18,8 @@ import { BreakPoint } from '@digital_brand_work/models/core.model'
 export class HomeSection3Component implements OnInit {
 	constructor(private media: MediaService) {}
 
+	renderAnimation: boolean = false
+
 	unsubscribe$: Subject<any> = new Subject<any>()
 
 	breakpoint$: Observable<BreakPoint> = this.media.breakpoints$

@@ -28,7 +28,12 @@
 	</div>
 
 	<div
-		[@listAnimation]="3"
+		animateJs
+		[ngClass]="{
+			animate__flipInY: renderAnimation
+		}"
+		is-in-screen
+		(onElementShow)="renderAnimation = true"
 		*ngIf="billing$ | async as billing"
 		class="grid items-center justify-center max-w-screen-lg grid-cols-3 text-center md:hidden mb-15"
 	>
@@ -37,7 +42,6 @@
 			*ngFor="let subscription of mawedySubscriptions; trackBy: identity"
 		>
 			<button
-				matRipple
 				*ngIf="subscription[billing]"
 				class="p-2 px-5 rounded-full"
 				matRippleColor="rgba(150, 150, 150,.2)"
@@ -55,27 +59,28 @@
 		</div>
 	</div>
 
-	<div
-		*ngIf="billing$ | async as billing"
-		[@listAnimation]="3"
-		class="grid items-start justify-start w-full max-w-screen-lg grid-cols-1 px-5 mt-10 md:grid-cols-3 gap-x-10"
-	>
+	<ng-container *ngIf="billing$ | async as billing">
 		<div
-			@zoomIn
-			@zoomOut
-			[class.hidden]="!subscription[billing]"
-			*ngFor="let subscription of mawedySubscriptions"
+			[@zoomIn]="renderAnimation"
+			class="grid items-start justify-start w-full max-w-screen-lg grid-cols-1 px-5 mt-10 md:grid-cols-3 gap-x-10"
 		>
-			<home-section3-pricing
-				*ngIf="subscription[billing]"
-				[ngClass]="{
-					hidden:
-						(breakpoint$ | async) === 'phone' &&
-						currentType !== subscription[billing]?.type
-				}"
-				[interval]="billing"
-				[subscription]="subscription[billing]"
-			></home-section3-pricing>
+			<div
+				@zoomIn
+				@zoomOut
+				[class.hidden]="!subscription[billing]"
+				*ngFor="let subscription of mawedySubscriptions"
+			>
+				<home-section3-pricing
+					*ngIf="subscription[billing]"
+					[ngClass]="{
+						hidden:
+							(breakpoint$ | async) === 'phone' &&
+							currentType !== subscription[billing]?.type
+					}"
+					[interval]="billing"
+					[subscription]="subscription[billing]"
+				></home-section3-pricing>
+			</div>
 		</div>
-	</div>
+	</ng-container>
 </div>

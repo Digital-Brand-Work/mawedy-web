@@ -50,6 +50,9 @@ import { DashboardStatusPipe } from 'app/app-core/pipes/resolve-status.color.pip
 import { AddAnimationDirective } from '@digital_brand_work/directives/animate-on-scroll.directive'
 import { IsInViewPipe } from '@digital_brand_work/pipes/element-is-in-view.pipe'
 import { ResolveSubscriptionPipe } from 'app/app-core/pipes/resolve-subscription.pipe'
+import { ElementIsInScreenDirective } from '@digital_brand_work/directives/element-is-in-screen.directive'
+import { InViewportModule } from 'ng-in-viewport'
+import 'intersection-observer'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -72,6 +75,7 @@ const modules: any[] = [
 	FuseCardModule,
 	SSRExcludeModule,
 	FuseConfirmationModule,
+	InViewportModule,
 	RouterModule,
 	NgxFullpageModule,
 	...matModules,
@@ -114,6 +118,7 @@ const directives: any[] = [
 	HideIfDoesNotMatchTimeDirective,
 	WeekCalendarCursorDirective,
 	AddAnimationDirective,
+	ElementIsInScreenDirective,
 ]
 
 @NgModule({
