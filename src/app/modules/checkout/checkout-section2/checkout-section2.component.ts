@@ -1,13 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import {
-	ChangeDetectorRef,
-	Component,
-	ElementRef,
-	Input,
-	OnInit,
-	ViewChild,
-} from '@angular/core'
-import { ScrollService } from '@digital_brand_work/services/scroll.service'
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { AlertState } from 'app/components/alert/alert.service'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
