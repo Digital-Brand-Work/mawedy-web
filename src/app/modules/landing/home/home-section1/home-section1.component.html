@@ -8,17 +8,11 @@
 		(breakpoint$ | async) === 'desktop' ||
 		(breakpoint$ | async) === 'max'
 	"
-	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
-	class="relative flex items-center justify-center w-full"
+	class="relative flex items-center justify-center w-full mt-[69px]"
 >
 	<img
-		[ngClass]="{
-			' h-screen ':
-				(breakpoint$ | async) !== 'tablet' &&
-				(breakpoint$ | async) !== 'phone'
-		}"
 		src="../../../../../assets/app/home/home-section-v2.png"
-		class="absolute top-0 z-0 object-cover w-screen h-full"
+		class="absolute top-0 z-0 object-none w-screen"
 		alt=""
 	/>
 
