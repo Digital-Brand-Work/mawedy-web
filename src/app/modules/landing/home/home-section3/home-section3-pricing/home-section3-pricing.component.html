@@ -1,46 +1,51 @@
 <div
+	[ngClass]="{
+		'bg-gradient-to-b from-teal-50 to-teal-200/80 ':
+			subscription.type === 'Golden'
+	}"
 	(click)="subscribe()"
 	role="button"
-	class="rounded-3xl shadow-xl shadow-emerald-200/10 border-2 border-emerald-500 bg-white p-10 flex-col flex justify-center items-center w-full hover:bg-gradient-to-b from-teal-50 to-teal-200/80"
+	class="flex flex-col items-center justify-center w-full p-10 bg-white border-2 shadow-xl rounded-3xl shadow-emerald-200/10 border-emerald-500/50"
 >
 	<div
 		matRipple
 		matRippleColor="rgba(150, 150, 150,.2)"
 		style="width: 218px"
-		class="bg-emerald-500 rounded-full py-3 text-2xl font-bold text-center text-white -mt-16"
+		class="py-3 -mt-16 text-2xl font-bold text-center text-white rounded-full bg-emerald-500"
 	>
 		{{ subscription.type }}
 	</div>
 
-	<div class="my-5 text-lg">( 60 AED Per User)</div>
+	<div class="my-2">( 60 AED Per User)</div>
 
-	<div class="accent-color text-7xl font-extrabold">
+	<div class="text-3xl font-extrabold accent-color">
 		{{ subscription.price | number }} AED
 	</div>
 
-	<div class="accent-color -mt-2 font-bold text-lg">
-		/ {{ interval | titlecase }}
-	</div>
+	<div class="-mt-2 font-bold accent-color">/ {{ interval | titlecase }}</div>
 
-	<div class="text-left my-5 accent-color self-start text-lg font-bold">
-		Features
-	</div>
+	<div class="self-start my-5 font-bold text-left accent-color">Features</div>
 
 	<ul>
 		<li
-			class="text-gray flex items-center py-2"
+			class="flex items-center py-1 text-sm text-gray"
 			*ngFor="let item of subscription.features; trackBy: identity"
 		>
-			<mat-icon class="mr-3 text-emerald-500" svgIcon="check"></mat-icon>
+			<mat-icon
+				class="mr-3 text-emerald-500 icon-size-6"
+				svgIcon="check"
+			></mat-icon>
 
 			{{ item }}
 		</li>
 	</ul>
 
-	<div class="flex items-center mt-10 justify-center">
+	<div class="flex items-center justify-center mt-10">
 		<button
+			matRipple
+			matRippleColor="rgba(250, 250, 250,.3)"
 			style="width: 189px; background-color: #0a2440"
-			class="tracking-wide text-white py-3 text-xl text-semibold hover:bg-blacky-3 rounded-full"
+			class="py-2 tracking-wide text-white rounded-full text-semibold hover:drop-shadow-xl"
 		>
 			{{
 				subscription.type === 'Standard'

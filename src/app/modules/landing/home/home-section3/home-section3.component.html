@@ -1,27 +1,24 @@
 <div
-	class="relative flex flex-col items-center justify-center w-full min-h-screen pt-10 md:py-20 bg-gray-50/40"
+	class="flex flex-col items-center justify-center w-full py-10 bg-gray-200/40"
 >
-	<div class="text-6xl font-extrabold text-center text-gray-700 md:mt-40">
-		Plans and Pricing
-	</div>
+	<div class="text-3xl font-extrabold text-center">Plans and Pricing</div>
 
-	<div class="px-20 text-xl font-medium text-center text-gray-700">
+	<div class="px-20 font-medium text-center text-gray-600">
 		Start small and free upgrade as you go. Take control of everything.
 	</div>
 
 	<div
 		style="width: 300px"
-		class="grid grid-cols-2 my-10 overflow-hidden border border-emerald-500 rounded-xl"
+		class="grid grid-cols-2 my-10 overflow-hidden border border-emerald-500 rounded-xl h-[45px]"
 	>
 		<button
 			(click)="billing$.next(item)"
-			style="height: 50px"
 			[ngClass]="{
-				'bg-emerald-500 text-white pointer-events-none  ':
+				'bg-emerald-500 text-white pointer-events-none  h-full':
 					(billing$ | async) === item,
-				'text-gray-400 bg-white': (billing$ | async) !== item
+				'text-gray-700 bg-white': (billing$ | async) !== item
 			}"
-			class="font-medium md:hover:bg-emerald-50 md:hover:text-emerald-800"
+			class="md:hover:bg-emerald-50 md:hover:text-emerald-800"
 			*ngFor="let item of billings; trackBy: identity"
 		>
 			{{ item | titlecase }} Plan
@@ -31,25 +28,25 @@
 	<div
 		[@listAnimation]="3"
 		*ngIf="billing$ | async as billing"
-		class="grid items-center justify-center grid-cols-3 text-center md:hidden mb-15"
+		class="grid items-center justify-center max-w-screen-lg grid-cols-3 text-center md:hidden mb-15"
 	>
 		<div
 			[class.hidden]="!subscription[billing]"
 			*ngFor="let subscription of mawedySubscriptions; trackBy: identity"
 		>
 			<button
-				*ngIf="subscription[billing]"
-				(click)="currentType = subscription[billing]?.type"
 				matRipple
+				*ngIf="subscription[billing]"
+				class="p-2 px-5 rounded-full"
+				matRippleColor="rgba(150, 150, 150,.2)"
+				(click)="currentType = subscription[billing]?.type"
 				[ngClass]="{
 					'accent-color': currentType !== subscription[billing]?.type,
 					'text-emerald-500':
 						currentType === subscription[billing]?.type
 				}"
-				matRippleColor="rgba(150, 150, 150,.2)"
-				class="p-2 px-5 rounded-full"
 			>
-				<div class="text-2xl font-bold">
+				<div class="text-xl font-bold">
 					{{ subscription[billing]?.type }}
 				</div>
 			</button>
@@ -59,7 +56,7 @@
 	<div
 		*ngIf="billing$ | async as billing"
 		[@listAnimation]="3"
-		class="grid items-start justify-start max-w-screen-xl grid-cols-1 px-5 md:grid-cols-3 gap-x-20 md:mt-20"
+		class="grid items-start justify-start w-full max-w-screen-lg grid-cols-1 px-5 mt-10 md:grid-cols-3 gap-x-10"
 	>
 		<div
 			@zoomIn

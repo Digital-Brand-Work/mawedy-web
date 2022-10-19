@@ -1,17 +1,17 @@
 <div
-	class="relative flex flex-col items-center justify-center w-full py-10 bg-white"
+	class="relative flex flex-col items-center justify-center w-full py-20 bg-white"
 >
-	<div class="text-2xl font-extrabold text-gray-700">Features</div>
+	<div class="text-3xl font-extrabold text-gray-700 md:text-left">
+		Mawedy Features
+	</div>
 
-	<div
-		classs="max-w-screen-md w-full flex items-center justify-center relative z-20"
-	>
+	<div class="w-full max-w-screen-md">
 		<div
 			[@listAnimation]="features.length"
 			[ngClass]="{
 				'pb-20': (breakpoint$ | async) === 'tablet'
 			}"
-			class="grid grid-cols-1 mt-10 md:grid-cols-2 md:gap-x-20 md:mt-20 gap-y-8 md:gap-y-10"
+			class="grid grid-cols-1 mt-10 md:grid-cols-2 md:gap-x-20 gap-y-8 md:gap-y-10"
 		>
 			<div
 				class="flex items-center px-5 md:px-0"
