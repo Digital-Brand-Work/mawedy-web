@@ -17,7 +17,7 @@
 	/>
 
 	<div
-		class="relative z-20 flex items-center justify-center w-full max-w-screen-md"
+		class="relative z-20 flex items-center justify-center w-full max-w-screen-lg"
 	>
 		<div
 			[ngClass]="{
@@ -31,7 +31,7 @@
 						(breakpoint$ | async) === 'max') &&
 					showSignInPanel
 			}"
-			class="grid grid-cols-2 md:gap-x-20"
+			class="grid grid-cols-2"
 		>
 			<div class="flex w-full px-5 md:justify-center">
 				<div
@@ -44,16 +44,10 @@
 				>
 					<div
 						@slideInTop
-						class="my-2 text-base font-black leading-none text-center accent-color md:text-5xl md:text-left whitespace-nowrap"
+						class="my-2 text-base font-black leading-none text-center accent-color md:text-7xl md:text-left"
 					>
-						Forget the long calls
-					</div>
-
-					<div
-						@slideInTop
-						class="my-2 text-base font-black leading-none text-center accent-color md:text-5xl md:text-left whitespace-nowrap"
-					>
-						Book Your Appointments!
+						Forget the long calls <br />
+						Book your appointments!
 					</div>
 
 					<div
@@ -92,7 +86,7 @@
 				class="flex w-full md:items-center md:justify-center md:px-10"
 			>
 				<home-section1-login-panel
-					class="hidden w-full md:block"
+					class="hidden w-full md:flex ml-auto max-w-[400px]"
 				></home-section1-login-panel>
 			</div>
 		</div>

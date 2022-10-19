@@ -20,37 +20,57 @@ export const landingHomeRoutes: Route[] = [
 				pathMatch: 'full',
 				redirectTo: 'home',
 			},
+
 			{
 				path: 'home',
 				component: HomeMainComponent,
 			},
+
 			{
 				path: 'about-us',
 				component: AboutUsComponent,
 			},
+
 			{
 				path: 'partner-with-us',
 				component: PartnerWithUsComponent,
 			},
+
 			{
 				path: 'join-us',
 				component: JoinUsComponent,
 			},
+
 			{
 				path: 'talk-to-us',
 				component: TalkToUsComponent,
 			},
+
 			{
 				path: 'subscription',
 				component: LandingSubscriptionComponent,
 			},
+
 			{
 				path: 'success',
 				component: SuccessComponent,
 			},
+
 			{
 				path: 'sit-back-relax',
 				component: SitBackRelexSection1Component,
+			},
+
+			{
+				path: 'privacy-policy',
+				pathMatch: 'full',
+				redirectTo: 'pages/privacy-policy',
+			},
+
+			{
+				path: 'terms-and-conditions',
+				pathMatch: 'full',
+				redirectTo: 'pages/terms-and-conditions',
 			},
 		],
 	},

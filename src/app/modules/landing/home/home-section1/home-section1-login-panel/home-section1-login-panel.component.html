@@ -1,8 +1,8 @@
 <form
-	@fadeInBottom
+	@zoomIn
 	[formGroup]="form"
-	[ngClass]="{ 'pointer-events-none opacity-87': isProcessing }"
-	class="flex flex-col items-center justify-center w-full px-5 py-10 bg-white md:rounded-lg md:px-10 mt-[69px]"
+	[ngClass]="{ 'pointer-events-none opacity-40': isProcessing }"
+	class="flex flex-col items-center justify-center w-full px-5 py-10 bg-white md:rounded-lg drop-shadow-lg md:px-10 mt-[69px] max-w-screen-sm ml-auto"
 >
 	<img
 		class="mb-5 h-36 max-w-50"
@@ -72,10 +72,10 @@
 		(click)="login()"
 		[disabled]="!form.valid || isProcessing"
 		[ngClass]="{
-			'bg-emerald-500 hover:bg-emerald-600': form.valid && !isProcessing,
-			'bg-gray-400 pointer-events-none': !form.valid || isProcessing
+			' hover:bg-emerald-600': form.valid && !isProcessing,
+			'bg-opacity-40 pointer-events-none': !form.valid || isProcessing
 		}"
-		class="flex items-center justify-center w-full px-10 py-2 mt-8 text-white rounded-md"
+		class="flex items-center justify-center w-full px-10 py-2 mt-8 text-white rounded-md bg-emerald-500"
 	>
 		<spinner *ngIf="isProcessing"></spinner>
 

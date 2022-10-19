@@ -6,6 +6,22 @@ import { PageNotFoundComponent } from './modules/pages/page-not-found/page-not-f
 
 export const routes: Route[] = [
 	{
+		path: '',
+		loadChildren: () =>
+			import('./modules/landing/landing.module').then(
+				(module) => module.LandingHomeModule,
+			),
+	},
+
+	{
+		path: 'pages',
+		loadChildren: () =>
+			import('./modules/pages/pages.module').then(
+				(module) => module.PagesModule,
+			),
+	},
+
+	{
 		path: 'checkout',
 		loadChildren: () =>
 			import('./modules/checkout/checkout.module').then(
@@ -21,13 +37,6 @@ export const routes: Route[] = [
 			),
 	},
 
-	{
-		path: '',
-		loadChildren: () =>
-			import('./modules/landing/landing.module').then(
-				(module) => module.LandingHomeModule,
-			),
-	},
 	{
 		path: ':clinic_name/:branch',
 		component: LayoutComponent,
