@@ -1,9 +1,8 @@
-<div class="w-full py-20 mt-[69px] flex items-center justify-center relative">
+<div
+	class="w-full py-5 md:mt-[69px] flex items-center justify-center relative mb-20 md:mb-0"
+>
 	<img
 		[ngClass]="{
-			' h-screen ':
-				(breakpoint$ | async) !== 'tablet' &&
-				(breakpoint$ | async) !== 'phone',
 			'resolve-mobile-img': (breakpoint$ | async) === 'phone'
 		}"
 		src="/assets/app/partner-with-us/partner.png"

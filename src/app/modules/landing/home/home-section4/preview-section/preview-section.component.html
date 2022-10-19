@@ -1,28 +1,27 @@
-<div
-	[ngClass]="{
-		'scale-50 -my-30': (breakpoint$ | async) === 'phone'
-	}"
-	style="transform-origin: left"
-	class="flex items-center"
->
-	<img
-		src="../../../../../assets/app/home/screen1.png"
-		alt="phone picture"
-		style="width: calc(244px / 2)"
-		class="-mr-10"
-	/>
+<div class="flex mt-8 md:scale-150 origin-left">
+	<div
+		style="transform-origin: left"
+		class="flex items-center mx-auto w-full"
+	>
+		<img
+			src="../../../../../assets/app/home/screen1.png"
+			alt="phone picture"
+			style="width: calc(244px / 2)"
+			class="-mr-10"
+		/>
 
-	<img
-		src="../../../../../assets/app/home/screen2.png"
-		alt="phone picture"
-		style="width: calc(331.65px / 2)"
-		class="relative z-20"
-	/>
+		<img
+			src="../../../../../assets/app/home/screen2.png"
+			alt="phone picture"
+			style="width: calc(331.65px / 2)"
+			class="relative z-20"
+		/>
 
-	<img
-		src="../../../../../assets/app/home/screen3.png"
-		alt="phone picture"
-		style="width: calc(244px / 2)"
-		class="-ml-10"
-	/>
+		<img
+			src="../../../../../assets/app/home/screen3.png"
+			alt="phone picture"
+			style="width: calc(244px / 2)"
+			class="-ml-10"
+		/>
+	</div>
 </div>

@@ -10,11 +10,18 @@
 	"
 	class="relative flex items-center justify-center w-full mt-[69px]"
 >
-	<img
-		src="../../../../../assets/app/home/home-section-v2.png"
-		class="absolute top-0 z-0 object-none w-screen"
-		alt=""
-	/>
+	<div class="absolute w-screen">
+		<div
+			class="absolute w-full h-full bg-gradient-to-br animated z-[1]"
+		></div>
+
+		<img
+			@zoomIn
+			src="../../../../../assets/app/home/home-section-v2.png"
+			class="top-0 relative z-0 object-contain"
+			alt=""
+		/>
+	</div>
 
 	<div
 		class="relative z-20 flex items-center justify-center w-full max-w-screen-lg"

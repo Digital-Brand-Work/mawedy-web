@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs'
+import { Observable } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Component, OnInit } from '@angular/core'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
