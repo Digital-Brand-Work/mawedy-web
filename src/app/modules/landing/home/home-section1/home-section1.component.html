@@ -9,23 +9,21 @@
 		(breakpoint$ | async) === 'max'
 	"
 	[ngClass]="{ 'min-h-screen': (breakpoint$ | async) !== 'tablet' }"
-	class="w-full flex items-center justify-center relative"
+	class="relative flex items-center justify-center w-full"
 >
 	<img
-		parallax
-		[factor]="3"
 		[ngClass]="{
 			' h-screen ':
 				(breakpoint$ | async) !== 'tablet' &&
 				(breakpoint$ | async) !== 'phone'
 		}"
 		src="../../../../../assets/app/home/home-section-v2.png"
-		class="w-screen h-full object-cover absolute top-0 z-0"
+		class="absolute top-0 z-0 object-cover w-screen h-full"
 		alt=""
 	/>
 
 	<div
-		class="max-w-screen-xl w-full flex items-center justify-center relative z-20"
+		class="relative z-20 flex items-center justify-center w-full max-w-screen-md"
 	>
 		<div
 			[ngClass]="{
@@ -39,16 +37,11 @@
 						(breakpoint$ | async) === 'max') &&
 					showSignInPanel
 			}"
-			class="grid md:gap-x-20"
+			class="grid grid-cols-2 md:gap-x-20"
 		>
-			<div
-				[ngClass]="{
-					'min-h-screen': (breakpoint$ | async) !== 'tablet'
-				}"
-				class="flex md:justify-center w-full px-5"
-			>
+			<div class="flex w-full px-5 md:justify-center">
 				<div
-					class="flex-col flex my-auto"
+					class="flex flex-col my-auto"
 					[ngClass]="{
 						'mt-40 ': (breakpoint$ | async) === 'tablet',
 						'text-center justify-center items-center':
@@ -57,21 +50,21 @@
 				>
 					<div
 						@slideInTop
-						class="accent-color text-2xl md:text-3xl text-center md:text-left"
+						class="text-xl text-center accent-color md:text-2xl md:text-left"
 					>
 						Forget the long calls
 					</div>
 
 					<div
 						@slideInTop
-						class="accent-color text-base md:text-8xl my-2 font-bold leading-none text-center md:text-left whitespace-nowrap"
+						class="my-2 text-base font-bold leading-none text-center accent-color md:text-5xl md:text-left whitespace-nowrap"
 					>
 						Book your appointments!
 					</div>
 
 					<div
 						@slideInBottom
-						class="accent-color text-xl md:text-2xl text-center md:text-left"
+						class="text-xl text-center accent-color md:text-lg md:text-left"
 					>
 						A reliable, detailed booking solution made to serve you.
 					</div>
@@ -102,10 +95,10 @@
 
 			<div
 				*ngIf="showSignInPanel"
-				class="flex md:items-center md:justify-center w-full md:px-10"
+				class="flex w-full md:items-center md:justify-center md:px-10"
 			>
 				<home-section1-login-panel
-					class="md:w-3/4 hidden md:block w-full"
+					class="hidden w-full md:block"
 				></home-section1-login-panel>
 			</div>
 		</div>

@@ -1,11 +1,11 @@
 <form
 	@fadeInBottom
-	[ngClass]="{ 'pointer-events-none opacity-87': isProcessing }"
 	[formGroup]="form"
-	class="md:rounded-lg pt-10 pb-20 flex flex-col justify-center items-center bg-white w-full px-5 md:px-10 drop--custom"
+	[ngClass]="{ 'pointer-events-none opacity-87': isProcessing }"
+	class="flex flex-col items-center justify-center w-full px-5 py-10 bg-white md:rounded-lg md:px-10 mt-[69px]"
 >
 	<img
-		class="h-36 max-w-50 mb-5"
+		class="mb-5 h-36 max-w-50"
 		src="/assets/app/logo.svg"
 		alt="Mawedy Logo"
 	/>
@@ -22,7 +22,7 @@
 				form.get('email')?.touched &&
 				!isProcessing
 		}"
-		class="py-4 bg-white px-5 border border-gray-300/80 rounded-md -md w-full focus:border-teal-500 mt-5"
+		class="w-full px-3 py-2 mt-5 bg-white border rounded-md border-gray-300/80 -md focus:border-teal-500"
 	/>
 
 	<div
@@ -31,7 +31,7 @@
 			form.get('email')?.touched &&
 			!isProcessing
 		"
-		class="text-sm text-rose-500 text-left self-baseline"
+		class="text-sm text-left text-rose-500 self-baseline"
 	>
 		Invalid email format.
 	</div>
@@ -47,7 +47,7 @@
 				form.get('password')?.touched &&
 				!isProcessing
 		}"
-		class="py-4 bg-white px-5 border border-gray-300/80 rounded-md -md w-full focus:border-teal-500 mt-5"
+		class="w-full px-3 py-2 mt-3 bg-white border rounded-md border-gray-300/80 -md focus:border-teal-500"
 	/>
 
 	<div
@@ -56,7 +56,7 @@
 			form.get('password')?.touched &&
 			!isProcessing
 		"
-		class="text-sm text-rose-500 text-left self-baseline"
+		class="text-sm text-left text-rose-500 self-baseline"
 	>
 		Password is required.
 	</div>
@@ -64,7 +64,7 @@
 	<a
 		routerLink="/auth"
 		role="button"
-		class="text-right text-gray-400 mt-5 self-end hover:underline"
+		class="self-end mt-5 text-right text-gray-400 hover:underline"
 		>Forgot Password ?</a
 	>
 
@@ -75,7 +75,7 @@
 			'bg-emerald-500 hover:bg-emerald-600': form.valid && !isProcessing,
 			'bg-gray-400 pointer-events-none': !form.valid || isProcessing
 		}"
-		class="text-white py-3 px-10 text-xl -lg rounded-md flex items-center mt-10 w-full justify-center"
+		class="flex items-center justify-center w-full px-10 py-2 mt-8 text-white rounded-md"
 	>
 		<spinner *ngIf="isProcessing"></spinner>
 

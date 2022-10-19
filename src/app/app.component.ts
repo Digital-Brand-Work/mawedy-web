@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, tap } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { AlertState } from './components/alert/alert.service'
 import { Alert } from './mawedy-core/models/utility.models'
@@ -21,11 +21,8 @@ export class AppComponent {
 	) {}
 
 	alerts$: Observable<Alert[]> = this._alert.get()
-
-	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
-
 	scrollTop$: Observable<number> = this._mediaService.geScrollTop()
-
+	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
 	@HostListener('window:resize')
 	onResize() {
 		this._mediaService.onResize()
@@ -36,8 +33,6 @@ export class AppComponent {
 		this._mediaService.onScroll()
 	}
 
-	identity = (item: any) => item
-
 	ngOnInit(): void {
 		this._clinicUserService.switched$.next()
 	}
@@ -45,4 +40,6 @@ export class AppComponent {
 	removeAlert(id: string) {
 		this._alert.remove(id)
 	}
+
+	identity = (item: any) => item
 }

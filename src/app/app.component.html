@@ -15,14 +15,16 @@
 
 <router-outlet></router-outlet>
 
-<div
-	class="fixed bottom-5 md:right-10 right-0"
-	style="z-index: 9999999999999999999"
->
-	<alert
-		role="button"
-		(click)="removeAlert(alert.id)"
-		[alert]="alert"
-		*ngFor="let alert of alerts$ | async"
-	></alert>
-</div>
+<ng-container *ngIf="breakpoint$ | async as breakpoint">
+	<div
+		class="fixed right-0 bottom-5 md:right-10"
+		style="z-index: 9999999999999999999"
+	>
+		<alert
+			role="button"
+			(click)="removeAlert(alert.id)"
+			[alert]="alert"
+			*ngFor="let alert of alerts$ | async"
+		></alert>
+	</div>
+</ng-container>

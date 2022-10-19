@@ -1,16 +1,12 @@
 <nav
-	[ngClass]="{
-		'bg-transparent': isInPartnerWithUs,
-		'bg-white': !isInPartnerWithUs
-	}"
-	class="flex items-center justify-center fixed z-50 w-full"
+	class="flex items-center justify-center h-[69px] fixed z-50 w-full bg-white"
 >
-	<div class="w-full max-w-screen-xl flex items-center justify-center">
+	<div class="flex items-center justify-center w-full max-w-screen-lg px-10">
 		<a @fadeInBottom routerLink="/">
-			<img class="h-28 max-w-50" src="/assets/app/logo.svg" alt="" />
+			<img class="h-15 max-w-50" src="/assets/app/logo.svg" alt="" />
 		</a>
 
-		<ul @slideInRight class="ml-auto flex">
+		<ul @slideInRight class="flex ml-auto">
 			<li
 				*ngFor="let nav of navigation"
 				[class.hidden]="nav.id === 2 && (hasLoggedIn$ | async)"
@@ -24,7 +20,7 @@
 				(click)="nav.id === 4 ? toDashboard() : null"
 				[routerLink]="nav.link"
 				role="button"
-				class="px-7 py-3 rounded-lg text-lg flex items-center"
+				class="flex items-center px-5 py-2 rounded-lg"
 			>
 				{{
 					(!showSignInPanel && nav.id === 4) ||
@@ -38,14 +34,14 @@
 						(!showSignInPanel && nav.id === 4) ||
 						isInSubscriptionSuccess
 					"
-					class="ml-auto icon-size-4 text-white"
+					class="ml-auto text-white icon-size-4"
 					[svgIcon]="'feather:chevron-right'"
 				></mat-icon>
 			</li>
 
 			<!-- <li>
 				<img
-					class="h-7 translate-y-2"
+					class="translate-y-2 h-7"
 					src="../../../../../assets/app/uae.icon.png"
 					alt="UAE Icon"
 				/>
