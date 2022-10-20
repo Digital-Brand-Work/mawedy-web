@@ -1,11 +1,16 @@
-<div @slideInBottom class="relative flex justify-center w-full py-20">
+<div
+	@slideInBottom
+	*ngIf="breakpoint$ | async as breakpoint"
+	class="relative flex justify-center w-full md:py-20"
+>
 	<div
+		[ngClass]="{ 'max-w-screen-sm mt-[69px]': breakpoint === 'tablet' }"
 		class="relative z-20 flex items-center justify-center w-full max-w-screen-md"
 	>
 		<div
 			[ngClass]="{
-				'pb-20': (breakpoint$ | async) === 'tablet',
-				'px-10': (breakpoint$ | async) === 'phone'
+				'pb-20': breakpoint === 'tablet',
+				'px-10': breakpoint === 'phone'
 			}"
 			class="grid grid-cols-1 md:grid-cols-2 md:gap-x-20"
 		>

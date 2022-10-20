@@ -56,7 +56,7 @@
 				[class.hidden]="nav.name === 'AR'"
 				[routerLink]="nav.link"
 				(click)="showNav$.next(false)"
-				class="flex items-center py-3 text-2xl font-medium tracking-wider border-b border-zinc-100 accent-color"
+				class="flex items-center py-3 text-2xl tracking-wider border-b border-zinc-100 accent-color"
 				*ngFor="
 					let nav of navigation;
 					let i = index;
@@ -67,7 +67,7 @@
 
 				<div class="ml-auto">
 					<mat-icon
-						class="accent-color"
+						class="text-gray-400"
 						svgIcon="heroicons_solid:chevron-right"
 					></mat-icon>
 				</div>
