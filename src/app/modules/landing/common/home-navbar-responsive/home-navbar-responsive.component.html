@@ -1,31 +1,31 @@
-<div class="w-full fixed text-black z-49 bg-white">
+<div class="fixed w-full text-black bg-white z-49">
 	<div
-		class="items-center flex justify-start w-full"
+		class="flex items-center justify-start w-full"
 		style="transition: 0.2s cubic-bezier(0.4, 0, 0.6, 1)"
 	>
 		<div
-			class="max-w-screen-2xl w-full font-medium px-5 flex items-center justify-start"
+			class="flex items-center justify-start w-full px-5 font-medium max-w-screen-2xl"
 		>
 			<div
-				class="flex items-start justify-start mr-auto w-20"
+				class="flex items-start justify-start w-20 mr-auto"
 				(click)="showNav$.next(false)"
 				routerLink="/"
 			>
 				<img
 					src="/assets/app/logo.svg"
-					class="h-20 mr-auto"
+					class="mr-auto h-15"
 					alt="Mawedy Logo"
 				/>
 			</div>
 
 			<div
 				(click)="showNav$.next(true)"
-				class="ml-auto px-4 py-2 rounded-full bg-emerald-400/40 flex items-center justify-center"
+				class="flex items-center justify-center px-4 py-2 ml-auto rounded-full"
 				@fadeInRight
 				*ngIf="!(showNav$ | async)"
 			>
 				<mat-icon
-					class="icon-size-5 text-emerald-700"
+					class="icon-size-5 accent-color"
 					svgIcon="feather:menu"
 				></mat-icon>
 			</div>
@@ -48,7 +48,7 @@
 		*ngIf="showNav$ | async"
 		@slideInBottom
 		@slideOutBottom
-		class="w-full z-100 block backdrop-blur-md min-h-screen"
+		class="block w-full min-h-screen z-100 backdrop-blur-md"
 		style="animation-duration: 0.4s"
 	>
 		<ul class="px-8 text-xl font-light">
@@ -56,7 +56,7 @@
 				[class.hidden]="nav.name === 'AR'"
 				[routerLink]="nav.link"
 				(click)="showNav$.next(false)"
-				class="py-3 border-b border-zinc-100 tracking-wider text-2xl font-medium accent-color flex items-center"
+				class="flex items-center py-3 text-2xl font-medium tracking-wider border-b border-zinc-100 accent-color"
 				*ngFor="
 					let nav of navigation;
 					let i = index;

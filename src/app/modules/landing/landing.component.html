@@ -2,16 +2,12 @@
 	*ngIf="
 		(breakpoint$ | async)! === 'laptop' ||
 		(breakpoint$ | async)! === 'desktop' ||
-		(breakpoint$ | async)! === 'max'
+		(breakpoint$ | async)! === 'max' ||
+		(breakpoint$ | async)! === 'tablet'
 	"
 ></home-navbar>
 
-<home-navbar-responsive
-	*ngIf="
-		(breakpoint$ | async)! === 'phone' ||
-		(breakpoint$ | async)! === 'tablet'
-	"
->
+<home-navbar-responsive *ngIf="(breakpoint$ | async)! === 'phone'">
 </home-navbar-responsive>
 
 <router-outlet></router-outlet>

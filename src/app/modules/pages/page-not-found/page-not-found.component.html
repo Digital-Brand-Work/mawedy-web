@@ -1,4 +1,14 @@
-<home-navbar></home-navbar>
+<home-navbar
+	*ngIf="
+		(breakpoint$ | async)! === 'laptop' ||
+		(breakpoint$ | async)! === 'desktop' ||
+		(breakpoint$ | async)! === 'max' ||
+		(breakpoint$ | async)! === 'tablet'
+	"
+></home-navbar>
+
+<home-navbar-responsive *ngIf="(breakpoint$ | async)! === 'phone'">
+</home-navbar-responsive>
 
 <div
 	class="grid flex-col items-center justify-center min-h-screen grid-cols-1 md:grid-cols-2"

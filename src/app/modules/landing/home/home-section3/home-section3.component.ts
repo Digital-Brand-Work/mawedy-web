@@ -19,19 +19,15 @@ export class HomeSection3Component implements OnInit {
 	constructor(private media: MediaService) {}
 
 	renderAnimation: boolean = false
-
-	unsubscribe$: Subject<any> = new Subject<any>()
-
-	breakpoint$: Observable<BreakPoint> = this.media.breakpoints$
-
-	billing$: BehaviorSubject<'yearly' | 'monthly' | string> =
-		new BehaviorSubject<string>(BILL_INTERVALS[1])
+	currentType: string = 'Standard'
+	unsubscribe$ = new Subject<any>()
+	breakpoint$ = this.media.breakpoints$
+	mawedySubscriptions = mawedySubscriptions
 
 	billings: string[] = BILL_INTERVALS
 
-	mawedySubscriptions: MawedySubscription[] = mawedySubscriptions
-
-	currentType: string = 'Standard'
+	billing$: BehaviorSubject<'yearly' | 'monthly' | string> =
+		new BehaviorSubject<string>(BILL_INTERVALS[1])
 
 	ngOnInit(): void {
 		this.billing$

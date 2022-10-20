@@ -1,8 +1,18 @@
-<home-navbar></home-navbar>
+<home-navbar
+	*ngIf="
+		(breakpoint$ | async)! === 'laptop' ||
+		(breakpoint$ | async)! === 'desktop' ||
+		(breakpoint$ | async)! === 'max' ||
+		(breakpoint$ | async)! === 'tablet'
+	"
+></home-navbar>
 
-<div class="flex w-full">
+<home-navbar-responsive *ngIf="(breakpoint$ | async)! === 'phone'">
+</home-navbar-responsive>
+
+<div class="flex w-full px-5">
 	<div class="min-h-screen mt-[69px] w-full mx-auto max-w-screen-md py-10">
-		<div class="font-bold text-5xl my-4 text-center">
+		<div class="my-4 text-5xl font-bold text-center">
 			Privacy Policy for Mawedy Portal
 		</div>
 

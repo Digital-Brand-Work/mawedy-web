@@ -8,10 +8,12 @@
 	</div>
 
 	<div
+		is-in-screen
+		(onElementShow)="renderAnimation = true"
 		style="width: 300px"
 		id="subscriptions"
 		fragment="subscriptions"
-		class="grid grid-cols-2 my-10 overflow-hidden border border-emerald-500 rounded-xl h-[45px]"
+		class="grid grid-cols-2 my-5 md:my-10 overflow-hidden border border-emerald-500 rounded-xl h-[45px]"
 	>
 		<button
 			(click)="billing$.next(item)"
@@ -28,14 +30,8 @@
 	</div>
 
 	<div
-		animateJs
-		[ngClass]="{
-			animate__flipInY: renderAnimation
-		}"
-		is-in-screen
-		(onElementShow)="renderAnimation = true"
 		*ngIf="billing$ | async as billing"
-		class="grid items-center justify-center max-w-screen-lg grid-cols-3 text-center md:hidden mb-15"
+		class="grid items-center justify-center max-w-screen-lg grid-cols-3 mb-10 text-center md:hidden md:mb-15"
 	>
 		<div
 			[class.hidden]="!subscription[billing]"
@@ -48,11 +44,11 @@
 				(click)="currentType = subscription[billing]?.type"
 				[ngClass]="{
 					'accent-color': currentType !== subscription[billing]?.type,
-					'text-emerald-500':
+					'text-emerald-500 font-bold':
 						currentType === subscription[billing]?.type
 				}"
 			>
-				<div class="text-xl font-bold">
+				<div class="text-xl">
 					{{ subscription[billing]?.type }}
 				</div>
 			</button>
@@ -60,27 +56,40 @@
 	</div>
 
 	<ng-container *ngIf="billing$ | async as billing">
-		<div
-			[@zoomIn]="renderAnimation"
-			class="grid items-start justify-start w-full max-w-screen-lg grid-cols-1 px-5 mt-10 md:grid-cols-3 gap-x-10"
-		>
+		<ng-container *ngIf="breakpoint$ | async as breakpoint">
 			<div
-				@zoomIn
-				@zoomOut
-				[class.hidden]="!subscription[billing]"
-				*ngFor="let subscription of mawedySubscriptions"
+				animateJs
+				[ngClass]="{
+					animate__flipInY: renderAnimation
+				}"
+				class="grid items-start justify-start w-full max-w-screen-lg grid-cols-1 px-5 md:gap-10 md:grid-cols-3 md:mt-10"
 			>
-				<home-section3-pricing
-					*ngIf="subscription[billing]"
-					[ngClass]="{
-						hidden:
-							(breakpoint$ | async) === 'phone' &&
-							currentType !== subscription[billing]?.type
-					}"
-					[interval]="billing"
-					[subscription]="subscription[billing]"
-				></home-section3-pricing>
+				<ng-container
+					*ngFor="
+						let subscription of mawedySubscriptions;
+						trackBy: trackByFn
+					"
+				>
+					<div
+						@slideInLeft
+						@zoomOut
+						*ngIf="subscription[billing]"
+						[class.hidden]="!subscription[billing]"
+					>
+						<home-section3-pricing
+							class="flex max-w-screen-sm mx-auto"
+							[interval]="billing"
+							[subscription]="subscription[billing]"
+							[ngClass]="{
+								hidden:
+									(breakpoint === 'phone' ||
+										breakpoint === 'tablet') &&
+									currentType !== subscription[billing]?.type
+							}"
+						></home-section3-pricing>
+					</div>
+				</ng-container>
 			</div>
-		</div>
+		</ng-container>
 	</ng-container>
 </div>

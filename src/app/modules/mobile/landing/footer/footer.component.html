@@ -1,9 +1,10 @@
-<div class="grid grid-cols-2 p-5 py-10 gap-x-10">
+<div class="grid grid-cols-2 p-5 gap-x-10">
 	<div>
 		<button
 			matRipple
+			routerLink="/about-us"
 			matRippleColor="rgba(250, 250, 250,.5)"
-			class="text-lg block font-semibold mb-3 px-2 rounded-full text-left"
+			class="block px-2 mb-3 text-lg text-left rounded-full"
 		>
 			Company
 		</button>
@@ -11,39 +12,41 @@
 		<button
 			matRipple
 			matRippleColor="rgba(250, 250, 250,.5)"
-			class="text-lg block font-semibold mb-3 px-2 rounded-full text-left"
+			class="block px-2 mb-3 text-lg text-left rounded-full"
 		>
-			Features
+			<a href="/home#features">Features</a>
 		</button>
 
 		<button
 			matRipple
 			matRippleColor="rgba(250, 250, 250,.5)"
-			class="text-lg block font-semibold mb-3 px-2 rounded-full text-left"
+			class="block px-2 mb-3 text-lg text-left rounded-full"
 		>
-			Pricing
+			<a href="/home#subscriptions">Subscriptions</a>
 		</button>
 
 		<button
 			matRipple
 			matRippleColor="rgba(250, 250, 250,.5)"
-			class="text-lg block font-semibold mb-3 px-2 rounded-full text-left"
+			class="block px-2 mb-3 text-lg text-left rounded-full"
 		>
-			Career
+			<a routerLink="/pages/under-maintenance">Careers</a>
 		</button>
 
 		<button
 			matRipple
 			matRippleColor="rgba(250, 250, 250,.5)"
-			class="text-lg block font-semibold mb-3 px-2 rounded-full text-left"
+			routerLink="/terms-and-conditions"
+			class="block px-2 mb-3 text-lg text-left rounded-full"
 		>
 			Terms & Conditions
 		</button>
 
 		<button
 			matRipple
+			routerLink="/privacy-policy"
 			matRippleColor="rgba(250, 250, 250,.5)"
-			class="text-lg block font-semibold mb-3 px-2 rounded-full text-left"
+			class="block px-2 mb-3 text-lg text-left rounded-full"
 		>
 			Privacy Policy
 		</button>
@@ -52,14 +55,9 @@
 	<div>
 		<div class="text-lg">Contact Us</div>
 
-		<div
-			matRipple
-			matRippleColor="rgba(250, 250, 250,.5)"
-			role="button"
-			class="text-lg mb-3 px-2 rounded-full"
-		>
+		<div role="button" class="mb-3 text-lg rounded-full">
 			<a
-				class="text-lg mb-3 text-emerald-200"
+				class="mb-3 text-lg text-emerald-200"
 				[href]="'https//:wa.me/' + phone"
 				target="_blank"
 			>
@@ -69,12 +67,7 @@
 
 		<div class="text-lg">Email Us</div>
 
-		<div
-			matRipple
-			matRippleColor="rgba(250, 250, 250,.5)"
-			role="button"
-			class="text-lg mb-3 px-2 rounded-full"
-		>
+		<div role="button" class="mb-3 text-lg rounded-full">
 			<a class="text-emerald-200" [href]="'mailto:' + email">{{
 				email
 			}}</a>
@@ -82,39 +75,39 @@
 
 		<div class="text-lg">Find us on</div>
 
-		<div class="grid grid-cols-4 gap-x-2 py-2">
+		<div class="grid grid-cols-4 py-2 gap-x-2">
 			<button
-				class="pb-2 rounded-full flex items-center text-center justify-center"
+				class="flex items-center justify-center pb-2 text-center rounded-full"
 				matRipple
 				matRippleColor="rgba(250, 250, 250,.5)"
 			>
-				<i class="bi bi-instagram text-2xl text-emerald-200"></i>
+				<i class="text-2xl bi bi-instagram text-emerald-200"></i>
 			</button>
 
 			<button
-				class="pb-2 rounded-full flex items-center text-center justify-center"
+				class="flex items-center justify-center pb-2 text-center rounded-full"
 				matRipple
 				matRippleColor="rgba(250, 250, 250,.5)"
 			>
-				<i class="bi bi-facebook text-2xl text-emerald-200"></i>
+				<i class="text-2xl bi bi-facebook text-emerald-200"></i>
 			</button>
 
 			<a
 				target="_blank"
-				class="pb-2 rounded-full flex items-center text-center justify-center"
+				class="flex items-center justify-center pb-2 text-center rounded-full"
 				[href]="'https//:wa.me/' + phone"
 				matRipple
 				matRippleColor="rgba(250, 250, 250,.5)"
 			>
-				<i class="bi bi-whatsapp text-2xl text-emerald-200"></i>
+				<i class="text-2xl bi bi-whatsapp text-emerald-200"></i>
 			</a>
 
 			<button
-				class="pb-2 rounded-full flex items-center text-center justify-center"
+				class="flex items-center justify-center pb-2 text-center rounded-full"
 				matRipple
 				matRippleColor="rgba(250, 250, 250,.5)"
 			>
-				<i class="bi bi-youtube text-2xl text-emerald-200"></i>
+				<i class="text-2xl bi bi-youtube text-emerald-200"></i>
 			</button>
 		</div>
 	</div>

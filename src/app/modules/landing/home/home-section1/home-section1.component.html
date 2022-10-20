@@ -1,6 +1,8 @@
-<mobile-home-section1
-	*ngIf="(breakpoint$ | async) === 'phone'"
-></mobile-home-section1>
+<ng-container *ngIf="breakpoint$ | async as breakpoint">
+	<mobile-home-section1
+		*ngIf="breakpoint === 'phone' || breakpoint === 'tablet'"
+	></mobile-home-section1>
+</ng-container>
 
 <div
 	*ngIf="
