@@ -34,6 +34,8 @@ export class HomeSection3PricingComponent implements OnInit {
 	subscribe(): any {
 		this._clinicUserService.clinic$.pipe(take(1)).subscribe((clinic) => {
 			if (clinic) {
+				console.log(clinic)
+
 				return this._clinicUserService
 					.resolveClinicPath()
 					.pipe(take(1))

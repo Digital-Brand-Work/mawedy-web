@@ -55,7 +55,7 @@
 		filterByCurrentDate
 		[appointment]="appointment"
 		[date]="date"
-		class="blue whitespace-nowrap overflow-hidden text-ellipsis py-0.5 px-2 text-sm mt-1 accent-color font-bold"
+		class="blue whitespace-nowrap font-normal overflow-hidden text-ellipsis py-0.5 px-2 text-sm mt-1 accent-color"
 	>
 		{{ appointment.start_time | toTwelve | uppercase }} -
 		{{ appointment.doctor.name }} & {{ appointment.patient.first_name }}
@@ -71,7 +71,7 @@
 				| filter_by_date: date
 				| appointmentsCount: date) > 0
 		"
-		class="mt-1"
+		class="mt-1 text-sm text-gray-500"
 		[class.hidden]="weekly"
 	>
 		{{

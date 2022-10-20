@@ -1,8 +1,6 @@
 <div *ngIf="clinic$ | async as clinic" class="md:px-10 px-0 w-full">
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full pb-40">
-		<div class="text-gray-700 text-2xl font-semibold mb-10">
-			Subscription
-		</div>
+		<div class="text-gray-700 text-2xl mb-10">Subscription</div>
 
 		<div>
 			<div class="accent-color text-4xl font-bold mb-2">
@@ -16,7 +14,7 @@
 				Subscription
 			</div>
 
-			<div class="text-gray-600 font-semibold mb-1 text-lg max-w-md">
+			<div class="text-gray-600 mb-1 text-lg max-w-md">
 				Your subscription renewal is automatic and your account will be
 				automatically charged every billing period.
 			</div>
@@ -28,7 +26,7 @@
 					Plans and Pricing
 				</div>
 
-				<div class="text-gray-700 font-medium text-xl">
+				<div class="text-gray-600 mb-1 text-lg max-w-md">
 					Start small and free upgrade as you go. Take control of
 					everything.
 				</div>
@@ -48,7 +46,7 @@
 							'text-gray-400 bg-white':
 								(billing$ | async) !== item
 						}"
-						class="hover:bg-emerald-50 hover:text-emerald-800 font-medium"
+						class="hover:bg-emerald-50 hover:text-emerald-800"
 						*ngFor="let item of billings; trackBy: trackByFn"
 					>
 						{{ item | titlecase }} Plan

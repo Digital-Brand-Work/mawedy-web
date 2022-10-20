@@ -4,9 +4,7 @@
 	class="md:px-10 px-0 w-full"
 >
 	<div class="md:rounded-xl bg-white py-5 px-10 w-full">
-		<div
-			class="text-gray-700 text-2xl font-semibold mb-10 flex items-center"
-		>
+		<div class="text-gray-700 text-2xl mb-10 flex items-center">
 			Subscription
 
 			<div
@@ -39,7 +37,7 @@
 					Subscription
 				</div>
 
-				<div class="text-gray-600 font-semibold mb-1 text-lg max-w-md">
+				<div class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]">
 					Your subscription payment mode is
 					{{ clinic.payment_mode | lowercase }} and your account
 
@@ -52,7 +50,7 @@
 				<button
 					routerLink="/aster_clinic/jumeirah/subscription/packages"
 					style="width: 189px"
-					class="bg-emerald-500 text-white tracking-wide drop-shadow-md border font-semibold hover:bg-emerald-600 rounded-md py-3 mr-10"
+					class="bg-emerald-500 text-white tracking-wide drop-shadow-md border hover:bg-emerald-600 rounded-md py-3 mr-10"
 				>
 					Upgrade
 				</button>
@@ -61,7 +59,7 @@
 					*ngIf="clinic.subscription_type !== 'Free'"
 					(click)="setToAutomatic(false)"
 					style="width: 189px"
-					class="text-teal-500 tracking-wide drop-shadow-md border border-teal-500 font-semibold bg-white hover:bg-gray-50 rounded-md py-3"
+					class="text-teal-500 tracking-wide drop-shadow-md border border-teal-500 bg-white hover:bg-gray-50 rounded-md py-3"
 				>
 					Cancel Subscription
 				</button>
@@ -74,7 +72,7 @@
 					Invoicing
 				</div>
 
-				<div class="text-gray-600 font-semibold mb-1 text-lg max-w-md">
+				<div class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]">
 					Last payment:
 					{{
 						(clinic$ | async).subscription_date | date: 'MM/dd/yyyy'
@@ -102,86 +100,74 @@
 					Billing History
 				</div>
 
-				<div class="grid grid-cols-2 gap-x-5">
+				<div class="my-4">
 					<div
-						class="text-gray-600 font-semibold mb-1 text-lg max-w-md"
+						class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]"
 					>
 						Customer name
 					</div>
 
-					<div
-						class="text-gray-800 font-semibold mb-1 text-lg max-w-md"
-					>
+					<div class="text-gray-800 mb-1 text-lg max-w-md">
 						{{ clinic.name }}
 					</div>
 				</div>
 
-				<div class="grid grid-cols-2 gap-x-5">
+				<div class="my-4">
 					<div
-						class="text-gray-600 font-semibold mb-1 text-lg max-w-md"
+						class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]"
 					>
 						Billing email
 					</div>
 
-					<div
-						class="text-gray-800 font-semibold mb-1 text-lg max-w-md"
-					>
+					<div class="text-gray-800 mb-1 text-lg max-w-md">
 						{{ clinic.email }}
 					</div>
 				</div>
 
-				<div class="grid grid-cols-2 gap-x-5">
+				<div class="my-4">
 					<div
-						class="text-gray-600 font-semibold mb-1 text-lg max-w-md"
+						class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]"
 					>
 						Billing address
 					</div>
 
-					<div
-						class="text-gray-800 font-semibold mb-1 text-lg max-w-md"
-					>
+					<div class="text-gray-800 mb-1 text-lg max-w-md">
 						{{ clinic.address }}
 					</div>
 				</div>
 
-				<div class="grid grid-cols-2 gap-x-5">
+				<div class="my-4">
 					<div
-						class="text-gray-600 font-semibold mb-1 text-lg max-w-md"
+						class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]"
 					>
 						Country
 					</div>
 
-					<div
-						class="text-gray-800 font-semibold mb-1 text-lg max-w-md"
-					>
+					<div class="text-gray-800 mb-1 text-lg max-w-md">
 						{{ clinic.country || 'N/A' }}
 					</div>
 				</div>
 
-				<div class="grid grid-cols-2 gap-x-5">
+				<div class="my-4">
 					<div
-						class="text-gray-600 font-semibold mb-1 text-lg max-w-md"
+						class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]"
 					>
 						City
 					</div>
 
-					<div
-						class="text-gray-800 font-semibold mb-1 text-lg max-w-md"
-					>
+					<div class="text-gray-800 mb-1 text-lg max-w-md">
 						{{ clinic.city || 'N/A' }}
 					</div>
 				</div>
 
-				<div class="grid grid-cols-2 gap-x-5">
+				<div class="my-4">
 					<div
-						class="text-gray-600 font-semibold mb-1 text-lg max-w-md"
+						class="text-gray-400 mb-1 text-lg max-w-md min-w-[200px]"
 					>
 						Zip/postal code
 					</div>
 
-					<div
-						class="text-gray-800 font-semibold mb-1 text-lg max-w-md"
-					>
+					<div class="text-gray-800 mb-1 text-lg max-w-md">
 						{{ clinic.postal_code || 'N/A' }}
 					</div>
 				</div>
