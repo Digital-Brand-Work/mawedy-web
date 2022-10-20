@@ -4,6 +4,7 @@ import { Route } from '@angular/router'
 import { PageNotFoundComponent } from 'app/modules/pages/page-not-found/page-not-found.component'
 import { UnderMaintenanceComponent } from 'app/modules/pages/under-maintenance/under-maintenance.component'
 import { PrivacyPolicyComponent } from 'app/modules/pages/privacy-policy/privacy-policy.component'
+import { NoInternetComponent } from 'app/modules/pages/no-internet/no-internet.component'
 
 export const PAGES_ROUTES: Route[] = [
 	{
@@ -23,7 +24,7 @@ export const PAGES_ROUTES: Route[] = [
 
 	{
 		path: 'no-internet',
-		component: PageNotFoundComponent,
+		component: NoInternetComponent,
 	},
 
 	{

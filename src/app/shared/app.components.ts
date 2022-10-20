@@ -24,8 +24,10 @@ import { HomeNavbarResponsiveComponent } from 'app/modules/landing/common/home-n
 import { CalendarItemComponent } from 'app/components/calendar-item/calendar-item.component'
 import { CalendarItemDayComponent } from 'app/components/calendar-item-day/calendar-item-day.component'
 import { PaginationComponent } from 'app/components/pagination/pagination.component'
+import { HomeSection3Component } from 'app/modules/landing/home/home-section3/home-section3.component'
+import { HomeSection3PricingComponent } from 'app/modules/landing/home/home-section3/home-section3-pricing/home-section3-pricing.component'
 
-export const appComponents: any[] = [
+export const appComponents = [
 	GooglePlayButtonComponent,
 	AppStoreButtonComponent,
 	GooglePayButtonComponent,
@@ -52,4 +54,6 @@ export const appComponents: any[] = [
 	CalendarItemComponent,
 	CalendarItemDayComponent,
 	PaginationComponent,
+	HomeSection3Component,
+	HomeSection3PricingComponent,
 ]

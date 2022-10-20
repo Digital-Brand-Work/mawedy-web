@@ -47,7 +47,6 @@ const components = [
 
 	HomeSection1Component,
 	HomeSection2Component,
-	HomeSection3Component,
 	HomeSection4Component,
 	HomeSection5Component,
 	HomeSection1LoginPanelComponent,
@@ -70,7 +69,6 @@ const components = [
 	LandingSubscriptionSection2Component,
 	TalkToUsSection1Component,
 	TalkToUsSection2Component,
-	HomeSection3PricingComponent,
 
 	LandingSubscriptionSection1Form1Component,
 	LandingSubscriptionSection1Form2Component,
