@@ -1,16 +1,16 @@
 <div class="min-h-screen mt-[69px]">
 	<div
 		*ngIf="!(subscription$ | async)"
-		class="h-full w-full flex items-center justify-center"
+		class="flex items-center justify-center w-full h-full"
 	></div>
 
 	<div
 		@slideInTop
 		*ngIf="subscription$ | async as subscription"
-		class="w-full flex justify-center relative py-10 bg-emerald-100/10"
+		class="relative flex justify-center w-full py-10 bg-emerald-100/10"
 	>
 		<div
-			class="max-w-screen-md w-full relative z-20 grid grid-cols-1 md:grid-cols-2"
+			class="relative z-20 grid w-full max-w-screen-md grid-cols-1 md:grid-cols-2"
 		>
 			<div
 				*ngIf="
@@ -22,23 +22,23 @@
 			>
 				<div
 					*ngIf="interval$ | async as interval"
-					class="border border-gray-300/80 bg-gray-100 p-5 rounded-3xl w-full"
+					class="w-full p-5 bg-gray-100 border border-gray-300/80 rounded-3xl"
 				>
 					<div
-						class="text-2xl font-extrabold text-emerald-500 text-center md:text-left"
+						class="text-2xl font-extrabold text-center text-emerald-500 md:text-left"
 					>
 						{{ subscription.type }}
 					</div>
 
 					<div
-						class="mb-5 accent-color text-lg font-bold text-center md:text-left"
+						class="mb-5 text-lg font-bold text-center accent-color md:text-left"
 					>
 						{{ subscription.price | number }} AED /
 						{{ interval | titlecase }}
 					</div>
 
 					<div
-						class="text-left my-2 accent-color self-start text-md font-bold"
+						class="self-start my-2 font-bold text-left accent-color text-md"
 					>
 						Features
 					</div>
@@ -48,7 +48,7 @@
 						class="grid grid-cols-1 md:grid-cols-2 gap-x-5"
 					>
 						<li
-							class="text-gray flex items-center py-1 md:py-2 w-full text-xs"
+							class="flex items-center w-full py-1 text-xs text-gray md:py-2"
 							*ngFor="
 								let item of subscription.features;
 								trackBy: trackByFn
@@ -64,8 +64,8 @@
 					</ul>
 				</div>
 
-				<div class="mt-5">
-					<div class="flex items-center text-md font-normal">
+				<div class="px-3 mt-5 md:px-0">
+					<div class="flex items-center font-normal text-md">
 						<div>{{ subscription.name }}</div>
 
 						<div class="ml-auto">
@@ -73,24 +73,24 @@
 						</div>
 					</div>
 
-					<div class="flex items-center mt-2 text-md font-normal">
-						<div class="flex justify-center flex-col">
-							<span class="text-emerald-500 font-black"
+					<div class="flex items-center mt-2 font-normal text-md">
+						<div class="flex flex-col justify-center">
+							<span class="font-black text-emerald-500"
 								>{{ subscription.users }} Free users
 							</span>
 
 							<div
-								class="flex items-start justify-center flex-col md:flex-row"
+								class="flex flex-col items-start justify-center md:flex-row"
 							>
 								{{ additionalUsers }} Additional users
 
 								<div
-									class="flex justify-center items-start md:items-center md:ml-10 mt-3 md:mt-0"
+									class="flex items-start justify-center mt-3 md:items-center md:ml-10 md:mt-0"
 								>
 									<button
 										mat-icon-button
 										matTooltip="Add user"
-										class="border-1 border-gray-200 md:border-none"
+										class="border-gray-200 border-1 md:border-none"
 										(click)="
 											additionalUsers =
 												additionalUsers + 1
@@ -109,13 +109,13 @@
 											min-width: 36px;
 											max-width: 50px;
 										"
-										class="md:p-3 p-1 items-center justify-center flex border border-emerald-500 rounded-md mx-1 font-bold accent-color text-center"
+										class="flex items-center justify-center p-1 mx-1 font-bold text-center border rounded-md md:p-3 border-emerald-500 accent-color"
 									/>
 
 									<button
 										mat-icon-button
 										matTooltip="Remove User"
-										class="border-1 border-gray-200 md:border-none"
+										class="border-gray-200 border-1 md:border-none"
 										(click)="
 											additionalUsers =
 												additionalUsers === 0
@@ -131,7 +131,7 @@
 							</div>
 						</div>
 
-						<div class="ml-auto flex flex-col mt-10">
+						<div class="flex flex-col mt-10 ml-auto">
 							<div class="text-right">
 								{{
 									additionalUsers *
@@ -142,7 +142,7 @@
 							</div>
 							<div
 								*ngIf="billMultiplier === 12"
-								class="text-sm ml-3 text-right"
+								class="ml-3 text-sm text-right"
 							>
 								( Additional Users x
 
@@ -152,10 +152,10 @@
 					</div>
 
 					<mat-divider
-						class="md:my-5 mb-0 my-2 border-gray-300"
+						class="my-2 mb-0 border-gray-300 md:my-5"
 					></mat-divider>
 
-					<div class="flex items-center mt-2 textlg font-normal">
+					<div class="flex items-center mt-2 font-normal textlg">
 						<div class="mr-auto">Total Amount</div>
 
 						<div class="ml-10 font-bold accent-color">
@@ -171,18 +171,21 @@
 				</div>
 			</div>
 
-			<button
-				(click)="onMobileNext = true; scrollTopTop()"
-				*ngIf="
-					(breakpoint$ | async) === 'phone' && onMobileNext === false
-				"
-				matRipple
-				matRippleColor="rgba(250, 250, 250,.4)"
-				[ngClass]="{ hidden: (breakpoint$ | async) !== 'phone' }"
-				class="bg-sky-500 rounded-xl mx-20 py-3 text-white font-normal mt-20"
-			>
-				Next
-			</button>
+			<div class="px-5">
+				<button
+					(click)="onMobileNext = true; scrollTopTop()"
+					*ngIf="
+						(breakpoint$ | async) === 'phone' &&
+						onMobileNext === false
+					"
+					matRipple
+					matRippleColor="rgba(250, 250, 250,.4)"
+					[ngClass]="{ hidden: (breakpoint$ | async) !== 'phone' }"
+					class="w-full py-3 mt-8 font-bold text-white shadow-md bg-sky-500 shadow-sky-500/50 rounded-xl"
+				>
+					Continue
+				</button>
+			</div>
 
 			<div
 				[ngClass]="{
@@ -190,14 +193,14 @@
 						(breakpoint$ | async) === 'phone' &&
 						onMobileNext === false
 				}"
-				class="px-5 md:p-10 items-start md:-translate-y-20"
+				class="items-start px-5 md:p-10 md:-translate-y-20"
 			>
 				<button
 					@fadeOutBottom
 					@slideInRight
 					*ngIf="hasLoggedIn$ | async"
 					(click)="toCheckOut()"
-					class="text-white hover:bg-emerald-600 font-bold text-lg bg-emerald-500 px-10 py-4 rounded-lg ml-auto w-full uppercase flex items-center mt-40 justify-center"
+					class="flex items-center justify-center w-full px-10 py-4 mt-40 ml-auto text-lg font-bold text-white uppercase rounded-lg hover:bg-emerald-600 bg-emerald-500"
 				>
 					<div>Proceed to CheckOut</div>
 				</button>

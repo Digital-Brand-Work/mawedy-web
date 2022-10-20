@@ -1,9 +1,11 @@
 <div
+	*ngIf="breakpoint$ | async as breakpoint"
+	[ngClass]="{ 'mt-[69px]': breakpoint === 'tablet' }"
 	class="w-full py-5 md:mt-[69px] flex items-center justify-center relative mb-20 md:mb-0"
 >
 	<img
 		[ngClass]="{
-			'resolve-mobile-img': (breakpoint$ | async) === 'phone'
+			'resolve-mobile-img': breakpoint === 'phone'
 		}"
 		src="/assets/app/partner-with-us/partner.png"
 		class="absolute top-0 z-0 object-fill w-screen h-full"
@@ -14,12 +16,11 @@
 		<div
 			[ngClass]="{
 				'pb-20  grid-cols-1':
-					(breakpoint$ | async) === 'phone' ||
-					(breakpoint$ | async) === 'tablet',
+					breakpoint === 'phone' || breakpoint === 'tablet',
 				'pb-20 md:grid-cols-2':
-					(breakpoint$ | async) === 'laptop' ||
-					(breakpoint$ | async) === 'desktop' ||
-					(breakpoint$ | async) === 'max'
+					breakpoint === 'laptop' ||
+					breakpoint === 'desktop' ||
+					breakpoint === 'max'
 			}"
 			class="grid w-full md:gap-x-20"
 		>

@@ -1,4 +1,4 @@
-<div class="relative flex items-center justify-center w-full py-20">
+<div class="relative flex items-center justify-center w-full md:py-20">
 	<div
 		class="relative z-20 flex items-center justify-center w-full max-w-screen-md"
 	>
@@ -31,20 +31,16 @@
 					</a>
 				</div>
 
-				<img
-					class="scale-125 md:mt-0 mt-30 md:scale-100"
-					src="/assets/app/talk-to-us/talk-to-us.svg"
-					alt=""
-				/>
+				<img src="/assets/app/talk-to-us/talk-to-us.svg" alt="" />
 			</div>
 
 			<div
-				class="py-10 bg-white rounded-lg md:mr-30 drop-shadow-xl w-full max-w-screen-sm"
+				class="w-full max-w-screen-sm py-10 mx-auto bg-white rounded-lg md:mr-30 md:drop-shadow-xl"
 			>
 				<form
 					*ngIf="form"
 					[formGroup]="form"
-					class="flex flex-col items-center w-full px-5 mt-20 md:items-start md:mt-0"
+					class="flex flex-col items-center w-full px-5 mx-auto MD:mt-20 md:items-start md:mt-0"
 				>
 					<div class="mb-5 text-xl font-semibold text-emerald-500">
 						How can we Help?
@@ -105,7 +101,7 @@
 								'pointer-events-none opacity-40':
 									!form.valid || isProcessing
 							}"
-							class="w-full px-10 py-3 mt-5 ml-auto tracking-widest text-white uppercase bg-emerald-500 hover:drop-shadow-2xl rounded-lg"
+							class="w-full px-10 py-3 mt-5 ml-auto tracking-widest text-white uppercase rounded-lg bg-emerald-500 hover:drop-shadow-2xl"
 						>
 							<span *ngIf="!isProcessing"> SEND </span>
 

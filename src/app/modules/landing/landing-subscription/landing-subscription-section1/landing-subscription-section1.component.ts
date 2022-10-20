@@ -11,6 +11,7 @@ import {
 	combineLatest,
 	Observable,
 	Subject,
+	take,
 	takeUntil,
 } from 'rxjs'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
@@ -42,29 +43,21 @@ export class LandingSubscriptionSection1Component implements OnInit {
 		private _homeSubscriptionState: HomeSubscriptionState,
 	) {}
 
+	additionalUsers: number = 0
+	billMultiplier: number = 1
+	isProcessing: boolean = false
+	PRICE_PER_USER = PRICE_PER_USER
 	onMobileNext: boolean = false
-
-	hasLoggedIn$: BehaviorSubject<boolean> =
-		this._clinicUserService.hasLoggedIn$
-
 	unsubscribe$: Subject<any> = new Subject<any>()
-
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
-
 	subscription$: BehaviorSubject<Subscription | null> = new BehaviorSubject(
 		null,
 	)
+	hasLoggedIn$: BehaviorSubject<boolean> =
+		this._clinicUserService.hasLoggedIn$
 
 	interval$: BehaviorSubject<string | null> =
 		this._homeSubscriptionState.interval$
-
-	PRICE_PER_USER = PRICE_PER_USER
-
-	additionalUsers: number = 0
-
-	billMultiplier: number = 1
-
-	isProcessing: boolean = false
 
 	ngOnInit(): void {}
 
@@ -88,7 +81,7 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			this._indexedDbService.getByKey(DB.CLINIC, 1),
 			this.breakpoint$,
 		])
-			.pipe(takeUntil(this.unsubscribe$))
+			.pipe(take(1))
 			.subscribe({
 				next: (request: any) => {
 					const [
