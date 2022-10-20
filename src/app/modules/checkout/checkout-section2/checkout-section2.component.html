@@ -1,94 +1,104 @@
-<form
-	*ngIf="form"
-	[formGroup]="form"
-	class="px-5 md:px-20 md:pr-30 font-normal max-w-screen-sm flex flex-col justify-center"
->
-	<div class="text-2xl accent-color mb-5">Pay with card</div>
-
-	<div class="text-lg text-gray-600 mb-1">Billing Address</div>
-	<div
-		@slideInTop
-		class="rounded-2xl border border-gray-200 w-full overflow-hidden bg-white mb-10"
-	>
-		<div class="border-b border-b-gray-200 px-3">
-			<country-form
-				(onChangeCountry)="onChangeCountry($event)"
-			></country-form>
-		</div>
-
-		<div class="border-b border-b-gray-200 px-3">
-			<select formControlName="city" class="py-2 px-3 w-full">
-				<option *ngFor="let item of cities; trackBy: trackByFny">
-					{{ item }}
-				</option>
-			</select>
-		</div>
-		<div class="border-b border-b-gray-200 px-3">
-			<input
-				type="text"
-				formControlName="line1"
-				placeholder="Address line one"
-				class="py-2 px-3 w-full"
-			/>
-		</div>
-
-		<div class="px-3">
-			<input
-				formControlName="postal_code"
-				type="text"
-				placeholder="Postal Code"
-				class="py-2 px-3 w-full"
-			/>
-		</div>
-	</div>
-
-	<div class="text-lg text-gray-600 mb-1">Card Information</div>
-
-	<div
-		@slideInTop
-		class="rounded-2xl border border-gray-200 w-full overflow-hidden shadow-md shadow-emerald-200/20 bg-white mb-10"
-	>
-		<div class="border-b border-b-gray-200 px-3">
-			<card-number-form
-				(onCardNumberChange)="onCardNumberChange($event)"
-			></card-number-form>
-		</div>
-
-		<div class="px-5 grid grid-cols-2">
-			<input
-				type="text"
-				formControlName="expiry"
-				placeholder="MM/YY"
-				mask="00/00"
-				maxlength="5"
-				class="py-2 px-3 w-full"
-				[ngClass]="{ 'text-red-500': expiryError }"
-			/>
-
-			<input
-				type="text"
-				formControlName="cvc"
-				placeholder="CVC"
-				maxlength="4"
-				class="py-2 px-3 w-full border-l border-gray-200"
-			/>
-		</div>
-	</div>
-
-	<button
-		(click)="pay()"
+<ng-container *ngIf="breakpoint$ | async as breakpoint">
+	<form
+		*ngIf="form"
+		[formGroup]="form"
 		[ngClass]="{
-			'bg-emerald-500  hover:bg-emerald-600/90 shadow-md shadow-emerald-500/50':
-				!isProcessing && form.valid,
-			'bg-gray-400 pointer-events-none ': isProcessing || !form.valid
+			'max-w-screen-sm ': breakpoint !== 'tablet'
 		}"
-		class="text-xl font-medium rounded-full py-2 px-5 text-white flex justify-center items-center"
-		style="transition: 0.4s linear"
+		class="px-5 md:px-20 md:pr-30 font-normal flex flex-col justify-center"
 	>
-		<div [ngClass]="{ 'mx-auto': !isProcessing, 'mr-auto': isProcessing }">
-			{{ isProcessing ? 'processing payment...' : 'Pay' }}
+		<div class="text-2xl accent-color mb-5">Pay with card</div>
+
+		<div class="text-lg text-gray-600 mb-1">Billing Address</div>
+		<div
+			@slideInTop
+			class="rounded-2xl border border-gray-200 w-full overflow-hidden bg-white mb-10"
+		>
+			<div class="border-b border-b-gray-200 px-3">
+				<country-form
+					(onChangeCountry)="onChangeCountry($event)"
+				></country-form>
+			</div>
+
+			<div class="border-b border-b-gray-200 px-3">
+				<select formControlName="city" class="py-2 px-3 w-full">
+					<option *ngFor="let item of cities; trackBy: trackByFn">
+						{{ item }}
+					</option>
+				</select>
+			</div>
+			<div class="border-b border-b-gray-200 px-3">
+				<input
+					type="text"
+					formControlName="line1"
+					placeholder="Address line one"
+					class="py-2 px-3 w-full"
+				/>
+			</div>
+
+			<div class="px-3">
+				<input
+					formControlName="postal_code"
+					type="text"
+					placeholder="Postal Code"
+					class="py-2 px-3 w-full"
+				/>
+			</div>
 		</div>
 
-		<spinner @zoomIn class="ml-auto" *ngIf="isProcessing"></spinner>
-	</button>
-</form>
+		<div class="text-lg text-gray-600 mb-1">Card Information</div>
+
+		<div
+			@slideInTop
+			class="rounded-2xl border border-gray-200 w-full overflow-hidden shadow-md bg-white mb-10"
+		>
+			<div class="border-b border-b-gray-200 px-3">
+				<card-number-form
+					(onCardNumberChange)="onCardNumberChange($event)"
+				></card-number-form>
+			</div>
+
+			<div class="px-5 grid grid-cols-2">
+				<input
+					type="text"
+					formControlName="expiry"
+					placeholder="MM/YY"
+					mask="00/00"
+					maxlength="5"
+					class="py-2 px-3 w-full"
+					[ngClass]="{ 'text-red-500': expiryError }"
+				/>
+
+				<input
+					type="text"
+					formControlName="cvc"
+					placeholder="CVC"
+					maxlength="4"
+					class="py-2 px-3 w-full border-l border-gray-200"
+				/>
+			</div>
+		</div>
+
+		<button
+			(click)="pay()"
+			[ngClass]="{
+				'bg-emerald-500  hover:bg-emerald-600/90 shadow-md shadow-emerald-500/50':
+					!isProcessing && form.valid,
+				'bg-gray-400 pointer-events-none ': isProcessing || !form.valid
+			}"
+			class="text-xl font-medium rounded-full py-2 px-5 text-white flex justify-center items-center"
+			style="transition: 0.4s linear"
+		>
+			<div
+				[ngClass]="{
+					'mx-auto': !isProcessing,
+					'mr-auto': isProcessing
+				}"
+			>
+				{{ isProcessing ? 'processing payment...' : 'Pay' }}
+			</div>
+
+			<spinner @zoomIn class="ml-auto" *ngIf="isProcessing"></spinner>
+		</button>
+	</form>
+</ng-container>

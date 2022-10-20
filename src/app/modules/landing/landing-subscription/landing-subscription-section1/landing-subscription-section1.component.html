@@ -1,216 +1,224 @@
-<div class="min-h-screen mt-[69px]">
-	<div
-		*ngIf="!(subscription$ | async)"
-		class="flex items-center justify-center w-full h-full"
-	></div>
-
-	<div
-		@slideInTop
-		*ngIf="subscription$ | async as subscription"
-		class="relative flex justify-center w-full py-10 bg-emerald-100/10"
-	>
+<ng-container *ngIf="breakpoint$ | async as breakpoint">
+	<div class="min-h-screen mt-[69px]">
 		<div
-			class="relative z-20 grid w-full max-w-screen-md grid-cols-1 md:grid-cols-2"
+			*ngIf="!(subscription$ | async)"
+			class="flex items-center justify-center w-full h-full"
+		></div>
+
+		<div
+			@slideInTop
+			*ngIf="subscription$ | async as subscription"
+			[ngClass]="{
+				'grid-cols-2': breakpoint !== 'phone',
+				'grid-cols-1': breakpoint === 'phone'
+			}"
+			class="relative flex justify-center w-full py-10 bg-emerald-100/10"
 		>
-			<div
-				*ngIf="
-					(breakpoint$ | async) !== 'phone' ||
-					((breakpoint$ | async) === 'phone' &&
-						onMobileNext === false)
-				"
-				class="px-5 md:px-0"
-			>
+			<div class="relative z-20 grid w-full max-w-screen-md grid-cols-1">
 				<div
-					*ngIf="interval$ | async as interval"
-					class="w-full p-5 bg-gray-100 border border-gray-300/80 rounded-3xl"
+					*ngIf="
+						breakpoint !== 'phone' ||
+						(breakpoint === 'phone' && onMobileNext === false)
+					"
+					class="px-5 md:px-0"
 				>
 					<div
-						class="text-2xl font-extrabold text-center text-emerald-500 md:text-left"
+						*ngIf="interval$ | async as interval"
+						class="w-full p-5 bg-gray-100 border border-gray-300/80 rounded-3xl"
 					>
-						{{ subscription.type }}
-					</div>
-
-					<div
-						class="mb-5 text-lg font-bold text-center accent-color md:text-left"
-					>
-						{{ subscription.price | number }} AED /
-						{{ interval | titlecase }}
-					</div>
-
-					<div
-						class="self-start my-2 font-bold text-left accent-color text-md"
-					>
-						Features
-					</div>
-
-					<ul
-						[@listAnimation]="subscription.features.length"
-						class="grid grid-cols-1 md:grid-cols-2 gap-x-5"
-					>
-						<li
-							class="flex items-center w-full py-1 text-xs text-gray md:py-2"
-							*ngFor="
-								let item of subscription.features;
-								trackBy: trackByFn
-							"
+						<div
+							class="text-2xl font-extrabold text-center text-emerald-500 md:text-left"
 						>
-							<mat-icon
-								class="mr-3 icon-size-5 text-emerald-500"
-								svgIcon="check"
-							></mat-icon>
-
-							{{ item }}
-						</li>
-					</ul>
-				</div>
-
-				<div class="px-3 mt-5 md:px-0">
-					<div class="flex items-center font-normal text-md">
-						<div>{{ subscription.name }}</div>
-
-						<div class="ml-auto">
-							{{ subscription.price | number }} AED
+							{{ subscription.type }}
 						</div>
+
+						<div
+							class="mb-5 text-lg font-bold text-center accent-color md:text-left"
+						>
+							{{ subscription.price | number }} AED /
+							{{ interval | titlecase }}
+						</div>
+
+						<div
+							class="self-start my-2 font-bold text-left accent-color text-md"
+						>
+							Features
+						</div>
+
+						<ul
+							[@listAnimation]="subscription.features.length"
+							[ngClass]="{
+								'grid-cols-2': breakpoint !== 'phone',
+								'grid-cols-1': breakpoint === 'phone'
+							}"
+							class="grid gap-x-5"
+						>
+							<li
+								class="flex items-center w-full py-1 text-xs text-gray md:py-2"
+								*ngFor="
+									let item of subscription.features;
+									trackBy: trackByFn
+								"
+							>
+								<mat-icon
+									class="mr-3 icon-size-5 text-emerald-500"
+									svgIcon="check"
+								></mat-icon>
+
+								{{ item }}
+							</li>
+						</ul>
 					</div>
 
-					<div class="flex items-center mt-2 font-normal text-md">
-						<div class="flex flex-col justify-center">
-							<span class="font-black text-emerald-500"
-								>{{ subscription.users }} Free users
-							</span>
+					<div class="px-3 mt-5 md:px-0">
+						<div class="flex items-center font-normal text-md">
+							<div>{{ subscription.name }}</div>
 
-							<div
-								class="flex flex-col items-start justify-center md:flex-row"
-							>
-								{{ additionalUsers }} Additional users
+							<div class="ml-auto">
+								{{ subscription.price | number }} AED
+							</div>
+						</div>
+
+						<div class="flex items-center mt-2 font-normal text-md">
+							<div class="flex flex-col justify-center">
+								<span class="font-black text-emerald-500"
+									>{{ subscription.users }} Free users
+								</span>
 
 								<div
-									class="flex items-start justify-center mt-3 md:items-center md:ml-10 md:mt-0"
+									class="flex flex-col items-start justify-center md:flex-row"
 								>
-									<button
-										mat-icon-button
-										matTooltip="Add user"
-										class="border-gray-200 border-1 md:border-none"
-										(click)="
-											additionalUsers =
-												additionalUsers + 1
-										"
-									>
-										<mat-icon
-											svgIcon="heroicons_outline:plus"
-										></mat-icon>
-									</button>
+									{{ additionalUsers }} Additional users
 
-									<input
-										type="number"
-										[(ngModel)]="additionalUsers"
-										style="
-											min-height: 36px;
-											min-width: 36px;
-											max-width: 50px;
-										"
-										class="flex items-center justify-center p-1 mx-1 font-bold text-center border rounded-md md:p-3 border-emerald-500 accent-color"
-									/>
-
-									<button
-										mat-icon-button
-										matTooltip="Remove User"
-										class="border-gray-200 border-1 md:border-none"
-										(click)="
-											additionalUsers =
-												additionalUsers === 0
-													? 0
-													: additionalUsers - 1
-										"
+									<div
+										class="flex items-start justify-center mt-3 md:items-center md:ml-10 md:mt-0"
 									>
-										<mat-icon
-											svgIcon="heroicons_outline:minus"
-										></mat-icon>
-									</button>
+										<button
+											mat-icon-button
+											matTooltip="Add user"
+											class="border-gray-200 border-1 md:border-none"
+											(click)="
+												additionalUsers =
+													additionalUsers + 1
+											"
+										>
+											<mat-icon
+												svgIcon="heroicons_outline:plus"
+											></mat-icon>
+										</button>
+
+										<input
+											type="number"
+											[(ngModel)]="additionalUsers"
+											style="
+												min-height: 36px;
+												min-width: 36px;
+												max-width: 50px;
+											"
+											class="flex items-center justify-center p-1 mx-1 font-bold text-center border rounded-md md:p-3 border-emerald-500 accent-color"
+										/>
+
+										<button
+											mat-icon-button
+											matTooltip="Remove User"
+											class="border-gray-200 border-1 md:border-none"
+											(click)="
+												additionalUsers =
+													additionalUsers === 0
+														? 0
+														: additionalUsers - 1
+											"
+										>
+											<mat-icon
+												svgIcon="heroicons_outline:minus"
+											></mat-icon>
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="flex flex-col mt-10 ml-auto">
+								<div class="text-right">
+									{{
+										additionalUsers *
+											PRICE_PER_USER *
+											billMultiplier | number
+									}}
+									AED
+								</div>
+								<div
+									*ngIf="billMultiplier === 12"
+									class="ml-3 text-sm text-right"
+								>
+									( Additional Users x
+
+									{{ PRICE_PER_USER | number }} AED ) x 12
+									Months
 								</div>
 							</div>
 						</div>
 
-						<div class="flex flex-col mt-10 ml-auto">
-							<div class="text-right">
+						<mat-divider
+							class="my-2 mb-0 border-gray-300 md:my-5"
+						></mat-divider>
+
+						<div class="flex items-center mt-2 font-normal textlg">
+							<div class="mr-auto">Total Amount</div>
+
+							<div class="ml-10 font-bold accent-color">
 								{{
-									additionalUsers *
-										PRICE_PER_USER *
-										billMultiplier | number
+									subscription.price +
+										additionalUsers *
+											PRICE_PER_USER *
+											billMultiplier | number
 								}}
 								AED
 							</div>
-							<div
-								*ngIf="billMultiplier === 12"
-								class="ml-3 text-sm text-right"
-							>
-								( Additional Users x
-
-								{{ PRICE_PER_USER | number }} AED ) x 12 Months
-							</div>
-						</div>
-					</div>
-
-					<mat-divider
-						class="my-2 mb-0 border-gray-300 md:my-5"
-					></mat-divider>
-
-					<div class="flex items-center mt-2 font-normal textlg">
-						<div class="mr-auto">Total Amount</div>
-
-						<div class="ml-10 font-bold accent-color">
-							{{
-								subscription.price +
-									additionalUsers *
-										PRICE_PER_USER *
-										billMultiplier | number
-							}}
-							AED
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="px-5">
-				<button
-					(click)="onMobileNext = true; scrollTopTop()"
-					*ngIf="
-						(breakpoint$ | async) === 'phone' &&
-						onMobileNext === false
-					"
-					matRipple
-					matRippleColor="rgba(250, 250, 250,.4)"
-					[ngClass]="{ hidden: (breakpoint$ | async) !== 'phone' }"
-					class="w-full py-3 mt-8 font-bold text-white shadow-md bg-sky-500 shadow-sky-500/50 rounded-xl"
+				<div class="px-5">
+					<button
+						(click)="onMobileNext = true; scrollTopTop()"
+						*ngIf="
+							(breakpoint$ | async) === 'phone' &&
+							onMobileNext === false
+						"
+						matRipple
+						matRippleColor="rgba(250, 250, 250,.4)"
+						[ngClass]="{
+							hidden: (breakpoint$ | async) !== 'phone'
+						}"
+						class="w-full py-3 mt-8 font-bold text-white shadow-md bg-sky-500 shadow-sky-500/50 rounded-xl"
+					>
+						Continue
+					</button>
+				</div>
+
+				<div
+					[ngClass]="{
+						hidden: breakpoint === 'phone' && onMobileNext === false
+					}"
+					class="items-start px-5 md:p-10 md:-translate-y-20"
 				>
-					Continue
-				</button>
-			</div>
+					<button
+						@fadeOutBottom
+						@slideInRight
+						*ngIf="hasLoggedIn$ | async"
+						(click)="toCheckOut()"
+						class="flex items-center justify-center w-full px-10 py-4 mt-40 ml-auto text-lg font-bold text-white uppercase rounded-lg hover:bg-emerald-600 bg-emerald-500"
+					>
+						<div>Proceed to CheckOut</div>
+					</button>
 
-			<div
-				[ngClass]="{
-					hidden:
-						(breakpoint$ | async) === 'phone' &&
-						onMobileNext === false
-				}"
-				class="items-start px-5 md:p-10 md:-translate-y-20"
-			>
-				<button
-					@fadeOutBottom
-					@slideInRight
-					*ngIf="hasLoggedIn$ | async"
-					(click)="toCheckOut()"
-					class="flex items-center justify-center w-full px-10 py-4 mt-40 ml-auto text-lg font-bold text-white uppercase rounded-lg hover:bg-emerald-600 bg-emerald-500"
-				>
-					<div>Proceed to CheckOut</div>
-				</button>
-
-				<landing-subscription-section1-form
-					*ngIf="!(hasLoggedIn$ | async)"
-					(onNext)="register($event)"
-					[isProcessing]="isProcessing"
-				></landing-subscription-section1-form>
+					<landing-subscription-section1-form
+						*ngIf="!(hasLoggedIn$ | async)"
+						(onNext)="register($event)"
+						[isProcessing]="isProcessing"
+					></landing-subscription-section1-form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</ng-container>

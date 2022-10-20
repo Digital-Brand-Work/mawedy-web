@@ -1,6 +1,7 @@
 <div
 	@slideInBottom
 	*ngIf="breakpoint$ | async as breakpoint"
+	[ngClass]="{ 'px-10': breakpoint === 'tablet' }"
 	class="relative flex justify-center w-full md:py-20"
 >
 	<div

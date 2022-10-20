@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
+import { SeoService } from '@digital_brand_work/services/seo.service'
+import { MediaService } from '@digital_brand_work/utilities/media.service'
 import { PRICE_PER_USER } from 'app/app-core/constants/app.constant'
 import { BehaviorSubject, Subscription } from 'rxjs'
 
@@ -10,15 +12,26 @@ import { BehaviorSubject, Subscription } from 'rxjs'
 	animations: [...dbwAnimations],
 })
 export class CheckoutSection1Component implements OnInit {
-	constructor() {}
+	constructor(
+		private _seoService: SeoService,
+		private _mediaService: MediaService,
+	) {
+		this._seoService.generateTags({ title: 'Mawedy | Checkout' })
+	}
 
-	@Input() subscription$?: BehaviorSubject<Subscription | null>
+	breakpoint$ = this._mediaService.breakpoints$
 
-	@Input() interval$?: BehaviorSubject<string | null>
+	@Input()
+	billMultiplier: number = 1
 
-	@Input() billMultiplier: number = 1
+	@Input()
+	additionalUsers: number = 5
 
-	@Input() additionalUsers: number = 5
+	@Input()
+	interval$?: BehaviorSubject<string | null>
+
+	@Input()
+	subscription$?: BehaviorSubject<Subscription | null>
 
 	PRICE_PER_USER = PRICE_PER_USER
 

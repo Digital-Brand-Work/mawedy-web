@@ -13,6 +13,8 @@ import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/app-core/enums/index.db.enum'
+import { SeoService } from '@digital_brand_work/services/seo.service'
+import { MediaService } from '@digital_brand_work/utilities/media.service'
 declare var window: any
 
 @Component({
@@ -27,6 +29,7 @@ export class CheckoutSection2Component implements OnInit {
 		private _alert: AlertState,
 		private _cdr: ChangeDetectorRef,
 		private _formBuilder: FormBuilder,
+		private _mediaService: MediaService,
 		private _checkoutService: CheckoutService,
 		private _clinicUserService: ClinicUserService,
 		private _errorHandlerService: ErrorHandlerService,
@@ -44,6 +47,8 @@ export class CheckoutSection2Component implements OnInit {
 
 	@Input()
 	subscription$?: BehaviorSubject<Subscription | null>
+
+	breakpoint$ = this._mediaService.breakpoints$
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
