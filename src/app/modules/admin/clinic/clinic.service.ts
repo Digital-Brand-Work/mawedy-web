@@ -12,11 +12,12 @@ import {
 	take,
 } from 'rxjs'
 import { Clinic } from './clinic.model'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Injectable } from '@angular/core'
 import { slugify } from '@digital_brand_work/helpers/helpers'
 import { DB } from 'app/app-core/enums/index.db.enum'
 import { LaravelNotificationService } from 'app/app-core/misc/laravel.notificaion.service'
+import { InitialDataResolver } from 'app/app.resolvers'
 
 export interface User {
 	access: {
@@ -145,7 +146,9 @@ export class ClinicUserService {
 						this.update()
 					}
 
-					this._router.navigate([path + `dashboard/appointments`])
+					this._router
+						.navigate([path + `dashboard/appointments`])
+						.then(() => location.reload())
 				},
 			})
 	}

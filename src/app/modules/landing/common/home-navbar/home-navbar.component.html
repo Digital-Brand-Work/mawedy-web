@@ -15,12 +15,14 @@
 						nav.id === 4,
 					'hover:bg-emerald-100  hover:text-emerald-500 ':
 						nav.name !== 'AR' && nav.id !== 4,
-					'text-black': nav.id !== 4
+					'text-black': nav.id !== 4 && !url.includes(nav.link),
+					'text-emerald-500 font-black pointer-events-none':
+						url.includes(nav.link) && nav.id !== 4
 				}"
 				(click)="nav.id === 4 ? toDashboard() : null"
 				[routerLink]="'/' + nav.link"
 				role="button"
-				class="flex items-center px-5 py-2 rounded-lg font-normal"
+				class="flex items-center px-5 py-2 font-normal rounded-lg"
 			>
 				{{
 					(!showSignInPanel && nav.id === 4) ||
