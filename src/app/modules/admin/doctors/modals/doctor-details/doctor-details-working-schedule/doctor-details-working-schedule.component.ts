@@ -10,13 +10,12 @@ import { WeekDay, weekDays } from 'app/app-core/constants/app.constant'
 export class DoctorDetailsWorkingScheduleComponent implements OnInit {
 	constructor() {}
 
-	@Input() timeslots: TimeSlot[] = []
+	@Input()
+	timeslots: TimeSlot[] = []
 
 	weekdays: WeekDay[] = weekDays
 
 	ngOnInit(): void {}
-
-	identity = (item: any): any => item
 
 	isAvailable(timeslots: TimeSlot[]): boolean {
 		let available = false
@@ -28,5 +27,9 @@ export class DoctorDetailsWorkingScheduleComponent implements OnInit {
 		}
 
 		return available
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

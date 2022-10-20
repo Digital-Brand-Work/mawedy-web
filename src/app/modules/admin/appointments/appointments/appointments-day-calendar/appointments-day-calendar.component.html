@@ -26,7 +26,11 @@
 
 			<div
 				[ngClass]="{ first: timingIndex === 0 }"
-				*ngFor="let timing of timings; let timingIndex = index"
+				*ngFor="
+					let timing of timings;
+					let timingIndex = index;
+					trackBy: trackByFn
+				"
 				class="grid grid-cols-8 col-span-8"
 			>
 				<div style="height: 70px" class="text-gray-400 text-right mr-5">

@@ -2,7 +2,7 @@
 
 <div class="working-schedule-container grid grid-cols-1 md:grid-cols-2 p-5">
 	<div
-		*ngFor="let day of weekdays; trackBy: identity"
+		*ngFor="let day of weekdays; trackBy: trackByFn"
 		class="flex flex-col mb-5"
 	>
 		<div>

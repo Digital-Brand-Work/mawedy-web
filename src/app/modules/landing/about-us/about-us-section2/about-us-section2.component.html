@@ -14,7 +14,7 @@
 		>
 			<div
 				class="flex-col items-center w-full"
-				*ngFor="let item of benefits; trackBy: identity"
+				*ngFor="let item of benefits; trackBy: trackByFn"
 			>
 				<img
 					style="

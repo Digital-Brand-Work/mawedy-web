@@ -35,8 +35,6 @@ export class SubscriptionPackageItemComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	subscribe() {
 		new BaseService(
 			this._http,
@@ -80,5 +78,9 @@ export class SubscriptionPackageItemComponent implements OnInit {
 					}
 				},
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

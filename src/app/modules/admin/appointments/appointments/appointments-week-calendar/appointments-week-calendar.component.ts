@@ -94,9 +94,9 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 	}
 
 	resolveTimeSlots(timeSlot: ClinicTimeSlot) {
-		const [startHour, startMinutes] = timeSlot.start.split(':')
+		const [startHour] = timeSlot.start.split(':')
 
-		const [endHour, endMinutes] = timeSlot.end.split(':')
+		const [endHour] = timeSlot.end.split(':')
 
 		const isGraveYard: boolean = parseInt(endHour) < PM
 
@@ -124,9 +124,7 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 			timings.push(timeSlot.end as Time)
 		}
 
-		timings = [...new Set(timings)]
-
-		this.timings = timings
+		this.timings = [...new Set(timings)]
 	}
 
 	ngOnDestroy(): void {
@@ -134,8 +132,6 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 
 		this.unsubscribe$.complete()
 	}
-
-	identity = (item: any) => item
 
 	resolveRoute(path: string) {
 		this._clinicUserService
@@ -149,5 +145,9 @@ export class AppointmentsWeekCalendarComponent implements OnInit {
 
 	setDate(date: Date): void {
 		this.date$.next(dayjs(date).toDate())
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

@@ -98,7 +98,8 @@
 							[value]="department.id"
 							*ngFor="
 								let department of (departments$ | async)
-									.entities | entities
+									.entities | entities;
+								trackBy: trackByFn
 							"
 						>
 							{{ department.name | titlecase }}

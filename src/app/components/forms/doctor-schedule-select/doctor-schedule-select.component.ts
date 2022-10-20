@@ -15,13 +15,17 @@ import {
 export class DoctorScheduleSelectComponent implements OnInit {
 	constructor(private _cdr: ChangeDetectorRef) {}
 
-	@Output() onTimeSelected = new EventEmitter<string>()
+	@Output()
+	onTimeSelected = new EventEmitter<string>()
 
-	@Input() timing: string
+	@Input()
+	timing: string
 
-	@Input() disabled: boolean
+	@Input()
+	disabled: boolean
 
-	@Input() day: boolean
+	@Input()
+	day: boolean
 
 	time = {
 		hours: [],
@@ -56,9 +60,7 @@ export class DoctorScheduleSelectComponent implements OnInit {
 		}
 
 		this.time.minutes.push('00')
-
 		this.time.minutes.push('30')
-
 		this._cdr.detectChanges()
 	}
 
@@ -66,9 +68,11 @@ export class DoctorScheduleSelectComponent implements OnInit {
 		this._cdr.detach()
 	}
 
-	identity = (item: any) => item
-
 	toFixedTwo(value: number): string {
 		return (value < 10 ? '0' : '') + value
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

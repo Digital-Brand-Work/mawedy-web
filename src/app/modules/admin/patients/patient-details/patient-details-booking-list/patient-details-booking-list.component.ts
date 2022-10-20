@@ -26,16 +26,16 @@ export class PatientDetailsBookingListComponent implements OnInit {
 		private _appointmentAPI: AppointmentService,
 	) {}
 
-	@Output() onUpdateAppointment = new EventEmitter<Appointment>()
+	@Output()
+	onUpdateAppointment = new EventEmitter<Appointment>()
 
-	@Input() appointments: Appointment[] = []
+	@Input()
+	appointments: Appointment[] = []
 
 	uploadResultOpened$: BehaviorSubject<boolean> =
 		this._uploadResultModal.opened$
 
 	ngOnInit(): void {}
-
-	identity = (item: any) => item
 
 	followUp(appointment: Appointment) {
 		this._appointmentAPI
@@ -95,5 +95,9 @@ export class PatientDetailsBookingListComponent implements OnInit {
 					this._errorHandlerService.handleError(http)
 				},
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

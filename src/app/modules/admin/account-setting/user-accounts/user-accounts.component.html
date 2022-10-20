@@ -69,7 +69,7 @@
 						*ngFor="
 							let child of form.get('accounts')?.controls;
 							let i = index;
-							trackBy: identity
+							trackBy: trackByFn
 						"
 						class="flex items-center w-full"
 					>

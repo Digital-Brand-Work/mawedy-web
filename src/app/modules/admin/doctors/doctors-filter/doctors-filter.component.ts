@@ -74,8 +74,6 @@ export class DoctorsFilterComponent implements OnInit {
 		this._cdr.detach()
 	}
 
-	identity = (item: any) => item
-
 	setMedicalServices(id: string): void {
 		this.departments$.pipe(take(1)).subscribe((store: any) => {
 			const departments: Department[] = Object.values(store.entities)
@@ -136,6 +134,10 @@ export class DoctorsFilterComponent implements OnInit {
 					DoctorActions.loadDoctors({ doctors: doctors.data }),
 				)
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }
 

@@ -63,5 +63,7 @@ export class WaitingPatientsComponent implements OnInit {
 		this.unsubscribe$.complete()
 	}
 
-	identity = (item: any) => item
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

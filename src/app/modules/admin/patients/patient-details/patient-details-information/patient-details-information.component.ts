@@ -37,7 +37,8 @@ export class PatientDetailsInformationComponent implements OnInit {
 		private _errorHandlerService: ErrorHandlerService,
 	) {}
 
-	@ViewChild('input') input?: ElementRef
+	@ViewChild('input')
+	input?: ElementRef
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
@@ -131,8 +132,6 @@ export class PatientDetailsInformationComponent implements OnInit {
 		this._cdr.detach()
 	}
 
-	identity = (item: any) => item
-
 	onChangeCountry(country: string) {
 		this.cities = this.countryJson[country]
 	}
@@ -190,5 +189,9 @@ export class PatientDetailsInformationComponent implements OnInit {
 				},
 			})
 			.add(this.form.enable())
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

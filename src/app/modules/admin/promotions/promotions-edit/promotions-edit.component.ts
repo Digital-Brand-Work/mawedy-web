@@ -261,4 +261,8 @@ export class PromotionsEditComponent implements OnInit {
 			})
 			.add(() => (this.isProcessing = false))
 	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

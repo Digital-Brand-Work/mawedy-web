@@ -64,7 +64,7 @@
 		class="ml-auto md:mx-auto px-1 py-1 bg-gray-100 rounded-md md:-translate-x-20 flex items-center"
 	>
 		<div
-			*ngFor="let toolbar of toolbars; trackBy: identity"
+			*ngFor="let toolbar of toolbars; trackBy: trackByFn"
 			mat-button
 			[matTooltip]="toolbar.name + ' Layout'"
 			(click)="resolveRoute(toolbar.link)"
@@ -91,7 +91,7 @@
 				[value]="doctor.id"
 				*ngFor="
 					let doctor of (doctors$ | async).entities | entities;
-					trackBy: identity
+					trackBy: trackByFn
 				"
 			>
 				{{ doctor.name }}

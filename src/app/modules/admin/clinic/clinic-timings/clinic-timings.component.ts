@@ -11,9 +11,12 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 export class ClinicTimingsComponent implements OnInit {
 	constructor() {}
 
-	@Input() timeslots?: ClinicTimeSlot[] = []
+	@Input()
+	timeslots?: ClinicTimeSlot[] = []
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

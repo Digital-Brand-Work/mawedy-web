@@ -41,5 +41,7 @@ export class AppComponent {
 		this._alert.remove(id)
 	}
 
-	identity = (item: any) => item
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

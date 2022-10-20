@@ -82,8 +82,6 @@ export class PromotionsTableComponent implements OnInit {
 		this.unsubscribe$.complete()
 	}
 
-	identity = (item: any) => item
-
 	viewPromotion(promotion: Promotion) {
 		combineLatest([
 			this._clinicUserService.resolveClinicPath(),
@@ -125,5 +123,9 @@ export class PromotionsTableComponent implements OnInit {
 					)
 				})
 		})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

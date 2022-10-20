@@ -51,7 +51,8 @@ export class DashboardAppointmentTableComponent implements OnInit {
 		}>,
 	) {}
 
-	@Input() appointments?: Appointment[]
+	@Input()
+	appointments?: Appointment[]
 
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this._doctorDetailsModal.opened$
@@ -65,8 +66,6 @@ export class DashboardAppointmentTableComponent implements OnInit {
 		this._paginationService.dashboardAppointments$
 
 	ngOnInit(): void {}
-
-	identity = (item: any) => item
 
 	paginate(url: string) {
 		this._appointmentAPI.paginate(url).subscribe((appointment: any) => {
@@ -152,5 +151,9 @@ export class DashboardAppointmentTableComponent implements OnInit {
 		this._dashboardAppointmentService.current$.next(appointment)
 
 		this.dashboardAppointmentDetailsModalOpened$.next(true)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

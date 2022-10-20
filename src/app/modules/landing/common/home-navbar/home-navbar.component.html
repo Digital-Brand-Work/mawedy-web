@@ -8,7 +8,7 @@
 
 		<ul @slideInRight class="flex ml-auto">
 			<li
-				*ngFor="let nav of navigation"
+				*ngFor="let nav of navigation; trackBy: trackByFn"
 				[class.hidden]="nav.id === 2 && (hasLoggedIn$ | async)"
 				[ngClass]="{
 					'bg-emerald-500 text-white hover:bg-emerald-600 hover:text-white shadow-md shadow-emerald-400/50 mx-2':

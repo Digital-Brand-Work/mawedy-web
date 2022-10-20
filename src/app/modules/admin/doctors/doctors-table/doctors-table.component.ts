@@ -28,7 +28,8 @@ export class DoctorsTableComponent implements OnInit {
 		private _doctorAvailabilityModal: DoctorAvailabilityModal,
 	) {}
 
-	@Output() onDoctorChanges = new EventEmitter<Doctor[]>()
+	@Output()
+	onDoctorChanges = new EventEmitter<Doctor[]>()
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -79,8 +80,6 @@ export class DoctorsTableComponent implements OnInit {
 		this.unsubscribe$.complete()
 	}
 
-	identity = (item: any) => item
-
 	manage(doctor: Doctor) {
 		this.doctorDetailsModalOpened$.next(true)
 		this._doctorService.current$.next(doctor)
@@ -90,5 +89,9 @@ export class DoctorsTableComponent implements OnInit {
 		this.doctorAvailabilityModalOpened$.next(true)
 
 		this._doctorService.current$.next(doctor)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

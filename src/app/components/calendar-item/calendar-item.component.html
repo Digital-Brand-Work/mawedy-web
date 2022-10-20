@@ -21,7 +21,7 @@
 				| sortBy: 'start_time'
 				| filter_by_doctor: (doctor$ | async)
 				| limitBy: 2;
-			trackBy: identity
+			trackBy: trackByFn
 		"
 		filterByCurrentDate
 		[appointment]="appointment"
@@ -50,7 +50,7 @@
 				| filter_by_date: date
 				| sortBy: 'start_time'
 				| filter_by_doctor: (doctor$ | async);
-			trackBy: identity
+			trackBy: trackByFn
 		"
 		filterByCurrentDate
 		[appointment]="appointment"

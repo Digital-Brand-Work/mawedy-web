@@ -41,11 +41,14 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 		private _storeRegisterRule: StoreRegisterRule,
 	) {}
 
-	@ViewChild('input') input!: ElementRef
+	@ViewChild('input')
+	input!: ElementRef
 
-	@Output() onBack = new EventEmitter()
+	@Output()
+	onBack = new EventEmitter()
 
-	@Input() step: 'one' | 'two' = 'one'
+	@Input()
+	step: 'one' | 'two' = 'one'
 
 	subscriptionTypes: string[] = clinicSubscriptionTypes
 
@@ -77,8 +80,6 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 		this._cdr.detach()
 	}
 
-	identity = (item: any) => item
-
 	handleUsers(users: number): Array<{ username: '' }> {
 		let accounts = []
 
@@ -96,4 +97,8 @@ export class PartnerWithUsSection1SecondStepComponent implements OnInit {
 	}
 
 	register(): void {}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

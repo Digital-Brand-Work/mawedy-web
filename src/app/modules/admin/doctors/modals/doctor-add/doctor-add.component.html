@@ -137,7 +137,7 @@
 							*ngFor="
 								let department of (departments$ | async)
 									.entities | entities;
-								trackBy: identity;
+								trackBy: trackByFn;
 								let i = index
 							"
 						>

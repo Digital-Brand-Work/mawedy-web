@@ -50,7 +50,8 @@ export class DoctorAddComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
-	@ViewChild('input') input!: ElementRef
+	@ViewChild('input')
+	input!: ElementRef
 
 	doctors$: BehaviorSubject<Doctor[]> = this._addAppointmentModal.doctors$
 
@@ -256,5 +257,9 @@ export class DoctorAddComponent implements OnInit {
 				},
 			})
 			.add(() => (this.isProcessing = false))
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

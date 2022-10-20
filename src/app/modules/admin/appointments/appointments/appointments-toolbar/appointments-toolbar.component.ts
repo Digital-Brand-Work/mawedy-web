@@ -97,8 +97,6 @@ export class AppointmentsToolbarComponent implements OnInit {
 		clearInterval(this.timer)
 	}
 
-	identity = (item: any) => item
-
 	moveCalendarMonth(mode: 'add' | 'subtract'): void {
 		combineLatest([this.date$])
 			.pipe(take(1))
@@ -141,5 +139,9 @@ export class AppointmentsToolbarComponent implements OnInit {
 
 	filter(doctor: string | null) {
 		this._appointmentToolbarService.doctorFilter$.next(doctor)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

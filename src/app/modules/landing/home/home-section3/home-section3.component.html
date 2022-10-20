@@ -21,7 +21,7 @@
 				'text-gray-700 bg-white': (billing$ | async) !== item
 			}"
 			class="md:hover:bg-emerald-50 md:hover:text-emerald-800"
-			*ngFor="let item of billings; trackBy: identity"
+			*ngFor="let item of billings; trackBy: trackByFn"
 		>
 			{{ item | titlecase }} Plan
 		</button>
@@ -39,7 +39,7 @@
 	>
 		<div
 			[class.hidden]="!subscription[billing]"
-			*ngFor="let subscription of mawedySubscriptions; trackBy: identity"
+			*ngFor="let subscription of mawedySubscriptions; trackBy: trackByFn"
 		>
 			<button
 				*ngIf="subscription[billing]"

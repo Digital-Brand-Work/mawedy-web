@@ -24,21 +24,25 @@ export class CalendarItemDayComponent implements OnInit {
 		}>,
 	) {}
 
+	@Input()
+	time?: Time
+
+	@Input()
+	date?: Date
+
 	ngOnInit(): void {}
 
 	appointments$: Observable<Appointment[]> = this._store.pipe(
 		select('appointments'),
 	)
 
-	@Input() time?: Time
-
-	@Input() date?: Date
-
-	identity = (item: any) => item
-
 	viewAppointment(appointment: Appointment) {
 		this._dashboardAppointmentService.current$.next(appointment)
 
 		this._dashboardAppointmentDetailsModal.opened$.next(true)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

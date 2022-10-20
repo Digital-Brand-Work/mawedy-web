@@ -72,7 +72,7 @@
 							form.get('patient_id').setValue(patient.id)
 						"
 						class="px-2 py-3 hover:bg-gray-100 flex items-center"
-						*ngFor="let patient of patients; trackBy: identity"
+						*ngFor="let patient of patients; trackBy: trackByFn"
 					>
 						<mat-icon
 							class="icon-size-5 mr-3 -translate-y-0.5"
@@ -106,7 +106,7 @@
 			>
 				<option
 					[value]="department.id"
-					*ngFor="let department of departments; trackBy: identity"
+					*ngFor="let department of departments; trackBy: trackByFn"
 				>
 					{{ department.name }}
 				</option>
@@ -132,7 +132,7 @@
 			>
 				<option
 					[value]="service.id"
-					*ngFor="let service of medicalServices; trackBy: identity"
+					*ngFor="let service of medicalServices; trackBy: trackByFn"
 				>
 					{{ service.name }}
 				</option>
@@ -254,7 +254,10 @@
 					}"
 				>
 					<option
-						*ngFor="let item of appointmentTypes; trackBy: identity"
+						*ngFor="
+							let item of appointmentTypes;
+							trackBy: trackByFn
+						"
 					>
 						{{ item }}
 					</option>

@@ -15,7 +15,7 @@
 	>
 		<option
 			[value]="country"
-			*ngFor="let country of countries; trackBy: identity"
+			*ngFor="let country of countries; trackBy: trackByFn"
 		>
 			{{ country }}
 		</option>

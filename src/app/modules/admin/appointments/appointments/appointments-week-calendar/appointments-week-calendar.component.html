@@ -41,7 +41,7 @@
 						class="text-center font-bold uppercase rounded-xl flex items-center justify-center flex-col"
 						*ngFor="
 							let day of weekDays$ | async;
-							trackBy: identity;
+							trackBy: trackByFn;
 							let weekDayIndex = index
 						"
 					>
@@ -73,7 +73,7 @@
 						role="button"
 						*ngFor="
 							let day of weekDays$ | async;
-							trackBy: identity;
+							trackBy: trackByFn;
 							let dayIndex = index
 						"
 						style="height: 70px"

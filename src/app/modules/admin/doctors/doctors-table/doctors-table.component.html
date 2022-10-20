@@ -21,7 +21,9 @@
 						style="height: 60px"
 						class="accent-color font-semibold border-b border-b-gray-100 hover:bg-gray-50"
 						*ngFor="
-							let doctor of (doctors$ | async).entities | entities
+							let doctor of (doctors$ | async).entities
+								| entities;
+							trackBy: trackByFn
 						"
 					>
 						<td>{{ doctor.name }}</td>

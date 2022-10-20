@@ -18,7 +18,7 @@
 
 		<div class="border-b border-b-gray-200 px-3">
 			<select formControlName="city" class="py-2 px-3 w-full">
-				<option *ngFor="let item of cities; trackBy: identity">
+				<option *ngFor="let item of cities; trackBy: trackByFny">
 					{{ item }}
 				</option>
 			</select>

@@ -49,7 +49,7 @@
 								(billing$ | async) !== item
 						}"
 						class="hover:bg-emerald-50 hover:text-emerald-800 font-medium"
-						*ngFor="let item of billings; trackBy: identity"
+						*ngFor="let item of billings; trackBy: trackByFn"
 					>
 						{{ item | titlecase }} Plan
 					</button>
@@ -65,7 +65,7 @@
 				[class.hidden]="!subscription[billing$ | async]"
 				*ngFor="
 					let subscription of mawedySubscriptions;
-					trackBy: identity
+					trackBy: trackByFn
 				"
 			>
 				<subscription-package-item

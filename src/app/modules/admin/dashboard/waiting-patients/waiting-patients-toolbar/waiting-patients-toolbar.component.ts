@@ -23,9 +23,11 @@ export class WaitingPatientsToolbarComponent implements OnInit {
 		})
 	}
 
-	@Output() onSearch = new EventEmitter()
+	@Output()
+	onSearch = new EventEmitter()
 
-	@Output() onFilter = new EventEmitter()
+	@Output()
+	onFilter = new EventEmitter()
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -40,8 +42,6 @@ export class WaitingPatientsToolbarComponent implements OnInit {
 	ngOnInit(): void {
 		this.resolveActiveNav()
 	}
-
-	identity = (item: any) => item
 
 	resolveActiveNav() {
 		if (this._router.url.includes('appointments')) {
@@ -70,5 +70,9 @@ export class WaitingPatientsToolbarComponent implements OnInit {
 		this.unsubscribe$.next(null)
 
 		this.unsubscribe$.complete()
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

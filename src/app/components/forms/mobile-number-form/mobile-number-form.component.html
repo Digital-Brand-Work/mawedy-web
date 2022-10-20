@@ -15,7 +15,10 @@
 			[ngClass]="{ 'font-bold': bold }"
 			class="pl-2 pr-5 text-base"
 		>
-			<option [value]="country.code" *ngFor="let country of countries">
+			<option
+				[value]="country.code"
+				*ngFor="let country of countries; trackBy: trackByFn"
+			>
 				{{ country.code }} ({{ country.dial_code }})
 			</option>
 		</select>

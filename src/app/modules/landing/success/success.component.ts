@@ -58,13 +58,6 @@ export class SuccessComponent implements OnInit {
 					)
 
 					if (index >= 0) {
-						// this._indexedDBController.removeAll([
-						// 	DB.SUBSCRIPTION_REQUEST,
-						// 	DB.ACCOUNT_USERS_REQUEST,
-						// ])
-
-						// localStorage.removeItem('password')
-
 						return (this.subscription =
 							mawedySubscriptions[index][
 								subscription_request.interval
@@ -79,8 +72,6 @@ export class SuccessComponent implements OnInit {
 			})
 	}
 
-	identity = (item: any) => item
-
 	explore() {
 		this._clinicUserService.hasLoggedIn$
 			.pipe(take(1))
@@ -93,5 +84,9 @@ export class SuccessComponent implements OnInit {
 					return this._router.navigate(['/'])
 				}
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

@@ -21,7 +21,7 @@
 				<tr
 					style="height: 48px"
 					class="text-gray-500 font-semibold border-b border-b-gray-100"
-					*ngFor="let appointment of appointments; trackBy: identity"
+					*ngFor="let appointment of appointments; trackBy: trackByFn"
 				>
 					<td>
 						{{ appointment.type_code

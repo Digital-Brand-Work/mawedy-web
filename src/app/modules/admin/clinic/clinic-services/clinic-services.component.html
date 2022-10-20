@@ -43,7 +43,7 @@
 						*ngFor="
 							let department of (departments$ | async).entities
 								| entities;
-							trackBy: identity;
+							trackBy: trackByFn;
 							let i = index
 						"
 						mat-menu-item
@@ -77,7 +77,7 @@
 				*ngFor="
 					let department of (departments$ | async).entities
 						| entities;
-					trackBy: identity;
+					trackBy: trackByFn;
 					let i = index
 				"
 				[ngClass]="{
@@ -128,7 +128,7 @@
 					*ngFor="
 						let service of (medicalServices$ | async)?.entities
 							| entities;
-						trackBy: identity
+						trackBy: trackByFn
 					"
 					(onSelectMedicalService)="editMedicalService($event)"
 				>

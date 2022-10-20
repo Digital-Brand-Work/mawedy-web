@@ -20,7 +20,7 @@
 						*ngFor="
 							let appointment of appointments
 								| sortBy: 'start_time';
-							trackBy: identity
+							trackBy: trackByFn
 						"
 					>
 						<td>{{ appointment.date | date: 'dd MMMM' }}</td>

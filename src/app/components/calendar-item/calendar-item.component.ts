@@ -25,28 +25,30 @@ export class CalendarItemComponent implements OnInit {
 		}>,
 	) {}
 
-	doctor$: BehaviorSubject<string | null> =
-		this._appointmentToolbarService.doctorFilter$
+	@Input()
+	date: Date
 
-	appointments$: Observable<Appointment[]> = this._store.pipe(
-		select('appointments'),
-	)
+	@Input()
+	time?: Time
 
-	@Input() date: Date
+	@Input()
+	matchTime: boolean = false
 
-	@Input() time?: Time
+	@Input()
+	weekly: boolean = false
 
-	@Input() matchTime: boolean = false
+	doctor$ = this._appointmentToolbarService.doctorFilter$
 
-	@Input() weekly: boolean = false
+	appointments$ = this._store.pipe(select('appointments'))
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	viewAppointment(appointment: Appointment) {
 		this._dashboardAppointmentService.current$.next(appointment)
-
 		this._dashboardAppointmentDetailsModal.opened$.next(true)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

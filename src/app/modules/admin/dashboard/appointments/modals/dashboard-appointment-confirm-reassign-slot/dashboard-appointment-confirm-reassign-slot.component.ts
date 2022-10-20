@@ -211,8 +211,6 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 		this.unsubscribe$.complete()
 	}
 
-	identity = (item: any) => item
-
 	toFixedTwo(value: number): string {
 		return (value < 10 ? '0' : '') + value
 	}
@@ -351,5 +349,9 @@ export class DashboardAppointmentConfirmReassignSlotComponent
 					),
 				)
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

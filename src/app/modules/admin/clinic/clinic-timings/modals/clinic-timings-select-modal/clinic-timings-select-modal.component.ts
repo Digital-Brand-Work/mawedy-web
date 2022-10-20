@@ -20,13 +20,12 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 
 	opened$: BehaviorSubject<boolean> = this._clinicTimingSelectModal.opened$
 
-	timing$: BehaviorSubject<ClinicTimeSlot> = this._clinicTimingSelectModal.timing$
+	timing$: BehaviorSubject<ClinicTimeSlot> =
+		this._clinicTimingSelectModal.timing$
 
 	selectedTime: string = ''
 
 	ngOnInit(): void {}
-
-	identity = (item: any): any => item
 
 	ngOnDestroy(): void {}
 
@@ -65,26 +64,51 @@ export class ClinicTimingsSelectModalComponent implements OnInit {
 	handleTimeChange(timing: 'start' | 'end'): void {
 		this.timing$.pipe(take(1)).subscribe((timeSlot) => {
 			if (timing === 'start') {
-				return this.timing$.next({ ...timeSlot, start: this.handleTimeValue() })
+				return this.timing$.next({
+					...timeSlot,
+					start: this.handleTimeValue(),
+				})
 			}
 
-			return this.timing$.next({ ...timeSlot, end: this.handleTimeValue() })
+			return this.timing$.next({
+				...timeSlot,
+				end: this.handleTimeValue(),
+			})
 		})
 	}
 
 	handleOpenAndClose(mode: 'open' | 'close' | 'custom'): void {
 		this.timing$.pipe(take(1)).subscribe((timeSlot) => {
 			if (mode === 'open') {
-				this.timing$.next({ ...timeSlot, start: '00:00', end: '23:59', active: true })
+				this.timing$.next({
+					...timeSlot,
+					start: '00:00',
+					end: '23:59',
+					active: true,
+				})
 			}
 
 			if (mode === 'close') {
-				this.timing$.next({ ...timeSlot, start: null, end: null, active: false })
+				this.timing$.next({
+					...timeSlot,
+					start: null,
+					end: null,
+					active: false,
+				})
 			}
 
 			if (mode === 'custom') {
-				this.timing$.next({ ...timeSlot, start: '01:00', end: '24:30', active: true })
+				this.timing$.next({
+					...timeSlot,
+					start: '01:00',
+					end: '24:30',
+					active: true,
+				})
 			}
 		})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

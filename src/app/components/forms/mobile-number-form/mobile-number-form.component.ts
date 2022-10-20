@@ -9,18 +9,23 @@ import { countries } from 'app/app-core/constants/country-codes.list'
 export class MobileNumberFormComponent implements OnInit {
 	constructor() {}
 
-	@Output() onMobileNumberChange = new EventEmitter<{
+	@Output()
+	onMobileNumberChange = new EventEmitter<{
 		countryCode: string
 		phoneNumber: string
 	}>()
 
-	@Input() phoneErrors: boolean = false
+	@Input()
+	bold: boolean = false
 
-	@Input() bold: boolean = false
+	@Input()
+	rounded: boolean = false
 
-	@Input() bordered: boolean = false
+	@Input()
+	bordered: boolean = false
 
-	@Input() rounded: boolean = false
+	@Input()
+	phoneErrors: boolean = false
 
 	@Input('countryCode') set setCountryCode(code: string) {
 		this.country_code = code
@@ -28,9 +33,11 @@ export class MobileNumberFormComponent implements OnInit {
 		this.change(code)
 	}
 
-	@Input() phoneNumber: string = ''
+	@Input()
+	phoneNumber: string = ''
 
-	@Input('code') set setCode(code: any) {
+	@Input('code')
+	set setCode(code: any) {
 		this.country_code = code
 
 		this.country_code1 = code.toLowerCase()
@@ -65,5 +72,9 @@ export class MobileNumberFormComponent implements OnInit {
 				phoneNumber: this.phoneNumber,
 			})
 		}
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

@@ -50,7 +50,8 @@ export class UserComponent implements OnInit, OnDestroy {
 		private _switchAccountApi: SwitchAccountApi,
 	) {}
 
-	@Input() showAvatar: boolean = true
+	@Input()
+	showAvatar: boolean = true
 
 	ngAcceptInputType_showAvatar: BooleanInput
 
@@ -79,8 +80,6 @@ export class UserComponent implements OnInit, OnDestroy {
 
 		this.unsubscribe$.complete()
 	}
-
-	identity = (item: any): any => item
 
 	resolvePath(path: string): void {
 		this._clinicUserService
@@ -139,5 +138,9 @@ export class UserComponent implements OnInit, OnDestroy {
 
 	signOut(): void {
 		this._clinicUserService.logout()
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

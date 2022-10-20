@@ -38,7 +38,8 @@ export class WaitingPatientsTableComponent implements OnInit {
 		private _dashboardAppointmentService: DashboardAppointmentService,
 	) {}
 
-	@Input() appointments?: Appointment[]
+	@Input()
+	appointments?: Appointment[]
 
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.doctorDetailsModal.opened$
@@ -49,8 +50,6 @@ export class WaitingPatientsTableComponent implements OnInit {
 	patient$: BehaviorSubject<Patient | null> = this._patientService.current$
 
 	ngOnInit(): void {}
-
-	identity = (item: any) => item
 
 	viewDoctor(doctor: Doctor) {
 		this._indexDBService
@@ -86,5 +85,9 @@ export class WaitingPatientsTableComponent implements OnInit {
 		this._dashboardAppointmentService.current$.next(appointment)
 
 		this.dashboardAppointmentDetailsModalOpened$.next(true)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

@@ -14,7 +14,7 @@
 			>
 				<div
 					class="text-center accent-color font-bold uppercase rounded-md flex items-center justify-center"
-					*ngFor="let day of weekDays; trackBy: identity"
+					*ngFor="let day of weekDays; trackBy: trackByFn"
 				>
 					{{ day | shortened }}
 				</div>
@@ -27,7 +27,7 @@
 					(click)="resolveRoute('day'); setDate(calendar.date)"
 					role="button"
 					class="day hover:bg-gray-50"
-					*ngFor="let calendar of days; let i = index"
+					*ngFor="let calendar of days; trackBy: trackByFn"
 				>
 					<div>
 						<div class="flex items-center">

@@ -51,7 +51,7 @@
 							class="text-gray flex items-center py-1 md:py-2 w-full text-xs"
 							*ngFor="
 								let item of subscription.features;
-								trackBy: identity
+								trackBy: trackByFn
 							"
 						>
 							<mat-icon

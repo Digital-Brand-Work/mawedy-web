@@ -59,8 +59,6 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 		this.unsubscribe$.complete()
 	}
 
-	identity = (item: any) => item
-
 	setCalendar(date: Date) {
 		const calendar = new JsonCalendar({ today: date })
 
@@ -100,6 +98,10 @@ export class AppointmentsMonthCalendarComponent implements OnInit {
 
 	setDate(date: Date): void {
 		this.date$.next(dayjs(date).toDate())
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }
 

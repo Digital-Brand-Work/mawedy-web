@@ -78,7 +78,7 @@
 				<div
 					[class.hidden]="!account.active"
 					class="border-b border-b-gray-100"
-					*ngFor="let account of clinic?.accounts; trackBy: identity"
+					*ngFor="let account of clinic?.accounts; trackBy: trackByFn"
 				>
 					<button
 						(click)="switchAccount(account.id)"

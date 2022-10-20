@@ -248,7 +248,7 @@
 						[value]="department.id"
 						*ngFor="
 							let department of departments;
-							trackBy: identity
+							trackBy: trackByFn
 						"
 					>
 						{{ department.name }}
@@ -286,7 +286,7 @@
 						*ngFor="
 							let doctor of (doctors$ | async).entities
 								| entities;
-							trackBy: identity
+							trackBy: trackByFn
 						"
 						>{{ doctor.name }}</mat-option
 					>
@@ -325,7 +325,7 @@
 						[value]="service.id"
 						*ngFor="
 							let service of medicalServices;
-							trackBy: identity
+							trackBy: trackByFn
 						"
 					>
 						{{ service.name }}

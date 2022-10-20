@@ -31,8 +31,6 @@ export class HomeSection3PricingComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	subscribe(): any {
 		this._clinicUserService.clinic$.pipe(take(1)).subscribe((clinic) => {
 			if (clinic) {
@@ -70,5 +68,9 @@ export class HomeSection3PricingComponent implements OnInit {
 			}
 			this._router.navigate(['/subscription'])
 		})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

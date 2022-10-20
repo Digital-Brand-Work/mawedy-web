@@ -64,8 +64,6 @@ export class DashboardAppointmentConfirmCancelAppointmentComponent
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	cancel() {
 		this.appointment$.pipe(take(1)).subscribe((appointment) => {
 			this._appointmentAPI
@@ -126,5 +124,9 @@ export class DashboardAppointmentConfirmCancelAppointmentComponent
 				}),
 			)
 		}
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

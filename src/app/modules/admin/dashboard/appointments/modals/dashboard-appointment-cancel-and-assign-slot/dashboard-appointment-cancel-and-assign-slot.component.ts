@@ -32,5 +32,7 @@ export class DashboardAppointmentCancelAndAssignSlotComponent
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

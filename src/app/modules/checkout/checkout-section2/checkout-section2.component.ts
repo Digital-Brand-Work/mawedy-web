@@ -33,13 +33,17 @@ export class CheckoutSection2Component implements OnInit {
 		private _indexDbService: NgxIndexedDBService,
 	) {}
 
-	@Input() subscription$?: BehaviorSubject<Subscription | null>
+	@Input()
+	billMultiplier: number = 1
 
-	@Input() interval$?: BehaviorSubject<string | null>
+	@Input()
+	additionalUsers: number = 5
 
-	@Input() billMultiplier: number = 1
+	@Input()
+	interval$?: BehaviorSubject<string | null>
 
-	@Input() additionalUsers: number = 5
+	@Input()
+	subscription$?: BehaviorSubject<Subscription | null>
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
 
@@ -117,8 +121,6 @@ export class CheckoutSection2Component implements OnInit {
 	ngOnDestroy(): void {
 		this._cdr.detach()
 	}
-
-	identity = (item: any) => item
 
 	onCardNumberChange(cardNumber: string) {
 		this.form.get('number')?.setValue(cardNumber)
@@ -198,5 +200,9 @@ export class CheckoutSection2Component implements OnInit {
 				},
 			})
 			.add(() => (this.isProcessing = false))
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

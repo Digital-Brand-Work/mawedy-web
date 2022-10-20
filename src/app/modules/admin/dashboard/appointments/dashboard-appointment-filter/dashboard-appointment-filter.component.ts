@@ -40,8 +40,6 @@ export class DashboardAppointmentFilterComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any): any => item
-
 	setMedicalServices(id: string) {
 		this.departments$.pipe(take(1)).subscribe((store: any) => {
 			const departments: Department[] = Object.values(store.entities)
@@ -103,5 +101,9 @@ export class DashboardAppointmentFilterComponent implements OnInit {
 					}),
 				)
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

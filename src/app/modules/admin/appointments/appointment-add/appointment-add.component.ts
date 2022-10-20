@@ -74,9 +74,11 @@ export class AppointmentAddComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
-	@ViewChild('input') input?: ElementRef
+	@ViewChild('input')
+	input?: ElementRef
 
-	@ViewChild('comments', { read: ElementRef }) textArea: ElementRef
+	@ViewChild('comments', { read: ElementRef })
+	textArea: ElementRef
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -348,5 +350,9 @@ export class AppointmentAddComponent implements OnInit {
 		databases.forEach((db: string) =>
 			this._indexDBService.add(db, appointment),
 		)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

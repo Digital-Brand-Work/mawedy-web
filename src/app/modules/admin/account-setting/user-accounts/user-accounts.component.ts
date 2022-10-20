@@ -114,8 +114,6 @@ export class UserAccountsComponent implements OnInit {
 		)
 	}
 
-	identity = (item: any) => item
-
 	save() {
 		let form = new FormData()
 
@@ -288,5 +286,9 @@ export class UserAccountsComponent implements OnInit {
 				})
 			}
 		})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

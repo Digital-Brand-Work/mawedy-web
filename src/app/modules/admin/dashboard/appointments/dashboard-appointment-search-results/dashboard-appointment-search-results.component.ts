@@ -33,8 +33,6 @@ export class DashboardAppointmentSearchResultsComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	onReset() {
 		this.keyword = ''
 
@@ -86,5 +84,9 @@ export class DashboardAppointmentSearchResultsComponent implements OnInit {
 					}, 250)
 				})
 		}
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

@@ -30,7 +30,7 @@
 				*ngFor="
 					let feature of subscription.golden;
 					let i = index;
-					trackBy: identity
+					trackBy: trackByFn
 				"
 			>
 				<mat-icon

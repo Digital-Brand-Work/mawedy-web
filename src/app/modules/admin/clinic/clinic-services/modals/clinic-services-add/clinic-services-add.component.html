@@ -138,7 +138,7 @@
 						[value]="doctor.id"
 						*ngFor="
 							let doctor of (department$ | async)?.doctors;
-							trackBy: identity
+							trackBy: trackByFn
 						"
 					>
 						{{ doctor.name }}</mat-option

@@ -20,4 +20,8 @@ export class SubscriptionInvoicesComponent implements OnInit {
 	opened$: BehaviorSubject<boolean> = this.subscriptionInvoicesModal.opened$
 
 	ngOnInit(): void {}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

@@ -20,7 +20,7 @@
 		>
 			<div
 				class="flex items-center px-5 md:px-0"
-				*ngFor="let item of features; trackBy: identity"
+				*ngFor="let item of features; trackBy: trackByFn"
 			>
 				<img
 					[class]="'bg-[' + item.color + ']'"

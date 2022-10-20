@@ -189,4 +189,8 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			})
 			.add(() => (this.isProcessing = false))
 	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

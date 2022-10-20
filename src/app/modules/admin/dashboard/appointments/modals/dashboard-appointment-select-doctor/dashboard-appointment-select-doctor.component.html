@@ -49,7 +49,7 @@
 					role="button"
 					*ngFor="
 						let doctor of doctors$ | async | filter: keyword;
-						trackBy: identity
+						trackBy: trackByFn
 					"
 				>
 					<div class="border-t border-gray-100 rounded-sm doctor">

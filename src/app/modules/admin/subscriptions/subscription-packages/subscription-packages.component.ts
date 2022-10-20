@@ -41,5 +41,7 @@ export class SubscriptionPackagesComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

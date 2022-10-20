@@ -8,7 +8,7 @@
 			#input
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		>
-			<option *ngFor="let item of billIntervals; trackBy: identity">
+			<option *ngFor="let item of billIntervals; trackBy: trackByFn">
 				{{ item | titlecase }}
 			</option>
 		</select>
@@ -23,7 +23,7 @@
 			#input
 			class="py-3 px-4 rounded-md border-gray-300/80 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 		>
-			<option *ngFor="let item of subscriptionTypes; trackBy: identity">
+			<option *ngFor="let item of subscriptionTypes; trackBy: trackByFn">
 				{{ item | titlecase }}
 			</option>
 		</select>
@@ -59,7 +59,7 @@
 			*ngFor="
 				let item of handleUsers(currentSubscription.users);
 				let i = index;
-				trackBy: identity
+				trackBy: trackByFn
 			"
 			class=""
 		>

@@ -10,7 +10,7 @@
 			'text-gray-400': !link.active
 		}"
 		class="mx-0.5"
-		*ngFor="let link of items; trackBy: identity; let i = index"
+		*ngFor="let link of items; trackBy: trackByFn; let i = index"
 	>
 		{{ link.label }}
 	</button>

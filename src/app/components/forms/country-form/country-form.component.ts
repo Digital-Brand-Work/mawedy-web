@@ -10,11 +10,14 @@ import { iso } from 'app/app-core/constants/countries.iso.constant'
 export class CountryFormComponent implements OnInit {
 	constructor() {}
 
-	@Output() onChangeCountry = new EventEmitter<string>()
+	@Output()
+	onChangeCountry = new EventEmitter<string>()
 
-	@Input() bordered: boolean = false
+	@Input()
+	bordered: boolean = false
 
-	@Input() rounded: boolean = false
+	@Input()
+	rounded: boolean = false
 
 	countries: string[] = []
 
@@ -38,5 +41,7 @@ export class CountryFormComponent implements OnInit {
 		this.onChangeCountry.emit(country)
 	}
 
-	identity = (item: any) => item
+	trackByFn(index: number, item: any): any {
+		return item.id || index
+	}
 }

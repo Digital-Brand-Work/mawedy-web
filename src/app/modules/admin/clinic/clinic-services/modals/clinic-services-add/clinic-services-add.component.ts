@@ -49,9 +49,11 @@ export class ClinicServicesAddComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
-	@ViewChild('input') input!: ElementRef
+	@ViewChild('input')
+	input!: ElementRef
 
-	@ViewChild('description', { read: ElementRef }) textArea: ElementRef
+	@ViewChild('description', { read: ElementRef })
+	textArea: ElementRef
 
 	department$: BehaviorSubject<Department | null> =
 		this.departmentService.current$
@@ -81,8 +83,6 @@ export class ClinicServicesAddComponent implements OnInit {
 	ngOnInit(): void {
 		this.reloadFormValues()
 	}
-
-	identity = (item: any) => item
 
 	ngAfterViewInit(): void {
 		combineLatest([this.opened$, this.departmentService.current$])
@@ -239,5 +239,9 @@ export class ClinicServicesAddComponent implements OnInit {
 						this.departmentService.current$.next(newDepartment)
 					})
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

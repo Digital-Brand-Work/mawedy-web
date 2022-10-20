@@ -40,8 +40,6 @@ export class PatientsTableComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	paginate(url: string) {
 		this._patientService.paginate(url).subscribe((patients: any) => {
 			this.InitialDataResolver.loadPatients(patients.data)
@@ -79,5 +77,9 @@ export class PatientsTableComponent implements OnInit {
 					)
 				})
 		})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

@@ -57,7 +57,11 @@
 				[routerLink]="nav.link"
 				(click)="showNav$.next(false)"
 				class="py-3 border-b border-zinc-100 tracking-wider text-2xl font-medium accent-color flex items-center"
-				*ngFor="let nav of navigation; let i = index"
+				*ngFor="
+					let nav of navigation;
+					let i = index;
+					trackBy: trackByFn
+				"
 			>
 				<div>{{ nav.name }}</div>
 

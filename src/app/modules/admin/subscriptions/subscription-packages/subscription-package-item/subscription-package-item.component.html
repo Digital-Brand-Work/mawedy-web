@@ -27,7 +27,7 @@
 	<ul>
 		<li
 			class="text-gray flex items-center py-2"
-			*ngFor="let item of subscription.features; trackBy: identity"
+			*ngFor="let item of subscription.features; trackBy: trackByFn"
 		>
 			<mat-icon class="mr-3 text-emerald-500" svgIcon="check"></mat-icon>
 

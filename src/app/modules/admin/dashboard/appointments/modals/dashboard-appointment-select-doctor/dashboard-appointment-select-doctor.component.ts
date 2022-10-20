@@ -30,7 +30,8 @@ export class DashboardAppointmentSelectDoctorComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
-	@ViewChild('input') input?: ElementRef
+	@ViewChild('input')
+	input?: ElementRef
 
 	opened$: BehaviorSubject<boolean> =
 		this._dashboardAppointmentSelectDoctorModal.opened$
@@ -43,8 +44,6 @@ export class DashboardAppointmentSelectDoctorComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	ngAfterViewInit(): void {
 		this.input?.nativeElement.focus()
 
@@ -53,5 +52,9 @@ export class DashboardAppointmentSelectDoctorComponent implements OnInit {
 
 	ngOnDestroy(): void {
 		this._cdr.detach()
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

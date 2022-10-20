@@ -50,7 +50,8 @@ export class ForApprovalsTableComponent implements OnInit {
 		}>,
 	) {}
 
-	@Input() appointments?: Appointment[]
+	@Input()
+	appointments?: Appointment[]
 
 	doctorDetailsModalOpened$: BehaviorSubject<boolean> =
 		this.doctorDetailsModal.opened$
@@ -61,8 +62,6 @@ export class ForApprovalsTableComponent implements OnInit {
 	patient$: BehaviorSubject<Patient | null> = this._patientService.current$
 
 	ngOnInit(): void {}
-
-	identity = (item: any) => item
 
 	viewDoctor(doctor: Doctor) {
 		this._indexDBService
@@ -141,5 +140,9 @@ export class ForApprovalsTableComponent implements OnInit {
 					id: Math.floor(Math.random() * 100000000000).toString(),
 				})
 			})
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

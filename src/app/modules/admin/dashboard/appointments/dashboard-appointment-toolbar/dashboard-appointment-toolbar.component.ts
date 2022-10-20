@@ -25,9 +25,11 @@ export class DashboardAppointmentToolbarComponent implements OnInit {
 		})
 	}
 
-	@Output() onSearch = new EventEmitter<DashboardFilter>()
+	@Output()
+	onFilter = new EventEmitter()
 
-	@Output() onFilter = new EventEmitter()
+	@Output()
+	onSearch = new EventEmitter<DashboardFilter>()
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -42,8 +44,6 @@ export class DashboardAppointmentToolbarComponent implements OnInit {
 	ngOnInit(): void {
 		this.resolveActiveNav()
 	}
-
-	identity = (item: any) => item
 
 	resolveActiveNav() {
 		if (this._router.url.includes('appointments')) {
@@ -72,5 +72,9 @@ export class DashboardAppointmentToolbarComponent implements OnInit {
 		this.unsubscribe$.next(null)
 
 		this.unsubscribe$.complete()
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

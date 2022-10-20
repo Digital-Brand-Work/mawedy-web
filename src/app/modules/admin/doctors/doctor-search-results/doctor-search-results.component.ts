@@ -35,8 +35,6 @@ export class DoctorSearchResultsComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	identity = (item: any) => item
-
 	onReset() {
 		this.keyword = ''
 
@@ -83,5 +81,9 @@ export class DoctorSearchResultsComponent implements OnInit {
 					}, 250)
 				})
 		}
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

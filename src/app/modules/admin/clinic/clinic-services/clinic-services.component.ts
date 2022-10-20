@@ -72,8 +72,6 @@ export class ClinicServicesComponent implements OnInit {
 		})
 	}
 
-	identity = (item: any): any => item
-
 	setDepartment(department: Department) {
 		this.department$.next(department)
 
@@ -146,5 +144,9 @@ export class ClinicServicesComponent implements OnInit {
 		this.editClinicServiceModalOpened$.next(true)
 
 		this._medicalServiceAPI.current$.next(service)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

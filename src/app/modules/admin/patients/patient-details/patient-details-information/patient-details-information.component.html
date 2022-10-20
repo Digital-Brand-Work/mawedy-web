@@ -237,7 +237,7 @@
 					class="w-full bg-white rounded-sm px-5 focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20"
 					style="height: 45px"
 				>
-					<option *ngFor="let city of cities; trackBy: identity">
+					<option *ngFor="let city of cities; trackBy: trackByFn">
 						{{ city }}
 					</option>
 				</select>

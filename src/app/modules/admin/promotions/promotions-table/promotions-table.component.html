@@ -43,7 +43,7 @@
 						*ngFor="
 							let promotion of (promotions$ | async).entities
 								| entities;
-							trackBy: identity
+							trackBy: trackByFn
 						"
 					>
 						<td>{{ promotion.promotion_name }}</td>

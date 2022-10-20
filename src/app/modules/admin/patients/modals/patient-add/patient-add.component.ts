@@ -44,9 +44,11 @@ export class PatientAddComponent implements OnInit {
 		this.opened$.next(false)
 	}
 
-	@ViewChild('input') input!: ElementRef
+	@ViewChild('input')
+	input!: ElementRef
 
-	@ViewChild('comments', { read: ElementRef }) textArea: ElementRef
+	@ViewChild('comments', { read: ElementRef })
+	textArea: ElementRef
 
 	unsubscribe$: Subject<any> = new Subject<any>()
 
@@ -75,8 +77,6 @@ export class PatientAddComponent implements OnInit {
 	picturePreview: string | ArrayBuffer | undefined = undefined
 
 	ngOnInit(): void {}
-
-	identity = (item: any) => item
 
 	onChangeCountry(country: string) {
 		this.cities = this.countryJson[country]
@@ -171,5 +171,9 @@ export class PatientAddComponent implements OnInit {
 				},
 			})
 			.add(this.form.enable())
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }

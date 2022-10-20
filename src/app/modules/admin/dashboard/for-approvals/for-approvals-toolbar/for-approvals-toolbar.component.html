@@ -1,7 +1,7 @@
 <div class="flex items-center w-full">
 	<button
 		(click)="resolvePath(nav.link)"
-		*ngFor="let nav of dashboardTabs; trackBy: identity"
+		*ngFor="let nav of dashboardTabs; trackBy: trackByFn"
 		[ngClass]="{
 			' text-emerald-500 border-b-4 border-emerald-500 pointer-events-none':
 				activeNavigation === nav.id,

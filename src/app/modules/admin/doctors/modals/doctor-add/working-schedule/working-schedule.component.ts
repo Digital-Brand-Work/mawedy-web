@@ -19,9 +19,11 @@ import { TimeSlot } from '../../../doctor.model'
 export class WorkingScheduleComponent implements OnInit {
 	constructor(private _cdr: ChangeDetectorRef) {}
 
-	@Output() onChangeSchedule = new EventEmitter()
+	@Output()
+	onChangeSchedule = new EventEmitter()
 
-	@Input() timeslots: TimeSlot[] = []
+	@Input()
+	timeslots: TimeSlot[] = []
 
 	weekdays: string[] = weekDays
 
@@ -77,8 +79,6 @@ export class WorkingScheduleComponent implements OnInit {
 		this._cdr.detach()
 	}
 
-	identity = (item: any) => item
-
 	toggleAvailability(mode: boolean) {
 		for (let key in this.currentTimeSlots) {
 			this.currentTimeSlots[key].active = mode
@@ -89,5 +89,9 @@ export class WorkingScheduleComponent implements OnInit {
 		this._cdr.detectChanges()
 
 		this.onChangeSchedule.emit(this.currentTimeSlots)
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }
