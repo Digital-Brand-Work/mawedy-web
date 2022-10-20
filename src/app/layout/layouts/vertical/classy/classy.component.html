@@ -2,16 +2,32 @@
 
 <div
 	*ngIf="(media$ | async) <= 1650"
-	class="h-screen w-screen flex items-center justify-center bg-white flex-col text-center px-10"
+	class="w-screen bg-white flex-col text-center"
 >
-	<img
-		class="object-contain h-40 mb-5"
-		src="/assets/app/logo.svg"
-		alt="Mawedy logo"
-	/>
+	<home-navbar
+		*ngIf="
+			(breakpoint$ | async)! === 'laptop' ||
+			(breakpoint$ | async)! === 'desktop' ||
+			(breakpoint$ | async)! === 'max' ||
+			(breakpoint$ | async)! === 'tablet'
+		"
+	></home-navbar>
 
-	The system only supports desktop mode. <br />
-	Screen width should be greater than or equal to 1650px.
+	<home-navbar-responsive *ngIf="(breakpoint$ | async)! === 'phone'">
+	</home-navbar-responsive>
+
+	<div class="flex flex-col items-center justify-center min-h-screen px-10">
+		<img
+			class="object-contain h-40 mb-5"
+			src="/assets/app/logo.svg"
+			alt="Mawedy logo"
+		/>
+
+		The system only supports desktop mode. <br />
+		Screen width should be greater than or equal to 1650px.
+	</div>
+
+	<footer></footer>
 </div>
 
 <div
