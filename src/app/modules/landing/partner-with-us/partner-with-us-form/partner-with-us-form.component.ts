@@ -97,8 +97,6 @@ export class PartnerWithUsFormComponent implements OnInit {
 	}
 
 	changeCities(country: string): void {
-		// console.log(country)
-
 		this.cities = countriesWithCity[country]
 
 		if (this.cities.length !== 0) {
@@ -125,5 +123,18 @@ export class PartnerWithUsFormComponent implements OnInit {
 
 	trackByFn(index: number, item: any): any {
 		return item.id || index
+	}
+
+	next() {
+		this.form.value.address = this.form.value.line1
+
+		console.log(this.form.value)
+		console.log(this.form.invalid)
+
+		if (this.form.invalid) {
+			return
+		}
+
+		this.onNext.emit({ form: this.form, trade_license_photo: this.file })
 	}
 }

@@ -118,30 +118,15 @@
 
 			<div class="flex w-full mt-5">
 				<button
-					@fadeOutBottom
 					@slideInRight
-					[disabled]="!form.valid || filename === '' || isProcessing"
-					[ngClass]="{
-						'bg-sky-500 hover:bg-sky-600':
-							form.valid && filename !== '' && !isProcessing,
-						'bg-gray-400 pointer-events-none':
-							!form.valid || filename === '' || isProcessing
-					}"
+					@fadeOutBottom
+					(click)="next()"
 					*ngIf="step !== 'two'"
-					(click)="
-						onNext.emit({ form: form, trade_license_photo: file })
-					"
-					class="flex items-center justify-center w-full px-10 py-2 mt-10 ml-auto text-base text-white md:py-4 rounded-xl"
+					class="flex items-center justify-center w-full px-10 py-2 mt-10 ml-auto text-base text-white bg-sky-500 hover:bg-sky-600 md:py-4 rounded-xl"
 				>
 					<spinner *ngIf="isProcessing"></spinner>
 
-					<div *ngIf="($isInSubscription | async) && !isProcessing">
-						Purchase Now
-					</div>
-
-					<div *ngIf="!isProcessing && !($isInSubscription | async)">
-						Register
-					</div>
+					<div *ngIf="!isProcessing">Continue</div>
 				</button>
 			</div>
 		</form>

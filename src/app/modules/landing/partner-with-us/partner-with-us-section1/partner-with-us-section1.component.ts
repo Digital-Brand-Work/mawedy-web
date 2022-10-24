@@ -59,31 +59,27 @@ export class PartnerWithUsSection1Component implements OnInit {
 
 	register(data: { form: FormGroup; trade_license_photo: any }) {
 		this.isProcessing = true
-
 		this.emailErrors = false
-
 		this.phoneErrors = false
 
 		let form = new FormData()
+		let payload = data.form.value
+		delete payload.interval
+
+		console.log(payload)
 
 		form.append('trade_license_photo', data.trade_license_photo)
 
 		form.append(
 			'phone_number_one',
-			`${setPrefix(data.form.value.phone_number_one_country_code)}${
-				data.form.value.phone_number_one
+			`${setPrefix(payload.phone_number_one_country_code)}${
+				payload.phone_number_one
 			}`,
 		)
 
-		for (let key in data?.form?.value) {
-			if (
-				data.form.value[key] !== undefined ||
-				data.form.value[key] !== '' ||
-				key !== 'interval'
-			) {
-				if (key !== 'phone_number_one') {
-					form.append(key, data.form.value[key])
-				}
+		for (let key in payload) {
+			if (key !== 'phone_number_one') {
+				form.append(key, payload[key])
 			}
 		}
 
