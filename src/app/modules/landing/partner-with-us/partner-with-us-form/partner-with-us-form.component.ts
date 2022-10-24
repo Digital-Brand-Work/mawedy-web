@@ -9,13 +9,14 @@ import {
 	Output,
 	ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { StoreRegisterRule } from 'app/app-core/rules/register.request'
 import { countriesWithCity } from 'app/app-core/constants/countries.constant'
+import { ClinicSubscriptionTypeEnum } from 'app/app-core/enums/clinic-subscription-type.enum'
 
 @Component({
 	selector: 'partner-with-us-form',
@@ -72,7 +73,17 @@ export class PartnerWithUsFormComponent implements OnInit {
 
 	cities: string[] = countriesWithCity['United Arab Emirates']
 
-	form: FormGroup = this._formBuilder.group(this._storeRegisterRule.firstForm)
+	form: FormGroup = this._formBuilder.group({
+		city: [''],
+		name: ['', Validators.required],
+		line1: ['', Validators.required],
+		postal_code: ['', Validators.required],
+		phone_number_one: ['', Validators.required],
+		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
+		email: ['', [Validators.email, Validators.required]],
+		country: ['United Arab Emirates', Validators.required],
+		phone_number_one_country_code: ['AE', Validators.required],
+	})
 
 	filename: string = ''
 

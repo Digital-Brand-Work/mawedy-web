@@ -14,6 +14,7 @@ import { Router } from '@angular/router'
 import { StoreRegisterRule } from 'app/app-core/rules/register.request'
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
 import { MediaService } from '@digital_brand_work/utilities/media.service'
+import { ClinicSubscriptionTypeEnum } from 'app/app-core/enums/clinic-subscription-type.enum'
 
 @Component({
 	selector: 'landing-subscription-section1-form',
@@ -69,7 +70,13 @@ export class LandingSubscriptionSection1FormComponent implements OnInit {
 	$isInSubscription = new BehaviorSubject<boolean>(true)
 
 	form: FormGroup = this._formBuilder.group({
-		...this._storeRegisterRule.firstForm,
+		name: ['', Validators.required],
+		phone_number_one: ['', Validators.required],
+		address: ['', Validators.required],
+		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
+		email: ['', [Validators.email, Validators.required]],
+		phone_number_one_country_code: ['AE', Validators.required],
+		interval: [''],
 		password: ['', [Validators.required, Validators.min(8)]],
 	})
 
