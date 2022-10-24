@@ -8,211 +8,213 @@
 
 @import url('https://fonts.cdnfonts.com/css/avenir');
 
-html {
-	overflow: auto;
-}
+@tailwind components;
 
-html,
-body {
-	scroll-behavior: smooth;
-	overflow-x: hidden;
-}
+@layer components {
+	html {
+		overflow: auto;
+	}
 
-body {
-	//Avenir
-	font-family: 'Avenir', 'Nunito Sans', sans-serif;
-	font-weight: 400;
-	scroll-behavior: smooth;
-	overflow-y: hidden;
-}
+	html,
+	body {
+		scroll-behavior: smooth;
+		overflow-x: hidden;
+	}
 
-@media (pointer: none), (pointer: coarse) {
+	body {
+		//Avenir
+		font-family: 'Avenir', 'Nunito Sans', sans-serif;
+		font-weight: 400;
+		scroll-behavior: smooth;
+		overflow-y: hidden;
+	}
+
+	@media (pointer: none), (pointer: coarse) {
+		input,
+		textarea,
+		select {
+			font-size: 16px !important;
+		}
+	}
+
 	input,
-	textarea,
 	select {
-		font-size: 16px !important;
-	}
-}
-
-input,
-select {
-	font-size: 16px;
-	font-weight: 500;
-	color: #0a2440;
-}
-
-.bg-accent {
-	background: #0a2440;
-}
-
-.accent-color {
-	color: #0a2440;
-}
-
-select option:checked,
-select option:hover {
-	background: #10b981;
-	color: #fff;
-}
-
-input[type='search']::-webkit-search-cancel-button {
-	-webkit-appearance: none;
-	background: url('/assets/app/x-circle.svg') no-repeat 60% 60%;
-	background-size: contain;
-}
-
-select {
-	background: url('/assets/app/dropdown-icon.svg') no-repeat !important;
-	background-position: calc(100% - 0.75rem) center !important;
-	-moz-appearance: none !important;
-	-webkit-appearance: none !important;
-	appearance: none !important;
-	padding-right: 2rem !important;
-}
-
-::-webkit-calendar-picker-indicator {
-	background-image: url('/assets/app/calendar-icon.svg');
-	cursor: pointer;
-	margin-left: 0.5rem;
-	transform: scale(1.4);
-}
-
-input[type='time']::-webkit-calendar-picker-indicator {
-	background-image: url('/assets/app/clock.svg');
-	cursor: pointer;
-	margin-left: 0.5rem;
-	transform: scale(1.4);
-}
-
-.datalist::-webkit-calendar-picker-indicator {
-	display: none !important;
-}
-
-th,
-td {
-	text-align: left;
-	padding-left: 1rem;
-	height: inherit;
-}
-
-::placeholder {
-	font-size: 13px;
-	font-weight: 400;
-	color: #6d7c8d;
-}
-
-::-webkit-input-placeholder {
-	font-weight: lighter;
-	color: #afb2b3;
-}
-
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus,
-select:-webkit-autofill:active,
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-	transition: background-color 5000s ease-in-out 0s;
-	-webkit-text-fill-color: #0a2440;
-}
-
-textarea {
-	resize: none; /*remove the resize handle on the bottom right*/
-}
-select {
-	cursor: pointer;
-}
-
-.gm-style-iw {
-	border-radius: 4px !important;
-	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
-	background: white !important;
-	border: none !important;
-}
-
-.mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
-	opacity: 0.03 !important;
-	background-color: #10b981 !important;
-}
-
-.mat-checkbox-checked.mat-accent .mat-checkbox-background,
-.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-	background-color: #10b981 !important;
-}
-.mat-checkbox-ripple .mat-ripple-element,
-.mat-checkbox-checked.mat-accent .mat-checkbox-background {
-	background-color: #10b981 !important;
-}
-
-.mat-progress-bar-fill::after {
-	background-color: #14b8a6 !important;
-}
-
-mat-checkbox {
-	.mat-checkbox-background {
-		border: 1px solid #10b981;
-		background: white;
+		font-size: 16px;
+		font-weight: 500;
+		color: #0a2440;
 	}
 
-	.mat-checkbox-focused {
-		border: 1px solid #10b981;
-		background: white;
+	.bg-accent {
+		background: #0a2440;
 	}
-}
 
-.mat-menu-panel {
-	box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 19px 0px !important;
-}
-
-.mat-menu-panel {
-	max-width: 500px !important;
-}
-
-.fuse-vertical-navigation-item-title-wrapper {
-	font-weight: 700 !important;
-	color: #0a2440;
-}
-
-.fuse-vertical-navigation-item:hover:not(.fuse-vertical-navigation-item-active) {
-	* {
-		color: #0a2440 !important;
+	.accent-color {
+		color: #0a2440;
 	}
-}
 
-.fuse-vertical-navigation-item-active {
-	background: #ebf9f4 !important;
-	* {
-		color: #00b074 !important;
+	select option:checked,
+	select option:hover {
+		background: #10b981;
+		color: #fff;
 	}
-	mat-icon {
-		color: #00b074 !important;
+
+	input[type='search']::-webkit-search-cancel-button {
+		-webkit-appearance: none;
+		background: url('/assets/app/x-circle.svg') no-repeat 60% 60%;
+		background-size: contain;
 	}
-}
 
-.fuse-vertical-navigation-item {
-	padding-top: 15px !important;
-	padding-bottom: 15px !important;
-	margin-bottom: 0 !important;
-}
-
-.fuse-vertical-navigation-content mat-icon {
-	color: #99a8bc !important;
-}
-
-.fuse-vertical-navigation-content {
-	padding-top: 3rem;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.fuse-confirmation-dialog-panel {
-	* {
-		box-shadow: none !important;
+	select {
+		background: url('/assets/app/dropdown-icon.svg') no-repeat !important;
+		background-position: calc(100% - 0.75rem) center !important;
+		-moz-appearance: none !important;
+		-webkit-appearance: none !important;
+		appearance: none !important;
+		padding-right: 2rem !important;
 	}
-}
 
-.cdk-global-scrollblock {
-	overflow-y: hidden !important;
+	::-webkit-calendar-picker-indicator {
+		background-image: url('/assets/app/calendar-icon.svg');
+		cursor: pointer;
+		margin-left: 0.5rem;
+		transform: scale(1.4);
+	}
+
+	input[type='time']::-webkit-calendar-picker-indicator {
+		background-image: url('/assets/app/clock.svg');
+		cursor: pointer;
+		margin-left: 0.5rem;
+		transform: scale(1.4);
+	}
+
+	.datalist::-webkit-calendar-picker-indicator {
+		display: none !important;
+	}
+
+	th,
+	td {
+		text-align: left;
+		padding-left: 1rem;
+		height: inherit;
+	}
+
+	::placeholder {
+		@apply font-normal text-gray-300  #{'!important'};
+	}
+
+	::-webkit-input-placeholder {
+		font-weight: lighter;
+		color: #afb2b3;
+	}
+
+	select:-webkit-autofill,
+	select:-webkit-autofill:hover,
+	select:-webkit-autofill:focus,
+	select:-webkit-autofill:active,
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+		transition: background-color 5000s ease-in-out 0s;
+		-webkit-text-fill-color: #0a2440;
+	}
+
+	textarea {
+		resize: none; /*remove the resize handle on the bottom right*/
+	}
+	select {
+		cursor: pointer;
+	}
+
+	.gm-style-iw {
+		border-radius: 4px !important;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+		background: white !important;
+		border: none !important;
+	}
+
+	.mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+		opacity: 0.03 !important;
+		background-color: #10b981 !important;
+	}
+
+	.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+	.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+		background-color: #10b981 !important;
+	}
+	.mat-checkbox-ripple .mat-ripple-element,
+	.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+		background-color: #10b981 !important;
+	}
+
+	.mat-progress-bar-fill::after {
+		background-color: #14b8a6 !important;
+	}
+
+	mat-checkbox {
+		.mat-checkbox-background {
+			border: 1px solid #10b981;
+			background: white;
+		}
+
+		.mat-checkbox-focused {
+			border: 1px solid #10b981;
+			background: white;
+		}
+	}
+
+	.mat-menu-panel {
+		box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 19px 0px !important;
+	}
+
+	.mat-menu-panel {
+		max-width: 500px !important;
+	}
+
+	.fuse-vertical-navigation-item-title-wrapper {
+		font-weight: 700 !important;
+		color: #0a2440;
+	}
+
+	.fuse-vertical-navigation-item:hover:not(.fuse-vertical-navigation-item-active) {
+		* {
+			color: #0a2440 !important;
+		}
+	}
+
+	.fuse-vertical-navigation-item-active {
+		background: #ebf9f4 !important;
+		* {
+			color: #00b074 !important;
+		}
+		mat-icon {
+			color: #00b074 !important;
+		}
+	}
+
+	.fuse-vertical-navigation-item {
+		padding-top: 15px !important;
+		padding-bottom: 15px !important;
+		margin-bottom: 0 !important;
+	}
+
+	.fuse-vertical-navigation-content mat-icon {
+		color: #99a8bc !important;
+	}
+
+	.fuse-vertical-navigation-content {
+		padding-top: 3rem;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.fuse-confirmation-dialog-panel {
+		* {
+			box-shadow: none !important;
+		}
+	}
+
+	.cdk-global-scrollblock {
+		overflow-y: hidden !important;
+	}
 }

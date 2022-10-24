@@ -1,9 +1,9 @@
-<div class="grid grid-cols-1 md:grid-cols-2 w-screen">
+<div class="grid w-screen grid-cols-1 md:grid-cols-2">
 	<div
-		class="text-white bg-gray-50 w-full flex justify-center md:justify-end py-10"
+		class="flex justify-center w-full py-10 text-white bg-gray-50 md:justify-end"
 	>
 		<checkout-section1
-			class="w-full"
+			class="flex"
 			[interval$]="interval$"
 			[subscription$]="subscription$"
 			[billMultiplier]="billMultiplier"
@@ -11,7 +11,7 @@
 		></checkout-section1>
 	</div>
 
-	<div class="w-full md:h-screen md:overflow-y-auto py-10">
+	<div class="w-full py-10 md:h-screen md:overflow-y-auto">
 		<checkout-section2
 			class="w-full"
 			[interval$]="interval$"

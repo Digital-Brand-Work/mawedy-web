@@ -8,6 +8,8 @@ export class ErrorHandlerService {
 	constructor(private _alert: AlertState) {}
 
 	handleError(http: HttpErrorResponse) {
+		// 'EXPiRED_SUBSCRIPTION'
+
 		for (let key in http.error.errors) {
 			for (let error of http.error.errors[key]) {
 				this._alert.add({

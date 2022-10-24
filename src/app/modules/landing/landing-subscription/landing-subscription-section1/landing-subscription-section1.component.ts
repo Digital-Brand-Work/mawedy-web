@@ -183,6 +183,10 @@ export class LandingSubscriptionSection1Component implements OnInit {
 			.add(() => (this.isProcessing = false))
 	}
 
+	signOut(): void {
+		this._clinicUserService.logout()
+	}
+
 	trackByFn(index: number, item: any): any {
 		return item.id || index
 	}

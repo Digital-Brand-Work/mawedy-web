@@ -1018,22 +1018,22 @@
 .mat-input-element {
 	&::placeholder {
 		transition: none !important;
-		@apply text-hint #{'!important'};
+		@apply text-gray-400 #{'!important'};
 	}
 
 	&::-moz-placeholder {
 		transition: none !important;
-		@apply text-hint #{'!important'};
+		@apply text-gray-400 #{'!important'};
 	}
 
 	&::-webkit-input-placeholder {
 		transition: none !important;
-		@apply text-hint #{'!important'};
+		@apply text-gray-400 #{'!important'};
 	}
 
 	&:-ms-input-placeholder {
 		transition: none !important;
-		@apply text-hint #{'!important'};
+		@apply text-gray-400 #{'!important'};
 	}
 }
 
