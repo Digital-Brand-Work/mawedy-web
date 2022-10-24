@@ -1,25 +1,25 @@
 <ng-container *ngIf="breakpoint$ | async as breakpoint">
 	<div
 		[ngClass]="{ 'mt-20': breakpoint === 'tablet' }"
-		class="flex flex-col items-center justify-center md:mt-10 w-full"
+		class="flex flex-col items-center justify-center w-full md:mt-10"
 	>
 		<div
-			class="max-w-screen-sm px-5 py-10 rounded-xl drop-shadow-lg bg-white"
+			class="max-w-screen-sm px-5 py-10 bg-white rounded-xl drop-shadow-lg"
 		>
 			<div class="text-2xl font-black text-emerald-500">
 				Clinic Information
 			</div>
 
-			<form [formGroup]="form" class="md:w-full mt-8">
+			<form [formGroup]="form" class="mt-8 md:w-full">
 				<mat-form-field class="w-full">
 					<mat-label>Clinic Name</mat-label>
-					<input matInput formControlName="name" />
+					<input #input matInput formControlName="name" />
 					<mat-error>Clinic Name is required</mat-error>
 				</mat-form-field>
 
 				<mat-form-field class="w-full">
 					<mat-label>Clinic Address</mat-label>
-					<input matInput formControlName="address" />
+					<input matInput formControlName="line1" />
 					<mat-error>Clinic Address is required</mat-error>
 				</mat-form-field>
 
@@ -49,12 +49,12 @@
 						matSuffix
 					>
 						<mat-icon
-							class="icon-size-5 text-gray-400"
+							class="text-gray-400 icon-size-5"
 							*ngIf="passwordField.type === 'password'"
 							[svgIcon]="'heroicons_solid:eye'"
 						></mat-icon>
 						<mat-icon
-							class="icon-size-5 text-gray-400"
+							class="text-gray-400 icon-size-5"
 							*ngIf="passwordField.type === 'text'"
 							[svgIcon]="'heroicons_solid:eye-off'"
 						></mat-icon>
@@ -63,7 +63,7 @@
 				</mat-form-field>
 
 				<div class="mb-5">
-					<div class="mb-1 font-bold text-gray-500 text-base">
+					<div class="mb-1 text-base font-bold text-gray-500">
 						Mobile Number*
 					</div>
 
@@ -92,21 +92,21 @@
 				</div>
 
 				<input
-					accept="image/*"
-					(change)="setTradeLicense($event)"
 					type="file"
 					#tradeLicense
 					class="hidden"
+					accept="image/*"
+					(change)="setTradeLicense($event)"
 				/>
 
-				<div class="mb-5 flex items-center">
-					<div class="mb-1 font-bold text-gray-500 text-base">
+				<div class="flex items-center mb-5">
+					<div class="mb-1 text-base font-bold text-gray-500">
 						Trade License No.
 					</div>
 
 					<button
 						(click)="tradeLicense.click()"
-						class="border text-white bg-emerald-500 hover:bg-emerald-600 px-10 py-3 rounded-lg ml-auto"
+						class="px-10 py-3 ml-auto text-white border rounded-lg bg-emerald-500 hover:bg-emerald-600"
 					>
 						{{ filename === '' ? 'Upload Docs' : 'Change Docs' }}
 					</button>
@@ -114,7 +114,7 @@
 
 				<div class="mt-2 text-sky-500">{{ filename }}</div>
 
-				<div class="mt-5 flex w-full">
+				<div class="flex w-full mt-5">
 					<button
 						@fadeOutBottom
 						@slideInRight
@@ -134,7 +134,7 @@
 								trade_license_photo: file
 							})
 						"
-						class="text-white px-10 py-4 rounded-lg ml-auto w-full flex items-center justify-center mt-10"
+						class="flex items-center justify-center w-full px-10 py-4 mt-10 ml-auto text-white rounded-lg"
 					>
 						<spinner *ngIf="isProcessing"></spinner>
 

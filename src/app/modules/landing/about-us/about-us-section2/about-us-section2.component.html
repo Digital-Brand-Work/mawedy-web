@@ -14,6 +14,8 @@
 			class="grid items-center justify-center w-full grid-cols-3 gap-15 md:gap-20"
 		>
 			<div
+				data-aos="zoom-in-up"
+				data-aos-duration="350"
 				class="flex-col items-center w-full"
 				*ngFor="let item of benefits; trackBy: trackByFn"
 			>
@@ -31,7 +33,7 @@
 					"
 					[src]="'/assets/app/about-us/benefits/' + item.img + '.png'"
 					alt="benefit-time"
-					class="object-contain hover:scale-x-[-1]"
+					class="object-contain"
 				/>
 
 				<div

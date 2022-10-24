@@ -18,6 +18,8 @@
 				class="flex flex-col my-auto text-center"
 			>
 				<div
+					data-aos="slide-down"
+					data-aos-duration="450"
 					@expandCollapse
 					class="text-4xl font-bold leading-none text-center md:text-4xl text-emerald-500 md:text-left"
 				>
@@ -25,6 +27,8 @@
 				</div>
 
 				<div
+					data-aos="slide-down"
+					data-aos-duration="450"
 					*ngIf="(breakpoint$ | async) === 'phone'"
 					class="grid grid-cols-2 gap-x-3 mt-15"
 				>
@@ -34,6 +38,8 @@
 				</div>
 
 				<div
+					data-aos="slide-up"
+					data-aos-duration="450"
 					*ngIf="(breakpoint$ | async) !== 'phone'"
 					[@listAnimation]="2"
 					[ngClass]="{
@@ -49,7 +55,11 @@
 				</div>
 			</div>
 
-			<div class="flex items-center justify-center w-full">
+			<div
+				data-aos="zoom-in-up"
+				data-aos-duration="350"
+				class="flex items-center justify-center w-full"
+			>
 				<preview-section class="w-full"></preview-section>
 			</div>
 		</div>
