@@ -27,15 +27,21 @@
 			</mat-form-field>
 
 			<mat-form-field class="w-full">
+				<mat-label>Email Address</mat-label>
+				<input matInput formControlName="email" />
+				<mat-error>Invalid Email Format</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="w-full">
 				<mat-label>Clinic Address</mat-label>
-				<input matInput formControlName="address" />
+				<input matInput formControlName="line1" />
 				<mat-error>Clinic Address is required</mat-error>
 			</mat-form-field>
 
 			<mat-form-field class="w-full">
-				<mat-label>Email Address</mat-label>
-				<input matInput formControlName="email" />
-				<mat-error>Invalid Email Format</mat-error>
+				<mat-label>Zip/Postal Code</mat-label>
+				<input matInput formControlName="postal_code" />
+				<mat-error>Zip/Postal Code is required</mat-error>
 			</mat-form-field>
 
 			<div class="mb-3">

@@ -54,15 +54,20 @@ export class PartnerWithUsFormComponent implements OnInit {
 		trade_license_photo: any
 	}>()
 
-	@Input() step: 'one' | 'two' = 'one'
+	@Input()
+	step: 'one' | 'two' = 'one'
 
-	@Input() emailErrors: boolean = false
+	@Input()
+	emailErrors: boolean = false
 
-	@Input() phoneErrors: boolean = false
+	@Input()
+	phoneErrors: boolean = false
 
-	@Input() isProcessing: boolean = false
+	@Input()
+	isProcessing: boolean = false
 
-	@Input() focus$!: BehaviorSubject<boolean>
+	@Input()
+	focus$!: BehaviorSubject<boolean>
 
 	form: FormGroup = this._formBuilder.group(this._storeRegisterRule.firstForm)
 
