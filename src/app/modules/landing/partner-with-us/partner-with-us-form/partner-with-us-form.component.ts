@@ -78,6 +78,10 @@ export class PartnerWithUsFormComponent implements OnInit {
 
 	file?: File
 
+	get phone_number_one_country_code() {
+		return this.form.get('phone_number_one_country_code')
+	}
+
 	ngOnInit(): void {
 		this.changeCities('United Arab Emirates')
 	}
@@ -126,10 +130,11 @@ export class PartnerWithUsFormComponent implements OnInit {
 	}
 
 	next() {
-		this.form.value.address = this.form.value.line1
-
-		console.log(this.form.value)
-		console.log(this.form.invalid)
+		for (let el in this.form.controls) {
+			if (this.form.controls[el].errors) {
+				console.log(el)
+			}
+		}
 
 		if (this.form.invalid) {
 			return

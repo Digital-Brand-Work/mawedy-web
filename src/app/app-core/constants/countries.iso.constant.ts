@@ -3237,3 +3237,5 @@ export const iso = [
 		'intermediate-region-code': '014',
 	},
 ]
+
+export const countryWithISO = iso

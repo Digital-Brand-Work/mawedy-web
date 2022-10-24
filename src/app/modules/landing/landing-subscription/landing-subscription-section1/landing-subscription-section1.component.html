@@ -204,13 +204,14 @@
 						(click)="toCheckOut()"
 						class="flex items-center justify-center w-full px-10 py-4 mt-40 ml-auto text-lg font-bold text-white uppercase rounded-lg hover:bg-emerald-600 bg-emerald-500"
 					>
-						<div>Proceed to CheckOut</div>
+						<div>Proceed to Checkout</div>
 					</button>
 
 					<button
 						@slideInRight
 						@fadeOutBottom
 						(click)="signOut()"
+						*ngIf="hasLoggedIn$ | async"
 						class="flex items-center justify-center w-full px-10 py-4 mt-3 ml-auto text-lg font-bold uppercase bg-gray-100 rounded-lg hover:bg-gray-50"
 					>
 						<div>Cancel</div>

@@ -30,16 +30,12 @@ export class PartnerWithUsSection1Component implements OnInit {
 	) {}
 
 	unsubscribe$: Subject<any> = new Subject<any>()
-
 	breakpoint$: Observable<BreakPoint> = this._mediaService.breakpoints$
-
 	focus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
-	isProcessing: boolean = false
-
 	emailErrors: boolean = false
-
 	phoneErrors: boolean = false
+	isProcessing: boolean = false
 
 	ngOnInit(): void {
 		this.focus$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
@@ -53,7 +49,6 @@ export class PartnerWithUsSection1Component implements OnInit {
 
 	ngOnDestroy(): void {
 		this.unsubscribe$.next(null)
-
 		this.unsubscribe$.complete()
 	}
 
@@ -70,18 +65,15 @@ export class PartnerWithUsSection1Component implements OnInit {
 
 		form.append('trade_license_photo', data.trade_license_photo)
 
-		form.append(
-			'phone_number_one',
-			`${setPrefix(payload.phone_number_one_country_code)}${
-				payload.phone_number_one
-			}`,
-		)
+		form.append('phone_number_one', `+${payload.phone_number_one}`)
 
 		for (let key in payload) {
 			if (key !== 'phone_number_one') {
 				form.append(key, payload[key])
 			}
 		}
+
+		form.append('address', `+${payload.line1}`)
 
 		this._registerService
 			.post(form)

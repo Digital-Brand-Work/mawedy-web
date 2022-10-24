@@ -28,6 +28,7 @@ import { HomeSection3Component } from 'app/modules/landing/home/home-section3/ho
 import { HomeSection3PricingComponent } from 'app/modules/landing/home/home-section3/home-section3-pricing/home-section3-pricing.component'
 import { CountryFormFieldComponent } from '@digital_brand_work/components/forms/country-form-field/country-form-field.component'
 import { ToFlagPipe } from '@digital_brand_work/pipes/to-flag.pipe'
+import { PhoneFormFieldComponent } from '@digital_brand_work/components/forms/phone-form-field/phone-form-field.component'
 
 export const appComponents = [
 	GooglePlayButtonComponent,
@@ -60,4 +61,5 @@ export const appComponents = [
 	HomeSection3PricingComponent,
 	CountryFormFieldComponent,
 	ToFlagPipe,
+	PhoneFormFieldComponent,
 ]

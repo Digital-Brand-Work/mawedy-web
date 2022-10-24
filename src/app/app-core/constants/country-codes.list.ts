@@ -1216,3 +1216,5 @@ export const countries: DialCode[] = [
 		code: 'ZW',
 	},
 ]
+
+export const countryWithDialCode = countries

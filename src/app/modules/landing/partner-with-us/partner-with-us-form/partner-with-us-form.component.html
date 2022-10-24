@@ -22,7 +22,7 @@
 		<form [formGroup]="form" class="md:w-full">
 			<mat-form-field class="w-full">
 				<mat-label>Clinic Name</mat-label>
-				<input matInput formControlName="name" />
+				<input #input matInput formControlName="name" />
 				<mat-error>Clinic Name is required</mat-error>
 			</mat-form-field>
 
@@ -69,28 +69,17 @@
 				<mat-error>Zip/Postal Code is required</mat-error>
 			</mat-form-field>
 
-			<div class="mb-3">
-				<div class="text-gray-500">Mobile Number*</div>
+			<div class="w-full">
+				<mat-label>Mobile Number</mat-label>
 
-				<div class="">
-					<input type="hidden" formControlName="phone_number_one" />
-
-					<input
-						type="hidden"
-						formControlName="phone_number_one_country_code"
-					/>
-
-					<mobile-number-form
-						(onMobileNumberChange)="
-							handleMobileNumberChange($event)
-						"
-						[phoneNumber]="form.value.phone_number_one"
-						[phoneErrors]="phoneErrors"
-						[bordered]="true"
-						[rounded]="true"
-						class="w-full"
-					></mobile-number-form>
-				</div>
+				<phone-form-field
+					[form]="form"
+					name="phone_number_one"
+					placeholder="Work phone"
+					(onChangeCountryCode)="
+						phone_number_one_country_code?.setValue($event)
+					"
+				></phone-form-field>
 			</div>
 
 			<input

@@ -1,0 +1,38 @@
+<form class="w-full" *ngIf="form && name" [formGroup]="form">
+	<mat-form-field class="w-full">
+		<img
+			alt="Flag"
+			matPrefix
+			role="button"
+			style="transform: scaleY(1.2)"
+			(click)="phoneCountryCode.open()"
+			[src]="countryISO | to_flag"
+			class="object-contain w-8 pr-2 mr-3 scale-125 border-r rounded-sm"
+		/>
+
+		<mat-select
+			#phoneCountryCode
+			class="invisible w-1 h-1"
+			placeholder="Select Country"
+			(selectionChange)="changeFlag($event.value)"
+		>
+			<mat-option
+				[value]="country.name"
+				*ngFor="let country of COUNTRIES; trackBy: trackByFn"
+			>
+				{{ country.name }}
+			</mat-option>
+		</mat-select>
+
+		<input
+			type="tel"
+			stop-propagation
+			mask="(000) 00-000-0000"
+			[formControlName]="name"
+			[placeholder]="placeholder"
+			matInput
+		/>
+
+		<mat-error>Phone is required.</mat-error>
+	</mat-form-field>
+</form>
