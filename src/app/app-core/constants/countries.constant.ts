@@ -1,3 +1,5 @@
+
+
 export const countries:{[key:string]:string[]} = {
   "Afghanistan": [
     "Herat",
@@ -84144,3 +84146,6 @@ export const countries:{[key:string]:string[]} = {
     "Victoria Falls"
   ]
 }
+
+
+export const countriesWithCity = countries

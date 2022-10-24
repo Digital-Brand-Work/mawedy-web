@@ -13,7 +13,7 @@ import { UnderConstructionComponent } from 'app/modules/pages/under-construction
 import { SSRExcludeModule } from 'ngx-ssr-exclude'
 import { NgxIndexedDBModule } from 'ngx-indexed-db'
 import { indexedDbConfig } from 'app/app-core/indexed-db/indexed-db.config'
-import { matModules } from './mat.modules'
+import { angularMaterialModules } from './mat.modules'
 import { appComponents } from './app.components'
 import { modalComponents } from './modal.components'
 import { AgmCoreModule } from '@agm/core'
@@ -78,7 +78,7 @@ const modules: any[] = [
 	InViewportModule,
 	RouterModule,
 	NgxFullpageModule,
-	...matModules,
+	...angularMaterialModules,
 ]
 
 const pipes: any[] = [

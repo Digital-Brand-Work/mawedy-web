@@ -13,9 +13,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatMomentDateModule } from '@angular/material-moment-adapter'
-import { MatProgressBarModule } from '@angular/material/progress-bar'
 
-export const matModules = [
+export const angularMaterialModules = [
 	MatIconModule,
 	MatMenuModule,
 	MatInputModule,
@@ -34,5 +33,4 @@ export const matModules = [
 	MatProgressSpinnerModule,
 	MatNativeDateModule,
 	MatMomentDateModule,
-	MatProgressBarModule,
 ]

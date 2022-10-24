@@ -26,6 +26,8 @@ import { CalendarItemDayComponent } from 'app/components/calendar-item-day/calen
 import { PaginationComponent } from 'app/components/pagination/pagination.component'
 import { HomeSection3Component } from 'app/modules/landing/home/home-section3/home-section3.component'
 import { HomeSection3PricingComponent } from 'app/modules/landing/home/home-section3/home-section3-pricing/home-section3-pricing.component'
+import { CountryFormFieldComponent } from '@digital_brand_work/components/forms/country-form-field/country-form-field.component'
+import { ToFlagPipe } from '@digital_brand_work/pipes/to-flag.pipe'
 
 export const appComponents = [
 	GooglePlayButtonComponent,
@@ -56,4 +58,6 @@ export const appComponents = [
 	PaginationComponent,
 	HomeSection3Component,
 	HomeSection3PricingComponent,
+	CountryFormFieldComponent,
+	ToFlagPipe,
 ]

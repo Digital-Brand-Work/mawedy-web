@@ -38,7 +38,7 @@ export class StoreRegisterRule {
 		phone_number_one: [''],
 		city: [''],
 		line1: ['', Validators.required],
-		country: [''],
+		country: ['United Arab Emirates'],
 		postal_code: ['', Validators.required],
 		subscription_type: [ClinicSubscriptionTypeEnum.FREE],
 		interval: [''],

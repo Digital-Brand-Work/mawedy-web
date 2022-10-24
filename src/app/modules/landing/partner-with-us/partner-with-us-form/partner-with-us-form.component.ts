@@ -15,6 +15,7 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs'
 import { StoreRegisterRule } from 'app/app-core/rules/register.request'
+import { countriesWithCity } from 'app/app-core/constants/countries.constant'
 
 @Component({
 	selector: 'partner-with-us-form',
@@ -69,13 +70,17 @@ export class PartnerWithUsFormComponent implements OnInit {
 	@Input()
 	focus$!: BehaviorSubject<boolean>
 
+	cities: string[] = countriesWithCity['United Arab Emirates']
+
 	form: FormGroup = this._formBuilder.group(this._storeRegisterRule.firstForm)
 
 	filename: string = ''
 
 	file?: File
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.changeCities('United Arab Emirates')
+	}
 
 	ngAfterViewInit(): void {
 		this.input.nativeElement.focus()
@@ -89,6 +94,16 @@ export class PartnerWithUsFormComponent implements OnInit {
 		this.unsubscribe$.complete()
 
 		this._cdr.detach()
+	}
+
+	changeCities(country: string): void {
+		// console.log(country)
+
+		this.cities = countriesWithCity[country]
+
+		if (this.cities.length !== 0) {
+			this.form.get('city')?.setValue(this.cities[0])
+		}
 	}
 
 	handleMobileNumberChange(event: {
@@ -106,5 +121,9 @@ export class PartnerWithUsFormComponent implements OnInit {
 		this.file = event.target.files[0]
 
 		this.filename = event.target.files[0].name
+	}
+
+	trackByFn(index: number, item: any): any {
+		return item.id || index
 	}
 }
