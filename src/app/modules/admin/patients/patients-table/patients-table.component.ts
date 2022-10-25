@@ -1,4 +1,4 @@
-import { InitialDataResolver } from 'app/app.resolvers'
+import { StoreAction } from './../../../../app-core/store/core/action.enum'
 import { PaginationData } from './../../../../app.resolvers'
 import { slugify } from '@digital_brand_work/helpers/helpers'
 import { Patient } from './../patient.model'
@@ -6,13 +6,14 @@ import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Component, Input, OnInit } from '@angular/core'
 import { PatientService } from '../patient.service'
 import { Store } from '@ngrx/store'
-import * as PatientActions from '../patient.actions'
+import * as PatientActions from '../../../../app-core/store/ngrx/patients/patient.actions'
 import { BehaviorSubject, take } from 'rxjs'
 import { ClinicUserService } from '../../clinic/clinic.service'
 import { Router } from '@angular/router'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { DB } from 'app/app-core/enums/index.db.enum'
 import { PaginationService } from 'app/app-core/misc/pagination.service'
+import { AppState } from 'app/app-core/store/core/app.state'
 
 @Component({
 	selector: 'patients-table',
@@ -24,31 +25,24 @@ export class PatientsTableComponent implements OnInit {
 	constructor(
 		private _router: Router,
 		private _patientService: PatientService,
-		private _indexDBService: NgxIndexedDBService,
-		private store: Store<{ patients: Patient[] }>,
+		private store: Store<AppState>,
 		private _clinicUserService: ClinicUserService,
 		private _paginationService: PaginationService,
-		private InitialDataResolver: InitialDataResolver,
 	) {}
 
-	patient$: BehaviorSubject<Patient | null> = this._patientService.current$
+	patient$ = this._patientService.current$
 
-	paginatedData$: BehaviorSubject<PaginationData | null> =
-		this._paginationService.patients$
+	paginatedData$ = this._paginationService.patients$
 
-	@Input() patients: Patient[] = []
+	@Input()
+	patients: Patient[] = []
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.store.dispatch(StoreAction.PATIENT.LOAD())
+	}
 
 	paginate(url: string) {
-		this._patientService.paginate(url).subscribe((patients: any) => {
-			this.InitialDataResolver.loadPatients(patients.data)
-
-			this.paginatedData$.next({
-				links: patients.links,
-				meta: patients.meta,
-			})
-		})
+		this.store.dispatch(StoreAction.PATIENT.PAGINATE({ url: url }))
 	}
 
 	viewPatient(patient: Patient) {
@@ -68,15 +62,7 @@ export class PatientsTableComponent implements OnInit {
 	}
 
 	remove(patient: Patient) {
-		this._patientService.remove(patient.id).subscribe(() => {
-			this._indexDBService
-				.delete(DB.PATIENTS, patient.id)
-				.subscribe(() => {
-					this.store.dispatch(
-						PatientActions.deletePatient({ id: patient.id }),
-					)
-				})
-		})
+		this.store.dispatch(StoreAction.PATIENT.REMOVE({ id: patient.id }))
 	}
 
 	trackByFn(index: number, item: any): any {

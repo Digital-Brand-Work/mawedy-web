@@ -34,14 +34,14 @@ export class BaseService<T> {
 		}
 	}
 
-	paginate(url: string): Observable<T> {
+	paginate(url: string): Observable<any> {
 		return this.http.get<T>(url, this.headers())
 	}
 
-	get(): Observable<T[]> {
+	get(): Observable<any> {
 		const url = `${environment.api}${this.url}`
 
-		return this.http.get<any>(url, this.headers())
+		return this.http.get<T>(url, this.headers())
 	}
 
 	query(param: string): Observable<T> {

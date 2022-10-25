@@ -11,6 +11,6 @@
 	></patients-toolbar>
 </ng-template>
 
-<patients-table
-	[patients]="(patients$ | async).entities | entities"
-></patients-table>
+<ng-container *ngIf="patients$ | async as patients">
+	<patients-table [patients]="patients"></patients-table>
+</ng-container>

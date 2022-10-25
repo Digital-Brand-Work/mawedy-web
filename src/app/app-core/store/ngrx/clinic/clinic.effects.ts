@@ -4,8 +4,8 @@ import { DB } from 'app/app-core/enums/index.db.enum'
 import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { switchMap, map, tap } from 'rxjs/operators'
-import { StoreAction } from '../core/action.enum'
-import { ClinicEffectService } from './clinic.effects.service'
+import { StoreAction } from '../../core/action.enum'
+import { ClinicEffectService } from './clinic-effects.service'
 
 @Injectable({
 	providedIn: 'root',
@@ -18,7 +18,7 @@ export class ClinicEffects {
 		private _indexedDBController: IndexedDbController,
 	) {}
 
-	upsert$ = createEffect(() =>
+	load$ = createEffect(() =>
 		this._actions$.pipe(
 			ofType(StoreAction.CLINIC.LOAD),
 			switchMap(() =>

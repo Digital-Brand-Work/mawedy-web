@@ -1,7 +1,7 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store'
 import { environment } from '../environments/environment'
 import * as fromDoctor from './modules/admin/doctors/doctor.reducer'
-import * as fromPatient from './modules/admin/patients/patient.reducer'
+import * as fromPatient from './app-core/store/ngrx/patients/patient.reducer'
 import * as fromPromotion from './modules/admin/promotions/promotion.reducer'
 import * as fromAppointment from './modules/admin/appointments/appointment.reducer'
 import * as fromDashboardWaitingPatient from './modules/admin/dashboard/waiting-patients/dashboard-waiting-patient.reducer'
@@ -33,7 +33,7 @@ export interface State {
 export const reducers: ActionReducerMap<State> = {
 	[fromDoctor.doctorsFeatureKey]: fromDoctor.reducer,
 
-	[fromPatient.patientsFeatureKey]: fromPatient.reducer,
+	[fromPatient.patientsFeatureKey]: fromPatient.patientReducer,
 
 	[fromPromotion.promotionsFeatureKey]: fromPromotion.reducer,
 

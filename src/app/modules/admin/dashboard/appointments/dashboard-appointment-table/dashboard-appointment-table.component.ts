@@ -69,7 +69,9 @@ export class DashboardAppointmentTableComponent implements OnInit {
 
 	paginate(url: string) {
 		this._appointmentAPI.paginate(url).subscribe((appointment: any) => {
-			this._initialDataResolver.loadPatients(appointment.data)
+			this._initialDataResolver.loadDashboardAppointments(
+				appointment.data,
+			)
 
 			this.paginatedData$.next({
 				links: appointment.link,

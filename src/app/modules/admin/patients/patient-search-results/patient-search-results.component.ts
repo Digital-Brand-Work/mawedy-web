@@ -1,10 +1,11 @@
+import { StoreAction } from './../../../../app-core/store/core/action.enum'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { PaginationData } from 'app/app.resolvers'
 import { PaginationService } from 'app/app-core/misc/pagination.service'
 import { Patient } from '../patient.model'
 import { PatientService } from '../patient.service'
-import * as PatientActions from '../patient.actions'
+import * as PatientActions from '../../../../app-core/store/ngrx/patients/patient.actions'
 
 @Component({
 	selector: 'patient-search-results',
@@ -37,28 +38,14 @@ export class PatientSearchResultsComponent implements OnInit {
 
 	onReset() {
 		this.keyword = ''
-
-		this._patientApi.get().subscribe((patients: any) => {
-			this.patients = []
-
-			this._paginationService.doctors$.next({
-				links: patients.links,
-				meta: patients.meta,
-			})
-
-			this._store.dispatch(
-				PatientActions.loadPatients({ patients: patients.data }),
-			)
-		})
+		this._store.dispatch(StoreAction.PATIENT.LOAD())
 	}
 
 	onEnter() {
 		this._store.dispatch(
-			PatientActions.loadPatients({ patients: this.patients }),
+			StoreAction.PATIENT.LOAD_SUCCESS({ patients: this.patients }),
 		)
-
-		this._paginationService.doctors$.next(this.temporaryPaginatedData)
-
+		this._paginationService.patients$.next(this.temporaryPaginatedData)
 		this.isSearching = false
 	}
 

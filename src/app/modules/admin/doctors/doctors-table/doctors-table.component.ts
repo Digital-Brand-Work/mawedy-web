@@ -49,12 +49,12 @@ export class DoctorsTableComponent implements OnInit {
 	}
 
 	paginate(url: string) {
-		this._doctorService.paginate(url).subscribe((patients: any) => {
-			this._initialDataResolver.loadPatients(patients.data)
+		this._doctorService.paginate(url).subscribe((doctors: any) => {
+			this._initialDataResolver.loadDoctors(doctors.data)
 
 			this.paginatedData$.next({
-				links: patients.links,
-				meta: patients.meta,
+				links: doctors.links,
+				meta: doctors.meta,
 			})
 		})
 	}

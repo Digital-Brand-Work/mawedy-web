@@ -17,7 +17,7 @@ import { DashboardWaitingPatient } from 'app/modules/admin/dashboard/waiting-pat
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { MedicalService } from 'app/modules/admin/clinic/clinic-services/medical-service.model'
 import { Promotion } from 'app/modules/admin/promotions/promotion.model'
-import * as PatientActions from '../../modules/admin/patients/patient.actions'
+import * as PatientActions from '../store/ngrx/patients/patient.actions'
 import { DB } from 'app/app-core/enums/index.db.enum'
 import { DoctorService } from 'app/modules/admin/doctors/doctor.service'
 import * as DoctorActions from '../../modules/admin/doctors/doctor.actions'

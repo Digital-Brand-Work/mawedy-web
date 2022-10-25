@@ -1,22 +1,22 @@
 import { createReducer, on } from '@ngrx/store'
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity'
-import { Patient } from './patient.model'
+import { Patient } from '../../../../modules/admin/patients/patient.model'
 import * as PatientActions from './patient.actions'
 
 export const patientsFeatureKey = 'patients'
 
-export interface State extends EntityState<Patient> {
-	// additional entities state properties
-}
+export interface State extends EntityState<Patient> {}
 
 export const adapter: EntityAdapter<Patient> = createEntityAdapter<Patient>()
 
-export const initialState: State = adapter.getInitialState({
-	// additional entity state properties
-})
+export const initialState: State = adapter.getInitialState({})
 
-export const reducer = createReducer(
+export const patientReducer = createReducer(
 	initialState,
+
+	on(PatientActions.LOAD_SUCCESS, (state, action) =>
+		adapter.setAll(action.patients, state),
+	),
 
 	on(PatientActions.loadPatients, (state, action) =>
 		adapter.setAll(action.patients, state),
@@ -35,5 +35,7 @@ export const reducer = createReducer(
 	),
 )
 
+export const PATIENT_SELECTORS = adapter.getSelectors()
+
 export const { selectIds, selectEntities, selectAll, selectTotal } =
-	adapter.getSelectors()
+	PATIENT_SELECTORS

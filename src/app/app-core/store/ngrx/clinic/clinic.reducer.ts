@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity'
 import { Clinic } from 'app/modules/admin/clinic/clinic.model'
-import { StoreAction } from '../core/action.enum'
+import { StoreAction } from '../../core/action.enum'
 
 export interface State extends EntityState<Clinic> {}
 

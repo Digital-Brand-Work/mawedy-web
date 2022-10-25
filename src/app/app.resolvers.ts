@@ -28,7 +28,7 @@ import { ClinicUserService } from './modules/admin/clinic/clinic.service'
 import { Store } from '@ngrx/store'
 import { DashboardWaitingPatient } from './modules/admin/dashboard/waiting-patients/dashboard-waiting-patient.model'
 import { Promotion } from './modules/admin/promotions/promotion.model'
-import * as PatientActions from './modules/admin/patients/patient.actions'
+import * as PatientActions from './app-core/store/ngrx/patients/patient.actions'
 import * as DoctorActions from './modules/admin/doctors/doctor.actions'
 import * as DepartmentActions from './modules/admin/clinic/department/department.actions'
 import * as MedicalServiceActions from './modules/admin/clinic/clinic-services/medical-service.actions'
@@ -83,7 +83,6 @@ export class InitialDataResolver implements Resolve<any> {
 		this._clinicUserService.switched$.subscribe(() => {
 			setTimeout(() => {
 				forkJoin([
-					this._patientAPI.get(),
 					this._departmentAPI.get(),
 					this._doctorAPI.get(),
 					this._promotionAPI.get(),
@@ -100,7 +99,6 @@ export class InitialDataResolver implements Resolve<any> {
 					this._clinicUserService.update()
 
 					const [
-						patients,
 						departments,
 						doctors,
 						promotions,
@@ -121,12 +119,6 @@ export class InitialDataResolver implements Resolve<any> {
 						DB.APPOINTMENTS,
 						DB.PROMOTIONS,
 					])
-
-					this.loadPatients(patients.data)
-					this._paginationService.patients$.next({
-						links: patients.links,
-						meta: patients.meta,
-					})
 
 					this.loadDepartments(departments.data)
 
@@ -167,16 +159,6 @@ export class InitialDataResolver implements Resolve<any> {
 			this._notificationsService.getAll(),
 			this._userService.get(),
 		])
-	}
-
-	loadPatients(patients: Patient[]) {
-		this._indexDBService.bulkAdd(DB.PATIENTS, patients).subscribe(() =>
-			this.store.dispatch(
-				PatientActions.loadPatients({
-					patients: patients,
-				}),
-			),
-		)
 	}
 
 	loadDepartments(departments: Department[]) {

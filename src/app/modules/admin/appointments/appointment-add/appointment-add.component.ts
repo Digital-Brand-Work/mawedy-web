@@ -1,4 +1,4 @@
-import { PatientService } from './../../patients/patient.service'
+import { PatientService } from '../../patients/patient.service'
 import { Appointment } from './../appointment.model'
 import { AppointmentService } from './../appointment.service'
 import { empty, hasData, tOTime, toTwelve } from 'app/app-core/helpers'
