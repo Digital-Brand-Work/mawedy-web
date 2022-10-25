@@ -1,3 +1,5 @@
+import { StoreAction } from './app-core/store/core/action.enum'
+import { EntityState } from '@ngrx/entity'
 import { DashboardAppointment } from './modules/admin/dashboard/appointments/dashboard-appointment.model'
 import { Doctor } from './modules/admin/doctors/doctor.model'
 import { Appointment } from './modules/admin/appointments/appointment.model'
@@ -38,6 +40,7 @@ import { DashboardForApprovalPatient } from './modules/admin/dashboard/for-appro
 import * as DashboardForApprovalPatients from './modules/admin/dashboard/for-approvals/dashboard-for-approval-patient.actions'
 import { AppointmentStatusEnum } from './app-core/enums/appointment-status.enum'
 import { PaginationService } from './app-core/misc/pagination.service'
+import { Clinic } from './modules/admin/clinic/clinic.model'
 
 @Injectable({
 	providedIn: 'root',
@@ -64,6 +67,7 @@ export class InitialDataResolver implements Resolve<any> {
 			appointments: Appointment[]
 			medicalServices: MedicalService[]
 			promotions: Promotion[]
+			clinic: EntityState<Clinic>
 		}>,
 	) {}
 
@@ -74,7 +78,7 @@ export class InitialDataResolver implements Resolve<any> {
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot,
 	): Observable<any> {
-		this._clinicUserService.update()
+		this.store.dispatch(StoreAction.CLINIC.LOAD())
 
 		this._clinicUserService.switched$.subscribe(() => {
 			setTimeout(() => {

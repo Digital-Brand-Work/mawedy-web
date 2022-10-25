@@ -136,9 +136,7 @@ export class ClinicUserService {
 						this.update()
 					}
 
-					this._router
-						.navigate([path + `dashboard/appointments`])
-						.then(() => location.reload())
+					this._router.navigate([path + `dashboard/appointments`])
 				},
 			})
 	}
