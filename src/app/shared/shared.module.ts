@@ -53,6 +53,10 @@ import { ResolveSubscriptionPipe } from 'app/app-core/pipes/resolve-subscription
 import { ElementIsInScreenDirective } from '@digital_brand_work/directives/element-is-in-screen.directive'
 import { InViewportModule } from 'ng-in-viewport'
 import 'intersection-observer'
+import {
+	DefaultMatCalendarRangeStrategy,
+	MAT_DATE_RANGE_SELECTION_STRATEGY,
+} from '@angular/material/datepicker'
 
 const components: any[] = [
 	...(appComponents as any[]),
@@ -130,6 +134,11 @@ const directives: any[] = [
 		...(directives as any[]),
 		...(modules as any[]),
 	],
-	providers: [],
+	providers: [
+		{
+			provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+			useClass: DefaultMatCalendarRangeStrategy,
+		},
+	],
 })
 export class SharedModule {}

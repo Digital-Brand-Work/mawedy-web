@@ -68,4 +68,6 @@ export class DashboardComponent implements OnInit {
 export interface DashboardFilter {
 	keyword: string
 	type: 'dashboardAppointments' | 'outreachPatients' | 'forApprovals'
+	startDate?: string
+	endDate?: string
 }

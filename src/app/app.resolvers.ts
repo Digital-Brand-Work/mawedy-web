@@ -74,6 +74,8 @@ export class InitialDataResolver implements Resolve<any> {
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot,
 	): Observable<any> {
+		this._clinicUserService.update()
+
 		this._clinicUserService.switched$.subscribe(() => {
 			setTimeout(() => {
 				forkJoin([

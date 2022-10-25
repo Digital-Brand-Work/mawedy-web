@@ -2,7 +2,7 @@ import { empty, hasData } from 'app/app-core/helpers'
 import { AppointmentService } from 'app/modules/admin/appointments/appointment.service'
 import { Department } from './../../../clinic/department/department.model'
 import { MedicalService } from './../../../clinic/clinic-services/medical-service.model'
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import * as WaitingPatientsActions from '../dashboard-waiting-patient.actions'
 import { Observable, take } from 'rxjs'
@@ -23,10 +23,12 @@ export class WaitingPatientsFilterComponent implements OnInit {
 	) {}
 
 	filter = {
-		status: 'Confirmed',
 		department_id: '',
 		doctor_id: '',
 		service_id: '',
+		status: 'Confirmed',
+		endDate: dayjs().add(1, 'day').format('YYYY-MM-DD'),
+		startDate: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
 	}
 
 	departments$?: Observable<Department[]> = this._store.pipe(

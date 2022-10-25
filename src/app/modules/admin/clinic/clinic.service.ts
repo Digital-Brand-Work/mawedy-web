@@ -2,23 +2,13 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { IndexedDbController } from '../../../app-core/indexed-db/indexed-db.controller'
 import { BaseService } from './../../../../@digital_brand_work/api/base.api'
 import { HttpClient } from '@angular/common/http'
-import {
-	BehaviorSubject,
-	combineLatest,
-	forkJoin,
-	map,
-	of,
-	Subject,
-	take,
-} from 'rxjs'
+import { BehaviorSubject, combineLatest, map, Subject, take } from 'rxjs'
 import { Clinic } from './clinic.model'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { Injectable } from '@angular/core'
 import { slugify } from '@digital_brand_work/helpers/helpers'
 import { DB } from 'app/app-core/enums/index.db.enum'
 import { LaravelNotificationService } from 'app/app-core/misc/laravel.notificaion.service'
-import { InitialDataResolver } from 'app/app.resolvers'
-
 export interface User {
 	access: {
 		token: string
