@@ -28,8 +28,8 @@ export class DashboardAppointmentFilterComponent implements OnInit {
 		doctor_id: '',
 		service_id: '',
 		status: 'Confirmed',
-		endDate: dayjs().add(1, 'day').format('YYYY-MM-DD'),
-		startDate: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
+		to: dayjs().add(1, 'day').format('YYYY-MM-DD'),
+		from: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
 	}
 
 	departments$?: Observable<Department[]> = this._store.pipe(
