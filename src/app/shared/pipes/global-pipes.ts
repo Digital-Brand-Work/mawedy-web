@@ -1,1 +1,1 @@
-export const globalPipes = []
+export const GLOBAL_PIPES = []

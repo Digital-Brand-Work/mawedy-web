@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatMomentDateModule } from '@angular/material-moment-adapter'
 
-export const angularMaterialModules = [
+export const MATERIAL_MODULES = [
 	MatIconModule,
 	MatMenuModule,
 	MatInputModule,
