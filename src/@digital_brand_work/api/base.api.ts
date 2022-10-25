@@ -61,6 +61,12 @@ export class BaseService<T> {
 		return this.http.post<T>(url, data, this.headers())
 	}
 
+	postCustom<T>(param: string, data: any): Observable<T> {
+		const url = `${environment.api}${this.url}${param}`
+
+		return this.http.post<T>(url, data, this.headers())
+	}
+
 	put(data: Object): Observable<T> {
 		const url = `${environment.api}${this.url}`
 

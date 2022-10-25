@@ -1,5 +1,5 @@
-import { FooterComponent } from './../modules/landing/common/footer/footer.component'
-import { AppToolbarComponent } from './../components/app-toolbar/app-toolbar.component'
+import { FooterComponent } from '../../modules/landing/common/footer/footer.component'
+import { AppToolbarComponent } from '../../components/app-toolbar/app-toolbar.component'
 import { SpinnerComponent } from 'app/components/spinner/spinner.component'
 import { MobileNumberFormComponent } from 'app/components/forms/mobile-number-form/mobile-number-form.component'
 import { AlertComponent } from 'app/components/alert/alert.component'
