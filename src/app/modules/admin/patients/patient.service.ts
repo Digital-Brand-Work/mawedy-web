@@ -1,5 +1,5 @@
 import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
-import { Patient } from './patient.model'
+import { Patient } from '../../../app-core/models/patient.model'
 import { BehaviorSubject } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { BaseService } from '../../../../@digital_brand_work/api/base.api'

@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 import { Injectable } from '@angular/core'
 import { PatientApi } from 'app/app-core/http/api/patient.api'
-import { Patient } from 'app/modules/admin/patients/patient.model'
+import { Patient } from 'app/app-core/models/patient.model'
 import { PHPResponse } from '@digital_brand_work/models/core.model'
 
 @Injectable({ providedIn: 'root' })

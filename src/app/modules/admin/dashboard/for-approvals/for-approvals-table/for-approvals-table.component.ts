@@ -10,7 +10,7 @@ import { DashboardAppointmentDetailsModal } from '../../appointments/modals/dash
 import { DashboardAppointmentService } from '../../appointments/dashboard-appointment.service'
 import { Appointment } from 'app/modules/admin/appointments/appointment.model'
 import { BehaviorSubject, take } from 'rxjs'
-import { Patient } from 'app/modules/admin/patients/patient.model'
+import { Patient } from 'app/app-core/models/patient.model'
 import { Doctor } from 'app/modules/admin/doctors/doctor.model'
 import { DB } from 'app/app-core/enums/index.db.enum'
 import { Router } from '@angular/router'

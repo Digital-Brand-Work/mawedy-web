@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store'
 import { Update } from '@ngrx/entity'
-import { Patient } from '../../../../modules/admin/patients/patient.model'
+import { Patient } from '../../../models/patient.model'
 
 enum PatientActionEnum {
 	LOAD = '[Patient/System] Load Patients',

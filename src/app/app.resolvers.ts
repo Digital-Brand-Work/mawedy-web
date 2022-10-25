@@ -5,7 +5,7 @@ import { Doctor } from './modules/admin/doctors/doctor.model'
 import { Appointment } from './modules/admin/appointments/appointment.model'
 import { MedicalService } from './modules/admin/clinic/clinic-services/medical-service.model'
 import { Department } from './modules/admin/clinic/department/department.model'
-import { Patient } from './modules/admin/patients/patient.model'
+import { Patient } from './app-core/models/patient.model'
 import { IndexedDbController } from './app-core/indexed-db/indexed-db.controller'
 import { Injectable } from '@angular/core'
 import {

@@ -1,4 +1,4 @@
-import { Patient } from './patient.model'
+import { Patient } from '../../../app-core/models/patient.model'
 import { BehaviorSubject, map, Subject, takeUntil, tap } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'

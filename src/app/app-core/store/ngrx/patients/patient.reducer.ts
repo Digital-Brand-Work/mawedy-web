@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity'
-import { Patient } from '../../../../modules/admin/patients/patient.model'
+import { Patient } from '../../../models/patient.model'
 import * as PatientActions from './patient.actions'
 
 export const patientsFeatureKey = 'patients'

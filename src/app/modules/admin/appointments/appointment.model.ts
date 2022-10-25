@@ -7,7 +7,7 @@ import {
 	PHPFile,
 } from '../../../../@digital_brand_work/models/core.model'
 import { Doctor } from '../doctors/doctor.model'
-import { Patient } from '../patients/patient.model'
+import { Patient } from '../../../app-core/models/patient.model'
 
 export interface Appointment extends PHPBaseModel {
 	clinic_id: string

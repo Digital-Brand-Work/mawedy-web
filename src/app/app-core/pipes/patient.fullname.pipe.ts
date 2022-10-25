@@ -1,4 +1,4 @@
-import { Patient } from 'app/modules/admin/patients/patient.model'
+import { Patient } from 'app/app-core/models/patient.model'
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({ name: 'full_name' })

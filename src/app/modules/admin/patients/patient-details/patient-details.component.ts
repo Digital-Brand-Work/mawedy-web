@@ -8,7 +8,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs'
 import { Clinic } from '../../clinic/clinic.model'
 import { ClinicUserService } from '../../clinic/clinic.service'
-import { Patient } from '../patient.model'
+import { Patient } from '../../../../app-core/models/patient.model'
 import { PatientService } from '../patient.service'
 import { AppointmentService } from '../../appointments/appointment.service'
 

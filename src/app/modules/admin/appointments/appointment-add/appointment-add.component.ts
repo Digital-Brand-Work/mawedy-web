@@ -25,7 +25,7 @@ import { select, Store } from '@ngrx/store'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
 import { Department } from '../../clinic/department/department.model'
-import { Patient } from '../../patients/patient.model'
+import { Patient } from '../../../../app-core/models/patient.model'
 import {
 	ChangeDetectorRef,
 	Component,

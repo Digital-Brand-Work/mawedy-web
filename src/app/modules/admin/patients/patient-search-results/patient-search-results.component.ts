@@ -3,7 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { PaginationData } from 'app/app.resolvers'
 import { PaginationService } from 'app/app-core/misc/pagination.service'
-import { Patient } from '../patient.model'
+import { Patient } from '../../../../app-core/models/patient.model'
 import { PatientService } from '../patient.service'
 import * as PatientActions from '../../../../app-core/store/ngrx/patients/patient.actions'
 

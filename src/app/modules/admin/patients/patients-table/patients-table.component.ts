@@ -1,7 +1,7 @@
 import { StoreAction } from './../../../../app-core/store/core/action.enum'
 import { PaginationData } from './../../../../app.resolvers'
 import { slugify } from '@digital_brand_work/helpers/helpers'
-import { Patient } from './../patient.model'
+import { Patient } from '../../../../app-core/models/patient.model'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
 import { Component, Input, OnInit } from '@angular/core'
 import { PatientService } from '../patient.service'
