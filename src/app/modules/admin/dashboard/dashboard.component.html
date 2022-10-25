@@ -35,19 +35,25 @@
 	></for-approvals-toolbar>
 </ng-template>
 
-<!-- <div @fadeInLeft *ngIf="true" class="px-10 -mt-5 mb-5">
-	<div class="subscription w-full flex items-center py-3 px-2">
-		<div class="text-2xl text-white font-medium md:ml-10">
-			Your account is temporarily disabled.
-		</div>
+<ng-container *ngIf="subscription$ | async as subscription">
+	<div
+		@fadeInLeft
+		class="px-10 mb-5 -mt-5"
+		*ngIf="subscription.status === 'past_due'"
+	>
+		<div class="flex items-center w-full px-2 py-3 subscription">
+			<div class="text-2xl font-medium text-white md:ml-10">
+				Your account is temporarily disabled.
+			</div>
 
-		<button
-			routerLink="/aster_clinic/jumeirah/subscription/packages"
-			class="text-2xl font-medium px-10 h-full rounded-xl bg-white/30 text-white ml-auto hover:bg-white/20"
-		>
-			Subscription
-		</button>
+			<button
+				routerLink="/aster_clinic/jumeirah/subscription/packages"
+				class="h-full px-10 ml-auto text-2xl font-medium text-white rounded-xl bg-white/30 hover:bg-white/20 animate-pulse"
+			>
+				Subscription
+			</button>
+		</div>
 	</div>
-</div> -->
+</ng-container>
 
 <router-outlet></router-outlet>

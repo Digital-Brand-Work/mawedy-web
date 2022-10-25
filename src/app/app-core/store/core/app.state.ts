@@ -5,4 +5,5 @@ import { Patient } from 'app/app-core/models/patient.model'
 export interface AppState {
 	clinic: EntityState<Clinic>
 	patients: EntityState<Patient>
+	appSubscription: EntityState<any>
 }

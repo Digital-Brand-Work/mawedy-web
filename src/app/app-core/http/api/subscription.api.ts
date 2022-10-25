@@ -6,7 +6,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class SubscriptionApi extends BaseService<any> {
 	constructor(_http: HttpClient, _indexedDBService: NgxIndexedDBService) {
-		super(_http, _indexedDBService, 'v1/subscriptions/')
+		super(_http, _indexedDBService, 'v1/clinic/subscriptions/')
 	}
 }
 
