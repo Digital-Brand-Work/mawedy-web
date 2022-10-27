@@ -28,9 +28,9 @@ export class HomeNavbarComponent implements OnInit {
 			this.url = this._router.url
 		})
 
-		if (!this.isInSubscriptionSuccess) {
-			this._clinicUserService.logout()
-		}
+		// if (!this.isInSubscriptionSuccess) {
+		// 	this._clinicUserService.logout()
+		// }
 	}
 
 	url: string = ''
