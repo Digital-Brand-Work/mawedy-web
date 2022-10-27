@@ -8,6 +8,7 @@ import { BreakPoint } from '@digital_brand_work/models/core.model'
 import { ClinicUserService } from './modules/admin/clinic/clinic.service'
 import { Router } from '@angular/router'
 import { fromEvent, map, merge, of } from 'rxjs'
+import { ViewApi } from './app-core/http/api/view.api'
 
 @Component({
 	selector: 'app-root',
@@ -18,6 +19,7 @@ import { fromEvent, map, merge, of } from 'rxjs'
 export class AppComponent {
 	constructor(
 		private _router: Router,
+		private _viewApi: ViewApi,
 		private _alert: AlertState,
 		private _mediaService: MediaService,
 		private _clinicUserService: ClinicUserService,
@@ -37,9 +39,9 @@ export class AppComponent {
 	}
 
 	ngOnInit(): void {
-		this._clinicUserService.switched$.next()
-
 		this.checkNetworkStatus()
+		this._viewApi.post({}).subscribe()
+		this._clinicUserService.switched$.next()
 	}
 
 	removeAlert(id: string) {
