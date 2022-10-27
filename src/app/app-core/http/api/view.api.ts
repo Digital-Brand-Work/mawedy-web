@@ -6,6 +6,6 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 @Injectable({ providedIn: 'root' })
 export class ViewApi extends BaseService<any> {
 	constructor(_http: HttpClient, _indexedDBService: NgxIndexedDBService) {
-		super(_http, _indexedDBService, 'v1/shared/views')
+		super(_http, _indexedDBService, 'v1/views')
 	}
 }
