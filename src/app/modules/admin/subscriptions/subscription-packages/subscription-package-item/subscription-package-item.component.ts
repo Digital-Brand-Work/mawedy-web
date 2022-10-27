@@ -9,6 +9,9 @@ import { Clinic } from 'app/modules/admin/clinic/clinic.model'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { BehaviorSubject, take } from 'rxjs'
+import { HomeSubscriptionState } from 'app/app-core/misc/home.state'
+import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controller'
+import { DB } from 'app/app-core/enums/index.db.enum'
 
 @Component({
 	selector: 'subscription-package-item',
@@ -17,12 +20,14 @@ import { BehaviorSubject, take } from 'rxjs'
 })
 export class SubscriptionPackageItemComponent implements OnInit {
 	constructor(
+		private _router: Router,
 		private _http: HttpClient,
 		private _alert: AlertState,
-		private _indexedDBService: NgxIndexedDBService,
-		private _errorHandlerService: ErrorHandlerService,
 		private _clinicUserService: ClinicUserService,
-		private _router: Router,
+		private _indexedDBService: NgxIndexedDBService,
+		private _indexedDbController: IndexedDbController,
+		private _errorHandlerService: ErrorHandlerService,
+		private _homeSubscriptionState: HomeSubscriptionState,
 	) {}
 
 	@Input() isGradient: boolean = false
@@ -72,6 +77,27 @@ export class SubscriptionPackageItemComponent implements OnInit {
 						http.error.key === 'SWAP_SUBSCRIPTION_ERROR' &&
 						http.error.sub_key === 'MISSING_SUBSCRIPTION'
 					) {
+						this._homeSubscriptionState.subscription$.next(
+							this.subscription,
+						)
+						this._homeSubscriptionState.interval$.next(
+							this.interval,
+						)
+						this._indexedDbController.upsert(
+							DB.SUBSCRIPTION_REQUEST,
+							{
+								id: 1,
+								interval: this.interval,
+								subscription: this.subscription,
+							},
+						)
+						this._homeSubscriptionState.subscription$.next(
+							this.subscription,
+						)
+						this._homeSubscriptionState.interval$.next(
+							this.interval,
+						)
+
 						this._router.navigate(['/checkout'])
 					} else {
 						this._errorHandlerService.handleError(http)

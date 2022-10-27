@@ -8,6 +8,6 @@ enum AppSubscriptionActionEnum {
 export const LOAD = createAction(AppSubscriptionActionEnum.LOAD)
 
 export const LOAD_SUCCESS = createAction(
-	AppSubscriptionActionEnum.LOAD,
+	AppSubscriptionActionEnum.LOAD_SUCCESS,
 	props<{ subscription: any }>(),
 )

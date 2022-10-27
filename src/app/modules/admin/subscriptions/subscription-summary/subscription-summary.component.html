@@ -48,8 +48,9 @@
 
 			<div class="flex mt-10">
 				<button
-					routerLink="/aster_clinic/jumeirah/subscription/packages"
+					(click)="upgrade()"
 					style="width: 189px"
+					*ngIf="clinic.subscription_type !== 'Platinum'"
 					class="bg-emerald-500 text-white tracking-wide drop-shadow-md border hover:bg-emerald-600 rounded-md py-3 mr-10"
 				>
 					Upgrade

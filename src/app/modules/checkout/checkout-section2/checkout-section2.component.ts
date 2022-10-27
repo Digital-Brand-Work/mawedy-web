@@ -40,7 +40,7 @@ export class CheckoutSection2Component implements OnInit {
 	billMultiplier: number = 1
 
 	@Input()
-	additionalUsers: number = 5
+	additionalUsers: number = 0
 
 	@Input()
 	interval$?: BehaviorSubject<string | null>
@@ -157,7 +157,7 @@ export class CheckoutSection2Component implements OnInit {
 
 		let data: any = {}
 
-		data.accounts = { count: this.additionalUsers }
+		data.accounts = { count: this.additionalUsers ?? 0 }
 
 		data.user = {
 			name: this.user.name,

@@ -4,18 +4,6 @@
 	*ngIf="(media$ | async) <= 1650"
 	class="w-screen bg-white flex-col text-center"
 >
-	<home-navbar
-		*ngIf="
-			(breakpoint$ | async)! === 'laptop' ||
-			(breakpoint$ | async)! === 'desktop' ||
-			(breakpoint$ | async)! === 'max' ||
-			(breakpoint$ | async)! === 'tablet'
-		"
-	></home-navbar>
-
-	<home-navbar-responsive *ngIf="(breakpoint$ | async)! === 'phone'">
-	</home-navbar-responsive>
-
 	<div class="flex flex-col items-center justify-center min-h-screen px-10">
 		<img
 			class="object-contain h-40 mb-5"
@@ -34,7 +22,7 @@
 	*ngIf="(media$ | async) >= 1650"
 	class="relative flex items-center w-full px-4 md:px-6 z-49 bg-card print:hidden py-2 md:py-0 border-b border-gray-200"
 >
-	<a @zoomIn class="h-20 w-50 mr-12 hidden md:block" routerLink="/">
+	<a @zoomIn class="h-20 w-50 mr-12 hidden md:block">
 		<img class="h-20 max-w-50" src="/assets/app/logo.svg" alt="" />
 	</a>
 

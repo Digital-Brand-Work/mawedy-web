@@ -1,7 +1,7 @@
 import { BillingPortalAPi } from './../subscription.service'
 import { Component, HostListener, OnInit } from '@angular/core'
 import { dbwAnimations } from '@digital_brand_work/animations/animation.api'
-import { BehaviorSubject, take } from 'rxjs'
+import { BehaviorSubject, combineLatest, take } from 'rxjs'
 import { SubscriptionInvoicesModal } from '../modals/subscription-invoices/subscription-invoices.service'
 import { AlertState } from 'app/components/alert/alert.service'
 import { ErrorHandlerService } from 'app/app-core/misc/error-handler.service'
@@ -10,6 +10,7 @@ import { Clinic } from '../../clinic/clinic.model'
 import { BaseService } from '@digital_brand_work/api/base.api'
 import { HttpClient } from '@angular/common/http'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'subscription-summary',
@@ -19,6 +20,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db'
 })
 export class SubscriptionSummaryComponent implements OnInit {
 	constructor(
+		private _router: Router,
 		private _http: HttpClient,
 		private _alert: AlertState,
 		private billingPortalAPI: BillingPortalAPi,
@@ -34,12 +36,30 @@ export class SubscriptionSummaryComponent implements OnInit {
 	}
 
 	clinic$: BehaviorSubject<Clinic | null> = this._clinicUserService.clinic$
-
 	opened$: BehaviorSubject<boolean> = this.subscriptionInvoicesModal.opened$
 
 	ngOnInit(): void {}
 
-	setToAutomatic(mode: boolean) {
+	upgrade(): void {
+		combineLatest([
+			this.clinic$,
+			this._clinicUserService.resolveClinicPath(),
+		])
+			.pipe(take(1))
+			.subscribe({
+				next: (results: any) => {
+					const [userAccount, path] = results
+
+					if (!userAccount || !path) {
+						return
+					}
+
+					this._router.navigate([path + `subscription/packages`])
+				},
+			})
+	}
+
+	setToAutomatic(mode: boolean): void {
 		new BaseService(
 			this._http,
 			this._indexedDBService,

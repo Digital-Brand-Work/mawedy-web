@@ -27,6 +27,10 @@ export class HomeNavbarComponent implements OnInit {
 			this.isInPartnerWithUs = this._router.url.includes('partner')
 			this.url = this._router.url
 		})
+
+		if (!this.isInSubscriptionSuccess) {
+			this._clinicUserService.logout()
+		}
 	}
 
 	url: string = ''
