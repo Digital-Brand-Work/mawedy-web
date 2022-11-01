@@ -67,7 +67,6 @@ export class DashboardAppointmentFilterComponent implements OnInit {
 	onFilter() {
 		const search = {
 			waiting: 'false',
-			date: dayjs().toJSON(),
 			...this.filter,
 		}
 

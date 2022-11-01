@@ -66,7 +66,6 @@ export class WaitingPatientsFilterComponent implements OnInit {
 	onFilter() {
 		const search = {
 			waiting: 'true',
-			date: dayjs().toJSON(),
 			...this.filter,
 		}
 
