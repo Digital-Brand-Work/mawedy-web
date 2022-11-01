@@ -59,7 +59,7 @@ export class MobileNumberFormComponent implements OnInit {
 
 	change(event) {
 		if (!empty(this.country_code)) {
-			this.country_code1 = event.target.value.toLowerCase()
+			this.country_code1 = event.target?.value?.toLowerCase() ?? 'ae'
 		}
 
 		this.emit()

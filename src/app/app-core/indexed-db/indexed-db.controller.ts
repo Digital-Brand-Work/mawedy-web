@@ -1,6 +1,8 @@
+import { empty } from 'app/app-core/helpers'
 import { Injectable } from '@angular/core'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
-import { forkJoin } from 'rxjs'
+import { forkJoin, tap } from 'rxjs'
+import { DB } from '../enums/index.db.enum'
 
 @Injectable({ providedIn: 'root' })
 export class IndexedDbController {
