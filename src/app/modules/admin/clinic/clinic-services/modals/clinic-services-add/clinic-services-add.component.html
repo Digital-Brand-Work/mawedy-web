@@ -1,52 +1,23 @@
 <div
 	stop-propagation
 	@zoomIn
-	class="m-auto bg-white h-auto w-full md:w-1/3 rounded-xl overflow-hidden"
+	class="w-full h-auto m-auto overflow-hidden bg-white md:w-1/3 rounded-xl"
 >
 	<modal-header
 		modalTitle="Add Medical Service"
 		(onClose)="opened$.next(false)"
 	></modal-header>
 
-	<form *ngIf="form" [formGroup]="form" class="p-10 py-5 bg-white">
-		<div class="px-7 py-14 h-auto bg-gray-100 rounded-lg">
-			<div class="grid grid-cols-4 gap-x-5">
-				<div class="mb-5 col-span-3">
-					<label
-						for="name"
-						class="mb-1 text-gray-400 font-semibold accent-color text-md"
-					>
-						Medical Service
-					</label>
+	<form *ngIf="form" [formGroup]="form" class="p-5 bg-white">
+		<div class="h-auto bg-gray-100 rounded-lg p-7">
+			<div class="flex items-center">
+				<mat-form-field class="flex-1 w-full mr-3">
+					<mat-label> Medical Service</mat-label>
 
-					<input
-						#input
-						id="name"
-						formControlName="name"
-						type="text"
-						[ngClass]="{
-							'border-red-500':
-								form.get('name')?.touched &&
-								!form.get('name')?.valid,
-							'text-red-500': errors.name
-						}"
-						class="py-3 px-4 rounded-md border-zinc-500/40 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
-					/>
+					<input #input matInput formControlName="name" type="text" />
 
-					<div
-						*ngIf="
-							form.get('name')?.touched &&
-							!form.get('name')?.valid
-						"
-						class="text-sm text-rose-500"
-					>
-						Medical Service is required.
-					</div>
-
-					<div class="text-gray-500 italic">
-						Note : image size 1080px file type: jpg or png
-					</div>
-				</div>
+					<mat-error> Medical Service is required. </mat-error>
+				</mat-form-field>
 
 				<button
 					(click)="medicalServiceImage.click()"
@@ -56,7 +27,7 @@
 						height: 120px;
 						box-shadow: 0px 3px 16px #6f7d8f38;
 					"
-					class="rounded-xl shadow-md bg-gray-100 border-2 border-white ml-auto hover:bg-gray-200 hover:border-gray-300"
+					class="ml-auto bg-gray-100 border-2 border-white shadow-md rounded-xl hover:bg-gray-200 hover:border-gray-300"
 				>
 					<mat-icon
 						class="text-gray-300 icon-size-14"
@@ -69,7 +40,7 @@
 					*ngIf="picturePreview"
 					(click)="medicalServiceImage.click()"
 					[src]="picturePreview"
-					class="rounded-xl border-2 border-white ml-auto"
+					class="ml-auto border-2 border-white rounded-xl"
 					style="
 						width: 121px;
 						height: 121px;
@@ -87,53 +58,23 @@
 				/>
 			</div>
 
-			<div class="mb-5 mt-10">
-				<label
-					for=""
-					class="mb-1 text-gray-400 font-semibold accent-color text-md"
-				>
-					Description
-				</label>
+			<mat-form-field class="flex-1 w-full mr-3">
+				<mat-label> Description</mat-label>
 
 				<textarea
 					#description
-					id="description"
+					matInput
 					formControlName="description"
 					(keyup)="autoGrow()"
-					[ngClass]="{
-						'border-red-500':
-							form.get('description')?.touched &&
-							!form.get('description')?.valid,
-						'text-red-500': errors.name
-					}"
-					class="py-3 px-4 rounded-md border-zinc-500/40 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
 				></textarea>
 
-				<div
-					*ngIf="
-						form.get('description')?.touched &&
-						!form.get('description')?.valid
-					"
-					class="text-sm text-rose-500"
-				>
-					Description is required
-				</div>
-			</div>
+				<mat-error> Description is required. </mat-error>
+			</mat-form-field>
 
-			<div class="mb-5">
-				<label
-					for="doctors"
-					class="mb-1 text-gray-400 font-semibold accent-color text-md"
-				>
-					Doctor Available
-				</label>
+			<mat-form-field class="flex-1 w-full mr-3">
+				<mat-label> Doctor Available</mat-label>
 
-				<mat-select
-					id="doctors"
-					formControlName="doctors"
-					[multiple]="true"
-					class="py-3 px-4 rounded-md border-zinc-500/40 border w-full focus:border-teal-500 focus:border-2 focus:shadow-md focus:shadow-teal-500/20 bg-white"
-				>
+				<mat-select formControlName="doctors" [multiple]="true">
 					<mat-option
 						[value]="doctor.id"
 						*ngFor="
@@ -144,11 +85,11 @@
 						{{ doctor.name }}</mat-option
 					>
 				</mat-select>
-			</div>
+			</mat-form-field>
 
 			<div
 				*ngIf="(department$ | async)?.doctors.length === 0"
-				class="border border-red-400 text-red-500 bg-red-50 p-3 rounded-md"
+				class="p-3 text-red-500 border border-red-400 rounded-md bg-red-50"
 			>
 				There are no doctors in this department.
 			</div>
@@ -165,7 +106,7 @@
 						'bg-gray-400 pointer-events-none ':
 							!form.valid || isProcessing
 					}"
-					class="ml-auto rounded-lg px-10 py-2 font-bold border-2"
+					class="px-10 py-2 ml-auto font-bold border-2 rounded-lg"
 				>
 					<spinner @slideInBottom *ngIf="isProcessing"></spinner>
 

@@ -6,6 +6,7 @@ import { IndexedDbController } from 'app/app-core/indexed-db/indexed-db.controll
 import { DB } from 'app/app-core/enums/index.db.enum'
 import { ClinicUserService } from 'app/modules/admin/clinic/clinic.service'
 import { take } from 'rxjs'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 
 @Component({
 	selector: 'home-section3-pricing',
@@ -16,6 +17,7 @@ export class HomeSection3PricingComponent implements OnInit {
 	constructor(
 		private _router: Router,
 		private _clinicUserService: ClinicUserService,
+		private _indexedDbService: NgxIndexedDBService,
 		private _indexedDbController: IndexedDbController,
 		private _homeSubscriptionState: HomeSubscriptionState,
 	) {}
@@ -49,20 +51,53 @@ export class HomeSection3PricingComponent implements OnInit {
 			}
 
 			this._homeSubscriptionState.subscription$.next(this.subscription)
+
 			this._homeSubscriptionState.interval$.next(this.interval)
-			this._indexedDbController.upsert(DB.SUBSCRIPTION_REQUEST, {
+
+			const db = DB.SUBSCRIPTION_REQUEST
+
+			const data = {
 				id: 1,
 				interval: this.interval,
 				subscription: this.subscription,
-			})
-			this._homeSubscriptionState.subscription$.next(this.subscription)
-			this._homeSubscriptionState.interval$.next(this.interval)
-
-			if (this._router.url.includes('subscription')) {
-				location.reload()
-				return
 			}
-			this._router.navigate(['/subscription'])
+
+			this._indexedDbService
+				.getByKey(DB.SUBSCRIPTION_REQUEST, 1)
+				.subscribe({
+					next: () => {
+						this._indexedDbService
+							.update(db, {
+								id: 1,
+								...data,
+							})
+							.subscribe()
+					},
+					error: () => {
+						this._indexedDbService
+							.add(db, {
+								subscription_request_id: 1,
+								...data,
+							})
+							.subscribe()
+					},
+				})
+				.add(() => {
+					this._homeSubscriptionState.subscription$.next(
+						this.subscription,
+					)
+
+					this._homeSubscriptionState.interval$.next(this.interval)
+
+					if (this._router.url.includes('subscription')) {
+						location.reload()
+						return
+					}
+
+					this._router.navigate(['/subscription']).then(() => {
+						location.reload()
+					})
+				})
 		})
 	}
 
